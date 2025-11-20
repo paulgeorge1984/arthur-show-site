@@ -1,12 +1,16 @@
-name: Deploy to Onamae server
+name: Deploy Astro Site
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
+  # ☆☆☆ テスト用：毎朝 1:00 JST に実行 ☆☆☆
+  schedule:
+    # JST 01:00 は UTC 16:00 
+    - cron: '0 16 * * *'
+  # ☆☆☆
 
 jobs:
-  build-and-deploy:
+  build_and_deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
