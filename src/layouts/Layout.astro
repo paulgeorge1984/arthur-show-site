@@ -1,0 +1,165 @@
+---
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description } = Astro.props;
+
+// URLとタイトルを定義
+const siteTitle = "THE ARTHUR HOLLANDS SHOW";
+const pageTitle = `${title} | ${siteTitle}`;
+const canonicalURL = new URL(Astro.url.pathname, "https://arthur-show.com");
+const socialImageURL = new URL("/og-image.jpg", canonicalURL); // サムネイル画像（あれば）
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description || "You are Loved. Walk the talk. Talk the walk."} />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="format-detection" content="telephone=no">
+		
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<title>{pageTitle}</title>
+		
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={description || "Arthur Hollands Archive"} />
+		<meta property="og:type" content="article" />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:site_name" content={siteTitle} />
+		<meta property="og:image" content={socialImageURL} />
+		
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={pageTitle} />
+		<meta name="twitter:description" content={description} />
+
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Oswald:wght@400;700&family=Shippori+Mincho:wght@500;700;800&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+	</head>
+	<body>
+		<header class="site-header">
+			<div class="header-inner">
+				<a href="/" class="logo">
+					<span class="logo-main">THE ARTHUR HOLLANDS SHOW</span>
+					<span class="logo-sub">ARCHIVE</span>
+				</a>
+			</div>
+		</header>
+
+		<main>
+			<slot />
+		</main>
+
+		<footer class="site-footer">
+			<div class="container">
+				<div class="footer-brand">
+					<p class="footer-logo">THE ARTHUR HOLLANDS SHOW</p>
+					<p class="footer-desc">You are Loved</p>
+				</div>
+				
+				<div class="footer-grid">
+					<div class="footer-col programs">
+						<h5>PROGRAM LINEUP</h5>
+						
+						<div class="prog-block">
+							<p class="prog-title">● THE DAILY with ARTHUR HOLLANDS</p>
+							<span class="prog-time">毎朝 6:30</span>
+							<p class="prog-text">
+								一日の始まりに必要なのは、たった一言の真理かもしれません。<br>
+								静かな朝、アーサー先生の声に耳を傾けてください。<br>
+								心が整い、勇気をもって今日を始められる、<br>
+								“霊的ルーティン”となるショートメッセージです。
+							</p>
+						</div>
+
+						<div class="prog-block">
+							<p class="prog-title">● THE ARTHUR HOLLANDS SHOW</p>
+							<span class="prog-time">2025年11月より不定期配信</span>
+							<p class="prog-text">
+								社会・文化・聖書・人生を貫くジーザスの真理を、<br>
+								アーサー先生がまっすぐに、力強く語りかけます。<br>
+								形式ばった言葉ではなく、心に火を灯すメッセージを体験してください。<br>
+								「言葉が魂に届く」――そんな時間が、ここにあります。
+							</p>
+						</div>
+					</div>
+
+					<div class="footer-col support">
+						<div class="social-block">
+							<a href="https://www.youtube.com/@arthurs-show" target="_blank" class="yt-btn">
+								<span class="yt-icon">▶</span> YouTube Channel
+							</a>
+						</div>
+
+						<h5>SUPPORT</h5>
+						<div class="bank-card">
+							<p class="bank-label">▼ アーサー先生への献金</p>
+							<div class="bank-details">
+								<div class="bank-row">三井住友銀行 ひばりヶ丘支店</div>
+								<div class="bank-row">普通 5396176</div>
+								<div class="bank-row">アーサー ホーランド</div>
+							</div>
+						</div>
+						<div class="bank-card">
+							<p class="bank-label">▼ 番組制作者へのサポート</p>
+							<div class="bank-details">
+								<div class="bank-row">みずほ銀行 青山支店</div>
+								<div class="bank-row">普通 1939570</div>
+								<div class="bank-row">スギモト ジョウジ</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="copyright">
+				&copy; {new Date().getFullYear()} The Arthur Hollands Show. All Rights Reserved.
+			</div>
+		</footer>
+	</body>
+</html>
+
+<style is:global>
+	:root {
+		--color-black: #0a0a0a; --color-white: #ffffff; --color-gold: #c5a059;
+		--font-head: 'Oswald', sans-serif; --font-serif: 'Shippori Mincho', serif;
+		--font-sans: 'Noto Sans JP', sans-serif; --font-cursive: 'Great Vibes', cursive;
+		--container-width: 900px;
+	}
+	*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+	html { font-size: 16px; scroll-behavior: smooth; }
+	body { background-color: var(--color-white); color: var(--color-black); font-family: var(--font-sans); line-height: 1.8; display: flex; flex-direction: column; min-height: 100vh; }
+	main { flex: 1; } a { color: inherit; text-decoration: none; transition: 0.2s; }
+	
+	.site-header { background: var(--color-black); color: var(--color-white); padding: 20px 0; position: sticky; top: 0; z-index: 100; border-bottom: 4px solid var(--color-gold); }
+	.header-inner { max-width: var(--container-width); margin: 0 auto; padding: 0 20px; display: flex; justify-content: center; }
+	.logo { text-align: center; display: flex; flex-direction: column; align-items: center; }
+	.logo-main { font-family: var(--font-head); font-size: 1.5rem; font-weight: 700; letter-spacing: 0.05em; line-height: 1; }
+	.logo-sub { font-family: var(--font-head); font-size: 0.8rem; color: var(--color-gold); letter-spacing: 0.3em; margin-top: 5px; }
+
+	.site-footer { background: var(--color-black); color: var(--color-white); padding: 60px 0 30px; margin-top: 80px; }
+	.container { max-width: var(--container-width); margin: 0 auto; padding: 0 20px; }
+	.footer-brand { text-align: center; margin-bottom: 60px; }
+	.footer-logo { font-family: var(--font-head); font-size: 1.8rem; margin-bottom: 10px; }
+	.footer-desc { font-family: var(--font-cursive); color: var(--color-gold); font-style: normal; font-size: 2.5rem; line-height: 1; font-weight: normal; }
+	@media (max-width: 768px) { .footer-desc { font-size: 2rem; } }
+	.footer-grid { display: grid; gap: 50px; }
+	@media(min-width: 768px) { .footer-grid { grid-template-columns: 1.5fr 1fr; gap: 60px; } }
+	.footer-col h5 { color: var(--color-gold); font-family: var(--font-head); margin-bottom: 25px; letter-spacing: 0.1em; font-size: 1.1rem; border-bottom: 1px solid #333; padding-bottom: 10px; }
+	.prog-block { margin-bottom: 40px; }
+	.prog-title { font-weight: bold; font-size: 1rem; margin-bottom: 5px; color: #fff; }
+	.prog-time { display: inline-block; background: #333; color: #ccc; font-size: 0.75rem; padding: 2px 8px; border-radius: 4px; margin-bottom: 10px; }
+	.prog-text { font-size: 0.9rem; color: #ccc; line-height: 1.8; }
+	.social-block { margin-bottom: 40px; }
+	.yt-btn { display: flex; align-items: center; justify-content: center; gap: 10px; background: transparent; border: 1px solid #fff; color: #fff; padding: 15px; text-align: center; font-weight: bold; transition: 0.3s; font-family: var(--font-head); letter-spacing: 0.05em; }
+	.yt-btn:hover { background: var(--color-gold); border-color: var(--color-gold); color: #000; }
+	.yt-icon { font-size: 1.2rem; }
+	.bank-card { background: #1a1a1a; padding: 20px; border-radius: 6px; margin-bottom: 15px; border-left: 3px solid #333; text-align: left; }
+	.bank-label { font-size: 0.75rem; color: #888; margin-bottom: 8px; font-weight: bold; display: block; }
+	.bank-details { font-family: 'Noto Sans JP', sans-serif; color: #ddd; font-size: 0.95rem; line-height: 1.6; font-weight: 500; }
+	.bank-row { display: block; width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+	.copyright { text-align: center; margin-top: 60px; padding-top: 20px; border-top: 1px solid #333; color: #666; font-size: 0.75rem; }
+</style>

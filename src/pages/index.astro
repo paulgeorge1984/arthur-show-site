@@ -1,0 +1,154 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allMessages = (await getCollection('daily-messages')).sort(
+	(a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+
+<Layout title="Latest Messages">
+	<div class="container">
+		
+		<div class="page-intro">
+			<h1>LATEST MESSAGES</h1>
+			<p>魂を揺さぶる言葉の記録</p>
+		</div>
+
+		<div class="card-grid">
+			{allMessages.map((post) => (
+				<a href={`/messages/${post.slug}`} class="card">
+					<div class="card-thumb">
+						<img 
+							src={`https://img.youtube.com/vi/${post.data.youtubeId}/maxresdefault.jpg`} 
+							alt={post.data.title}
+						/>
+						<div class="play-icon">▶</div>
+					</div>
+					<div class="card-body">
+						<div class="card-date">
+							{post.data.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).toUpperCase()}
+						</div>
+						<h2 class="card-title">{post.data.title}</h2>
+						<div class="card-tags">
+							{post.data.tags?.map(tag => <span>#{tag}</span>)}
+						</div>
+					</div>
+				</a>
+			))}
+		</div>
+	</div>
+</Layout>
+
+<style>
+	.container {
+		max-width: 800px;
+		margin: 0 auto;
+		padding: 0 20px;
+	}
+	
+	.page-intro {
+		text-align: center;
+		padding: 60px 0;
+	}
+	
+	.page-intro h1 {
+		font-family: 'Oswald', sans-serif;
+		font-size: 2.5rem;
+		margin-bottom: 10px;
+		color: #000; /* 黒 */
+	}
+	
+	.page-intro p {
+		font-family: 'Noto Sans JP', sans-serif;
+		color: #666;
+		font-weight: 500;
+	}
+
+	.card-grid {
+		display: grid;
+		gap: 50px;
+	}
+	
+	.card {
+		display: block;
+	}
+	
+	.card:hover .play-icon {
+		background: #c5a059;
+		color: #000;
+		border-color: #c5a059;
+	}
+	
+	.card:hover .card-title {
+		color: #c5a059; /* ホバー時はゴールド */
+	}
+
+	.card-thumb { 
+		position: relative;
+		width: 100%;
+		aspect-ratio: 16/9; 
+		background: #000;
+		overflow: hidden;
+		margin-bottom: 20px;
+		border-bottom: 4px solid #000;
+	}
+	
+	.card-thumb img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		opacity: 0.9;
+		transition: 0.3s;
+	}
+	
+	.card:hover img {
+		opacity: 1;
+		transform: scale(1.02);
+	}
+	
+	.play-icon {
+		position: absolute;
+		bottom: 20px;
+		right: 20px;
+		width: 50px;
+		height: 50px;
+		background: rgba(0,0,0,0.7);
+		color: #fff;
+		border: 2px solid #fff;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 1.2rem;
+		transition: 0.3s;
+	}
+
+	.card-date { 
+		font-family: 'Oswald', sans-serif;
+		color: #999;
+		font-size: 0.9rem;
+		letter-spacing: 0.1em;
+		margin-bottom: 5px;
+	}
+	
+	/* ★修正箇所：タイトルを強制的に黒く、太く、モダンに */
+	.card-title {
+		font-family: 'Noto Sans JP', sans-serif; /* ゴシック体 */
+		font-size: 1.8rem;
+		font-weight: 900; /* 極太 */
+		line-height: 1.4;
+		margin-bottom: 15px;
+		transition: 0.3s;
+		color: #000000 !important; /* 強制的に真っ黒 */
+	}
+	
+	.card-tags span {
+		font-size: 0.8rem;
+		color: #000;
+		background: #f4f4f5; 
+		padding: 4px 10px;
+		margin-right: 5px;
+		font-weight: bold;
+		display: inline-block;
+	}
+</style>
