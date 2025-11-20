@@ -2,7 +2,14 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
-const allMessages = (await getCollection('daily-messages')).sort(
+// サイトのビルドが実行された現在の時刻を取得
+const currentBuildTime = new Date(); 
+
+// コレクションから記事を取得し、フィルタリングする
+const allMessages = (await getCollection('daily-messages', ({ data }) => {
+	// data.date（フロントマターの日時）が currentBuildTime 以下（過去または同時刻）の記事だけを公開
+	return data.date <= currentBuildTime;
+})).sort(
 	(a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
 ---
