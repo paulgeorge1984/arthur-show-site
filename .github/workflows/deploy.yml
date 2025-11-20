@@ -3,11 +3,10 @@ name: Deploy Astro Site
 on:
   push:
     branches: [ main ]
-  # ☆☆☆ テスト用：毎朝 1:00 JST に実行 ☆☆☆
   schedule:
-    # JST 01:00 は UTC 16:00 
-    - cron: '0 16 * * *'
-  # ☆☆☆
+    # JST 06:30 は UTC 21:30
+    - cron: '30 21 * * *'
+  workflow_dispatch:
 
 jobs:
   build_and_deploy:
