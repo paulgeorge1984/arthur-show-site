@@ -4,8 +4,8 @@ on:
   push:
     branches: [ main ]
   schedule:
-    # JST 06:30 は UTC 21:30
-    - cron: '30 21 * * *'
+    # Runs every 30 minutes (UTC)
+    - cron: '*/30 * * * *'
   workflow_dispatch:
 
 jobs:
