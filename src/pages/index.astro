@@ -16,7 +16,19 @@ const allMessages = (await getCollection('daily-messages', ({ data }) => {
 
 <Layout title="Latest Messages">
 	<div class="container">
-		
+		<a class="awaji-feature" href="/walk-across-awaji2026/" aria-label="ARTHUR HOLLANDS WALK ACROSS AWAJI 2026 アーカイブを見る">
+			<div class="awaji-visual">
+				<img src="/assets/walk-across-awaji2026-poster.webp" alt="WALK ACROSS AWAJI 2026 淡路島一周十字架行進のチラシ" loading="eager" />
+			</div>
+			<div class="awaji-copy">
+				<p class="awaji-kicker">MEMORIAL ARCHIVE</p>
+				<h2>WALK ACROSS AWAJI 2026</h2>
+				<p class="awaji-ja">アーサーホーランド淡路島一周十字架行進2026</p>
+				<p class="awaji-text">祈り、出会い、洗礼、感謝に満ちた5日間の記録。</p>
+				<span class="awaji-button">アーカイブを見る</span>
+			</div>
+		</a>
+
 		<div class="page-intro">
 			<h1>LATEST MESSAGES</h1>
 			<p>魂を揺さぶる言葉の記録</p>
@@ -70,6 +82,102 @@ const allMessages = (await getCollection('daily-messages', ({ data }) => {
 		font-family: 'Noto Sans JP', sans-serif;
 		color: #666;
 		font-weight: 500;
+	}
+
+	.awaji-feature {
+		position: relative;
+		display: grid;
+		grid-template-columns: 170px 1fr;
+		gap: 24px;
+		align-items: center;
+		margin: 28px 0 8px;
+		padding: 18px;
+		overflow: hidden;
+		background: #0a0a0a;
+		color: #fff;
+		border-left: 5px solid #c5a059;
+		box-shadow: 0 14px 34px rgba(0, 0, 0, 0.14);
+	}
+
+	.awaji-feature::before {
+		display: none;
+	}
+
+	.awaji-copy {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	.awaji-kicker {
+		margin-bottom: 6px;
+		color: #c5a059;
+		font-family: 'Oswald', sans-serif;
+		font-size: 0.78rem;
+		font-weight: 700;
+		letter-spacing: 0.16em;
+	}
+
+	.awaji-copy h2 {
+		margin-bottom: 8px;
+		font-family: 'Oswald', sans-serif;
+		font-size: clamp(1.65rem, 4vw, 2.8rem);
+		line-height: 1.05;
+		letter-spacing: 0;
+		color: #fff;
+	}
+
+	.awaji-ja {
+		margin-bottom: 6px;
+		font-size: clamp(0.98rem, 2.2vw, 1.18rem);
+		font-weight: 900;
+		line-height: 1.5;
+	}
+
+	.awaji-text {
+		margin-bottom: 16px;
+		color: rgba(255, 255, 255, 0.78);
+		font-size: 0.92rem;
+	}
+
+	.awaji-button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: fit-content;
+		min-height: 38px;
+		padding: 0 14px;
+		background: #c5a059;
+		color: #000;
+		font-weight: 900;
+		font-size: 0.9rem;
+	}
+
+	.awaji-visual {
+		position: relative;
+		z-index: 1;
+		aspect-ratio: 520 / 629;
+		background: #151515;
+		overflow: hidden;
+	}
+
+	.awaji-visual img {
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+		opacity: 0.94;
+		transition: 0.3s;
+	}
+
+	.awaji-feature:hover .awaji-visual img {
+		transform: scale(1.025);
+		opacity: 1;
+	}
+
+	.awaji-feature:hover .awaji-button {
+		background: #fff;
 	}
 
 	.card-grid {
@@ -157,5 +265,28 @@ const allMessages = (await getCollection('daily-messages', ({ data }) => {
 		margin-right: 5px;
 		font-weight: bold;
 		display: inline-block;
+	}
+
+	@media (max-width: 760px) {
+		.awaji-feature {
+			grid-template-columns: 1fr;
+			min-height: 0;
+			gap: 16px;
+			margin: 18px 0 4px;
+			padding: 14px;
+		}
+
+		.awaji-visual {
+			min-height: 0;
+			aspect-ratio: 520 / 629;
+			max-width: 220px;
+			width: 100%;
+			margin: 0 auto;
+		}
+
+		.awaji-visual img {
+			height: auto;
+			object-fit: contain;
+		}
 	}
 </style>
