@@ -273,6 +273,10 @@ p {
   padding: clamp(48px, 8vw, 96px) clamp(18px, 5vw, 56px);
 }
 
+section[id] {
+  scroll-margin-top: 86px;
+}
+
 .section-heading {
   max-width: 760px;
   margin-bottom: 28px;
@@ -420,6 +424,182 @@ p {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 18px;
+}
+
+.road-movie {
+  max-width: 1320px;
+}
+
+.road-movie-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(360px, 0.88fr);
+  gap: clamp(22px, 4vw, 46px);
+  align-items: stretch;
+  padding: clamp(16px, 3vw, 26px);
+  overflow: hidden;
+  color: white;
+  background:
+    linear-gradient(112deg, rgba(8, 18, 34, 0.96), rgba(6, 62, 115, 0.9)),
+    url("./assets/og-image.jpg") center / cover;
+  border: 1px solid rgba(240, 196, 65, 0.34);
+  border-left: 8px solid var(--gold);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.road-movie-thumb {
+  position: relative;
+  display: block;
+  min-height: 100%;
+  overflow: hidden;
+  color: white;
+  text-decoration: none;
+  background: #071527;
+  border-radius: 6px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.34);
+}
+
+.road-movie-thumb img {
+  width: 100%;
+  height: 100%;
+  min-height: 330px;
+  object-fit: cover;
+  transition: transform 220ms ease;
+}
+
+.road-movie-thumb:hover img {
+  transform: scale(1.025);
+}
+
+.road-movie-thumb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(7, 21, 39, 0.02), rgba(7, 21, 39, 0.48)),
+    linear-gradient(90deg, rgba(7, 21, 39, 0.24), transparent 52%);
+}
+
+.road-movie-play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: clamp(72px, 9vw, 104px);
+  height: clamp(52px, 6.4vw, 72px);
+  background: rgba(186, 27, 29, 0.96);
+  border-radius: 8px;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.36);
+}
+
+.road-movie-play::after {
+  content: "";
+  position: absolute;
+  left: 43%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border-bottom: clamp(13px, 1.7vw, 18px) solid transparent;
+  border-left: clamp(20px, 2.6vw, 28px) solid white;
+  border-top: clamp(13px, 1.7vw, 18px) solid transparent;
+  transform: translateY(-50%);
+}
+
+.road-movie-status {
+  position: absolute;
+  left: 18px;
+  top: 18px;
+  z-index: 1;
+  padding: 9px 12px;
+  color: #14213d;
+  background: var(--gold);
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+}
+
+.road-movie-copy {
+  align-self: center;
+  padding: clamp(10px, 2vw, 18px) clamp(6px, 1vw, 10px);
+}
+
+.road-movie-copy h3 {
+  margin-bottom: 16px;
+  color: white;
+  font-size: clamp(28px, 4vw, 48px);
+  line-height: 1.2;
+}
+
+.road-movie-copy p {
+  color: rgba(255, 255, 255, 0.84);
+}
+
+.road-movie-copy .road-movie-lead {
+  color: white;
+  font-size: clamp(17px, 2vw, 21px);
+  font-weight: 800;
+  line-height: 1.8;
+}
+
+.road-movie-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.road-movie-actions .button.primary {
+  border-color: var(--gold);
+  color: #14213d;
+  background: var(--gold);
+}
+
+.road-movie-actions .button.secondary {
+  color: white;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.58);
+}
+
+.trilogy-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.trilogy-card {
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--blue);
+  border-radius: 8px;
+}
+
+.trilogy-card.current {
+  background: rgba(255, 255, 255, 0.9);
+  border-top-color: var(--red);
+  box-shadow: 0 14px 34px rgba(10, 31, 68, 0.12);
+}
+
+.trilogy-card span {
+  display: block;
+  margin-bottom: 9px;
+  color: var(--red);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+}
+
+.trilogy-card h3 {
+  margin-bottom: 8px;
+}
+
+.trilogy-card p {
+  margin-bottom: 0;
+  font-size: 14px;
+  line-height: 1.75;
 }
 
 .documentary-notice {
@@ -801,6 +981,19 @@ footer a {
     grid-template-columns: 1fr;
   }
 
+  .road-movie-feature {
+    grid-template-columns: 1fr;
+  }
+
+  .road-movie-thumb img {
+    min-height: auto;
+    aspect-ratio: 16 / 9;
+  }
+
+  .trilogy-grid {
+    grid-template-columns: 1fr;
+  }
+
   .share-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -897,6 +1090,29 @@ footer a {
 
   .video-grid {
     gap: 18px;
+  }
+
+  .road-movie-feature {
+    padding: 12px;
+  }
+
+  .road-movie-status {
+    left: 12px;
+    top: 12px;
+    font-size: 12px;
+  }
+
+  .road-movie-copy {
+    padding: 8px 2px 4px;
+  }
+
+  .road-movie-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .road-movie-actions .button.secondary {
+    margin: 0;
   }
 
   .share-grid {
