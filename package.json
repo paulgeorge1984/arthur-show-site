@@ -11,6 +11,8 @@
     "fetch:friday-night": "node scripts/fetch-friday-night.mjs",
     "fetch:daily-verses": "node scripts/fetch-daily-verse-videos.mjs",
     "fetch:bible-books": "node scripts/fetch-bible-book-videos.mjs",
+    "repair:word-of-god-refs": "node scripts/repair-word-of-god-booklet-refs.mjs",
+    "link:line-scriptures": "node scripts/build-line-scripture-links.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },

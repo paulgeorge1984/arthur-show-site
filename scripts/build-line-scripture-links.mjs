@@ -86,7 +86,10 @@ for (const [book, aliases] of bookAliases) {
 	for (const alias of aliases) aliasToBook.set(normalizeAlias(alias), book);
 }
 const aliasPattern = [...aliasToBook.keys()].sort((a, b) => b.length - a.length).map(escapeRegExp).join('|');
-const refRegex = new RegExp(`(${aliasPattern})[^0-9\\n]{0,8}(\\d{1,3})\\s*(?:章|:|：)\\s*(\\d{1,3})(?:\\s*(?:節)?\\s*[-ー〜~–－]\\s*(\\d{1,3}))?`, 'g');
+const refRegex = new RegExp(
+	`(${aliasPattern})[^0-9\\n]{0,8}(\\d{1,3})\\s*(?:(?:章\\s*(?:(\\d{1,3})(?:\\s*節)?(?:\\s*[-ー〜~–－]\\s*(\\d{1,3}))?)?)|(?:[:：]\\s*(\\d{1,3})(?:\\s*[-ー〜~–－]\\s*(\\d{1,3}))?))`,
+	'g',
+);
 
 function normalizeAlias(value = '') {
 	return String(value).normalize('NFKC').replace(/[　\s・]/g, '').replace(/^第([一二三])/, '$1');
@@ -145,15 +148,16 @@ function extractRefs(text = '') {
 	for (const match of normalized.matchAll(refRegex)) {
 		const book = aliasToBook.get(match[1]);
 		const chapter = Number(match[2]);
-		const startVerse = Number(match[3]);
-		const endVerse = Number(match[4] || match[3]);
+		const explicitVerse = Number(match[3] || match[5] || 0);
+		const startVerse = explicitVerse || 1;
+		const endVerse = Number(match[4] || match[6] || explicitVerse || 999);
 		if (!book || !chapter || !startVerse) continue;
 		refs.push({
 			book,
 			chapter,
 			startVerse,
 			endVerse: Math.max(startVerse, endVerse),
-			label: `${book} ${chapter}:${startVerse}${endVerse > startVerse ? `-${endVerse}` : ''}`,
+			label: explicitVerse ? `${book} ${chapter}:${startVerse}${endVerse > startVerse ? `-${endVerse}` : ''}` : `${book} ${chapter} 章`,
 		});
 	}
 	return refs;
@@ -226,7 +230,7 @@ function expectedFridayNightDate(lineDate) {
 
 function expectedShowDates(lineDate) {
 	const dates = new Set();
-	for (let offset = 0; offset <= 1; offset += 1) {
+	for (let offset = -1; offset <= 2; offset += 1) {
 		const candidate = addDays(lineDate, offset);
 		const day = new Date(`${candidate}T00:00:00+09:00`).getDay();
 		if (day === 2 || day === 3) dates.add(candidate);
@@ -271,7 +275,7 @@ function videoCard(video) {
 	return {
 		id: video.id,
 		title: video.title,
-		url: video.url,
+		url: video.url || (video.id ? `https://youtu.be/${video.id}` : ''),
 		thumbnail: video.thumbnail,
 		duration: video.duration || '',
 		source: video.source,
@@ -281,7 +285,7 @@ function videoCard(video) {
 function findFridayVideos(lineDate, fridayVideos) {
 	const expected = expectedFridayNightDate(lineDate);
 	const expectedRelease = firstFridayNextMonth(expected);
-	return fridayVideos
+	const matched = fridayVideos
 		.filter((video) => {
 			const eventMatches = video.eventDate && Math.abs(dayDiff(video.eventDate, expected)) <= 7;
 			const releaseMatches = video.publishedDate && Math.abs(dayDiff(video.publishedDate, expectedRelease)) <= 7;
@@ -289,15 +293,24 @@ function findFridayVideos(lineDate, fridayVideos) {
 		})
 		.map((video) => videoCard(video))
 		.slice(0, 2);
+	if (matched.length) return matched;
+	return fridayVideos
+		.filter((video) => video.eventDate && Math.abs(dayDiff(video.eventDate, lineDate)) <= 14)
+		.map((video) => videoCard(video))
+		.slice(0, 1);
 }
 
 function findShowVideos(lineDate, showVideos) {
 	const expectedDates = expectedShowDates(lineDate);
-	if (!expectedDates.size) return [];
-	return showVideos
+	const matched = showVideos
 		.filter((video) => video.eventDate && expectedDates.has(video.eventDate))
 		.map((video) => videoCard(video))
 		.slice(0, 2);
+	if (matched.length) return matched;
+	return showVideos
+		.filter((video) => video.eventDate && Math.abs(dayDiff(video.eventDate, lineDate)) <= 3)
+		.map((video) => videoCard(video))
+		.slice(0, 1);
 }
 
 function findDailyVideos(pageNumber, lineDate, dailyByPage) {
