@@ -56,10 +56,13 @@ const isCurrent = (href: string) => {
 		</header>
 		<div class="global-nav-shell" data-global-nav-shell>
 			<button class="global-menu-toggle" type="button" aria-expanded="false" aria-controls="global-section-nav" data-global-menu-toggle>
-				<span></span>
-				<span></span>
-				<span></span>
-				<strong>MENU</strong>
+				<span class="menu-lines" aria-hidden="true">
+					<i></i>
+					<i></i>
+					<i></i>
+				</span>
+				<span class="menu-signature" aria-hidden="true">You are Loved</span>
+				<strong>SITE MENU</strong>
 			</button>
 			<nav class="global-section-nav" id="global-section-nav" aria-label="サイト内主要メニュー" data-global-section-nav>
 				<a href="/#messages" class:list={{ active: currentPath === '/' }}>Arthur Hollands' Message</a>
@@ -241,43 +244,74 @@ const isCurrent = (href: string) => {
 			position: sticky;
 			top: 86px;
 			margin: 0 0 18px;
-			padding: 8px 14px;
+			padding: 10px 14px;
 		}
 		.global-menu-toggle {
-			display: inline-grid;
-			grid-template-columns: 18px auto;
+			display: grid;
+			grid-template-columns: 44px minmax(0, 1fr) auto;
 			align-items: center;
-			gap: 9px;
-			min-height: 38px;
-			padding: 0 12px;
+			gap: 12px;
+			width: 100%;
+			min-height: 42px;
+			padding: 0 2px;
 			color: #fff;
-			background: rgba(255, 255, 255, 0.06);
-			border: 1px solid rgba(197, 160, 89, 0.5);
+			background: transparent;
+			border: 0;
+			border-top: 1px solid rgba(197, 160, 89, 0.22);
+			border-bottom: 1px solid rgba(197, 160, 89, 0.22);
 			font: inherit;
 			cursor: pointer;
 		}
-		.global-menu-toggle span {
+		.global-menu-toggle .menu-lines {
+			position: relative;
+			display: grid;
+			gap: 6px;
+			width: 34px;
+			padding: 2px 0;
+		}
+		.global-menu-toggle .menu-lines i {
 			display: block;
-			grid-column: 1;
-			width: 18px;
+			width: 34px;
 			height: 2px;
-			background: var(--color-gold);
+			background: linear-gradient(90deg, var(--color-gold), rgba(255, 255, 255, 0.78));
+			transform-origin: center;
+			transition: transform 0.18s ease, opacity 0.18s ease;
+		}
+		.global-nav-shell.is-open .global-menu-toggle .menu-lines i:nth-child(1) {
+			transform: translateY(8px) rotate(36deg);
+		}
+		.global-nav-shell.is-open .global-menu-toggle .menu-lines i:nth-child(2) {
+			opacity: 0;
+		}
+		.global-nav-shell.is-open .global-menu-toggle .menu-lines i:nth-child(3) {
+			transform: translateY(-8px) rotate(-36deg);
 		}
 		.global-menu-toggle strong {
-			grid-column: 2;
-			grid-row: 1 / 4;
 			font-family: var(--font-head);
-			font-size: 0.82rem;
+			font-size: 0.86rem;
 			font-weight: 900;
-			letter-spacing: 0.08em;
+			letter-spacing: 0.18em;
+			color: rgba(255, 255, 255, 0.86);
+			white-space: nowrap;
+		}
+		.global-menu-toggle .menu-signature {
+			justify-self: center;
+			min-width: 0;
+			color: var(--color-gold);
+			font-family: var(--font-cursive);
+			font-size: 1.28rem;
+			line-height: 1;
+			text-align: center;
+			white-space: nowrap;
 		}
 		.global-section-nav {
 			display: none;
 			grid-template-columns: 1fr;
-			gap: 6px;
-			margin-top: 8px;
-			padding: 8px 0 4px;
+			gap: 1px;
+			margin-top: 10px;
+			padding: 0;
 			overflow: visible;
+			background: rgba(255, 255, 255, 0.08);
 		}
 		.global-nav-shell.is-open .global-section-nav {
 			display: grid;
@@ -285,9 +319,9 @@ const isCurrent = (href: string) => {
 		.global-section-nav a {
 			justify-content: flex-start;
 			width: 100%;
-			min-height: 40px;
-			padding: 0 12px;
-			background: rgba(255, 255, 255, 0.04);
+			min-height: 42px;
+			padding: 0 14px;
+			background: rgba(10, 10, 10, 0.96);
 			font-size: 0.86rem;
 		}
 	}
