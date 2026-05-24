@@ -1,6 +1,7 @@
 ---
 import wordOfGodBooklet from '../data/word-of-god-booklet.json';
 import dailyVerseVideos from '../data/daily-verse-videos.json';
+import lineScriptureVideoLinks from '../data/line-scripture-video-links.json';
 
 const bibleBooks = [
 	'創世記', '出エジプト記', 'レビ記', '民数記', '申命記', 'ヨシュア記', '士師記', 'ルツ記',
@@ -45,7 +46,9 @@ const normalizeBookletText = (value = '') => value.replace(/[　\s]/g, '');
 const bookletPages = wordOfGodBooklet.pages;
 const bookletPageCount = bookletPages.length;
 const dailyVerseVideosByPage = dailyVerseVideos.videosByPage || {};
+const lineScriptureVideosByPage = lineScriptureVideoLinks.videosByPage || {};
 const linkedDailyVideoCount = Object.values(dailyVerseVideosByPage).reduce((total, videos) => total + (Array.isArray(videos) ? videos.length : 0), 0);
+const linkedLineVideoCount = Object.values(lineScriptureVideosByPage).reduce((total, videos) => total + (Array.isArray(videos) ? videos.length : 0), 0);
 const bookletBookIndex = bibleBooks.map((book) => {
 	const aliases = (bookletBookAliases[book] || [book]).map(normalizeBookletText);
 	const page = bookletPages.find((item) => {
@@ -136,10 +139,10 @@ const newBookletBooks = bookletBookIndex.slice(39).filter((item) => item.page);
 	<section class="booklet-related" aria-labelledby="booklet-related-title">
 		<div class="booklet-related-heading">
 			<div>
-				<p class="section-kicker">THE DAILY WITH ARTHUR HOLLANDS</p>
-				<h2 id="booklet-related-title">この聖句に関連するデイリーメッセージ</h2>
+				<p class="section-kicker">RELATED MESSAGES</p>
+				<h2 id="booklet-related-title">この聖句に関連する映像</h2>
 			</div>
-			<p data-booklet-related-status>{linkedDailyVideoCount} videos linked</p>
+			<p data-booklet-related-status>{linkedDailyVideoCount + linkedLineVideoCount} videos linked</p>
 		</div>
 		<div class="booklet-related-grid" data-booklet-related-list></div>
 		<p class="booklet-related-empty" data-booklet-related-empty>この聖句を解説した動画がここに表示されます。</p>
@@ -148,9 +151,11 @@ const newBookletBooks = bookletBookIndex.slice(39).filter((item) => item.page);
 
 <script type="application/json" data-booklet-pages set:html={JSON.stringify(bookletPages)}></script>
 <script type="application/json" data-booklet-related-videos set:html={JSON.stringify(dailyVerseVideosByPage)}></script>
+<script type="application/json" data-booklet-line-videos set:html={JSON.stringify(lineScriptureVideosByPage)}></script>
 <script is:inline>
 	const bookletPages = JSON.parse(document.querySelector('[data-booklet-pages]')?.textContent || '[]');
 	const bookletRelatedVideos = JSON.parse(document.querySelector('[data-booklet-related-videos]')?.textContent || '{}');
+	const bookletLineVideos = JSON.parse(document.querySelector('[data-booklet-line-videos]')?.textContent || '{}');
 	const bookletSearch = document.querySelector('[data-booklet-search]');
 	const bookletImage = document.querySelector('[data-booklet-image]');
 	const bookletSearchStatus = document.querySelector('[data-booklet-search-status]');
@@ -210,7 +215,32 @@ const newBookletBooks = bookletBookIndex.slice(39).filter((item) => item.page);
 	}
 
 	function renderRelatedVideos(pageNumber) {
-		const videos = bookletRelatedVideos[String(pageNumber)] || [];
+		const dailyVideos = bookletRelatedVideos[String(pageNumber)] || [];
+		const linkedVideos = bookletLineVideos[String(pageNumber)] || [];
+		const videoItems = [];
+		const seen = new Set();
+		linkedVideos.forEach((video) => {
+			const key = `${video.source || ''}:${video.id}`;
+			if (seen.has(key)) return;
+			seen.add(key);
+			videoItems.push({
+				...video,
+				quote: video.source || 'RELATED MESSAGE',
+				confidence: video.source || 'RELATED',
+				matchMeta: video.source || 'RELATED',
+			});
+		});
+		dailyVideos.forEach((video) => {
+			const key = `THE DAILY:${video.id}`;
+			if (seen.has(key)) return;
+			seen.add(key);
+			videoItems.push({
+				...video,
+				source: 'THE DAILY',
+				matchMeta: `${video.confidence === 'exact' ? 'TITLE MATCH' : 'QUOTE MATCH'}${formatBookletDuration(video.duration) ? ` / ${formatBookletDuration(video.duration)}` : ''}`,
+			});
+		});
+		const videos = videoItems;
 		if (bookletRelatedStatus) {
 			bookletRelatedStatus.textContent = videos.length ? `P.${pageNumber} / ${videos.length} videos` : `P.${pageNumber}`;
 		}
@@ -233,7 +263,7 @@ const newBookletBooks = bookletBookIndex.slice(39).filter((item) => item.page);
 			const body = document.createElement('span');
 			body.className = 'booklet-related-body';
 			const meta = document.createElement('small');
-			meta.textContent = `${video.confidence === 'exact' ? 'TITLE MATCH' : 'QUOTE MATCH'}${formatBookletDuration(video.duration) ? ` / ${formatBookletDuration(video.duration)}` : ''}`;
+			meta.textContent = video.matchMeta || `${video.source || 'RELATED'}${formatBookletDuration(video.duration) ? ` / ${formatBookletDuration(video.duration)}` : ''}`;
 			const title = document.createElement('strong');
 			title.textContent = video.title;
 			const quote = document.createElement('em');
