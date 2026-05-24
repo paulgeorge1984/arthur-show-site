@@ -1,0 +1,1643 @@
+{
+  "fetchedAt": "2026-05-24T16:39:46.751Z",
+  "playlist": {
+    "id": "PL-faIdjPoxKh0A9o6_eq2pH5-ZVrhcAD8",
+    "title": "THE DAILY with ARTHUR HOLLANDS",
+    "url": "https://www.youtube.com/playlist?list=PL-faIdjPoxKh0A9o6_eq2pH5-ZVrhcAD8"
+  },
+  "stats": {
+    "publicVideoCount": 1210,
+    "linkedVideoCount": 98,
+    "linkedPageCount": 69
+  },
+  "videosByPage": {
+    "13": [
+      {
+        "id": "sjYYrA5GGxY",
+        "title": "「ノアは、すべて主が命じられたとおりにした。」THE DAILY with Arthur Hollands 2025/04/07",
+        "url": "https://youtu.be/sjYYrA5GGxY",
+        "thumbnail": "https://i.ytimg.com/vi/sjYYrA5GGxY/hqdefault.jpg",
+        "duration": "PT9M38S",
+        "quote": "ノアは、すべて主が命じられたとおりにした。",
+        "pageLabel": "創世記 7:5",
+        "pageRefs": [
+          "創世記 7:5",
+          "創世記 8:22",
+          "創世記 9:1"
+        ],
+        "confidence": "phrase",
+        "score": 13
+      }
+    ],
+    "15": [
+      {
+        "id": "wp9aX5kjr6Y",
+        "title": "「地上のすべての民族は、あなたによって祝福される」THE DAILY with Arthur Hollands 2025/04/19",
+        "url": "https://youtu.be/wp9aX5kjr6Y",
+        "thumbnail": "https://i.ytimg.com/vi/wp9aX5kjr6Y/hqdefault.jpg",
+        "duration": "PT11M24S",
+        "quote": "地上のすべての民族は、あなたによって祝福される",
+        "pageLabel": "創世記 12:3",
+        "pageRefs": [
+          "創世記 12:3",
+          "創世記 12:7"
+        ],
+        "confidence": "phrase",
+        "score": 13
+      }
+    ],
+    "27": [
+      {
+        "id": "fTdT4aONkfE",
+        "title": "「彼はまた、すべての兄弟に口づけし、彼らを抱いて泣いた」THE DAILY with Arthur Hollands 2025/02/02",
+        "url": "https://youtu.be/fTdT4aONkfE",
+        "thumbnail": "https://i.ytimg.com/vi/fTdT4aONkfE/hqdefault.jpg",
+        "duration": "PT7M30S",
+        "quote": "彼はまた、すべての兄弟に口づけし、彼らを抱いて泣いた",
+        "pageLabel": "創世記 45:4-5",
+        "pageRefs": [
+          "創世記 45:4-5",
+          "創世記 45:15",
+          "創世記 45:24"
+        ],
+        "confidence": "phrase",
+        "score": 14
+      },
+      {
+        "id": "h-shVh49OaM",
+        "title": "「私はあなたがたがエジプトに売った弟のヨセフです」THE DAILY with Arthur Hollands 2025/02/01",
+        "url": "https://youtu.be/h-shVh49OaM",
+        "thumbnail": "https://i.ytimg.com/vi/h-shVh49OaM/hqdefault.jpg",
+        "duration": "PT8M13S",
+        "quote": "私はあなたがたがエジプトに売った弟のヨセフです",
+        "pageLabel": "創世記 45:4-5",
+        "pageRefs": [
+          "創世記 45:4-5",
+          "創世記 45:15",
+          "創世記 45:24"
+        ],
+        "confidence": "phrase",
+        "score": 14
+      }
+    ],
+    "28": [
+      {
+        "id": "A-NAEJqDi7s",
+        "title": "「私の名が先祖アブラハムとイサクの名とともに、彼らのうちにとなえ続けられますように」THE DAILY with Arthur Hollands 2025/04/01",
+        "url": "https://youtu.be/A-NAEJqDi7s",
+        "thumbnail": "https://i.ytimg.com/vi/A-NAEJqDi7s/hqdefault.jpg",
+        "duration": "PT6M39S",
+        "quote": "私の名が先祖アブラハムとイサクの名とともに、彼らのうちにとなえ続けられますように",
+        "pageLabel": "創世記 47:9",
+        "pageRefs": [
+          "創世記 47:9",
+          "創世記 48:15-16"
+        ],
+        "confidence": "phrase",
+        "score": 14
+      }
+    ],
+    "53": [
+      {
+        "id": "B0MaGEwW3cA",
+        "title": "「主を喜ぶことはあなたがたの力です」THE DAILY with Arthur Hollands  2024/02/11",
+        "url": "https://youtu.be/B0MaGEwW3cA",
+        "thumbnail": "https://i.ytimg.com/vi/B0MaGEwW3cA/hqdefault.jpg",
+        "duration": "PT2M49S",
+        "quote": "主を喜ぶことはあなたがたの力です",
+        "pageLabel": "ネヘミヤ記 8:10",
+        "pageRefs": [
+          "ネヘミヤ記 8:10"
+        ],
+        "confidence": "exact",
+        "score": 16
+      }
+    ],
+    "110": [
+      {
+        "id": "Ga_fOD9y5SY",
+        "title": "「悪者には心の痛みが多い。しかし、主に信頼する者には…」THE DAILY with Arthur Hollands  2024/05/11",
+        "url": "https://youtu.be/Ga_fOD9y5SY",
+        "thumbnail": "https://i.ytimg.com/vi/Ga_fOD9y5SY/hqdefault.jpg",
+        "duration": "PT6M25S",
+        "quote": "悪者には心の痛みが多い。しかし、主に信頼する者には…",
+        "pageLabel": "詩篇 32:10",
+        "pageRefs": [
+          "詩篇 32:10"
+        ],
+        "confidence": "phrase",
+        "score": 14
+      }
+    ],
+    "116": [
+      {
+        "id": "j6AkZekvOu0",
+        "title": "「神はわれらの避け所、また力。」THE DAILY with Arthur Hollands  2024/03/25",
+        "url": "https://youtu.be/j6AkZekvOu0",
+        "thumbnail": "https://i.ytimg.com/vi/j6AkZekvOu0/hqdefault.jpg",
+        "duration": "PT2M22S",
+        "quote": "神はわれらの避け所、また力。",
+        "pageLabel": "詩篇 46:1",
+        "pageRefs": [
+          "詩篇 46:1",
+          "詩篇 46:1-3"
+        ],
+        "confidence": "exact",
+        "score": 12
+      },
+      {
+        "id": "HESdx6zgY5A",
+        "title": "「神はわれらの避け所、また力。苦しむとき、そこにある助け」THE DAILY with Arthur Hollands 2024/10/15",
+        "url": "https://youtu.be/HESdx6zgY5A",
+        "thumbnail": "https://i.ytimg.com/vi/HESdx6zgY5A/hqdefault.jpg",
+        "duration": "PT5M52S",
+        "quote": "神はわれらの避け所、また力。苦しむとき、そこにある助け",
+        "pageLabel": "詩篇 46:1",
+        "pageRefs": [
+          "詩篇 46:1",
+          "詩篇 46:1-3"
+        ],
+        "confidence": "phrase",
+        "score": 12
+      }
+    ],
+    "117": [
+      {
+        "id": "LCrRQ9T9TD4",
+        "title": "「静まって、わたしこそ神であることを知れ。」THE DAILY with Arthur Hollands 2024/11/17",
+        "url": "https://youtu.be/LCrRQ9T9TD4",
+        "thumbnail": "https://i.ytimg.com/vi/LCrRQ9T9TD4/hqdefault.jpg",
+        "duration": "PT4M6S",
+        "quote": "静まって、わたしこそ神であることを知れ。",
+        "pageLabel": "詩篇 46:2",
+        "pageRefs": [
+          "詩篇 46:2",
+          "詩篇 46:3",
+          "詩篇 46:10"
+        ],
+        "confidence": "exact",
+        "score": 18
+      },
+      {
+        "id": "v_EH6J2HeBE",
+        "title": "【未公開スペシャル】「静まって、わたしこそ神であることを知れ。」2024/09/17(📹AUG 11)",
+        "url": "https://youtu.be/v_EH6J2HeBE",
+        "thumbnail": "https://i.ytimg.com/vi/v_EH6J2HeBE/hqdefault.jpg",
+        "duration": "PT7M32S",
+        "quote": "静まって、わたしこそ神であることを知れ。",
+        "pageLabel": "詩篇 46:2",
+        "pageRefs": [
+          "詩篇 46:2",
+          "詩篇 46:3",
+          "詩篇 46:10"
+        ],
+        "confidence": "exact",
+        "score": 18
+      },
+      {
+        "id": "X8pCr5WSZ9Y",
+        "title": "「静まって、わたしこそ神であることを知れ。」THE DAILY with Arthur Hollands  2024/6/4",
+        "url": "https://youtu.be/X8pCr5WSZ9Y",
+        "thumbnail": "https://i.ytimg.com/vi/X8pCr5WSZ9Y/hqdefault.jpg",
+        "duration": "PT2M43S",
+        "quote": "静まって、わたしこそ神であることを知れ。",
+        "pageLabel": "詩篇 46:2",
+        "pageRefs": [
+          "詩篇 46:2",
+          "詩篇 46:3",
+          "詩篇 46:10"
+        ],
+        "confidence": "exact",
+        "score": 18
+      },
+      {
+        "id": "axOQuEpegxo",
+        "title": "「静まって、わたしこそ神であることを知れ。」THE DAILY with Arthur Hollands  2024/04/18",
+        "url": "https://youtu.be/axOQuEpegxo",
+        "thumbnail": "https://i.ytimg.com/vi/axOQuEpegxo/hqdefault.jpg",
+        "duration": "PT3M31S",
+        "quote": "静まって、わたしこそ神であることを知れ。",
+        "pageLabel": "詩篇 46:2",
+        "pageRefs": [
+          "詩篇 46:2",
+          "詩篇 46:3",
+          "詩篇 46:10"
+        ],
+        "confidence": "exact",
+        "score": 18
+      }
+    ],
+    "132": [
+      {
+        "id": "wUa_GRQGOOE",
+        "title": "「これは、主が設けられた日である。この日を楽しみ喜ぼう。」THE DAILY with Arthur Hollands   2024/6/28",
+        "url": "https://youtu.be/wUa_GRQGOOE",
+        "thumbnail": "https://i.ytimg.com/vi/wUa_GRQGOOE/hqdefault.jpg",
+        "duration": "PT4M6S",
+        "quote": "これは、主が設けられた日である。この日を楽しみ喜ぼう。",
+        "pageLabel": "詩篇 118:24",
+        "pageRefs": [
+          "詩篇 118:24",
+          "詩篇 119:71",
+          "詩篇 126:5-6"
+        ],
+        "confidence": "phrase",
+        "score": 13
+      }
+    ],
+    "168": [
+      {
+        "id": "c1J4I7giVuM",
+        "title": "【未公開スペシャル】「権力によらず、能力によらず、わたしの霊によって」THE DAILY with Arthur Hollands  2024/06/09 (📹MAY 20 )",
+        "url": "https://youtu.be/c1J4I7giVuM",
+        "thumbnail": "https://i.ytimg.com/vi/c1J4I7giVuM/hqdefault.jpg",
+        "duration": "PT4M14S",
+        "quote": "権力によらず、能力によらず、わたしの霊によって",
+        "pageLabel": "ゼカリヤ書 4:6",
+        "pageRefs": [
+          "ゼカリヤ書 4:6"
+        ],
+        "confidence": "phrase",
+        "score": 17
+      }
+    ],
+    "177": [
+      {
+        "id": "4JH3kvbhYes",
+        "title": "「人はパンだけで生きるのではなく、神の口から出る一つ一つのことばによる」THE DAILY with Arthur Hollands 2024/11/21",
+        "url": "https://youtu.be/4JH3kvbhYes",
+        "thumbnail": "https://i.ytimg.com/vi/4JH3kvbhYes/hqdefault.jpg",
+        "duration": "PT6M36S",
+        "quote": "人はパンだけで生きるのではなく、神の口から出る一つ一つのことばによる",
+        "pageLabel": "福音書 4:4",
+        "pageRefs": [
+          "福音書 4:4",
+          "福音書 4:12-17"
+        ],
+        "confidence": "phrase",
+        "score": 17
+      },
+      {
+        "id": "Pvglv7hoQwU",
+        "title": "「人はパンだけで生きるのではなく、神の口から出る一つ一つのことばによって生きる」THE DAILY with Arthur Hollands  2023/12/26",
+        "url": "https://youtu.be/Pvglv7hoQwU",
+        "thumbnail": "https://i.ytimg.com/vi/Pvglv7hoQwU/hqdefault.jpg",
+        "duration": "PT2M35S",
+        "quote": "人はパンだけで生きるのではなく、神の口から出る一つ一つのことばによって生きる",
+        "pageLabel": "福音書 4:4",
+        "pageRefs": [
+          "福音書 4:4",
+          "福音書 4:12-17"
+        ],
+        "confidence": "phrase",
+        "score": 17
+      }
+    ],
+    "183": [
+      {
+        "id": "4p6zcG8dtSM",
+        "title": "【未公開スペシャル】「施しをするとき、右の手のしていることを左の手に知られないようにしなさい」 (Vlog📹 2024/06/29)THE DAILY 2024/07/09",
+        "url": "https://youtu.be/4p6zcG8dtSM",
+        "thumbnail": "https://i.ytimg.com/vi/4p6zcG8dtSM/hqdefault.jpg",
+        "duration": "PT5M36S",
+        "quote": "施しをするとき、右の手のしていることを左の手に知られないようにしなさい",
+        "pageLabel": "福音書 6:1-4",
+        "pageRefs": [
+          "福音書 6:1-4",
+          "福音書 6:3-4"
+        ],
+        "confidence": "phrase",
+        "score": 17
+      }
+    ],
+    "184": [
+      {
+        "id": "jkGGPt_joT0",
+        "title": "「隠れた所におられるあなたの父に祈りなさい」THE DAILY with Arthur Hollands   2024/6/27",
+        "url": "https://youtu.be/jkGGPt_joT0",
+        "thumbnail": "https://i.ytimg.com/vi/jkGGPt_joT0/hqdefault.jpg",
+        "duration": "PT7M47S",
+        "quote": "隠れた所におられるあなたの父に祈りなさい",
+        "pageLabel": "福音書 6:5-8",
+        "pageRefs": [
+          "福音書 6:5-8",
+          "福音書 6:6"
+        ],
+        "confidence": "phrase",
+        "score": 12
+      }
+    ],
+    "193": [
+      {
+        "id": "TnB-SOs0SFg",
+        "title": "「わたしに向かって、『主よ、主よ』と言う者がみな天の御国に入るのではなく」THE DAILY with Arthur Hollands 2024/11/09",
+        "url": "https://youtu.be/TnB-SOs0SFg",
+        "thumbnail": "https://i.ytimg.com/vi/TnB-SOs0SFg/hqdefault.jpg",
+        "duration": "PT7M55S",
+        "quote": "わたしに向かって、『主よ、主よ』と言う者がみな天の御国に入るのではなく",
+        "pageLabel": "福音書 7:21",
+        "pageRefs": [
+          "福音書 7:21",
+          "福音書 7:24-25"
+        ],
+        "confidence": "phrase",
+        "score": 15
+      }
+    ],
+    "196": [
+      {
+        "id": "Aj-DsfdIYYw",
+        "title": "「わたしは正しい人を招くためではなく、罪人を招くために来たのです。」THE DAILY with Arthur Hollands 2024/08/22",
+        "url": "https://youtu.be/Aj-DsfdIYYw",
+        "thumbnail": "https://i.ytimg.com/vi/Aj-DsfdIYYw/hqdefault.jpg",
+        "duration": "PT18M9S",
+        "quote": "わたしは正しい人を招くためではなく、罪人を招くために来たのです。",
+        "pageLabel": "福音書 9:13",
+        "pageRefs": [
+          "福音書 9:13",
+          "福音書 9:18-26"
+        ],
+        "confidence": "phrase",
+        "score": 17
+      },
+      {
+        "id": "FtI67WG9TTo",
+        "title": "「わたしが来たのは、正しい人を招くためではなく、罪人を招くためです。」THE DAILY with Arthur Hollands  2024/05/01",
+        "url": "https://youtu.be/FtI67WG9TTo",
+        "thumbnail": "https://i.ytimg.com/vi/FtI67WG9TTo/hqdefault.jpg",
+        "duration": "PT6M13S",
+        "quote": "わたしが来たのは、正しい人を招くためではなく、罪人を招くためです。",
+        "pageLabel": "福音書 9:13",
+        "pageRefs": [
+          "福音書 9:13",
+          "福音書 9:18-26"
+        ],
+        "confidence": "phrase",
+        "score": 18
+      }
+    ],
+    "197": [
+      {
+        "id": "g4JfXSTn724",
+        "title": "【未公開スペシャル】「あなたの信仰が、あなたを救ったのです。」THE DAILY with Arthur Hollands   2024/7/6(📹JUNE 15 )",
+        "url": "https://youtu.be/g4JfXSTn724",
+        "thumbnail": "https://i.ytimg.com/vi/g4JfXSTn724/hqdefault.jpg",
+        "duration": "PT5M17S",
+        "quote": "あなたの信仰が、あなたを救ったのです。",
+        "pageLabel": "福音書 9:36-38",
+        "pageRefs": [
+          "福音書 9:36-38"
+        ],
+        "confidence": "exact",
+        "score": 17
+      },
+      {
+        "id": "eLaTP86gKig",
+        "title": "「あなたの信仰があなたを救ったのです」THE DAILY with Arthur Hollands 2022/12/29",
+        "url": "https://youtu.be/eLaTP86gKig",
+        "thumbnail": "https://i.ytimg.com/vi/eLaTP86gKig/hqdefault.jpg",
+        "duration": "PT1M34S",
+        "quote": "あなたの信仰があなたを救ったのです",
+        "pageLabel": "福音書 9:36-38",
+        "pageRefs": [
+          "福音書 9:36-38"
+        ],
+        "confidence": "exact",
+        "score": 17
+      },
+      {
+        "id": "zydmO5nb_ac",
+        "title": "「ジーザスは、羊飼いのない羊のように弱り果てて倒れている彼らをかわいそうに思われた」THE DAILY with Arthur Hollands 2024/08/28",
+        "url": "https://youtu.be/zydmO5nb_ac",
+        "thumbnail": "https://i.ytimg.com/vi/zydmO5nb_ac/hqdefault.jpg",
+        "duration": "PT15M45S",
+        "quote": "ジーザスは、羊飼いのない羊のように弱り果てて倒れている彼らをかわいそうに思われた",
+        "pageLabel": "福音書 9:36-38",
+        "pageRefs": [
+          "福音書 9:36-38"
+        ],
+        "confidence": "phrase",
+        "score": 18
+      },
+      {
+        "id": "Yf9wB7p1C6M",
+        "title": "「あなたの信仰があなたを救う」THE DAILY with Arthur Hollands 2023/01/09",
+        "url": "https://youtu.be/Yf9wB7p1C6M",
+        "thumbnail": "https://i.ytimg.com/vi/Yf9wB7p1C6M/hqdefault.jpg",
+        "duration": "PT1M37S",
+        "quote": "あなたの信仰があなたを救う",
+        "pageLabel": "福音書 9:36-38",
+        "pageRefs": [
+          "福音書 9:36-38"
+        ],
+        "confidence": "phrase",
+        "score": 12
+      }
+    ],
+    "206": [
+      {
+        "id": "5Iq1KWfEYaI",
+        "title": "「あなたがたは、わたしをだれだと言いますか。」THE DAILY with Arthur Hollands  2024/05/21",
+        "url": "https://youtu.be/5Iq1KWfEYaI",
+        "thumbnail": "https://i.ytimg.com/vi/5Iq1KWfEYaI/hqdefault.jpg",
+        "duration": "PT3M44S",
+        "quote": "あなたがたは、わたしをだれだと言いますか。",
+        "pageLabel": "福音書 16:15",
+        "pageRefs": [
+          "福音書 16:15",
+          "福音書 16:16",
+          "福音書 16:21"
+        ],
+        "confidence": "phrase",
+        "score": 12
+      },
+      {
+        "id": "5XyatsiUgL4",
+        "title": "「苦しみを受け、殺され、そして三日目によみがえることを弟子たちに示し始められた」THE DAILY with Arthur Hollands  2024/04/04",
+        "url": "https://youtu.be/5XyatsiUgL4",
+        "thumbnail": "https://i.ytimg.com/vi/5XyatsiUgL4/hqdefault.jpg",
+        "duration": "PT5M43S",
+        "quote": "苦しみを受け、殺され、そして三日目によみがえることを弟子たちに示し始められた",
+        "pageLabel": "福音書 16:15",
+        "pageRefs": [
+          "福音書 16:15",
+          "福音書 16:16",
+          "福音書 16:21"
+        ],
+        "confidence": "phrase",
+        "score": 21
+      }
+    ],
+    "212": [
+      {
+        "id": "hDBQmOUSXwk",
+        "title": "「仕えられるためではなく、仕えるために…」THE DAILY with Arthur Hollands  2024/01/19",
+        "url": "https://youtu.be/hDBQmOUSXwk",
+        "thumbnail": "https://i.ytimg.com/vi/hDBQmOUSXwk/hqdefault.jpg",
+        "duration": "PT3M58S",
+        "quote": "仕えられるためではなく、仕えるために…",
+        "pageLabel": "福音書 20:20-28",
+        "pageRefs": [
+          "福音書 20:20-28"
+        ],
+        "confidence": "phrase",
+        "score": 16
+      }
+    ],
+    "214": [
+      {
+        "id": "Fg4N2sYD5dw",
+        "title": "「そんな思い違いをしているのは、聖書も神の力も知らないからです。」THE DAILY with Arthur Hollands  2024/03/29",
+        "url": "https://youtu.be/Fg4N2sYD5dw",
+        "thumbnail": "https://i.ytimg.com/vi/Fg4N2sYD5dw/hqdefault.jpg",
+        "duration": "PT6M6S",
+        "quote": "そんな思い違いをしているのは、聖書も神の力も知らないからです。",
+        "pageLabel": "福音書 21:15-17",
+        "pageRefs": [
+          "福音書 21:15-17",
+          "福音書 22:29"
+        ],
+        "confidence": "phrase",
+        "score": 14
+      }
+    ],
+    "215": [
+      {
+        "id": "1Cg1VaUcAWU",
+        "title": "「自分を高くする者は低くされ、自分を低くする者は高くされる」(📹JULY 12) THE DAILY with Arthur Hollands   2024/07/15",
+        "url": "https://youtu.be/1Cg1VaUcAWU",
+        "thumbnail": "https://i.ytimg.com/vi/1Cg1VaUcAWU/hqdefault.jpg",
+        "duration": "PT7M55S",
+        "quote": "自分を高くする者は低くされ、自分を低くする者は高くされる",
+        "pageLabel": "福音書 23:12",
+        "pageRefs": [
+          "福音書 23:12",
+          "福音書 24:12",
+          "福音書 24:14"
+        ],
+        "confidence": "exact",
+        "score": 27
+      },
+      {
+        "id": "osCvRr0kMhk",
+        "title": "【未公開スペシャル】「自分を高くする者は低くされ、自分を低くする者は高くされる」(📹JUNE 28)THE DAILY with Arthur Hollands 2024/07/08",
+        "url": "https://youtu.be/osCvRr0kMhk",
+        "thumbnail": "https://i.ytimg.com/vi/osCvRr0kMhk/hqdefault.jpg",
+        "duration": "PT6M18S",
+        "quote": "自分を高くする者は低くされ、自分を低くする者は高くされる",
+        "pageLabel": "福音書 23:12",
+        "pageRefs": [
+          "福音書 23:12",
+          "福音書 24:12",
+          "福音書 24:14"
+        ],
+        "confidence": "exact",
+        "score": 27
+      }
+    ],
+    "220": [
+      {
+        "id": "7LQt3i7JiXs",
+        "title": "「誘惑に陥らないように、目をさまして、祈っていなさい」- THE DAILY with Arthur Hollands 2023/09/26",
+        "url": "https://youtu.be/7LQt3i7JiXs",
+        "thumbnail": "https://i.ytimg.com/vi/7LQt3i7JiXs/hqdefault.jpg",
+        "duration": "PT4M24S",
+        "quote": "誘惑に陥らないように、目をさまして、祈っていなさい",
+        "pageLabel": "福音書 26:36-41",
+        "pageRefs": [
+          "福音書 26:36-41"
+        ],
+        "confidence": "exact",
+        "score": 23
+      }
+    ],
+    "229": [
+      {
+        "id": "b88MGKIfGCY",
+        "title": "「ジーザスは、寂しい所へ出て行き、そこで祈っておられた。」THE DAILY with Arthur Hollands    2024/08/19",
+        "url": "https://youtu.be/b88MGKIfGCY",
+        "thumbnail": "https://i.ytimg.com/vi/b88MGKIfGCY/hqdefault.jpg",
+        "duration": "PT23M35S",
+        "quote": "ジーザスは、寂しい所へ出て行き、そこで祈っておられた。",
+        "pageLabel": "福音書 1:15",
+        "pageRefs": [
+          "福音書 1:15",
+          "福音書 1:35",
+          "福音書 1:35-39"
+        ],
+        "confidence": "phrase",
+        "score": 19
+      }
+    ],
+    "249": [
+      {
+        "id": "qWjKKXK9T3E",
+        "title": "「あなたの信仰が、あなたを救ったのです。安心して行きなさい。」",
+        "url": "https://youtu.be/qWjKKXK9T3E",
+        "thumbnail": "https://i.ytimg.com/vi/qWjKKXK9T3E/hqdefault.jpg",
+        "duration": "PT14M17S",
+        "quote": "あなたの信仰が、あなたを救ったのです。安心して行きなさい。",
+        "pageLabel": "福音書 5:34",
+        "pageRefs": [
+          "福音書 5:34"
+        ],
+        "confidence": "exact",
+        "score": 26
+      }
+    ],
+    "262": [
+      {
+        "id": "saFgm0fSXUs",
+        "title": "「カイザルのものはカイザルに返しなさい。そして神のものは神にかえしなさい。」THE DAILY with Arthur Hollands 2024/11/29",
+        "url": "https://youtu.be/saFgm0fSXUs",
+        "thumbnail": "https://i.ytimg.com/vi/saFgm0fSXUs/hqdefault.jpg",
+        "duration": "PT5M34S",
+        "quote": "カイザルのものはカイザルに返しなさい。そして神のものは神にかえしなさい。",
+        "pageLabel": "福音書 10:51",
+        "pageRefs": [
+          "福音書 10:51",
+          "福音書 12:17",
+          "福音書 13:1-2"
+        ],
+        "confidence": "phrase",
+        "score": 13
+      }
+    ],
+    "302": [
+      {
+        "id": "H_sZM8RhZvU",
+        "title": "「ジーザスは彼らに言われた…『あなたがたは、わたしをだれだと言いますか』」THE DAILY with Arthur Hollands  2023/12/30",
+        "url": "https://youtu.be/H_sZM8RhZvU",
+        "thumbnail": "https://i.ytimg.com/vi/H_sZM8RhZvU/hqdefault.jpg",
+        "duration": "PT2M35S",
+        "quote": "ジーザスは彼らに言われた…『あなたがたは、わたしをだれだと言いますか』",
+        "pageLabel": "福音書 8:22-25",
+        "pageRefs": [
+          "福音書 8:22-25"
+        ],
+        "confidence": "phrase",
+        "score": 14
+      }
+    ],
+    "314": [
+      {
+        "id": "2YBV2Ibfoe4",
+        "title": "「幸いなのは、神のことばを聞いてそれを守る人たちです」THE DAILY with Arthur Hollands 2025/04/10",
+        "url": "https://youtu.be/2YBV2Ibfoe4",
+        "thumbnail": "https://i.ytimg.com/vi/2YBV2Ibfoe4/hqdefault.jpg",
+        "duration": "PT7M1S",
+        "quote": "幸いなのは、神のことばを聞いてそれを守る人たちです",
+        "pageLabel": "福音書 11:28",
+        "pageRefs": [
+          "福音書 11:28",
+          "福音書 11:32"
+        ],
+        "confidence": "phrase",
+        "score": 13
+      }
+    ],
+    "316": [
+      {
+        "id": "8SXXYHy6AkA",
+        "title": "「盗人も近寄らず、虫も食い破らない天に、尽きることのない宝をたくわえなさい」THE DAILY with Arthur Hollands 2025/03/15",
+        "url": "https://youtu.be/8SXXYHy6AkA",
+        "thumbnail": "https://i.ytimg.com/vi/8SXXYHy6AkA/hqdefault.jpg",
+        "duration": "PT5M45S",
+        "quote": "盗人も近寄らず、虫も食い破らない天に、尽きることのない宝をたくわえなさい",
+        "pageLabel": "福音書 12:12",
+        "pageRefs": [
+          "福音書 12:12",
+          "福音書 12:33",
+          "福音書 12:34"
+        ],
+        "confidence": "exact",
+        "score": 34
+      }
+    ],
+    "344": [
+      {
+        "id": "WhNr6RsWVtM",
+        "title": "「だからあなたは、立ち直ったら、兄弟たちを力づけてやりなさい。」THE DAILY with Arthur Hollands  2024/04/05",
+        "url": "https://youtu.be/WhNr6RsWVtM",
+        "thumbnail": "https://i.ytimg.com/vi/WhNr6RsWVtM/hqdefault.jpg",
+        "duration": "PT5M46S",
+        "quote": "だからあなたは、立ち直ったら、兄弟たちを力づけてやりなさい。",
+        "pageLabel": "福音書 19:40",
+        "pageRefs": [
+          "福音書 19:40",
+          "福音書 20:36",
+          "福音書 22:31-32"
+        ],
+        "confidence": "phrase",
+        "score": 14
+      },
+      {
+        "id": "cArDBUySXpE",
+        "title": "「ジーザスは、あなたの信仰がなくならないように、あなたのために祈っている。」THE DAILY with Arthur Hollands  2023/12/09",
+        "url": "https://youtu.be/cArDBUySXpE",
+        "thumbnail": "https://i.ytimg.com/vi/cArDBUySXpE/hqdefault.jpg",
+        "duration": "PT2M39S",
+        "quote": "ジーザスは、あなたの信仰がなくならないように、あなたのために祈っている。",
+        "pageLabel": "福音書 19:40",
+        "pageRefs": [
+          "福音書 19:40",
+          "福音書 20:36",
+          "福音書 22:31-32"
+        ],
+        "confidence": "phrase",
+        "score": 26
+      }
+    ],
+    "359": [
+      {
+        "id": "gNFKVwxwREE",
+        "title": "【未公開スペシャル】「わたしはピリポがあなたを呼ぶ前にあなたがいちじくの木の下にいるのを見たのです」THE DAILY with Arthur Hollands 2025/06/02 (📹05/19)",
+        "url": "https://youtu.be/gNFKVwxwREE",
+        "thumbnail": "https://i.ytimg.com/vi/gNFKVwxwREE/hqdefault.jpg",
+        "duration": "PT10M27S",
+        "quote": "わたしはピリポがあなたを呼ぶ前にあなたがいちじくの木の下にいるのを見たのです",
+        "pageLabel": "福音書 1:4-5",
+        "pageRefs": [
+          "福音書 1:4-5"
+        ],
+        "confidence": "phrase",
+        "score": 19
+      }
+    ],
+    "362": [
+      {
+        "id": "hWCChHbRHgY",
+        "title": "「見よ、世の罪を取り除く神の小羊」THE DAILY with Arthur Hollands 2025/05/17",
+        "url": "https://youtu.be/hWCChHbRHgY",
+        "thumbnail": "https://i.ytimg.com/vi/hWCChHbRHgY/hqdefault.jpg",
+        "duration": "PT11M16S",
+        "quote": "見よ、世の罪を取り除く神の小羊",
+        "pageLabel": "福音書 1:29",
+        "pageRefs": [
+          "福音書 1:29",
+          "福音書 1:31-34"
+        ],
+        "confidence": "exact",
+        "score": 14
+      },
+      {
+        "id": "TwEZt_WSi2U",
+        "title": "「見よ、世の罪を取り除く神の小羊」THE DAILY with Arthur Hollands 2025/05/04　🌐💬🆗",
+        "url": "https://youtu.be/TwEZt_WSi2U",
+        "thumbnail": "https://i.ytimg.com/vi/TwEZt_WSi2U/hqdefault.jpg",
+        "duration": "PT9M11S",
+        "quote": "見よ、世の罪を取り除く神の小羊",
+        "pageLabel": "福音書 1:29",
+        "pageRefs": [
+          "福音書 1:29",
+          "福音書 1:31-34"
+        ],
+        "confidence": "exact",
+        "score": 14
+      },
+      {
+        "id": "jvqYMrVST2o",
+        "title": "「世の罪を取り除く神の小羊」THE DAILY with Arthur Hollands 2023/10/28",
+        "url": "https://youtu.be/jvqYMrVST2o",
+        "thumbnail": "https://i.ytimg.com/vi/jvqYMrVST2o/hqdefault.jpg",
+        "duration": "PT3M11S",
+        "quote": "世の罪を取り除く神の小羊",
+        "pageLabel": "福音書 1:29",
+        "pageRefs": [
+          "福音書 1:29",
+          "福音書 1:31-34"
+        ],
+        "confidence": "exact",
+        "score": 12
+      },
+      {
+        "id": "j7TPXphuwPw",
+        "title": "「見よ、世の罪を取り除く神の子羊」THE DAILY with Arthur Hollands 2022/12/07",
+        "url": "https://youtu.be/j7TPXphuwPw",
+        "thumbnail": "https://i.ytimg.com/vi/j7TPXphuwPw/hqdefault.jpg",
+        "duration": "PT1M44S",
+        "quote": "見よ、世の罪を取り除く神の子羊",
+        "pageLabel": "福音書 1:29",
+        "pageRefs": [
+          "福音書 1:29",
+          "福音書 1:31-34"
+        ],
+        "confidence": "phrase",
+        "score": 12
+      }
+    ],
+    "367": [
+      {
+        "id": "QVZ8yjfPCx0",
+        "title": "「わたしの父の家を商売の家としてはならない」THE DAILY with Arthur Hollands 2024/12/26",
+        "url": "https://youtu.be/QVZ8yjfPCx0",
+        "thumbnail": "https://i.ytimg.com/vi/QVZ8yjfPCx0/hqdefault.jpg",
+        "duration": "PT7M38S",
+        "quote": "わたしの父の家を商売の家としてはならない",
+        "pageLabel": "福音書 2:14-16",
+        "pageRefs": [
+          "福音書 2:14-16",
+          "福音書 2:19",
+          "福音書 2:19-21"
+        ],
+        "confidence": "phrase",
+        "score": 13
+      }
+    ],
+    "370": [
+      {
+        "id": "RPzt6O7wAiY",
+        "title": "「人は、新しく生まれなければ、神の国を見ることはできません」THE DAILY with Arthur Hollands 2025/05/24",
+        "url": "https://youtu.be/RPzt6O7wAiY",
+        "thumbnail": "https://i.ytimg.com/vi/RPzt6O7wAiY/hqdefault.jpg",
+        "duration": "PT7M6S",
+        "quote": "人は、新しく生まれなければ、神の国を見ることはできません",
+        "pageLabel": "福音書 3:1-5",
+        "pageRefs": [
+          "福音書 3:1-5"
+        ],
+        "confidence": "phrase",
+        "score": 16
+      },
+      {
+        "id": "bWLuV2XFfog",
+        "title": "【未公開スペシャル】「人は、新しく生まれなければ、神の国を見ることはできません。」THE DAILY with Arthur Hollands  2024/06/08 (📹JUNE 4)",
+        "url": "https://youtu.be/bWLuV2XFfog",
+        "thumbnail": "https://i.ytimg.com/vi/bWLuV2XFfog/hqdefault.jpg",
+        "duration": "PT5M1S",
+        "quote": "人は、新しく生まれなければ、神の国を見ることはできません。",
+        "pageLabel": "福音書 3:1-5",
+        "pageRefs": [
+          "福音書 3:1-5"
+        ],
+        "confidence": "phrase",
+        "score": 16
+      }
+    ],
+    "376": [
+      {
+        "id": "UZVehzuUyfo",
+        "title": "「 神が御子を世に遣わされたのは、世をさばくためではなく、御子によって世が救われるためである。」THE DAILY with Arthur Hollands 2025/03/09",
+        "url": "https://youtu.be/UZVehzuUyfo",
+        "thumbnail": "https://i.ytimg.com/vi/UZVehzuUyfo/hqdefault.jpg",
+        "duration": "PT5M31S",
+        "quote": "神が御子を世に遣わされたのは、世をさばくためではなく、御子によって世が救われるためである。",
+        "pageLabel": "福音書 3:14",
+        "pageRefs": [
+          "福音書 3:14",
+          "福音書 3:16",
+          "福音書 3:17"
+        ],
+        "confidence": "phrase",
+        "score": 23
+      },
+      {
+        "id": "DGTSDE5rIBE",
+        "title": "「 神が御子を世に遣わされたのは、世をさばくためではなく、御子によって世が救われるためである」THE DAILY with Arthur Hollands 2024/12/29",
+        "url": "https://youtu.be/DGTSDE5rIBE",
+        "thumbnail": "https://i.ytimg.com/vi/DGTSDE5rIBE/hqdefault.jpg",
+        "duration": "PT4M35S",
+        "quote": "神が御子を世に遣わされたのは、世をさばくためではなく、御子によって世が救われるためである",
+        "pageLabel": "福音書 3:14",
+        "pageRefs": [
+          "福音書 3:14",
+          "福音書 3:16",
+          "福音書 3:17"
+        ],
+        "confidence": "phrase",
+        "score": 23
+      }
+    ],
+    "384": [
+      {
+        "id": "kJtbuI5AJzw",
+        "title": "「わたしが与える水を飲む者はだれでも、決して渇くことがありません」THE DAILY with Arthur Hollands 2025/05/28",
+        "url": "https://youtu.be/kJtbuI5AJzw",
+        "thumbnail": "https://i.ytimg.com/vi/kJtbuI5AJzw/hqdefault.jpg",
+        "duration": "PT8M45S",
+        "quote": "わたしが与える水を飲む者はだれでも、決して渇くことがありません",
+        "pageLabel": "福音書 4:13-14",
+        "pageRefs": [
+          "福音書 4:13-14",
+          "福音書 4:14",
+          "福音書 4:21"
+        ],
+        "confidence": "phrase",
+        "score": 13
+      }
+    ],
+    "388": [
+      {
+        "id": "0IaTNZvwx9g",
+        "title": "「ジーザスは、ただひとり、また山に退かれた」THE DAILY with Arthur Hollands 2025/01/03",
+        "url": "https://youtu.be/0IaTNZvwx9g",
+        "thumbnail": "https://i.ytimg.com/vi/0IaTNZvwx9g/hqdefault.jpg",
+        "duration": "PT6M24S",
+        "quote": "ジーザスは、ただひとり、また山に退かれた",
+        "pageLabel": "福音書 6:9",
+        "pageRefs": [
+          "福音書 6:9",
+          "福音書 6:15",
+          "福音書 6:20"
+        ],
+        "confidence": "phrase",
+        "score": 13
+      }
+    ],
+    "389": [
+      {
+        "id": "ImHjMAyvSj8",
+        "title": "「あなたがたがわたしを捜しているのは、しるしを見たからではなく、パンを食べて満腹したからです。」",
+        "url": "https://youtu.be/ImHjMAyvSj8",
+        "thumbnail": "https://i.ytimg.com/vi/ImHjMAyvSj8/hqdefault.jpg",
+        "duration": "PT9M43S",
+        "quote": "あなたがたがわたしを捜しているのは、しるしを見たからではなく、パンを食べて満腹したからです。",
+        "pageLabel": "福音書 6:21",
+        "pageRefs": [
+          "福音書 6:21",
+          "福音書 6:26",
+          "福音書 6:26-35"
+        ],
+        "confidence": "phrase",
+        "score": 17
+      },
+      {
+        "id": "6PIFRBt7NOA",
+        "title": "「あなたがたはわたしを捜しているのは、しるしを見たからではなく、パンを食べて満腹したからです」THE DAILY with Arthur Hollands 2025/01/05",
+        "url": "https://youtu.be/6PIFRBt7NOA",
+        "thumbnail": "https://i.ytimg.com/vi/6PIFRBt7NOA/hqdefault.jpg",
+        "duration": "PT5M58S",
+        "quote": "あなたがたはわたしを捜しているのは、しるしを見たからではなく、パンを食べて満腹したからです",
+        "pageLabel": "福音書 6:21",
+        "pageRefs": [
+          "福音書 6:21",
+          "福音書 6:26",
+          "福音書 6:26-35"
+        ],
+        "confidence": "phrase",
+        "score": 17
+      }
+    ],
+    "393": [
+      {
+        "id": "cX5reNvFzA8",
+        "title": "「事実、わたしの父のみこころは、子を見て信じる者がみな永遠のいのちを持つことです」THE DAILY with Arthur Hollands 2025/01/09",
+        "url": "https://youtu.be/cX5reNvFzA8",
+        "thumbnail": "https://i.ytimg.com/vi/cX5reNvFzA8/hqdefault.jpg",
+        "duration": "PT6M",
+        "quote": "事実、わたしの父のみこころは、子を見て信じる者がみな永遠のいのちを持つことです",
+        "pageLabel": "福音書 6:35-40",
+        "pageRefs": [
+          "福音書 6:35-40",
+          "福音書 6:35-41"
+        ],
+        "confidence": "phrase",
+        "score": 20
+      }
+    ],
+    "396": [
+      {
+        "id": "XGdaAz-NUFE",
+        "title": "「父から聞いて学んだ者はみな、わたしのところにきます」THE DAILY with Arthur Hollands 2025/01/11",
+        "url": "https://youtu.be/XGdaAz-NUFE",
+        "thumbnail": "https://i.ytimg.com/vi/XGdaAz-NUFE/hqdefault.jpg",
+        "duration": "PT3M46S",
+        "quote": "父から聞いて学んだ者はみな、わたしのところにきます",
+        "pageLabel": "福音書 6:45",
+        "pageRefs": [
+          "福音書 6:45",
+          "福音書 6:48-50",
+          "福音書 6:48-51"
+        ],
+        "confidence": "phrase",
+        "score": 16
+      }
+    ],
+    "404": [
+      {
+        "id": "85ldApCPykU",
+        "title": "「あなたがたが人の子を上げてしまうと、その時」THE DAILY with Arthur Hollands 2025/01/12",
+        "url": "https://youtu.be/85ldApCPykU",
+        "thumbnail": "https://i.ytimg.com/vi/85ldApCPykU/hqdefault.jpg",
+        "duration": "PT5M11S",
+        "quote": "あなたがたが人の子を上げてしまうと、その時",
+        "pageLabel": "福音書 8:12",
+        "pageRefs": [
+          "福音書 8:12",
+          "福音書 8:28",
+          "福音書 8:31-32"
+        ],
+        "confidence": "phrase",
+        "score": 15
+      }
+    ],
+    "405": [
+      {
+        "id": "seqeq7QAn5c",
+        "title": "「わたしのことばにとどまるなら、あなたがたはほんとうにわたしの弟子です」THE DAILY with Arthur Hollands 2025/01/13",
+        "url": "https://youtu.be/seqeq7QAn5c",
+        "thumbnail": "https://i.ytimg.com/vi/seqeq7QAn5c/hqdefault.jpg",
+        "duration": "PT6M10S",
+        "quote": "わたしのことばにとどまるなら、あなたがたはほんとうにわたしの弟子です",
+        "pageLabel": "福音書 8:31-37",
+        "pageRefs": [
+          "福音書 8:31-37"
+        ],
+        "confidence": "phrase",
+        "score": 20
+      }
+    ],
+    "407": [
+      {
+        "id": "ZaFD3wtemLw",
+        "title": "「アブラハムが生まれる前から、わたしはいるのです。」THE DAILY with Arthur Hollands  2024/03/22",
+        "url": "https://youtu.be/ZaFD3wtemLw",
+        "thumbnail": "https://i.ytimg.com/vi/ZaFD3wtemLw/hqdefault.jpg",
+        "duration": "PT4M22S",
+        "quote": "アブラハムが生まれる前から、わたしはいるのです。",
+        "pageLabel": "福音書 8:47",
+        "pageRefs": [
+          "福音書 8:47",
+          "福音書 8:51",
+          "福音書 8:58-59"
+        ],
+        "confidence": "phrase",
+        "score": 13
+      }
+    ],
+    "437": [
+      {
+        "id": "WeymcmdKPgk",
+        "title": "「あなたがたに光がある間に、光の子どもとなるために、光を信じなさい」THE DAILY with Arthur Hollands 2025/01/28",
+        "url": "https://youtu.be/WeymcmdKPgk",
+        "thumbnail": "https://i.ytimg.com/vi/WeymcmdKPgk/hqdefault.jpg",
+        "duration": "PT5M21S",
+        "quote": "あなたがたに光がある間に、光の子どもとなるために、光を信じなさい",
+        "pageLabel": "福音書 12:32-33",
+        "pageRefs": [
+          "福音書 12:32-33",
+          "福音書 12:36",
+          "福音書 12:44-46"
+        ],
+        "confidence": "phrase",
+        "score": 13
+      }
+    ],
+    "440": [
+      {
+        "id": "Ears3qk9GJM",
+        "title": "「わたしがあなたがたを愛したように、あなたがたも互いに愛し合うこと、これがわたしの戒めです。」THE DAILY with Arthur Hollands 2025/02/09",
+        "url": "https://youtu.be/Ears3qk9GJM",
+        "thumbnail": "https://i.ytimg.com/vi/Ears3qk9GJM/hqdefault.jpg",
+        "duration": "PT7M25S",
+        "quote": "わたしがあなたがたを愛したように、あなたがたも互いに愛し合うこと、これがわたしの戒めです。",
+        "pageLabel": "福音書 13:34",
+        "pageRefs": [
+          "福音書 13:34",
+          "福音書 13:34-35",
+          "福音書 13:37-38"
+        ],
+        "confidence": "phrase",
+        "score": 23
+      }
+    ],
+    "442": [
+      {
+        "id": "sB7nroLzMmQ",
+        "title": "「わたしは道であり、真理であり、いのちです」THE DAILY with Arthur Hollands 2023/03/15",
+        "url": "https://youtu.be/sB7nroLzMmQ",
+        "thumbnail": "https://i.ytimg.com/vi/sB7nroLzMmQ/hqdefault.jpg",
+        "duration": "PT2M14S",
+        "quote": "わたしは道であり、真理であり、いのちです",
+        "pageLabel": "福音書 14 章",
+        "pageRefs": [
+          "福音書 14 章"
+        ],
+        "confidence": "phrase",
+        "score": 13
+      }
+    ],
+    "452": [
+      {
+        "id": "UIPfftOujFs",
+        "title": "「わたしはぶどうの木」THE DAILY with Arthur Hollands 2023/03/13",
+        "url": "https://youtu.be/UIPfftOujFs",
+        "thumbnail": "https://i.ytimg.com/vi/UIPfftOujFs/hqdefault.jpg",
+        "duration": "PT2M2S",
+        "quote": "わたしはぶどうの木",
+        "pageLabel": "福音書 15:1-8",
+        "pageRefs": [
+          "福音書 15:1-8"
+        ],
+        "confidence": "exact",
+        "score": 9
+      },
+      {
+        "id": "WW9njZVeiZ0",
+        "title": "「わたしはぶどうの木」THE DAILY with Arthur Hollands 2022/12/06",
+        "url": "https://youtu.be/WW9njZVeiZ0",
+        "thumbnail": "https://i.ytimg.com/vi/WW9njZVeiZ0/hqdefault.jpg",
+        "duration": "PT1M43S",
+        "quote": "わたしはぶどうの木",
+        "pageLabel": "福音書 15:1-8",
+        "pageRefs": [
+          "福音書 15:1-8"
+        ],
+        "confidence": "exact",
+        "score": 9
+      }
+    ],
+    "457": [
+      {
+        "id": "lyORaoLXizU",
+        "title": "「あなたがたがわたしを選んだのではありません。わたしがあなたがたを選び、あなたがたを任命したのです。」THE DAILY with Arthur Hollands 2025/04/13",
+        "url": "https://youtu.be/lyORaoLXizU",
+        "thumbnail": "https://i.ytimg.com/vi/lyORaoLXizU/hqdefault.jpg",
+        "duration": "PT9M22S",
+        "quote": "あなたがたがわたしを選んだのではありません。わたしがあなたがたを選び、あなたがたを任命したのです。",
+        "pageLabel": "福音書 15:12-17",
+        "pageRefs": [
+          "福音書 15:12-17",
+          "福音書 15:13"
+        ],
+        "confidence": "phrase",
+        "score": 16
+      },
+      {
+        "id": "cvdqS1ukpGI",
+        "title": "「あなたがたが、わたしの名によって何かをわたしに求めるなら」THE DAILY with Arthur Hollands 2025/04/03",
+        "url": "https://youtu.be/cvdqS1ukpGI",
+        "thumbnail": "https://i.ytimg.com/vi/cvdqS1ukpGI/hqdefault.jpg",
+        "duration": "PT7M6S",
+        "quote": "あなたがたが、わたしの名によって何かをわたしに求めるなら",
+        "pageLabel": "福音書 15:12-17",
+        "pageRefs": [
+          "福音書 15:12-17",
+          "福音書 15:13"
+        ],
+        "confidence": "phrase",
+        "score": 15
+      }
+    ],
+    "458": [
+      {
+        "id": "pVI9MdjAgHM",
+        "title": "「世はあなたがたを憎むのです。」THE DAILY with Arthur Hollands 2025/02/10",
+        "url": "https://youtu.be/pVI9MdjAgHM",
+        "thumbnail": "https://i.ytimg.com/vi/pVI9MdjAgHM/hqdefault.jpg",
+        "duration": "PT6M22S",
+        "quote": "世はあなたがたを憎むのです。",
+        "pageLabel": "福音書 15:16",
+        "pageRefs": [
+          "福音書 15:16",
+          "福音書 15:19"
+        ],
+        "confidence": "phrase",
+        "score": 12
+      }
+    ],
+    "465": [
+      {
+        "id": "F9SUXfOiPZk",
+        "title": "「見よ。わたしはあなたがたのために、パンが天から降るようにする。」THE DAILY with Arthur Hollands 2025/02/22",
+        "url": "https://youtu.be/F9SUXfOiPZk",
+        "thumbnail": "https://i.ytimg.com/vi/F9SUXfOiPZk/hqdefault.jpg",
+        "duration": "PT7M26S",
+        "quote": "見よ。わたしはあなたがたのために、パンが天から降るようにする。",
+        "pageLabel": "福音書 16:20",
+        "pageRefs": [
+          "福音書 16:20",
+          "福音書 16:25-27"
+        ],
+        "confidence": "phrase",
+        "score": 13
+      }
+    ],
+    "467": [
+      {
+        "id": "pFHzMtuXuNo",
+        "title": "「世にあっては患難があります。しかし、勇敢でありなさい。わたしはすでに世に勝ったのです。」THE DAILY with Arthur Hollands 2025/02/13",
+        "url": "https://youtu.be/pFHzMtuXuNo",
+        "thumbnail": "https://i.ytimg.com/vi/pFHzMtuXuNo/hqdefault.jpg",
+        "duration": "PT5M41S",
+        "quote": "世にあっては患難があります。しかし、勇敢でありなさい。わたしはすでに世に勝ったのです。",
+        "pageLabel": "福音書 16:33",
+        "pageRefs": [
+          "福音書 16:33",
+          "福音書 18:28-40"
+        ],
+        "confidence": "phrase",
+        "score": 14
+      },
+      {
+        "id": "tv6fTcdI8DQ",
+        "title": "「勇敢でありなさい。わたしはすでに世に勝ったのです。」THE DAILY with Arthur Hollands 2024/12/13",
+        "url": "https://youtu.be/tv6fTcdI8DQ",
+        "thumbnail": "https://i.ytimg.com/vi/tv6fTcdI8DQ/hqdefault.jpg",
+        "duration": "PT5M40S",
+        "quote": "勇敢でありなさい。わたしはすでに世に勝ったのです。",
+        "pageLabel": "福音書 16:33",
+        "pageRefs": [
+          "福音書 16:33",
+          "福音書 18:28-40"
+        ],
+        "confidence": "phrase",
+        "score": 14
+      },
+      {
+        "id": "1leGEhotuHc",
+        "title": "「勇敢でありなさい。わたしはすでに世に勝ったのです。」THE DAILY with Arthur Hollands  2024/02/18",
+        "url": "https://youtu.be/1leGEhotuHc",
+        "thumbnail": "https://i.ytimg.com/vi/1leGEhotuHc/hqdefault.jpg",
+        "duration": "PT3M32S",
+        "quote": "勇敢でありなさい。わたしはすでに世に勝ったのです。",
+        "pageLabel": "福音書 16:33",
+        "pageRefs": [
+          "福音書 16:33",
+          "福音書 18:28-40"
+        ],
+        "confidence": "phrase",
+        "score": 14
+      }
+    ],
+    "484": [
+      {
+        "id": "SdXAWdI1IUo",
+        "title": "「わたしの羊を飼いなさい」THE DAILY with Arthur Hollands 2025/03/31",
+        "url": "https://youtu.be/SdXAWdI1IUo",
+        "thumbnail": "https://i.ytimg.com/vi/SdXAWdI1IUo/hqdefault.jpg",
+        "duration": "PT7M34S",
+        "quote": "わたしの羊を飼いなさい",
+        "pageLabel": "福音書 21:5-6",
+        "pageRefs": [
+          "福音書 21:5-6",
+          "福音書 21:15-17"
+        ],
+        "confidence": "exact",
+        "score": 11
+      }
+    ],
+    "515": [
+      {
+        "id": "zjxN1yuF4DQ",
+        "title": "「栄光と誉れと平和は、ユダヤ人をはじめギリシヤ人にも、善を行うすべての者の上にあります。」THE DAILY with Arthur Hollands 2025/04/17",
+        "url": "https://youtu.be/zjxN1yuF4DQ",
+        "thumbnail": "https://i.ytimg.com/vi/zjxN1yuF4DQ/hqdefault.jpg",
+        "duration": "PT7M29S",
+        "quote": "栄光と誉れと平和は、ユダヤ人をはじめギリシヤ人にも、善を行うすべての者の上にあります。",
+        "pageLabel": "手紙 1:14",
+        "pageRefs": [
+          "手紙 1:14",
+          "手紙 1:14-17"
+        ],
+        "confidence": "phrase",
+        "score": 16
+      }
+    ],
+    "516": [
+      {
+        "id": "NLXE8LsQvRw",
+        "title": "【未公開スペシャル】「神の、目に見えない本性、すなわち神の永遠の力と神性は」THE DAILY with Arthur Hollands 2025/06/04 (📹05/23)",
+        "url": "https://youtu.be/NLXE8LsQvRw",
+        "thumbnail": "https://i.ytimg.com/vi/NLXE8LsQvRw/hqdefault.jpg",
+        "duration": "PT3M55S",
+        "quote": "神の、目に見えない本性、すなわち神の永遠の力と神性は",
+        "pageLabel": "手紙 1:16",
+        "pageRefs": [
+          "手紙 1:16",
+          "手紙 1:20",
+          "手紙 2:1"
+        ],
+        "confidence": "phrase",
+        "score": 13
+      },
+      {
+        "id": "M6CmtASBKtA",
+        "title": "「他人をさばくことによって、自分自身を罪に定めています。」THE DAILY with Arthur Hollands 2025/04/16",
+        "url": "https://youtu.be/M6CmtASBKtA",
+        "thumbnail": "https://i.ytimg.com/vi/M6CmtASBKtA/hqdefault.jpg",
+        "duration": "PT7M13S",
+        "quote": "他人をさばくことによって、自分自身を罪に定めています。",
+        "pageLabel": "手紙 1:16",
+        "pageRefs": [
+          "手紙 1:16",
+          "手紙 1:20",
+          "手紙 2:1"
+        ],
+        "confidence": "phrase",
+        "score": 23
+      }
+    ],
+    "545": [
+      {
+        "id": "3dp8POYPcYo",
+        "title": "「栄光から栄光へと」THE DAILY with Arthur Hollands  2024/03/02",
+        "url": "https://youtu.be/3dp8POYPcYo",
+        "thumbnail": "https://i.ytimg.com/vi/3dp8POYPcYo/hqdefault.jpg",
+        "duration": "PT2M57S",
+        "quote": "栄光から栄光へと",
+        "pageLabel": "第二 3:16-18",
+        "pageRefs": [
+          "第二 3:16-18",
+          "第二 5:17",
+          "第二 5:19"
+        ],
+        "confidence": "exact",
+        "score": 8
+      },
+      {
+        "id": "dgyzUEX0zTQ",
+        "title": "「だれでもキリストのうちにあるなら、その人は新しく造られた者です」THE DAILY with Arthur Hollands 2025/05/19",
+        "url": "https://youtu.be/dgyzUEX0zTQ",
+        "thumbnail": "https://i.ytimg.com/vi/dgyzUEX0zTQ/hqdefault.jpg",
+        "duration": "PT6M37S",
+        "quote": "だれでもキリストのうちにあるなら、その人は新しく造られた者です",
+        "pageLabel": "第二 3:16-18",
+        "pageRefs": [
+          "第二 3:16-18",
+          "第二 5:17",
+          "第二 5:19"
+        ],
+        "confidence": "phrase",
+        "score": 13
+      },
+      {
+        "id": "mNazVzIklhQ",
+        "title": "「だれでもキリストのうちにあるなら、その人は新しく造られた者です」THE DAILY with Arthur Hollands 2025/03/29",
+        "url": "https://youtu.be/mNazVzIklhQ",
+        "thumbnail": "https://i.ytimg.com/vi/mNazVzIklhQ/hqdefault.jpg",
+        "duration": "PT6M51S",
+        "quote": "だれでもキリストのうちにあるなら、その人は新しく造られた者です",
+        "pageLabel": "第二 3:16-18",
+        "pageRefs": [
+          "第二 3:16-18",
+          "第二 5:17",
+          "第二 5:19"
+        ],
+        "confidence": "phrase",
+        "score": 13
+      }
+    ],
+    "550": [
+      {
+        "id": "I6rROCKOGOE",
+        "title": "「そのとき滅ぼそうとした信仰を今は宣べ伝えている」THE DAILY with Arthur Hollands  2024/03/13",
+        "url": "https://youtu.be/I6rROCKOGOE",
+        "thumbnail": "https://i.ytimg.com/vi/I6rROCKOGOE/hqdefault.jpg",
+        "duration": "PT4M1S",
+        "quote": "そのとき滅ぼそうとした信仰を今は宣べ伝えている",
+        "pageLabel": "手紙 1:3",
+        "pageRefs": [
+          "手紙 1:3",
+          "手紙 1:4"
+        ],
+        "confidence": "phrase",
+        "score": 12
+      }
+    ],
+    "551": [
+      {
+        "id": "POoov6Jggls",
+        "title": "「ジーザスを信じる信仰によって義と認められる」THE DAILY with Arthur Hollands  2024/03/15",
+        "url": "https://youtu.be/POoov6Jggls",
+        "thumbnail": "https://i.ytimg.com/vi/POoov6Jggls/hqdefault.jpg",
+        "duration": "PT4M16S",
+        "quote": "ジーザスを信じる信仰によって義と認められる",
+        "pageLabel": "手紙 1:23-24",
+        "pageRefs": [
+          "手紙 1:23-24",
+          "手紙 2:16"
+        ],
+        "confidence": "phrase",
+        "score": 12
+      }
+    ],
+    "557": [
+      {
+        "id": "zG-b9FFjDSU",
+        "title": "「私たちの主イエス・キリストの十字架以外に誇りとするものが決してあってはなりません。」THE DAILY with Arthur Hollands   2024/07/11",
+        "url": "https://youtu.be/zG-b9FFjDSU",
+        "thumbnail": "https://i.ytimg.com/vi/zG-b9FFjDSU/hqdefault.jpg",
+        "duration": "PT9M4S",
+        "quote": "私たちの主イエス・キリストの十字架以外に誇りとするものが決してあってはなりません。",
+        "pageLabel": "手紙 6:9",
+        "pageRefs": [
+          "手紙 6:9",
+          "手紙 6:14"
+        ],
+        "confidence": "phrase",
+        "score": 19
+      }
+    ],
+    "560": [
+      {
+        "id": "L_22xOIQZ3M",
+        "title": "「あなたがたの救われたのは、実に、恵みにより、信仰によるのである」THE DAILY with Arthur Hollands 2024/11/18",
+        "url": "https://youtu.be/L_22xOIQZ3M",
+        "thumbnail": "https://i.ytimg.com/vi/L_22xOIQZ3M/hqdefault.jpg",
+        "duration": "PT4M48S",
+        "quote": "あなたがたの救われたのは、実に、恵みにより、信仰によるのである",
+        "pageLabel": "手紙 1:14",
+        "pageRefs": [
+          "手紙 1:14",
+          "手紙 2:8-10"
+        ],
+        "confidence": "exact",
+        "score": 28
+      }
+    ],
+    "567": [
+      {
+        "id": "im0JPrFrmGM",
+        "title": "「鎖につながれていても、語るべきことを大胆に語れるように」THE DAILY with Arthur Hollands 2024/10/08",
+        "url": "https://youtu.be/im0JPrFrmGM",
+        "thumbnail": "https://i.ytimg.com/vi/im0JPrFrmGM/hqdefault.jpg",
+        "duration": "PT4M15S",
+        "quote": "鎖につながれていても、語るべきことを大胆に語れるように",
+        "pageLabel": "手紙 6:18",
+        "pageRefs": [
+          "手紙 6:18"
+        ],
+        "confidence": "phrase",
+        "score": 12
+      }
+    ],
+    "570": [
+      {
+        "id": "zRmKlNnQof4",
+        "title": "「私にとっては、生きることはキリスト、死ぬことも益です。」THE DAILY with Arthur Hollands 2024/11/16",
+        "url": "https://youtu.be/zRmKlNnQof4",
+        "thumbnail": "https://i.ytimg.com/vi/zRmKlNnQof4/hqdefault.jpg",
+        "duration": "PT5M14S",
+        "quote": "私にとっては、生きることはキリスト、死ぬことも益です。",
+        "pageLabel": "手紙 1:12",
+        "pageRefs": [
+          "手紙 1:12",
+          "手紙 1:20-24"
+        ],
+        "confidence": "phrase",
+        "score": 15
+      }
+    ],
+    "574": [
+      {
+        "id": "mo2ia_RkYC4",
+        "title": "「主にあって喜びなさい」THE DAILY with Arthur Hollands 2024/09/26",
+        "url": "https://youtu.be/mo2ia_RkYC4",
+        "thumbnail": "https://i.ytimg.com/vi/mo2ia_RkYC4/hqdefault.jpg",
+        "duration": "PT4M39S",
+        "quote": "主にあって喜びなさい",
+        "pageLabel": "手紙 3:1",
+        "pageRefs": [
+          "手紙 3:1",
+          "手紙 3:10-12"
+        ],
+        "confidence": "exact",
+        "score": 10
+      }
+    ],
+    "576": [
+      {
+        "id": "N3ppi28pNyU",
+        "title": "「私たちの卑しいからだを、ご自身の光のからだと同じ姿に変えてくださる」THE DAILY with Arthur Hollands 2025/04/05",
+        "url": "https://youtu.be/N3ppi28pNyU",
+        "thumbnail": "https://i.ytimg.com/vi/N3ppi28pNyU/hqdefault.jpg",
+        "duration": "PT8M1S",
+        "quote": "私たちの卑しいからだを、ご自身の光のからだと同じ姿に変えてくださる",
+        "pageLabel": "手紙 3:21",
+        "pageRefs": [
+          "手紙 3:21",
+          "手紙 4:1",
+          "手紙 4:4"
+        ],
+        "confidence": "phrase",
+        "score": 14
+      }
+    ],
+    "586": [
+      {
+        "id": "fPBJtuGutVs",
+        "title": "「いつも喜び、絶えず祈り、全てのことに感謝する テサロニケ人への手紙 第一　- THE DAILY with Arthur Hollands 2023/08/19 #新約聖書",
+        "url": "https://youtu.be/fPBJtuGutVs",
+        "thumbnail": "https://i.ytimg.com/vi/fPBJtuGutVs/hqdefault.jpg",
+        "duration": "PT2M23S",
+        "quote": "「いつも喜び、絶えず祈り、全てのことに感謝する テサロニケ人への手紙 第一",
+        "pageLabel": "第一 5:16-18",
+        "pageRefs": [
+          "第一 5:16-18"
+        ],
+        "confidence": "phrase",
+        "score": 12
+      }
+    ],
+    "590": [
+      {
+        "id": "cgPUzjENpB4",
+        "title": "「みことばを宣べ伝えなさい。時が良くても悪くても」THE DAILY with Arthur Hollands  2024/04/15",
+        "url": "https://youtu.be/cgPUzjENpB4",
+        "thumbnail": "https://i.ytimg.com/vi/cgPUzjENpB4/hqdefault.jpg",
+        "duration": "PT4M37S",
+        "quote": "みことばを宣べ伝えなさい。時が良くても悪くても",
+        "pageLabel": "第二 4:2",
+        "pageRefs": [
+          "第二 4:2",
+          "第二 4:7"
+        ],
+        "confidence": "phrase",
+        "score": 18
+      }
+    ],
+    "600": [
+      {
+        "id": "TY1uqY1uqTc",
+        "title": "「金銭を愛する生活をしてはいけません。いま持っているもので満足しなさい。」THE DAILY with Arthur Hollands 2024/12/22",
+        "url": "https://youtu.be/TY1uqY1uqTc",
+        "thumbnail": "https://i.ytimg.com/vi/TY1uqY1uqTc/hqdefault.jpg",
+        "duration": "PT11M13S",
+        "quote": "金銭を愛する生活をしてはいけません。いま持っているもので満足しなさい。",
+        "pageLabel": "手紙 12:7",
+        "pageRefs": [
+          "手紙 12:7",
+          "手紙 12:22",
+          "手紙 13:5"
+        ],
+        "confidence": "phrase",
+        "score": 14
+      },
+      {
+        "id": "OBrk4BTssaA",
+        "title": "「わたしは決してあなたを離れず、また、あなたを捨てない。- THE DAILY with Arthur Hollands 2023/09/03",
+        "url": "https://youtu.be/OBrk4BTssaA",
+        "thumbnail": "https://i.ytimg.com/vi/OBrk4BTssaA/hqdefault.jpg",
+        "duration": "PT1M49S",
+        "quote": "「わたしは決してあなたを離れず、また、あなたを捨てない。",
+        "pageLabel": "手紙 12:7",
+        "pageRefs": [
+          "手紙 12:7",
+          "手紙 12:22",
+          "手紙 13:5"
+        ],
+        "confidence": "phrase",
+        "score": 14
+      }
+    ],
+    "605": [
+      {
+        "id": "iCyrP1FoLQI",
+        "title": "【未公開スペシャル】「みことばは、あなたがたのたましいを救うことができます」THE DAILY with Arthur Hollands    2024/09/05 (📹 AUG 17)",
+        "url": "https://youtu.be/iCyrP1FoLQI",
+        "thumbnail": "https://i.ytimg.com/vi/iCyrP1FoLQI/hqdefault.jpg",
+        "duration": "PT9M49S",
+        "quote": "みことばは、あなたがたのたましいを救うことができます",
+        "pageLabel": "手紙 1:2-4",
+        "pageRefs": [
+          "手紙 1:2-4"
+        ],
+        "confidence": "phrase",
+        "score": 14
+      }
+    ],
+    "611": [
+      {
+        "id": "b15JOsBvgow",
+        "title": "「あなたがたも耐え忍びなさい。心を強くしなさい。主の来られるのが近いからです。」THE DAILY with Arthur Hollands 2024/10/13",
+        "url": "https://youtu.be/b15JOsBvgow",
+        "thumbnail": "https://i.ytimg.com/vi/b15JOsBvgow/hqdefault.jpg",
+        "duration": "PT7M49S",
+        "quote": "あなたがたも耐え忍びなさい。心を強くしなさい。主の来られるのが近いからです。",
+        "pageLabel": "手紙 4:6",
+        "pageRefs": [
+          "手紙 4:6",
+          "手紙 4:8",
+          "手紙 5:7-8"
+        ],
+        "confidence": "phrase",
+        "score": 12
+      },
+      {
+        "id": "tyQZ0feGea0",
+        "title": "「神に近づきなさい。そうすれば、神はあなたがたに近づいてくださいます。」THE DAILY with Arthur Hollands  2024/02/08",
+        "url": "https://youtu.be/tyQZ0feGea0",
+        "thumbnail": "https://i.ytimg.com/vi/tyQZ0feGea0/hqdefault.jpg",
+        "duration": "PT2M51S",
+        "quote": "神に近づきなさい。そうすれば、神はあなたがたに近づいてくださいます。",
+        "pageLabel": "手紙 4:6",
+        "pageRefs": [
+          "手紙 4:6",
+          "手紙 4:8",
+          "手紙 5:7-8"
+        ],
+        "confidence": "phrase",
+        "score": 25
+      }
+    ],
+    "614": [
+      {
+        "id": "kyE3ionurZc",
+        "title": "「互いに熱心に愛し合いなさい。愛は多くの罪をおおうからです。」THE DAILY with Arthur Hollands 2024/12/03",
+        "url": "https://youtu.be/kyE3ionurZc",
+        "thumbnail": "https://i.ytimg.com/vi/kyE3ionurZc/hqdefault.jpg",
+        "duration": "PT5M22S",
+        "quote": "互いに熱心に愛し合いなさい。愛は多くの罪をおおうからです。",
+        "pageLabel": "第一 1:8",
+        "pageRefs": [
+          "第一 1:8",
+          "第一 2:4-5",
+          "第一 4:8"
+        ],
+        "confidence": "phrase",
+        "score": 13
+      }
+    ],
+    "624": [
+      {
+        "id": "fpbjLm_5qbQ",
+        "title": "「私たちが神を愛したのではなく、神が私たちを愛したのです」THE DAILY with Arthur Hollands 2024/12/19",
+        "url": "https://youtu.be/fpbjLm_5qbQ",
+        "thumbnail": "https://i.ytimg.com/vi/fpbjLm_5qbQ/hqdefault.jpg",
+        "duration": "PT8M20S",
+        "quote": "私たちが神を愛したのではなく、神が私たちを愛したのです",
+        "pageLabel": "第一 4:7-10",
+        "pageRefs": [
+          "第一 4:7-10",
+          "第一 4:7-12"
+        ],
+        "confidence": "phrase",
+        "score": 15
+      },
+      {
+        "id": "wD6Fg7jIBlU",
+        "title": "「私たちが神を愛したのではなく、神が私たちを愛し…」THE DAILY with Arthur Hollands  2024/03/26",
+        "url": "https://youtu.be/wD6Fg7jIBlU",
+        "thumbnail": "https://i.ytimg.com/vi/wD6Fg7jIBlU/hqdefault.jpg",
+        "duration": "PT2M6S",
+        "quote": "私たちが神を愛したのではなく、神が私たちを愛し…",
+        "pageLabel": "第一 4:7-10",
+        "pageRefs": [
+          "第一 4:7-10",
+          "第一 4:7-12"
+        ],
+        "confidence": "phrase",
+        "score": 15
+      }
+    ],
+    "630": [
+      {
+        "id": "THHI3Rz_EdY",
+        "title": "「見よ。わたしは、戸の外に立ってたたく。」THE DAILY with Arthur Hollands  2024/03/01",
+        "url": "https://youtu.be/THHI3Rz_EdY",
+        "thumbnail": "https://i.ytimg.com/vi/THHI3Rz_EdY/hqdefault.jpg",
+        "duration": "PT3M15S",
+        "quote": "見よ。わたしは、戸の外に立ってたたく。",
+        "pageLabel": "黙示録 3:20",
+        "pageRefs": [
+          "黙示録 3:20",
+          "黙示録 14:6",
+          "黙示録 19:16"
+        ],
+        "confidence": "phrase",
+        "score": 15
+      }
+    ]
+  }
+}

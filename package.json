@@ -9,6 +9,7 @@
     "fetch:arthur-show-series": "node scripts/fetch-arthur-show-series.mjs",
     "fetch:walk-across": "node scripts/fetch-walk-across.mjs",
     "fetch:friday-night": "node scripts/fetch-friday-night.mjs",
+    "fetch:daily-verses": "node scripts/fetch-daily-verse-videos.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },

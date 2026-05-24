@@ -1,5 +1,6 @@
 ---
 import wordOfGodBooklet from '../data/word-of-god-booklet.json';
+import dailyVerseVideos from '../data/daily-verse-videos.json';
 
 const bibleBooks = [
 	'創世記', '出エジプト記', 'レビ記', '民数記', '申命記', 'ヨシュア記', '士師記', 'ルツ記',
@@ -43,6 +44,8 @@ const bookletBookAliases: Record<string, string[]> = {
 const normalizeBookletText = (value = '') => value.replace(/[　\s]/g, '');
 const bookletPages = wordOfGodBooklet.pages;
 const bookletPageCount = bookletPages.length;
+const dailyVerseVideosByPage = dailyVerseVideos.videosByPage || {};
+const linkedDailyVideoCount = Object.values(dailyVerseVideosByPage).reduce((total, videos) => total + (Array.isArray(videos) ? videos.length : 0), 0);
 const bookletBookIndex = bibleBooks.map((book) => {
 	const aliases = (bookletBookAliases[book] || [book]).map(normalizeBookletText);
 	const page = bookletPages.find((item) => {
@@ -126,11 +129,24 @@ const newBookletBooks = bookletBookIndex.slice(39).filter((item) => item.page);
 			</div>
 		</article>
 	</div>
+	<section class="booklet-related" aria-labelledby="booklet-related-title">
+		<div class="booklet-related-heading">
+			<div>
+				<p class="section-kicker">THE DAILY WITH ARTHUR HOLLANDS</p>
+				<h2 id="booklet-related-title">この聖句に関連するデイリーメッセージ</h2>
+			</div>
+			<p data-booklet-related-status>{linkedDailyVideoCount} videos linked</p>
+		</div>
+		<div class="booklet-related-grid" data-booklet-related-list></div>
+		<p class="booklet-related-empty" data-booklet-related-empty>このページに紐づくデイリーメッセージはまだありません。</p>
+	</section>
 </section>
 
 <script type="application/json" data-booklet-pages set:html={JSON.stringify(bookletPages)}></script>
+<script type="application/json" data-booklet-related-videos set:html={JSON.stringify(dailyVerseVideosByPage)}></script>
 <script is:inline>
 	const bookletPages = JSON.parse(document.querySelector('[data-booklet-pages]')?.textContent || '[]');
+	const bookletRelatedVideos = JSON.parse(document.querySelector('[data-booklet-related-videos]')?.textContent || '{}');
 	const bookletSearch = document.querySelector('[data-booklet-search]');
 	const bookletImage = document.querySelector('[data-booklet-image]');
 	const bookletSearchStatus = document.querySelector('[data-booklet-search-status]');
@@ -144,6 +160,9 @@ const newBookletBooks = bookletBookIndex.slice(39).filter((item) => item.page);
 	const bookletBookButtons = Array.from(document.querySelectorAll('[data-booklet-book-page]'));
 	const bookletTestamentTabs = Array.from(document.querySelectorAll('[data-booklet-testament-tab]'));
 	const bookletTestamentGroups = Array.from(document.querySelectorAll('[data-booklet-testament-group]'));
+	const bookletRelatedList = document.querySelector('[data-booklet-related-list]');
+	const bookletRelatedEmpty = document.querySelector('[data-booklet-related-empty]');
+	const bookletRelatedStatus = document.querySelector('[data-booklet-related-status]');
 	let currentBookletPage = 1;
 	let bookletTouchStartX = 0;
 	let bookletTouchStartY = 0;
@@ -176,6 +195,51 @@ const newBookletBooks = bookletBookIndex.slice(39).filter((item) => item.page);
 		if (activeGroup) setBookletTestament(activeGroup);
 	}
 
+	function formatBookletDuration(value) {
+		const match = String(value || '').match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+		if (!match) return '';
+		const hours = Number(match[1] || 0);
+		const minutes = Number(match[2] || 0);
+		const seconds = Number(match[3] || 0);
+		if (hours) return `${hours}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+		return `${minutes}:${String(seconds).padStart(2, '0')}`;
+	}
+
+	function renderRelatedVideos(pageNumber) {
+		const videos = bookletRelatedVideos[String(pageNumber)] || [];
+		if (bookletRelatedStatus) {
+			bookletRelatedStatus.textContent = videos.length ? `P.${pageNumber} / ${videos.length} videos` : `P.${pageNumber}`;
+		}
+		if (bookletRelatedEmpty) bookletRelatedEmpty.hidden = videos.length > 0;
+		if (!bookletRelatedList) return;
+		bookletRelatedList.innerHTML = '';
+		videos.slice(0, 6).forEach((video) => {
+			const card = document.createElement('a');
+			card.className = 'booklet-related-card';
+			card.href = video.url;
+			card.target = '_blank';
+			card.rel = 'noopener noreferrer';
+			const thumb = document.createElement('span');
+			thumb.className = 'booklet-related-thumb';
+			const image = document.createElement('img');
+			image.src = video.thumbnail;
+			image.alt = '';
+			image.loading = 'lazy';
+			thumb.appendChild(image);
+			const body = document.createElement('span');
+			body.className = 'booklet-related-body';
+			const meta = document.createElement('small');
+			meta.textContent = `${video.confidence === 'exact' ? 'TITLE MATCH' : 'QUOTE MATCH'}${formatBookletDuration(video.duration) ? ` / ${formatBookletDuration(video.duration)}` : ''}`;
+			const title = document.createElement('strong');
+			title.textContent = video.title;
+			const quote = document.createElement('em');
+			quote.textContent = video.quote || 'THE DAILY with ARTHUR HOLLANDS';
+			body.append(meta, title, quote);
+			card.append(thumb, body);
+			bookletRelatedList.appendChild(card);
+		});
+	}
+
 	function renderBookletPage(pageNumber, query = '') {
 		const page = bookletPages.find((item) => item.page === pageNumber) || bookletPages[0];
 		if (!page) return;
@@ -198,6 +262,7 @@ const newBookletBooks = bookletBookIndex.slice(39).filter((item) => item.page);
 		bookletBookButtons.forEach((button) => {
 			button.classList.toggle('active', button === currentBookButton);
 		});
+		renderRelatedVideos(page.page);
 	}
 
 	function turnBookletPage(direction) {
@@ -616,6 +681,116 @@ const newBookletBooks = bookletBookIndex.slice(39).filter((item) => item.page);
 		background: linear-gradient(270deg, rgba(0, 0, 0, 0.74), rgba(0, 0, 0, 0.08));
 	}
 
+	.booklet-related {
+		position: relative;
+		z-index: 1;
+		margin-top: 18px;
+		padding: 18px;
+		background: linear-gradient(180deg, rgba(197, 160, 89, 0.12), rgba(255, 255, 255, 0.035));
+		border: 1px solid rgba(197, 160, 89, 0.42);
+	}
+
+	.booklet-related-heading {
+		display: flex;
+		align-items: end;
+		justify-content: space-between;
+		gap: 16px;
+		margin-bottom: 14px;
+		padding-bottom: 12px;
+		border-bottom: 1px solid rgba(197, 160, 89, 0.34);
+	}
+
+	.booklet-related-heading h2 {
+		margin-top: 4px;
+		color: #fff;
+		font-family: 'Oswald', sans-serif;
+		font-size: clamp(1.5rem, 3vw, 2.35rem);
+		font-weight: 900;
+		line-height: 1.05;
+	}
+
+	.booklet-related-heading > p {
+		flex: 0 0 auto;
+		color: #c5a059;
+		font-family: 'Oswald', sans-serif;
+		font-size: 0.78rem;
+		font-weight: 900;
+		letter-spacing: 0.12em;
+	}
+
+	.booklet-related-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 12px;
+	}
+
+	.booklet-related-card {
+		display: grid;
+		min-width: 0;
+		background: rgba(0, 0, 0, 0.38);
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		overflow: hidden;
+	}
+
+	.booklet-related-card:hover {
+		border-color: rgba(197, 160, 89, 0.72);
+		transform: translateY(-2px);
+	}
+
+	.booklet-related-thumb {
+		display: block;
+		aspect-ratio: 16 / 9;
+		background: #000;
+		overflow: hidden;
+	}
+
+	.booklet-related-thumb img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.booklet-related-body {
+		display: grid;
+		gap: 7px;
+		padding: 12px;
+	}
+
+	.booklet-related-body small {
+		color: #c5a059;
+		font-family: 'Oswald', sans-serif;
+		font-size: 0.68rem;
+		font-weight: 900;
+		letter-spacing: 0.1em;
+	}
+
+	.booklet-related-body strong {
+		color: #fff;
+		font-size: 0.92rem;
+		font-weight: 900;
+		line-height: 1.45;
+	}
+
+	.booklet-related-body em {
+		color: rgba(255, 255, 255, 0.64);
+		font-size: 0.78rem;
+		font-style: normal;
+		font-weight: 800;
+		line-height: 1.5;
+	}
+
+	.booklet-related-empty {
+		margin: 0;
+		color: rgba(255, 255, 255, 0.62);
+		font-size: 0.9rem;
+		font-weight: 800;
+	}
+
+	.booklet-related-empty[hidden] {
+		display: none;
+	}
+
 	@media (max-width: 760px) {
 		.booklet-viewer {
 			padding: 18px;
@@ -658,6 +833,15 @@ const newBookletBooks = bookletBookIndex.slice(39).filter((item) => item.page);
 
 		.booklet-page-frame img {
 			width: min(100%, 520px);
+		}
+
+		.booklet-related-heading {
+			align-items: flex-start;
+			flex-direction: column;
+		}
+
+		.booklet-related-grid {
+			grid-template-columns: 1fr;
 		}
 
 		.booklet-turn {
