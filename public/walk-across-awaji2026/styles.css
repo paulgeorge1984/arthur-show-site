@@ -80,9 +80,10 @@ a {
 .logo-sub {
   margin-top: 5px;
   color: #c5a059;
-  font-family: "Oswald", sans-serif;
-  font-size: 0.8rem;
-  letter-spacing: 0.3em;
+  font-family: "Great Vibes", cursive;
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+  line-height: 1;
 }
 
 .global-section-nav {

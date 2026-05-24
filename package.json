@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "fetch:arthur-show": "node scripts/fetch-arthur-show.mjs",
+    "fetch:arthur-show-series": "node scripts/fetch-arthur-show-series.mjs",
     "fetch:walk-across": "node scripts/fetch-walk-across.mjs",
     "preview": "astro preview",
     "astro": "astro"

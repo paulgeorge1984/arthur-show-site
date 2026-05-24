@@ -14,6 +14,10 @@ const secretPath = path.join(os.homedir(), '.arthur-tools/google_client_secret.j
 const YOUTUBE_API_BASE = 'https://www.googleapis.com/youtube/v3';
 const playlistId = 'PL-faIdjPoxKj10dRLBajkm2zk1xbzK-RQ';
 const execFileAsync = promisify(execFile);
+const yearOverrides = new Map([
+	['tUOSn2Bp3jI', '1992'],
+	['aPPRePlh-IY', '1998'],
+]);
 
 function die(message) {
 	console.error(message);
@@ -210,7 +214,7 @@ async function fetchWithYtDlpFallback() {
 				description,
 				excerpt: feed.excerpt || excerptFromDescription(description),
 				publishedAt: feed.publishedAt || '',
-				year: feed.year || parseYearFromTitle(entry.title || ''),
+				year: yearOverrides.get(entry.id) || feed.year || parseYearFromTitle(entry.title || ''),
 				thumbnail: feed.thumbnail || `https://i.ytimg.com/vi/${entry.id}/hq720.jpg`,
 				duration,
 				viewCount: feed.viewCount || (entry.view_count ? String(entry.view_count) : ''),
@@ -240,7 +244,7 @@ async function main() {
 					description,
 					excerpt: excerptFromDescription(description),
 					publishedAt: snippet.publishedAt || item.contentDetails?.videoPublishedAt || '',
-					year: parseYear(snippet.publishedAt || item.contentDetails?.videoPublishedAt || '') || parseYearFromTitle(snippet.title || ''),
+					year: yearOverrides.get(id) || parseYear(snippet.publishedAt || item.contentDetails?.videoPublishedAt || '') || parseYearFromTitle(snippet.title || ''),
 					thumbnail: snippet.thumbnails?.maxres?.url || snippet.thumbnails?.standard?.url || snippet.thumbnails?.high?.url || snippet.thumbnails?.medium?.url || '',
 					duration: video?.contentDetails?.duration || '',
 					viewCount: video?.statistics?.viewCount || '',
