@@ -322,14 +322,20 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 						data-scripture-bible-book-series={row.isBibleBookSeries ? 'true' : 'false'}
 						hidden={!row.isBibleBookSeries}
 					>
-						<a class="scripture-message-link" href={row.href}>
+						<div class="scripture-message-link">
 							<span class="scripture-ref">{row.ref}</span>
 							<q>{row.text}</q>
 							<span class="scripture-meta">
 								<span>{row.dateLabel}</span>
 								<strong>{row.title}</strong>
 							</span>
-						</a>
+							<div class="scripture-actions">
+								{row.relatedVideos[0] && (
+									<a class="scripture-action primary" href={row.relatedVideos[0].url} target="_blank" rel="noopener noreferrer">映像を見る</a>
+								)}
+								<a class="scripture-action secondary" href={row.href}>{row.source === 'message' ? '記事で見る' : '冊子で見る'}</a>
+							</div>
+						</div>
 						{row.relatedVideos.length > 0 && (
 							<div class="scripture-related" aria-label={`${row.ref}に関連するデイリーメッセージ`}>
 								<span class="scripture-related-label">RELATED MESSAGES</span>
@@ -653,6 +659,42 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		flex-direction: column;
 		padding: 22px 18px 18px 22px;
 		color: inherit;
+	}
+
+	.scripture-actions {
+		position: relative;
+		z-index: 2;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		margin-top: 14px;
+	}
+
+	.scripture-action {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 38px;
+		padding: 0 13px;
+		border: 1px solid rgba(197, 160, 89, 0.72);
+		font-size: 0.78rem;
+		font-weight: 900;
+		line-height: 1;
+	}
+
+	.scripture-action.primary {
+		background: #c5a059;
+		color: #050505;
+		box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.32);
+	}
+
+	.scripture-action.secondary {
+		background: rgba(255, 255, 255, 0.06);
+		color: rgba(255, 255, 255, 0.82);
+	}
+
+	.scripture-action:hover {
+		transform: translateY(-1px);
 	}
 
 	.scripture-card::before {
