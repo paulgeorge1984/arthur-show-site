@@ -508,17 +508,26 @@ const formatViews = (value?: string) => {
 	.featured-body {
 		padding: 28px 28px 28px 0;
 		align-self: center;
+		min-width: 0;
 	}
 
 	.featured-body h2 {
 		margin-top: 8px;
 		font-size: clamp(1.4rem, 3.2vw, 2.3rem);
 		line-height: 1.35;
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
 	}
 
 	.featured-body p:not(.broadcast-label) {
 		margin-top: 14px;
 		color: rgba(17, 16, 14, 0.74);
+		display: -webkit-box;
+		-webkit-line-clamp: 5;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
 	}
 
 	.featured-body a {
