@@ -12,6 +12,146 @@ const allMessages = (await getCollection('daily-messages', ({ data }) => {
 })).sort(
 	(a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
+
+const featuredMessages = allMessages.slice(0, 3);
+const archiveMessages = allMessages.slice(3);
+const monthFormatter = new Intl.DateTimeFormat('ja-JP', { year: 'numeric', month: 'long' });
+const normalizeSearchText = (value = '') => value
+	.replace(/<style>{`[\s\S]*?`}<\/style>/g, ' ')
+	.replace(/\{\/\*[\s\S]*?\*\/\}/g, ' ')
+	.replace(/<[^>]+>/g, ' ')
+	.replace(/[{}()[\];"'`<>]/g, ' ')
+	.replace(/\s+/g, ' ')
+	.trim()
+	.toLowerCase();
+const cleanInlineText = (value = '') => value
+	.replace(/<br\s*\/?>/g, ' ')
+	.replace(/<[^>]+>/g, ' ')
+	.replace(/&nbsp;/g, ' ')
+	.replace(/&amp;/g, '&')
+	.replace(/&quot;/g, '"')
+	.replace(/&#39;/g, "'")
+	.replace(/\s+/g, ' ')
+	.trim();
+const normalizeScriptureRef = (ref = '') => ref
+	.replace(/^イザヤ(?=[\s　0-9０-９])/, 'イザヤ書')
+	.replace(/^ヘブル(?=[\s　0-9０-９])/, 'ヘブル人への手紙')
+	.replace(/^ヨハネの第一の手紙/, 'ヨハネの手紙 第一')
+	.replace(/^ヨハネ(?=[\s　0-9０-９])/, 'ヨハネの福音書')
+	.replace(/^ルカ(?=[\s　0-9０-９])/, 'ルカの福音書')
+	.replace(/^マタイ(?=[\s　0-9０-９])/, 'マタイの福音書')
+	.replace(/^マルコ(?=[\s　0-9０-９])/, 'マルコの福音書')
+	.replace(/^ローマ(?=[\s　0-9０-９])/, 'ローマ人への手紙')
+	.replace(/^ピリピ(?=[\s　0-9０-９])/, 'ピリピ人への手紙')
+	.replace(/^ガラテヤ(?=[\s　0-9０-９])/, 'ガラテヤ人への手紙')
+	.replace(/^第一コリント人への手紙|^第一コリント|^第1コリント|^コリント人への手紙第一/, 'コリント人への手紙 第一')
+	.replace(/^第二コリント人への手紙|^第二コリント|^第2コリント|^コリント人への手紙第二/, 'コリント人への手紙 第二')
+	.replace(/^第一テサロニケ人への手紙|^第一テサロニケ/, 'テサロニケ人への手紙 第一')
+	.replace(/\s+/g, ' ')
+	.trim();
+const getScriptureBook = (ref = '') => ref
+	.replace(/[0-9０-９].*$/, '')
+	.replace(/[　\s]+$/, '')
+	.trim();
+const bibleBooks = [
+	'創世記', '出エジプト記', 'レビ記', '民数記', '申命記', 'ヨシュア記', '士師記', 'ルツ記',
+	'サムエル記 第一', 'サムエル記 第二', '列王記 第一', '列王記 第二', '歴代誌 第一', '歴代誌 第二',
+	'エズラ記', 'ネヘミヤ記', 'エステル記', 'ヨブ記', '詩篇', '箴言', '伝道者の書', '雅歌',
+	'イザヤ書', 'エレミヤ書', '哀歌', 'エゼキエル書', 'ダニエル書', 'ホセア書', 'ヨエル書', 'アモス書',
+	'オバデヤ書', 'ヨナ書', 'ミカ書', 'ナホム書', 'ハバクク書', 'ゼパニヤ書', 'ハガイ書', 'ゼカリヤ書', 'マラキ書',
+	'マタイの福音書', 'マルコの福音書', 'ルカの福音書', 'ヨハネの福音書', '使徒の働き',
+	'ローマ人への手紙', 'コリント人への手紙 第一', 'コリント人への手紙 第二', 'ガラテヤ人への手紙',
+	'エペソ人への手紙', 'ピリピ人への手紙', 'コロサイ人への手紙', 'テサロニケ人への手紙 第一',
+	'テサロニケ人への手紙 第二', 'テモテへの手紙 第一', 'テモテへの手紙 第二', 'テトスへの手紙',
+	'ピレモンへの手紙', 'ヘブル人への手紙', 'ヤコブの手紙', 'ペテロの手紙 第一', 'ペテロの手紙 第二',
+	'ヨハネの手紙 第一', 'ヨハネの手紙 第二', 'ヨハネの手紙 第三', 'ユダの手紙', 'ヨハネの黙示録',
+];
+const bibleBookOrder = new Map(bibleBooks.map((book, index) => [book, index]));
+const months = Array.from(new Set(allMessages.map((post) => {
+	const y = post.data.date.getFullYear();
+	const m = String(post.data.date.getMonth() + 1).padStart(2, '0');
+	return `${y}-${m}`;
+}))).map((key) => {
+	const [year, month] = key.split('-').map(Number);
+	const date = new Date(year, month - 1, 1);
+	return {
+		key,
+		label: monthFormatter.format(date),
+		count: allMessages.filter((post) => {
+			const y = post.data.date.getFullYear();
+			const m = String(post.data.date.getMonth() + 1).padStart(2, '0');
+			return `${y}-${m}` === key;
+		}).length,
+	};
+});
+const seenArchiveMonths = new Set<string>();
+const archiveRows = archiveMessages.map((post) => {
+	const monthKey = `${post.data.date.getFullYear()}-${String(post.data.date.getMonth() + 1).padStart(2, '0')}`;
+	const showMonthAnchor = !seenArchiveMonths.has(monthKey);
+	seenArchiveMonths.add(monthKey);
+	return {
+		post,
+		monthKey,
+		showMonthAnchor,
+		searchText: normalizeSearchText([
+			post.data.title,
+			post.data.description,
+			(post.data.tags || []).join(' '),
+			post.body,
+		].join(' ')),
+	};
+});
+
+const formatDate = (date: Date) => date.toLocaleDateString('ja-JP', {
+	year: 'numeric',
+	month: '2-digit',
+	day: '2-digit',
+});
+const messageLotteryItems = allMessages.map((post) => ({
+	title: post.data.title,
+	date: formatDate(post.data.date),
+	url: `/messages/${post.slug}`,
+	thumb: `https://i.ytimg.com/vi/${post.data.youtubeId}/hq720.jpg`,
+	description: post.data.description,
+}));
+const rawScriptureRows = allMessages.flatMap((post) => {
+	const rows = Array.from(post.body.matchAll(/<p\s+class=["']verse-text["'][^>]*>([\s\S]*?)<\/p>\s*<span\s+class=["']verse-ref["'][^>]*>([\s\S]*?)<\/span>/g))
+		.map((match) => {
+			const text = cleanInlineText(match[1]);
+			const ref = normalizeScriptureRef(cleanInlineText(match[2]));
+			return {
+				ref,
+				text,
+				book: getScriptureBook(ref),
+				post,
+			};
+		})
+		.filter((row) => row.ref && row.text);
+
+	if (rows.length) return rows;
+
+	const refs = Array.from(post.body.matchAll(/<span\s+class=["']msg-verse-ref["'][^>]*>([\s\S]*?)<\/span>/g))
+		.map((match) => normalizeScriptureRef(cleanInlineText(match[1])))
+		.filter(Boolean);
+	return Array.from(new Set(refs)).map((ref) => ({
+		ref,
+		text: post.data.description,
+		book: getScriptureBook(ref),
+		post,
+	}));
+});
+const scriptureRows = rawScriptureRows.map((row, index) => ({
+	...row,
+	isRecent: index < 12,
+}));
+const scriptureBooks = Array.from(new Set(scriptureRows.map((row) => row.book).filter(Boolean)))
+	.sort((a, b) => {
+		const orderA = bibleBookOrder.get(a) ?? 999;
+		const orderB = bibleBookOrder.get(b) ?? 999;
+		return orderA === orderB ? a.localeCompare(b, 'ja') : orderA - orderB;
+	});
+const oldTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(book) ?? 999) < 39);
+const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(book) ?? 999) >= 39);
 ---
 
 <Layout title="Latest Messages">
@@ -29,59 +169,289 @@ const allMessages = (await getCollection('daily-messages', ({ data }) => {
 			</div>
 		</a>
 
-		<div class="page-intro">
-			<h1>LATEST MESSAGES</h1>
-			<p>魂を揺さぶる言葉の記録</p>
-		</div>
+		<section class="latest-section" id="messages" aria-labelledby="featured-title">
+			<div class="section-bar">
+				<div>
+					<p class="section-kicker">LATEST MESSAGES</p>
+					<h1 id="featured-title">最新メッセージ</h1>
+				</div>
+				<a class="section-link" href="#archive">一覧から探す</a>
+			</div>
+			<div class="featured-grid">
+				{featuredMessages.map((post, index) => (
+					<a href={`/messages/${post.slug}`} class:list={['featured-card', { primary: index === 0 }]}>
+						<div class="featured-thumb">
+							<img
+								src={`https://img.youtube.com/vi/${post.data.youtubeId}/maxresdefault.jpg`}
+								alt={post.data.title}
+								loading={index === 0 ? 'eager' : 'lazy'}
+							/>
+							<div class="play-icon">▶</div>
+						</div>
+						<div class="featured-body">
+							<div class="card-date">{formatDate(post.data.date)}</div>
+							<h3>{post.data.title}</h3>
+						</div>
+					</a>
+				))}
+			</div>
+		</section>
 
-		<div class="card-grid">
-			{allMessages.map((post) => (
-				<a href={`/messages/${post.slug}`} class="card">
-					<div class="card-thumb">
-						<img 
-							src={`https://img.youtube.com/vi/${post.data.youtubeId}/maxresdefault.jpg`} 
-							alt={post.data.title}
-						/>
-						<div class="play-icon">▶</div>
-					</div>
-					<div class="card-body">
-						<div class="card-date">
-							{post.data.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).toUpperCase()}
-						</div>
-						<h2 class="card-title">{post.data.title}</h2>
-						<div class="card-tags">
-							{post.data.tags?.map(tag => <span>#{tag}</span>)}
-						</div>
-					</div>
+		<section class="share-section" id="share" aria-labelledby="share-title">
+			<h2 id="share-title">このページをシェアする</h2>
+			<div class="share-grid" aria-label="SNS共有ボタン">
+				<button class="share-card primary-share" type="button" data-share-native>
+					<span>スマホで共有</span>
+				</button>
+				<a class="share-card line" href="https://line.me/R/msg/text/?THE%20ARTHUR%20HOLLANDS%20SHOW%0Ahttps%3A%2F%2Farthur-show.com%2F" data-share-line target="_blank" rel="noreferrer">
+					<span>LINE</span>
 				</a>
-			))}
-		</div>
+				<a class="share-card x" href="https://twitter.com/intent/tweet?text=THE%20ARTHUR%20HOLLANDS%20SHOW&url=https%3A%2F%2Farthur-show.com%2F" data-share-x target="_blank" rel="noreferrer">
+					<span>X</span>
+				</a>
+				<a class="share-card facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farthur-show.com%2F" data-share-facebook target="_blank" rel="noreferrer">
+					<span>Facebook</span>
+				</a>
+				<button class="share-card instagram" type="button" data-copy-link>
+					<span>Instagram</span>
+				</button>
+				<button class="share-card copy" type="button" data-copy-link>
+					<span>リンクコピー</span>
+					<small data-copy-status>URLをクリップボードへ</small>
+				</button>
+			</div>
+		</section>
+
+		<section class="lottery-section" id="message-jukebox" aria-labelledby="lottery-title">
+			<div class="lottery-copy">
+				<p class="jukebox-label">特設コーナー</p>
+				<h2 id="lottery-title">BIBLE<br />JUKEBOX</h2>
+				<p>あの日の言葉が、今のあなたに届く。</p>
+				<div class="jukebox-actions" aria-label="BIBLE JUKEBOX 操作">
+					<a class="jukebox-action watch-action" href={messageLotteryItems[0]?.url || '#'} data-lottery-watch>WATCH HERE</a>
+					<button class="jukebox-action next-action" type="button" data-lottery-button>NEXT EPISODE</button>
+					<button class="jukebox-action previous-action" type="button" data-lottery-prev disabled>PREVIOUS EPISODE</button>
+				</div>
+			</div>
+			<a class="lottery-card" href={messageLotteryItems[0]?.url || '#'} data-lottery-card>
+				<span class="lottery-thumb">
+					<img src={messageLotteryItems[0]?.thumb} alt="" data-lottery-thumb loading="lazy" />
+				</span>
+				<span class="lottery-body">
+					<span class="card-date" data-lottery-date>{messageLotteryItems[0]?.date}</span>
+					<strong data-lottery-title>{messageLotteryItems[0]?.title}</strong>
+					<small data-lottery-description>{messageLotteryItems[0]?.description}</small>
+				</span>
+			</a>
+		</section>
+
+		<section class="archive-section" id="archive" aria-labelledby="archive-title">
+			<div class="section-bar archive-bar">
+				<div>
+					<p class="section-kicker">ARCHIVE</p>
+					<h2 id="archive-title">メッセージ一覧</h2>
+				</div>
+				<p class="archive-count">{allMessages.length}件</p>
+			</div>
+			<div class="archive-tools">
+				<label class="search-box">
+					<span>検索</span>
+					<input type="search" placeholder="キーワードで探す" data-message-search />
+				</label>
+				<div class="month-nav" aria-label="月別ジャンプ">
+					<a href="#archive" data-month-filter="all">すべて</a>
+					{months.map(month => (
+						<a href={`#month-${month.key}`} data-month-filter={month.key}>{month.label}<small>{month.count}</small></a>
+					))}
+				</div>
+			</div>
+
+			<div class="archive-list" data-archive-list>
+				{archiveRows.map(({ post, monthKey, showMonthAnchor, searchText }) => {
+					return (
+						<a
+							href={`/messages/${post.slug}`}
+							class="archive-item"
+							id={showMonthAnchor ? `month-${monthKey}` : undefined}
+							data-month={monthKey}
+							data-search={searchText}
+						>
+							<span class="archive-thumb">
+								<img
+									class="archive-thumb-bg"
+									src={`https://i.ytimg.com/vi/${post.data.youtubeId}/hq720.jpg`}
+									alt=""
+									aria-hidden="true"
+									loading="lazy"
+								/>
+								<img
+									class="archive-thumb-main"
+									src={`https://i.ytimg.com/vi/${post.data.youtubeId}/hq720.jpg`}
+									alt=""
+									loading="lazy"
+								/>
+							</span>
+							<div class="archive-item-body">
+								<div class="card-date">{formatDate(post.data.date)}</div>
+								<h3>{post.data.title}</h3>
+							</div>
+						</a>
+					);
+				})}
+			</div>
+			<p class="no-results" data-no-results hidden>該当するメッセージがありません。</p>
+		</section>
 	</div>
+
+	<script type="application/json" data-lottery-items set:html={JSON.stringify(messageLotteryItems)}></script>
+	<script is:inline>
+		const lotteryItems = JSON.parse(document.querySelector('[data-lottery-items]')?.textContent || '[]');
+		const shareTitle = 'アーサーホーランド公式YouTubeチャンネル THE ARTHUR HOLLANDS SHOW';
+		const shareText = '魂を揺さぶるメッセージアーカイブ。';
+		const shareUrl = 'https://arthur-show.com/';
+		const searchInput = document.querySelector('[data-message-search]');
+		const items = Array.from(document.querySelectorAll('[data-archive-list] .archive-item'));
+		const monthButtons = Array.from(document.querySelectorAll('[data-month-filter]'));
+		const noResults = document.querySelector('[data-no-results]');
+		let activeMonth = 'all';
+		let currentLotteryIndex = 0;
+		const lotteryHistory = [];
+		const initialLotteryIndex = lotteryItems.length
+			? Math.floor(Math.random() * lotteryItems.length)
+			: 0;
+
+		function updateShareLinks() {
+			const encodedUrl = encodeURIComponent(shareUrl);
+			const encodedText = encodeURIComponent(`${shareTitle}\n${shareText}`);
+			const encodedLineText = encodeURIComponent(`${shareTitle}\n${shareText}\n${shareUrl}`);
+			const line = document.querySelector('[data-share-line]');
+			const x = document.querySelector('[data-share-x]');
+			const facebook = document.querySelector('[data-share-facebook]');
+
+			if (line) line.href = `https://line.me/R/msg/text/?${encodedLineText}`;
+			if (x) x.href = `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`;
+			if (facebook) facebook.href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+		}
+
+		async function copyShareLink() {
+			const statusItems = document.querySelectorAll('[data-copy-status]');
+			try {
+				await navigator.clipboard.writeText(`${shareTitle}\n${shareText}\n${shareUrl}`);
+				statusItems.forEach((item) => {
+					item.textContent = 'コピーしました';
+				});
+				setTimeout(() => {
+					statusItems.forEach((item) => {
+						item.textContent = 'URLをクリップボードへ';
+					});
+				}, 1800);
+			} catch {
+				window.prompt('この内容をコピーしてください', `${shareTitle}\n${shareText}\n${shareUrl}`);
+			}
+		}
+
+		async function sharePage() {
+			if (navigator.share) {
+				try {
+					await navigator.share({
+						title: shareTitle,
+						text: shareText,
+						url: shareUrl,
+					});
+					return;
+				} catch (error) {
+					if (error.name === 'AbortError') return;
+				}
+			}
+			await copyShareLink();
+		}
+
+		function applyArchiveFilter() {
+			const query = (searchInput?.value || '').trim().toLowerCase();
+			let visible = 0;
+			items.forEach((item) => {
+				const monthOk = activeMonth === 'all' || item.dataset.month === activeMonth;
+				const searchOk = !query || (item.dataset.search || '').includes(query);
+				const show = monthOk && searchOk;
+				item.hidden = !show;
+				if (show) visible += 1;
+			});
+			if (noResults) noResults.hidden = visible !== 0;
+		}
+
+		function renderLotteryItem(index) {
+			const item = lotteryItems[index];
+			if (!item) return;
+			const card = document.querySelector('[data-lottery-card]');
+			const watch = document.querySelector('[data-lottery-watch]');
+			const previous = document.querySelector('[data-lottery-prev]');
+			const thumb = document.querySelector('[data-lottery-thumb]');
+			const date = document.querySelector('[data-lottery-date]');
+			const title = document.querySelector('[data-lottery-title]');
+			const description = document.querySelector('[data-lottery-description]');
+
+			card?.setAttribute('href', item.url);
+			watch?.setAttribute('href', item.url);
+			if (thumb) thumb.src = item.thumb;
+			if (date) date.textContent = item.date;
+			if (title) title.textContent = item.title;
+			if (description) description.textContent = item.description || '';
+			if (previous) previous.disabled = lotteryHistory.length === 0;
+			card?.classList.remove('is-drawn');
+			requestAnimationFrame(() => {
+				card?.classList.add('is-drawn');
+			});
+		}
+
+		function drawLottery() {
+			if (!lotteryItems.length) return;
+			let nextIndex = Math.floor(Math.random() * lotteryItems.length);
+			if (lotteryItems.length > 1) {
+				while (nextIndex === currentLotteryIndex) {
+					nextIndex = Math.floor(Math.random() * lotteryItems.length);
+				}
+			}
+			lotteryHistory.push(currentLotteryIndex);
+			currentLotteryIndex = nextIndex;
+			renderLotteryItem(currentLotteryIndex);
+		}
+
+		function showPreviousLottery() {
+			if (!lotteryHistory.length) return;
+			currentLotteryIndex = lotteryHistory.pop();
+			renderLotteryItem(currentLotteryIndex);
+		}
+
+		searchInput?.addEventListener('input', applyArchiveFilter);
+		monthButtons.forEach((button) => {
+			button.addEventListener('click', (event) => {
+				event.preventDefault();
+				activeMonth = button.dataset.monthFilter || 'all';
+				monthButtons.forEach((b) => b.classList.toggle('active', b === button));
+				applyArchiveFilter();
+				document.querySelector('#archive')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+			});
+		});
+		monthButtons[0]?.classList.add('active');
+		updateShareLinks();
+		document.querySelector('[data-lottery-prev]')?.addEventListener('click', showPreviousLottery);
+		document.querySelectorAll('[data-share-native]').forEach((button) => {
+			button.addEventListener('click', sharePage);
+		});
+		document.querySelectorAll('[data-copy-link]').forEach((button) => {
+			button.addEventListener('click', copyShareLink);
+		});
+		currentLotteryIndex = initialLotteryIndex;
+		renderLotteryItem(currentLotteryIndex);
+		document.querySelector('[data-lottery-button]')?.addEventListener('click', drawLottery);
+	</script>
 </Layout>
 
 <style>
 	.container {
-		max-width: 800px;
+		max-width: 980px;
 		margin: 0 auto;
 		padding: 0 20px;
-	}
-	
-	.page-intro {
-		text-align: center;
-		padding: 60px 0;
-	}
-	
-	.page-intro h1 {
-		font-family: 'Oswald', sans-serif;
-		font-size: 2.5rem;
-		margin-bottom: 10px;
-		color: #000; /* 黒 */
-	}
-	
-	.page-intro p {
-		font-family: 'Noto Sans JP', sans-serif;
-		color: #666;
-		font-weight: 500;
 	}
 
 	.awaji-feature {
@@ -180,54 +550,161 @@ const allMessages = (await getCollection('daily-messages', ({ data }) => {
 		background: #fff;
 	}
 
-	.card-grid {
-		display: grid;
-		gap: 50px;
-	}
-	
-	.card {
-		display: block;
-	}
-	
-	.card:hover .play-icon {
-		background: #c5a059;
-		color: #000;
-		border-color: #c5a059;
-	}
-	
-	.card:hover .card-title {
-		color: #c5a059; /* ホバー時はゴールド */
+	.latest-section,
+	.scripture-section,
+	.archive-section {
+		margin-top: 46px;
 	}
 
-	.card-thumb { 
-		position: relative;
-		width: 100%;
-		aspect-ratio: 16/9; 
-		background: #000;
-		overflow: hidden;
-		margin-bottom: 20px;
-		border-bottom: 4px solid #000;
+	.section-bar {
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-between;
+		gap: 18px;
+		margin-bottom: 18px;
+		padding-bottom: 14px;
+		border-bottom: 3px solid #000;
 	}
-	
-	.card-thumb img {
+
+	.section-kicker {
+		color: #c5a059;
+		font-family: 'Oswald', sans-serif;
+		font-size: 0.85rem;
+		font-weight: 700;
+		letter-spacing: 0.18em;
+	}
+
+	.section-bar h1,
+	.section-bar h2 {
+		font-family: 'Oswald', sans-serif;
+		font-size: clamp(1.9rem, 5vw, 3rem);
+		line-height: 1.05;
+	}
+
+	.section-link,
+	.archive-count {
+		flex: 0 0 auto;
+		color: #666;
+		font-size: 0.9rem;
+		font-weight: 900;
+	}
+
+	.section-link:hover {
+		color: #c5a059;
+	}
+
+	.featured-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 18px;
+	}
+
+	.featured-card {
+		display: grid;
+		min-width: 0;
+		overflow: hidden;
+		background: #fff;
+		border: 1px solid #e4e4e7;
+		border-left: 4px solid #000;
+		box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+	}
+
+	.featured-card.primary {
+		grid-column: 1 / -1;
+		grid-template-columns: 1fr;
+		border-left-color: #c5a059;
+	}
+
+	.featured-thumb {
+		position: relative;
+		aspect-ratio: 16 / 9;
+		overflow: hidden;
+		background: #000;
+	}
+
+	.featured-card.primary .featured-thumb {
+		min-height: 0;
+	}
+
+	.featured-thumb img,
+	.archive-thumb img {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		opacity: 0.9;
-		transition: 0.3s;
+		opacity: 0.92;
+		transition: 0.25s;
 	}
-	
-	.card:hover img {
+
+	.archive-thumb {
+		position: relative;
+		display: block;
+		aspect-ratio: 16 / 9;
+		overflow: hidden;
+		background: #000;
+	}
+
+	.archive-thumb-bg {
+		position: absolute;
+		inset: -10px;
+		width: calc(100% + 20px);
+		height: calc(100% + 20px);
+		object-fit: cover;
+		filter: blur(10px);
+		opacity: 0.62;
+		transform: scale(1.08);
+	}
+
+	.archive-thumb-main {
+		position: relative;
+		z-index: 1;
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+	}
+
+	.featured-card:hover img {
 		opacity: 1;
-		transform: scale(1.02);
+		transform: scale(1.025);
 	}
-	
+
+	.archive-item:hover .archive-thumb-main {
+		opacity: 1;
+		transform: scale(1.025);
+	}
+
+	.archive-item:hover .archive-thumb-bg {
+		opacity: 0.74;
+		transform: scale(1.12);
+	}
+
+	.featured-body {
+		min-width: 0;
+		padding: 18px;
+	}
+
+	.featured-card.primary .featured-body {
+		padding: 22px;
+	}
+
+	.featured-body h3 {
+		margin-bottom: 12px;
+		font-size: 1.32rem;
+		font-weight: 900;
+		line-height: 1.45;
+		overflow-wrap: anywhere;
+	}
+
+	.featured-card.primary .featured-body h3 {
+		font-size: clamp(1.55rem, 3.5vw, 2.15rem);
+		line-height: 1.4;
+	}
+
 	.play-icon {
 		position: absolute;
-		bottom: 20px;
-		right: 20px;
-		width: 50px;
-		height: 50px;
+		bottom: 14px;
+		right: 14px;
+		width: 46px;
+		height: 46px;
 		background: rgba(0,0,0,0.7);
 		color: #fff;
 		border: 2px solid #fff;
@@ -245,29 +722,705 @@ const allMessages = (await getCollection('daily-messages', ({ data }) => {
 		letter-spacing: 0.1em;
 		margin-bottom: 5px;
 	}
-	
-	/* ★修正箇所：タイトルを強制的に黒く、太く、モダンに */
-	.card-title {
-		font-family: 'Noto Sans JP', sans-serif; /* ゴシック体 */
-		font-size: 1.8rem;
-		font-weight: 900; /* 極太 */
-		line-height: 1.4;
-		margin-bottom: 15px;
-		transition: 0.3s;
-		color: #000000 !important; /* 強制的に真っ黒 */
+
+	.archive-tools {
+		position: sticky;
+		top: 92px;
+		z-index: 5;
+		display: grid;
+		gap: 12px;
+		margin-bottom: 18px;
+		padding: 14px;
+		background: rgba(255, 255, 255, 0.94);
+		border: 1px solid #e4e4e7;
+		backdrop-filter: blur(12px);
 	}
-	
-	.card-tags span {
-		font-size: 0.8rem;
+
+	.share-section {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 14px;
+		margin-top: 24px;
+		padding: 12px 0;
+		border-top: 1px solid #e4e4e7;
+		border-bottom: 1px solid #e4e4e7;
+	}
+
+	.share-section h2 {
+		flex: 0 0 auto;
+		color: #666;
+		font-size: 0.86rem;
+		font-weight: 900;
+	}
+
+	.share-grid {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+		gap: 8px;
+	}
+
+	.share-card {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 34px;
+		padding: 0 11px;
+		color: #111;
+		text-align: center;
+		text-decoration: none;
+		cursor: pointer;
+		background: #f4f4f5;
+		border: 1px solid #e4e4e7;
+		font: inherit;
+	}
+
+	.share-card span {
+		display: block;
+		font-size: 0.78rem;
+		font-weight: 900;
+		line-height: 1;
+	}
+
+	.share-card small {
+		display: none;
+	}
+
+	.share-card:hover {
+		transform: translateY(-1px);
+		box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+	}
+
+	.primary-share {
+		color: #fff;
+		background: #000;
+	}
+
+	.primary-share small {
+		color: rgba(255, 255, 255, 0.78);
+	}
+
+	.line {
+		border-bottom: 3px solid #06c755;
+	}
+
+	.x {
+		border-bottom: 3px solid #111;
+	}
+
+	.facebook {
+		border-bottom: 3px solid #1877f2;
+	}
+
+	.instagram {
+		border-bottom: 3px solid #e4405f;
+	}
+
+	.copy {
+		border-bottom: 3px solid #c5a059;
+	}
+
+	.lottery-section {
+		position: relative;
+		display: grid;
+		grid-template-columns: minmax(250px, 0.7fr) minmax(0, 1.3fr);
+		gap: 18px;
+		align-items: stretch;
+		margin-top: 34px;
+		padding: 22px;
+		overflow: hidden;
+		background:
+			linear-gradient(90deg, rgba(197, 160, 89, 0.22) 0 2px, transparent 2px 13px),
+			linear-gradient(135deg, #080808 0%, #18100c 48%, #060606 100%);
+		color: #fff;
+		border: 1px solid rgba(197, 160, 89, 0.45);
+		box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.04), 0 18px 38px rgba(0, 0, 0, 0.16);
+	}
+
+	.lottery-section::before {
+		content: "";
+		position: absolute;
+		inset: 12px;
+		pointer-events: none;
+		border: 1px solid rgba(255, 255, 255, 0.16);
+	}
+
+	.lottery-section::after {
+		content: "";
+		position: absolute;
+		top: 18px;
+		bottom: 18px;
+		left: 18px;
+		width: 8px;
+		background: #b62424;
+		box-shadow: 14px 0 0 #c5a059, 28px 0 0 rgba(255, 255, 255, 0.88);
+		pointer-events: none;
+	}
+
+	.lottery-copy {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		min-width: 0;
+		padding-left: 44px;
+	}
+
+	.jukebox-label {
+		width: fit-content;
+		margin-bottom: 10px;
+		padding: 4px 9px;
+		background: #fff;
+		color: #111;
+		font-size: 0.78rem;
+		font-weight: 900;
+		letter-spacing: 0;
+	}
+
+	.lottery-copy h2 {
+		margin-bottom: 10px;
+		color: #f4d06f;
+		font-family: 'Oswald', sans-serif;
+		font-size: clamp(3.1rem, 5vw, 4.6rem);
+		font-weight: 900;
+		line-height: 0.9;
+		text-transform: uppercase;
+		white-space: normal;
+	}
+
+	.lottery-copy p:not(.section-kicker):not(.jukebox-label) {
+		max-width: 28em;
+		margin-bottom: 20px;
+		color: rgba(255, 255, 255, 0.9);
+		font-size: 1rem;
+		font-weight: 700;
+		line-height: 1.7;
+	}
+
+	.jukebox-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
+		align-items: center;
+	}
+
+	.jukebox-action {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: fit-content;
+		max-width: 100%;
+		min-height: 48px;
+		padding: 0 22px;
+		border: 3px solid rgba(255, 255, 255, 0.82);
+		font-family: 'Oswald', sans-serif;
+		font-size: 1rem;
+		font-weight: 900;
+		letter-spacing: 0.08em;
+		line-height: 1;
+		cursor: pointer;
+	}
+
+	.watch-action {
+		background: linear-gradient(180deg, #ffffff 0%, #f2f2f2 64%, #bdbdbd 100%);
 		color: #000;
-		background: #f4f4f5; 
-		padding: 4px 10px;
-		margin-right: 5px;
-		font-weight: bold;
-		display: inline-block;
+		box-shadow: 0 0 0 3px #111, 5px 5px 0 #c5a059, inset 0 2px 0 rgba(255, 255, 255, 0.8);
+	}
+
+	.next-action {
+		background: linear-gradient(180deg, #fff5c9 0%, #c5a059 62%, #8a6728 100%);
+		color: #000;
+		box-shadow: 0 0 0 3px #111, 5px 5px 0 #6d1616, inset 0 2px 0 rgba(255, 255, 255, 0.7);
+	}
+
+	.previous-action {
+		min-height: 38px;
+		padding: 0 14px;
+		background: linear-gradient(180deg, #4b4b4b 0%, #202020 100%);
+		color: #fff;
+		border-color: rgba(255, 255, 255, 0.5);
+		font-size: 0.78rem;
+		box-shadow: 0 0 0 2px #111, 4px 4px 0 rgba(197, 160, 89, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+	}
+
+	.previous-action:disabled,
+	.previous-action:disabled:hover {
+		opacity: 0.42;
+		cursor: default;
+		transform: none;
+	}
+
+	.jukebox-action:hover {
+		transform: translateY(1px);
+	}
+
+	.watch-action:hover {
+		background: linear-gradient(180deg, #ffffff 0%, #dcdcdc 70%, #a6a6a6 100%);
+	}
+
+	.next-action:hover {
+		background: linear-gradient(180deg, #fff 0%, #e0bd67 70%, #9b742f 100%);
+	}
+
+	.lottery-card {
+		position: relative;
+		z-index: 1;
+		display: grid;
+		grid-template-columns: 1fr;
+		min-width: 0;
+		overflow: hidden;
+		background: #111;
+		color: #fff;
+		border: 1px solid rgba(255, 255, 255, 0.18);
+		box-shadow: 8px 8px 0 rgba(197, 160, 89, 0.28);
+	}
+
+	.lottery-card.is-drawn {
+		animation: draw-pop 0.28s ease-out;
+	}
+
+	.lottery-thumb {
+		display: block;
+		aspect-ratio: 16 / 9;
+		background: #000;
+		overflow: hidden;
+		border: 8px solid #050505;
+	}
+
+	.lottery-thumb img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.lottery-body {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		min-width: 0;
+		padding: 18px;
+		border-top: 3px solid #c5a059;
+	}
+
+	.lottery-body strong {
+		display: -webkit-box;
+		overflow: hidden;
+		font-size: 1.15rem;
+		font-weight: 900;
+		line-height: 1.5;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 3;
+	}
+
+	.lottery-body small {
+		display: -webkit-box;
+		margin-top: 8px;
+		overflow: hidden;
+		color: rgba(255, 255, 255, 0.7);
+		font-size: 0.78rem;
+		font-weight: 700;
+		line-height: 1.55;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2;
+	}
+
+	.scripture-section {
+		position: relative;
+		padding: 22px;
+		overflow: hidden;
+		background:
+			linear-gradient(120deg, rgba(255, 255, 255, 0.88) 0 30%, rgba(224, 224, 224, 0.28) 30% 32%, transparent 32%),
+			linear-gradient(90deg, rgba(197, 160, 89, 0.14) 0 1px, transparent 1px 16px),
+			#f8f8f8;
+		border: 1px solid #d7d7dc;
+		border-left: 6px solid #111;
+		box-shadow: inset 0 0 0 3px rgba(197, 160, 89, 0.12), 0 18px 36px rgba(0, 0, 0, 0.06);
+	}
+
+	.scripture-section::before {
+		content: "";
+		position: absolute;
+		top: 24px;
+		right: -44px;
+		width: min(46vw, 560px);
+		height: 14px;
+		background:
+			linear-gradient(90deg, transparent 0 7%, #111 7% 10%, #c5a059 10% 14%, #eeeeee 14% 84%, #b7b7b7 84% 100%);
+		clip-path: polygon(0 38%, 86% 38%, 100% 50%, 86% 62%, 0 62%);
+		opacity: 0.9;
+		pointer-events: none;
+	}
+
+	.scripture-section::after {
+		content: "";
+		position: absolute;
+		top: 61px;
+		right: 30px;
+		width: min(36vw, 440px);
+		height: 1px;
+		background: linear-gradient(90deg, transparent, rgba(17, 17, 17, 0.72), transparent);
+		pointer-events: none;
+	}
+
+	.scripture-bar {
+		position: relative;
+		z-index: 1;
+		margin-bottom: 14px;
+	}
+
+	.scripture-bar h2 {
+		max-width: 760px;
+		color: #111;
+		text-shadow: 2px 2px 0 rgba(197, 160, 89, 0.28);
+	}
+
+	.scripture-quick {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		margin-bottom: 10px;
+	}
+
+	.scripture-book-index {
+		position: relative;
+		z-index: 1;
+		margin-bottom: 18px;
+		background: rgba(255, 255, 255, 0.78);
+		border: 1px solid #d4d4d8;
+	}
+
+	.scripture-book-index summary {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		min-height: 42px;
+		padding: 0 14px;
+		background: #111;
+		color: #fff;
+		border-bottom: 3px solid #c5a059;
+		font-family: 'Oswald', sans-serif;
+		font-size: 0.95rem;
+		font-weight: 900;
+		letter-spacing: 0.08em;
+		cursor: pointer;
+	}
+
+	.scripture-book-index summary::after {
+		content: "+";
+		color: #c5a059;
+		font-size: 1.2rem;
+	}
+
+	.scripture-book-index[open] summary::after {
+		content: "-";
+	}
+
+	.book-index-columns {
+		display: grid;
+		grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+		gap: 16px;
+		padding: 14px;
+	}
+
+	.book-index-group h3 {
+		margin-bottom: 8px;
+		color: #c5a059;
+		font-family: 'Oswald', sans-serif;
+		font-size: 0.82rem;
+		font-weight: 900;
+		letter-spacing: 0.14em;
+	}
+
+	.book-index-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 7px;
+	}
+
+	.scripture-filter {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		flex: 0 0 auto;
+		min-height: 36px;
+		min-width: 0;
+		padding: 0 10px;
+		background: linear-gradient(180deg, #fff 0%, #f0f0f0 100%);
+		color: #111;
+		border: 1px solid #d4d4d8;
+		border-bottom: 3px solid #c5a059;
+		font: inherit;
+		font-size: 0.86rem;
+		font-weight: 900;
+		line-height: 1.25;
+		text-align: center;
+		cursor: pointer;
+	}
+
+	.scripture-filter.active,
+	.scripture-filter:hover {
+		background: linear-gradient(180deg, #242424 0%, #000 100%);
+		color: #fff;
+		border-color: #000;
+		border-bottom-color: #c5a059;
+	}
+
+	.scripture-grid {
+		position: relative;
+		z-index: 1;
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 14px;
+	}
+
+	.scripture-card {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		min-height: 250px;
+		padding: 20px 18px 18px;
+		overflow: hidden;
+		background:
+			linear-gradient(135deg, rgba(197, 160, 89, 0.13) 0 8px, transparent 8px 100%),
+			linear-gradient(180deg, #fff 0%, #f7f7f7 100%);
+		color: #111;
+		border: 1px solid #d7d7dc;
+		border-top: 4px solid #111;
+		box-shadow: 0 12px 26px rgba(0, 0, 0, 0.05);
+	}
+
+	.scripture-card::before {
+		content: "";
+		position: absolute;
+		top: 13px;
+		right: -36px;
+		width: 150px;
+		height: 10px;
+		background:
+			linear-gradient(90deg, #111 0 10%, #c5a059 10% 16%, #f3f3f3 16% 82%, #aaa 82% 100%);
+		clip-path: polygon(0 36%, 83% 36%, 100% 50%, 83% 64%, 0 64%);
+		opacity: 0.36;
+		pointer-events: none;
+	}
+
+	.scripture-card::after {
+		content: "WORD";
+		position: absolute;
+		right: 14px;
+		bottom: 12px;
+		color: rgba(17, 17, 17, 0.06);
+		font-family: 'Oswald', sans-serif;
+		font-size: 2.5rem;
+		font-weight: 900;
+		line-height: 1;
+		pointer-events: none;
+	}
+
+	.scripture-card[hidden] {
+		display: none;
+	}
+
+	.scripture-card:hover {
+		border-color: #c5a059;
+		transform: translateY(-2px);
+		box-shadow: 0 16px 34px rgba(0, 0, 0, 0.09);
+	}
+
+	.scripture-card:hover::before {
+		opacity: 0.72;
+	}
+
+	.scripture-ref {
+		position: relative;
+		z-index: 1;
+		width: fit-content;
+		margin-bottom: 14px;
+		padding: 6px 11px 6px 14px;
+		background: #000;
+		color: #fff;
+		border-left: 4px solid #c5a059;
+		font-size: 0.82rem;
+		font-weight: 900;
+		line-height: 1.35;
+	}
+
+	.scripture-ref::after {
+		content: "";
+		position: absolute;
+		top: 50%;
+		right: -34px;
+		width: 30px;
+		height: 2px;
+		background: #c5a059;
+		transform: translateY(-50%);
+	}
+
+	.scripture-card q {
+		position: relative;
+		z-index: 1;
+		display: -webkit-box;
+		overflow: hidden;
+		color: #18181b;
+		font-size: 1.02rem;
+		font-weight: 800;
+		line-height: 1.75;
+		quotes: none;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 6;
+	}
+
+	.scripture-meta {
+		position: relative;
+		z-index: 1;
+		display: grid;
+		gap: 5px;
+		margin-top: auto;
+		padding-top: 16px;
+		border-top: 1px solid #cfcfd4;
+	}
+
+	.scripture-meta span {
+		color: #999;
+		font-family: 'Oswald', sans-serif;
+		font-size: 0.78rem;
+		letter-spacing: 0.08em;
+	}
+
+	.scripture-meta strong {
+		display: -webkit-box;
+		overflow: hidden;
+		font-size: 0.9rem;
+		font-weight: 900;
+		line-height: 1.45;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2;
+	}
+
+	@keyframes draw-pop {
+		from {
+			opacity: 0.55;
+			transform: translateY(8px) scale(0.985);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0) scale(1);
+		}
+	}
+
+	.search-box {
+		display: grid;
+		gap: 6px;
+	}
+
+	.search-box span {
+		font-size: 0.78rem;
+		font-weight: 900;
+		color: #666;
+	}
+
+	.search-box input {
+		width: 100%;
+		min-height: 46px;
+		padding: 0 14px;
+		border: 2px solid #000;
+		font: inherit;
+		font-weight: 700;
+	}
+
+	.month-nav {
+		display: flex;
+		gap: 8px;
+		overflow-x: auto;
+		padding-bottom: 3px;
+	}
+
+	.month-nav a {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		flex: 0 0 auto;
+		min-height: 34px;
+		padding: 0 12px;
+		background: #f4f4f5;
+		color: #111;
+		border: 1px solid #e4e4e7;
+		font-size: 0.85rem;
+		font-weight: 900;
+	}
+
+	.month-nav a.active,
+	.month-nav a:hover {
+		background: #000;
+		color: #fff;
+	}
+
+	.month-nav small {
+		color: #888;
+		font-size: 0.72rem;
+	}
+
+	.archive-list {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 18px;
+	}
+
+	.archive-item {
+		display: block;
+		min-width: 0;
+		overflow: hidden;
+		background: #fff;
+		border: 1px solid #e4e4e7;
+		box-shadow: 0 10px 24px rgba(0, 0, 0, 0.05);
+	}
+
+	.archive-item[hidden] {
+		display: none;
+	}
+
+	.archive-item-body {
+		padding: 14px;
+	}
+
+	.archive-item h3 {
+		display: -webkit-box;
+		margin-bottom: 8px;
+		overflow: hidden;
+		color: #000;
+		font-size: 1rem;
+		font-weight: 900;
+		line-height: 1.45;
+		overflow-wrap: anywhere;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2;
+	}
+
+	.archive-item:hover {
+		border-color: #c5a059;
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+	}
+
+	.no-results {
+		padding: 32px;
+		text-align: center;
+		color: #666;
+		background: #f4f4f5;
+		font-weight: 900;
 	}
 
 	@media (max-width: 760px) {
+		.container {
+			padding: 0 14px;
+		}
+
+		.page-intro {
+			padding: 38px 0;
+		}
+
 		.awaji-feature {
 			grid-template-columns: 1fr;
 			min-height: 0;
@@ -287,6 +1440,114 @@ const allMessages = (await getCollection('daily-messages', ({ data }) => {
 		.awaji-visual img {
 			height: auto;
 			object-fit: contain;
+		}
+
+		.section-bar {
+			align-items: flex-start;
+			flex-direction: column;
+		}
+
+		.featured-grid,
+		.featured-card.primary {
+			grid-template-columns: 1fr;
+		}
+
+		.featured-card.primary .featured-thumb {
+			min-height: 0;
+		}
+
+		.featured-body h3,
+		.featured-card.primary .featured-body h3 {
+			font-size: 1.35rem;
+			line-height: 1.45;
+		}
+
+		.archive-tools {
+			position: static;
+		}
+
+		.share-section {
+			align-items: flex-start;
+			flex-direction: column;
+		}
+
+		.share-grid {
+			justify-content: flex-start;
+		}
+
+		.lottery-section,
+		.lottery-card {
+			grid-template-columns: 1fr;
+		}
+
+		.lottery-section {
+			padding: 18px;
+		}
+
+		.lottery-section::after {
+			top: 16px;
+			bottom: auto;
+			left: 16px;
+			width: 7px;
+			height: 56px;
+			box-shadow: 12px 0 0 #c5a059, 24px 0 0 rgba(255, 255, 255, 0.88);
+		}
+
+		.lottery-copy {
+			padding: 68px 0 2px;
+		}
+
+		.lottery-copy h2 {
+			font-size: clamp(2.15rem, 11vw, 3.25rem);
+			white-space: normal;
+		}
+
+		.lottery-thumb {
+			border-right: 8px solid #050505;
+		}
+
+		.lottery-body {
+			border-top: 3px solid #c5a059;
+			border-left: 0;
+		}
+
+		.scripture-section {
+			padding: 18px;
+		}
+
+		.scripture-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.book-index-columns {
+			grid-template-columns: 1fr;
+		}
+
+		.book-index-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+
+		.scripture-card {
+			min-height: 220px;
+		}
+
+		.archive-list {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 440px) {
+		.featured-body,
+		.featured-card.primary .featured-body {
+			padding: 18px;
+		}
+
+		.archive-list {
+			grid-template-columns: 1fr;
+		}
+
+		.share-card {
+			min-height: 32px;
 		}
 	}
 </style>

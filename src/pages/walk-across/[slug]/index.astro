@@ -1,0 +1,305 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { walkAcrossPlaylists } from '../../../data/walk-across-playlists';
+import archive from '../../../data/walk-across-archive.json';
+
+export function getStaticPaths() {
+	return walkAcrossPlaylists.map((playlist) => ({
+		params: { slug: playlist.slug },
+		props: { playlist },
+	}));
+}
+
+const { playlist } = Astro.props;
+const archiveData = archive as {
+	fetchedAt: string | null;
+	playlists: Record<string, { videos?: VideoItem[] }>;
+};
+
+type VideoItem = {
+	id: string;
+	title: string;
+	description?: string;
+	publishedAt?: string;
+	thumbnail?: string;
+	duration?: string;
+	viewCount?: string;
+	caption?: {
+		language?: string;
+		trackKind?: string;
+		text?: string;
+	} | null;
+	excerpt?: string;
+};
+
+const videos = archiveData.playlists?.[playlist.slug]?.videos || [];
+const firstVideo = videos[0];
+const playlistUrl = `https://www.youtube.com/playlist?list=${playlist.playlistId}`;
+const embedUrl = `https://www.youtube.com/embed/videoseries?list=${playlist.playlistId}&rel=0`;
+const formatDate = (value?: string) => {
+	if (!value) return '';
+	return new Intl.DateTimeFormat('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(value));
+};
+---
+
+<Layout title={playlist.englishTitle} description={`${playlist.title} | THE ARTHUR HOLLANDS SHOW`}>
+	<article class="walk-detail">
+		<header class="detail-hero">
+			<a class="back-link" href="/walk-across/">WALK ACROSS ARCHIVE</a>
+			<p>{playlist.region} / {playlist.year}</p>
+			<h1>{playlist.englishTitle}</h1>
+			<h2>{playlist.title}</h2>
+			<span>{playlist.description}</span>
+		</header>
+
+		<section class="player-block">
+			<div class="player">
+				<iframe
+					src={embedUrl}
+					title={`${playlist.title} playlist`}
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+					allowfullscreen
+				></iframe>
+			</div>
+			<div class="playlist-meta">
+				<p class="section-kicker">PLAYLIST</p>
+				<h2>{videos.length ? `${videos.length} EPISODES` : 'YOUTUBE PLAYLIST'}</h2>
+				<p>
+					{archiveData.fetchedAt
+						? '各地を歩いた十字架行進の記録を、映像の流れに沿ってたどることができます。'
+						: '各地を歩いた十字架行進の映像を、このページから続けて見ることができます。'}
+				</p>
+				<a href={playlistUrl} target="_blank" rel="noopener noreferrer">YouTubeで開く</a>
+			</div>
+		</section>
+
+		<section class="story-block">
+			<div class="story-heading">
+				<p class="section-kicker">STORY</p>
+				<h2>旅路の言葉</h2>
+			</div>
+			{firstVideo?.excerpt ? (
+				<p class="main-excerpt">{firstVideo.excerpt}</p>
+			) : (
+				<p class="main-excerpt pending">
+					歩みの中で語られた言葉、祈り、出会いの記録を、映像とともにたどるアーカイブです。
+				</p>
+			)}
+		</section>
+
+		<section class="episode-list">
+			<div class="story-heading">
+				<p class="section-kicker">EPISODES</p>
+				<h2>映像一覧</h2>
+			</div>
+
+			{videos.length ? (
+				<div class="episodes">
+					{videos.map((video, index) => (
+						<a class="episode-card" href={`https://youtu.be/${video.id}`} target="_blank" rel="noopener noreferrer">
+							<div class="episode-thumb">
+								<img src={video.thumbnail || `https://i.ytimg.com/vi/${video.id}/hq720.jpg`} alt={`${video.title} サムネイル`} loading="lazy" />
+							</div>
+							<div class="episode-body">
+								<p>{String(index + 1).padStart(2, '0')} / {formatDate(video.publishedAt)}</p>
+								<h3>{video.title}</h3>
+								{video.excerpt && <span>{video.excerpt}</span>}
+							</div>
+						</a>
+					))}
+				</div>
+			) : (
+				<div class="pending-list">
+					<p>映像は上のプレイリストから視聴できます。各エピソードの言葉の記録は順次整理していきます。</p>
+					<a href={playlistUrl} target="_blank" rel="noopener noreferrer">現在のプレイリストを見る</a>
+				</div>
+			)}
+		</section>
+	</article>
+</Layout>
+
+<style>
+	.walk-detail {
+		background: #0d0c0a;
+		color: #f6efe3;
+		margin: -22px 0 -80px;
+		padding: 0 20px 90px;
+	}
+	.detail-hero,
+	.player-block,
+	.story-block,
+	.episode-list {
+		max-width: 1120px;
+		margin: 0 auto;
+	}
+	.detail-hero {
+		padding: 82px 0 42px;
+	}
+	.back-link,
+	.section-kicker,
+	.detail-hero p {
+		color: #cfa952;
+		font-family: var(--font-head);
+		font-size: 0.78rem;
+		font-weight: 900;
+		letter-spacing: 0.16em;
+	}
+	.back-link {
+		display: inline-flex;
+		margin-bottom: 28px;
+		border-bottom: 1px solid rgba(207, 169, 82, 0.5);
+	}
+	.detail-hero h1 {
+		margin-top: 8px;
+		font-family: var(--font-head);
+		font-size: clamp(3.6rem, 11vw, 9rem);
+		font-weight: 900;
+		letter-spacing: 0.01em;
+		line-height: 0.92;
+		max-width: 980px;
+	}
+	.detail-hero h2 {
+		margin-top: 18px;
+		font-family: var(--font-serif);
+		font-size: clamp(1.25rem, 3vw, 2rem);
+		line-height: 1.35;
+	}
+	.detail-hero span {
+		display: block;
+		margin-top: 14px;
+		color: rgba(246, 239, 227, 0.76);
+	}
+	.player-block {
+		display: grid;
+		grid-template-columns: minmax(0, 1.6fr) minmax(280px, 0.7fr);
+		gap: 24px;
+		align-items: stretch;
+	}
+	.player {
+		aspect-ratio: 16 / 9;
+		background: #050505;
+		border: 1px solid rgba(207, 169, 82, 0.32);
+	}
+	.player iframe {
+		width: 100%;
+		height: 100%;
+		border: 0;
+		display: block;
+	}
+	.playlist-meta {
+		padding: 24px;
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		background: rgba(255, 255, 255, 0.055);
+	}
+	.playlist-meta h2,
+	.story-heading h2 {
+		margin-top: 8px;
+		font-family: var(--font-head);
+		font-size: clamp(2rem, 5vw, 3.2rem);
+		line-height: 1;
+	}
+	.playlist-meta p:not(.section-kicker) {
+		margin-top: 18px;
+		color: rgba(246, 239, 227, 0.76);
+	}
+	.playlist-meta a,
+	.pending-list a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 42px;
+		margin-top: 22px;
+		padding: 0 18px;
+		border: 1px solid rgba(207, 169, 82, 0.75);
+		color: #fff;
+		font-family: var(--font-head);
+		font-weight: 900;
+		letter-spacing: 0.08em;
+	}
+	.story-block,
+	.episode-list {
+		padding-top: 58px;
+	}
+	.main-excerpt {
+		margin-top: 18px;
+		padding: 28px;
+		border-left: 4px solid #cfa952;
+		background: rgba(207, 169, 82, 0.1);
+		font-family: var(--font-serif);
+		font-size: clamp(1.05rem, 2vw, 1.35rem);
+		font-weight: 700;
+		line-height: 1.9;
+	}
+	.pending {
+		color: rgba(246, 239, 227, 0.66);
+	}
+	.episodes {
+		display: grid;
+		gap: 16px;
+		margin-top: 20px;
+	}
+	.episode-card {
+		display: grid;
+		grid-template-columns: 220px minmax(0, 1fr);
+		gap: 18px;
+		padding: 14px;
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		background: rgba(255, 255, 255, 0.05);
+	}
+	.episode-card:hover {
+		border-color: rgba(207, 169, 82, 0.65);
+	}
+	.episode-thumb {
+		aspect-ratio: 16 / 9;
+		overflow: hidden;
+		background: #18140f;
+	}
+	.episode-thumb img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+	}
+	.episode-body p {
+		color: #cfa952;
+		font-family: var(--font-head);
+		font-size: 0.72rem;
+		font-weight: 900;
+		letter-spacing: 0.14em;
+	}
+	.episode-body h3 {
+		margin-top: 7px;
+		font-size: 1.08rem;
+		line-height: 1.45;
+	}
+	.episode-body span,
+	.pending-list p {
+		display: block;
+		margin-top: 10px;
+		color: rgba(246, 239, 227, 0.7);
+		font-size: 0.92rem;
+		line-height: 1.7;
+	}
+	.pending-list {
+		margin-top: 20px;
+		padding: 28px;
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		background: rgba(255, 255, 255, 0.05);
+	}
+	@media (max-width: 820px) {
+		.player-block {
+			grid-template-columns: 1fr;
+		}
+		.episode-card {
+			grid-template-columns: 1fr;
+		}
+	}
+	@media (max-width: 640px) {
+		.walk-detail {
+			padding-inline: 14px;
+		}
+		.detail-hero {
+			padding-top: 58px;
+		}
+	}
+</style>

@@ -11,6 +11,11 @@ const siteTitle = "THE ARTHUR HOLLANDS SHOW";
 const pageTitle = `${title} | ${siteTitle}`;
 const canonicalURL = new URL(Astro.url.pathname, "https://arthur-show.com");
 const socialImageURL = new URL("/og-image.jpg", canonicalURL); // サムネイル画像（あれば）
+const currentPath = Astro.url.pathname;
+const isCurrent = (href: string) => {
+	if (href === '/') return currentPath === '/';
+	return currentPath.startsWith(href);
+};
 ---
 
 <!doctype html>
@@ -47,9 +52,16 @@ const socialImageURL = new URL("/og-image.jpg", canonicalURL); // サムネイ�
 					<span class="logo-main">THE ARTHUR HOLLANDS SHOW</span>
 					<span class="logo-sub">ARCHIVE</span>
 				</a>
-				<a href="/walk-across-awaji2026/" class="header-awaji-link">WALK ACROSS AWAJI 2026</a>
 			</div>
 		</header>
+		<nav class="global-section-nav" aria-label="サイト内主要メニュー">
+			<a href="/#messages" class:list={{ active: currentPath === '/' }}>Arthur Hollands' Message</a>
+			<a href="/walk-across/" class:list={{ active: isCurrent('/walk-across/') }}>WALK ACROSS</a>
+			<a href="/walk-across-awaji2026/" class:list={{ active: isCurrent('/walk-across-awaji2026/') }}>WALK ACROSS AWAJI 2026</a>
+			<a href="/message-jukebox/" class:list={{ active: isCurrent('/message-jukebox/') }}>BIBLE JUKEBOX</a>
+			<a href="/swords-of-words/" class:list={{ active: isCurrent('/swords-of-words/') }}>THE SWORDS OF WORDS</a>
+			<a href="/1000-verses/" class:list={{ active: isCurrent('/1000-verses/') }}>厳選 1000 VERSES</a>
+		</nav>
 
 		<main>
 			<slot />
@@ -134,15 +146,76 @@ const socialImageURL = new URL("/og-image.jpg", canonicalURL); // サムネイ�
 	html { font-size: 16px; scroll-behavior: smooth; }
 	body { background-color: var(--color-white); color: var(--color-black); font-family: var(--font-sans); line-height: 1.8; display: flex; flex-direction: column; min-height: 100vh; }
 	main { flex: 1; } a { color: inherit; text-decoration: none; transition: 0.2s; }
+	.msg-tags { display: none !important; }
 	
 	.site-header { background: var(--color-black); color: var(--color-white); padding: 20px 0; position: sticky; top: 0; z-index: 100; border-bottom: 4px solid var(--color-gold); }
-	.header-inner { max-width: var(--container-width); margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
-	.logo { text-align: center; display: flex; flex-direction: column; align-items: center; }
-	.logo-main { font-family: var(--font-head); font-size: 1.5rem; font-weight: 700; letter-spacing: 0.05em; line-height: 1; }
+	.header-inner { max-width: var(--container-width); margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: center; gap: 18px; }
+	.logo { min-width: 0; text-align: center; display: flex; flex-direction: column; align-items: center; }
+	.logo-main { font-family: var(--font-head); font-size: clamp(1.1rem, 6vw, 1.5rem); font-weight: 700; letter-spacing: 0.05em; line-height: 1; }
 	.logo-sub { font-family: var(--font-head); font-size: 0.8rem; color: var(--color-gold); letter-spacing: 0.3em; margin-top: 5px; }
-	.header-awaji-link { flex: 0 0 auto; border: 1px solid var(--color-gold); color: var(--color-gold); padding: 8px 12px; font-family: var(--font-head); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.05em; line-height: 1; }
-	.header-awaji-link:hover { background: var(--color-gold); color: #000; }
-	@media (max-width: 720px) { .header-inner { flex-direction: column; justify-content: center; gap: 12px; } .header-awaji-link { font-size: 0.78rem; } }
+	@media (max-width: 720px) { .header-inner { justify-content: center; } .logo-main { font-size: clamp(1rem, 6.4vw, 1.35rem); } }
+	@media (max-width: 420px) { .logo-main { font-size: 0.98rem; } }
+
+	.global-section-nav {
+		position: sticky;
+		top: 85px;
+		z-index: 90;
+		display: flex;
+		justify-content: center;
+		gap: 4px;
+		width: 100%;
+		margin: 0 0 22px;
+		padding: 10px 20px;
+		overflow-x: auto;
+		background: rgba(10, 10, 10, 0.96);
+		border-bottom: 1px solid rgba(197, 160, 89, 0.72);
+		box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+		backdrop-filter: blur(12px);
+		scrollbar-width: none;
+	}
+	.global-section-nav::-webkit-scrollbar {
+		display: none;
+	}
+	.global-section-nav a {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex: 0 0 auto;
+		min-height: 34px;
+		padding: 0 14px;
+		color: rgba(255, 255, 255, 0.78);
+		border: 1px solid transparent;
+		border-bottom: 2px solid transparent;
+		font-family: var(--font-head);
+		font-size: 0.82rem;
+		font-weight: 900;
+		letter-spacing: 0.04em;
+		line-height: 1;
+		text-align: center;
+		white-space: nowrap;
+	}
+	.global-section-nav a:hover,
+	.global-section-nav a.active {
+		color: #fff;
+		border-color: rgba(197, 160, 89, 0.24);
+		border-bottom-color: var(--color-gold);
+		background: rgba(255, 255, 255, 0.06);
+	}
+	@media (max-width: 720px) {
+		.global-section-nav {
+			position: sticky;
+			top: 86px;
+			justify-content: flex-start;
+			gap: 2px;
+			margin: 0 0 18px;
+			padding: 9px 14px;
+		}
+		.global-section-nav a {
+			min-height: 32px;
+			padding: 0 12px;
+			font-size: 0.78rem;
+		}
+	}
 
 	.site-footer { background: var(--color-black); color: var(--color-white); padding: 60px 0 30px; margin-top: 80px; }
 	.container { max-width: var(--container-width); margin: 0 auto; padding: 0 20px; }

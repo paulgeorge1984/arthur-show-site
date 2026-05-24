@@ -1,0 +1,291 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { walkAcrossPlaylists } from '../../data/walk-across-playlists';
+import archive from '../../data/walk-across-archive.json';
+
+const archiveData = archive as {
+	fetchedAt: string | null;
+	playlists: Record<string, { videos?: { id: string; title: string; thumbnail?: string; excerpt?: string }[] }>;
+};
+
+const featured = walkAcrossPlaylists[0];
+const years = [...new Set(walkAcrossPlaylists.map((playlist) => playlist.year))];
+---
+
+<Layout
+	title="WALK ACROSS"
+	description="アーサー・ホーランドの十字架行進アーカイブ。日本、台湾、淡路島、能登半島、富士山、四国、紀伊半島など、歩いて届けられた祈りと証しの記録。"
+>
+	<section class="walk-archive">
+		<div class="walk-hero">
+			<p class="eyebrow">ARTHUR HOLLANDS CROSS WALK ARCHIVE</p>
+			<h1>WALK ACROSS</h1>
+			<p class="lead">十字架を担ぎ、地を歩き、祈りを刻んできた旅の記録。</p>
+			<div class="hero-actions">
+				<a href="/walk-across-awaji2026/">WALK ACROSS AWAJI 2026</a>
+				<a href={`/walk-across/${featured.slug}/`}>{featured.englishTitle}</a>
+			</div>
+		</div>
+
+		<div class="year-strip" aria-label="年別ジャンプ">
+			{years.map((year) => <a href={`#year-${year}`}>{year}</a>)}
+		</div>
+
+		<div class="awaji-special">
+			<div>
+			<p class="section-kicker">SPECIAL PAGE</p>
+			<h2>WALK ACROSS AWAJI 2026</h2>
+				<p>淡路島一周十字架行進2026の特設アーカイブ。ダイジェスト映像、ロードムービー、5日間の歩みをまとめています。</p>
+			</div>
+			<a href="/walk-across-awaji2026/">特設ページを見る</a>
+		</div>
+
+		{years.map((year) => (
+			<section class="year-block" id={`year-${year}`}>
+				<div class="year-heading">
+					<span>{year}</span>
+					<h2>{year} ARCHIVE</h2>
+				</div>
+				<div class="playlist-grid">
+					{walkAcrossPlaylists
+						.filter((playlist) => playlist.year === year)
+						.map((playlist) => {
+							const videos = archiveData.playlists?.[playlist.slug]?.videos || [];
+							const firstVideo = videos[0];
+							const thumb = firstVideo?.thumbnail || `https://i.ytimg.com/vi/${firstVideo?.id || ''}/hq720.jpg`;
+							return (
+								<a class="playlist-card" href={`/walk-across/${playlist.slug}/`}>
+									<div class="thumb">
+										{firstVideo?.id ? (
+											<img src={thumb} alt={`${playlist.title} サムネイル`} loading="lazy" />
+										) : (
+											<div class="playlist-fallback">{playlist.englishTitle}</div>
+										)}
+									</div>
+									<div class="card-body">
+										<p>{playlist.region}</p>
+										<h3>{playlist.englishTitle}</h3>
+										<strong>{playlist.title}</strong>
+										<span>{videos.length ? `${videos.length} EPISODES` : 'PLAYLIST ARCHIVE'}</span>
+									</div>
+								</a>
+							);
+						})}
+				</div>
+			</section>
+		))}
+	</section>
+</Layout>
+
+<style>
+	.walk-archive {
+		background: #0d0c0a;
+		color: #f6efe3;
+		margin: -22px 0 -80px;
+		padding: 0 20px 90px;
+	}
+	.walk-hero {
+		max-width: 1120px;
+		min-height: 58vh;
+		margin: 0 auto;
+		padding: 92px 0 58px;
+		display: grid;
+		align-content: center;
+		border-bottom: 1px solid rgba(207, 169, 82, 0.34);
+	}
+	.eyebrow,
+	.section-kicker {
+		color: #cfa952;
+		font-family: var(--font-head);
+		font-size: 0.82rem;
+		font-weight: 900;
+		letter-spacing: 0.18em;
+	}
+	h1 {
+		margin-top: 8px;
+		font-family: var(--font-head);
+		font-size: clamp(4.4rem, 14vw, 12rem);
+		font-weight: 900;
+		letter-spacing: 0.02em;
+		line-height: 0.9;
+	}
+	.lead {
+		max-width: 680px;
+		margin-top: 22px;
+		color: rgba(246, 239, 227, 0.82);
+		font-family: var(--font-serif);
+		font-size: clamp(1.1rem, 2.5vw, 1.55rem);
+		font-weight: 700;
+	}
+	.hero-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
+		margin-top: 32px;
+	}
+	.hero-actions a,
+	.awaji-special a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 44px;
+		padding: 0 18px;
+		border: 1px solid rgba(207, 169, 82, 0.75);
+		background: rgba(207, 169, 82, 0.14);
+		color: #fff;
+		font-family: var(--font-head);
+		font-size: 0.84rem;
+		font-weight: 900;
+		letter-spacing: 0.08em;
+	}
+	.year-strip {
+		position: sticky;
+		top: 142px;
+		z-index: 5;
+		max-width: 1120px;
+		margin: 0 auto 34px;
+		padding: 12px 0;
+		display: flex;
+		gap: 8px;
+		overflow-x: auto;
+		background: rgba(13, 12, 10, 0.88);
+		backdrop-filter: blur(12px);
+	}
+	.year-strip a {
+		flex: 0 0 auto;
+		padding: 6px 16px;
+		border: 1px solid rgba(255, 255, 255, 0.14);
+		color: rgba(246, 239, 227, 0.78);
+		font-family: var(--font-head);
+		font-weight: 900;
+	}
+	.awaji-special,
+	.year-block {
+		max-width: 1120px;
+		margin: 0 auto;
+	}
+	.awaji-special {
+		display: grid;
+		grid-template-columns: 1fr auto;
+		gap: 24px;
+		align-items: center;
+		padding: 28px;
+		border: 1px solid rgba(207, 169, 82, 0.35);
+		background: linear-gradient(135deg, rgba(207, 169, 82, 0.16), rgba(255, 255, 255, 0.04));
+	}
+	.awaji-special h2,
+	.year-heading h2 {
+		font-family: var(--font-head);
+		font-size: clamp(1.9rem, 5vw, 3.4rem);
+		line-height: 1;
+	}
+	.awaji-special p:last-child {
+		margin-top: 10px;
+		color: rgba(246, 239, 227, 0.76);
+	}
+	.year-block {
+		padding-top: 58px;
+	}
+	.year-heading {
+		display: flex;
+		align-items: end;
+		gap: 16px;
+		margin-bottom: 20px;
+	}
+	.year-heading span {
+		color: #cfa952;
+		font-family: var(--font-head);
+		font-size: 1.1rem;
+		font-weight: 900;
+	}
+	.playlist-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 18px;
+	}
+	.playlist-card {
+		display: grid;
+		background: rgba(255, 255, 255, 0.055);
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		min-width: 0;
+		overflow: hidden;
+	}
+	.playlist-card:hover {
+		border-color: rgba(207, 169, 82, 0.65);
+		transform: translateY(-2px);
+	}
+	.thumb {
+		aspect-ratio: 16 / 9;
+		background: #18140f;
+		overflow: hidden;
+	}
+	.thumb img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+	}
+	.playlist-fallback {
+		width: 100%;
+		height: 100%;
+		display: grid;
+		place-items: center;
+		padding: 22px;
+		color: #cfa952;
+		font-family: var(--font-head);
+		font-size: 1.6rem;
+		font-weight: 900;
+		line-height: 1;
+		text-align: center;
+		background:
+			linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent),
+			radial-gradient(circle at 20% 20%, rgba(207, 169, 82, 0.28), transparent 38%);
+	}
+	.card-body {
+		padding: 18px;
+	}
+	.card-body p,
+	.card-body span {
+		color: #cfa952;
+		font-family: var(--font-head);
+		font-size: 0.72rem;
+		font-weight: 900;
+		letter-spacing: 0.14em;
+	}
+	.card-body h3 {
+		margin-top: 6px;
+		font-family: var(--font-head);
+		font-size: 1.45rem;
+		line-height: 1.05;
+	}
+	.card-body strong {
+		display: block;
+		margin: 10px 0 14px;
+		color: rgba(246, 239, 227, 0.76);
+		font-size: 0.9rem;
+		line-height: 1.55;
+	}
+	@media (max-width: 900px) {
+		.playlist-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+		.awaji-special {
+			grid-template-columns: 1fr;
+		}
+	}
+	@media (max-width: 640px) {
+		.walk-archive {
+			padding-inline: 14px;
+		}
+		.walk-hero {
+			min-height: 50vh;
+			padding-top: 62px;
+		}
+		.year-strip {
+			top: 136px;
+		}
+		.playlist-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

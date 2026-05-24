@@ -1,9 +1,10 @@
 const lightbox = document.querySelector(".lightbox");
 const lightboxImage = lightbox.querySelector("img");
 const closeButton = document.querySelector(".lightbox-close");
-const shareTitle = "ARTHUR HOLLANDS WALK ACROSS AWAJI 2026 | アーサーホーランド淡路島一周十字架行進2026";
+const shareTitle =
+  "ARTHUR HOLLANDS WALK ACROSS AWAJI 2026 | アーサーホーランド公式YouTubeチャンネル THE ARTHUR HOLLANDS SHOW";
 const shareText =
-  "アーサーホーランド淡路島一周十字架行進2026のメモリアルアーカイブ。祈り、出会い、洗礼、感謝に満ちた5日間の記録。";
+  "淡路島一周十字架行進2026のメモリアルアーカイブ。祈り、出会い、洗礼、感謝に満ちた5日間の記録。";
 const shareUrl = "https://arthur-show.com/walk-across-awaji2026/";
 
 // Add future YouTube videos here. Use the video ID from the YouTube URL.
@@ -56,7 +57,7 @@ function updateShareLinks() {
   const url = getShareUrl();
   const encodedUrl = encodeURIComponent(url);
   const encodedText = encodeURIComponent(`${shareTitle}\n${shareText}`);
-  const encodedLineText = encodeURIComponent(`${shareTitle}\n${url}`);
+  const encodedLineText = encodeURIComponent(`${shareTitle}\n${shareText}\n${url}`);
   const line = document.querySelector("[data-share-line]");
   const x = document.querySelector("[data-share-x]");
   const facebook = document.querySelector("[data-share-facebook]");
@@ -79,7 +80,7 @@ async function copyShareLink() {
   const statusItems = document.querySelectorAll("[data-copy-status]");
 
   try {
-    await navigator.clipboard.writeText(url);
+    await navigator.clipboard.writeText(`${shareTitle}\n${shareText}\n${url}`);
     statusItems.forEach((item) => {
       item.textContent = "コピーしました";
     });
@@ -89,7 +90,7 @@ async function copyShareLink() {
       });
     }, 1800);
   } catch {
-    window.prompt("このURLをコピーしてください", url);
+    window.prompt("この内容をコピーしてください", `${shareTitle}\n${shareText}\n${url}`);
   }
 }
 

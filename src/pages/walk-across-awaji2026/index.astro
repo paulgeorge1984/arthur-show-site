@@ -33,19 +33,30 @@
     />
     <meta name="twitter:image" content="https://arthur-show.com/walk-across-awaji2026/assets/og-image.jpg" />
     <meta name="twitter:image:alt" content="ARTHUR HOLLANDS WALK ACROSS AWAJI 2026 淡路島一周十字架行進2026" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Oswald:wght@400;700&family=Shippori+Mincho:wght@500;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <header class="site-header" id="top">
-      <a class="brand" href="/" aria-label="THE ARTHUR HOLLANDS SHOW トップページへ戻る">
-        <span class="brand-mark">十</span>
-        <span>
-          <strong>WALK ACROSS AWAJI</strong>
-          <small>淡路島一周十字架行進 2026</small>
-        </span>
-      </a>
-      <nav aria-label="ページ内ナビゲーション">
-        <a href="/" class="home-nav">THE ARTHUR HOLLANDS SHOW</a>
+      <div class="header-inner">
+        <a href="/" class="archive-logo" aria-label="THE ARTHUR HOLLANDS SHOW トップページへ戻る">
+          <span class="logo-main">THE ARTHUR HOLLANDS SHOW</span>
+          <span class="logo-sub">ARCHIVE</span>
+        </a>
+      </div>
+    </header>
+    <nav class="global-section-nav" aria-label="サイト内主要メニュー">
+      <a href="/#messages">Arthur Hollands' Message</a>
+      <a href="/walk-across/">WALK ACROSS</a>
+      <a href="/walk-across-awaji2026/" class="active">WALK ACROSS AWAJI 2026</a>
+      <a href="/message-jukebox/">BIBLE JUKEBOX</a>
+      <a href="/swords-of-words/">THE SWORDS OF WORDS</a>
+      <a href="/1000-verses/">厳選 1000 VERSES</a>
+    </nav>
+    <nav class="walk-local-nav" aria-label="ページ内ナビゲーション">
         <a href="#about">概要</a>
         <a href="#days">5日間</a>
         <a href="#starts">出発地点</a>
@@ -53,9 +64,8 @@
         <a href="#road-movie">ロードムービー</a>
         <a href="#videos">映像</a>
         <a href="#flyer">チラシ</a>
-        <a href="#share">共有</a>
-      </nav>
-    </header>
+        <a href="#share">シェア</a>
+    </nav>
 
     <main>
       <section class="hero" aria-labelledby="hero-title">
@@ -77,11 +87,37 @@
             <a class="button primary" href="#road-movie">ロードムービーを見る</a>
             <a class="button secondary" href="#days">5日間の記録を見る</a>
           </div>
-          <div class="quick-share" aria-label="共有">
-            <button class="share-native" type="button" data-share-native>この記録を共有</button>
+          <div class="quick-share" aria-label="シェア">
+            <button class="share-native" type="button" data-share-native>この記録をシェア</button>
             <button type="button" data-copy-link>リンクをコピー</button>
           </div>
         </div>
+      </section>
+
+      <section class="section cross-walk-digest" id="digest" aria-labelledby="digest-title">
+        <div class="section-heading">
+          <p class="eyebrow">CROSS WALK DIGEST</p>
+          <h2 id="digest-title">淡路島十字架行進ダイジェスト映像</h2>
+          <p>
+            ロードムービー三部作とは別に、淡路島十字架行進そのものを短く振り返るダイジェストです。
+            まず全体の歩みを見たい方はこちらから。
+          </p>
+        </div>
+        <article class="digest-feature" aria-label="淡路島十字架行進ダイジェスト映像">
+          <a class="digest-thumb" href="https://youtu.be/TK9MFezf03Y" target="_blank" rel="noreferrer" aria-label="淡路島十字架行進ダイジェスト映像をYouTubeで見る">
+            <img src="https://i.ytimg.com/vi/TK9MFezf03Y/hqdefault.jpg" alt="淡路島十字架行進ダイジェスト映像 YouTubeサムネイル" loading="lazy" decoding="async" />
+            <span class="road-movie-play" aria-hidden="true"></span>
+          </a>
+          <div class="digest-copy">
+            <p class="documentary-kicker">AWAJI CROSS WALK</p>
+            <h3>5日間の歩みを一気に振り返る</h3>
+            <p>
+              道、祈り、出会い、洗礼、雨の中の行進まで。
+              淡路島一周十字架行進の全体像を、短い映像でたどれる一本です。
+            </p>
+            <a class="button primary" href="https://youtu.be/TK9MFezf03Y" target="_blank" rel="noreferrer">ダイジェストを見る</a>
+          </div>
+        </article>
       </section>
 
       <section class="section road-movie" id="road-movie" aria-labelledby="road-movie-title">
@@ -160,32 +196,6 @@
             <p>公開準備中。五日間の歩みが感謝へ向かっていく最終章です。</p>
           </article>
         </div>
-      </section>
-
-      <section class="section cross-walk-digest" id="digest" aria-labelledby="digest-title">
-        <div class="section-heading">
-          <p class="eyebrow">CROSS WALK DIGEST</p>
-          <h2 id="digest-title">淡路島十字架行進ダイジェスト映像</h2>
-          <p>
-            ロードムービー三部作とは別に、淡路島十字架行進そのものを短く振り返るダイジェストです。
-            まず全体の歩みを見たい方はこちらから。
-          </p>
-        </div>
-        <article class="digest-feature" aria-label="淡路島十字架行進ダイジェスト映像">
-          <a class="digest-thumb" href="https://youtu.be/TK9MFezf03Y" target="_blank" rel="noreferrer" aria-label="淡路島十字架行進ダイジェスト映像をYouTubeで見る">
-            <img src="https://i.ytimg.com/vi/TK9MFezf03Y/hqdefault.jpg" alt="淡路島十字架行進ダイジェスト映像 YouTubeサムネイル" loading="lazy" decoding="async" />
-            <span class="road-movie-play" aria-hidden="true"></span>
-          </a>
-          <div class="digest-copy">
-            <p class="documentary-kicker">AWAJI CROSS WALK</p>
-            <h3>5日間の歩みを一気に振り返る</h3>
-            <p>
-              道、祈り、出会い、洗礼、雨の中の行進まで。
-              淡路島一周十字架行進の全体像を、短い映像でたどれる一本です。
-            </p>
-            <a class="button primary" href="https://youtu.be/TK9MFezf03Y" target="_blank" rel="noreferrer">ダイジェストを見る</a>
-          </div>
-        </article>
       </section>
 
       <section class="section intro" id="about" aria-labelledby="about-title">
@@ -349,7 +359,7 @@
       <section class="section share-section" id="share" aria-labelledby="share-title">
         <div class="section-heading">
           <p class="eyebrow">SHARE</p>
-          <h2 id="share-title">この記録を分かち合う</h2>
+          <h2 id="share-title">この記録をシェアする</h2>
           <p>祈りと証しの記録を、必要としている人へ届けられるように。</p>
         </div>
         <div class="share-grid" aria-label="SNS共有ボタン">
@@ -357,11 +367,11 @@
             <span>スマホで共有</span>
             <small>標準の共有メニューを開く</small>
           </button>
-          <a class="share-card line" href="https://line.me/R/msg/text/?ARTHUR%20HOLLANDS%20WALK%20ACROSS%20AWAJI%202026%20%7C%20%E3%82%A2%E3%83%BC%E3%82%B5%E3%83%BC%E3%83%9B%E3%83%BC%E3%83%A9%E3%83%B3%E3%83%89%E6%B7%A1%E8%B7%AF%E5%B3%B6%E4%B8%80%E5%91%A8%E5%8D%81%E5%AD%97%E6%9E%B6%E8%A1%8C%E9%80%B22026%0Ahttps%3A%2F%2Farthur-show.com%2Fwalk-across-awaji2026%2F" data-share-line target="_blank" rel="noreferrer">
+          <a class="share-card line" href="https://line.me/R/msg/text/?ARTHUR%20HOLLANDS%20WALK%20ACROSS%20AWAJI%202026%20%7C%20%E3%82%A2%E3%83%BC%E3%82%B5%E3%83%BC%E3%83%9B%E3%83%BC%E3%83%A9%E3%83%B3%E3%83%89%E5%85%AC%E5%BC%8FYouTube%E3%83%81%E3%83%A3%E3%83%B3%E3%83%8D%E3%83%AB%20THE%20ARTHUR%20HOLLANDS%20SHOW%0A%E6%B7%A1%E8%B7%AF%E5%B3%B6%E4%B8%80%E5%91%A8%E5%8D%81%E5%AD%97%E6%9E%B6%E8%A1%8C%E9%80%B22026%E3%81%AE%E3%83%A1%E3%83%A2%E3%83%AA%E3%82%A2%E3%83%AB%E3%82%A2%E3%83%BC%E3%82%AB%E3%82%A4%E3%83%96%E3%80%82%0Ahttps%3A%2F%2Farthur-show.com%2Fwalk-across-awaji2026%2F" data-share-line target="_blank" rel="noreferrer">
             <span>LINE</span>
             <small>友だち・グループへ送る</small>
           </a>
-          <a class="share-card x" href="https://twitter.com/intent/tweet?text=ARTHUR%20HOLLANDS%20WALK%20ACROSS%20AWAJI%202026%20%7C%20%E3%82%A2%E3%83%BC%E3%82%B5%E3%83%BC%E3%83%9B%E3%83%BC%E3%83%A9%E3%83%B3%E3%83%89%E6%B7%A1%E8%B7%AF%E5%B3%B6%E4%B8%80%E5%91%A8%E5%8D%81%E5%AD%97%E6%9E%B6%E8%A1%8C%E9%80%B22026&url=https%3A%2F%2Farthur-show.com%2Fwalk-across-awaji2026%2F" data-share-x target="_blank" rel="noreferrer">
+          <a class="share-card x" href="https://twitter.com/intent/tweet?text=ARTHUR%20HOLLANDS%20WALK%20ACROSS%20AWAJI%202026%20%7C%20%E3%82%A2%E3%83%BC%E3%82%B5%E3%83%BC%E3%83%9B%E3%83%BC%E3%83%A9%E3%83%B3%E3%83%89%E5%85%AC%E5%BC%8FYouTube%E3%83%81%E3%83%A3%E3%83%B3%E3%83%8D%E3%83%AB%20THE%20ARTHUR%20HOLLANDS%20SHOW%0A%E6%B7%A1%E8%B7%AF%E5%B3%B6%E4%B8%80%E5%91%A8%E5%8D%81%E5%AD%97%E6%9E%B6%E8%A1%8C%E9%80%B22026%E3%81%AE%E3%83%A1%E3%83%A2%E3%83%AA%E3%82%A2%E3%83%AB%E3%82%A2%E3%83%BC%E3%82%AB%E3%82%A4%E3%83%96%E3%80%82&url=https%3A%2F%2Farthur-show.com%2Fwalk-across-awaji2026%2F" data-share-x target="_blank" rel="noreferrer">
             <span>X</span>
             <small>投稿で紹介する</small>
           </a>

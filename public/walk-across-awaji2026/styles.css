@@ -21,7 +21,7 @@ html {
 
 body {
   margin: 0;
-  font-family: "Hiragino Sans", "Yu Gothic", "YuGothic", "Noto Sans JP", system-ui, sans-serif;
+  font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", "YuGothic", system-ui, sans-serif;
   color: var(--ink);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(251, 246, 234, 0.92)),
@@ -43,80 +43,120 @@ a {
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 20;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  padding: 14px clamp(18px, 4vw, 56px);
-  background: rgba(251, 246, 234, 0.9);
-  border-bottom: 1px solid var(--line);
-  backdrop-filter: blur(16px);
+  z-index: 100;
+  padding: 20px 0;
+  background: #0a0a0a;
+  color: #fff;
+  border-bottom: 4px solid #c5a059;
 }
 
-.brand {
-  display: inline-flex;
+.header-inner {
+  display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.archive-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  color: #fff;
+  text-align: center;
   text-decoration: none;
-  min-width: 220px;
 }
 
-.brand-mark {
-  display: grid;
-  place-items: center;
-  width: 38px;
-  height: 38px;
-  color: white;
-  background: var(--red);
-  font-weight: 900;
-  border-radius: 4px;
-  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.12);
+.logo-main {
+  font-family: "Oswald", sans-serif;
+  font-size: clamp(1.1rem, 6vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 1;
 }
 
-.brand strong,
-.brand small {
-  display: block;
-  line-height: 1.2;
+.logo-sub {
+  margin-top: 5px;
+  color: #c5a059;
+  font-family: "Oswald", sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
 }
 
-.brand strong {
-  font-size: 13px;
-  letter-spacing: 0.08em;
+.global-section-nav {
+  position: sticky;
+  top: 85px;
+  z-index: 90;
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+  margin: 0 0 22px;
+  padding: 10px 20px;
+  overflow-x: auto;
+  background: rgba(10, 10, 10, 0.96);
+  border-bottom: 1px solid rgba(197, 160, 89, 0.72);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+  backdrop-filter: blur(12px);
+  scrollbar-width: none;
 }
 
-.brand small {
-  margin-top: 2px;
-  color: var(--muted);
-  font-size: 12px;
+.global-section-nav::-webkit-scrollbar {
+  display: none;
 }
 
-nav {
+.global-section-nav a {
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  min-height: 34px;
+  padding: 0 14px;
+  color: rgba(255, 255, 255, 0.78);
+  border: 1px solid transparent;
+  border-bottom: 2px solid transparent;
+  font-family: "Oswald", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.global-section-nav a:hover,
+.global-section-nav a.active {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(197, 160, 89, 0.24);
+  border-bottom-color: #c5a059;
+}
+
+.walk-local-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 8px;
+  max-width: 1040px;
+  margin: -8px auto 18px;
+  padding: 0 18px;
   font-size: 14px;
   font-weight: 700;
 }
 
-nav a {
+.walk-local-nav a {
   padding: 10px 12px;
   text-decoration: none;
   border-radius: 4px;
+  background: rgba(255, 255, 255, 0.72);
 }
 
-nav a:hover {
+.walk-local-nav a:hover {
   background: rgba(7, 91, 168, 0.08);
-}
-
-.home-nav {
-  color: white;
-  background: var(--blue-dark);
-}
-
-.home-nav:hover {
-  color: white;
-  background: var(--blue);
 }
 
 .hero {
@@ -1033,15 +1073,8 @@ footer a {
 }
 
 @media (max-width: 980px) {
-  .site-header {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  nav {
-    width: 100%;
-    overflow-x: auto;
+  .global-section-nav {
+    justify-content: flex-start;
   }
 
   .hero,
@@ -1107,28 +1140,38 @@ footer a {
 
 @media (max-width: 620px) {
   .site-header {
-    position: static;
-    padding: 12px 14px;
+    position: sticky;
+    padding: 20px 0;
   }
 
-  .brand {
-    min-width: 0;
+  .logo-main {
+    font-size: 1rem;
   }
 
-  .brand-mark {
-    width: 34px;
-    height: 34px;
+  .global-section-nav {
+    position: sticky;
+    top: 86px;
+    justify-content: flex-start;
+    gap: 2px;
+    margin: 0 0 18px;
+    padding: 9px 14px;
   }
 
-  .brand strong {
-    font-size: 12px;
+  .global-section-nav a {
+    min-height: 32px;
+    padding: 0 12px;
+    font-size: 0.78rem;
   }
 
-  .brand small {
-    font-size: 11px;
+  .walk-local-nav {
+    justify-content: flex-start;
+    margin-top: -4px;
+    overflow-x: auto;
+    flex-wrap: nowrap;
   }
 
-  nav a {
+  .walk-local-nav a {
+    flex: 0 0 auto;
     padding-inline: 10px;
     white-space: nowrap;
   }

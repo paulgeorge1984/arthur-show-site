@@ -11,6 +11,9 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+const messageShareTitle = `${entry.data.title} | アーサーホーランド公式YouTubeチャンネル THE ARTHUR HOLLANDS SHOW`;
+const messageShareText = entry.data.description || entry.data.title;
+const messageShareUrl = `https://arthur-show.com/messages/${entry.slug}/`;
 ---
 
 <Layout title={entry.data.title} description={entry.data.description}>
@@ -36,7 +39,7 @@ const { Content } = await entry.render();
 
 </Layout>
 
-<script>
+<script define:vars={{ messageShareTitle, messageShareText, messageShareUrl }}>
 	const anchor = document.getElementById('video-anchor');
 	const player = document.getElementById('floating-player');
 	const closeBtn = document.getElementById('close-pip');
@@ -66,6 +69,55 @@ const { Content } = await entry.render();
 			player.classList.add('pip-hidden');
 		});
 	}
+
+	function updateMessageShareButtons() {
+		const shareButtons = document.querySelectorAll('.share-button');
+		const encodedUrl = encodeURIComponent(messageShareUrl);
+		const encodedText = encodeURIComponent(`${messageShareTitle}\n${messageShareText}`);
+		const encodedLineText = encodeURIComponent(`${messageShareTitle}\n${messageShareText}\n${messageShareUrl}`);
+
+		shareButtons.forEach((button) => {
+			button.removeAttribute('onclick');
+
+			if (button.classList.contains('twitter')) {
+				button.addEventListener('click', () => {
+					window.open(`https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`, '_blank', 'noopener,noreferrer');
+				});
+				return;
+			}
+
+			if (button.classList.contains('facebook')) {
+				button.addEventListener('click', () => {
+					window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`, '_blank', 'noopener,noreferrer');
+				});
+				return;
+			}
+
+			if (button.classList.contains('line')) {
+				button.addEventListener('click', () => {
+					window.open(`https://line.me/R/msg/text/?${encodedLineText}`, '_blank', 'noopener,noreferrer');
+				});
+				return;
+			}
+
+			if (button.classList.contains('copy')) {
+				button.addEventListener('click', async () => {
+					try {
+						await navigator.clipboard.writeText(`${messageShareTitle}\n${messageShareText}\n${messageShareUrl}`);
+						const originalLabel = button.getAttribute('aria-label') || 'リンクをコピー';
+						button.setAttribute('aria-label', 'コピーしました');
+						setTimeout(() => {
+							button.setAttribute('aria-label', originalLabel);
+						}, 1800);
+					} catch {
+						window.prompt('このURLをコピーしてください', `${messageShareTitle}\n${messageShareText}\n${messageShareUrl}`);
+					}
+				});
+			}
+		});
+	}
+
+	updateMessageShareButtons();
 </script>
 
 <style>

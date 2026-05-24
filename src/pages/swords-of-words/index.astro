@@ -1,0 +1,618 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const currentBuildTime = new Date();
+const allMessages = (await getCollection('daily-messages', ({ data }) => {
+	return data.date <= currentBuildTime;
+})).sort(
+	(a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const formatDate = (date: Date) => date.toLocaleDateString('ja-JP', {
+	year: 'numeric',
+	month: '2-digit',
+	day: '2-digit',
+});
+
+const cleanInlineText = (value = '') => value
+	.replace(/<br\s*\/?>/g, ' ')
+	.replace(/<[^>]+>/g, ' ')
+	.replace(/&nbsp;/g, ' ')
+	.replace(/&amp;/g, '&')
+	.replace(/&quot;/g, '"')
+	.replace(/&#39;/g, "'")
+	.replace(/\s+/g, ' ')
+	.trim();
+
+const normalizeScriptureRef = (ref = '') => ref
+	.replace(/^イザヤ(?=[\s　0-9０-９])/, 'イザヤ書')
+	.replace(/^ヘブル(?=[\s　0-9０-９])/, 'ヘブル人への手紙')
+	.replace(/^ヨハネの第一の手紙/, 'ヨハネの手紙 第一')
+	.replace(/^ヨハネ(?=[\s　0-9０-９])/, 'ヨハネの福音書')
+	.replace(/^ルカ(?=[\s　0-9０-９])/, 'ルカの福音書')
+	.replace(/^マタイ(?=[\s　0-9０-９])/, 'マタイの福音書')
+	.replace(/^マルコ(?=[\s　0-9０-９])/, 'マルコの福音書')
+	.replace(/^ローマ(?=[\s　0-9０-９])/, 'ローマ人への手紙')
+	.replace(/^ピリピ(?=[\s　0-9０-９])/, 'ピリピ人への手紙')
+	.replace(/^ガラテヤ(?=[\s　0-9０-９])/, 'ガラテヤ人への手紙')
+	.replace(/^第一コリント人への手紙|^第一コリント|^第1コリント|^コリント人への手紙第一/, 'コリント人への手紙 第一')
+	.replace(/^第二コリント人への手紙|^第二コリント|^第2コリント|^コリント人への手紙第二/, 'コリント人への手紙 第二')
+	.replace(/^第一テサロニケ人への手紙|^第一テサロニケ/, 'テサロニケ人への手紙 第一')
+	.replace(/\s+/g, ' ')
+	.trim();
+
+const getScriptureBook = (ref = '') => ref
+	.replace(/[0-9０-９].*$/, '')
+	.replace(/[　\s]+$/, '')
+	.trim();
+
+const bibleBooks = [
+	'創世記', '出エジプト記', 'レビ記', '民数記', '申命記', 'ヨシュア記', '士師記', 'ルツ記',
+	'サムエル記 第一', 'サムエル記 第二', '列王記 第一', '列王記 第二', '歴代誌 第一', '歴代誌 第二',
+	'エズラ記', 'ネヘミヤ記', 'エステル記', 'ヨブ記', '詩篇', '箴言', '伝道者の書', '雅歌',
+	'イザヤ書', 'エレミヤ書', '哀歌', 'エゼキエル書', 'ダニエル書', 'ホセア書', 'ヨエル書', 'アモス書',
+	'オバデヤ書', 'ヨナ書', 'ミカ書', 'ナホム書', 'ハバクク書', 'ゼパニヤ書', 'ハガイ書', 'ゼカリヤ書', 'マラキ書',
+	'マタイの福音書', 'マルコの福音書', 'ルカの福音書', 'ヨハネの福音書', '使徒の働き',
+	'ローマ人への手紙', 'コリント人への手紙 第一', 'コリント人への手紙 第二', 'ガラテヤ人への手紙',
+	'エペソ人への手紙', 'ピリピ人への手紙', 'コロサイ人への手紙', 'テサロニケ人への手紙 第一',
+	'テサロニケ人への手紙 第二', 'テモテへの手紙 第一', 'テモテへの手紙 第二', 'テトスへの手紙',
+	'ピレモンへの手紙', 'ヘブル人への手紙', 'ヤコブの手紙', 'ペテロの手紙 第一', 'ペテロの手紙 第二',
+	'ヨハネの手紙 第一', 'ヨハネの手紙 第二', 'ヨハネの手紙 第三', 'ユダの手紙', 'ヨハネの黙示録',
+];
+const bibleBookOrder = new Map(bibleBooks.map((book, index) => [book, index]));
+
+const rawScriptureRows = allMessages.flatMap((post) => {
+	const rows = Array.from(post.body.matchAll(/<p\s+class=["']verse-text["'][^>]*>([\s\S]*?)<\/p>\s*<span\s+class=["']verse-ref["'][^>]*>([\s\S]*?)<\/span>/g))
+		.map((match) => {
+			const text = cleanInlineText(match[1]);
+			const ref = normalizeScriptureRef(cleanInlineText(match[2]));
+			return {
+				ref,
+				text,
+				book: getScriptureBook(ref),
+				post,
+			};
+		})
+		.filter((row) => row.ref && row.text);
+
+	if (rows.length) return rows;
+
+	const refs = Array.from(post.body.matchAll(/<span\s+class=["']msg-verse-ref["'][^>]*>([\s\S]*?)<\/span>/g))
+		.map((match) => normalizeScriptureRef(cleanInlineText(match[1])))
+		.filter(Boolean);
+
+	return Array.from(new Set(refs)).map((ref) => ({
+		ref,
+		text: post.data.description,
+		book: getScriptureBook(ref),
+		post,
+	}));
+});
+
+const scriptureRows = rawScriptureRows.map((row, index) => ({
+	...row,
+	isRecent: index < 12,
+}));
+const scriptureBooks = Array.from(new Set(scriptureRows.map((row) => row.book).filter(Boolean)))
+	.sort((a, b) => {
+		const orderA = bibleBookOrder.get(a) ?? 999;
+		const orderB = bibleBookOrder.get(b) ?? 999;
+		return orderA === orderB ? a.localeCompare(b, 'ja') : orderA - orderB;
+	});
+const oldTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(book) ?? 999) < 39);
+const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(book) ?? 999) >= 39);
+---
+
+<Layout
+	title="THE SWORDS OF WORDS"
+	description="御言葉からアーサー・ホーランドのメッセージを探す索引。"
+>
+	<main class="swords-page">
+		<section class="scripture-section" id="scripture-index" aria-labelledby="scripture-title">
+			<div class="swords-banner" aria-hidden="true">
+				<img src="/assets/generated/swords-of-words-banner.webp" alt="" loading="eager" />
+			</div>
+			<div class="section-bar scripture-bar">
+				<div>
+					<p class="section-kicker">御言葉から探す</p>
+					<h1 id="scripture-title">THE SWORDS OF WORDS</h1>
+				</div>
+				<p class="archive-count">{scriptureRows.length}件</p>
+			</div>
+
+			<figure class="swords-feature-image" aria-hidden="true">
+				<img src="/assets/generated/swords-of-words-banner.webp" alt="" loading="eager" />
+			</figure>
+
+			<div class="scripture-quick" aria-label="聖句表示切り替え">
+				<button class="scripture-filter active" type="button" data-scripture-filter="recent">最近の御言葉</button>
+				<button class="scripture-filter" type="button" data-scripture-filter="all">すべて</button>
+			</div>
+
+			<details class="scripture-book-index" open>
+				<summary>66巻順で探す</summary>
+				<div class="book-index-columns">
+					<div class="book-index-group">
+						<h2>OLD TESTAMENT</h2>
+						<div class="book-index-grid">
+							{oldTestamentBooks.map((book) => (
+								<button class="scripture-filter" type="button" data-scripture-filter={book}>{book}</button>
+							))}
+						</div>
+					</div>
+					<div class="book-index-group">
+						<h2>NEW TESTAMENT</h2>
+						<div class="book-index-grid">
+							{newTestamentBooks.map((book) => (
+								<button class="scripture-filter" type="button" data-scripture-filter={book}>{book}</button>
+							))}
+						</div>
+					</div>
+				</div>
+			</details>
+
+			<div class="scripture-grid" data-scripture-list>
+				{scriptureRows.map((row) => (
+					<a
+						class="scripture-card"
+						href={`/messages/${row.post.slug}`}
+						data-scripture-card
+						data-scripture-book={row.book}
+						data-scripture-recent={row.isRecent ? 'true' : 'false'}
+						hidden={!row.isRecent}
+					>
+						<span class="scripture-ref">{row.ref}</span>
+						<q>{row.text}</q>
+						<span class="scripture-meta">
+							<span>{formatDate(row.post.data.date)}</span>
+							<strong>{row.post.data.title}</strong>
+						</span>
+					</a>
+				))}
+			</div>
+			<p class="no-results" data-scripture-empty hidden>該当する御言葉がありません。</p>
+
+		</section>
+	</main>
+
+	<script is:inline>
+		const scriptureCards = Array.from(document.querySelectorAll('[data-scripture-card]'));
+		const scriptureFilters = Array.from(document.querySelectorAll('[data-scripture-filter]'));
+		const scriptureEmpty = document.querySelector('[data-scripture-empty]');
+
+		function applyScriptureFilter(book) {
+			let visible = 0;
+			scriptureCards.forEach((card) => {
+				const show = book === 'all'
+					|| (book === 'recent' && card.dataset.scriptureRecent === 'true')
+					|| card.dataset.scriptureBook === book;
+				card.hidden = !show;
+				if (show) visible += 1;
+			});
+			if (scriptureEmpty) scriptureEmpty.hidden = visible !== 0;
+		}
+
+		scriptureFilters.forEach((button) => {
+			button.addEventListener('click', () => {
+				const book = button.dataset.scriptureFilter || 'recent';
+				scriptureFilters.forEach((b) => b.classList.toggle('active', b === button));
+				applyScriptureFilter(book);
+			});
+		});
+	</script>
+</Layout>
+
+<style>
+	.swords-page {
+		max-width: 1080px;
+		margin: 0 auto;
+		padding: 0 20px 46px;
+	}
+
+	.scripture-section {
+		position: relative;
+		padding: 28px;
+		overflow: hidden;
+		background:
+			radial-gradient(circle at 80% 0%, rgba(197, 160, 89, 0.24), transparent 28%),
+			linear-gradient(115deg, transparent 0 24%, rgba(255, 255, 255, 0.08) 24% 25%, transparent 25% 100%),
+			linear-gradient(135deg, #090909 0%, #16110c 48%, #050505 100%);
+		color: #fff;
+		border: 1px solid rgba(197, 160, 89, 0.5);
+		border-left: 8px solid #c5a059;
+		box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.04), 0 22px 46px rgba(0, 0, 0, 0.16);
+	}
+
+	.scripture-section::before {
+		content: "";
+		position: absolute;
+		top: 38px;
+		right: -64px;
+		width: min(58vw, 700px);
+		height: 32px;
+		background:
+			linear-gradient(90deg, transparent 0 8%, #050505 8% 11%, #c5a059 11% 14%, #f7f7f7 14% 45%, #bfc3c8 45% 48%, #ffffff 48% 84%, #8f949b 84% 100%);
+		clip-path: polygon(0 42%, 86% 42%, 100% 50%, 86% 58%, 0 58%);
+		opacity: 0.9;
+		pointer-events: none;
+	}
+
+	.scripture-section::after {
+		content: "";
+		position: absolute;
+		inset: 16px;
+		border: 1px solid rgba(255, 255, 255, 0.16);
+		pointer-events: none;
+	}
+
+	.swords-banner {
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+		overflow: hidden;
+	}
+
+	.swords-banner img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center top;
+		opacity: 0.42;
+		filter: saturate(1.08) contrast(1.12);
+	}
+
+	.swords-banner::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background:
+			linear-gradient(90deg, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.72) 52%, rgba(0, 0, 0, 0.56) 100%),
+			linear-gradient(180deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.86));
+	}
+
+	.section-bar {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-between;
+		gap: 18px;
+		margin-bottom: 18px;
+		padding: 16px 0 20px;
+		border-bottom: 3px solid #c5a059;
+	}
+
+	.section-kicker {
+		color: #c5a059;
+		font-family: 'Oswald', sans-serif;
+		font-size: 0.85rem;
+		font-weight: 700;
+		letter-spacing: 0.18em;
+	}
+
+	.scripture-bar h1 {
+		max-width: 760px;
+		color: #f7f7f7;
+		font-family: 'Oswald', sans-serif;
+		font-size: clamp(2.4rem, 7vw, 4.4rem);
+		line-height: 0.95;
+		text-shadow: 3px 3px 0 #000, 5px 5px 0 rgba(197, 160, 89, 0.42);
+	}
+
+	.archive-count {
+		flex: 0 0 auto;
+		color: rgba(255, 255, 255, 0.72);
+		font-size: 0.9rem;
+		font-weight: 900;
+	}
+
+	.swords-feature-image {
+		position: relative;
+		z-index: 1;
+		aspect-ratio: 21 / 7;
+		margin-bottom: 18px;
+		overflow: hidden;
+		border: 1px solid rgba(197, 160, 89, 0.6);
+		border-bottom: 5px solid #c5a059;
+		background: #050505;
+		box-shadow: 10px 10px 0 rgba(197, 160, 89, 0.18);
+	}
+
+	.swords-feature-image::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background:
+			linear-gradient(90deg, rgba(0, 0, 0, 0.64), transparent 38%, rgba(0, 0, 0, 0.28)),
+			linear-gradient(180deg, transparent 45%, rgba(0, 0, 0, 0.66));
+		pointer-events: none;
+	}
+
+	.swords-feature-image img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center 42%;
+		filter: saturate(1.12) contrast(1.08);
+	}
+
+	.scripture-quick {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		margin-bottom: 10px;
+	}
+
+	.scripture-book-index {
+		position: relative;
+		z-index: 1;
+		margin-bottom: 18px;
+		background:
+			linear-gradient(90deg, rgba(197, 160, 89, 0.18) 0 2px, transparent 2px 12px),
+			rgba(255, 255, 255, 0.08);
+		border: 1px solid rgba(197, 160, 89, 0.5);
+		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+	}
+
+	.scripture-book-index summary {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		min-height: 42px;
+		padding: 0 14px;
+		background: #050505;
+		color: #fff;
+		border-bottom: 3px solid #c5a059;
+		font-family: 'Oswald', sans-serif;
+		font-size: 0.95rem;
+		font-weight: 900;
+		letter-spacing: 0.08em;
+		cursor: pointer;
+	}
+
+	.scripture-book-index summary::after {
+		content: "+";
+		color: #c5a059;
+		font-size: 1.2rem;
+	}
+
+	.scripture-book-index[open] summary::after {
+		content: "-";
+	}
+
+	.book-index-columns {
+		display: grid;
+		grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+		gap: 16px;
+		padding: 14px;
+	}
+
+	.book-index-group {
+		position: relative;
+		padding: 14px;
+		background: rgba(0, 0, 0, 0.26);
+		border: 1px solid rgba(255, 255, 255, 0.1);
+	}
+
+	.book-index-group h2 {
+		margin-bottom: 10px;
+		color: #c5a059;
+		font-family: 'Oswald', sans-serif;
+		font-size: 0.82rem;
+		font-weight: 900;
+		letter-spacing: 0.14em;
+	}
+
+	.book-index-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 7px;
+	}
+
+	.scripture-filter {
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		flex: 0 0 auto;
+		min-height: 36px;
+		min-width: 0;
+		padding: 0 12px;
+		background: linear-gradient(180deg, #f7f7f7 0%, #cfd3d8 56%, #9fa5ad 100%);
+		color: #050505;
+		border: 1px solid rgba(255, 255, 255, 0.55);
+		border-left: 5px solid #c5a059;
+		border-bottom: 2px solid #5e6268;
+		font: inherit;
+		font-size: 0.86rem;
+		font-weight: 900;
+		line-height: 1.25;
+		text-align: center;
+		cursor: pointer;
+		box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.75);
+		clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0 100%);
+	}
+
+	.scripture-filter.active,
+	.scripture-filter:hover {
+		background: linear-gradient(180deg, #242424 0%, #050505 100%);
+		color: #fff;
+		border-color: #c5a059;
+		border-bottom-color: #c5a059;
+	}
+
+	.scripture-grid {
+		position: relative;
+		z-index: 1;
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 14px;
+	}
+
+	.scripture-card {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		min-height: 250px;
+		padding: 22px 18px 18px 22px;
+		overflow: hidden;
+		background:
+			linear-gradient(90deg, #c5a059 0 5px, transparent 5px 100%),
+			linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0 18%, transparent 18% 100%),
+			linear-gradient(180deg, #1a1a1a 0%, #0b0b0b 100%);
+		color: #fff;
+		border: 1px solid rgba(197, 160, 89, 0.42);
+		border-top: 5px solid #c5a059;
+		box-shadow: 0 14px 28px rgba(0, 0, 0, 0.24);
+	}
+
+	.scripture-card::before {
+		content: "";
+		position: absolute;
+		top: 18px;
+		right: -44px;
+		width: 190px;
+		height: 18px;
+		background: linear-gradient(90deg, #050505 0 10%, #c5a059 10% 16%, #f3f3f3 16% 50%, #9ba1a8 50% 53%, #fff 53% 82%, #777d85 82% 100%);
+		clip-path: polygon(0 40%, 86% 40%, 100% 50%, 86% 60%, 0 60%);
+		opacity: 0.62;
+		pointer-events: none;
+	}
+
+	.scripture-card::after {
+		content: "WORD";
+		position: absolute;
+		right: 14px;
+		bottom: 12px;
+		color: rgba(255, 255, 255, 0.05);
+		font-family: 'Oswald', sans-serif;
+		font-size: 2.5rem;
+		font-weight: 900;
+		line-height: 1;
+		pointer-events: none;
+	}
+
+	.scripture-card[hidden] {
+		display: none;
+	}
+
+	.scripture-card:hover {
+		border-color: #c5a059;
+		transform: translateY(-2px);
+		box-shadow: 0 18px 38px rgba(0, 0, 0, 0.32);
+	}
+
+	.scripture-card:hover::before {
+		opacity: 0.72;
+	}
+
+	.scripture-ref {
+		position: relative;
+		z-index: 1;
+		width: fit-content;
+		margin-bottom: 14px;
+		padding: 6px 11px 6px 14px;
+		background: #f8f8f8;
+		color: #000;
+		border-left: 4px solid #c5a059;
+		box-shadow: 4px 4px 0 rgba(197, 160, 89, 0.36);
+		font-size: 0.82rem;
+		font-weight: 900;
+		line-height: 1.35;
+	}
+
+	.scripture-ref::after {
+		content: "";
+		position: absolute;
+		top: 50%;
+		right: -34px;
+		width: 30px;
+		height: 2px;
+		background: #c5a059;
+		transform: translateY(-50%);
+	}
+
+	.scripture-card q {
+		position: relative;
+		z-index: 1;
+		display: -webkit-box;
+		overflow: hidden;
+		color: rgba(255, 255, 255, 0.93);
+		font-size: 1.02rem;
+		font-weight: 800;
+		line-height: 1.75;
+		quotes: none;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 6;
+	}
+
+	.scripture-meta {
+		position: relative;
+		z-index: 1;
+		display: grid;
+		gap: 5px;
+		margin-top: auto;
+		padding-top: 16px;
+		border-top: 1px solid rgba(255, 255, 255, 0.2);
+	}
+
+	.scripture-meta span {
+		color: #c5a059;
+		font-family: 'Oswald', sans-serif;
+		font-size: 0.78rem;
+		letter-spacing: 0.08em;
+	}
+
+	.scripture-meta strong {
+		display: -webkit-box;
+		overflow: hidden;
+		font-size: 0.9rem;
+		font-weight: 900;
+		color: rgba(255, 255, 255, 0.86);
+		line-height: 1.45;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2;
+	}
+
+	.no-results {
+		padding: 32px;
+		text-align: center;
+		color: #666;
+		background: #f4f4f5;
+		font-weight: 900;
+	}
+
+	@media (max-width: 760px) {
+		.swords-page {
+			padding: 0 14px 32px;
+		}
+
+		.scripture-section {
+			padding: 18px;
+		}
+
+		.section-bar {
+			align-items: flex-start;
+			flex-direction: column;
+		}
+
+		.book-index-columns {
+			grid-template-columns: 1fr;
+		}
+
+		.book-index-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+
+		.scripture-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.scripture-card {
+			min-height: 220px;
+		}
+	}
+</style>
