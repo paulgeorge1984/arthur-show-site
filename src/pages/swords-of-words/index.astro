@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import dailyVerseVideos from '../../data/daily-verse-videos.json';
+import wordOfGodBooklet from '../../data/word-of-god-booklet.json';
 
 const currentBuildTime = new Date();
 const allMessages = (await getCollection('daily-messages', ({ data }) => {
@@ -93,6 +94,17 @@ const dailyVerseVideoPool = Object.values(dailyVerseVideos.videosByPage || {})
 		normalizedQuote: normalizeMatchText(video.quote || video.title || ''),
 	}));
 
+const scriptureBookPattern = bibleBooks
+	.slice()
+	.sort((a, b) => b.length - a.length)
+	.map((book) => book.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\s+/g, '\\s*'))
+	.join('|');
+
+const scriptureRefPattern = new RegExp(
+	`(${scriptureBookPattern})\\s*[0-9０-９]+\\s*(?:(?:章\\s*[0-9０-９]+(?:[-－ー〜～—][0-9０-９]+)?\\s*節?)|(?:[:：]\\s*[0-9０-９]+(?:[-－ー〜～—][0-9０-９]+)?)|章)`,
+	'g'
+);
+
 const findRelatedDailyVideos = (text = '') => {
 	const normalizedText = normalizeMatchText(text);
 	if (normalizedText.length < 8) return [];
@@ -113,8 +125,8 @@ const findRelatedDailyVideos = (text = '') => {
 		.slice(0, 3);
 };
 
-const rawScriptureRows = allMessages.flatMap((post) => {
-	const rows = Array.from(post.body.matchAll(/<p\s+class=["']verse-text["'][^>]*>([\s\S]*?)<\/p>\s*<span\s+class=["']verse-ref["'][^>]*>([\s\S]*?)<\/span>/g))
+const messageScriptureRows = allMessages.flatMap((post) => {
+	const verseBoxRows = Array.from(post.body.matchAll(/<p\s+class=["']verse-text["'][^>]*>([\s\S]*?)<\/p>\s*<span\s+class=["']verse-ref["'][^>]*>([\s\S]*?)<\/span>/g))
 		.map((match) => {
 			const text = cleanInlineText(match[1]);
 			const ref = normalizeScriptureRef(cleanInlineText(match[2]));
@@ -127,24 +139,75 @@ const rawScriptureRows = allMessages.flatMap((post) => {
 		})
 		.filter((row) => row.ref && row.text);
 
-	if (rows.length) return rows;
-
-	const refs = Array.from(post.body.matchAll(/<span\s+class=["']msg-verse-ref["'][^>]*>([\s\S]*?)<\/span>/g))
+	const markedRefs = Array.from(post.body.matchAll(/<span\s+class=["']msg-verse-ref["'][^>]*>([\s\S]*?)<\/span>/g))
 		.map((match) => normalizeScriptureRef(cleanInlineText(match[1])))
 		.filter(Boolean);
 
-	return Array.from(new Set(refs)).map((ref) => ({
-		ref,
-		text: post.data.description,
-		book: getScriptureBook(ref),
-		post,
-	}));
+	const bodyRefs = Array.from(`${post.data.description || ''}\n${post.body}`.matchAll(scriptureRefPattern))
+		.map((match) => normalizeScriptureRef(cleanInlineText(match[0]).replace(/\s*:\s*/g, ':')))
+		.filter(Boolean);
+
+	const existingRefs = new Set(verseBoxRows.map((row) => row.ref));
+	const refRows = Array.from(new Set([...markedRefs, ...bodyRefs]))
+		.filter((ref) => !existingRefs.has(ref))
+		.map((ref) => ({
+			ref,
+			text: post.data.description,
+			book: getScriptureBook(ref),
+			post,
+		}));
+
+	return [...verseBoxRows, ...refRows].filter((row) => row.ref && row.text);
 });
+
+const extractBookletVerseText = (pageText = '', ref = '') => {
+	const escaped = ref.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+	const match = pageText.match(new RegExp(`${escaped}\\s*([\\s\\S]*?)(?=\\n[^\\n]*\\s\\d|\\n\\d\\s\\d\\s\\d|$)`));
+	return cleanInlineText(match?.[1] || pageText).replace(/\s*\d\s+\d\s+\d\s*$/, '').slice(0, 260);
+};
+
+const extractFullBookletRefs = (pageText = '', fallbackRefs = []) => {
+	const fullRefs = Array.from(pageText.matchAll(scriptureRefPattern))
+		.map((match) => normalizeScriptureRef(cleanInlineText(match[0]).replace(/\s*:\s*/g, ':')))
+		.filter(Boolean);
+	if (fullRefs.length) return Array.from(new Set(fullRefs));
+	return Array.from(new Set(fallbackRefs.map((ref) => normalizeScriptureRef(ref)).filter(Boolean)));
+};
+
+const bookletScriptureRows = (wordOfGodBooklet.pages || []).flatMap((page) => {
+	const refs = extractFullBookletRefs(page.text || '', Array.isArray(page.refs) ? page.refs : []);
+	return refs.map((ref) => {
+		const normalizedRef = normalizeScriptureRef(ref);
+		const pageVideos = dailyVerseVideos.videosByPage?.[String(page.page)] || [];
+		return {
+			ref: normalizedRef,
+			text: extractBookletVerseText(page.text || '', ref),
+			book: getScriptureBook(normalizedRef),
+			source: 'booklet',
+			page: page.page,
+			href: `/1000-verses/?page=${page.page}#word-of-god-booklet`,
+			dateLabel: `P.${page.page}`,
+			title: 'THE WORD OF GOD 1000 VERSES COLLECTION',
+			relatedVideos: pageVideos,
+		};
+	}).filter((row) => row.ref && row.text);
+});
+
+const rawScriptureRows = [
+	...messageScriptureRows.map((row) => ({
+		...row,
+		source: 'message',
+		href: `/messages/${row.post.slug}`,
+		dateLabel: formatDate(row.post.data.date),
+		title: row.post.data.title,
+		relatedVideos: findRelatedDailyVideos(row.text),
+	})),
+	...bookletScriptureRows,
+];
 
 const scriptureRows = rawScriptureRows.map((row, index) => ({
 	...row,
 	isRecent: index < 12,
-	relatedVideos: findRelatedDailyVideos(row.text),
 }));
 const scriptureBooks = Array.from(new Set(scriptureRows.map((row) => row.book).filter(Boolean)))
 	.sort((a, b) => {
@@ -213,12 +276,12 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 						data-scripture-recent={row.isRecent ? 'true' : 'false'}
 						hidden={!row.isRecent}
 					>
-						<a class="scripture-message-link" href={`/messages/${row.post.slug}`}>
+						<a class="scripture-message-link" href={row.href}>
 							<span class="scripture-ref">{row.ref}</span>
 							<q>{row.text}</q>
 							<span class="scripture-meta">
-								<span>{formatDate(row.post.data.date)}</span>
-								<strong>{row.post.data.title}</strong>
+								<span>{row.dateLabel}</span>
+								<strong>{row.title}</strong>
 							</span>
 						</a>
 						{row.relatedVideos.length > 0 && (

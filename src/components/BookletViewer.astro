@@ -311,7 +311,8 @@ const newBookletBooks = bookletBookIndex.slice(39).filter((item) => item.page);
 		button.addEventListener('click', () => renderBookletPage(Number(button.dataset.bookletBookPage), bookletSearch?.value.trim() || ''));
 	});
 	setBookletTestament('new');
-	renderBookletPage(1, '');
+	const initialBookletPage = Number(new URLSearchParams(window.location.search).get('page') || 1);
+	renderBookletPage(Number.isFinite(initialBookletPage) ? initialBookletPage : 1, '');
 </script>
 
 <style>
