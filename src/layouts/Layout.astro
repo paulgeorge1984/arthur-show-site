@@ -16,6 +16,16 @@ const isCurrent = (href: string) => {
 	if (href === '/') return currentPath === '/';
 	return currentPath.startsWith(href);
 };
+const navItems = [
+	{ href: "/#messages", label: "Arthur Hollands' Message", active: currentPath === "/" },
+	{ href: "/arthur-hollands-show/", label: "THE ARTHUR HOLLANDS SHOW", active: isCurrent("/arthur-hollands-show/") },
+	{ href: "/friday-night/", label: "FRIDAY NIGHT", active: isCurrent("/friday-night/") },
+	{ href: "/walk-across/", label: "WALK ACROSS", active: isCurrent("/walk-across/") },
+	{ href: "/walk-across-awaji2026/", label: "WALK ACROSS AWAJI 2026", active: isCurrent("/walk-across-awaji2026/") },
+	{ href: "/message-jukebox/", label: "BIBLE JUKEBOX", active: isCurrent("/message-jukebox/") },
+	{ href: "/swords-of-words/", label: "THE SWORDS OF WORDS", active: isCurrent("/swords-of-words/") },
+	{ href: "/1000-verses/", label: "厳選 1000 VERSES", active: isCurrent("/1000-verses/") },
+];
 ---
 
 <!doctype html>
@@ -55,6 +65,11 @@ const isCurrent = (href: string) => {
 			</div>
 		</header>
 		<div class="global-nav-shell" data-global-nav-shell>
+			<nav class="global-quick-nav" aria-label="サイト内主要メニューショートカット">
+				{navItems.map((item) => (
+					<a href={item.href} class:list={{ active: item.active }}>{item.label}</a>
+				))}
+			</nav>
 			<button class="global-menu-toggle" type="button" aria-expanded="false" aria-controls="global-section-nav" data-global-menu-toggle>
 				<span class="menu-lines" aria-hidden="true">
 					<i></i>
@@ -64,14 +79,9 @@ const isCurrent = (href: string) => {
 				<strong>SITE MENU</strong>
 			</button>
 			<nav class="global-section-nav" id="global-section-nav" aria-label="サイト内主要メニュー" data-global-section-nav>
-				<a href="/#messages" class:list={{ active: currentPath === '/' }}>Arthur Hollands' Message</a>
-				<a href="/arthur-hollands-show/" class:list={{ active: isCurrent('/arthur-hollands-show/') }}>THE ARTHUR HOLLANDS SHOW</a>
-				<a href="/friday-night/" class:list={{ active: isCurrent('/friday-night/') }}>FRIDAY NIGHT</a>
-				<a href="/walk-across/" class:list={{ active: isCurrent('/walk-across/') }}>WALK ACROSS</a>
-				<a href="/walk-across-awaji2026/" class:list={{ active: isCurrent('/walk-across-awaji2026/') }}>WALK ACROSS AWAJI 2026</a>
-				<a href="/message-jukebox/" class:list={{ active: isCurrent('/message-jukebox/') }}>BIBLE JUKEBOX</a>
-				<a href="/swords-of-words/" class:list={{ active: isCurrent('/swords-of-words/') }}>THE SWORDS OF WORDS</a>
-				<a href="/1000-verses/" class:list={{ active: isCurrent('/1000-verses/') }}>厳選 1000 VERSES</a>
+				{navItems.map((item) => (
+					<a href={item.href} class:list={{ active: item.active }}>{item.label}</a>
+				))}
 			</nav>
 		</div>
 
@@ -201,6 +211,9 @@ const isCurrent = (href: string) => {
 	.global-menu-toggle {
 		display: none;
 	}
+	.global-quick-nav {
+		display: none;
+	}
 	.global-section-nav {
 		display: flex;
 		justify-content: center;
@@ -213,6 +226,7 @@ const isCurrent = (href: string) => {
 	.global-section-nav::-webkit-scrollbar {
 		display: none;
 	}
+	.global-quick-nav a,
 	.global-section-nav a {
 		display: flex;
 		align-items: center;
@@ -231,6 +245,8 @@ const isCurrent = (href: string) => {
 		text-align: center;
 		white-space: nowrap;
 	}
+	.global-quick-nav a:hover,
+	.global-quick-nav a.active,
 	.global-section-nav a:hover,
 	.global-section-nav a.active {
 		color: #fff;
@@ -244,6 +260,25 @@ const isCurrent = (href: string) => {
 			top: 86px;
 			margin: 0 0 18px;
 			padding: 10px 14px;
+		}
+		.global-quick-nav {
+			display: flex;
+			gap: 4px;
+			margin: 0 -4px 10px;
+			padding: 0 4px 10px;
+			overflow-x: auto;
+			scrollbar-width: none;
+			border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+		}
+		.global-quick-nav::-webkit-scrollbar {
+			display: none;
+		}
+		.global-quick-nav a {
+			min-height: 34px;
+			padding: 0 12px;
+			background: rgba(255, 255, 255, 0.045);
+			border-color: rgba(255, 255, 255, 0.06);
+			font-size: 0.78rem;
 		}
 		.global-menu-toggle {
 			display: inline-flex;
