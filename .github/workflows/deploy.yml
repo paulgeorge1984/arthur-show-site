@@ -4,8 +4,8 @@ on:
   push:
     branches: [ main ]
   schedule:
-    # Publish scheduled messages shortly after the usual 06:30 JST release time.
-    - cron: '35 21 * * *'
+    # Check scheduled messages every 15 minutes, but deploy only when content just became publishable.
+    - cron: '*/15 * * * *'
   workflow_dispatch:
 
 concurrency:
@@ -18,14 +18,50 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v3
+
+      - name: Check scheduled publish window
+        id: publish_window
+        run: |
+          if [ "${{ github.event_name }}" != "schedule" ]; then
+            echo "should_deploy=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          node <<'NODE' >> "$GITHUB_OUTPUT"
+          const fs = require('fs');
+          const path = require('path');
+          const contentDir = path.join(process.cwd(), 'src/content/daily-messages');
+          const now = new Date();
+          const windowStart = new Date(now.getTime() - 90 * 60 * 1000);
+          let shouldDeploy = false;
+
+          for (const file of fs.readdirSync(contentDir)) {
+            if (!file.endsWith('.mdx')) continue;
+            const body = fs.readFileSync(path.join(contentDir, file), 'utf8');
+            const match = body.match(/^date:\s*(.+)$/m);
+            if (!match) continue;
+            const publishDate = new Date(match[1].trim().replace(/^["']|["']$/g, ''));
+            if (publishDate > windowStart && publishDate <= now) {
+              shouldDeploy = true;
+              break;
+            }
+          }
+
+          console.log(`should_deploy=${shouldDeploy ? 'true' : 'false'}`);
+          NODE
+
       - uses: actions/setup-node@v3
+        if: steps.publish_window.outputs.should_deploy == 'true'
         with:
           node-version: 18
       - name: Install dependencies
+        if: steps.publish_window.outputs.should_deploy == 'true'
         run: npm ci
       - name: Build site
+        if: steps.publish_window.outputs.should_deploy == 'true'
         run: npm run build
       - name: FTP Deploy
+        if: steps.publish_window.outputs.should_deploy == 'true'
         env:
           FTP_HOST: ${{ secrets.FTP_HOST }}
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
