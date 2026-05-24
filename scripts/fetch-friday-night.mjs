@@ -31,6 +31,25 @@ function isPublicVideo(video) {
 	return !/(^\[?private video\]?$|^\[?deleted video\]?$|unavailable|非公開|削除済み|この動画は再生できません)/i.test(title);
 }
 
+async function thumbnailExists(url) {
+	try {
+		const response = await fetch(url, { method: 'HEAD' });
+		const contentLength = Number(response.headers.get('content-length') || 0);
+		return response.ok && contentLength > 1000;
+	} catch {
+		return false;
+	}
+}
+
+async function resolveThumbnail(id) {
+	const candidates = ['maxresdefault', 'hq720', 'sddefault', 'hqdefault', 'mqdefault']
+		.map((quality) => `https://i.ytimg.com/vi/${id}/${quality}.jpg`);
+	for (const url of candidates) {
+		if (await thumbnailExists(url)) return url;
+	}
+	return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+}
+
 async function main() {
 	const { stdout } = await execFileAsync('yt-dlp', [
 		'--flat-playlist',
@@ -46,16 +65,18 @@ async function main() {
 		timeout: 1000 * 60 * 10,
 	});
 	const data = JSON.parse(stdout);
-	const videos = (data.entries || [])
-		.map((entry) => ({
+	const videos = [];
+	for (const entry of data.entries || []) {
+		const video = {
 			id: entry.id || '',
 			title: entry.title || entry.fulltitle || '',
 			url: `https://youtu.be/${entry.id}`,
-			thumbnail: `https://i.ytimg.com/vi/${entry.id}/hq720.jpg`,
+			thumbnail: entry.id ? await resolveThumbnail(entry.id) : '',
 			duration: toIsoDuration(entry.duration),
 			viewCount: entry.view_count ? String(entry.view_count) : '',
-		}))
-		.filter(isPublicVideo);
+		};
+		if (isPublicVideo(video)) videos.push(video);
+	}
 
 	await fs.mkdir(path.dirname(outPath), { recursive: true });
 	await fs.writeFile(outPath, `${JSON.stringify({
