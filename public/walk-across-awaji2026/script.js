@@ -1,6 +1,9 @@
 const lightbox = document.querySelector(".lightbox");
 const lightboxImage = lightbox.querySelector("img");
 const closeButton = document.querySelector(".lightbox-close");
+const globalMenuToggle = document.querySelector("[data-global-menu-toggle]");
+const globalNavShell = document.querySelector("[data-global-nav-shell]");
+const globalNav = document.querySelector("[data-global-section-nav]");
 const shareTitle =
   "ARTHUR HOLLANDS WALK ACROSS AWAJI 2026 | アーサーホーランド公式YouTubeチャンネル THE ARTHUR HOLLANDS SHOW";
 const shareText =
@@ -117,6 +120,20 @@ async function sharePage() {
 
 updateShareLinks();
 
+function setGlobalMenu(open) {
+  if (!globalMenuToggle || !globalNavShell || !globalNav) return;
+  globalNavShell.classList.toggle("is-open", open);
+  globalMenuToggle.setAttribute("aria-expanded", String(open));
+}
+
+globalMenuToggle?.addEventListener("click", () => {
+  setGlobalMenu(!globalNavShell?.classList.contains("is-open"));
+});
+
+globalNav?.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => setGlobalMenu(false));
+});
+
 document.querySelectorAll("[data-share-native]").forEach((button) => {
   button.addEventListener("click", sharePage);
 });
@@ -152,6 +169,10 @@ lightbox.addEventListener("click", (event) => {
 });
 
 document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    setGlobalMenu(false);
+  }
+
   if (event.key === "Escape" && !lightbox.hidden) {
     closeLightbox();
   }
