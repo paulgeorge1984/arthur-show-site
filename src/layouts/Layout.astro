@@ -54,16 +54,24 @@ const isCurrent = (href: string) => {
 				</a>
 			</div>
 		</header>
-		<nav class="global-section-nav" aria-label="サイト内主要メニュー">
-			<a href="/#messages" class:list={{ active: currentPath === '/' }}>Arthur Hollands' Message</a>
-			<a href="/arthur-hollands-show/" class:list={{ active: isCurrent('/arthur-hollands-show/') }}>THE ARTHUR HOLLANDS SHOW</a>
-			<a href="/friday-night/" class:list={{ active: isCurrent('/friday-night/') }}>FRIDAY NIGHT</a>
-			<a href="/walk-across/" class:list={{ active: isCurrent('/walk-across/') }}>WALK ACROSS</a>
-			<a href="/walk-across-awaji2026/" class:list={{ active: isCurrent('/walk-across-awaji2026/') }}>WALK ACROSS AWAJI 2026</a>
-			<a href="/message-jukebox/" class:list={{ active: isCurrent('/message-jukebox/') }}>BIBLE JUKEBOX</a>
-			<a href="/swords-of-words/" class:list={{ active: isCurrent('/swords-of-words/') }}>THE SWORDS OF WORDS</a>
-			<a href="/1000-verses/" class:list={{ active: isCurrent('/1000-verses/') }}>厳選 1000 VERSES</a>
-		</nav>
+		<div class="global-nav-shell" data-global-nav-shell>
+			<button class="global-menu-toggle" type="button" aria-expanded="false" aria-controls="global-section-nav" data-global-menu-toggle>
+				<span></span>
+				<span></span>
+				<span></span>
+				<strong>MENU</strong>
+			</button>
+			<nav class="global-section-nav" id="global-section-nav" aria-label="サイト内主要メニュー" data-global-section-nav>
+				<a href="/#messages" class:list={{ active: currentPath === '/' }}>Arthur Hollands' Message</a>
+				<a href="/arthur-hollands-show/" class:list={{ active: isCurrent('/arthur-hollands-show/') }}>THE ARTHUR HOLLANDS SHOW</a>
+				<a href="/friday-night/" class:list={{ active: isCurrent('/friday-night/') }}>FRIDAY NIGHT</a>
+				<a href="/walk-across/" class:list={{ active: isCurrent('/walk-across/') }}>WALK ACROSS</a>
+				<a href="/walk-across-awaji2026/" class:list={{ active: isCurrent('/walk-across-awaji2026/') }}>WALK ACROSS AWAJI 2026</a>
+				<a href="/message-jukebox/" class:list={{ active: isCurrent('/message-jukebox/') }}>BIBLE JUKEBOX</a>
+				<a href="/swords-of-words/" class:list={{ active: isCurrent('/swords-of-words/') }}>THE SWORDS OF WORDS</a>
+				<a href="/1000-verses/" class:list={{ active: isCurrent('/1000-verses/') }}>厳選 1000 VERSES</a>
+			</nav>
+		</div>
 
 		<main>
 			<slot />
@@ -134,6 +142,25 @@ const isCurrent = (href: string) => {
 				&copy; {new Date().getFullYear()} The Arthur Hollands Show. All Rights Reserved.
 			</div>
 		</footer>
+		<script is:inline>
+			const globalMenuToggle = document.querySelector('[data-global-menu-toggle]');
+			const globalNavShell = document.querySelector('[data-global-nav-shell]');
+			const globalNav = document.querySelector('[data-global-section-nav]');
+			function setGlobalMenu(open) {
+				if (!globalMenuToggle || !globalNavShell || !globalNav) return;
+				globalNavShell.classList.toggle('is-open', open);
+				globalMenuToggle.setAttribute('aria-expanded', String(open));
+			}
+			globalMenuToggle?.addEventListener('click', () => {
+				setGlobalMenu(!globalNavShell?.classList.contains('is-open'));
+			});
+			globalNav?.querySelectorAll('a').forEach((link) => {
+				link.addEventListener('click', () => setGlobalMenu(false));
+			});
+			document.addEventListener('keydown', (event) => {
+				if (event.key === 'Escape') setGlobalMenu(false);
+			});
+		</script>
 	</body>
 </html>
 
@@ -158,21 +185,27 @@ const isCurrent = (href: string) => {
 	@media (max-width: 720px) { .header-inner { justify-content: center; } .logo-main { font-size: clamp(1rem, 6.4vw, 1.35rem); } }
 	@media (max-width: 420px) { .logo-main { font-size: 0.98rem; } }
 
-	.global-section-nav {
+	.global-nav-shell {
 		position: sticky;
 		top: 85px;
 		z-index: 90;
-		display: flex;
-		justify-content: center;
-		gap: 4px;
 		width: 100%;
 		margin: 0 0 22px;
-		padding: 10px 20px;
-		overflow-x: auto;
 		background: rgba(10, 10, 10, 0.96);
 		border-bottom: 1px solid rgba(197, 160, 89, 0.72);
 		box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
 		backdrop-filter: blur(12px);
+	}
+	.global-menu-toggle {
+		display: none;
+	}
+	.global-section-nav {
+		display: flex;
+		justify-content: center;
+		gap: 4px;
+		width: 100%;
+		padding: 10px 20px;
+		overflow-x: auto;
 		scrollbar-width: none;
 	}
 	.global-section-nav::-webkit-scrollbar {
@@ -203,19 +236,59 @@ const isCurrent = (href: string) => {
 		border-bottom-color: var(--color-gold);
 		background: rgba(255, 255, 255, 0.06);
 	}
-	@media (max-width: 720px) {
-		.global-section-nav {
+	@media (max-width: 980px) {
+		.global-nav-shell {
 			position: sticky;
 			top: 86px;
-			justify-content: flex-start;
-			gap: 2px;
 			margin: 0 0 18px;
-			padding: 9px 14px;
+			padding: 8px 14px;
+		}
+		.global-menu-toggle {
+			display: inline-grid;
+			grid-template-columns: 18px auto;
+			align-items: center;
+			gap: 9px;
+			min-height: 38px;
+			padding: 0 12px;
+			color: #fff;
+			background: rgba(255, 255, 255, 0.06);
+			border: 1px solid rgba(197, 160, 89, 0.5);
+			font: inherit;
+			cursor: pointer;
+		}
+		.global-menu-toggle span {
+			display: block;
+			grid-column: 1;
+			width: 18px;
+			height: 2px;
+			background: var(--color-gold);
+		}
+		.global-menu-toggle strong {
+			grid-column: 2;
+			grid-row: 1 / 4;
+			font-family: var(--font-head);
+			font-size: 0.82rem;
+			font-weight: 900;
+			letter-spacing: 0.08em;
+		}
+		.global-section-nav {
+			display: none;
+			grid-template-columns: 1fr;
+			gap: 6px;
+			margin-top: 8px;
+			padding: 8px 0 4px;
+			overflow: visible;
+		}
+		.global-nav-shell.is-open .global-section-nav {
+			display: grid;
 		}
 		.global-section-nav a {
-			min-height: 32px;
+			justify-content: flex-start;
+			width: 100%;
+			min-height: 40px;
 			padding: 0 12px;
-			font-size: 0.78rem;
+			background: rgba(255, 255, 255, 0.04);
+			font-size: 0.86rem;
 		}
 	}
 
