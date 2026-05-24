@@ -240,6 +240,7 @@ const scriptureRows = rawScriptureRows
 	.map((row, index) => ({
 		...row,
 		isRecent: index < 12,
+		isBibleBookSeries: row.source === 'bible-book-video',
 	}));
 const scriptureBooks = Array.from(new Set(scriptureRows.map((row) => row.book).filter(Boolean)))
 	.sort((a, b) => {
@@ -273,7 +274,8 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 			</figure>
 
 			<div class="scripture-quick" aria-label="聖句表示切り替え">
-				<button class="scripture-filter active" type="button" data-scripture-filter="recent">最近の御言葉</button>
+				<button class="scripture-filter active" type="button" data-scripture-filter="bible-book-series">66巻シリーズ</button>
+				<button class="scripture-filter" type="button" data-scripture-filter="recent">最近の御言葉</button>
 				<button class="scripture-filter" type="button" data-scripture-filter="all">すべて</button>
 			</div>
 
@@ -306,7 +308,8 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 						data-scripture-card
 						data-scripture-book={row.book}
 						data-scripture-recent={row.isRecent ? 'true' : 'false'}
-						hidden={!row.isRecent}
+						data-scripture-bible-book-series={row.isBibleBookSeries ? 'true' : 'false'}
+						hidden={!row.isBibleBookSeries}
 					>
 						<a class="scripture-message-link" href={row.href}>
 							<span class="scripture-ref">{row.ref}</span>
@@ -348,6 +351,7 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 			scriptureCards.forEach((card) => {
 				const show = book === 'all'
 					|| (book === 'recent' && card.dataset.scriptureRecent === 'true')
+					|| (book === 'bible-book-series' && card.dataset.scriptureBibleBookSeries === 'true')
 					|| card.dataset.scriptureBook === book;
 				card.hidden = !show;
 				if (show) visible += 1;
