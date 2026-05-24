@@ -19,9 +19,11 @@ const archiveData = archive as {
 
 const videos = archiveData.videos || [];
 const latestVideo = videos[0];
-const originVideos = videos.slice(-6).reverse();
 const featureVideos = videos.slice(0, 6);
-const vrVideos = videos.filter((video) => /VR|ＶＲ|vr/i.test(video.title));
+const isVrTitle = (title: string) => /VR版|ＶＲ版|VR version|\bVR\b/i.test(title);
+const vrVideos = videos.filter((video) => isVrTitle(video.title));
+const nonVrVideos = videos.filter((video) => !isVrTitle(video.title));
+const originVideos = nonVrVideos.slice(-6).reverse();
 const yearFromTitle = (title: string) => title.match(/20\d{2}/)?.[0] || 'ARCHIVE';
 const years = Array.from(new Set(videos.map((video) => yearFromTitle(video.title)))).sort((a, b) => {
 	if (a === 'ARCHIVE') return 1;
