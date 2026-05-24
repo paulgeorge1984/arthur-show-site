@@ -61,7 +61,6 @@ const isCurrent = (href: string) => {
 					<i></i>
 					<i></i>
 				</span>
-				<span class="menu-signature" aria-hidden="true">You are Loved</span>
 				<strong>SITE MENU</strong>
 			</button>
 			<nav class="global-section-nav" id="global-section-nav" aria-label="サイト内主要メニュー" data-global-section-nav>
@@ -247,9 +246,9 @@ const isCurrent = (href: string) => {
 			padding: 10px 14px;
 		}
 		.global-menu-toggle {
-			display: grid;
-			grid-template-columns: 44px minmax(0, 1fr) auto;
+			display: inline-flex;
 			align-items: center;
+			justify-content: space-between;
 			gap: 12px;
 			width: 100%;
 			min-height: 42px;
@@ -292,16 +291,6 @@ const isCurrent = (href: string) => {
 			font-weight: 900;
 			letter-spacing: 0.18em;
 			color: rgba(255, 255, 255, 0.86);
-			white-space: nowrap;
-		}
-		.global-menu-toggle .menu-signature {
-			justify-self: center;
-			min-width: 0;
-			color: var(--color-gold);
-			font-family: var(--font-cursive);
-			font-size: 1.28rem;
-			line-height: 1;
-			text-align: center;
 			white-space: nowrap;
 		}
 		.global-section-nav {
