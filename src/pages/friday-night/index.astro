@@ -56,7 +56,7 @@ const formatViews = (value?: string) => {
 
 <Layout
 	title="FRIDAY NIGHT"
-	description="OCC Friday Night。アーサー・ホーランドが30年以上語り続けてきた集会と、コロナ禍以降に始まった映像伝道の歴史的アーカイブ。"
+	description="OCC Friday Night。毎月第一金曜日19:00より、お茶の水クリスチャンセンターにて開催。アーサー・ホーランドが30年以上語り続けてきた集会と、コロナ禍以降に始まった映像伝道の歴史的アーカイブ。"
 >
 	<article class="friday-page">
 		<header class="friday-hero">
@@ -70,6 +70,11 @@ const formatViews = (value?: string) => {
 				<div class="hero-actions">
 					<a href="#archive">ARCHIVE</a>
 					<a href={archiveData.playlist.url} target="_blank" rel="noopener noreferrer">YOUTUBE</a>
+				</div>
+				<div class="event-info" aria-label="OCCフライデイナイト開催情報">
+					<span>OCC FRIDAY NIGHT</span>
+					<strong>毎月第一金曜日 19:00-</strong>
+					<small>お茶の水クリスチャンセンターにて開催</small>
 				</div>
 			</div>
 			{latestVideo && (
@@ -239,7 +244,7 @@ const formatViews = (value?: string) => {
 
 	<script is:inline>
 		const shareTitle = 'FRIDAY NIGHT | アーサーホーランド公式YouTubeチャンネル THE ARTHUR HOLLANDS SHOW';
-		const shareText = 'OCC Friday Night。コロナ禍以降に始まった映像伝道の歴史的アーカイブ。';
+		const shareText = 'OCC Friday Night。毎月第一金曜日19:00より、お茶の水クリスチャンセンターにて開催。コロナ禍以降に始まった映像伝道の歴史的アーカイブ。';
 		const shareUrl = 'https://arthur-show.com/friday-night/';
 		const searchInput = document.querySelector('[data-friday-search]');
 		const episodeCards = Array.from(document.querySelectorAll('[data-friday-list] .episode-card'));
@@ -389,6 +394,31 @@ const formatViews = (value?: string) => {
 
 	.hero-actions {
 		margin-top: 28px;
+	}
+
+	.event-info {
+		display: inline-grid;
+		gap: 5px;
+		margin-top: 18px;
+		padding: 14px 18px;
+		background: rgba(247, 240, 228, 0.08);
+		border-left: 4px solid var(--friday-gold);
+		color: rgba(247, 240, 228, 0.84);
+	}
+
+	.event-info span,
+	.event-info small {
+		font-family: var(--font-head);
+		font-size: 0.75rem;
+		font-weight: 900;
+		letter-spacing: 0.12em;
+	}
+
+	.event-info strong {
+		color: #fff;
+		font-family: var(--font-serif);
+		font-size: clamp(1.1rem, 2vw, 1.38rem);
+		line-height: 1.2;
 	}
 
 	.hero-actions a,
