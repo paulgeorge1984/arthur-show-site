@@ -68,6 +68,12 @@ function normalizeYtDlpVideo(entry) {
 	};
 }
 
+function isPublicVideo(video) {
+	const title = String(video?.title || '').trim();
+	if (!video?.id || !title) return false;
+	return !/(^\[?private video\]?$|^\[?deleted video\]?$|unavailable|非公開|削除済み|この動画は再生できません)/i.test(title);
+}
+
 async function fetchPlaylistWithYtDlp(playlistId) {
 	if (!useYtDlpFallback) throw new Error('yt-dlp fallback is disabled.');
 	const playlistUrl = `https://www.youtube.com/playlist?list=${playlistId}`;
@@ -91,7 +97,7 @@ async function fetchPlaylistWithYtDlp(playlistId) {
 	const videos = (data.entries || [])
 		.filter((entry) => entry?.id)
 		.map(normalizeYtDlpVideo)
-		.filter((video) => video.id && video.title);
+		.filter(isPublicVideo);
 	return { playlistId, videos, source: 'yt-dlp' };
 }
 
@@ -284,7 +290,7 @@ async function main() {
 						excerpt: makeExcerpt(caption?.text, snippet.description || ''),
 					});
 				}
-				archive.playlists[playlist.slug] = { playlistId: playlist.playlistId, videos, source: 'youtube-api' };
+				archive.playlists[playlist.slug] = { playlistId: playlist.playlistId, videos: videos.filter(isPublicVideo), source: 'youtube-api' };
 			}
 			await writeJson(outPath, archive);
 		} catch (error) {

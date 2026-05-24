@@ -32,7 +32,12 @@ type VideoItem = {
 	excerpt?: string;
 };
 
-const videos = archiveData.playlists?.[playlist.slug]?.videos || [];
+const isPublicVideo = (video: VideoItem) => {
+	const title = String(video.title || '').trim();
+	return Boolean(video.id && title && !/(^\[?private video\]?$|^\[?deleted video\]?$|unavailable|非公開|削除済み|この動画は再生できません)/i.test(title));
+};
+
+const videos = (archiveData.playlists?.[playlist.slug]?.videos || []).filter(isPublicVideo);
 const firstVideo = videos[0];
 const playlistUrl = `https://www.youtube.com/playlist?list=${playlist.playlistId}`;
 const embedUrl = `https://www.youtube.com/embed/videoseries?list=${playlist.playlistId}&rel=0`;

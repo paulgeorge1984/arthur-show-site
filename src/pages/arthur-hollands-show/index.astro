@@ -35,7 +35,6 @@ const archiveData = archive as {
 const seriesData = seriesArchive as { fetchedAt: string | null; playlists: ShowSeries[] };
 
 const videos = archiveData.videos || [];
-const initialPickup = videos[0];
 const excludedSeriesPlaylistIds = new Set(['PL-faIdjPoxKiA5aStAASg7VMrjT_-90_o']);
 const showSeries = (seriesData.playlists || []).filter((series) => !excludedSeriesPlaylistIds.has(series.playlistId));
 const paintingSeries = showSeries.find((series) => series.kind === 'painting');
@@ -76,19 +75,6 @@ const formatViews = (value?: string) => {
 	if (!count) return '';
 	return new Intl.NumberFormat('ja-JP').format(count);
 };
-const pickupItems = videos.map((video) => ({
-	id: video.id,
-	title: video.title,
-	excerpt: video.excerpt || video.description || '',
-	url: `https://youtu.be/${video.id}`,
-	thumbnail: video.thumbnail || `https://i.ytimg.com/vi/${video.id}/hq720.jpg`,
-	meta: [
-		video.year || '',
-		formatDate(video.publishedAt),
-		formatDuration(video.duration),
-	].filter(Boolean).join(' / '),
-	views: formatViews(video.viewCount),
-}));
 ---
 
 <Layout
@@ -96,24 +82,6 @@ const pickupItems = videos.map((video) => ({
 	description="毎週水曜14:00、生配信で語られてきたチャンネルの原点となる生配信番組 THE ARTHUR HOLLANDS SHOW の記録。社会・文化・聖書・人生を貫くジーザスの真理を、アーサーホーランドが力強く宣べ伝えます。"
 >
 	<article class="show-page">
-		{initialPickup && (
-			<section class="featured-broadcast" aria-labelledby="featured-broadcast-title">
-				<div class="featured-thumb">
-					<img src={initialPickup.thumbnail || `https://i.ytimg.com/vi/${initialPickup.id}/hq720.jpg`} alt={`${initialPickup.title} サムネイル`} loading="lazy" data-pickup-thumb />
-				</div>
-				<div class="featured-body">
-					<p class="broadcast-label">ARCHIVE PICKUP</p>
-					<h2 id="featured-broadcast-title" data-pickup-title>{initialPickup.title}</h2>
-					<p class="pickup-meta" data-pickup-meta>{pickupItems[0]?.meta}</p>
-					<p data-pickup-excerpt>{initialPickup.excerpt || initialPickup.description}</p>
-					<div class="pickup-actions">
-						<a href={`https://youtu.be/${initialPickup.id}`} target="_blank" rel="noopener noreferrer" data-pickup-link>この回を見る</a>
-						<button type="button" data-pickup-random>別の回を出す</button>
-					</div>
-				</div>
-			</section>
-		)}
-
 		<header class="show-hero">
 			<div class="hero-copy">
 				<p class="broadcast-label">LIVE PROGRAM ARCHIVE</p>
@@ -299,9 +267,7 @@ const pickupItems = videos.map((video) => ({
 		</section>
 	</article>
 
-	<script type="application/json" data-pickup-items set:html={JSON.stringify(pickupItems)}></script>
 	<script is:inline>
-		const pickupItems = JSON.parse(document.querySelector('[data-pickup-items]')?.textContent || '[]');
 		const shareTitle = 'THE ARTHUR HOLLANDS SHOW | アーサーホーランド公式YouTubeチャンネル THE ARTHUR HOLLANDS SHOW';
 		const shareText = '毎週水曜14:00、生配信で語られてきたチャンネルの原点となる生配信番組の記録。';
 		const shareUrl = 'https://arthur-show.com/arthur-hollands-show/';
@@ -311,7 +277,6 @@ const pickupItems = videos.map((video) => ({
 		const yearBlocks = Array.from(document.querySelectorAll('[data-year-block]'));
 		const noResults = document.querySelector('[data-show-no-results]');
 		let activeYear = 'all';
-		let currentPickupIndex = 0;
 
 		function updateShareLinks() {
 			const encodedUrl = encodeURIComponent(shareUrl);
@@ -371,36 +336,6 @@ const pickupItems = videos.map((video) => ({
 			if (noResults) noResults.hidden = visible !== 0;
 		}
 
-		function renderPickup(index) {
-			const item = pickupItems[index];
-			if (!item) return;
-			const thumb = document.querySelector('[data-pickup-thumb]');
-			const title = document.querySelector('[data-pickup-title]');
-			const meta = document.querySelector('[data-pickup-meta]');
-			const excerpt = document.querySelector('[data-pickup-excerpt]');
-			const link = document.querySelector('[data-pickup-link]');
-			if (thumb) {
-				thumb.src = item.thumbnail;
-				thumb.alt = `${item.title} サムネイル`;
-			}
-			if (title) title.textContent = item.title;
-			if (meta) meta.textContent = item.meta || '';
-			if (excerpt) excerpt.textContent = item.excerpt || '';
-			if (link) link.href = item.url;
-		}
-
-		function showRandomPickup() {
-			if (!pickupItems.length) return;
-			let nextIndex = Math.floor(Math.random() * pickupItems.length);
-			if (pickupItems.length > 1) {
-				while (nextIndex === currentPickupIndex) {
-					nextIndex = Math.floor(Math.random() * pickupItems.length);
-				}
-			}
-			currentPickupIndex = nextIndex;
-			renderPickup(currentPickupIndex);
-		}
-
 		yearButtons.forEach((button) => {
 			button.addEventListener('click', (event) => {
 				event.preventDefault();
@@ -417,9 +352,6 @@ const pickupItems = videos.map((video) => ({
 		document.querySelectorAll('[data-copy-link]').forEach((button) => {
 			button.addEventListener('click', copyShareLink);
 		});
-		document.querySelector('[data-pickup-random]')?.addEventListener('click', showRandomPickup);
-		currentPickupIndex = pickupItems.length ? Math.floor(Math.random() * pickupItems.length) : 0;
-		renderPickup(currentPickupIndex);
 		yearButtons[0]?.classList.add('active');
 		updateShareLinks();
 	</script>

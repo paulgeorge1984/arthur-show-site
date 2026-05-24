@@ -8,6 +8,11 @@ const archiveData = archive as {
 	playlists: Record<string, { videos?: { id: string; title: string; thumbnail?: string; excerpt?: string }[] }>;
 };
 
+const isPublicVideo = (video: { id: string; title: string }) => {
+	const title = String(video.title || '').trim();
+	return Boolean(video.id && title && !/(^\[?private video\]?$|^\[?deleted video\]?$|unavailable|非公開|削除済み|この動画は再生できません)/i.test(title));
+};
+
 const years = [...new Set(walkAcrossPlaylists.map((playlist) => playlist.year))];
 ---
 
@@ -45,7 +50,7 @@ const years = [...new Set(walkAcrossPlaylists.map((playlist) => playlist.year))]
 					{walkAcrossPlaylists
 						.filter((playlist) => playlist.year === year)
 						.map((playlist) => {
-							const videos = archiveData.playlists?.[playlist.slug]?.videos || [];
+							const videos = (archiveData.playlists?.[playlist.slug]?.videos || []).filter(isPublicVideo);
 							const firstVideo = videos[0];
 							const thumb = firstVideo?.thumbnail || `https://i.ytimg.com/vi/${firstVideo?.id || ''}/hq720.jpg`;
 							return (
