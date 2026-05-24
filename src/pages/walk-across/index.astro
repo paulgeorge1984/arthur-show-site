@@ -8,7 +8,6 @@ const archiveData = archive as {
 	playlists: Record<string, { videos?: { id: string; title: string; thumbnail?: string; excerpt?: string }[] }>;
 };
 
-const featured = walkAcrossPlaylists[0];
 const years = [...new Set(walkAcrossPlaylists.map((playlist) => playlist.year))];
 ---
 
@@ -21,10 +20,6 @@ const years = [...new Set(walkAcrossPlaylists.map((playlist) => playlist.year))]
 			<p class="eyebrow">ARTHUR HOLLANDS CROSS WALK ARCHIVE</p>
 			<h1>WALK ACROSS</h1>
 			<p class="lead">十字架を担ぎ、地を歩き、祈りを刻んできた旅の記録。</p>
-			<div class="hero-actions">
-				<a href="/walk-across-awaji2026/">WALK ACROSS AWAJI 2026</a>
-				<a href={`/walk-across/${featured.slug}/`}>{featured.englishTitle}</a>
-			</div>
 		</div>
 
 		<div class="year-strip" aria-label="年別ジャンプ">
@@ -117,13 +112,6 @@ const years = [...new Set(walkAcrossPlaylists.map((playlist) => playlist.year))]
 		font-size: clamp(1.1rem, 2.5vw, 1.55rem);
 		font-weight: 700;
 	}
-	.hero-actions {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 12px;
-		margin-top: 32px;
-	}
-	.hero-actions a,
 	.awaji-special a {
 		display: inline-flex;
 		align-items: center;
