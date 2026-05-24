@@ -13,7 +13,16 @@ const isPublicVideo = (video: { id: string; title: string }) => {
 	return Boolean(video.id && title && !/(^\[?private video\]?$|^\[?deleted video\]?$|unavailable|非公開|削除済み|この動画は再生できません)/i.test(title));
 };
 
-const years = [...new Set(walkAcrossPlaylists.map((playlist) => playlist.year))];
+const awajiSpecial = {
+	year: '2026',
+	title: '淡路島一周十字架行進2026',
+	englishTitle: 'WALK ACROSS AWAJI 2026',
+	region: '淡路島',
+	href: '/walk-across-awaji2026/',
+	image: '/assets/walk-across-awaji2026-poster.webp',
+	description: '淡路島一周十字架行進2026の特設アーカイブ。ダイジェスト映像、ロードムービー、5日間の歩みをまとめています。',
+};
+const years = [...new Set([awajiSpecial.year, ...walkAcrossPlaylists.map((playlist) => playlist.year)])];
 ---
 
 <Layout
@@ -32,15 +41,39 @@ const years = [...new Set(walkAcrossPlaylists.map((playlist) => playlist.year))]
 		</div>
 
 		<div class="awaji-special">
+			<a class="awaji-special-media" href={awajiSpecial.href} aria-label={`${awajiSpecial.englishTitle} 特設ページを見る`}>
+				<img src={awajiSpecial.image} alt={`${awajiSpecial.englishTitle} 淡路島一周十字架行進2026`} loading="eager" />
+			</a>
 			<div>
-			<p class="section-kicker">SPECIAL PAGE</p>
-			<h2>WALK ACROSS AWAJI 2026</h2>
-				<p>淡路島一周十字架行進2026の特設アーカイブ。ダイジェスト映像、ロードムービー、5日間の歩みをまとめています。</p>
+				<p class="section-kicker">SPECIAL PAGE</p>
+				<h2>{awajiSpecial.englishTitle}</h2>
+				<p>{awajiSpecial.description}</p>
 			</div>
-			<a href="/walk-across-awaji2026/">特設ページを見る</a>
+			<a class="awaji-special-button" href={awajiSpecial.href}>特設ページを見る</a>
 		</div>
 
+		<section class="year-block" id={`year-${awajiSpecial.year}`}>
+			<div class="year-heading">
+				<span>{awajiSpecial.year}</span>
+				<h2>{awajiSpecial.year} ARCHIVE</h2>
+			</div>
+			<div class="playlist-grid">
+				<a class="playlist-card special-playlist-card" href={awajiSpecial.href}>
+					<div class="thumb">
+						<img src={awajiSpecial.image} alt={`${awajiSpecial.englishTitle} サムネイル`} loading="lazy" />
+					</div>
+					<div class="card-body">
+						<p>{awajiSpecial.region}</p>
+						<h3>{awajiSpecial.englishTitle}</h3>
+						<strong>{awajiSpecial.title}</strong>
+						<span>SPECIAL ARCHIVE</span>
+					</div>
+				</a>
+			</div>
+		</section>
+
 		{years.map((year) => (
+			year === awajiSpecial.year ? null : (
 			<section class="year-block" id={`year-${year}`}>
 				<div class="year-heading">
 					<span>{year}</span>
@@ -70,9 +103,10 @@ const years = [...new Set(walkAcrossPlaylists.map((playlist) => playlist.year))]
 									</div>
 								</a>
 							);
-						})}
+					})}
 				</div>
 			</section>
+			)
 		))}
 	</section>
 </Layout>
@@ -117,7 +151,7 @@ const years = [...new Set(walkAcrossPlaylists.map((playlist) => playlist.year))]
 		font-size: clamp(1.1rem, 2.5vw, 1.55rem);
 		font-weight: 700;
 	}
-	.awaji-special a {
+	.awaji-special-button {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
@@ -159,12 +193,25 @@ const years = [...new Set(walkAcrossPlaylists.map((playlist) => playlist.year))]
 	}
 	.awaji-special {
 		display: grid;
-		grid-template-columns: 1fr auto;
+		grid-template-columns: minmax(260px, 0.44fr) minmax(0, 1fr) auto;
 		gap: 24px;
 		align-items: center;
 		padding: 28px;
 		border: 1px solid rgba(207, 169, 82, 0.35);
 		background: linear-gradient(135deg, rgba(207, 169, 82, 0.16), rgba(255, 255, 255, 0.04));
+	}
+	.awaji-special-media {
+		display: block;
+		overflow: hidden;
+		border: 1px solid rgba(207, 169, 82, 0.46);
+		background: #18140f;
+		box-shadow: 10px 10px 0 rgba(207, 169, 82, 0.14);
+	}
+	.awaji-special-media img {
+		display: block;
+		width: 100%;
+		aspect-ratio: 16 / 9;
+		object-fit: cover;
 	}
 	.awaji-special h2,
 	.year-heading h2 {
@@ -206,6 +253,10 @@ const years = [...new Set(walkAcrossPlaylists.map((playlist) => playlist.year))]
 	.playlist-card:hover {
 		border-color: rgba(207, 169, 82, 0.65);
 		transform: translateY(-2px);
+	}
+	.special-playlist-card {
+		border-color: rgba(207, 169, 82, 0.34);
+		background: linear-gradient(135deg, rgba(207, 169, 82, 0.12), rgba(255, 255, 255, 0.055));
 	}
 	.thumb {
 		aspect-ratio: 16 / 9;
