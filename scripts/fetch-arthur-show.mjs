@@ -18,6 +18,9 @@ const yearOverrides = new Map([
 	['tUOSn2Bp3jI', '1992'],
 	['aPPRePlh-IY', '1998'],
 ]);
+const thumbnailOverrides = new Map([
+	['P1gBzc2UGGs', 'https://i.ytimg.com/vi/P1gBzc2UGGs/sddefault.jpg?v=651d4e32'],
+]);
 
 function die(message) {
 	console.error(message);
@@ -215,7 +218,7 @@ async function fetchWithYtDlpFallback() {
 				excerpt: feed.excerpt || excerptFromDescription(description),
 				publishedAt: feed.publishedAt || '',
 				year: yearOverrides.get(entry.id) || feed.year || parseYearFromTitle(entry.title || ''),
-				thumbnail: feed.thumbnail || `https://i.ytimg.com/vi/${entry.id}/hq720.jpg`,
+				thumbnail: thumbnailOverrides.get(entry.id) || feed.thumbnail || `https://i.ytimg.com/vi/${entry.id}/hq720.jpg`,
 				duration,
 				viewCount: feed.viewCount || (entry.view_count ? String(entry.view_count) : ''),
 				liveStartedAt: '',
@@ -245,7 +248,7 @@ async function main() {
 					excerpt: excerptFromDescription(description),
 					publishedAt: snippet.publishedAt || item.contentDetails?.videoPublishedAt || '',
 					year: yearOverrides.get(id) || parseYear(snippet.publishedAt || item.contentDetails?.videoPublishedAt || '') || parseYearFromTitle(snippet.title || ''),
-					thumbnail: snippet.thumbnails?.maxres?.url || snippet.thumbnails?.standard?.url || snippet.thumbnails?.high?.url || snippet.thumbnails?.medium?.url || '',
+					thumbnail: thumbnailOverrides.get(id) || snippet.thumbnails?.maxres?.url || snippet.thumbnails?.standard?.url || snippet.thumbnails?.high?.url || snippet.thumbnails?.medium?.url || '',
 					duration: video?.contentDetails?.duration || '',
 					viewCount: video?.statistics?.viewCount || '',
 					liveStartedAt: video?.liveStreamingDetails?.actualStartTime || '',
