@@ -1,0 +1,602 @@
+{
+  "fetchedAt": "2026-05-24T17:01:01.684Z",
+  "playlist": {
+    "id": "PL-faIdjPoxKhk3dvt6OK5udmxtvf1JPJu",
+    "title": "THE DAILY with Arthur Hollands from 66 books of the Bible",
+    "url": "https://www.youtube.com/playlist?list=PL-faIdjPoxKhk3dvt6OK5udmxtvf1JPJu"
+  },
+  "stats": {
+    "publicVideoCount": 65,
+    "linkedBookCount": 65,
+    "missingBooks": [
+      "ガラテヤ人への手紙"
+    ]
+  },
+  "videos": [
+    {
+      "id": "-ADa8ljSGP0",
+      "book": "創世記",
+      "title": "「神は仰せられた「光あれ」—01. 創世記」- THE DAILY with Arthur Hollands 2023/06/30",
+      "quote": "神は仰せられた「光あれ",
+      "url": "https://youtu.be/-ADa8ljSGP0",
+      "thumbnail": "https://i.ytimg.com/vi/-ADa8ljSGP0/hqdefault.jpg",
+      "duration": "PT2M38S"
+    },
+    {
+      "id": "U0pujhfVDo4",
+      "book": "出エジプト記",
+      "title": "「信仰の力によって拘束から解放へ　―02.出エジプト記 」- THE DAILY with Arthur Hollands 2023/07/01",
+      "quote": "信仰の力によって拘束から解放へ　―02.出エジプト記",
+      "url": "https://youtu.be/U0pujhfVDo4",
+      "thumbnail": "https://i.ytimg.com/vi/U0pujhfVDo4/hqdefault.jpg",
+      "duration": "PT2M52S"
+    },
+    {
+      "id": "KbOlW7-wMrc",
+      "book": "レビ記",
+      "title": "「レビ記の教え　モーセから学ぶジーザスへの道　―03.レビ記」- THE DAILY with Arthur Hollands 2023/07/02",
+      "quote": "レビ記の教え　モーセから学ぶジーザスへの道　―03.レビ記",
+      "url": "https://youtu.be/KbOlW7-wMrc",
+      "thumbnail": "https://i.ytimg.com/vi/KbOlW7-wMrc/hqdefault.jpg",
+      "duration": "PT2M8S"
+    },
+    {
+      "id": "Sln5T33bdgQ",
+      "book": "民数記",
+      "title": "「一日一日を神と共に生きる　―04.民数記」- THE DAILY with Arthur Hollands 2023/07/03",
+      "quote": "一日一日を神と共に生きる　―04.民数記",
+      "url": "https://youtu.be/Sln5T33bdgQ",
+      "thumbnail": "https://i.ytimg.com/vi/Sln5T33bdgQ/hqdefault.jpg",
+      "duration": "PT2M54S"
+    },
+    {
+      "id": "BinaJ4LCNlg",
+      "book": "申命記",
+      "title": "「信仰の道を走り抜ける　―05.申命記」- THE DAILY with Arthur Hollands 2023/07/04",
+      "quote": "信仰の道を走り抜ける　―05.申命記",
+      "url": "https://youtu.be/BinaJ4LCNlg",
+      "thumbnail": "https://i.ytimg.com/vi/BinaJ4LCNlg/hqdefault.jpg",
+      "duration": "PT2M52S"
+    },
+    {
+      "id": "WuSpt1QN9mc",
+      "book": "ヨシュア記",
+      "title": "「ヨルダン川を渡る：モーセからヨシュアへのバトンタッチ　―06.ヨシュア記」- THE DAILY with Arthur Hollands 2023/07/05",
+      "quote": "ヨルダン川を渡る：モーセからヨシュアへのバトンタッチ　―06.ヨシュア記",
+      "url": "https://youtu.be/WuSpt1QN9mc",
+      "thumbnail": "https://i.ytimg.com/vi/WuSpt1QN9mc/hqdefault.jpg",
+      "duration": "PT2M32S"
+    },
+    {
+      "id": "jsjlBrqlpto",
+      "book": "士師記",
+      "title": "「信仰の勇者 ギデオンと300人の兵士 07.士師記」- THE DAILY with Arthur Hollands 2023/07/06",
+      "quote": "信仰の勇者 ギデオンと300人の兵士 07.士師記",
+      "url": "https://youtu.be/jsjlBrqlpto",
+      "thumbnail": "https://i.ytimg.com/vi/jsjlBrqlpto/hqdefault.jpg",
+      "duration": "PT3M41S"
+    },
+    {
+      "id": "iIqFCDvy3fA",
+      "book": "ルツ記",
+      "title": "「ルツの純真な献身 08.ルツ記」- THE DAILY with Arthur Hollands 2023/07/07",
+      "quote": "ルツの純真な献身 08.ルツ記",
+      "url": "https://youtu.be/iIqFCDvy3fA",
+      "thumbnail": "https://i.ytimg.com/vi/iIqFCDvy3fA/hqdefault.jpg",
+      "duration": "PT3M5S"
+    },
+    {
+      "id": "EOsF6OqmLnw",
+      "book": "サムエル記 第一",
+      "title": "「嘆きと奇跡 09.サムエル記第一」- THE DAILY with Arthur Hollands 2023/07/08",
+      "quote": "嘆きと奇跡 09.サムエル記第一",
+      "url": "https://youtu.be/EOsF6OqmLnw",
+      "thumbnail": "https://i.ytimg.com/vi/EOsF6OqmLnw/hqdefault.jpg",
+      "duration": "PT2M47S"
+    },
+    {
+      "id": "alQ_v4e42cg",
+      "book": "サムエル記 第二",
+      "title": "「ダビデとジーザス 10.サムエル記第二」- THE DAILY with Arthur Hollands 2023/07/09",
+      "quote": "ダビデとジーザス 10.サムエル記第二",
+      "url": "https://youtu.be/alQ_v4e42cg",
+      "thumbnail": "https://i.ytimg.com/vi/alQ_v4e42cg/hqdefault.jpg",
+      "duration": "PT3M19S"
+    },
+    {
+      "id": "ROy7-x2Po4o",
+      "book": "列王記 第一",
+      "title": "「信仰の継承―父ダビデから息子ソロモンへ  11.列王記第一」- THE DAILY with Arthur Hollands 2023/07/10",
+      "quote": "信仰の継承―父ダビデから息子ソロモンへ  11.列王記第一",
+      "url": "https://youtu.be/ROy7-x2Po4o",
+      "thumbnail": "https://i.ytimg.com/vi/ROy7-x2Po4o/hqdefault.jpg",
+      "duration": "PT2M53S"
+    },
+    {
+      "id": "AP9q-n_K60Q",
+      "book": "列王記 第二",
+      "title": "「エリアとエリシャ: 神の力を受け継ぐ 12.列王記第二」- THE DAILY with Arthur Hollands 2023/07/11",
+      "quote": "エリアとエリシャ: 神の力を受け継ぐ 12.列王記第二",
+      "url": "https://youtu.be/AP9q-n_K60Q",
+      "thumbnail": "https://i.ytimg.com/vi/AP9q-n_K60Q/hqdefault.jpg",
+      "duration": "PT3M54S"
+    },
+    {
+      "id": "gmADajNm8eM",
+      "book": "歴代誌 第一",
+      "title": "「心の中の契約の箱 13.歴代誌第一」- THE DAILY with Arthur Hollands 2023/07/12",
+      "quote": "心の中の契約の箱 13.歴代誌第一",
+      "url": "https://youtu.be/gmADajNm8eM",
+      "thumbnail": "https://i.ytimg.com/vi/gmADajNm8eM/hqdefault.jpg",
+      "duration": "PT3M43S"
+    },
+    {
+      "id": "5PuyW17rbSY",
+      "book": "歴代誌 第二",
+      "title": "「ソロモンの知恵を学ぶ 14.歴代誌第二」- THE DAILY with Arthur Hollands 2023/07/13",
+      "quote": "ソロモンの知恵を学ぶ 14.歴代誌第二",
+      "url": "https://youtu.be/5PuyW17rbSY",
+      "thumbnail": "https://i.ytimg.com/vi/5PuyW17rbSY/hqdefault.jpg",
+      "duration": "PT2M53S"
+    },
+    {
+      "id": "CYqYLutbgyI",
+      "book": "エズラ記",
+      "title": "「ペルシアの王クロスの心を動かした神 15.エズラ記」- THE DAILY with Arthur Hollands 2023/07/17",
+      "quote": "ペルシアの王クロスの心を動かした神 15.エズラ記",
+      "url": "https://youtu.be/CYqYLutbgyI",
+      "thumbnail": "https://i.ytimg.com/vi/CYqYLutbgyI/hqdefault.jpg",
+      "duration": "PT2M47S"
+    },
+    {
+      "id": "s7tOTuCR9-U",
+      "book": "ネヘミヤ記",
+      "title": "「悔い改めの心—ネヘミヤの祈り 16.ネヘミア記」- THE DAILY with Arthur Hollands 2023/07/14",
+      "quote": "悔い改めの心—ネヘミヤの祈り 16.ネヘミア記",
+      "url": "https://youtu.be/s7tOTuCR9-U",
+      "thumbnail": "https://i.ytimg.com/vi/s7tOTuCR9-U/hqdefault.jpg",
+      "duration": "PT2M25S"
+    },
+    {
+      "id": "xVVv_T0TVPk",
+      "book": "エステル記",
+      "title": "「エステルの決断  17.エステル記」- THE DAILY with Arthur Hollands 2023/07/15",
+      "quote": "エステルの決断  17.エステル記",
+      "url": "https://youtu.be/xVVv_T0TVPk",
+      "thumbnail": "https://i.ytimg.com/vi/xVVv_T0TVPk/hqdefault.jpg",
+      "duration": "PT3M47S"
+    },
+    {
+      "id": "uXOEAwoQUig",
+      "book": "ヨブ記",
+      "title": "「試練の中の神の存在　—ヨブ記を通して　18.ヨブ記」- THE DAILY with Arthur Hollands 2023/07/16",
+      "quote": "試練の中の神の存在　—ヨブ記を通して　18.ヨブ記",
+      "url": "https://youtu.be/uXOEAwoQUig",
+      "thumbnail": "https://i.ytimg.com/vi/uXOEAwoQUig/hqdefault.jpg",
+      "duration": "PT2M38S"
+    },
+    {
+      "id": "68uo5TBlLyY",
+      "book": "詩篇",
+      "title": "「水路のそばに植わった木のように  19.詩篇」- THE DAILY with Arthur Hollands 2023/07/18",
+      "quote": "水路のそばに植わった木のように  19.詩篇",
+      "url": "https://youtu.be/68uo5TBlLyY",
+      "thumbnail": "https://i.ytimg.com/vi/68uo5TBlLyY/hqdefault.jpg",
+      "duration": "PT3M6S"
+    },
+    {
+      "id": "NWw2D7LG1Rc",
+      "book": "箴言",
+      "title": "「親切なことばは蜂蜜　20.箴言」- THE DAILY with Arthur Hollands 2023/07/19",
+      "quote": "親切なことばは蜂蜜　20.箴言",
+      "url": "https://youtu.be/NWw2D7LG1Rc",
+      "thumbnail": "https://i.ytimg.com/vi/NWw2D7LG1Rc/hqdefault.jpg",
+      "duration": "PT2M27S"
+    },
+    {
+      "id": "DHXu5NWsQk4",
+      "book": "伝道者の書",
+      "title": "「神のなさることは全て時にかなって美しい　21.伝道者の書」- THE DAILY with Arthur Hollands 2023/07/20",
+      "quote": "神のなさることは全て時にかなって美しい　21.伝道者の書",
+      "url": "https://youtu.be/DHXu5NWsQk4",
+      "thumbnail": "https://i.ytimg.com/vi/DHXu5NWsQk4/hqdefault.jpg",
+      "duration": "PT2M41S"
+    },
+    {
+      "id": "zTaHXAWFFYo",
+      "book": "雅歌",
+      "title": "「刻まれた愛　—ジーザスとのリレーションシップ 22.雅歌」- THE DAILY with Arthur Hollands 2023/07/21",
+      "quote": "刻まれた愛　—ジーザスとのリレーションシップ 22.雅歌",
+      "url": "https://youtu.be/zTaHXAWFFYo",
+      "thumbnail": "https://i.ytimg.com/vi/zTaHXAWFFYo/hqdefault.jpg",
+      "duration": "PT3M1S"
+    },
+    {
+      "id": "nWCjD7xUkmk",
+      "book": "イザヤ書",
+      "title": "「わたしの目には、あなたは高価で尊い　23.イザヤ書」- THE DAILY with Arthur Hollands 2023/07/22",
+      "quote": "わたしの目には、あなたは高価で尊い　23.イザヤ書",
+      "url": "https://youtu.be/nWCjD7xUkmk",
+      "thumbnail": "https://i.ytimg.com/vi/nWCjD7xUkmk/hqdefault.jpg",
+      "duration": "PT2M9S"
+    },
+    {
+      "id": "eBFwftTFt4o",
+      "book": "エレミヤ書",
+      "title": "「あなたが生まれる前からあなたのことを知っている神　24.エレミヤ書」- THE DAILY with Arthur Hollands 2023/07/23",
+      "quote": "あなたが生まれる前からあなたのことを知っている神　24.エレミヤ書",
+      "url": "https://youtu.be/eBFwftTFt4o",
+      "thumbnail": "https://i.ytimg.com/vi/eBFwftTFt4o/hqdefault.jpg",
+      "duration": "PT2M35S"
+    },
+    {
+      "id": "KRX-jzHq-d4",
+      "book": "哀歌",
+      "title": "「求めにこたえてくださる神　25.哀歌」- THE DAILY with Arthur Hollands 2023/07/24",
+      "quote": "求めにこたえてくださる神　25.哀歌",
+      "url": "https://youtu.be/KRX-jzHq-d4",
+      "thumbnail": "https://i.ytimg.com/vi/KRX-jzHq-d4/hqdefault.jpg",
+      "duration": "PT2M19S"
+    },
+    {
+      "id": "qkAYCTYkJes",
+      "book": "エゼキエル書",
+      "title": "「私たちに声をかけてくださる方　26.エゼキエル書」- THE DAILY with Arthur Hollands 2023/07/25",
+      "quote": "私たちに声をかけてくださる方　26.エゼキエル書",
+      "url": "https://youtu.be/qkAYCTYkJes",
+      "thumbnail": "https://i.ytimg.com/vi/qkAYCTYkJes/hqdefault.jpg",
+      "duration": "PT2M58S"
+    },
+    {
+      "id": "IeG8fi0z78Q",
+      "book": "ダニエル書",
+      "title": "「燃える炉の中からも救い出す存在 27.ダニエル書」- THE DAILY with Arthur Hollands 2023/07/26",
+      "quote": "燃える炉の中からも救い出す存在 27.ダニエル書",
+      "url": "https://youtu.be/IeG8fi0z78Q",
+      "thumbnail": "https://i.ytimg.com/vi/IeG8fi0z78Q/hqdefault.jpg",
+      "duration": "PT3M33S"
+    },
+    {
+      "id": "ZbuWpn-duVU",
+      "book": "ホセア書",
+      "title": "「悔い改めは、方向転換 28.ホセア書」- THE DAILY with Arthur Hollands 2023/07/27",
+      "quote": "悔い改めは、方向転換 28.ホセア書",
+      "url": "https://youtu.be/ZbuWpn-duVU",
+      "thumbnail": "https://i.ytimg.com/vi/ZbuWpn-duVU/hqdefault.jpg",
+      "duration": "PT3M4S"
+    },
+    {
+      "id": "9JuOhImdfEE",
+      "book": "ヨエル書",
+      "title": "「情け深く、あわれみ深い存在の愛に立ち返る　 29.ヨエル書」- THE DAILY with Arthur Hollands 2023/07/28",
+      "quote": "情け深く、あわれみ深い存在の愛に立ち返る　 29.ヨエル書",
+      "url": "https://youtu.be/9JuOhImdfEE",
+      "thumbnail": "https://i.ytimg.com/vi/9JuOhImdfEE/hqdefault.jpg",
+      "duration": "PT2M49S"
+    },
+    {
+      "id": "EsitvWC39Pk",
+      "book": "アモス書",
+      "title": "「聖書の御言葉を土台とする 30.アモス書」- THE DAILY with Arthur Hollands 2023/07/29",
+      "quote": "聖書の御言葉を土台とする 30.アモス書",
+      "url": "https://youtu.be/EsitvWC39Pk",
+      "thumbnail": "https://i.ytimg.com/vi/EsitvWC39Pk/hqdefault.jpg",
+      "duration": "PT2M52S"
+    },
+    {
+      "id": "FuzRgTRtpCA",
+      "book": "オバデヤ書",
+      "title": "「【主】の日は、日々近づいている 31.オバデヤ書」- THE DAILY with Arthur Hollands 2023/07/30",
+      "quote": "【主】の日は、日々近づいている 31.オバデヤ書",
+      "url": "https://youtu.be/FuzRgTRtpCA",
+      "thumbnail": "https://i.ytimg.com/vi/FuzRgTRtpCA/hqdefault.jpg",
+      "duration": "PT3M14S"
+    },
+    {
+      "id": "s6MNY88ZZ0A",
+      "book": "ヨナ書",
+      "title": "「あなたの声を聞いて救い出してくださる方 32.ヨナ書」- THE DAILY with Arthur Hollands 2023/07/31",
+      "quote": "あなたの声を聞いて救い出してくださる方 32.ヨナ書",
+      "url": "https://youtu.be/s6MNY88ZZ0A",
+      "thumbnail": "https://i.ytimg.com/vi/s6MNY88ZZ0A/hqdefault.jpg",
+      "duration": "PT2M27S"
+    },
+    {
+      "id": "MiL0mDVvLUg",
+      "book": "ミカ書",
+      "title": "「金ではなく、神のために生きる 33.ミカ書」- THE DAILY with Arthur Hollands 2023/08/01",
+      "quote": "金ではなく、神のために生きる 33.ミカ書",
+      "url": "https://youtu.be/MiL0mDVvLUg",
+      "thumbnail": "https://i.ytimg.com/vi/MiL0mDVvLUg/hqdefault.jpg",
+      "duration": "PT2M46S"
+    },
+    {
+      "id": "jXd9ugdAdcU",
+      "book": "ナホム書",
+      "title": "「決してあなたを見捨てない存在 34.ナホム書」- THE DAILY with Arthur Hollands 2023/08/02",
+      "quote": "決してあなたを見捨てない存在 34.ナホム書",
+      "url": "https://youtu.be/jXd9ugdAdcU",
+      "thumbnail": "https://i.ytimg.com/vi/jXd9ugdAdcU/hqdefault.jpg",
+      "duration": "PT2M26S"
+    },
+    {
+      "id": "YVMdwA2XRHs",
+      "book": "ハバクク書",
+      "title": "「信仰の翼―神の力に生きる 35.ハバクク書」- THE DAILY with Arthur Hollands 2023/08/03",
+      "quote": "信仰の翼―神の力に生きる 35.ハバクク書",
+      "url": "https://youtu.be/YVMdwA2XRHs",
+      "thumbnail": "https://i.ytimg.com/vi/YVMdwA2XRHs/hqdefault.jpg",
+      "duration": "PT2M36S"
+    },
+    {
+      "id": "irMvIK6cP4o",
+      "book": "ゼパニヤ書",
+      "title": "「あなたのただ中におられる救いの勇士　36.ゼパニヤ書」- THE DAILY with Arthur Hollands 2023/08/04",
+      "quote": "あなたのただ中におられる救いの勇士　36.ゼパニヤ書",
+      "url": "https://youtu.be/irMvIK6cP4o",
+      "thumbnail": "https://i.ytimg.com/vi/irMvIK6cP4o/hqdefault.jpg",
+      "duration": "PT1M49S"
+    },
+    {
+      "id": "IKmjftjVu3w",
+      "book": "ハガイ書",
+      "title": "「大いなる存在のスピリットがあなたがたの間に働いている　37.ハガイ書」- THE DAILY with Arthur Hollands 2023/08/05",
+      "quote": "大いなる存在のスピリットがあなたがたの間に働いている　37.ハガイ書",
+      "url": "https://youtu.be/IKmjftjVu3w",
+      "thumbnail": "https://i.ytimg.com/vi/IKmjftjVu3w/hqdefault.jpg",
+      "duration": "PT2M12S"
+    },
+    {
+      "id": "X7dFDvS9dXc",
+      "book": "ゼカリヤ書",
+      "title": "「約束された救い主　38.ゼカリヤ書」- THE DAILY with Arthur Hollands 2023/08/06  #旧約聖書",
+      "quote": "約束された救い主　38.ゼカリヤ書",
+      "url": "https://youtu.be/X7dFDvS9dXc",
+      "thumbnail": "https://i.ytimg.com/vi/X7dFDvS9dXc/hqdefault.jpg",
+      "duration": "PT2M58S"
+    },
+    {
+      "id": "eE6rrSjum1E",
+      "book": "マラキ書",
+      "title": "「祝福を注ぐ存在　39.マラキ書」- THE DAILY with Arthur Hollands 2023/08/07　 #旧約聖書",
+      "quote": "祝福を注ぐ存在　39.マラキ書",
+      "url": "https://youtu.be/eE6rrSjum1E",
+      "thumbnail": "https://i.ytimg.com/vi/eE6rrSjum1E/hqdefault.jpg",
+      "duration": "PT2M4S"
+    },
+    {
+      "id": "R80lEemweP4",
+      "book": "マタイの福音書",
+      "title": "「疲れた人、重荷を負っている人は、わたしのところに来なさい。　01.マタイの福音書」- THE DAILY with Arthur Hollands 2023/08/08 #新約聖書",
+      "quote": "疲れた人、重荷を負っている人は、わたしのところに来なさい。　01.マタイの福音書",
+      "url": "https://youtu.be/R80lEemweP4",
+      "thumbnail": "https://i.ytimg.com/vi/R80lEemweP4/hqdefault.jpg",
+      "duration": "PT1M58S"
+    },
+    {
+      "id": "l3Bu_4jVAcw",
+      "book": "マルコの福音書",
+      "title": "「かつて見たことのない奇跡　02.マルコの福音書」- THE DAILY with Arthur Hollands 2023/08/09 #新約聖書",
+      "quote": "かつて見たことのない奇跡　02.マルコの福音書",
+      "url": "https://youtu.be/l3Bu_4jVAcw",
+      "thumbnail": "https://i.ytimg.com/vi/l3Bu_4jVAcw/hqdefault.jpg",
+      "duration": "PT2M42S"
+    },
+    {
+      "id": "QuSC9wA9Ens",
+      "book": "ルカの福音書",
+      "title": "「深みに漕ぎ出して、網をおろせ　03.ルカの福音書」- THE DAILY with Arthur Hollands 2023/08/10 #新約聖書",
+      "quote": "深みに漕ぎ出して、網をおろせ　03.ルカの福音書",
+      "url": "https://youtu.be/QuSC9wA9Ens",
+      "thumbnail": "https://i.ytimg.com/vi/QuSC9wA9Ens/hqdefault.jpg",
+      "duration": "PT3M15S"
+    },
+    {
+      "id": "mbegE-9ODm4",
+      "book": "ヨハネの福音書",
+      "title": "「神は、実に、そのひとり子をお与えになったほどに　04 ヨハネの福音書」- THE DAILY with Arthur Hollands 2023/08/11 #新約聖書",
+      "quote": "神は、実に、そのひとり子をお与えになったほどに　04 ヨハネの福音書",
+      "url": "https://youtu.be/mbegE-9ODm4",
+      "thumbnail": "https://i.ytimg.com/vi/mbegE-9ODm4/hqdefault.jpg",
+      "duration": "PT3M53S"
+    },
+    {
+      "id": "loen94fhDxg",
+      "book": "使徒の働き",
+      "title": "「聖霊があなたがたの上に臨む時 05 使徒の働き」- THE DAILY with Arthur Hollands 2023/08/12 #新約聖書",
+      "quote": "聖霊があなたがたの上に臨む時 05 使徒の働き",
+      "url": "https://youtu.be/loen94fhDxg",
+      "thumbnail": "https://i.ytimg.com/vi/loen94fhDxg/hqdefault.jpg",
+      "duration": "PT3M12S"
+    },
+    {
+      "id": "xiDWg4_sjYY",
+      "book": "ローマ人への手紙",
+      "title": "「自然界を創造し、私たちを愛する存在  06 ローマ人への手紙」- THE DAILY with Arthur Hollands 2023/08/13 #新約聖書",
+      "quote": "自然界を創造し、私たちを愛する存在  06 ローマ人への手紙",
+      "url": "https://youtu.be/xiDWg4_sjYY",
+      "thumbnail": "https://i.ytimg.com/vi/xiDWg4_sjYY/hqdefault.jpg",
+      "duration": "PT3M11S"
+    },
+    {
+      "id": "7CflYkWRX_0",
+      "book": "コリント人への手紙 第一",
+      "title": "「十字架のことばはあなたに注がれる神の力 07.コリント人への手紙第一 - THE DAILY with Arthur Hollands 2023/08/14 #新約聖書",
+      "quote": "「十字架のことばはあなたに注がれる神の力 07.コリント人への手紙第一",
+      "url": "https://youtu.be/7CflYkWRX_0",
+      "thumbnail": "https://i.ytimg.com/vi/7CflYkWRX_0/hqdefault.jpg",
+      "duration": "PT2M8S"
+    },
+    {
+      "id": "Hdz0Df9g5tI",
+      "book": "コリント人への手紙 第二",
+      "title": "「御霊のあるところに自由がある　08.コリント人への手紙第二 - THE DAILY with Arthur Hollands 2023/08/15 #新約聖書",
+      "quote": "「御霊のあるところに自由がある　08.コリント人への手紙第二",
+      "url": "https://youtu.be/Hdz0Df9g5tI",
+      "thumbnail": "https://i.ytimg.com/vi/Hdz0Df9g5tI/hqdefault.jpg",
+      "duration": "PT2M22S"
+    },
+    {
+      "id": "KdTqp0CxRmA",
+      "book": "エペソ人への手紙",
+      "title": "「自分の行いではなく、ジーザスの恵みによって、救われる。　10.エペソ人への手紙 . THE DAILY with Arthur Hollands 2023/08/16 #新約聖書",
+      "quote": "「自分の行いではなく、ジーザスの恵みによって、救われる。　10.エペソ人への手紙 .",
+      "url": "https://youtu.be/KdTqp0CxRmA",
+      "thumbnail": "https://i.ytimg.com/vi/KdTqp0CxRmA/hqdefault.jpg",
+      "duration": "PT3M14S"
+    },
+    {
+      "id": "Yw5y_KhSk58",
+      "book": "ピリピ人への手紙",
+      "title": "「いつも主にあって喜びなさい　11.ピリピ人への手紙 - THE DAILY with Arthur Hollands 2023/08/17 #新約聖書",
+      "quote": "「いつも主にあって喜びなさい　11.ピリピ人への手紙",
+      "url": "https://youtu.be/Yw5y_KhSk58",
+      "thumbnail": "https://i.ytimg.com/vi/Yw5y_KhSk58/hqdefault.jpg",
+      "duration": "PT2M21S"
+    },
+    {
+      "id": "Bg-v7Ek2G3w",
+      "book": "コロサイ人への手紙",
+      "title": "「暗闇の中から救い出してくださる方　12.コロサイ人への手紙 - THE DAILY with Arthur Hollands 2023/08/18 #新約聖書",
+      "quote": "「暗闇の中から救い出してくださる方　12.コロサイ人への手紙",
+      "url": "https://youtu.be/Bg-v7Ek2G3w",
+      "thumbnail": "https://i.ytimg.com/vi/Bg-v7Ek2G3w/hqdefault.jpg",
+      "duration": "PT2M5S"
+    },
+    {
+      "id": "fPBJtuGutVs",
+      "book": "テサロニケ人への手紙 第一",
+      "title": "「いつも喜び、絶えず祈り、全てのことに感謝する テサロニケ人への手紙 第一　- THE DAILY with Arthur Hollands 2023/08/19 #新約聖書",
+      "quote": "「いつも喜び、絶えず祈り、全てのことに感謝する テサロニケ人への手紙 第一",
+      "url": "https://youtu.be/fPBJtuGutVs",
+      "thumbnail": "https://i.ytimg.com/vi/fPBJtuGutVs/hqdefault.jpg",
+      "duration": "PT2M23S"
+    },
+    {
+      "id": "tLqnjfMDVQc",
+      "book": "テサロニケ人への手紙 第二",
+      "title": "「平和の主」　14.テサロニケ人への手紙 第二- THE DAILY with Arthur Hollands 2023/08/20 #新約聖書",
+      "quote": "平和の主",
+      "url": "https://youtu.be/tLqnjfMDVQc",
+      "thumbnail": "https://i.ytimg.com/vi/tLqnjfMDVQc/hqdefault.jpg",
+      "duration": "PT2M26S"
+    },
+    {
+      "id": "sNyhBhOown4",
+      "book": "テモテへの手紙 第一",
+      "title": "「私を強くしてくださる方に感謝　15.テモテへの手紙 第一- THE DAILY with Arthur Hollands 2023/08/21 #新約聖書",
+      "quote": "「私を強くしてくださる方に感謝　15.テモテへの手紙 第一",
+      "url": "https://youtu.be/sNyhBhOown4",
+      "thumbnail": "https://i.ytimg.com/vi/sNyhBhOown4/hqdefault.jpg",
+      "duration": "PT2M5S"
+    },
+    {
+      "id": "bxVWoe5DNDU",
+      "book": "テモテへの手紙 第二",
+      "title": "「時が良くても、悪くても 16. テモテへの手紙 第二 - THE DAILY with Arthur Hollands 2023/08/22 #新約聖書",
+      "quote": "「時が良くても、悪くても 16. テモテへの手紙 第二",
+      "url": "https://youtu.be/bxVWoe5DNDU",
+      "thumbnail": "https://i.ytimg.com/vi/bxVWoe5DNDU/hqdefault.jpg",
+      "duration": "PT2M32S"
+    },
+    {
+      "id": "yb7QZPWILO4",
+      "book": "テトスへの手紙",
+      "title": "「聖霊が豊かに注がれる　 17.テトスへの手紙 - THE DAILY with Arthur Hollands 2023/08/23 #新約聖書",
+      "quote": "「聖霊が豊かに注がれる　 17.テトスへの手紙",
+      "url": "https://youtu.be/yb7QZPWILO4",
+      "thumbnail": "https://i.ytimg.com/vi/yb7QZPWILO4/hqdefault.jpg",
+      "duration": "PT2M12S"
+    },
+    {
+      "id": "Zm-sgjRgFuM",
+      "book": "ピレモンへの手紙",
+      "title": "「苦しみや試練の中での生きざまで励まされる   18.ピレモンへの手紙 - THE DAILY with Arthur Hollands 2023/08/24 #新約聖書",
+      "quote": "「苦しみや試練の中での生きざまで励まされる   18.ピレモンへの手紙",
+      "url": "https://youtu.be/Zm-sgjRgFuM",
+      "thumbnail": "https://i.ytimg.com/vi/Zm-sgjRgFuM/hqdefault.jpg",
+      "duration": "PT2M51S"
+    },
+    {
+      "id": "Ys9Oipwwtz4",
+      "book": "ヘブル人への手紙",
+      "title": "「信仰がなくては、神に喜ばれることはできません。19.ヘブル人への手紙　- THE DAILY with Arthur Hollands 2023/08/25 #新約聖書",
+      "quote": "「信仰がなくては、神に喜ばれることはできません。19.ヘブル人への手紙",
+      "url": "https://youtu.be/Ys9Oipwwtz4",
+      "thumbnail": "https://i.ytimg.com/vi/Ys9Oipwwtz4/hqdefault.jpg",
+      "duration": "PT1M59S"
+    },
+    {
+      "id": "1lnfaiSFvSc",
+      "book": "ヤコブの手紙",
+      "title": "「忍耐を完全に働かせなさい　20.ヤコブの手紙　- THE DAILY with Arthur Hollands 2023/08/26 #新約聖書",
+      "quote": "「忍耐を完全に働かせなさい　20.ヤコブの手紙",
+      "url": "https://youtu.be/1lnfaiSFvSc",
+      "thumbnail": "https://i.ytimg.com/vi/1lnfaiSFvSc/hqdefault.jpg",
+      "duration": "PT2M45S"
+    },
+    {
+      "id": "qhSjc7tqGuo",
+      "book": "ペテロの手紙 第一",
+      "title": "「ジーザスに信頼する者は、決して失望させられることがない 21.ペテロの手紙 第一　- THE DAILY with Arthur Hollands 2023/08/27 #新約聖書",
+      "quote": "「ジーザスに信頼する者は、決して失望させられることがない 21.ペテロの手紙 第一",
+      "url": "https://youtu.be/qhSjc7tqGuo",
+      "thumbnail": "https://i.ytimg.com/vi/qhSjc7tqGuo/hqdefault.jpg",
+      "duration": "PT2M52S"
+    },
+    {
+      "id": "2WdVDouwoy8",
+      "book": "ペテロの手紙 第二",
+      "title": "「主の御前では、一日は千年のようであり、千年は一日のよう 22.ペテロの手紙 第二　- THE DAILY with Arthur Hollands 2023/08/28 #新約聖書",
+      "quote": "「主の御前では、一日は千年のようであり、千年は一日のよう 22.ペテロの手紙 第二",
+      "url": "https://youtu.be/2WdVDouwoy8",
+      "thumbnail": "https://i.ytimg.com/vi/2WdVDouwoy8/hqdefault.jpg",
+      "duration": "PT2M45S"
+    },
+    {
+      "id": "N-kYUHwrsOE",
+      "book": "ヨハネの手紙 第一",
+      "title": "「神は光であって、神のうちには暗いところが少しもない 23.ヨハネの手紙 第一 - THE DAILY with Arthur Hollands 2023/08/29 #新約聖書",
+      "quote": "「神は光であって、神のうちには暗いところが少しもない 23.ヨハネの手紙 第一",
+      "url": "https://youtu.be/N-kYUHwrsOE",
+      "thumbnail": "https://i.ytimg.com/vi/N-kYUHwrsOE/hqdefault.jpg",
+      "duration": "PT2M54S"
+    },
+    {
+      "id": "nqGOOCxLf08",
+      "book": "ヨハネの手紙 第二",
+      "title": "「愛のうちを歩むこと 24.ヨハネの手紙 第二 - THE DAILY with Arthur Hollands 2023/08/30 #新約聖書",
+      "quote": "「愛のうちを歩むこと 24.ヨハネの手紙 第二",
+      "url": "https://youtu.be/nqGOOCxLf08",
+      "thumbnail": "https://i.ytimg.com/vi/nqGOOCxLf08/hqdefault.jpg",
+      "duration": "PT2M57S"
+    },
+    {
+      "id": "vn8E9c3AYZE",
+      "book": "ヨハネの手紙 第三",
+      "title": "「善を見ならう　25.ヨハネの手紙 第三 - THE DAILY with Arthur Hollands 2023/08/31 #新約聖書",
+      "quote": "「善を見ならう　25.ヨハネの手紙 第三",
+      "url": "https://youtu.be/vn8E9c3AYZE",
+      "thumbnail": "https://i.ytimg.com/vi/vn8E9c3AYZE/hqdefault.jpg",
+      "duration": "PT2M57S"
+    },
+    {
+      "id": "SVzLtnTsllg",
+      "book": "ユダの手紙",
+      "title": "「あわれみと平安と愛　26.ユダの手紙 - THE DAILY with Arthur Hollands 2023/09/01 #新約聖書",
+      "quote": "「あわれみと平安と愛　26.ユダの手紙",
+      "url": "https://youtu.be/SVzLtnTsllg",
+      "thumbnail": "https://i.ytimg.com/vi/SVzLtnTsllg/hqdefault.jpg",
+      "duration": "PT2M15S"
+    },
+    {
+      "id": "Zgs-zqgkxjc",
+      "book": "ヨハネの黙示録",
+      "title": "「主イエスの恵みがすべての者とともにあるように　27.ヨハネの黙示録- THE DAILY with Arthur Hollands 2023/09/02 #新約聖書",
+      "quote": "「主イエスの恵みがすべての者とともにあるように　27.ヨハネの黙示録",
+      "url": "https://youtu.be/Zgs-zqgkxjc",
+      "thumbnail": "https://i.ytimg.com/vi/Zgs-zqgkxjc/hqdefault.jpg",
+      "duration": "PT3M1S"
+    }
+  ]
+}

@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import dailyVerseVideos from '../../data/daily-verse-videos.json';
 import wordOfGodBooklet from '../../data/word-of-god-booklet.json';
+import bibleBookVideos from '../../data/bible-book-videos.json';
 
 const currentBuildTime = new Date();
 const allMessages = (await getCollection('daily-messages', ({ data }) => {
@@ -193,6 +194,17 @@ const bookletScriptureRows = (wordOfGodBooklet.pages || []).flatMap((page) => {
 	}).filter((row) => row.ref && row.text);
 });
 
+const bibleBookVideoRows = (bibleBookVideos.videos || []).map((video) => ({
+	ref: video.book,
+	text: video.quote || video.title,
+	book: video.book,
+	source: 'bible-book-video',
+	href: video.url,
+	dateLabel: '66 BOOKS',
+	title: 'THE DAILY with Arthur Hollands from 66 books of the Bible',
+	relatedVideos: [video],
+})).filter((row) => row.ref && row.text && row.relatedVideos.length);
+
 const rawScriptureRows = [
 	...messageScriptureRows.map((row) => ({
 		...row,
@@ -203,6 +215,7 @@ const rawScriptureRows = [
 		relatedVideos: findRelatedDailyVideos(row.text),
 	})),
 	...bookletScriptureRows,
+	...bibleBookVideoRows,
 ];
 
 const scriptureRows = rawScriptureRows

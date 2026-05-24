@@ -10,6 +10,7 @@
     "fetch:walk-across": "node scripts/fetch-walk-across.mjs",
     "fetch:friday-night": "node scripts/fetch-friday-night.mjs",
     "fetch:daily-verses": "node scripts/fetch-daily-verse-videos.mjs",
+    "fetch:bible-books": "node scripts/fetch-bible-book-videos.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
