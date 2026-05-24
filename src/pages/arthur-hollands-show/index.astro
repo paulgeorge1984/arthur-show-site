@@ -36,7 +36,8 @@ const seriesData = seriesArchive as { fetchedAt: string | null; playlists: ShowS
 
 const videos = archiveData.videos || [];
 const initialPickup = videos[0];
-const showSeries = seriesData.playlists || [];
+const excludedSeriesPlaylistIds = new Set(['PL-faIdjPoxKiA5aStAASg7VMrjT_-90_o']);
+const showSeries = (seriesData.playlists || []).filter((series) => !excludedSeriesPlaylistIds.has(series.playlistId));
 const paintingSeries = showSeries.find((series) => series.kind === 'painting');
 const relatedSeries = showSeries.filter((series) => series.kind !== 'painting');
 const playlistEmbedUrl = `https://www.youtube.com/embed/videoseries?list=${archiveData.playlist.id}&rel=0`;

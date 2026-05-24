@@ -28,14 +28,6 @@ const series = [
 		playlistId: 'PL-faIdjPoxKgCoEeX8ABTS--RLjgOwJOM',
 	},
 	{
-		slug: 'lords-angels-motorcycle',
-		kind: 'road',
-		label: "LORD'S ANGELS",
-		title: "LORD'S ANGELS Motorcycle Across 2023 in Niigata and Akita",
-		description: "LORD'S ANGELSの歩みと、バイク、旅、証しが交差する特別アーカイブ。",
-		playlistId: 'PL-faIdjPoxKiA5aStAASg7VMrjT_-90_o',
-	},
-	{
 		slug: 'painting-series',
 		kind: 'painting',
 		label: 'PAINTING SERIES',
