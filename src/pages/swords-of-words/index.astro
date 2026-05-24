@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import dailyVerseVideos from '../../data/daily-verse-videos.json';
 
 const currentBuildTime = new Date();
 const allMessages = (await getCollection('daily-messages', ({ data }) => {
@@ -62,6 +63,56 @@ const bibleBooks = [
 ];
 const bibleBookOrder = new Map(bibleBooks.map((book, index) => [book, index]));
 
+const normalizeMatchText = (value = '') => String(value)
+	.normalize('NFKC')
+	.toLowerCase()
+	.replace(/[\s　。、，,.!！?？:：;；「」『』（）()【】[\]<>＜＞'"“”‘’〜～―—_・]/g, '');
+
+const longestCommonSubstringLength = (a = '', b = '') => {
+	if (!a || !b) return 0;
+	let best = 0;
+	const previous = new Uint16Array(b.length + 1);
+	const current = new Uint16Array(b.length + 1);
+	for (let i = 1; i <= a.length; i += 1) {
+		for (let j = 1; j <= b.length; j += 1) {
+			const value = a[i - 1] === b[j - 1] ? previous[j - 1] + 1 : 0;
+			current[j] = value;
+			if (value > best) best = value;
+		}
+		previous.set(current);
+		current.fill(0);
+	}
+	return best;
+};
+
+const dailyVerseVideoPool = Object.values(dailyVerseVideos.videosByPage || {})
+	.flat()
+	.filter((video, index, videos) => video?.id && videos.findIndex((item) => item.id === video.id) === index)
+	.map((video) => ({
+		...video,
+		normalizedQuote: normalizeMatchText(video.quote || video.title || ''),
+	}));
+
+const findRelatedDailyVideos = (text = '') => {
+	const normalizedText = normalizeMatchText(text);
+	if (normalizedText.length < 8) return [];
+	return dailyVerseVideoPool
+		.map((video) => {
+			const exact = normalizedText.includes(video.normalizedQuote) || video.normalizedQuote.includes(normalizedText);
+			const score = exact
+				? Math.min(normalizedText.length, video.normalizedQuote.length)
+				: longestCommonSubstringLength(normalizedText, video.normalizedQuote);
+			const ratio = score / Math.min(normalizedText.length, video.normalizedQuote.length || 1);
+			return { ...video, matchScore: score, matchRatio: ratio, matchExact: exact };
+		})
+		.filter((video) => video.matchExact || (video.matchScore >= 12 && video.matchRatio >= 0.45))
+		.sort((a, b) => {
+			if (a.matchExact !== b.matchExact) return a.matchExact ? -1 : 1;
+			return b.matchScore - a.matchScore;
+		})
+		.slice(0, 3);
+};
+
 const rawScriptureRows = allMessages.flatMap((post) => {
 	const rows = Array.from(post.body.matchAll(/<p\s+class=["']verse-text["'][^>]*>([\s\S]*?)<\/p>\s*<span\s+class=["']verse-ref["'][^>]*>([\s\S]*?)<\/span>/g))
 		.map((match) => {
@@ -93,6 +144,7 @@ const rawScriptureRows = allMessages.flatMap((post) => {
 const scriptureRows = rawScriptureRows.map((row, index) => ({
 	...row,
 	isRecent: index < 12,
+	relatedVideos: findRelatedDailyVideos(row.text),
 }));
 const scriptureBooks = Array.from(new Set(scriptureRows.map((row) => row.book).filter(Boolean)))
 	.sort((a, b) => {
@@ -154,21 +206,36 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 
 			<div class="scripture-grid" data-scripture-list>
 				{scriptureRows.map((row) => (
-					<a
+					<article
 						class="scripture-card"
-						href={`/messages/${row.post.slug}`}
 						data-scripture-card
 						data-scripture-book={row.book}
 						data-scripture-recent={row.isRecent ? 'true' : 'false'}
 						hidden={!row.isRecent}
 					>
-						<span class="scripture-ref">{row.ref}</span>
-						<q>{row.text}</q>
-						<span class="scripture-meta">
-							<span>{formatDate(row.post.data.date)}</span>
-							<strong>{row.post.data.title}</strong>
-						</span>
-					</a>
+						<a class="scripture-message-link" href={`/messages/${row.post.slug}`}>
+							<span class="scripture-ref">{row.ref}</span>
+							<q>{row.text}</q>
+							<span class="scripture-meta">
+								<span>{formatDate(row.post.data.date)}</span>
+								<strong>{row.post.data.title}</strong>
+							</span>
+						</a>
+						{row.relatedVideos.length > 0 && (
+							<div class="scripture-related" aria-label={`${row.ref}に関連するデイリーメッセージ`}>
+								<span class="scripture-related-label">RELATED DAILY</span>
+								{row.relatedVideos.slice(0, 2).map((video) => (
+									<a class="scripture-video-link" href={video.url} target="_blank" rel="noopener noreferrer">
+										<img src={video.thumbnail} alt="" loading="lazy" />
+										<span>
+											<strong>{video.title}</strong>
+											<small>{video.quote}</small>
+										</span>
+									</a>
+								))}
+							</div>
+						)}
+					</article>
 				))}
 			</div>
 			<p class="no-results" data-scripture-empty hidden>該当する御言葉がありません。</p>
@@ -457,7 +524,6 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		display: flex;
 		flex-direction: column;
 		min-height: 250px;
-		padding: 22px 18px 18px 22px;
 		overflow: hidden;
 		background:
 			linear-gradient(90deg, #c5a059 0 5px, transparent 5px 100%),
@@ -467,6 +533,16 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		border: 1px solid rgba(197, 160, 89, 0.42);
 		border-top: 5px solid #c5a059;
 		box-shadow: 0 14px 28px rgba(0, 0, 0, 0.24);
+	}
+
+	.scripture-message-link {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		padding: 22px 18px 18px 22px;
+		color: inherit;
 	}
 
 	.scripture-card::before {
@@ -575,6 +651,75 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		line-height: 1.45;
 		-webkit-box-orient: vertical;
 		-webkit-line-clamp: 2;
+	}
+
+	.scripture-related {
+		position: relative;
+		z-index: 2;
+		display: grid;
+		gap: 8px;
+		padding: 12px 14px 14px 18px;
+		background: rgba(0, 0, 0, 0.34);
+		border-top: 1px solid rgba(197, 160, 89, 0.36);
+	}
+
+	.scripture-related-label {
+		color: #c5a059;
+		font-family: 'Oswald', sans-serif;
+		font-size: 0.68rem;
+		font-weight: 900;
+		letter-spacing: 0.12em;
+	}
+
+	.scripture-video-link {
+		display: grid;
+		grid-template-columns: 74px minmax(0, 1fr);
+		gap: 9px;
+		align-items: center;
+		padding: 7px;
+		background: rgba(255, 255, 255, 0.055);
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		color: #fff;
+	}
+
+	.scripture-video-link:hover {
+		border-color: rgba(197, 160, 89, 0.72);
+		background: rgba(197, 160, 89, 0.12);
+	}
+
+	.scripture-video-link img {
+		width: 74px;
+		aspect-ratio: 16 / 9;
+		object-fit: cover;
+		background: #000;
+	}
+
+	.scripture-video-link span {
+		display: grid;
+		gap: 3px;
+		min-width: 0;
+	}
+
+	.scripture-video-link strong,
+	.scripture-video-link small {
+		display: -webkit-box;
+		overflow: hidden;
+		line-height: 1.35;
+		-webkit-box-orient: vertical;
+	}
+
+	.scripture-video-link strong {
+		color: rgba(255, 255, 255, 0.9);
+		font-size: 0.78rem;
+		font-weight: 900;
+		-webkit-line-clamp: 2;
+	}
+
+	.scripture-video-link small {
+		color: rgba(255, 255, 255, 0.58);
+		font-size: 0.7rem;
+		font-weight: 800;
+		-webkit-line-clamp: 1;
 	}
 
 	.no-results {
