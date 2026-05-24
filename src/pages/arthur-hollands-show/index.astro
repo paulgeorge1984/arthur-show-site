@@ -75,6 +75,19 @@ const formatViews = (value?: string) => {
 	if (!count) return '';
 	return new Intl.NumberFormat('ja-JP').format(count);
 };
+const pickupItems = videos.map((video) => ({
+	id: video.id,
+	title: video.title,
+	excerpt: video.excerpt || video.description || '',
+	url: `https://youtu.be/${video.id}`,
+	thumbnail: video.thumbnail || `https://i.ytimg.com/vi/${video.id}/hq720.jpg`,
+	meta: [
+		video.year || '',
+		formatDate(video.publishedAt),
+		formatDuration(video.duration),
+	].filter(Boolean).join(' / '),
+	views: formatViews(video.viewCount),
+}));
 ---
 
 <Layout
@@ -110,6 +123,24 @@ const formatViews = (value?: string) => {
 				</div>
 			</div>
 		</header>
+
+		{pickupItems.length > 0 && (
+			<section class="featured-broadcast" aria-labelledby="featured-broadcast-title">
+				<div class="featured-thumb">
+					<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="" loading="lazy" data-pickup-thumb />
+				</div>
+				<div class="featured-body">
+					<p class="broadcast-label">ARCHIVE PICKUP</p>
+					<h2 id="featured-broadcast-title" data-pickup-title>NOW SELECTING...</h2>
+					<p class="pickup-meta" data-pickup-meta></p>
+					<p data-pickup-excerpt></p>
+					<div class="pickup-actions">
+						<a href={archiveData.playlist.url} target="_blank" rel="noopener noreferrer" data-pickup-link>この回を見る</a>
+						<button type="button" data-pickup-random>別の回を出す</button>
+					</div>
+				</div>
+			</section>
+		)}
 
 		<section class="show-intro" aria-label="番組概要">
 			<div class="intro-card primary">
@@ -267,7 +298,9 @@ const formatViews = (value?: string) => {
 		</section>
 	</article>
 
+	<script type="application/json" data-pickup-items set:html={JSON.stringify(pickupItems)}></script>
 	<script is:inline>
+		const pickupItems = JSON.parse(document.querySelector('[data-pickup-items]')?.textContent || '[]');
 		const shareTitle = 'THE ARTHUR HOLLANDS SHOW | アーサーホーランド公式YouTubeチャンネル THE ARTHUR HOLLANDS SHOW';
 		const shareText = '毎週水曜14:00、生配信で語られてきたチャンネルの原点となる生配信番組の記録。';
 		const shareUrl = 'https://arthur-show.com/arthur-hollands-show/';
@@ -277,6 +310,7 @@ const formatViews = (value?: string) => {
 		const yearBlocks = Array.from(document.querySelectorAll('[data-year-block]'));
 		const noResults = document.querySelector('[data-show-no-results]');
 		let activeYear = 'all';
+		let currentPickupIndex = -1;
 
 		function updateShareLinks() {
 			const encodedUrl = encodeURIComponent(shareUrl);
@@ -336,6 +370,36 @@ const formatViews = (value?: string) => {
 			if (noResults) noResults.hidden = visible !== 0;
 		}
 
+		function renderPickup(index) {
+			const item = pickupItems[index];
+			if (!item) return;
+			const thumb = document.querySelector('[data-pickup-thumb]');
+			const title = document.querySelector('[data-pickup-title]');
+			const meta = document.querySelector('[data-pickup-meta]');
+			const excerpt = document.querySelector('[data-pickup-excerpt]');
+			const link = document.querySelector('[data-pickup-link]');
+			if (thumb) {
+				thumb.src = item.thumbnail;
+				thumb.alt = `${item.title} サムネイル`;
+			}
+			if (title) title.textContent = item.title;
+			if (meta) meta.textContent = item.meta || '';
+			if (excerpt) excerpt.textContent = item.excerpt || '';
+			if (link) link.href = item.url;
+		}
+
+		function showRandomPickup() {
+			if (!pickupItems.length) return;
+			let nextIndex = Math.floor(Math.random() * pickupItems.length);
+			if (pickupItems.length > 1) {
+				while (nextIndex === currentPickupIndex) {
+					nextIndex = Math.floor(Math.random() * pickupItems.length);
+				}
+			}
+			currentPickupIndex = nextIndex;
+			renderPickup(currentPickupIndex);
+		}
+
 		yearButtons.forEach((button) => {
 			button.addEventListener('click', (event) => {
 				event.preventDefault();
@@ -352,6 +416,8 @@ const formatViews = (value?: string) => {
 		document.querySelectorAll('[data-copy-link]').forEach((button) => {
 			button.addEventListener('click', copyShareLink);
 		});
+		document.querySelector('[data-pickup-random]')?.addEventListener('click', showRandomPickup);
+		showRandomPickup();
 		yearButtons[0]?.classList.add('active');
 		updateShareLinks();
 	</script>
