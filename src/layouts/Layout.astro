@@ -56,6 +56,7 @@ const isCurrent = (href: string) => {
 		</header>
 		<nav class="global-section-nav" aria-label="サイト内主要メニュー">
 			<a href="/#messages" class:list={{ active: currentPath === '/' }}>Arthur Hollands' Message</a>
+			<a href="/arthur-hollands-show/" class:list={{ active: isCurrent('/arthur-hollands-show/') }}>THE ARTHUR HOLLANDS SHOW</a>
 			<a href="/walk-across/" class:list={{ active: isCurrent('/walk-across/') }}>WALK ACROSS</a>
 			<a href="/walk-across-awaji2026/" class:list={{ active: isCurrent('/walk-across-awaji2026/') }}>WALK ACROSS AWAJI 2026</a>
 			<a href="/message-jukebox/" class:list={{ active: isCurrent('/message-jukebox/') }}>BIBLE JUKEBOX</a>
