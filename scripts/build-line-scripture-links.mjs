@@ -210,6 +210,12 @@ function expectedMonthlyFridayNight(year, month) {
 	return toDateKey(date);
 }
 
+function firstFridayNextMonth(dateKey) {
+	const date = new Date(`${dateKey}T00:00:00+09:00`);
+	date.setMonth(date.getMonth() + 1, 1);
+	return firstFriday(date.getFullYear(), date.getMonth() + 1);
+}
+
 function expectedFridayNightDate(lineDate) {
 	const date = new Date(`${lineDate}T00:00:00+09:00`);
 	const current = expectedMonthlyFridayNight(date.getFullYear(), date.getMonth() + 1);
@@ -274,8 +280,13 @@ function videoCard(video) {
 
 function findFridayVideos(lineDate, fridayVideos) {
 	const expected = expectedFridayNightDate(lineDate);
+	const expectedRelease = firstFridayNextMonth(expected);
 	return fridayVideos
-		.filter((video) => video.eventDate && Math.abs(dayDiff(video.eventDate, expected)) <= 7)
+		.filter((video) => {
+			const eventMatches = video.eventDate && Math.abs(dayDiff(video.eventDate, expected)) <= 7;
+			const releaseMatches = video.publishedDate && Math.abs(dayDiff(video.publishedDate, expectedRelease)) <= 7;
+			return eventMatches || releaseMatches;
+		})
 		.map((video) => videoCard(video))
 		.slice(0, 2);
 }
