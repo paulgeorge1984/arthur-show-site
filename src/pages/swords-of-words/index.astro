@@ -205,10 +205,12 @@ const rawScriptureRows = [
 	...bookletScriptureRows,
 ];
 
-const scriptureRows = rawScriptureRows.map((row, index) => ({
-	...row,
-	isRecent: index < 12,
-}));
+const scriptureRows = rawScriptureRows
+	.filter((row) => Array.isArray(row.relatedVideos) && row.relatedVideos.length > 0)
+	.map((row, index) => ({
+		...row,
+		isRecent: index < 12,
+	}));
 const scriptureBooks = Array.from(new Set(scriptureRows.map((row) => row.book).filter(Boolean)))
 	.sort((a, b) => {
 		const orderA = bibleBookOrder.get(a) ?? 999;
