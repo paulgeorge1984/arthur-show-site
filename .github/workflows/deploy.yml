@@ -26,10 +26,18 @@ jobs:
       - name: Build site
         run: npm run build
       - name: FTP Deploy
-        uses: SamKirkland/FTP-Deploy-Action@4.3.0
-        with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./dist/
-          server-dir: ${{ secrets.FTP_REMOTE_DIR }}/
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_REMOTE_DIR: ${{ secrets.FTP_REMOTE_DIR }}
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lftp
+          lftp -u "$FTP_USERNAME","$FTP_PASSWORD" "$FTP_HOST" <<EOF
+          set ftp:ssl-allow no
+          set net:max-retries 3
+          set net:timeout 20
+          mirror --reverse --verbose --parallel=4 ./dist/ "$FTP_REMOTE_DIR"/
+          bye
+          EOF
