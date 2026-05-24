@@ -1,7 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
-import showArchive from '../data/arthur-show-archive.json';
 
 // サイトのビルドが実行された現在の時刻を取得
 const currentBuildTime = new Date(); 
@@ -153,8 +152,6 @@ const scriptureBooks = Array.from(new Set(scriptureRows.map((row) => row.book).f
 	});
 const oldTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(book) ?? 999) < 39);
 const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(book) ?? 999) >= 39);
-const showVideos = (showArchive as { videos?: { id: string; title: string; thumbnail?: string }[] }).videos || [];
-const latestShowVideo = showVideos[0];
 ---
 
 <Layout title="Latest Messages">
@@ -169,20 +166,6 @@ const latestShowVideo = showVideos[0];
 				<p class="awaji-ja">アーサーホーランド淡路島一周十字架行進2026</p>
 				<p class="awaji-text">祈り、出会い、洗礼、感謝に満ちた5日間の記録。</p>
 				<span class="awaji-button">アーカイブを見る</span>
-			</div>
-		</a>
-
-		<a class="show-feature" href="/arthur-hollands-show/" aria-label="THE ARTHUR HOLLANDS SHOW アーカイブを見る">
-			<div class="show-feature-copy">
-				<p class="show-feature-kicker">LIVE PROGRAM ARCHIVE</p>
-				<h2>THE ARTHUR HOLLANDS SHOW</h2>
-				<p>毎週水曜14:00、生配信で語られてきたチャンネルの原点となる生配信番組の記録。</p>
-				<span>番組アーカイブを見る</span>
-			</div>
-			<div class="show-feature-visual">
-				{latestShowVideo && (
-					<img src={latestShowVideo.thumbnail || `https://i.ytimg.com/vi/${latestShowVideo.id}/hq720.jpg`} alt={latestShowVideo.title} loading="lazy" />
-				)}
 			</div>
 		</a>
 
@@ -564,91 +547,6 @@ const latestShowVideo = showVideos[0];
 	}
 
 	.awaji-feature:hover .awaji-button {
-		background: #fff;
-	}
-
-	.show-feature {
-		display: grid;
-		grid-template-columns: minmax(0, 1fr) 260px;
-		gap: 22px;
-		align-items: stretch;
-		margin: 18px 0 8px;
-		overflow: hidden;
-		background: #151412;
-		color: #fff;
-		border-left: 5px solid #b63b32;
-		box-shadow: 0 14px 34px rgba(0, 0, 0, 0.14);
-	}
-
-	.show-feature-copy {
-		padding: 22px 0 22px 22px;
-	}
-
-	.show-feature-kicker {
-		margin-bottom: 7px;
-		color: #c5a059;
-		font-family: 'Oswald', sans-serif;
-		font-size: 0.78rem;
-		font-weight: 900;
-		letter-spacing: 0.16em;
-	}
-
-	.show-feature h2 {
-		font-family: 'Oswald', sans-serif;
-		font-size: clamp(1.75rem, 5vw, 3rem);
-		line-height: 0.98;
-	}
-
-	.show-feature p:not(.show-feature-kicker) {
-		max-width: 560px;
-		margin-top: 12px;
-		color: rgba(255, 255, 255, 0.76);
-		font-size: 0.94rem;
-	}
-
-	.show-feature span {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		min-height: 38px;
-		margin-top: 18px;
-		padding: 0 14px;
-		background: #c5a059;
-		color: #111;
-		font-weight: 900;
-		font-size: 0.9rem;
-	}
-
-	.show-feature-visual {
-		position: relative;
-		background: #000;
-		min-height: 180px;
-	}
-
-	.show-feature-visual::before {
-		content: "";
-		position: absolute;
-		inset: 12px;
-		border: 1px solid rgba(197, 160, 89, 0.5);
-		z-index: 1;
-		pointer-events: none;
-	}
-
-	.show-feature-visual img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		display: block;
-		opacity: 0.9;
-		transition: 0.25s;
-	}
-
-	.show-feature:hover img {
-		opacity: 1;
-		transform: scale(1.025);
-	}
-
-	.show-feature:hover span {
 		background: #fff;
 	}
 
@@ -1542,19 +1440,6 @@ const latestShowVideo = showVideos[0];
 		.awaji-visual img {
 			height: auto;
 			object-fit: contain;
-		}
-
-		.show-feature {
-			grid-template-columns: 1fr;
-			gap: 0;
-		}
-
-		.show-feature-copy {
-			padding: 18px;
-		}
-
-		.show-feature-visual {
-			min-height: 210px;
 		}
 
 		.section-bar {
