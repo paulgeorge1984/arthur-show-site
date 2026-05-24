@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import dailyVerseVideos from '../../data/daily-verse-videos.json';
+import lineScriptureVideoLinks from '../../data/line-scripture-video-links.json';
 import wordOfGodBooklet from '../../data/word-of-god-booklet.json';
 import bibleBookVideos from '../../data/bible-book-videos.json';
 
@@ -95,6 +96,16 @@ const dailyVerseVideoPool = Object.values(dailyVerseVideos.videosByPage || {})
 		normalizedQuote: normalizeMatchText(video.quote || video.title || ''),
 	}));
 
+const uniqueRelatedVideos = (videos = []) => {
+	const seen = new Set();
+	return videos.filter((video) => {
+		const key = `${video.source || 'VIDEO'}:${video.id || video.url}`;
+		if (!video?.url || seen.has(key)) return false;
+		seen.add(key);
+		return true;
+	});
+};
+
 const scriptureBookPattern = bibleBooks
 	.slice()
 	.sort((a, b) => b.length - a.length)
@@ -179,7 +190,13 @@ const bookletScriptureRows = (wordOfGodBooklet.pages || []).flatMap((page) => {
 	const refs = extractFullBookletRefs(page.text || '', Array.isArray(page.refs) ? page.refs : []);
 	return refs.map((ref) => {
 		const normalizedRef = normalizeScriptureRef(ref);
-		const pageVideos = dailyVerseVideos.videosByPage?.[String(page.page)] || [];
+		const pageVideos = uniqueRelatedVideos([
+			...(lineScriptureVideoLinks.videosByPage?.[String(page.page)] || []),
+			...(dailyVerseVideos.videosByPage?.[String(page.page)] || []).map((video) => ({
+				...video,
+				source: 'THE DAILY',
+			})),
+		]);
 		return {
 			ref: normalizedRef,
 			text: extractBookletVerseText(page.text || '', ref),
@@ -301,13 +318,13 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 						</a>
 						{row.relatedVideos.length > 0 && (
 							<div class="scripture-related" aria-label={`${row.ref}に関連するデイリーメッセージ`}>
-								<span class="scripture-related-label">RELATED DAILY</span>
+								<span class="scripture-related-label">RELATED MESSAGES</span>
 								{row.relatedVideos.slice(0, 2).map((video) => (
 									<a class="scripture-video-link" href={video.url} target="_blank" rel="noopener noreferrer">
 										<img src={video.thumbnail} alt="" loading="lazy" />
 										<span>
 											<strong>{video.title}</strong>
-											<small>{video.quote}</small>
+											<small>{video.quote || video.source || 'RELATED MESSAGE'}</small>
 										</span>
 									</a>
 								))}
