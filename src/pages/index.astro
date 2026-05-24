@@ -254,6 +254,11 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 				<p class="archive-count">{allMessages.length}件</p>
 			</div>
 			<div class="archive-tools">
+				<div class="archive-tools-head">
+					<p>SEARCH</p>
+					<strong>メッセージを探す</strong>
+					<small>キーワード、月別で絞り込めます。</small>
+				</div>
 				<label class="search-box">
 					<span>検索</span>
 					<input type="search" placeholder="キーワードで探す" data-message-search />
@@ -728,12 +733,42 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		top: 92px;
 		z-index: 5;
 		display: grid;
-		gap: 12px;
-		margin-bottom: 18px;
-		padding: 14px;
-		background: rgba(255, 255, 255, 0.94);
-		border: 1px solid #e4e4e7;
+		grid-template-columns: 180px minmax(220px, 1fr);
+		gap: 14px;
+		align-items: end;
+		margin-bottom: 22px;
+		padding: 18px;
+		background: #fff;
+		border: 3px solid #111;
+		box-shadow: 8px 8px 0 rgba(197, 160, 89, 0.32);
 		backdrop-filter: blur(12px);
+	}
+
+	.archive-tools-head {
+		display: grid;
+		gap: 4px;
+		align-self: center;
+	}
+
+	.archive-tools-head p {
+		color: #c5a059;
+		font-family: 'Oswald', sans-serif;
+		font-size: 0.8rem;
+		font-weight: 900;
+		letter-spacing: 0.18em;
+	}
+
+	.archive-tools-head strong {
+		font-size: 1.25rem;
+		font-weight: 900;
+		line-height: 1.15;
+	}
+
+	.archive-tools-head small {
+		color: #666;
+		font-size: 0.8rem;
+		font-weight: 700;
+		line-height: 1.45;
 	}
 
 	.share-section {
@@ -1324,14 +1359,24 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 
 	.search-box input {
 		width: 100%;
-		min-height: 46px;
-		padding: 0 14px;
-		border: 2px solid #000;
+		min-height: 54px;
+		padding: 0 16px;
+		background: #f7f7f7;
+		border: 3px solid #000;
 		font: inherit;
-		font-weight: 700;
+		font-size: 1.05rem;
+		font-weight: 900;
+		box-shadow: inset 0 0 0 1px rgba(197, 160, 89, 0.16);
+	}
+
+	.search-box input:focus {
+		outline: 3px solid rgba(197, 160, 89, 0.45);
+		outline-offset: 2px;
+		background: #fff;
 	}
 
 	.month-nav {
+		grid-column: 2;
 		display: flex;
 		gap: 8px;
 		overflow-x: auto;
@@ -1343,11 +1388,11 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		align-items: center;
 		gap: 6px;
 		flex: 0 0 auto;
-		min-height: 34px;
-		padding: 0 12px;
+		min-height: 40px;
+		padding: 0 14px;
 		background: #f4f4f5;
 		color: #111;
-		border: 1px solid #e4e4e7;
+		border: 2px solid #e4e4e7;
 		font-size: 0.85rem;
 		font-weight: 900;
 	}
@@ -1464,6 +1509,37 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 
 		.archive-tools {
 			position: static;
+			grid-template-columns: 1fr;
+			gap: 12px;
+			margin-top: 18px;
+			margin-bottom: 26px;
+			padding: 18px 16px;
+			box-shadow: 6px 6px 0 rgba(197, 160, 89, 0.36);
+		}
+
+		.archive-tools-head {
+			padding-bottom: 10px;
+			border-bottom: 1px solid #e4e4e7;
+		}
+
+		.archive-tools-head strong {
+			font-size: 1.35rem;
+		}
+
+		.search-box input {
+			min-height: 58px;
+			font-size: 1.08rem;
+		}
+
+		.month-nav {
+			grid-column: auto;
+			margin-inline: -2px;
+			padding: 2px 2px 6px;
+		}
+
+		.month-nav a {
+			min-height: 44px;
+			padding-inline: 16px;
 		}
 
 		.share-section {
