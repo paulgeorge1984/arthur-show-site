@@ -62,14 +62,17 @@ const formatViews = (value?: string) => {
 
 <Layout
 	title="THE ARTHUR HOLLANDS SHOW"
-	description="毎週水曜14:00から届けられてきた生配信番組 THE ARTHUR HOLLANDS SHOW のアーカイブ。社会、文化、聖書、人生を貫くメッセージを映像でたどるページです。"
+	description="毎週水曜14:00、生配信で語られてきたチャンネルの原点となる生配信番組 THE ARTHUR HOLLANDS SHOW の記録。社会・文化・聖書・人生を貫くジーザスの真理を、アーサーホーランドが力強く宣べ伝えます。"
 >
 	<article class="show-page">
 		<header class="show-hero">
 			<div class="hero-copy">
 				<p class="broadcast-label">LIVE PROGRAM ARCHIVE</p>
 				<h1>THE ARTHUR HOLLANDS SHOW</h1>
-				<p class="hero-lead">毎週水曜14:00から届けられてきた、チャンネル名の原点となる生配信番組の記録。</p>
+				<p class="hero-lead">
+					毎週水曜14:00、生配信で語られてきたチャンネルの原点となる生配信番組の記録。<br />
+					社会・文化・聖書・人生を貫くジーザスの真理を、アーサーホーランドが力強く宣べ伝えます。
+				</p>
 				<div class="hero-actions">
 					<a href="#episodes">EPISODES</a>
 					<a href={archiveData.playlist.url} target="_blank" rel="noopener noreferrer">YOUTUBE</a>
@@ -212,7 +215,7 @@ const formatViews = (value?: string) => {
 
 	<script is:inline>
 		const shareTitle = 'THE ARTHUR HOLLANDS SHOW | アーサーホーランド公式YouTubeチャンネル THE ARTHUR HOLLANDS SHOW';
-		const shareText = '毎週水曜14:00から届けられてきた生配信番組のアーカイブ。';
+		const shareText = '毎週水曜14:00、生配信で語られてきたチャンネルの原点となる生配信番組の記録。';
 		const shareUrl = 'https://arthur-show.com/arthur-hollands-show/';
 		const searchInput = document.querySelector('[data-show-search]');
 		const episodeCards = Array.from(document.querySelectorAll('[data-show-list] .episode-card'));
