@@ -3,9 +3,6 @@ name: Deploy Astro Site
 on:
   push:
     branches: [ main ]
-  schedule:
-    # Runs every 30 minutes (UTC)
-    - cron: '*/30 * * * *'
   workflow_dispatch:
 
 concurrency:
