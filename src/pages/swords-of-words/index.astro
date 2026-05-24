@@ -211,16 +211,27 @@ const bookletScriptureRows = (wordOfGodBooklet.pages || []).flatMap((page) => {
 	}).filter((row) => row.ref && row.text);
 });
 
-const bibleBookVideoRows = (bibleBookVideos.videos || []).map((video) => ({
-	ref: video.book,
-	text: video.quote || video.title,
-	book: video.book,
-	source: 'bible-book-video',
-	href: video.url,
-	dateLabel: '66 BOOKS',
-	title: 'THE DAILY with Arthur Hollands from 66 books of the Bible',
-	relatedVideos: [video],
-})).filter((row) => row.ref && row.text && row.relatedVideos.length);
+const firstBookletPageByBook = new Map<string, number>();
+bookletScriptureRows.forEach((row) => {
+	if (row.book && row.page && !firstBookletPageByBook.has(row.book)) {
+		firstBookletPageByBook.set(row.book, row.page);
+	}
+});
+
+const bibleBookVideoRows = (bibleBookVideos.videos || []).map((video) => {
+	const bookletPage = firstBookletPageByBook.get(video.book);
+	return {
+		ref: video.book,
+		text: video.quote || video.title,
+		book: video.book,
+		source: 'bible-book-video',
+		page: bookletPage,
+		href: bookletPage ? `/1000-verses/?page=${bookletPage}#word-of-god-booklet` : '/1000-verses/#word-of-god-booklet',
+		dateLabel: bookletPage ? `P.${bookletPage}` : '1000 VERSES',
+		title: 'THE WORD OF GOD 1000 VERSES COLLECTION',
+		relatedVideos: [video],
+	};
+}).filter((row) => row.ref && row.text && row.relatedVideos.length);
 
 const rawScriptureRows = [
 	...messageScriptureRows.map((row) => ({
