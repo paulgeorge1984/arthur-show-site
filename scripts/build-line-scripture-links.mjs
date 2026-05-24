@@ -266,7 +266,7 @@ function decorateDaily(video) {
 	return {
 		...video,
 		source: 'THE DAILY',
-		eventDate: dates[0] || '',
+		eventDate: video.eventDate || dates[0] || '',
 		matchKind: 'daily-scripture',
 	};
 }
@@ -322,6 +322,15 @@ function findDailyVideos(pageNumber, lineDate, dailyByPage) {
 		.slice(0, 3);
 }
 
+function findDailyBatchVideo(refIndex, refCount, lineDate, dailyVideos) {
+	if (refCount < 2) return [];
+	const candidates = dailyVideos
+		.filter((video) => video.eventDate && dayDiff(video.eventDate, lineDate) >= 0 && dayDiff(video.eventDate, lineDate) <= 9)
+		.sort((a, b) => a.eventDate.localeCompare(b.eventDate));
+	const video = candidates[refIndex];
+	return video ? [videoCard(video)] : [];
+}
+
 function uniqueVideos(videos) {
 	const seen = new Set();
 	return videos.filter((video) => {
@@ -346,6 +355,7 @@ async function main() {
 	const pages = buildPages(booklet);
 	const fridayVideos = (friday.videos || []).map(decorateFriday).filter((video) => video.eventDate && !/^【VR版】/.test(video.title));
 	const showVideos = (show.videos || []).map(decorateShow).filter((video) => video.eventDate);
+	const dailyVideos = (daily.videos || []).map(decorateDaily).filter((video) => video.eventDate);
 	const messages = parseLineMessages(lineText).filter((message) => message.sender === 'Arthur Hollands');
 	const videosByPage = {};
 	let lineRefCount = 0;
@@ -353,7 +363,7 @@ async function main() {
 	for (const message of messages) {
 		const refs = extractRefs(message.text);
 		if (!refs.length) continue;
-		for (const ref of refs) {
+		for (const [refIndex, ref] of refs.entries()) {
 			const matchedPages = pagesForRef(ref, pages);
 			if (!matchedPages.length) continue;
 			lineRefCount += 1;
@@ -362,6 +372,7 @@ async function main() {
 					...findFridayVideos(message.date, fridayVideos),
 					...findShowVideos(message.date, showVideos),
 					...findDailyVideos(page.page, message.date, daily.videosByPage || {}),
+					...findDailyBatchVideo(refIndex, refs.length, message.date, dailyVideos),
 				]);
 				if (!videos.length) continue;
 				videosByPage[page.page] ||= [];

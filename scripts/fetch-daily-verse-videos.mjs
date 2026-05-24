@@ -39,6 +39,25 @@ function isPublicVideo(video) {
 	return !/(^\[?private video\]?$|^\[?deleted video\]?$|unavailable|非公開|削除済み|この動画は再生できません)/i.test(title);
 }
 
+function parseDates(value = '') {
+	const source = String(value).normalize('NFKC');
+	const dates = [];
+	for (const match of source.matchAll(/(20\d{2})\s*年\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日/g)) {
+		dates.push(`${match[1]}-${match[2].padStart(2, '0')}-${match[3].padStart(2, '0')}`);
+	}
+	for (const match of source.matchAll(/(20\d{2})[/.](\d{1,2})[/.](\d{1,2})/g)) {
+		dates.push(`${match[1]}-${match[2].padStart(2, '0')}-${match[3].padStart(2, '0')}`);
+	}
+	for (const match of source.matchAll(/(\d{4})-(\d{2})-(\d{2})/g)) {
+		dates.push(`${match[1]}-${match[2]}-${match[3]}`);
+	}
+	return [...new Set(dates)];
+}
+
+function isDailyVideo(video) {
+	return /the\s*daily|daily\s*with/i.test(video.title || '');
+}
+
 function extractQuote(title = '') {
 	const matches = [...String(title).matchAll(/「([^」]{4,})」/g)];
 	if (matches.length) return matches.map((match) => match[1]).sort((a, b) => b.length - a.length)[0].trim();
@@ -119,6 +138,7 @@ async function main() {
 	const playlistData = JSON.parse(stdout);
 	const seen = new Set();
 	const videosByPage = {};
+	const videos = [];
 	let publicVideoCount = 0;
 
 	for (const entry of playlistData.entries || []) {
@@ -131,6 +151,12 @@ async function main() {
 		};
 		if (!isPublicVideo(video)) continue;
 		publicVideoCount += 1;
+		if (isDailyVideo(video)) {
+			videos.push({
+				...video,
+				eventDate: parseDates(video.title)[0] || '',
+			});
+		}
 		const match = chooseMatch(video, pages);
 		if (!match) continue;
 		const dedupeKey = `${match.page}:${video.id}`;
@@ -160,9 +186,11 @@ async function main() {
 		},
 		stats: {
 			publicVideoCount,
+			dailyVideoCount: videos.length,
 			linkedVideoCount,
 			linkedPageCount: Object.keys(videosByPage).length,
 		},
+		videos,
 		videosByPage,
 	}, null, 2)}\n`, 'utf8');
 
