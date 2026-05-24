@@ -124,6 +124,24 @@ const pickupItems = videos.map((video) => ({
 			</div>
 		</header>
 
+		{initialPickup && (
+			<section class="featured-broadcast" aria-labelledby="featured-broadcast-title">
+				<div class="featured-thumb">
+					<img src={initialPickup.thumbnail || `https://i.ytimg.com/vi/${initialPickup.id}/hq720.jpg`} alt={`${initialPickup.title} サムネイル`} loading="lazy" data-pickup-thumb />
+				</div>
+				<div class="featured-body">
+					<p class="broadcast-label">ARCHIVE PICKUP</p>
+					<h2 id="featured-broadcast-title" data-pickup-title>{initialPickup.title}</h2>
+					<p class="pickup-meta" data-pickup-meta>{pickupItems[0]?.meta}</p>
+					<p data-pickup-excerpt>{initialPickup.excerpt || initialPickup.description}</p>
+					<div class="pickup-actions">
+						<a href={`https://youtu.be/${initialPickup.id}`} target="_blank" rel="noopener noreferrer" data-pickup-link>この回を見る</a>
+						<button type="button" data-pickup-random>別の回を出す</button>
+					</div>
+				</div>
+			</section>
+		)}
+
 		<section class="show-intro" aria-label="番組概要">
 			<div class="intro-card primary">
 				<p>PROGRAM</p>
@@ -191,24 +209,6 @@ const pickupItems = videos.map((video) => ({
 							</a>
 						);
 					})}
-				</div>
-			</section>
-		)}
-
-		{initialPickup && (
-			<section class="featured-broadcast" aria-labelledby="featured-broadcast-title">
-				<div class="featured-thumb">
-					<img src={initialPickup.thumbnail || `https://i.ytimg.com/vi/${initialPickup.id}/hq720.jpg`} alt={`${initialPickup.title} サムネイル`} loading="lazy" data-pickup-thumb />
-				</div>
-				<div class="featured-body">
-					<p class="broadcast-label">ARCHIVE PICKUP</p>
-					<h2 id="featured-broadcast-title" data-pickup-title>{initialPickup.title}</h2>
-					<p class="pickup-meta" data-pickup-meta>{pickupItems[0]?.meta}</p>
-					<p data-pickup-excerpt>{initialPickup.excerpt || initialPickup.description}</p>
-					<div class="pickup-actions">
-						<a href={`https://youtu.be/${initialPickup.id}`} target="_blank" rel="noopener noreferrer" data-pickup-link>この回を見る</a>
-						<button type="button" data-pickup-random>別の回を出す</button>
-					</div>
 				</div>
 			</section>
 		)}
