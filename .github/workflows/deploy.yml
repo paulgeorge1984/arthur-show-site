@@ -3,6 +3,9 @@ name: Deploy Astro Site
 on:
   push:
     branches: [ main ]
+  schedule:
+    # Publish scheduled messages shortly after the usual 06:30 JST release time.
+    - cron: '35 21 * * *'
   workflow_dispatch:
 
 concurrency:
