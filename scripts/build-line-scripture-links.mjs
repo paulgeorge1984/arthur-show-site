@@ -204,12 +204,28 @@ function firstFriday(year, month) {
 	return toDateKey(date);
 }
 
+function expectedMonthlyFridayNight(year, month) {
+	const date = new Date(`${firstFriday(year, month)}T00:00:00+09:00`);
+	if (month === 1 || month === 5) date.setDate(date.getDate() + 7);
+	return toDateKey(date);
+}
+
 function expectedFridayNightDate(lineDate) {
 	const date = new Date(`${lineDate}T00:00:00+09:00`);
-	const current = firstFriday(date.getFullYear(), date.getMonth() + 1);
+	const current = expectedMonthlyFridayNight(date.getFullYear(), date.getMonth() + 1);
 	if (dayDiff(lineDate, current) <= 3) return current;
 	date.setMonth(date.getMonth() + 1, 1);
-	return firstFriday(date.getFullYear(), date.getMonth() + 1);
+	return expectedMonthlyFridayNight(date.getFullYear(), date.getMonth() + 1);
+}
+
+function expectedShowDates(lineDate) {
+	const dates = new Set();
+	for (let offset = 0; offset <= 1; offset += 1) {
+		const candidate = addDays(lineDate, offset);
+		const day = new Date(`${candidate}T00:00:00+09:00`).getDay();
+		if (day === 2 || day === 3) dates.add(candidate);
+	}
+	return dates;
 }
 
 function decorateFriday(video) {
@@ -265,8 +281,10 @@ function findFridayVideos(lineDate, fridayVideos) {
 }
 
 function findShowVideos(lineDate, showVideos) {
+	const expectedDates = expectedShowDates(lineDate);
+	if (!expectedDates.size) return [];
 	return showVideos
-		.filter((video) => video.eventDate && dayDiff(video.eventDate, lineDate) >= 0 && dayDiff(video.eventDate, lineDate) <= 1)
+		.filter((video) => video.eventDate && expectedDates.has(video.eventDate))
 		.map((video) => videoCard(video))
 		.slice(0, 2);
 }
@@ -275,7 +293,7 @@ function findDailyVideos(pageNumber, lineDate, dailyByPage) {
 	const videos = dailyByPage[String(pageNumber)] || [];
 	return videos
 		.map(decorateDaily)
-		.filter((video) => !video.eventDate || Math.abs(dayDiff(video.eventDate, lineDate)) <= 21)
+		.filter((video) => !video.eventDate || (dayDiff(video.eventDate, lineDate) >= 0 && dayDiff(video.eventDate, lineDate) <= 7))
 		.map((video) => videoCard(video))
 		.slice(0, 3);
 }
