@@ -1056,68 +1056,6 @@ section[id] {
   border-top: 5px solid var(--gold);
 }
 
-.home-return {
-  position: relative;
-  display: grid;
-  gap: 8px;
-  max-width: 1040px;
-  margin: 0 auto clamp(48px, 7vw, 86px);
-  padding: clamp(28px, 5vw, 46px);
-  overflow: hidden;
-  color: white;
-  text-decoration: none;
-  background:
-    linear-gradient(105deg, rgba(6, 62, 115, 0.98), rgba(20, 33, 61, 0.94)),
-    url("./assets/og-image.jpg") center / cover;
-  border-left: 6px solid var(--gold);
-  border-radius: 8px;
-  box-shadow: var(--shadow);
-}
-
-.home-return::after {
-  content: "→";
-  position: absolute;
-  right: clamp(22px, 5vw, 46px);
-  top: 50%;
-  color: var(--gold);
-  font-size: clamp(42px, 7vw, 78px);
-  font-weight: 900;
-  line-height: 1;
-  transform: translateY(-50%);
-}
-
-.home-return-kicker,
-.home-return-title,
-.home-return-text {
-  position: relative;
-  z-index: 1;
-}
-
-.home-return-kicker {
-  color: var(--gold);
-  font-size: 13px;
-  font-weight: 900;
-  letter-spacing: 0.14em;
-}
-
-.home-return-title {
-  max-width: 720px;
-  font-size: clamp(30px, 5vw, 56px);
-  font-weight: 900;
-  line-height: 1.05;
-}
-
-.home-return-text {
-  color: rgba(255, 255, 255, 0.82);
-  font-size: clamp(16px, 2vw, 20px);
-  font-weight: 800;
-}
-
-.home-return:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 28px 70px rgba(10, 31, 68, 0.22);
-}
-
 .closing {
   max-width: 920px;
   text-align: center;
@@ -1401,9 +1339,6 @@ section[id] {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .home-return::after {
-    opacity: 0.32;
-  }
 }
 
 @media (max-width: 620px) {
@@ -1540,16 +1475,6 @@ section[id] {
 
   .share-card {
     min-height: 82px;
-  }
-
-  .home-return {
-    margin-bottom: 44px;
-    padding: 24px 18px;
-  }
-
-  .home-return::after {
-    right: 18px;
-    font-size: 48px;
   }
 
   .day-card.wide {
