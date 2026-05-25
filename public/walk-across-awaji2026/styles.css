@@ -1133,24 +1133,168 @@ section[id] {
   font-size: clamp(18px, 2vw, 23px);
 }
 
-footer {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 30px clamp(18px, 5vw, 56px);
-  color: white;
-  background: var(--blue-dark);
+.site-footer {
+  margin-top: 80px;
+  padding: 60px 0 30px;
+  color: #fff;
+  background: #0a0a0a;
 }
 
-footer p {
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-brand {
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.footer-logo {
+  margin: 0 0 10px;
+  font-family: "Oswald", sans-serif;
+  font-size: 1.8rem;
+  line-height: 1.2;
+}
+
+.footer-desc {
   margin: 0;
-  color: rgba(255, 255, 255, 0.86);
+  color: #c5a059;
+  font-family: "Great Vibes", cursive;
+  font-size: 2.5rem;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
 }
 
-footer a {
-  flex: 0 0 auto;
-  color: white;
-  font-weight: 800;
+.footer-grid {
+  display: grid;
+  gap: 50px;
+}
+
+.footer-col h5 {
+  margin: 0 0 25px;
+  padding-bottom: 10px;
+  color: #c5a059;
+  border-bottom: 1px solid #333;
+  font-family: "Oswald", sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+}
+
+.prog-block {
+  margin-bottom: 40px;
+}
+
+.prog-title {
+  margin: 0 0 5px;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.prog-time {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 2px 8px;
+  color: #ccc;
+  background: #333;
+  border-radius: 4px;
+  font-size: 0.75rem;
+}
+
+.prog-text {
+  margin: 0;
+  color: #ccc;
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+
+.social-block {
+  margin-bottom: 40px;
+}
+
+.yt-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px;
+  color: #fff;
+  border: 1px solid #fff;
+  background: transparent;
+  font-family: "Oswald", sans-serif;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-align: center;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.yt-btn:hover {
+  color: #000;
+  background: #c5a059;
+  border-color: #c5a059;
+}
+
+.yt-icon {
+  font-size: 1.2rem;
+}
+
+.bank-card {
+  margin-bottom: 15px;
+  padding: 20px;
+  text-align: left;
+  background: #1a1a1a;
+  border-left: 3px solid #333;
+  border-radius: 6px;
+}
+
+.bank-label {
+  display: block;
+  margin: 0 0 8px;
+  color: #888;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.bank-details {
+  color: #ddd;
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.bank-row {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.copyright {
+  margin-top: 60px;
+  padding-top: 20px;
+  color: #666;
+  border-top: 1px solid #333;
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1.5fr 1fr;
+    gap: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-desc {
+    font-size: 2rem;
+  }
 }
 
 .lightbox {
@@ -1429,8 +1573,7 @@ footer a {
     background: rgba(0, 0, 0, 0.45);
   }
 
-  footer {
-    flex-direction: column;
-    padding: 24px 14px;
+  .site-footer {
+    margin-top: 56px;
   }
 }

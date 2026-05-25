@@ -1,4 +1,6 @@
 ---
+import SiteFooter from '../components/SiteFooter.astro';
+
 interface Props {
 	title: string;
 	description?: string;
@@ -89,71 +91,7 @@ const navItems = [
 			<slot />
 		</main>
 
-		<footer class="site-footer">
-			<div class="container">
-				<div class="footer-brand">
-					<p class="footer-logo">THE ARTHUR HOLLANDS SHOW</p>
-					<p class="footer-desc">You are Loved</p>
-				</div>
-				
-				<div class="footer-grid">
-					<div class="footer-col programs">
-						<h5>PROGRAM LINEUP</h5>
-						
-						<div class="prog-block">
-							<p class="prog-title">● THE DAILY with ARTHUR HOLLANDS</p>
-							<span class="prog-time">毎朝 6:30</span>
-							<p class="prog-text">
-								一日の始まりに必要なのは、たった一言の真理かもしれません。<br>
-								静かな朝、アーサー先生の声に耳を傾けてください。<br>
-								心が整い、勇気をもって今日を始められる、<br>
-								“霊的ルーティン”となるショートメッセージです。
-							</p>
-						</div>
-
-						<div class="prog-block">
-							<p class="prog-title">● THE ARTHUR HOLLANDS SHOW</p>
-							<span class="prog-time">2025年11月より不定期配信</span>
-							<p class="prog-text">
-								社会・文化・聖書・人生を貫くジーザスの真理を、<br>
-								アーサー先生がまっすぐに、力強く語りかけます。<br>
-								形式ばった言葉ではなく、心に火を灯すメッセージを体験してください。<br>
-								「言葉が魂に届く」――そんな時間が、ここにあります。
-							</p>
-						</div>
-					</div>
-
-					<div class="footer-col support">
-						<div class="social-block">
-							<a href="https://www.youtube.com/@arthurs-show" target="_blank" class="yt-btn">
-								<span class="yt-icon">▶</span> YouTube Channel
-							</a>
-						</div>
-
-						<h5>SUPPORT</h5>
-						<div class="bank-card">
-							<p class="bank-label">▼ アーサー先生への献金</p>
-							<div class="bank-details">
-								<div class="bank-row">三井住友銀行 ひばりヶ丘支店</div>
-								<div class="bank-row">普通 5396176</div>
-								<div class="bank-row">アーサー ホーランド</div>
-							</div>
-						</div>
-						<div class="bank-card">
-							<p class="bank-label">▼ 番組制作者へのサポート</p>
-							<div class="bank-details">
-								<div class="bank-row">みずほ銀行 青山支店</div>
-								<div class="bank-row">普通 1939570</div>
-								<div class="bank-row">スギモト ジョウジ</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="copyright">
-				&copy; {new Date().getFullYear()} The Arthur Hollands Show. All Rights Reserved.
-			</div>
-		</footer>
+		<SiteFooter />
 		<script is:inline>
 			const globalMenuToggle = document.querySelector('[data-global-menu-toggle]');
 			const globalNavShell = document.querySelector('[data-global-nav-shell]');
