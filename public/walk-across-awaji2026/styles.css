@@ -636,6 +636,41 @@ section[id] {
   order: 1;
 }
 
+.road-movie-feature-final {
+  grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
+  background:
+    linear-gradient(112deg, rgba(3, 19, 25, 0.94), rgba(8, 62, 67, 0.88)),
+    url("./assets/rain-traces.jpg") center / cover;
+  border-left-color: #89d1d4;
+}
+
+.road-movie-video {
+  position: relative;
+  align-self: center;
+  min-width: 0;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(7, 21, 39, 0.1), rgba(7, 21, 39, 0.58)),
+    url("./assets/rain-traces.jpg") center / cover;
+  border: 1px solid rgba(137, 209, 212, 0.44);
+  border-radius: 6px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.34);
+}
+
+.road-movie-video::before {
+  content: "";
+  display: block;
+  aspect-ratio: 16 / 9;
+}
+
+.road-movie-video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 .road-movie-thumb {
   position: relative;
   display: block;
@@ -1317,6 +1352,7 @@ section[id] {
 
   .road-movie-feature,
   .road-movie-feature-alt,
+  .road-movie-feature-final,
   .digest-feature {
     grid-template-columns: 1fr;
   }
@@ -1441,6 +1477,7 @@ section[id] {
   }
 
   .road-movie-feature,
+  .road-movie-feature-final,
   .digest-feature {
     padding: 12px;
   }
