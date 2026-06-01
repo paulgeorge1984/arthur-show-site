@@ -1193,7 +1193,7 @@ section[id] {
   line-height: 1.8;
 }
 
-.goto-contact a {
+.goto-contact span {
   display: inline-flex;
   align-items: center;
   min-height: 42px;
@@ -1204,7 +1204,6 @@ section[id] {
   border-radius: 4px;
   font-size: clamp(18px, 2vw, 24px);
   font-weight: 900;
-  text-decoration: none;
 }
 
 .goto-schedule {

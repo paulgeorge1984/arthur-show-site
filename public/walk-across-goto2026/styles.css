@@ -445,7 +445,7 @@ section[id] {
   font-weight: 800;
 }
 
-.contact-panel a {
+.contact-panel span {
   flex: 0 0 auto;
   min-height: 44px;
   padding: 0 16px;
@@ -454,7 +454,7 @@ section[id] {
   border-radius: 4px;
   font-size: clamp(18px, 2vw, 24px);
   font-weight: 900;
-  text-decoration: none;
+  line-height: 44px;
 }
 
 .video-grid,
