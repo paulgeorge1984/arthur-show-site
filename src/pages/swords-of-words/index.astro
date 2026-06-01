@@ -251,7 +251,7 @@ const scriptureRows = rawScriptureRows
 	.filter((row) => Array.isArray(row.relatedVideos) && row.relatedVideos.length > 0)
 	.map((row, index) => ({
 		...row,
-		isRecent: index < 12,
+		isRecent: row.source === 'message',
 		isBibleBookSeries: row.source === 'bible-book-video',
 	}));
 const scriptureBooks = Array.from(new Set(scriptureRows.map((row) => row.book).filter(Boolean)))
