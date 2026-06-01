@@ -286,8 +286,7 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 			</figure>
 
 			<div class="scripture-quick" aria-label="聖句表示切り替え">
-				<button class="scripture-filter active" type="button" data-scripture-filter="bible-book-series">66巻シリーズ</button>
-				<button class="scripture-filter" type="button" data-scripture-filter="recent">最近の御言葉</button>
+				<button class="scripture-filter active" type="button" data-scripture-filter="recent">最近の御言葉</button>
 				<button class="scripture-filter" type="button" data-scripture-filter="all">すべて</button>
 			</div>
 
@@ -384,6 +383,7 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 				applyScriptureFilter(book);
 			});
 		});
+		applyScriptureFilter('recent');
 	</script>
 </Layout>
 
