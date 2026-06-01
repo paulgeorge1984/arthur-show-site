@@ -71,7 +71,7 @@ const years = [...new Set([gotoSpecial.year, awajiSpecial.year, ...walkAcrossPla
 			</div>
 			<div class="playlist-grid">
 				{specialPages.map((special) => (
-					<a class="playlist-card special-playlist-card" href={special.href}>
+					<a class:list={['playlist-card', 'special-playlist-card', { 'goto-special-playlist-card': special.href === '/walk-across-goto2026/' }]} href={special.href}>
 						<div class="thumb">
 							<img src={special.image} alt={`${special.englishTitle} サムネイル`} loading="lazy" />
 						</div>
@@ -282,6 +282,9 @@ const years = [...new Set([gotoSpecial.year, awajiSpecial.year, ...walkAcrossPla
 		height: 100%;
 		object-fit: cover;
 		display: block;
+	}
+	.goto-special-playlist-card .thumb img {
+		object-position: 50% 18%;
 	}
 	.playlist-fallback {
 		width: 100%;
