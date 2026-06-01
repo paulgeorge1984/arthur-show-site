@@ -415,6 +415,14 @@ section[id] {
   border-top: 5px solid var(--sea);
 }
 
+.schedule-grid .schedule-feature {
+  grid-column: span 2;
+  background: linear-gradient(135deg, rgba(9, 96, 117, 0.94), rgba(19, 125, 134, 0.88));
+  border-color: rgba(255, 255, 255, 0.28);
+  border-top-color: var(--gold);
+  color: #fff;
+}
+
 .schedule-grid time {
   color: var(--red);
   font-size: 14px;
@@ -422,9 +430,36 @@ section[id] {
   letter-spacing: 0.06em;
 }
 
+.schedule-grid .schedule-feature time {
+  color: #f7d18a;
+}
+
 .schedule-grid strong {
   font-size: 21px;
   line-height: 1.45;
+}
+
+.schedule-grid p {
+  margin: 0;
+  color: rgba(26, 38, 45, 0.72);
+  font-weight: 700;
+}
+
+.schedule-grid .schedule-feature p {
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.schedule-grid a {
+  width: fit-content;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 900;
+  text-decoration: none;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.64);
+}
+
+.schedule-grid a:hover {
+  border-bottom-color: #fff;
 }
 
 .video-grid,
@@ -957,6 +992,10 @@ section[id] {
 
   .schedule-grid {
     grid-template-columns: 1fr;
+  }
+
+  .schedule-grid .schedule-feature {
+    grid-column: auto;
   }
 
   .share-grid {
