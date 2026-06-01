@@ -8,10 +8,18 @@
   "stats": {
     "publicVideoCount": 1210,
     "dailyVideoCount": 1109,
-    "linkedVideoCount": 107,
-    "linkedPageCount": 72
+    "linkedVideoCount": 117,
+    "linkedPageCount": 79
   },
   "videos": [
+    {
+      "id": "XcoNKRlGiDA",
+      "title": "闇を照らし、腐敗を正せ—あなたは光と塩",
+      "url": "https://youtu.be/XcoNKRlGiDA",
+      "thumbnail": "https://i.ytimg.com/vi/XcoNKRlGiDA/hqdefault.jpg",
+      "duration": "",
+      "eventDate": "2025-11-02"
+    },
     {
       "id": "XGR4g5fc7dI",
       "title": "Don't Carry Too Much—Wildflowers Don't Worry | The Daily with Arthur Hollands 2026/05/24",
@@ -8988,6 +8996,25 @@
         "score": 16
       }
     ],
+    "61": [
+      {
+        "id": "sqzpx_LT9BA",
+        "title": "荒削りな私でいい—主は用いられる",
+        "url": "https://youtu.be/sqzpx_LT9BA",
+        "thumbnail": "https://i.ytimg.com/vi/sqzpx_LT9BA/hqdefault.jpg",
+        "duration": "PT41M11S",
+        "eventDate": "2025-11-03",
+        "quote": "幸いなことよ。 すべて主に身を避ける人は。 主があなたを祝福し、あなたを守られますように。 主が御顔をあなたに照らし、あなたを恵まれますように。 主が御顔をあなたに向け、あなたに平安を与えられますように。",
+        "pageLabel": "詩篇 2:12 / 民数記 6:24–26",
+        "pageRefs": [
+          "詩篇 2:8",
+          "詩篇 2:12",
+          "詩篇 3:1-8"
+        ],
+        "confidence": "exact",
+        "score": 99
+      }
+    ],
     "110": [
       {
         "id": "Ga_fOD9y5SY",
@@ -9168,6 +9195,24 @@
         "score": 17
       }
     ],
+    "181": [
+      {
+        "id": "XcoNKRlGiDA",
+        "title": "闇を照らし、腐敗を正せ—あなたは光と塩",
+        "url": "https://youtu.be/XcoNKRlGiDA",
+        "thumbnail": "https://i.ytimg.com/vi/XcoNKRlGiDA/hqdefault.jpg",
+        "duration": "",
+        "eventDate": "2025-11-02",
+        "quote": "あなたがたは地の塩です。もし塩が塩気をなくしたら、何によって塩気をつけるのでしょうか。あなたがたは世界の光です。",
+        "pageLabel": "マタイの福音書 5:13-14",
+        "pageRefs": [
+          "マタイの福音書 5:13-14",
+          "マタイの福音書 5:15-16"
+        ],
+        "confidence": "exact",
+        "score": 99
+      }
+    ],
     "183": [
       {
         "id": "4p6zcG8dtSM",
@@ -9200,6 +9245,24 @@
         ],
         "confidence": "phrase",
         "score": 12
+      }
+    ],
+    "185": [
+      {
+        "id": "KKOxkSFbVyU",
+        "title": "ジーザスの教えた最強の祈り",
+        "url": "https://youtu.be/KKOxkSFbVyU",
+        "thumbnail": "https://i.ytimg.com/vi/KKOxkSFbVyU/hqdefault.jpg",
+        "duration": "PT30M41S",
+        "eventDate": "2025-11-05",
+        "quote": "だから、こう祈りなさい。天にいます私たちの父よ。御名があがめられますように。",
+        "pageLabel": "マタイの福音書 6:9-13",
+        "pageRefs": [
+          "マタイの福音書 6:9-13",
+          "マタイの福音書 6:10"
+        ],
+        "confidence": "exact",
+        "score": 99
       }
     ],
     "193": [
@@ -9460,7 +9523,42 @@
         "score": 26
       }
     ],
+    "258": [
+      {
+        "id": "n63JhBxZZWI",
+        "title": "幼子の心がないと、始まらないよ？",
+        "url": "https://youtu.be/n63JhBxZZWI",
+        "thumbnail": "https://i.ytimg.com/vi/n63JhBxZZWI/hqdefault.jpg",
+        "duration": "PT25M26S",
+        "eventDate": "2025-11-08",
+        "quote": "誠にあなたがたに告げます。 子どものように神の国を受け入れる者でなければ、 決してそこに入ることはできません。",
+        "pageLabel": "マルコの福音書 10:15",
+        "pageRefs": [
+          "マルコの福音書 10:15",
+          "マルコの福音書 10:29-31"
+        ],
+        "confidence": "exact",
+        "score": 99
+      }
+    ],
     "262": [
+      {
+        "id": "cnOvuAFDjbY",
+        "title": "成増で起きた 涙のリバイバル",
+        "url": "https://youtu.be/cnOvuAFDjbY",
+        "thumbnail": "https://i.ytimg.com/vi/cnOvuAFDjbY/hqdefault.jpg",
+        "duration": "PT50M14S",
+        "eventDate": "2025-11-06",
+        "quote": "イエスが、宮から出て行かれるとき、弟子のひとりがイエスに言った。先生。これはまあ、何とみごとな石でしょう。",
+        "pageLabel": "マルコの福音書 10:51",
+        "pageRefs": [
+          "マルコの福音書 10:51",
+          "マルコの福音書 12:17",
+          "マルコの福音書 13:1-2"
+        ],
+        "confidence": "exact",
+        "score": 99
+      },
       {
         "id": "saFgm0fSXUs",
         "title": "「カイザルのものはカイザルに返しなさい。そして神のものは神にかえしなさい。」THE DAILY with Arthur Hollands 2024/11/29",
@@ -9527,6 +9625,23 @@
         ],
         "confidence": "exact",
         "score": 34
+      },
+      {
+        "id": "CkPyxcTB2Gg",
+        "title": "受けるより与える ー本当の富",
+        "url": "https://youtu.be/CkPyxcTB2Gg",
+        "thumbnail": "https://i.ytimg.com/vi/CkPyxcTB2Gg/hqdefault.jpg",
+        "duration": "PT29M38S",
+        "eventDate": "",
+        "quote": "あなたがたの宝のあるところに、あなたがたの心もあるからです。",
+        "pageLabel": "ルカの福音書 12:34",
+        "pageRefs": [
+          "ルカの福音書 12:12",
+          "ルカの福音書 12:33",
+          "ルカの福音書 12:34"
+        ],
+        "confidence": "exact",
+        "score": 99
       }
     ],
     "344": [
@@ -9828,6 +9943,24 @@
         "score": 16
       }
     ],
+    "397": [
+      {
+        "id": "MBLM_hnNfdE",
+        "title": "去る者と残る者　ジーザスの問い",
+        "url": "https://youtu.be/MBLM_hnNfdE",
+        "thumbnail": "https://i.ytimg.com/vi/MBLM_hnNfdE/hqdefault.jpg",
+        "duration": "PT24M18S",
+        "eventDate": "",
+        "quote": "するとシモン・ペテロが答えた。 「ジーザスよ。私たちは、だれのところに行きましょうか。 あなたは永遠のいのちのことばを持っておられます。」",
+        "pageLabel": "ヨハネの福音書 6:68",
+        "pageRefs": [
+          "ヨハネの福音書 6:65-68",
+          "ヨハネの福音書 6:68"
+        ],
+        "confidence": "exact",
+        "score": 99
+      }
+    ],
     "404": [
       {
         "id": "85ldApCPykU",
@@ -9878,6 +10011,24 @@
         ],
         "confidence": "phrase",
         "score": 13
+      }
+    ],
+    "416": [
+      {
+        "id": "jj8Ws5MpgAc",
+        "title": "日本よ、起きよ！リバイバルの祈り",
+        "url": "https://youtu.be/jj8Ws5MpgAc",
+        "thumbnail": "https://i.ytimg.com/vi/jj8Ws5MpgAc/hqdefault.jpg",
+        "duration": "PT38M18S",
+        "eventDate": "2025-10-31",
+        "quote": "わたしは良い牧者です。 良い牧者は羊のためにいのちを捨てます。",
+        "pageLabel": "ヨハネの福音書 10:11",
+        "pageRefs": [
+          "ヨハネの福音書 10:11",
+          "ヨハネの福音書 10:11-18"
+        ],
+        "confidence": "exact",
+        "score": 99
       }
     ],
     "437": [
@@ -10457,6 +10608,24 @@
         "score": 10
       }
     ],
+    "575": [
+      {
+        "id": "TRBM2KrBenU",
+        "title": "不完全な私を捉えたジーザス",
+        "url": "https://youtu.be/TRBM2KrBenU",
+        "thumbnail": "https://i.ytimg.com/vi/TRBM2KrBenU/hqdefault.jpg",
+        "duration": "PT1H22S",
+        "eventDate": "",
+        "quote": "私は、すでにそれを得たというわけではなく、 すでに完全にされているのでもありません。 ただ捉えようとして追求しているのです。 そしてそれを得るようにと、キリストイエスが私を捉えてくださったのです。",
+        "pageLabel": "ピリピ人への手紙 3:12",
+        "pageRefs": [
+          "ピリピ人への手紙 3:10-14",
+          "ピリピ人への手紙 3:12"
+        ],
+        "confidence": "exact",
+        "score": 99
+      }
+    ],
     "576": [
       {
         "id": "N3ppi28pNyU",
@@ -10476,6 +10645,21 @@
       }
     ],
     "586": [
+      {
+        "id": "dcprArwBUrk",
+        "title": "十字架の赦しが、怒りをほどく",
+        "url": "https://youtu.be/dcprArwBUrk",
+        "thumbnail": "https://i.ytimg.com/vi/dcprArwBUrk/hqdefault.jpg",
+        "duration": "PT31M25S",
+        "eventDate": "2025-11-04",
+        "quote": "いつも喜んでいなさい。絶えず祈りなさい。すべての事について、感謝しなさい。",
+        "pageLabel": "テサロニケ人への手紙 第一 5:16-18",
+        "pageRefs": [
+          "テサロニケ人への手紙 第一 5:16-18"
+        ],
+        "confidence": "exact",
+        "score": 99
+      },
       {
         "id": "fPBJtuGutVs",
         "title": "「いつも喜び、絶えず祈り、全てのことに感謝する テサロニケ人への手紙 第一　- THE DAILY with Arthur Hollands 2023/08/19 #新約聖書",

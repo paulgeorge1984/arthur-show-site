@@ -15,7 +15,14 @@ const allMessages = (await getCollection('daily-messages', ({ data }) => {
 
 const featuredMessages = allMessages.slice(0, 3);
 const archiveMessages = allMessages.slice(3);
-const monthFormatter = new Intl.DateTimeFormat('ja-JP', { year: 'numeric', month: 'long' });
+const monthFormatter = new Intl.DateTimeFormat('ja-JP', { year: 'numeric', month: 'long', timeZone: 'Asia/Tokyo' });
+const tokyoDateParts = new Intl.DateTimeFormat('en-CA', {
+	year: 'numeric',
+	month: '2-digit',
+	day: '2-digit',
+	timeZone: 'Asia/Tokyo',
+});
+const getTokyoMonthKey = (date: Date) => tokyoDateParts.format(date).slice(0, 7);
 const normalizeSearchText = (value = '') => value
 	.replace(/<style>{`[\s\S]*?`}<\/style>/g, ' ')
 	.replace(/\{\/\*[\s\S]*?\*\/\}/g, ' ')
@@ -67,26 +74,18 @@ const bibleBooks = [
 	'ヨハネの手紙 第一', 'ヨハネの手紙 第二', 'ヨハネの手紙 第三', 'ユダの手紙', 'ヨハネの黙示録',
 ];
 const bibleBookOrder = new Map(bibleBooks.map((book, index) => [book, index]));
-const months = Array.from(new Set(allMessages.map((post) => {
-	const y = post.data.date.getFullYear();
-	const m = String(post.data.date.getMonth() + 1).padStart(2, '0');
-	return `${y}-${m}`;
-}))).map((key) => {
+const months = Array.from(new Set(allMessages.map((post) => getTokyoMonthKey(post.data.date)))).map((key) => {
 	const [year, month] = key.split('-').map(Number);
 	const date = new Date(year, month - 1, 1);
 	return {
 		key,
 		label: monthFormatter.format(date),
-		count: allMessages.filter((post) => {
-			const y = post.data.date.getFullYear();
-			const m = String(post.data.date.getMonth() + 1).padStart(2, '0');
-			return `${y}-${m}` === key;
-		}).length,
+		count: allMessages.filter((post) => getTokyoMonthKey(post.data.date) === key).length,
 	};
 });
 const seenArchiveMonths = new Set<string>();
 const archiveRows = archiveMessages.map((post) => {
-	const monthKey = `${post.data.date.getFullYear()}-${String(post.data.date.getMonth() + 1).padStart(2, '0')}`;
+	const monthKey = getTokyoMonthKey(post.data.date);
 	const showMonthAnchor = !seenArchiveMonths.has(monthKey);
 	seenArchiveMonths.add(monthKey);
 	return {
@@ -106,6 +105,7 @@ const formatDate = (date: Date) => date.toLocaleDateString('ja-JP', {
 	year: 'numeric',
 	month: '2-digit',
 	day: '2-digit',
+	timeZone: 'Asia/Tokyo',
 });
 const messageLotteryItems = allMessages.map((post) => ({
 	title: post.data.title,
