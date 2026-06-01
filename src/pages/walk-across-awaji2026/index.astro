@@ -41,7 +41,7 @@ import SiteFooter from '../../components/SiteFooter.astro';
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Oswald:wght@400;700&family=Shippori+Mincho:wght@500;700;800&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=20260530-rain-traces" />
+    <link rel="stylesheet" href="./styles.css?v=20260601-goto-cross" />
   </head>
   <body>
     <header class="site-header" id="top">
@@ -90,6 +90,7 @@ import SiteFooter from '../../components/SiteFooter.astro';
         <a href="#road-movie">ロードムービー</a>
         <a href="#videos">映像</a>
         <a href="#flyer">チラシ</a>
+        <a href="#goto2026">次回・五島列島</a>
         <a href="#share">シェア</a>
     </nav>
 
@@ -406,6 +407,56 @@ import SiteFooter from '../../components/SiteFooter.astro';
           淡路島を一周したこの道が、これからの人生の道を照らし続けますように。
           祈り、出会い、励まし、洗礼、感謝に満ちた5日間を記念して。
         </p>
+      </section>
+
+      <section class="section goto-next" id="goto2026" aria-labelledby="goto-title">
+        <div class="goto-visual">
+          <button class="goto-poster-button" type="button" data-full="./assets/goto-cross-walk-2026.jpg" aria-label="Arthur Hollands 五島列島十字架行進 2026 告知ビジュアルを拡大表示">
+            <img src="./assets/goto-cross-walk-2026.jpg" alt="Arthur Hollands 五島列島十字架行進 2026 告知ビジュアル" loading="lazy" decoding="async" />
+          </button>
+        </div>
+        <div class="goto-copy">
+          <p class="eyebrow">NEXT CROSS WALK</p>
+          <h2 id="goto-title">次の十字架行進は、五島列島へ。</h2>
+          <p class="goto-lead">
+            2026年6月、長崎県・五島列島を舞台に、祈りを込めて十字架を掲げ、島から島へ歩いていきます。
+          </p>
+          <p>
+            福江島、久賀島、奈留島、若松島、そして上五島へ。
+            日本のキリシタン史において重要な舞台の一つである五島の道を、信仰の足跡を覚えながら一歩一歩進む旅です。
+          </p>
+          <div class="goto-route" aria-label="行進予定地">
+            <span>福江島</span>
+            <span>久賀島</span>
+            <span>奈留島</span>
+            <span>若松島</span>
+            <span>上五島</span>
+          </div>
+          <div class="goto-info-grid">
+            <article class="goto-history">
+              <h3>祈りを受け継いだ島々を歩く</h3>
+              <p>
+                かつて多くのキリシタンが、信仰を守るために長崎本土から五島へ移り住みました。
+                厳しい時代の中で受け継がれてきた祈りと歴史を覚えながら、十字架を掲げて歩きます。
+              </p>
+            </article>
+            <article class="goto-contact">
+              <h3>コースのお問い合わせ</h3>
+              <p>当日の詳しいコースについては、事前にサポートスタッフの後藤までお問い合わせください。</p>
+              <a href="tel:08039271165">後藤：080-3927-1165</a>
+            </article>
+          </div>
+          <div class="goto-schedule" aria-label="五島列島十字架行進スケジュール">
+            <div class="goto-schedule-head">行進スケジュール</div>
+            <div><strong>6月21日(日) 夜</strong><span>福江島にて集会予定</span></div>
+            <div><strong>6月22日(月)・23日(火)</strong><span>福江島</span></div>
+            <div><strong>6月24日(水)</strong><span>久賀島</span></div>
+            <div><strong>6月25日(木)</strong><span>奈留島</span></div>
+            <div><strong>6月26日(金)</strong><span>若松島</span></div>
+            <div><strong>6月27日(土)</strong><span>上五島</span></div>
+          </div>
+          <p class="goto-note">行進は朝7:00スタートを基本に、各島の地形や移動状況に合わせて進めていく予定です。</p>
+        </div>
       </section>
 
       <section class="section share-section" id="share" aria-labelledby="share-title">
