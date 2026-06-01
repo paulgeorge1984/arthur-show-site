@@ -156,6 +156,19 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 
 <Layout title="Latest Messages">
 	<div class="container">
+		<a class="awaji-feature goto-feature" href="/walk-across-goto2026/" aria-label="ARTHUR HOLLANDS WALK ACROSS GOTO ISLANDS 2026 特設ページを見る">
+			<div class="awaji-visual">
+				<img src="/walk-across-goto2026/assets/goto-cross-walk-2026.jpg" alt="WALK ACROSS GOTO ISLANDS 2026 五島列島十字架行進の告知ビジュアル" loading="eager" />
+			</div>
+			<div class="awaji-copy">
+				<p class="awaji-kicker">SPECIAL PAGE</p>
+				<h2>GOTO ISLANDS 2026</h2>
+				<p class="awaji-ja">アーサーホーランド五島列島十字架行進2026</p>
+				<p class="awaji-text">2026年6月、祈りをつなぎ、十字架を掲げて五島を歩く旅。</p>
+				<span class="awaji-button">特設ページを見る</span>
+			</div>
+		</a>
+
 		<a class="awaji-feature" href="/walk-across-awaji2026/" aria-label="ARTHUR HOLLANDS WALK ACROSS AWAJI 2026 アーカイブを見る">
 			<div class="awaji-visual">
 				<img src="/assets/walk-across-awaji2026-poster.webp" alt="WALK ACROSS AWAJI 2026 淡路島一周十字架行進のチラシ" loading="eager" />
@@ -553,6 +566,21 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 
 	.awaji-feature:hover .awaji-button {
 		background: #fff;
+	}
+
+	.goto-feature {
+		background:
+			linear-gradient(112deg, rgba(5, 43, 58, 0.98), rgba(6, 96, 117, 0.9)),
+			#052b3a;
+		border-left-color: #8ed8d6;
+	}
+
+	.goto-feature .awaji-kicker {
+		color: #8ed8d6;
+	}
+
+	.goto-feature .awaji-button {
+		background: #d9aa52;
 	}
 
 	.latest-section,
