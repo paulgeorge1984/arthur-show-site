@@ -219,6 +219,16 @@ const newBookletBooks = bookletBookIndex.slice(39).filter((item) => item.page);
 		const linkedVideos = bookletLineVideos[String(pageNumber)] || [];
 		const videoItems = [];
 		const seen = new Set();
+		dailyVideos.forEach((video) => {
+			const key = `THE DAILY:${video.id}`;
+			if (seen.has(key)) return;
+			seen.add(key);
+			videoItems.push({
+				...video,
+				source: 'THE DAILY',
+				matchMeta: `${video.confidence === 'exact' ? 'TITLE MATCH' : 'QUOTE MATCH'}${formatBookletDuration(video.duration) ? ` / ${formatBookletDuration(video.duration)}` : ''}`,
+			});
+		});
 		linkedVideos.forEach((video) => {
 			const key = `${video.source || ''}:${video.id}`;
 			if (seen.has(key)) return;
@@ -228,16 +238,6 @@ const newBookletBooks = bookletBookIndex.slice(39).filter((item) => item.page);
 				quote: video.source || 'RELATED MESSAGE',
 				confidence: video.source || 'RELATED',
 				matchMeta: video.source || 'RELATED',
-			});
-		});
-		dailyVideos.forEach((video) => {
-			const key = `THE DAILY:${video.id}`;
-			if (seen.has(key)) return;
-			seen.add(key);
-			videoItems.push({
-				...video,
-				source: 'THE DAILY',
-				matchMeta: `${video.confidence === 'exact' ? 'TITLE MATCH' : 'QUOTE MATCH'}${formatBookletDuration(video.duration) ? ` / ${formatBookletDuration(video.duration)}` : ''}`,
 			});
 		});
 		const videos = videoItems;
