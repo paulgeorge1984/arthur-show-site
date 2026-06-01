@@ -7,6 +7,7 @@ export type WalkAcrossPlaylist = {
 	playlistId: string;
 	description: string;
 	featured?: boolean;
+	useArchiveVideoSeries?: boolean;
 };
 
 export const walkAcrossPlaylists: WalkAcrossPlaylist[] = [
@@ -63,6 +64,16 @@ export const walkAcrossPlaylists: WalkAcrossPlaylist[] = [
 		region: '日本全国',
 		playlistId: 'PL-faIdjPoxKgiITOcvwjUMgL7zgH8sY6H',
 		description: '行進の旅路から届けられたデイリーメッセージ。',
+	},
+	{
+		slug: 'japan-2024-blessing-news',
+		title: '日本縦断十字架行進2024 Blessing News',
+		englishTitle: 'WALK ACROSS JAPAN 2024 BLESSING NEWS',
+		year: '2024',
+		region: '日本全国',
+		playlistId: 'PL-faIdjPoxKjVQ_uvV2tyTmPXe9d7T-bt',
+		description: 'Blessing Newsで届けられた、日本縦断十字架行進2024の出会い、証し、洗礼の記録。',
+		useArchiveVideoSeries: true,
 	},
 	{
 		slug: 'fuji-2023',

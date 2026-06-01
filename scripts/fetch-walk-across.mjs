@@ -16,7 +16,14 @@ const tokenPath = path.join(os.homedir(), '.arthur-tools/youtube_oauth_token.jso
 const secretPath = path.join(os.homedir(), '.arthur-tools/google_client_secret.json');
 const fetchCaptions = ['1', 'true', 'yes'].includes(String(process.env.FETCH_WALK_CAPTIONS || '').toLowerCase());
 const useYtDlpFallback = !['0', 'false', 'no'].includes(String(process.env.YT_DLP_FALLBACK || '').toLowerCase());
+const useYtDlpOnly = ['1', 'true', 'yes'].includes(String(process.env.YT_DLP_ONLY || '').toLowerCase());
 const fetchFullYtDlpMetadata = ['1', 'true', 'yes'].includes(String(process.env.YT_DLP_FULL_METADATA || '').toLowerCase());
+const requestedSlugs = new Set(
+	String(process.env.WALK_ACROSS_SLUGS || '')
+		.split(',')
+		.map((slug) => slug.trim())
+		.filter(Boolean)
+);
 const execFileAsync = promisify(execFile);
 
 function die(message) {
@@ -72,6 +79,36 @@ function isPublicVideo(video) {
 	const title = String(video?.title || '').trim();
 	if (!video?.id || !title) return false;
 	return !/(^\[?private video\]?$|^\[?deleted video\]?$|unavailable|非公開|削除済み|この動画は再生できません)/i.test(title);
+}
+
+function filterJapan2024BlessingNews(archive, playlistData) {
+	const japan2024Ids = new Set((archive.playlists?.['japan-2024']?.videos || []).map((video) => video.id));
+	const extraJapan2024Ids = new Set([
+		'2jtXSXw4nx0',
+		'bmP13AYbZ5s',
+		'XlYKIygXg7M',
+		'uh6jgPRCBQk',
+		's4XHpdAlsgU',
+		'BAEH-2DsPII',
+	]);
+	const seen = new Set();
+	const videos = (playlistData.videos || []).filter((video) => {
+		const keep = japan2024Ids.has(video.id) || extraJapan2024Ids.has(video.id);
+		if (!keep || seen.has(video.id)) return false;
+		seen.add(video.id);
+		return true;
+	});
+	return {
+		...playlistData,
+		videos,
+		source: `${playlistData.source || 'unknown'} filtered from Blessing News`,
+	};
+}
+
+function postProcessPlaylist(archive, slug) {
+	if (slug === 'japan-2024-blessing-news') {
+		archive.playlists[slug] = filterJapan2024BlessingNews(archive, archive.playlists[slug]);
+	}
 }
 
 async function fetchPlaylistWithYtDlp(playlistId) {
@@ -254,8 +291,11 @@ async function fetchCaption(videoId, accessToken) {
 }
 
 async function main() {
-	const accessToken = await refreshTokenIfNeeded();
-	const playlists = await loadPlaylists();
+	const accessToken = useYtDlpOnly ? '' : await refreshTokenIfNeeded();
+	const playlists = (await loadPlaylists()).filter((playlist) => !requestedSlugs.size || requestedSlugs.has(playlist.slug));
+	if (!playlists.length) {
+		die(`更新対象のWALK_ACROSS_SLUGSが見つかりません: ${[...requestedSlugs].join(', ')}`);
+	}
 	const archive = await readExistingArchive();
 	archive.fetchedAt = new Date().toISOString();
 	archive.playlists ||= {};
@@ -264,7 +304,7 @@ async function main() {
 	for (const playlist of playlists) {
 		console.log(`Fetching ${playlist.slug}...`);
 		try {
-			if (apiQuotaReached) {
+			if (useYtDlpOnly || apiQuotaReached) {
 				console.log(`Using yt-dlp metadata fallback for ${playlist.slug}...`);
 				archive.playlists[playlist.slug] = await fetchPlaylistWithYtDlp(playlist.playlistId);
 			} else {
@@ -292,6 +332,7 @@ async function main() {
 				}
 				archive.playlists[playlist.slug] = { playlistId: playlist.playlistId, videos: videos.filter(isPublicVideo), source: 'youtube-api' };
 			}
+			postProcessPlaylist(archive, playlist.slug);
 			await writeJson(outPath, archive);
 		} catch (error) {
 			if (isQuotaError(error)) {
