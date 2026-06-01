@@ -427,36 +427,6 @@ section[id] {
   line-height: 1.45;
 }
 
-.contact-panel {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  margin-top: 18px;
-  padding: 18px;
-  color: white;
-  background: var(--sea-dark);
-  border-radius: 8px;
-}
-
-.contact-panel p {
-  margin-bottom: 0;
-  color: rgba(255, 255, 255, 0.84);
-  font-weight: 800;
-}
-
-.contact-panel span {
-  flex: 0 0 auto;
-  min-height: 44px;
-  padding: 0 16px;
-  color: var(--sea-dark);
-  background: var(--gold);
-  border-radius: 4px;
-  font-size: clamp(18px, 2vw, 24px);
-  font-weight: 900;
-  line-height: 44px;
-}
-
 .video-grid,
 .documentary-list {
   display: grid;
@@ -918,11 +888,6 @@ section[id] {
 
   .schedule-grid {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .contact-panel {
-    align-items: flex-start;
-    flex-direction: column;
   }
 
   .share-grid {

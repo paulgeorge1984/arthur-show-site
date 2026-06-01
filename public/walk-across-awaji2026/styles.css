@@ -1193,19 +1193,6 @@ section[id] {
   line-height: 1.8;
 }
 
-.goto-contact span {
-  display: inline-flex;
-  align-items: center;
-  min-height: 42px;
-  margin-top: 14px;
-  padding: 0 14px;
-  color: #102235;
-  background: #f2d37c;
-  border-radius: 4px;
-  font-size: clamp(18px, 2vw, 24px);
-  font-weight: 900;
-}
-
 .goto-schedule {
   overflow: hidden;
 }
