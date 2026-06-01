@@ -1089,7 +1089,7 @@ section[id] {
   color: white;
   background:
     linear-gradient(112deg, rgba(3, 35, 48, 0.95), rgba(6, 74, 96, 0.9) 48%, rgba(10, 18, 29, 0.96)),
-    url("./assets/goto-cross-walk-2026.jpg") center / cover;
+    url("./assets/goto-cross-walk-2026-wide.jpg") center / cover;
   border: 1px solid rgba(137, 209, 212, 0.36);
   border-left: 8px solid #d6a84c;
   border-radius: 8px;

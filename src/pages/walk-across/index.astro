@@ -20,6 +20,7 @@ const awajiSpecial = {
 	region: '淡路島',
 	href: '/walk-across-awaji2026/',
 	image: '/assets/walk-across-awaji2026-special.jpg',
+	wideImage: null,
 	description: '淡路島一周十字架行進2026の特設アーカイブ。ダイジェスト映像、ロードムービー、5日間の歩みをまとめています。',
 };
 const gotoSpecial = {
@@ -29,6 +30,7 @@ const gotoSpecial = {
 	region: '五島列島',
 	href: '/walk-across-goto2026/',
 	image: '/walk-across-goto2026/assets/goto-cross-walk-2026.jpg',
+	wideImage: '/walk-across-goto2026/assets/goto-cross-walk-2026-wide.jpg',
 	description: '2026年6月、長崎県・五島列島を舞台に十字架を掲げて歩く祈りの旅。現地映像、ドキュメンタリー、行進記録を順次掲載します。',
 };
 const specialPages = [gotoSpecial, awajiSpecial];
@@ -53,7 +55,7 @@ const years = [...new Set([gotoSpecial.year, awajiSpecial.year, ...walkAcrossPla
 		{specialPages.map((special) => (
 			<div class="awaji-special">
 				<a class="awaji-special-media" href={special.href} aria-label={`${special.englishTitle} 特設ページを見る`}>
-					<img src={special.image} alt={`${special.englishTitle} ${special.title}`} loading="eager" />
+					<img src={special.wideImage || special.image} alt={`${special.englishTitle} ${special.title}`} loading="eager" />
 				</a>
 				<div>
 					<p class="section-kicker">SPECIAL PAGE</p>
@@ -73,7 +75,7 @@ const years = [...new Set([gotoSpecial.year, awajiSpecial.year, ...walkAcrossPla
 				{specialPages.map((special) => (
 					<a class:list={['playlist-card', 'special-playlist-card', { 'goto-special-playlist-card': special.href === '/walk-across-goto2026/' }]} href={special.href}>
 						<div class="thumb">
-							<img src={special.image} alt={`${special.englishTitle} サムネイル`} loading="lazy" />
+							<img src={special.wideImage || special.image} alt={`${special.englishTitle} サムネイル`} loading="lazy" />
 						</div>
 						<div class="card-body">
 							<p>{special.region}</p>
@@ -282,10 +284,6 @@ const years = [...new Set([gotoSpecial.year, awajiSpecial.year, ...walkAcrossPla
 		height: 100%;
 		object-fit: cover;
 		display: block;
-	}
-	.goto-special-playlist-card .thumb img {
-		object-fit: contain;
-		object-position: center center;
 	}
 	.playlist-fallback {
 		width: 100%;

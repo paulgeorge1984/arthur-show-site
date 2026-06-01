@@ -376,7 +376,7 @@ section[id] {
   color: white;
   background:
     linear-gradient(112deg, rgba(5, 43, 58, 0.96), rgba(6, 96, 117, 0.9)),
-    url("./assets/goto-cross-walk-2026.jpg") center / cover;
+    url("./assets/goto-cross-walk-2026-wide.jpg") center / cover;
   border: 1px solid rgba(142, 216, 214, 0.34);
   border-left: 8px solid var(--gold);
   border-radius: 8px;

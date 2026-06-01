@@ -158,7 +158,7 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 	<div class="container">
 		<a class="awaji-feature goto-feature" href="/walk-across-goto2026/" aria-label="ARTHUR HOLLANDS WALK ACROSS GOTO ISLANDS 2026 特設ページを見る">
 			<div class="awaji-visual">
-				<img src="/walk-across-goto2026/assets/goto-cross-walk-2026.jpg" alt="WALK ACROSS GOTO ISLANDS 2026 五島列島十字架行進の告知ビジュアル" loading="eager" />
+				<img src="/walk-across-goto2026/assets/goto-cross-walk-2026-wide.jpg" alt="WALK ACROSS GOTO ISLANDS 2026 五島列島十字架行進の告知ビジュアル" loading="eager" />
 			</div>
 			<div class="awaji-copy">
 				<p class="awaji-kicker">SPECIAL PAGE</p>
@@ -579,9 +579,13 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		color: #8ed8d6;
 	}
 
+	.goto-feature .awaji-visual {
+		aspect-ratio: 16 / 9;
+	}
+
 	.goto-feature .awaji-visual img {
 		object-fit: cover;
-		object-position: 62% 18%;
+		object-position: center center;
 	}
 
 	.goto-feature .awaji-button {
