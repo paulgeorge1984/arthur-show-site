@@ -22,7 +22,17 @@ const awajiSpecial = {
 	image: '/assets/walk-across-awaji2026-special.jpg',
 	description: '淡路島一周十字架行進2026の特設アーカイブ。ダイジェスト映像、ロードムービー、5日間の歩みをまとめています。',
 };
-const years = [...new Set([awajiSpecial.year, ...walkAcrossPlaylists.map((playlist) => playlist.year)])];
+const gotoSpecial = {
+	year: '2026',
+	title: '五島列島十字架行進2026',
+	englishTitle: 'WALK ACROSS GOTO ISLANDS 2026',
+	region: '五島列島',
+	href: '/walk-across-goto2026/',
+	image: '/walk-across-goto2026/assets/goto-cross-walk-2026.jpg',
+	description: '2026年6月、長崎県・五島列島を舞台に十字架を掲げて歩く祈りの旅。現地映像、ドキュメンタリー、行進記録を順次掲載します。',
+};
+const specialPages = [gotoSpecial, awajiSpecial];
+const years = [...new Set([gotoSpecial.year, awajiSpecial.year, ...walkAcrossPlaylists.map((playlist) => playlist.year)])];
 ---
 
 <Layout
@@ -40,17 +50,19 @@ const years = [...new Set([awajiSpecial.year, ...walkAcrossPlaylists.map((playli
 			{years.map((year) => <a href={`#year-${year}`}>{year}</a>)}
 		</div>
 
-		<div class="awaji-special">
-			<a class="awaji-special-media" href={awajiSpecial.href} aria-label={`${awajiSpecial.englishTitle} 特設ページを見る`}>
-				<img src={awajiSpecial.image} alt={`${awajiSpecial.englishTitle} 淡路島一周十字架行進2026`} loading="eager" />
-			</a>
-			<div>
-				<p class="section-kicker">SPECIAL PAGE</p>
-				<h2>{awajiSpecial.englishTitle}</h2>
-				<p>{awajiSpecial.description}</p>
+		{specialPages.map((special) => (
+			<div class="awaji-special">
+				<a class="awaji-special-media" href={special.href} aria-label={`${special.englishTitle} 特設ページを見る`}>
+					<img src={special.image} alt={`${special.englishTitle} ${special.title}`} loading="eager" />
+				</a>
+				<div>
+					<p class="section-kicker">SPECIAL PAGE</p>
+					<h2>{special.englishTitle}</h2>
+					<p>{special.description}</p>
+				</div>
+				<a class="awaji-special-button" href={special.href}>特設ページを見る</a>
 			</div>
-			<a class="awaji-special-button" href={awajiSpecial.href}>特設ページを見る</a>
-		</div>
+		))}
 
 		<section class="year-block" id={`year-${awajiSpecial.year}`}>
 			<div class="year-heading">
@@ -58,17 +70,19 @@ const years = [...new Set([awajiSpecial.year, ...walkAcrossPlaylists.map((playli
 				<h2>{awajiSpecial.year} ARCHIVE</h2>
 			</div>
 			<div class="playlist-grid">
-				<a class="playlist-card special-playlist-card" href={awajiSpecial.href}>
-					<div class="thumb">
-						<img src={awajiSpecial.image} alt={`${awajiSpecial.englishTitle} サムネイル`} loading="lazy" />
-					</div>
-					<div class="card-body">
-						<p>{awajiSpecial.region}</p>
-						<h3>{awajiSpecial.englishTitle}</h3>
-						<strong>{awajiSpecial.title}</strong>
-						<span>SPECIAL ARCHIVE</span>
-					</div>
-				</a>
+				{specialPages.map((special) => (
+					<a class="playlist-card special-playlist-card" href={special.href}>
+						<div class="thumb">
+							<img src={special.image} alt={`${special.englishTitle} サムネイル`} loading="lazy" />
+						</div>
+						<div class="card-body">
+							<p>{special.region}</p>
+							<h3>{special.englishTitle}</h3>
+							<strong>{special.title}</strong>
+							<span>SPECIAL ARCHIVE</span>
+						</div>
+					</a>
+				))}
 			</div>
 		</section>
 

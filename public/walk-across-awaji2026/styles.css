@@ -1248,6 +1248,13 @@ section[id] {
   font-size: 14px;
 }
 
+.goto-note + .button {
+  margin-top: 18px;
+  border-color: var(--gold);
+  color: #14213d;
+  background: var(--gold);
+}
+
 .site-footer {
   margin-top: 80px;
   padding: 60px 0 30px;
