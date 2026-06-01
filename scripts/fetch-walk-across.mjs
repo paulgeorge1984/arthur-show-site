@@ -100,7 +100,7 @@ function filterJapan2024BlessingNews(archive, playlistData) {
 	});
 	return {
 		...playlistData,
-		videos,
+		videos: videos.reverse(),
 		source: `${playlistData.source || 'unknown'} filtered from Blessing News`,
 	};
 }
