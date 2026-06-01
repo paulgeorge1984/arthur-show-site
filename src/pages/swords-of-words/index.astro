@@ -107,6 +107,15 @@ const uniqueRelatedVideos = (videos = []) => {
 	});
 };
 
+const getMessageVideo = (post) => ({
+	id: post.data.youtubeId,
+	title: post.data.title,
+	url: `https://youtu.be/${post.data.youtubeId}`,
+	thumbnail: post.data.heroImage || `https://i.ytimg.com/vi/${post.data.youtubeId}/hq720.jpg`,
+	quote: post.data.description,
+	source: 'THE DAILY',
+});
+
 const scriptureBookPattern = bibleBooks
 	.slice()
 	.sort((a, b) => b.length - a.length)
@@ -241,7 +250,10 @@ const rawScriptureRows = [
 		href: `/messages/${row.post.slug}`,
 		dateLabel: formatDate(row.post.data.date),
 		title: row.post.data.title,
-		relatedVideos: findRelatedDailyVideos(row.text),
+		relatedVideos: uniqueRelatedVideos([
+			getMessageVideo(row.post),
+			...findRelatedDailyVideos(row.text),
+		]),
 	})),
 	...bookletScriptureRows,
 	...bibleBookVideoRows,
@@ -320,7 +332,7 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 						data-scripture-book={row.book}
 						data-scripture-recent={row.isRecent ? 'true' : 'false'}
 						data-scripture-bible-book-series={row.isBibleBookSeries ? 'true' : 'false'}
-						hidden={!row.isBibleBookSeries}
+						hidden={!row.isRecent}
 					>
 						<div class="scripture-message-link">
 							<span class="scripture-ref">{row.ref}</span>
