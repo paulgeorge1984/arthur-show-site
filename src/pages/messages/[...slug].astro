@@ -26,7 +26,8 @@ const slideTranslationNotes = slideDeckIds
 			.split(/\n{2,}/)
 			.map((paragraph) => paragraph.trim())
 			.filter(Boolean),
-	}));
+	}))
+	.filter((note) => note.paragraphs.length > 0);
 const messageShareTitle = entry.data.title;
 const messageShareText = 'アーサーホーランド公式YouTubeチャンネル THE ARTHUR HOLLANDS SHOW';
 const messageShareUrl = `https://arthur-show.com/messages/${entry.slug}/?share=20260602`;
@@ -117,33 +118,14 @@ const messageStructuredData = [
 						Google Slides の埋め込み画面は外部サービスのため、ページ翻訳では中の文字が翻訳されない場合があります。翻訳ページでは、同じ内容をこの欄で読めるようにしています。
 					</p>
 					{slideTranslationNotes.map((note) => (
-						note.paragraphs.length > 0 ? (
-							<details class="slide-notes-card" open data-slide-notes-deck={note.deckId}>
-								<summary>このGoogleスライドの本文</summary>
-								<div class="slide-notes-copy">
-									{note.paragraphs.map((paragraph) => (
-										<p>{paragraph}</p>
-									))}
-								</div>
-							</details>
-						) : (
-							<div class="slide-notes-card slide-notes-empty" data-slide-notes-deck={note.deckId}>
-								<strong>このGoogleスライドの本文データはまだ未登録です。</strong>
-								<p>
-									下のボタンから、Google翻訳でスライドのテキスト版を開けます。
-								</p>
-								<a
-									class="slide-translate-button slide-translate-button-secondary"
-									href={`https://docs.google.com/presentation/d/${note.deckId}/export/txt`}
-									target="_blank"
-									rel="noopener noreferrer"
-									data-slide-notes-text-link
-									data-slide-deck-id={note.deckId}
-								>
-									翻訳用テキストを開く
-								</a>
+						<details class="slide-notes-card" open data-slide-notes-deck={note.deckId}>
+							<summary>このGoogleスライドの本文</summary>
+							<div class="slide-notes-copy">
+								{note.paragraphs.map((paragraph) => (
+									<p>{paragraph}</p>
+								))}
 							</div>
-						)
+						</details>
 					))}
 				</div>
 			</section>
@@ -233,6 +215,39 @@ const messageStructuredData = [
 	}
 
 	updateMessageShareButtons();
+
+	function suppressGoogleTranslateChrome() {
+		if (!window.location.hostname.endsWith('.translate.goog')) return;
+
+		document.documentElement.style.setProperty('margin-top', '0', 'important');
+		document.documentElement.style.setProperty('overflow-x', 'hidden', 'important');
+		document.body?.style.setProperty('margin-top', '0', 'important');
+		document.body?.style.setProperty('top', '0', 'important');
+		document.body?.style.setProperty('overflow-x', 'hidden', 'important');
+		document
+			.querySelectorAll('iframe#gt-nvframe, iframe.goog-te-banner-frame, iframe.skiptranslate, body > .skiptranslate, #goog-gt-tt, .goog-te-balloon-frame, .VIpgJd-ZVi9od-ORHb-OEVmcd')
+			.forEach((item) => {
+				item.style.setProperty('display', 'none', 'important');
+				item.style.setProperty('visibility', 'hidden', 'important');
+				item.style.setProperty('width', '0', 'important');
+				item.style.setProperty('height', '0', 'important');
+				item.style.setProperty('opacity', '0', 'important');
+				item.style.setProperty('pointer-events', 'none', 'important');
+			});
+		if (window.scrollX) window.scrollTo(0, window.scrollY);
+	}
+
+	suppressGoogleTranslateChrome();
+	if (window.location.hostname.endsWith('.translate.goog')) {
+		const translateChromeObserver = new MutationObserver(suppressGoogleTranslateChrome);
+		translateChromeObserver.observe(document.documentElement, { childList: true, subtree: true });
+		window.addEventListener('load', () => {
+			suppressGoogleTranslateChrome();
+			[300, 1000, 2400, 5000].forEach((delay) => {
+				window.setTimeout(suppressGoogleTranslateChrome, delay);
+			});
+		}, { once: true });
+	}
 
 	function getTargetTranslationLanguage() {
 		const params = new URLSearchParams(window.location.search);
@@ -402,6 +417,17 @@ const messageStructuredData = [
 		return mediaColumn;
 	}
 
+	function getSlideNotesFallbackForDeck(deckId) {
+		if (!deckId) return null;
+
+		let matchingFallback = null;
+		document.querySelectorAll('[data-slide-notes-deck]').forEach((card) => {
+			if (card.dataset.slideNotesDeck !== deckId) return;
+			matchingFallback = card.closest('[data-slide-notes-fallback]');
+		});
+		return matchingFallback;
+	}
+
 	function addSlideTranslationSupport() {
 		const targetLanguage = getTargetTranslationLanguage();
 		setSlideNotesFallbackVisibility(Boolean(targetLanguage));
@@ -423,8 +449,9 @@ const messageStructuredData = [
 				iframe.setAttribute('src', originalSlideUrl);
 			}
 
+			const deckId = getSlideDeckId(source);
 			const container = iframe.closest('.slide-container') || iframe.parentElement;
-			const notes = document.querySelector('[data-slide-notes-fallback]');
+			const notes = getSlideNotesFallbackForDeck(deckId);
 			const actionParent = notes ? placeSlideNotesFallback(container, notes) : container;
 			if (!actionParent || actionParent.querySelector('.slide-translate-actions')) return;
 
@@ -502,12 +529,60 @@ const messageStructuredData = [
 	}
 
 	.content-area {
+		width: 100%;
 		max-width: 800px;
 		margin: 0 auto;
 		padding: 40px 20px;
 		background: #fff;
 		position: relative;
 		z-index: 10;
+		overflow-x: clip;
+	}
+
+	:global(html),
+	:global(body) {
+		width: 100%;
+		max-width: 100%;
+		overflow-x: hidden;
+	}
+
+	:global(html.translated-ltr),
+	:global(html.translated-rtl) {
+		margin-top: 0 !important;
+	}
+
+	:global(body.translated-ltr),
+	:global(body.translated-rtl) {
+		top: 0 !important;
+		margin-top: 0 !important;
+	}
+
+	:global(iframe#gt-nvframe),
+	:global(iframe.goog-te-banner-frame),
+	:global(iframe.skiptranslate),
+	:global(body > .skiptranslate),
+	:global(#goog-gt-tt),
+	:global(.goog-te-balloon-frame),
+	:global(.VIpgJd-ZVi9od-ORHb-OEVmcd) {
+		display: none !important;
+		visibility: hidden !important;
+		width: 0 !important;
+		height: 0 !important;
+		opacity: 0 !important;
+		pointer-events: none !important;
+	}
+
+	:global(.goog-text-highlight) {
+		background: transparent !important;
+		box-shadow: none !important;
+	}
+
+	:global(.article-wrap),
+	:global(.slide-container),
+	:global(.slide-translation-layout),
+	:global(.slide-media-column) {
+		max-width: 100%;
+		min-width: 0;
 	}
 
 	:global(.slide-translation-layout) {
@@ -536,6 +611,8 @@ const messageStructuredData = [
 		flex-wrap: wrap;
 		justify-content: flex-start;
 		margin: 12px 0 0;
+		max-width: 100%;
+		min-width: 0;
 	}
 
 	:global(.slide-translate-button) {
@@ -551,8 +628,12 @@ const messageStructuredData = [
 		font-size: 0.82rem;
 		font-weight: 900;
 		letter-spacing: 0.08em;
-		line-height: 1;
+		line-height: 1.2;
 		text-decoration: none;
+		max-width: 100%;
+		min-width: 0;
+		text-align: center;
+		white-space: normal;
 	}
 
 	:global(.slide-translate-button:hover) {
@@ -719,27 +800,6 @@ const messageStructuredData = [
 		letter-spacing: 0.08em;
 	}
 
-	:global(.slide-notes-empty) {
-		display: grid;
-		gap: 12px;
-		padding: 16px;
-	}
-
-	:global(.slide-notes-empty strong) {
-		color: #111;
-		font-size: 0.96rem;
-		font-weight: 900;
-		line-height: 1.55;
-	}
-
-	:global(.slide-notes-empty p) {
-		margin: 0;
-		color: #555;
-		font-size: 0.9rem;
-		font-weight: 700;
-		line-height: 1.7;
-	}
-
 	:global(.slide-notes-copy) {
 		max-height: none;
 		overflow: visible;
@@ -878,6 +938,17 @@ const messageStructuredData = [
 			max-height: 58vh;
 			overflow: auto;
 			padding-right: 2px;
+		}
+
+		:global(.slide-translate-actions) {
+			display: grid;
+			grid-template-columns: 1fr;
+		}
+
+		:global(.slide-translate-button) {
+			width: 100%;
+			min-height: 40px;
+			padding: 8px 12px;
 		}
 	}
 </style>
