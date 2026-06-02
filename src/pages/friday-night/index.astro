@@ -54,11 +54,18 @@ const formatViews = (value?: string) => {
 	if (!count) return '';
 	return new Intl.NumberFormat('ja-JP').format(count);
 };
+const socialImage = latestVideo?.id
+	? `https://i.ytimg.com/vi/${latestVideo.id}/hq720.jpg`
+	: '/og-image.jpg';
 ---
 
 <Layout
 	title="FRIDAY NIGHT"
 	description="OCC Friday Night。毎月第一金曜日19:00より、お茶の水クリスチャンセンターにて開催。アーサー・ホーランドが30年以上語り続けてきた集会と、コロナ禍以降に始まった映像伝道の歴史的アーカイブ。"
+	image={socialImage}
+	imageAlt="FRIDAY NIGHT 最新メッセージ サムネイル"
+	imageWidth={1280}
+	imageHeight={720}
 >
 	<article class="friday-page">
 		<header class="friday-hero">

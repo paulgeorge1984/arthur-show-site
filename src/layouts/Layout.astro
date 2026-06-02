@@ -4,15 +4,34 @@ import SiteFooter from '../components/SiteFooter.astro';
 interface Props {
 	title: string;
 	description?: string;
+	image?: string;
+	imageAlt?: string;
+	imageWidth?: number;
+	imageHeight?: number;
+	imageType?: string;
+	ogType?: string;
 }
 
-const { title, description } = Astro.props;
+const {
+	title,
+	description,
+	image = "/og-image.jpg",
+	imageAlt,
+	imageWidth = 1200,
+	imageHeight = 675,
+	imageType = "image/jpeg",
+	ogType = "article",
+} = Astro.props;
 
 // URLとタイトルを定義
 const siteTitle = "THE ARTHUR HOLLANDS SHOW";
+const siteUrl = "https://arthur-show.com";
 const pageTitle = `${title} | ${siteTitle}`;
-const canonicalURL = new URL(Astro.url.pathname, "https://arthur-show.com");
-const socialImageURL = new URL("/og-image.jpg", canonicalURL); // サムネイル画像（あれば）
+const fallbackDescription = "You are Loved. Walk the talk. Talk the walk.";
+const metaDescription = description || fallbackDescription;
+const canonicalURL = new URL(Astro.url.pathname, siteUrl).href;
+const socialImageURL = new URL(image, siteUrl).href;
+const socialImageAlt = imageAlt || pageTitle;
 const currentPath = Astro.url.pathname;
 const isCurrent = (href: string) => {
 	if (href === '/') return currentPath === '/';
@@ -35,23 +54,32 @@ const navItems = [
 <html lang="ja">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content={description || "You are Loved. Walk the talk. Talk the walk."} />
+		<meta name="description" content={metaDescription} />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="format-detection" content="telephone=no">
 		
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="canonical" href={canonicalURL} />
 		<title>{pageTitle}</title>
 		
 		<meta property="og:title" content={pageTitle} />
-		<meta property="og:description" content={description || "Arthur Hollands Archive"} />
-		<meta property="og:type" content="article" />
+		<meta property="og:description" content={metaDescription} />
+		<meta property="og:type" content={ogType} />
 		<meta property="og:url" content={canonicalURL} />
 		<meta property="og:site_name" content={siteTitle} />
+		<meta property="og:locale" content="ja_JP" />
 		<meta property="og:image" content={socialImageURL} />
+		<meta property="og:image:secure_url" content={socialImageURL} />
+		<meta property="og:image:type" content={imageType} />
+		<meta property="og:image:width" content={String(imageWidth)} />
+		<meta property="og:image:height" content={String(imageHeight)} />
+		<meta property="og:image:alt" content={socialImageAlt} />
 		
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={pageTitle} />
-		<meta name="twitter:description" content={description} />
+		<meta name="twitter:description" content={metaDescription} />
+		<meta name="twitter:image" content={socialImageURL} />
+		<meta name="twitter:image:alt" content={socialImageAlt} />
 
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

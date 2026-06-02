@@ -44,13 +44,23 @@ const playlistUrl = `https://www.youtube.com/playlist?list=${playlist.playlistId
 const embedUrl = playlist.useArchiveVideoSeries && archiveVideoIds.length
 	? `https://www.youtube.com/embed/${archiveVideoIds[0]}?playlist=${archiveVideoIds.slice(1).join(',')}&rel=0`
 	: `https://www.youtube.com/embed/videoseries?list=${playlist.playlistId}&rel=0`;
+const socialImage = firstVideo?.id
+	? `https://i.ytimg.com/vi/${firstVideo.id}/hq720.jpg`
+	: '/og-image.jpg';
 const formatDate = (value?: string) => {
 	if (!value) return '';
 	return new Intl.DateTimeFormat('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(value));
 };
 ---
 
-<Layout title={playlist.englishTitle} description={`${playlist.title} | THE ARTHUR HOLLANDS SHOW`}>
+<Layout
+	title={playlist.englishTitle}
+	description={`${playlist.title} | THE ARTHUR HOLLANDS SHOW`}
+	image={socialImage}
+	imageAlt={`${playlist.englishTitle} サムネイル`}
+	imageWidth={1280}
+	imageHeight={720}
+>
 	<article class="walk-detail">
 		<header class="detail-hero">
 			<a class="back-link" href="/walk-across/">WALK ACROSS ARCHIVE</a>

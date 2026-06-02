@@ -87,11 +87,18 @@ const pickupItems = videos.map((video) => ({
 	].filter(Boolean).join(' / '),
 	views: formatViews(video.viewCount),
 }));
+const socialImage = pickupItems[0]?.id
+	? `https://i.ytimg.com/vi/${pickupItems[0].id}/hq720.jpg`
+	: '/og-image.jpg';
 ---
 
 <Layout
 	title="THE ARTHUR HOLLANDS SHOW"
 	description="毎週水曜14:00、生配信で語られてきたチャンネルの原点となる生配信番組 THE ARTHUR HOLLANDS SHOW の記録。社会・文化・聖書・人生を貫くジーザスの真理を、アーサーホーランドが力強く宣べ伝えます。"
+	image={socialImage}
+	imageAlt="THE ARTHUR HOLLANDS SHOW 最新メッセージ サムネイル"
+	imageWidth={1280}
+	imageHeight={720}
 >
 	<article class="show-page">
 		<header class="show-hero">
