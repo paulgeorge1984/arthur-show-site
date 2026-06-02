@@ -11,8 +11,8 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
-const messageShareTitle = `${entry.data.title} | アーサーホーランド公式YouTubeチャンネル THE ARTHUR HOLLANDS SHOW`;
-const messageShareText = entry.data.description || entry.data.title;
+const messageShareTitle = entry.data.title;
+const messageShareText = '';
 const messageShareUrl = `https://arthur-show.com/messages/${entry.slug}/?share=20260602`;
 const messageImage = entry.data.heroImage || `https://i.ytimg.com/vi/${entry.data.youtubeId}/hq720.jpg`;
 ---
@@ -81,8 +81,10 @@ const messageImage = entry.data.heroImage || `https://i.ytimg.com/vi/${entry.dat
 	function updateMessageShareButtons() {
 		const shareButtons = document.querySelectorAll('.share-button');
 		const encodedUrl = encodeURIComponent(messageShareUrl);
-		const encodedText = encodeURIComponent(`${messageShareTitle}\n${messageShareText}`);
-		const encodedLineText = encodeURIComponent(`${messageShareTitle}\n${messageShareText}\n${messageShareUrl}`);
+		const shareText = [messageShareTitle, messageShareText].filter(Boolean).join('\n');
+		const shareTextWithUrl = [messageShareTitle, messageShareText, messageShareUrl].filter(Boolean).join('\n');
+		const encodedText = encodeURIComponent(shareText);
+		const encodedLineText = encodeURIComponent(shareTextWithUrl);
 
 		shareButtons.forEach((button) => {
 			button.removeAttribute('onclick');
@@ -111,14 +113,14 @@ const messageImage = entry.data.heroImage || `https://i.ytimg.com/vi/${entry.dat
 			if (button.classList.contains('copy')) {
 				button.addEventListener('click', async () => {
 					try {
-						await navigator.clipboard.writeText(`${messageShareTitle}\n${messageShareText}\n${messageShareUrl}`);
+						await navigator.clipboard.writeText(shareTextWithUrl);
 						const originalLabel = button.getAttribute('aria-label') || 'リンクをコピー';
 						button.setAttribute('aria-label', 'コピーしました');
 						setTimeout(() => {
 							button.setAttribute('aria-label', originalLabel);
 						}, 1800);
 					} catch {
-						window.prompt('このURLをコピーしてください', `${messageShareTitle}\n${messageShareText}\n${messageShareUrl}`);
+						window.prompt('このURLをコピーしてください', shareTextWithUrl);
 					}
 				});
 			}
