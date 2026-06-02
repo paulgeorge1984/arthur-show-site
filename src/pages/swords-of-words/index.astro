@@ -299,6 +299,31 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 				<img src="/assets/generated/swords-of-words-banner.webp" alt="" loading="eager" />
 			</figure>
 
+			<section class="share-section" id="share" aria-labelledby="share-title">
+				<h2 id="share-title">この索引をシェアする</h2>
+				<div class="share-grid" aria-label="SNS共有ボタン">
+					<button class="share-card primary-share" type="button" data-share-native>
+						<span>スマホで共有</span>
+					</button>
+					<a class="share-card line" href="https://line.me/R/msg/text/?THE%20SWORDS%20OF%20WORDS%0Ahttps%3A%2F%2Farthur-show.com%2Fswords-of-words%2F" data-share-line target="_blank" rel="noreferrer">
+						<span>LINE</span>
+					</a>
+					<a class="share-card x" href="https://twitter.com/intent/tweet?text=THE%20SWORDS%20OF%20WORDS&url=https%3A%2F%2Farthur-show.com%2Fswords-of-words%2F" data-share-x target="_blank" rel="noreferrer">
+						<span>X</span>
+					</a>
+					<a class="share-card facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farthur-show.com%2Fswords-of-words%2F" data-share-facebook target="_blank" rel="noreferrer">
+						<span>Facebook</span>
+					</a>
+					<button class="share-card instagram" type="button" data-copy-link>
+						<span>Instagram</span>
+					</button>
+					<button class="share-card copy" type="button" data-copy-link>
+						<span>リンクコピー</span>
+						<small data-copy-status>URLをクリップボードへ</small>
+					</button>
+				</div>
+			</section>
+
 			<div class="scripture-quick" aria-label="聖句表示切り替え">
 				<button class="scripture-filter active" type="button" data-scripture-filter="recent">最近の御言葉</button>
 				<button class="scripture-filter" type="button" data-scripture-filter="all">すべて</button>
@@ -373,9 +398,59 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 	</main>
 
 	<script is:inline>
+		const shareTitle = 'THE SWORDS OF WORDS';
+		const shareText = 'アーサーホーランドの御言葉メッセージ索引。';
+		const shareUrl = 'https://arthur-show.com/swords-of-words/?share=20260602';
 		const scriptureCards = Array.from(document.querySelectorAll('[data-scripture-card]'));
 		const scriptureFilters = Array.from(document.querySelectorAll('[data-scripture-filter]'));
 		const scriptureEmpty = document.querySelector('[data-scripture-empty]');
+
+		function updateShareLinks() {
+			const encodedUrl = encodeURIComponent(shareUrl);
+			const encodedText = encodeURIComponent(`${shareTitle}\n${shareText}`);
+			const encodedLineText = encodeURIComponent(`${shareTitle}\n${shareText}\n${shareUrl}`);
+			const line = document.querySelector('[data-share-line]');
+			const x = document.querySelector('[data-share-x]');
+			const facebook = document.querySelector('[data-share-facebook]');
+
+			if (line) line.href = `https://line.me/R/msg/text/?${encodedLineText}`;
+			if (x) x.href = `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`;
+			if (facebook) facebook.href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+		}
+
+		async function copyShareLink() {
+			const statusItems = document.querySelectorAll('[data-copy-status]');
+			const payload = `${shareTitle}\n${shareText}\n${shareUrl}`;
+			try {
+				await navigator.clipboard.writeText(payload);
+				statusItems.forEach((item) => {
+					item.textContent = 'コピーしました';
+				});
+				setTimeout(() => {
+					statusItems.forEach((item) => {
+						item.textContent = 'URLをクリップボードへ';
+					});
+				}, 1800);
+			} catch {
+				window.prompt('この内容をコピーしてください', payload);
+			}
+		}
+
+		async function sharePage() {
+			if (navigator.share) {
+				try {
+					await navigator.share({
+						title: shareTitle,
+						text: shareText,
+						url: shareUrl,
+					});
+					return;
+				} catch (error) {
+					if (error.name === 'AbortError') return;
+				}
+			}
+			await copyShareLink();
+		}
 
 		function applyScriptureFilter(book) {
 			let visible = 0;
@@ -396,6 +471,13 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 				scriptureFilters.forEach((b) => b.classList.toggle('active', b === button));
 				applyScriptureFilter(book);
 			});
+		});
+		updateShareLinks();
+		document.querySelectorAll('[data-share-native]').forEach((button) => {
+			button.addEventListener('click', sharePage);
+		});
+		document.querySelectorAll('[data-copy-link]').forEach((button) => {
+			button.addEventListener('click', copyShareLink);
 		});
 		applyScriptureFilter('recent');
 	</script>
@@ -533,6 +615,89 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		object-fit: cover;
 		object-position: center 42%;
 		filter: saturate(1.12) contrast(1.08);
+	}
+
+	.share-section {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 14px;
+		margin: 0 0 18px;
+		padding: 13px 0;
+		border-top: 1px solid rgba(197, 160, 89, 0.5);
+		border-bottom: 1px solid rgba(197, 160, 89, 0.28);
+	}
+
+	.share-section h2 {
+		flex: 0 0 auto;
+		color: rgba(255, 255, 255, 0.72);
+		font-size: 0.86rem;
+		font-weight: 900;
+	}
+
+	.share-grid {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+		gap: 8px;
+	}
+
+	.share-card {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 34px;
+		padding: 0 11px;
+		color: #fff;
+		text-align: center;
+		text-decoration: none;
+		cursor: pointer;
+		background: rgba(255, 255, 255, 0.08);
+		border: 1px solid rgba(197, 160, 89, 0.32);
+		font: inherit;
+	}
+
+	.share-card span {
+		display: block;
+		font-size: 0.78rem;
+		font-weight: 900;
+		line-height: 1;
+	}
+
+	.share-card small {
+		display: none;
+	}
+
+	.share-card:hover {
+		transform: translateY(-1px);
+		background: rgba(255, 255, 255, 0.14);
+	}
+
+	.primary-share {
+		color: #050505;
+		background: #c5a059;
+	}
+
+	.line {
+		border-bottom: 3px solid #06c755;
+	}
+
+	.x {
+		border-bottom: 3px solid #fff;
+	}
+
+	.facebook {
+		border-bottom: 3px solid #1877f2;
+	}
+
+	.instagram {
+		border-bottom: 3px solid #e4405f;
+	}
+
+	.copy {
+		border-bottom: 3px solid #c5a059;
 	}
 
 	.scripture-quick {
@@ -917,6 +1082,15 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 
 		.book-index-grid {
 			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+
+		.share-section {
+			align-items: flex-start;
+			flex-direction: column;
+		}
+
+		.share-grid {
+			justify-content: flex-start;
 		}
 
 		.scripture-grid {
