@@ -4,7 +4,9 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
+    "prebuild": "node scripts/sync-slide-notes.mjs",
     "build": "astro build",
+    "sync:slide-notes": "node scripts/sync-slide-notes.mjs",
     "fetch:arthur-show": "node scripts/fetch-arthur-show.mjs",
     "fetch:arthur-show-series": "node scripts/fetch-arthur-show-series.mjs",
     "fetch:walk-across": "node scripts/fetch-walk-across.mjs",
