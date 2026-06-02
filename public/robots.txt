@@ -1,0 +1,8 @@
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: *
+Allow: /
+Disallow: /private-arthur-growth-lab-2026/
+
+Sitemap: https://arthur-show.com/sitemap.xml

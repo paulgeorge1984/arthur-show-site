@@ -1,0 +1,1241 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const officialScheduleUrl = 'https://www.arthurhollands.com/%E3%82%B9%E3%82%B1%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB';
+const officialNotice = '本ページは参考表記のため、カレンダーの最新データ、および再来月以降のスケジュールは、必ず上記のアーサーホーランド公式サイトからご確認ください。';
+const recurringScheduleImage = '/assets/arthur-related-schedule-cycle.jpg';
+const calendarShareUrl = 'https://arthur-show.com/calendar/';
+const calendarShareTitle = 'アーサーホーランド関連スケジュール | THE ARTHUR HOLLANDS SHOW';
+const encodedCalendarShareUrl = encodeURIComponent(calendarShareUrl);
+const encodedCalendarShareText = encodeURIComponent(calendarShareTitle);
+const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${calendarShareUrl}`);
+---
+
+	<Layout
+		title="Calendar"
+		description="アーサー・ホーランド公式Googleカレンダーと同期して、今月・来月のイベントスケジュールを見やすく表示します。本ページは参考表記のため、最新データは公式サイトをご確認ください。"
+		ogType="website"
+	>
+	<article class="calendar-page">
+		<header class="calendar-hero">
+			<div class="hero-copy">
+				<p class="calendar-label">OFFICIAL SCHEDULE SYNC</p>
+				<h1>CALENDAR</h1>
+				<p>
+					アーサー・ホーランド公式サイトで公開されているGoogleカレンダー情報から、今月と来月の予定を読み込んで表示しています。
+				</p>
+				<div class="hero-actions">
+					<a href="#calendar-events">予定を見る</a>
+					<a href={officialScheduleUrl} target="_blank" rel="noopener noreferrer">公式サイト</a>
+				</div>
+			</div>
+			<aside class="official-note" aria-label="公式サイト確認の案内">
+				<span>IMPORTANT</span>
+				<a class="official-note-link" href={officialScheduleUrl} target="_blank" rel="noopener noreferrer">公式サイトはこちら</a>
+				<strong>{officialNotice}</strong>
+				<p>このページは公式Googleカレンダーと同期していますが、公式情報の確認先はアーサーホーランド公式サイトです。</p>
+			</aside>
+		</header>
+
+		<section class="recurring-schedule" aria-label="アーサー・ホーランド氏 関連予定">
+			<img
+				src={recurringScheduleImage}
+				alt="アーサー・ホーランド氏 関連予定。第1週金曜日フライデーナイト、お茶の水OCC、月に一回成増教会での日曜礼拝、月に一回ブレッシングナイト、u-ma神楽坂。"
+				width="1280"
+				height="720"
+				loading="eager"
+			/>
+		</section>
+
+		<section class="calendar-section" id="calendar-events" aria-labelledby="calendar-title">
+			<div class="calendar-heading">
+				<div>
+					<p class="calendar-label">EVENT SCHEDULE</p>
+					<h2 id="calendar-title">今月・来月の予定</h2>
+				</div>
+				<a href={officialScheduleUrl} target="_blank" rel="noopener noreferrer">公式スケジュールへ</a>
+			</div>
+
+			<section class="calendar-share" aria-labelledby="calendar-share-title">
+				<div>
+					<p class="calendar-label">SHARE</p>
+					<h3 id="calendar-share-title">この予定をシェア</h3>
+				</div>
+				<div class="calendar-share-buttons" aria-label="SNS共有ボタン">
+					<button class="calendar-share-button native" type="button" data-calendar-share-native>
+						<span>スマホで共有</span>
+					</button>
+					<a class="calendar-share-button line" href={`https://line.me/R/msg/text/?${encodedCalendarLineText}`} target="_blank" rel="noopener noreferrer">
+						<span>LINE</span>
+					</a>
+					<a class="calendar-share-button x" href={`https://twitter.com/intent/tweet?text=${encodedCalendarShareText}&url=${encodedCalendarShareUrl}`} target="_blank" rel="noopener noreferrer">
+						<span>X</span>
+					</a>
+					<a class="calendar-share-button facebook" href={`https://www.facebook.com/sharer/sharer.php?u=${encodedCalendarShareUrl}`} target="_blank" rel="noopener noreferrer">
+						<span>Facebook</span>
+					</a>
+					<button class="calendar-share-button copy" type="button" data-calendar-copy-link>
+						<span>リンクコピー</span>
+						<small data-calendar-copy-status>URLをコピー</small>
+					</button>
+				</div>
+			</section>
+
+			<div class="mini-calendar-list" data-mini-calendars aria-live="polite"></div>
+
+			<div class="month-list" data-calendar-months aria-live="polite"></div>
+
+			<div class="calendar-fallback" data-calendar-fallback hidden>
+				<strong>予定を読み込めませんでした。</strong>
+				<p>通信環境やGoogleカレンダー側の応答により表示できない場合があります。</p>
+				<a href={officialScheduleUrl} target="_blank" rel="noopener noreferrer">公式サイトで確認する</a>
+			</div>
+		</section>
+	</article>
+
+	<script is:inline>
+		const CALENDAR_ID = 'arthur.hollands.hp@gmail.com';
+		const CALENDAR_API_KEY = 'AIzaSyDOtGM5jr8bNp1utVpG2_gSRH03RNGBkI8';
+		const CALENDAR_SHARE_URL = 'https://arthur-show.com/calendar/';
+		const CALENDAR_SHARE_TITLE = 'アーサーホーランド関連スケジュール | THE ARTHUR HOLLANDS SHOW';
+		const TOKYO_TIME_ZONE = 'Asia/Tokyo';
+		const DAY_MS = 24 * 60 * 60 * 1000;
+
+		const monthContainer = document.querySelector('[data-calendar-months]');
+		const miniCalendarContainer = document.querySelector('[data-mini-calendars]');
+		const fallbackNode = document.querySelector('[data-calendar-fallback]');
+		const shareNativeButtons = document.querySelectorAll('[data-calendar-share-native]');
+		const shareCopyButtons = document.querySelectorAll('[data-calendar-copy-link]');
+		const shareCopyStatusNodes = document.querySelectorAll('[data-calendar-copy-status]');
+
+		const tokyoPartsFormatter = new Intl.DateTimeFormat('en-CA', {
+			year: 'numeric',
+			month: '2-digit',
+			day: '2-digit',
+			timeZone: TOKYO_TIME_ZONE,
+		});
+		const monthFormatter = new Intl.DateTimeFormat('ja-JP', {
+			year: 'numeric',
+			month: 'long',
+			timeZone: TOKYO_TIME_ZONE,
+		});
+		const dayFormatter = new Intl.DateTimeFormat('ja-JP', {
+			month: 'numeric',
+			day: 'numeric',
+			weekday: 'short',
+			timeZone: TOKYO_TIME_ZONE,
+		});
+		const dayNumberFormatter = new Intl.DateTimeFormat('ja-JP', {
+			day: '2-digit',
+			timeZone: TOKYO_TIME_ZONE,
+		});
+		const weekdayFormatter = new Intl.DateTimeFormat('ja-JP', {
+			weekday: 'short',
+			timeZone: TOKYO_TIME_ZONE,
+		});
+		const timeFormatter = new Intl.DateTimeFormat('ja-JP', {
+			hour: '2-digit',
+			minute: '2-digit',
+			timeZone: TOKYO_TIME_ZONE,
+		});
+		function getTokyoParts(date = new Date()) {
+			const [year, month, day] = tokyoPartsFormatter.format(date).split('-').map(Number);
+			return { year, month, day };
+		}
+
+		function addMonths(year, month, offset) {
+			const base = new Date(Date.UTC(year, month - 1 + offset, 1));
+			return {
+				year: base.getUTCFullYear(),
+				month: base.getUTCMonth() + 1,
+			};
+		}
+
+		function pad2(value) {
+			return String(value).padStart(2, '0');
+		}
+
+		function monthKey(year, month) {
+			return `${year}-${pad2(month)}`;
+		}
+
+		function tokyoDateFromDateOnly(value) {
+			return new Date(`${value}T00:00:00+09:00`);
+		}
+
+		function buildRange() {
+			const now = getTokyoParts();
+			const current = { year: now.year, month: now.month, key: monthKey(now.year, now.month) };
+			const nextParts = addMonths(now.year, now.month, 1);
+			const next = { ...nextParts, key: monthKey(nextParts.year, nextParts.month) };
+			const afterNext = addMonths(now.year, now.month, 2);
+			return {
+				current,
+				next,
+				months: [current, next],
+				timeMin: `${current.key}-01T00:00:00+09:00`,
+				timeMax: `${monthKey(afterNext.year, afterNext.month)}-01T00:00:00+09:00`,
+				todayStart: tokyoDateFromDateOnly(`${now.year}-${pad2(now.month)}-${pad2(now.day)}`),
+			};
+		}
+
+		function escapeHtml(value = '') {
+			return String(value)
+				.replace(/&/g, '&amp;')
+				.replace(/</g, '&lt;')
+				.replace(/>/g, '&gt;')
+				.replace(/"/g, '&quot;')
+				.replace(/'/g, '&#39;');
+		}
+
+		function textFromHtml(value = '') {
+			const doc = new DOMParser().parseFromString(String(value), 'text/html');
+			return (doc.body.textContent || '').replace(/\u00a0/g, ' ').trim();
+		}
+
+		function formatMultilineText(value = '') {
+			const cleanText = textFromHtml(value);
+			if (!cleanText) return '';
+			return cleanText
+				.split(/\n+/)
+				.map((line) => escapeHtml(line.trim()))
+				.filter(Boolean)
+				.map((line) => line.replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>'))
+				.join('<br />');
+		}
+
+		function getEventStart(event) {
+			if (event.start?.dateTime) return new Date(event.start.dateTime);
+			return tokyoDateFromDateOnly(event.start?.date);
+		}
+
+		function getEventEnd(event) {
+			if (event.end?.dateTime) return new Date(event.end.dateTime);
+			if (event.end?.date) return tokyoDateFromDateOnly(event.end.date);
+			return getEventStart(event);
+		}
+
+		function getEventMonthKey(event) {
+			if (event.start?.date) return event.start.date.slice(0, 7);
+			const parts = getTokyoParts(getEventStart(event));
+			return monthKey(parts.year, parts.month);
+		}
+
+		function getDateKeyFromDate(date) {
+			const parts = getTokyoParts(date);
+			return `${parts.year}-${pad2(parts.month)}-${pad2(parts.day)}`;
+		}
+
+		function getWeekdayIndexFromDateKey(key) {
+			const [year, month, day] = key.split('-').map(Number);
+			return new Date(Date.UTC(year, month - 1, day)).getUTCDay();
+		}
+
+		function addDaysToDateKey(key, offset) {
+			return getDateKeyFromDate(new Date(tokyoDateFromDateOnly(key).getTime() + (offset * DAY_MS)));
+		}
+
+		function getEventVisibleDateKeys(event) {
+			const startKey = event.start?.date || getDateKeyFromDate(getEventStart(event));
+			let endKey = startKey;
+
+			if (event.start?.date && event.end?.date) {
+				endKey = getDateKeyFromDate(new Date(tokyoDateFromDateOnly(event.end.date).getTime() - DAY_MS));
+			} else if (event.end?.dateTime) {
+				endKey = getDateKeyFromDate(getEventEnd(event));
+			}
+
+			const keys = [];
+			let currentKey = startKey;
+			for (let guard = 0; guard < 62; guard += 1) {
+				keys.push(currentKey);
+				if (currentKey === endKey) break;
+				currentKey = addDaysToDateKey(currentKey, 1);
+			}
+			return keys;
+		}
+
+		function groupEventsByDate(events) {
+			const grouped = new Map();
+			events.forEach((event) => {
+				getEventVisibleDateKeys(event).forEach((key) => {
+					if (!grouped.has(key)) grouped.set(key, []);
+					grouped.get(key).push(event);
+				});
+			});
+			return grouped;
+		}
+
+		function formatDateRange(event) {
+			const start = getEventStart(event);
+			if (event.start?.date && event.end?.date) {
+				const visibleEnd = new Date(tokyoDateFromDateOnly(event.end.date).getTime() - DAY_MS);
+				if (dayFormatter.format(start) === dayFormatter.format(visibleEnd)) return dayFormatter.format(start);
+				return `${dayFormatter.format(start)} - ${dayFormatter.format(visibleEnd)}`;
+			}
+			const end = getEventEnd(event);
+			if (dayFormatter.format(start) === dayFormatter.format(end)) return dayFormatter.format(start);
+			return `${dayFormatter.format(start)} - ${dayFormatter.format(end)}`;
+		}
+
+		function formatTimeRange(event) {
+			if (!event.start?.dateTime) return '';
+			const start = getEventStart(event);
+			const end = getEventEnd(event);
+			if (Number.isNaN(end.valueOf())) return timeFormatter.format(start);
+			return `${timeFormatter.format(start)} - ${timeFormatter.format(end)}`;
+		}
+
+		function monthLabelForKey(key) {
+			return monthFormatter.format(tokyoDateFromDateOnly(`${key}-01`));
+		}
+
+		function renderEventCard(event, todayStart) {
+			const start = getEventStart(event);
+			const end = getEventEnd(event);
+			const isPast = end.getTime() <= todayStart.getTime();
+			const description = formatMultilineText(event.description || '');
+			const location = textFromHtml(event.location || '');
+			const dayNumber = dayNumberFormatter.format(start);
+			const weekday = weekdayFormatter.format(start);
+			const startKey = event.start?.date || getDateKeyFromDate(start);
+			const weekdayIndex = getWeekdayIndexFromDateKey(startKey);
+			const weekdayClass = weekdayIndex === 0 ? ' is-sunday' : weekdayIndex === 6 ? ' is-saturday' : '';
+			const timeRange = formatTimeRange(event);
+
+			return `
+				<article class="event-card${isPast ? ' is-past' : ''}">
+					<div class="event-date${weekdayClass}" aria-label="${escapeHtml(formatDateRange(event))}">
+						<span>${escapeHtml(dayNumber)}</span>
+						<small>${escapeHtml(weekday)}</small>
+					</div>
+					<div class="event-body">
+							<div class="event-meta">
+								<span>${escapeHtml(formatDateRange(event))}</span>
+								${timeRange ? `<span>${escapeHtml(timeRange)}</span>` : ''}
+								${isPast ? '<em>終了</em>' : ''}
+							</div>
+							<h3>${escapeHtml(event.summary || '名称未定')}</h3>
+							${description ? `<p class="event-description">${description}</p>` : ''}
+							${location ? `<p class="event-location">${escapeHtml(location)}</p>` : ''}
+						</div>
+					</article>
+				`;
+		}
+
+		function renderMiniCalendar(month, eventsByDate, todayKey) {
+			const daysInMonth = new Date(Date.UTC(month.year, month.month, 0)).getUTCDate();
+			const firstWeekday = new Date(Date.UTC(month.year, month.month - 1, 1)).getUTCDay();
+			const weekdayLabels = ['日', '月', '火', '水', '木', '金', '土'];
+			const blanks = Array.from({ length: firstWeekday }, () => '<span class="mini-calendar-day is-empty" aria-hidden="true"></span>');
+			const dayCells = Array.from({ length: daysInMonth }, (_, index) => {
+				const day = index + 1;
+				const key = `${month.key}-${pad2(day)}`;
+				const weekdayIndex = getWeekdayIndexFromDateKey(key);
+				const events = eventsByDate.get(key) || [];
+				const eventTitles = events.map((event) => event.summary || '名称未定');
+				const classNames = [
+					'mini-calendar-day',
+					weekdayIndex === 0 ? 'is-sunday' : '',
+					weekdayIndex === 6 ? 'is-saturday' : '',
+					events.length ? 'has-events' : '',
+					key === todayKey ? 'is-today' : '',
+				].filter(Boolean).join(' ');
+				const preview = events.length
+					? `<span class="mini-calendar-events">${eventTitles.slice(0, 2).map((title) => `<small>${escapeHtml(title)}</small>`).join('')}${events.length > 2 ? `<em>+${events.length - 2}</em>` : ''}</span>`
+					: '';
+				const ariaLabel = events.length
+					? `${month.month}月${day}日 ${weekdayLabels[weekdayIndex]}曜日、予定${events.length}件: ${eventTitles.join('、')}`
+					: `${month.month}月${day}日 ${weekdayLabels[weekdayIndex]}曜日`;
+
+				return `
+					<a class="${classNames}" href="#month-${month.key}-events" aria-label="${escapeHtml(ariaLabel)}">
+						<span class="mini-calendar-number">${day}</span>
+						${preview}
+					</a>
+				`;
+			});
+			const weekdays = weekdayLabels.map((label, index) => {
+				const className = index === 0 ? 'is-sunday' : index === 6 ? 'is-saturday' : '';
+				return `<span class="${className}">${label}</span>`;
+			}).join('');
+
+			return `
+				<section class="mini-calendar-card" aria-label="${escapeHtml(monthLabelForKey(month.key))} ミニカレンダー">
+					<div class="mini-calendar-title">
+						<p class="calendar-label">${month.key}</p>
+						<h3>${escapeHtml(monthLabelForKey(month.key))}</h3>
+					</div>
+					<div class="mini-calendar-weekdays" aria-hidden="true">${weekdays}</div>
+					<div class="mini-calendar-grid">
+						${blanks.join('')}
+						${dayCells.join('')}
+					</div>
+				</section>
+			`;
+		}
+
+		function renderMonth(month, events, todayStart) {
+			const eventMarkup = events.length
+				? events.map((event) => renderEventCard(event, todayStart)).join('')
+				: '<p class="empty-month">この月の予定は現在登録されていません。</p>';
+
+			return `
+				<section class="month-block" id="month-${month.key}-events" data-month="${month.key}">
+					<div class="month-title">
+						<div>
+							<p class="calendar-label">${month.key}</p>
+							<h3>${escapeHtml(monthLabelForKey(month.key))}</h3>
+						</div>
+						<strong>${events.length} EVENTS</strong>
+					</div>
+					<div class="event-list">
+						${eventMarkup}
+					</div>
+				</section>
+			`;
+		}
+
+		async function fetchCalendarEvents(range) {
+			const allItems = [];
+			let pageToken = '';
+			do {
+				const params = new URLSearchParams({
+					key: CALENDAR_API_KEY,
+					singleEvents: 'true',
+					orderBy: 'startTime',
+					timeZone: TOKYO_TIME_ZONE,
+					maxAttendees: '1',
+					maxResults: '250',
+					showDeleted: 'false',
+					timeMin: range.timeMin,
+					timeMax: range.timeMax,
+				});
+				if (pageToken) params.set('pageToken', pageToken);
+				const response = await fetch(`https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(CALENDAR_ID)}/events?${params.toString()}`);
+				if (!response.ok) throw new Error(`Google Calendar API error: ${response.status}`);
+				const data = await response.json();
+				allItems.push(...(data.items || []));
+				pageToken = data.nextPageToken || '';
+				if (!pageToken) return { items: allItems, updated: data.updated };
+			} while (pageToken);
+			return { items: allItems, updated: '' };
+		}
+
+		function calendarShareMessage() {
+			return `${CALENDAR_SHARE_TITLE}\n${CALENDAR_SHARE_URL}`;
+		}
+
+		function setCopyStatus(label) {
+			shareCopyStatusNodes.forEach((node) => {
+				node.textContent = label;
+			});
+		}
+
+		function fallbackCopyText(text) {
+			const textarea = document.createElement('textarea');
+			textarea.value = text;
+			textarea.setAttribute('readonly', '');
+			textarea.style.position = 'fixed';
+			textarea.style.top = '-1000px';
+			textarea.style.left = '-1000px';
+			textarea.style.opacity = '0';
+			document.body.appendChild(textarea);
+			textarea.focus({ preventScroll: true });
+			textarea.select();
+			textarea.setSelectionRange(0, text.length);
+			let copied = false;
+			try {
+				copied = document.execCommand('copy');
+			} catch {
+				copied = false;
+			}
+			textarea.remove();
+			return copied;
+		}
+
+		async function copyCalendarShareLink() {
+			const message = calendarShareMessage();
+			try {
+				if (navigator.clipboard?.writeText) {
+					await navigator.clipboard.writeText(message);
+				} else if (!fallbackCopyText(message)) {
+					throw new Error('copy unavailable');
+				}
+				setCopyStatus('コピーしました');
+				setTimeout(() => setCopyStatus('URLをコピー'), 1800);
+			} catch {
+				if (fallbackCopyText(message)) {
+					setCopyStatus('コピーしました');
+					setTimeout(() => setCopyStatus('URLをコピー'), 1800);
+					return;
+				}
+				setCopyStatus('コピーできませんでした');
+				setTimeout(() => setCopyStatus('URLをコピー'), 1800);
+			}
+		}
+
+		async function shareCalendarPage() {
+			if (navigator.share) {
+				try {
+					await navigator.share({
+						title: CALENDAR_SHARE_TITLE,
+						url: CALENDAR_SHARE_URL,
+					});
+					return;
+				} catch (error) {
+					if (error.name === 'AbortError') return;
+				}
+			}
+			await copyCalendarShareLink();
+		}
+
+		async function initCalendar() {
+			const range = buildRange();
+
+			try {
+				const { items, updated } = await fetchCalendarEvents(range);
+				const activeEvents = items
+					.filter((event) => event.status !== 'cancelled')
+					.sort((a, b) => getEventStart(a).getTime() - getEventStart(b).getTime());
+				const grouped = new Map(range.months.map((month) => [month.key, []]));
+				activeEvents.forEach((event) => {
+					const key = getEventMonthKey(event);
+					if (grouped.has(key)) grouped.get(key).push(event);
+				});
+				const eventsByDate = groupEventsByDate(activeEvents);
+				const todayKey = getDateKeyFromDate(range.todayStart);
+
+				if (miniCalendarContainer) {
+					miniCalendarContainer.innerHTML = range.months
+						.map((month) => renderMiniCalendar(month, eventsByDate, todayKey))
+						.join('');
+				}
+				if (monthContainer) {
+					monthContainer.innerHTML = range.months
+						.map((month) => renderMonth(month, grouped.get(month.key) || [], range.todayStart))
+						.join('');
+				}
+			} catch (error) {
+				console.error(error);
+				if (fallbackNode) fallbackNode.hidden = false;
+			}
+		}
+
+		initCalendar();
+		shareNativeButtons.forEach((button) => {
+			button.addEventListener('click', shareCalendarPage);
+		});
+		shareCopyButtons.forEach((button) => {
+			button.addEventListener('click', copyCalendarShareLink);
+		});
+	</script>
+</Layout>
+
+<style is:global>
+	.calendar-page {
+		--calendar-bg: #0b0b0b;
+		--calendar-ink: #f8f3e9;
+		--calendar-muted: rgba(248, 243, 233, 0.72);
+		--calendar-gold: #c5a059;
+		--calendar-red: #a7352a;
+		--calendar-sunday: #d6574d;
+		--calendar-saturday: #4f86c6;
+			background: var(--calendar-bg);
+			color: var(--calendar-ink);
+			margin-top: -22px;
+			max-width: 100vw;
+			overflow-x: hidden;
+			padding-bottom: 72px;
+			width: 100vw;
+		}
+
+		.calendar-hero {
+			box-sizing: border-box;
+			display: grid;
+			grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
+			gap: 28px;
+			max-width: 1120px;
+			width: 100%;
+			margin: 0 auto;
+			padding: 84px 20px 44px;
+		}
+
+	.hero-copy h1 {
+		font-family: var(--font-head);
+		font-size: clamp(3.1rem, 12vw, 7.5rem);
+		line-height: 0.9;
+		letter-spacing: 0;
+		margin: 8px 0 22px;
+	}
+
+	.hero-copy p:not(.calendar-label) {
+		max-width: 680px;
+			color: var(--calendar-muted);
+			font-size: 1.05rem;
+			line-height: 1.9;
+			overflow-wrap: anywhere;
+		}
+
+	.calendar-label {
+		color: var(--calendar-gold);
+		font-family: var(--font-head);
+		font-size: 0.82rem;
+		font-weight: 900;
+		letter-spacing: 0.12em;
+		line-height: 1.2;
+	}
+
+	.hero-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		margin-top: 30px;
+	}
+
+		.hero-actions a,
+		.official-note-link,
+		.calendar-heading a,
+		.calendar-fallback a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 42px;
+		padding: 0 18px;
+		border: 1px solid rgba(197, 160, 89, 0.5);
+		background: var(--calendar-gold);
+		color: #050505;
+		font-family: var(--font-head);
+		font-size: 0.84rem;
+		font-weight: 900;
+		letter-spacing: 0.08em;
+		line-height: 1;
+	}
+
+		.hero-actions a + a,
+		.calendar-heading a {
+			background: transparent;
+			color: var(--calendar-ink);
+		}
+
+		.official-note-link {
+			margin-bottom: 18px;
+		}
+
+	.official-note {
+		align-self: end;
+		border: 1px solid rgba(197, 160, 89, 0.28);
+		border-left: 4px solid var(--calendar-gold);
+		border-radius: 8px;
+		background: rgba(255, 255, 255, 0.055);
+		padding: 24px;
+	}
+
+	.official-note span {
+		display: block;
+		color: var(--calendar-red);
+		font-family: var(--font-head);
+		font-weight: 900;
+		letter-spacing: 0.14em;
+		margin-bottom: 12px;
+	}
+
+	.official-note strong {
+			display: block;
+			font-family: var(--font-serif);
+			font-size: 1.25rem;
+			line-height: 1.6;
+			overflow-wrap: anywhere;
+		}
+
+		.official-note p {
+			color: var(--calendar-muted);
+			font-size: 0.92rem;
+			margin-top: 12px;
+			overflow-wrap: anywhere;
+		}
+
+		.recurring-schedule {
+			box-sizing: border-box;
+			max-width: 1120px;
+			width: 100%;
+			margin: 0 auto;
+			padding: 0 20px 32px;
+		}
+
+		.recurring-schedule img {
+			box-sizing: border-box;
+			display: block;
+			width: 100%;
+			max-width: 100%;
+			height: auto;
+			border: 1px solid rgba(197, 160, 89, 0.32);
+			border-radius: 8px;
+			background: rgba(255, 255, 255, 0.04);
+			box-shadow: 0 18px 58px rgba(0, 0, 0, 0.34);
+		}
+
+		.calendar-overview {
+			box-sizing: border-box;
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 1px;
+			max-width: 1120px;
+			width: 100%;
+			margin: 0 auto;
+			padding: 0 20px 28px;
+		}
+
+	.calendar-overview div {
+		min-height: 118px;
+		padding: 22px;
+		background: rgba(255, 255, 255, 0.06);
+		border: 1px solid rgba(255, 255, 255, 0.07);
+	}
+
+	.calendar-overview span {
+		display: block;
+		font-family: var(--font-head);
+		font-size: clamp(2rem, 5vw, 3.2rem);
+		font-weight: 900;
+		line-height: 1;
+		color: var(--calendar-gold);
+	}
+
+	.calendar-overview .range-cell span {
+		font-size: clamp(1.15rem, 2.5vw, 1.75rem);
+		line-height: 1.1;
+	}
+
+	.calendar-overview p {
+		margin-top: 14px;
+		color: var(--calendar-muted);
+		font-family: var(--font-head);
+		font-size: 0.82rem;
+		font-weight: 900;
+		letter-spacing: 0.12em;
+	}
+
+		.calendar-section {
+			box-sizing: border-box;
+			max-width: 1120px;
+			width: 100%;
+			margin: 0 auto;
+			padding: 0 20px;
+		}
+
+	.calendar-share {
+		display: grid;
+		grid-template-columns: minmax(180px, 0.55fr) minmax(0, 1.45fr);
+		gap: 18px;
+		align-items: center;
+		margin: 22px 0;
+		padding: 18px;
+		border: 1px solid rgba(197, 160, 89, 0.24);
+		border-left: 4px solid var(--calendar-gold);
+		border-radius: 8px;
+		background: rgba(255, 255, 255, 0.052);
+	}
+
+	.calendar-share h3 {
+		margin-top: 6px;
+		font-family: var(--font-serif);
+		font-size: clamp(1.2rem, 3vw, 1.72rem);
+		line-height: 1.25;
+	}
+
+	.calendar-share-buttons {
+		display: grid;
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+		gap: 8px;
+	}
+
+	.calendar-share-button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		gap: 3px;
+		min-height: 48px;
+		min-width: 0;
+		padding: 8px 10px;
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		border-radius: 6px;
+		background: rgba(255, 255, 255, 0.08);
+		color: #fff;
+		cursor: pointer;
+		font-family: var(--font-head);
+		font-size: 0.82rem;
+		font-weight: 900;
+		letter-spacing: 0.06em;
+		line-height: 1;
+		text-align: center;
+		transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+	}
+
+	.calendar-share-button:hover,
+	.calendar-share-button:focus-visible {
+		border-color: rgba(197, 160, 89, 0.55);
+		transform: translateY(-1px);
+		outline: none;
+	}
+
+	.calendar-share-button.native {
+		background: var(--calendar-gold);
+		color: #050505;
+	}
+
+	.calendar-share-button.line {
+		background: #06c755;
+		color: #fff;
+	}
+
+	.calendar-share-button.x {
+		background: #111;
+		color: #fff;
+	}
+
+	.calendar-share-button.facebook {
+		background: #1877f2;
+		color: #fff;
+	}
+
+	.calendar-share-button.copy {
+		background: rgba(255, 255, 255, 0.04);
+	}
+
+	.calendar-share-button small {
+		display: block;
+		max-width: 100%;
+		overflow: hidden;
+		color: rgba(255, 255, 255, 0.66);
+		font-family: var(--font-sans);
+		font-size: 0.66rem;
+		font-weight: 800;
+		letter-spacing: 0;
+		line-height: 1.2;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.calendar-heading,
+	.month-title {
+		display: flex;
+		align-items: end;
+		justify-content: space-between;
+		gap: 18px;
+		border-bottom: 1px solid rgba(197, 160, 89, 0.28);
+		padding: 26px 0 18px;
+	}
+
+	.calendar-heading h2,
+	.month-title h3 {
+		font-family: var(--font-serif);
+		font-size: clamp(1.75rem, 5vw, 3rem);
+		line-height: 1.18;
+	}
+
+	.mini-calendar-list {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 18px;
+		margin: 0 0 36px;
+	}
+
+	.mini-calendar-card {
+		min-width: 0;
+		border: 1px solid rgba(197, 160, 89, 0.24);
+		border-radius: 8px;
+		background: rgba(255, 255, 255, 0.052);
+		padding: 18px;
+	}
+
+	.mini-calendar-title {
+		display: flex;
+		align-items: end;
+		justify-content: space-between;
+		gap: 12px;
+		margin-bottom: 14px;
+	}
+
+	.mini-calendar-title h3 {
+		font-family: var(--font-serif);
+		font-size: clamp(1.28rem, 3vw, 1.75rem);
+		line-height: 1.18;
+		text-align: right;
+	}
+
+	.mini-calendar-weekdays,
+	.mini-calendar-grid {
+		display: grid;
+		grid-template-columns: repeat(7, minmax(0, 1fr));
+		gap: 6px;
+	}
+
+	.mini-calendar-weekdays {
+		margin-bottom: 8px;
+	}
+
+	.mini-calendar-weekdays span {
+		color: rgba(248, 243, 233, 0.56);
+		font-family: var(--font-head);
+		font-size: 0.74rem;
+		font-weight: 900;
+		line-height: 1;
+		text-align: center;
+	}
+
+	.mini-calendar-weekdays .is-sunday,
+	.mini-calendar-day.is-sunday .mini-calendar-number {
+		color: var(--calendar-sunday);
+	}
+
+	.mini-calendar-weekdays .is-saturday,
+	.mini-calendar-day.is-saturday .mini-calendar-number {
+		color: var(--calendar-saturday);
+	}
+
+	.mini-calendar-day {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+		aspect-ratio: 1 / 1;
+		min-height: 0;
+		padding: 8px;
+		overflow: hidden;
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		border-radius: 6px;
+		background: rgba(255, 255, 255, 0.04);
+		color: var(--calendar-ink);
+	}
+
+	.mini-calendar-day:hover,
+	.mini-calendar-day:focus-visible {
+		border-color: rgba(197, 160, 89, 0.55);
+		background: rgba(255, 255, 255, 0.075);
+		outline: none;
+	}
+
+	.mini-calendar-day.is-empty {
+		aspect-ratio: 1 / 1;
+		min-height: 0;
+		border-color: transparent;
+		background: transparent;
+	}
+
+	.mini-calendar-day.has-events {
+		border-color: rgba(197, 160, 89, 0.56);
+		background: rgba(197, 160, 89, 0.14);
+	}
+
+	.mini-calendar-day.has-events::after {
+		content: "";
+		position: absolute;
+		top: 7px;
+		right: 7px;
+		width: 7px;
+		height: 7px;
+		border-radius: 999px;
+		background: var(--calendar-gold);
+		box-shadow: 0 0 0 4px rgba(197, 160, 89, 0.13);
+	}
+
+	.mini-calendar-day.is-today {
+		box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.5);
+	}
+
+	.mini-calendar-number {
+		display: block;
+		color: rgba(248, 243, 233, 0.92);
+		font-family: var(--font-head);
+		font-size: 1.08rem;
+		font-weight: 900;
+		line-height: 1;
+	}
+
+	.mini-calendar-events {
+		display: grid;
+		gap: 3px;
+		min-width: 0;
+		padding-right: 6px;
+	}
+
+	.mini-calendar-events small {
+		display: -webkit-box;
+		overflow: hidden;
+		color: rgba(248, 243, 233, 0.82);
+		font-size: 0.62rem;
+		font-weight: 800;
+		line-height: 1.2;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 1;
+	}
+
+	.mini-calendar-events em {
+		color: var(--calendar-gold);
+		font-family: var(--font-head);
+		font-size: 0.68rem;
+		font-style: normal;
+		font-weight: 900;
+		line-height: 1;
+	}
+
+	.month-list {
+		display: grid;
+		gap: 42px;
+	}
+
+	.month-title strong {
+		flex: 0 0 auto;
+		color: var(--calendar-muted);
+		font-family: var(--font-head);
+		font-size: 0.82rem;
+		letter-spacing: 0.12em;
+	}
+
+	.event-list {
+		display: grid;
+		gap: 12px;
+		margin-top: 18px;
+	}
+
+	.event-card {
+		display: grid;
+		grid-template-columns: 96px minmax(0, 1fr);
+		gap: 18px;
+		border: 1px solid rgba(255, 255, 255, 0.09);
+		border-radius: 8px;
+		background: rgba(255, 255, 255, 0.055);
+		padding: 18px;
+		transition: border-color 0.18s ease, background 0.18s ease;
+	}
+
+	.event-card:hover {
+		border-color: rgba(197, 160, 89, 0.5);
+		background: rgba(255, 255, 255, 0.075);
+	}
+
+	.event-card.is-past {
+		opacity: 0.58;
+	}
+
+	.event-date {
+		display: grid;
+		place-items: center;
+		min-height: 96px;
+		border-radius: 8px;
+		background: #f8f3e9;
+		color: #0b0b0b;
+	}
+
+	.event-date span {
+		font-family: var(--font-head);
+		font-size: 2.55rem;
+		font-weight: 900;
+		line-height: 0.9;
+	}
+
+	.event-date small {
+		font-weight: 900;
+		color: #0b0b0b;
+	}
+
+	.event-date.is-sunday small {
+		color: var(--calendar-sunday);
+	}
+
+	.event-date.is-saturday small {
+		color: var(--calendar-saturday);
+	}
+
+	.event-body {
+		min-width: 0;
+	}
+
+	.event-meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		margin-bottom: 8px;
+	}
+
+	.event-meta span,
+	.event-meta em {
+		display: inline-flex;
+		align-items: center;
+		min-height: 28px;
+		padding: 0 10px;
+		border: 1px solid rgba(197, 160, 89, 0.26);
+		border-radius: 999px;
+		color: var(--calendar-muted);
+		font-size: 0.78rem;
+		font-style: normal;
+		font-weight: 800;
+		line-height: 1;
+	}
+
+	.event-meta em {
+		border-color: rgba(167, 53, 42, 0.48);
+		color: #e8b0aa;
+	}
+
+	.event-body h3 {
+		font-family: var(--font-serif);
+		font-size: clamp(1.18rem, 3vw, 1.65rem);
+		line-height: 1.35;
+	}
+
+	.event-description,
+	.event-location {
+		color: var(--calendar-muted);
+		font-size: 0.94rem;
+		line-height: 1.8;
+		margin-top: 10px;
+		overflow-wrap: anywhere;
+	}
+
+	.event-description a {
+		color: var(--calendar-gold);
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+
+	.event-location {
+		border-left: 3px solid rgba(197, 160, 89, 0.38);
+		padding-left: 12px;
+	}
+
+		.empty-month,
+	.calendar-fallback {
+		border: 1px solid rgba(255, 255, 255, 0.09);
+		border-radius: 8px;
+		background: rgba(255, 255, 255, 0.055);
+		color: var(--calendar-muted);
+		padding: 24px;
+	}
+
+	.calendar-fallback {
+		margin-top: 20px;
+	}
+
+	.calendar-fallback strong {
+		display: block;
+		color: var(--calendar-ink);
+		font-family: var(--font-serif);
+		font-size: 1.25rem;
+		margin-bottom: 8px;
+	}
+
+	.calendar-fallback a {
+		margin-top: 16px;
+	}
+
+	@media (max-width: 860px) {
+		.calendar-hero {
+			grid-template-columns: 1fr;
+			padding-top: 58px;
+		}
+
+		.official-note {
+			align-self: stretch;
+		}
+
+		.calendar-overview {
+			grid-template-columns: 1fr;
+		}
+
+		.mini-calendar-list {
+			grid-template-columns: 1fr;
+		}
+
+		.calendar-share {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.calendar-page {
+			margin-top: -18px;
+		}
+
+			.calendar-hero,
+			.calendar-section,
+			.recurring-schedule,
+			.calendar-overview {
+				padding-left: 14px;
+				padding-right: 14px;
+			}
+
+		.calendar-heading,
+		.month-title {
+			align-items: start;
+			flex-direction: column;
+		}
+
+		.calendar-heading a {
+			width: 100%;
+		}
+
+		.calendar-share {
+			padding: 14px;
+		}
+
+		.calendar-share-buttons {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+
+		.calendar-share-button {
+			min-height: 44px;
+			font-size: 0.78rem;
+		}
+
+		.event-card {
+			grid-template-columns: 72px minmax(0, 1fr);
+			gap: 12px;
+			padding: 14px;
+		}
+
+		.event-date {
+			min-height: 74px;
+		}
+
+		.event-date span {
+			font-size: 2rem;
+		}
+
+		.event-meta span,
+		.event-meta em {
+			min-height: 26px;
+			font-size: 0.72rem;
+		}
+
+		.mini-calendar-card {
+			padding: 14px;
+		}
+
+		.mini-calendar-weekdays,
+		.mini-calendar-grid {
+			gap: 4px;
+		}
+
+		.mini-calendar-day {
+			padding: 6px;
+		}
+
+		.mini-calendar-events small {
+			display: none;
+		}
+
+		.mini-calendar-events em {
+			display: none;
+		}
+
+		.mini-calendar-day.has-events::after {
+			top: 6px;
+			right: 6px;
+			width: 6px;
+			height: 6px;
+		}
+	}
+</style>

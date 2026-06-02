@@ -11,6 +11,10 @@ interface Props {
 	imageHeight?: number;
 	imageType?: string;
 	ogType?: string;
+	noindex?: boolean;
+	canonicalPath?: string;
+	structuredData?: Record<string, unknown> | Record<string, unknown>[];
+	hideChrome?: boolean;
 }
 
 const {
@@ -22,17 +26,64 @@ const {
 	imageHeight = 675,
 	imageType = "image/jpeg",
 	ogType = "article",
+	noindex = false,
+	canonicalPath,
+	structuredData,
+	hideChrome = false,
 } = Astro.props;
 
 // URLとタイトルを定義
 const siteTitle = "THE ARTHUR HOLLANDS SHOW";
 const siteUrl = "https://arthur-show.com";
 const pageTitle = `${title} | ${siteTitle}`;
-const fallbackDescription = "You are Loved. Walk the talk. Talk the walk.";
+const fallbackDescription = "アーサーホーランド（アーサー・ホーランド / Arthur Hollands）の公式動画アーカイブ。THE DAILY with ARTHUR HOLLANDS、THE ARTHUR HOLLANDS SHOW、WALK ACROSSのメッセージと活動記録を届けます。";
 const metaDescription = description || fallbackDescription;
-const canonicalURL = new URL(Astro.url.pathname, siteUrl).href;
+const canonicalURL = new URL(canonicalPath || Astro.url.pathname, siteUrl).href;
 const socialImageURL = new URL(image, siteUrl).href;
 const socialImageAlt = imageAlt || pageTitle;
+const robotsContent = noindex
+	? "noindex,nofollow,noarchive"
+	: "index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1";
+const baseStructuredData = [
+	{
+		"@context": "https://schema.org",
+		"@type": "Person",
+		"@id": `${siteUrl}/#arthur-hollands`,
+		name: "アーサーホーランド",
+		alternateName: ["アーサー・ホーランド", "Arthur Hollands", "不良牧師"],
+		description:
+			"アーサーホーランド（アーサー・ホーランド）は、THE ARTHUR HOLLANDS SHOW、THE DAILY with ARTHUR HOLLANDS、WALK ACROSSで聖書、人生、愛、希望を語るメッセンジャーです。",
+		url: siteUrl,
+		sameAs: [
+			"https://www.youtube.com/@arthurs-show",
+			"https://www.arthurhollands.com/",
+		],
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "WebSite",
+		"@id": `${siteUrl}/#website`,
+		url: siteUrl,
+		name: siteTitle,
+		alternateName: [
+			"アーサーホーランド公式動画アーカイブ",
+			"アーサーホーランド動画アーカイブ",
+			"アーサー・ホーランド公式動画アーカイブ",
+			"Arthur Hollands Show Archive",
+		],
+		inLanguage: "ja-JP",
+		description: fallbackDescription,
+		publisher: { "@id": `${siteUrl}/#arthur-hollands` },
+	},
+];
+const structuredDataList = [
+	...baseStructuredData,
+	...(Array.isArray(structuredData)
+		? structuredData
+		: structuredData
+			? [structuredData]
+			: []),
+];
 const currentPath = Astro.url.pathname;
 const isCurrent = (href: string) => {
 	if (href === '/') return currentPath === '/';
@@ -48,6 +99,7 @@ const navItems = [
 	{ href: "/message-jukebox/", label: "BIBLE JUKEBOX", active: isCurrent("/message-jukebox/") },
 	{ href: "/swords-of-words/", label: "THE SWORDS OF WORDS", active: isCurrent("/swords-of-words/") },
 	{ href: "/1000-verses/", label: "厳選 1000 VERSES", active: isCurrent("/1000-verses/") },
+	{ href: "/calendar/", label: "CALENDAR", active: isCurrent("/calendar/") },
 ];
 ---
 
@@ -56,8 +108,13 @@ const navItems = [
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content={metaDescription} />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="keywords" content="アーサーホーランド, アーサー・ホーランド, Arthur Hollands, 不良牧師, THE ARTHUR HOLLANDS SHOW, THE DAILY with ARTHUR HOLLANDS, WALK ACROSS, You are Loved, 聖書メッセージ" />
+		<meta name="author" content="THE ARTHUR HOLLANDS SHOW" />
+		<meta name="robots" content={robotsContent} />
+		<meta name="googlebot" content={robotsContent} />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="format-detection" content="telephone=no">
+		<meta name="theme-color" content="#0a0a0a" />
 		
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="canonical" href={canonicalURL} />
@@ -81,6 +138,9 @@ const navItems = [
 		<meta name="twitter:description" content={metaDescription} />
 		<meta name="twitter:image" content={socialImageURL} />
 		<meta name="twitter:image:alt" content={socialImageAlt} />
+		{structuredDataList.map((schema) => (
+			<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+		))}
 
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -88,41 +148,45 @@ const navItems = [
 		<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 	</head>
 	<body>
-		<header class="site-header">
-			<div class="header-inner">
-				<a href="/" class="logo">
-					<span class="logo-main">THE ARTHUR HOLLANDS SHOW</span>
-					<span class="logo-sub">You are Loved</span>
-				</a>
-				<LanguageMenu />
-			</div>
-		</header>
-		<div class="global-nav-shell" data-global-nav-shell>
-			<nav class="global-quick-nav" aria-label="サイト内主要メニューショートカット">
-				{navItems.map((item) => (
-					<a href={item.href} class:list={{ active: item.active }}>{item.label}</a>
-				))}
-			</nav>
-			<button class="global-menu-toggle" type="button" aria-expanded="false" aria-controls="global-section-nav" data-global-menu-toggle>
-				<span class="menu-lines" aria-hidden="true">
-					<i></i>
-					<i></i>
-					<i></i>
-				</span>
-				<strong>SITE MENU</strong>
-			</button>
-			<nav class="global-section-nav" id="global-section-nav" aria-label="サイト内主要メニュー" data-global-section-nav>
-				{navItems.map((item) => (
-					<a href={item.href} class:list={{ active: item.active }}>{item.label}</a>
-				))}
-			</nav>
-		</div>
+		{!hideChrome && (
+			<>
+				<header class="site-header">
+					<div class="header-inner">
+						<a href="/" class="logo">
+							<span class="logo-main">THE ARTHUR HOLLANDS SHOW</span>
+							<span class="logo-sub">You are Loved</span>
+						</a>
+						<LanguageMenu />
+					</div>
+				</header>
+				<div class="global-nav-shell" data-global-nav-shell>
+					<nav class="global-quick-nav" aria-label="サイト内主要メニューショートカット">
+						{navItems.map((item) => (
+							<a href={item.href} class:list={{ active: item.active }}>{item.label}</a>
+						))}
+					</nav>
+					<button class="global-menu-toggle" type="button" aria-expanded="false" aria-controls="global-section-nav" data-global-menu-toggle>
+						<span class="menu-lines" aria-hidden="true">
+							<i></i>
+							<i></i>
+							<i></i>
+						</span>
+						<strong>SITE MENU</strong>
+					</button>
+					<nav class="global-section-nav" id="global-section-nav" aria-label="サイト内主要メニュー" data-global-section-nav>
+						{navItems.map((item) => (
+							<a href={item.href} class:list={{ active: item.active }}>{item.label}</a>
+						))}
+					</nav>
+				</div>
+			</>
+		)}
 
 		<main>
 			<slot />
 		</main>
 
-		<SiteFooter />
+		{!hideChrome && <SiteFooter />}
 		<script is:inline>
 			const globalMenuToggle = document.querySelector('[data-global-menu-toggle]');
 			const globalNavShell = document.querySelector('[data-global-nav-shell]');
@@ -153,18 +217,126 @@ const navItems = [
 		--container-width: 900px;
 	}
 	*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-	html { font-size: 16px; scroll-behavior: smooth; }
-	body { background-color: var(--color-white); color: var(--color-black); font-family: var(--font-sans); line-height: 1.8; display: flex; flex-direction: column; min-height: 100vh; }
-	main { flex: 1; } a { color: inherit; text-decoration: none; transition: 0.2s; }
+	html { width: 100%; max-width: 100%; overflow-x: hidden; font-size: 16px; scroll-behavior: smooth; }
+	body { position: relative; width: 100%; max-width: 100%; margin: 0 !important; overflow-x: hidden; background-color: var(--color-white); color: var(--color-black); font-family: var(--font-sans); line-height: 1.8; display: flex; flex-direction: column; min-height: 100vh; }
+	main { flex: 1; min-width: 0; } a { color: inherit; text-decoration: none; transition: 0.2s; }
+	img, svg, video, canvas, iframe { max-width: 100%; }
+	header, main, footer, section, article, aside, nav, div { min-width: 0; }
 	.msg-tags { display: none !important; }
+	html.translated-ltr,
+	html.translated-rtl {
+		margin-top: 0 !important;
+	}
+	body.translated-ltr,
+	body.translated-rtl {
+		margin-top: 0 !important;
+		top: 0 !important;
+	}
+	iframe#gt-nvframe,
+	iframe.goog-te-banner-frame,
+	iframe.skiptranslate,
+	body > .skiptranslate,
+	#goog-gt-tt,
+	.goog-te-balloon-frame,
+	.VIpgJd-ZVi9od-ORHb-OEVmcd {
+		display: none !important;
+		visibility: hidden !important;
+		width: 0 !important;
+		height: 0 !important;
+		opacity: 0 !important;
+		pointer-events: none !important;
+	}
+	.goog-text-highlight {
+		background: transparent !important;
+		box-shadow: none !important;
+	}
 	
 	.site-header { background: var(--color-black); color: var(--color-white); padding: 20px 0; position: sticky; top: 0; z-index: 100; border-bottom: 4px solid var(--color-gold); }
-	.header-inner { max-width: var(--container-width); margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: center; gap: 18px; }
+	.header-inner { width: 100%; max-width: none; margin: 0 auto; padding: 0 clamp(18px, 4vw, 44px); display: grid; grid-template-columns: minmax(72px, 1fr) auto minmax(72px, 1fr); align-items: center; gap: 18px; }
 	.logo { min-width: 0; text-align: center; display: flex; flex-direction: column; align-items: center; }
 	.logo-main { font-family: var(--font-head); font-size: clamp(1.1rem, 6vw, 1.5rem); font-weight: 700; letter-spacing: 0.05em; line-height: 1; }
 	.logo-sub { font-family: var(--font-cursive); font-size: 1.15rem; color: var(--color-gold); letter-spacing: 0.04em; margin-top: 5px; line-height: 1; }
-	@media (max-width: 720px) { .header-inner { justify-content: center; } .logo-main { font-size: clamp(1rem, 6.4vw, 1.35rem); } }
-	@media (max-width: 420px) { .logo-main { font-size: 0.98rem; } }
+	.translate-menu {
+		position: relative;
+		justify-self: end;
+		width: 62px;
+	}
+	.translate-menu summary {
+		display: inline-flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		width: 62px;
+		min-height: 42px;
+		color: #fff;
+		background: rgba(255, 255, 255, 0.06);
+		border: 1px solid rgba(197, 160, 89, 0.56);
+		font-family: var(--font-head);
+		line-height: 1;
+		text-align: center;
+		list-style: none;
+		cursor: pointer;
+	}
+	.translate-menu summary::-webkit-details-marker {
+		display: none;
+	}
+	.translate-menu summary span {
+		color: var(--color-gold);
+		font-size: 0.9rem;
+		font-weight: 900;
+		letter-spacing: 0.04em;
+	}
+	.translate-menu summary small {
+		margin-top: 4px;
+		color: rgba(255, 255, 255, 0.78);
+		font-size: 0.62rem;
+		font-weight: 900;
+		letter-spacing: 0.02em;
+	}
+	.translate-menu summary:hover,
+	.translate-menu[open] summary {
+		background: var(--color-gold);
+		color: #000;
+	}
+	.translate-menu summary:hover span,
+	.translate-menu summary:hover small,
+	.translate-menu[open] summary span,
+	.translate-menu[open] summary small {
+		color: #000;
+	}
+	.translate-list {
+		position: absolute;
+		top: calc(100% + 10px);
+		right: 0;
+		z-index: 130;
+		display: grid;
+		grid-template-columns: repeat(2, minmax(128px, 1fr));
+		width: min(360px, calc(100vw - 24px));
+		max-height: min(70vh, 520px);
+		overflow: auto;
+		padding: 8px;
+		background: rgba(10, 10, 10, 0.98);
+		border: 1px solid rgba(197, 160, 89, 0.62);
+		box-shadow: 0 16px 36px rgba(0, 0, 0, 0.24);
+	}
+	.translate-list a {
+		display: flex;
+		align-items: center;
+		min-height: 34px;
+		padding: 0 10px;
+		color: rgba(255, 255, 255, 0.88);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+		font-size: 0.82rem;
+		font-weight: 900;
+		line-height: 1.2;
+		white-space: nowrap;
+	}
+	.translate-list a:hover {
+		color: #000;
+		background: var(--color-gold);
+	}
+	@media (max-width: 720px) { .header-inner { grid-template-columns: 56px minmax(0, 1fr) 56px; padding: 0 20px; gap: 8px; } .logo-main { font-size: clamp(1rem, 6.4vw, 1.35rem); } .translate-menu, .translate-menu summary { width: 52px; } .translate-menu summary { min-height: 38px; } .translate-menu summary span { font-size: 0.78rem; } .translate-menu summary small { display: none; } .translate-list { grid-template-columns: 1fr; width: min(230px, calc(100vw - 20px)); } }
+	@media (max-width: 420px) { .logo-main { font-size: 0.9rem; } .logo-sub { font-size: 1rem; } }
 
 	.global-nav-shell {
 		position: sticky;
@@ -325,8 +497,17 @@ const navItems = [
 	.footer-logo { font-family: var(--font-head); font-size: 1.8rem; margin-bottom: 10px; }
 	.footer-desc { font-family: var(--font-cursive); color: var(--color-gold); font-style: normal; font-size: 2.5rem; line-height: 1; font-weight: normal; }
 	@media (max-width: 768px) { .footer-desc { font-size: 2rem; } }
-	.footer-grid { display: grid; gap: 50px; }
+	.footer-grid { display: grid; gap: 50px; min-width: 0; }
 	@media(min-width: 768px) { .footer-grid { grid-template-columns: 1.5fr 1fr; gap: 60px; } }
+	.footer-col,
+	.prog-block,
+	.social-block,
+	.bank-card,
+	.bank-details,
+	.bank-row {
+		min-width: 0;
+		max-width: 100%;
+	}
 	.footer-col h5 { color: var(--color-gold); font-family: var(--font-head); margin-bottom: 25px; letter-spacing: 0.1em; font-size: 1.1rem; border-bottom: 1px solid #333; padding-bottom: 10px; }
 	.prog-block { margin-bottom: 40px; }
 	.prog-title { font-weight: bold; font-size: 1rem; margin-bottom: 5px; color: #fff; }
@@ -340,5 +521,12 @@ const navItems = [
 	.bank-label { font-size: 0.75rem; color: #888; margin-bottom: 8px; font-weight: bold; display: block; }
 	.bank-details { font-family: 'Noto Sans JP', sans-serif; color: #ddd; font-size: 0.95rem; line-height: 1.6; font-weight: 500; }
 	.bank-row { display: block; width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+	.prog-title,
+	.prog-text,
+	.bank-label,
+	.bank-details,
+	.yt-btn {
+		overflow-wrap: anywhere;
+	}
 	.copyright { text-align: center; margin-top: 60px; padding-top: 20px; border-top: 1px solid #333; color: #666; font-size: 0.75rem; }
 </style>

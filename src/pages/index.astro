@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
+const siteURL = 'https://arthur-show.com';
+
 // サイトのビルドが実行された現在の時刻を取得
 const currentBuildTime = new Date(); 
 
@@ -114,6 +116,36 @@ const messageLotteryItems = allMessages.map((post) => ({
 	thumb: `https://i.ytimg.com/vi/${post.data.youtubeId}/hq720.jpg`,
 	description: post.data.description,
 }));
+const homeStructuredData = [
+	{
+		"@context": "https://schema.org",
+		"@type": "CollectionPage",
+		"@id": `${siteURL}/#collection`,
+		url: `${siteURL}/`,
+		name: "アーサーホーランド公式動画アーカイブ",
+		alternateName: [
+			"アーサー・ホーランド公式動画アーカイブ",
+			"Arthur Hollands official video archive",
+			"THE ARTHUR HOLLANDS SHOW",
+		],
+		inLanguage: "ja-JP",
+		description:
+			"アーサーホーランド（アーサー・ホーランド / Arthur Hollands）の公式動画アーカイブ。最新メッセージ、THE DAILY、WALK ACROSS、You are Lovedの言葉をまとめています。",
+		about: { "@id": `${siteURL}/#arthur-hollands` },
+		isPartOf: { "@id": `${siteURL}/#website` },
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "ItemList",
+		name: "アーサーホーランド最新メッセージ",
+		itemListElement: featuredMessages.map((post, index) => ({
+			"@type": "ListItem",
+			position: index + 1,
+			url: `${siteURL}/messages/${post.slug}/`,
+			name: post.data.title,
+		})),
+	},
+];
 const rawScriptureRows = allMessages.flatMap((post) => {
 	const rows = Array.from(post.body.matchAll(/<p\s+class=["']verse-text["'][^>]*>([\s\S]*?)<\/p>\s*<span\s+class=["']verse-ref["'][^>]*>([\s\S]*?)<\/span>/g))
 		.map((match) => {
@@ -155,12 +187,14 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 ---
 
 <Layout
-	title="Latest Messages"
+	title="アーサーホーランド公式動画アーカイブ"
+	description="アーサーホーランド（アーサー・ホーランド / Arthur Hollands）の公式動画アーカイブ。THE ARTHUR HOLLANDS SHOW、THE DAILY、WALK ACROSSの最新メッセージを探せます。"
 	image="/walk-across-goto2026/assets/goto-cross-walk-2026-wide.jpg"
 	imageAlt="WALK ACROSS GOTO ISLANDS 2026 | THE ARTHUR HOLLANDS SHOW"
 	imageWidth={1280}
 	imageHeight={720}
 	ogType="website"
+	structuredData={homeStructuredData}
 >
 	<div class="container">
 		<a class="awaji-feature goto-feature" href="/walk-across-goto2026/" aria-label="ARTHUR HOLLANDS WALK ACROSS GOTO ISLANDS 2026 特設ページを見る">

@@ -1,0 +1,1278 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+export const prerender = true;
+
+const accessHash =
+	import.meta.env.OWNER_DASHBOARD_HASH ||
+	'b7cf6e0f034f129c67f39e41685c671d6b94747501b3440a36f6af8170b10d66';
+
+const baselineData = {
+	generatedAt: new Date().toISOString(),
+	source: 'baseline',
+	site: {
+		sessions: 0,
+		users: 0,
+		engagedSessions: 0,
+		searchQueries: [
+			{ query: 'アーサー ホーランド', impressions: 1200, clicks: 24, ctr: 0.02, position: 12.4 },
+			{ query: 'アーサーホーランド', impressions: 930, clicks: 11, ctr: 0.0118, position: 15.2 },
+			{ query: 'Arthur Hollands', impressions: 410, clicks: 18, ctr: 0.0439, position: 7.3 },
+			{ query: '不良牧師 アーサー ホーランド', impressions: 380, clicks: 31, ctr: 0.0816, position: 4.8 },
+		],
+		topPages: [
+			{ path: '/', views: 0, sessions: 0, conversions: 0 },
+		],
+		referrers: [],
+	},
+	youtube: {
+		channel: {
+			views: 0,
+			watchTimeHours: 0,
+			subscribersGained: 0,
+			subscribersLost: 0,
+		},
+		videos: [
+			{
+				videoId: 'Hf38XfAwJqw',
+				title: '信仰はきれいごとじゃない！ ジーザスは拒まなかった。それでも私は赦された。',
+				views: 0,
+				watchTimeHours: 0,
+				avgViewDurationSec: 0,
+				retentionPercent: 0,
+				subscribersGained: 0,
+				ctr: 0,
+				trafficSource: 'unknown',
+			},
+		],
+	},
+};
+---
+
+<Layout
+	title="Owner Growth Lab"
+	description="Private analytics workspace for THE ARTHUR HOLLANDS SHOW."
+	noindex={true}
+	hideChrome={true}
+	canonicalPath="/private-arthur-growth-lab-2026/"
+>
+	<section class="owner-shell" data-owner-shell data-access-hash={accessHash}>
+		<div class="login-panel" id="loginPanel">
+			<form class="login-box" id="accessForm">
+				<p class="kicker">OWNER ACCESS</p>
+				<h1>Arthur Growth Intelligence</h1>
+				<p class="login-note">Production access is protected by server-side Basic Auth when owner credentials are configured.</p>
+				<label for="passcode">Passcode</label>
+				<div class="login-row">
+					<input id="passcode" name="passcode" type="password" autocomplete="current-password" />
+					<button type="submit">Enter</button>
+				</div>
+				<p class="access-error" id="accessError" aria-live="polite"></p>
+			</form>
+		</div>
+
+		<div class="dashboard" id="dashboard" hidden>
+			<header class="dashboard-header">
+				<div>
+					<p class="kicker">OWNER GROWTH LAB</p>
+					<h1>Arthur Growth Intelligence</h1>
+					<p class="status-line" id="dataStatus">Baseline loaded</p>
+				</div>
+				<div class="header-actions">
+					<button type="button" id="loadBaseline">Baseline</button>
+					<button type="button" id="exportPlan">Export</button>
+					<button type="button" id="lockDashboard">Lock</button>
+				</div>
+			</header>
+
+			<section class="security-note" aria-label="Production security notice">
+				<p>
+					注意: 今は静的サイトなので、このページのパスコードは本物のサーバー認証ではありません。本番で「完全に僕しか見れない」状態にするには、お名前サーバー側のBasic認証、Cloudflare Access、またはサーバー側ログインを必ず追加してください。
+				</p>
+				<p>
+					LLM自動分析も、APIキーを安全に置くためにはサーバー側エンドポイントが必要です。現状はCSV/JSONを読み込んでルール分析し、必要に応じてLLM用プロンプトをコピーする運用です。
+				</p>
+			</section>
+
+			<section class="kpi-grid" aria-label="Key metrics">
+				<div class="metric-card">
+					<span class="metric-label">Site Sessions</span>
+					<strong id="kpiSessions">0</strong>
+					<span id="kpiEngagement">Engaged 0</span>
+				</div>
+				<div class="metric-card">
+					<span class="metric-label">Search Impressions</span>
+					<strong id="kpiImpressions">0</strong>
+					<span id="kpiCtr">CTR 0%</span>
+				</div>
+				<div class="metric-card">
+					<span class="metric-label">YouTube Views</span>
+					<strong id="kpiViews">0</strong>
+					<span id="kpiWatch">Watch 0h</span>
+				</div>
+				<div class="metric-card">
+					<span class="metric-label">Subscribers</span>
+					<strong id="kpiSubs">0</strong>
+					<span id="kpiSubRate">Sub rate 0%</span>
+				</div>
+			</section>
+
+			<section class="workspace-grid">
+				<div class="panel">
+					<div class="panel-heading">
+						<div>
+							<p class="panel-kicker">DATA</p>
+							<h2>Import</h2>
+						</div>
+						<span class="panel-state" id="importState">Ready</span>
+					</div>
+					<label class="file-drop" for="dataFile">
+						<input id="dataFile" type="file" accept=".json,.csv,.txt" />
+						<span>GA4 / Search Console / YouTube CSV or JSON</span>
+					</label>
+					<textarea id="dataPaste" rows="9" spellcheck="false" placeholder='{"site":{"searchQueries":[]},"youtube":{"videos":[]}}'></textarea>
+					<div class="button-row">
+						<button type="button" id="analyzePaste">Analyze</button>
+						<button type="button" id="clearData">Clear</button>
+					</div>
+				</div>
+
+				<div class="panel">
+					<div class="panel-heading">
+						<div>
+							<p class="panel-kicker">LLM</p>
+							<h2>Brief</h2>
+						</div>
+						<div class="panel-actions">
+							<button type="button" id="serverAnalyze">Server Analyze</button>
+							<button type="button" id="copyPrompt">Copy Prompt</button>
+						</div>
+					</div>
+					<p class="server-status" id="serverStatus">Server-side LLM endpoint is required for automatic analysis.</p>
+					<div class="brief-box" id="briefBox"></div>
+					<textarea id="llmPrompt" rows="9" readonly></textarea>
+				</div>
+			</section>
+
+			<section class="analysis-grid">
+				<div class="panel panel-wide">
+					<div class="panel-heading">
+						<div>
+							<p class="panel-kicker">ACTIONS</p>
+							<h2>Priority Plan</h2>
+						</div>
+						<span class="panel-state" id="actionCount">0 items</span>
+					</div>
+					<ol class="recommendation-list" id="recommendationList"></ol>
+				</div>
+
+				<div class="panel">
+					<div class="panel-heading">
+						<div>
+							<p class="panel-kicker">SEARCH</p>
+							<h2>Queries</h2>
+						</div>
+					</div>
+					<div class="table-wrap">
+						<table>
+							<thead>
+								<tr>
+									<th>Query</th>
+									<th>Imp.</th>
+									<th>CTR</th>
+									<th>Pos.</th>
+								</tr>
+							</thead>
+							<tbody id="queryRows"></tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="panel">
+					<div class="panel-heading">
+						<div>
+							<p class="panel-kicker">YOUTUBE</p>
+							<h2>Videos</h2>
+						</div>
+					</div>
+					<div class="table-wrap">
+						<table>
+							<thead>
+								<tr>
+									<th>Title</th>
+									<th>Views</th>
+									<th>Ret.</th>
+									<th>Subs</th>
+								</tr>
+							</thead>
+							<tbody id="videoRows"></tbody>
+						</table>
+					</div>
+				</div>
+			</section>
+		</div>
+	</section>
+</Layout>
+
+<script type="application/json" id="baselineData" set:html={JSON.stringify(baselineData)} />
+
+<script is:inline>
+	const baseline = JSON.parse(document.getElementById('baselineData').textContent || '{}');
+	const shell = document.querySelector('[data-owner-shell]');
+	const targetHash = shell.dataset.accessHash;
+	const loginPanel = document.getElementById('loginPanel');
+	const dashboard = document.getElementById('dashboard');
+	const accessForm = document.getElementById('accessForm');
+	const accessError = document.getElementById('accessError');
+	const dataFile = document.getElementById('dataFile');
+	const dataPaste = document.getElementById('dataPaste');
+	const importState = document.getElementById('importState');
+	const dataStatus = document.getElementById('dataStatus');
+	const briefBox = document.getElementById('briefBox');
+	const llmPrompt = document.getElementById('llmPrompt');
+	const recommendationList = document.getElementById('recommendationList');
+	const queryRows = document.getElementById('queryRows');
+	const videoRows = document.getElementById('videoRows');
+	const actionCount = document.getElementById('actionCount');
+	const serverStatus = document.getElementById('serverStatus');
+	const storageKey = 'arthur-growth-data-v1';
+	const accessKey = 'arthur-growth-access';
+	let state = {
+		data: readStoredData() || baseline,
+		insights: [],
+	};
+
+	const numberFormat = new Intl.NumberFormat('ja-JP');
+	const percentFormat = new Intl.NumberFormat('ja-JP', {
+		style: 'percent',
+		maximumFractionDigits: 1,
+	});
+
+	const digest = async (value) => {
+		const bytes = new TextEncoder().encode(value);
+		const hashBuffer = await crypto.subtle.digest('SHA-256', bytes);
+		return Array.from(new Uint8Array(hashBuffer))
+			.map((byte) => byte.toString(16).padStart(2, '0'))
+			.join('');
+	};
+
+	const unlock = () => {
+		loginPanel.hidden = true;
+		dashboard.hidden = false;
+		render();
+	};
+
+	if (sessionStorage.getItem(accessKey) === targetHash) {
+		unlock();
+	}
+
+	accessForm.addEventListener('submit', async (event) => {
+		event.preventDefault();
+		const formData = new FormData(accessForm);
+		const passcode = String(formData.get('passcode') || '');
+		const passHash = await digest(passcode);
+		if (passHash === targetHash) {
+			sessionStorage.setItem(accessKey, passHash);
+			accessForm.reset();
+			accessError.textContent = '';
+			unlock();
+			return;
+		}
+		accessError.textContent = 'Access denied';
+	});
+
+	document.getElementById('lockDashboard').addEventListener('click', () => {
+		sessionStorage.removeItem(accessKey);
+		dashboard.hidden = true;
+		loginPanel.hidden = false;
+	});
+
+	document.getElementById('loadBaseline').addEventListener('click', () => {
+		state.data = baseline;
+		saveData();
+		importState.textContent = 'Baseline';
+		render();
+	});
+
+	document.getElementById('clearData').addEventListener('click', () => {
+		localStorage.removeItem(storageKey);
+		state.data = baseline;
+		dataPaste.value = '';
+		importState.textContent = 'Cleared';
+		render();
+	});
+
+	document.getElementById('analyzePaste').addEventListener('click', () => {
+		if (!dataPaste.value.trim()) {
+			importState.textContent = 'Empty';
+			return;
+		}
+		applyInput(dataPaste.value, 'paste');
+	});
+
+	dataFile.addEventListener('change', async () => {
+		const file = dataFile.files?.[0];
+		if (!file) return;
+		const text = await file.text();
+		applyInput(text, file.name);
+		dataFile.value = '';
+	});
+
+	document.getElementById('copyPrompt').addEventListener('click', async () => {
+		await navigator.clipboard.writeText(llmPrompt.value);
+		importState.textContent = 'Prompt copied';
+	});
+
+	document.getElementById('serverAnalyze').addEventListener('click', async () => {
+		serverStatus.textContent = 'Running server-side LLM analysis...';
+		try {
+			const response = await fetch('/api/owner-growth-analysis', {
+				method: 'POST',
+				credentials: 'same-origin',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					data: state.data,
+					insights: state.insights,
+					prompt: llmPrompt.value,
+				}),
+			});
+			if (!response.ok) {
+				throw new Error(`Server returned ${response.status}`);
+			}
+			const result = await response.json();
+			if (!result.analysis) {
+				throw new Error('Missing analysis text');
+			}
+			briefBox.innerHTML = `<p>${escapeHTML(result.analysis).replaceAll('\n', '<br>')}</p>`;
+			serverStatus.textContent = 'Server-side LLM analysis complete.';
+		} catch (error) {
+			serverStatus.textContent =
+				'Server-side LLM endpoint is not active yet. Use Copy Prompt, or deploy the server endpoint with a private API key.';
+			console.error(error);
+		}
+	});
+
+	document.getElementById('exportPlan').addEventListener('click', () => {
+		const exportData = {
+			exportedAt: new Date().toISOString(),
+			data: state.data,
+			insights: state.insights,
+			llmPrompt: llmPrompt.value,
+		};
+		const blob = new Blob([JSON.stringify(exportData, null, 2)], {
+			type: 'application/json',
+		});
+		const url = URL.createObjectURL(blob);
+		const link = document.createElement('a');
+		link.href = url;
+		link.download = `arthur-growth-plan-${new Date().toISOString().slice(0, 10)}.json`;
+		link.click();
+		URL.revokeObjectURL(url);
+	});
+
+	function applyInput(text, label) {
+		try {
+			const imported = parseInput(text);
+			state.data = mergeData(state.data, imported);
+			state.data.source = label;
+			state.data.generatedAt = new Date().toISOString();
+			saveData();
+			importState.textContent = 'Loaded';
+			render();
+		} catch (error) {
+			importState.textContent = 'Invalid data';
+			console.error(error);
+		}
+	}
+
+	function parseInput(text) {
+		const trimmed = text.trim();
+		if (trimmed.startsWith('{') || trimmed.startsWith('[')) {
+			const parsed = JSON.parse(trimmed);
+			return Array.isArray(parsed) ? detectRows(parsed) : parsed;
+		}
+		return detectRows(rowsToObjects(parseCSV(trimmed)));
+	}
+
+	function parseCSV(text) {
+		const rows = [];
+		let row = [];
+		let cell = '';
+		let quoted = false;
+
+		for (let index = 0; index < text.length; index += 1) {
+			const char = text[index];
+			const next = text[index + 1];
+			if (quoted) {
+				if (char === '"' && next === '"') {
+					cell += '"';
+					index += 1;
+				} else if (char === '"') {
+					quoted = false;
+				} else {
+					cell += char;
+				}
+				continue;
+			}
+			if (char === '"') {
+				quoted = true;
+			} else if (char === ',') {
+				row.push(cell.trim());
+				cell = '';
+			} else if (char === '\n') {
+				row.push(cell.trim());
+				if (row.some(Boolean)) rows.push(row);
+				row = [];
+				cell = '';
+			} else if (char !== '\r') {
+				cell += char;
+			}
+		}
+
+		row.push(cell.trim());
+		if (row.some(Boolean)) rows.push(row);
+		return rows;
+	}
+
+	function rowsToObjects(rows) {
+		const headers = rows.shift() || [];
+		return rows.map((row) => {
+			const object = {};
+			headers.forEach((header, index) => {
+				object[header] = row[index] || '';
+			});
+			return object;
+		});
+	}
+
+	function detectRows(rows) {
+		const sample = rows[0] || {};
+		const keys = Object.keys(sample).map(normalizeKey);
+		const has = (candidates) => candidates.some((candidate) => keys.includes(candidate));
+
+		if (has(['query', 'queries', 'searchterm', 'searchquery', 'kueri', 'クエリ', '検索語句'])) {
+			return {
+				site: {
+					searchQueries: rows.map((row) => ({
+						query: readValue(row, ['query', 'queries', 'search term', 'search query', 'クエリ', '検索語句']),
+						impressions: parseNumber(readValue(row, ['impressions', '表示回数', 'インプレッション'])),
+						clicks: parseNumber(readValue(row, ['clicks', 'クリック数', 'クリック'])),
+						ctr: parseRatio(readValue(row, ['ctr', 'click through rate', 'クリック率'])),
+						position: parseNumber(readValue(row, ['position', 'average position', '掲載順位', '平均掲載順位'])),
+					})),
+				},
+			};
+		}
+
+		if (has(['videotitle', 'title', '動画タイトル', '動画'])) {
+			return {
+				youtube: {
+					videos: rows.map((row) => ({
+						videoId: readValue(row, ['video id', 'videoid', '動画 id', '動画id']),
+						title: readValue(row, ['video title', 'title', '動画タイトル', '動画']),
+						views: parseNumber(readValue(row, ['views', '視聴回数'])),
+						watchTimeHours: parseNumber(
+							readValue(row, ['watch time hours', 'watchtimehours', '総再生時間（時間）', '総再生時間'])
+						),
+						avgViewDurationSec: parseDuration(readValue(row, ['average view duration', 'avg view duration', '平均視聴時間'])),
+						retentionPercent: parseRatio(readValue(row, ['average percentage viewed', 'retention', '平均再生率', '維持率'])),
+						subscribersGained: parseNumber(readValue(row, ['subscribers gained', '登録者増加', 'チャンネル登録者増加'])),
+						ctr: parseRatio(readValue(row, ['impressions click-through rate', 'ctr', 'クリック率'])),
+						trafficSource: readValue(row, ['traffic source', 'トラフィック ソース', 'トラフィックソース']),
+					})),
+				},
+			};
+		}
+
+		return {
+			site: {
+				topPages: rows.map((row) => ({
+					path: readValue(row, ['page path', 'page', 'landing page', 'path', 'ページ', 'ランディング ページ']),
+					views: parseNumber(readValue(row, ['views', 'screen page views', '表示回数', 'ページビュー'])),
+					sessions: parseNumber(readValue(row, ['sessions', 'セッション'])),
+					conversions: parseNumber(readValue(row, ['conversions', 'キーイベント', 'コンバージョン'])),
+				})),
+			},
+		};
+	}
+
+	function mergeData(current, imported) {
+		return {
+			...current,
+			...imported,
+			site: {
+				...(current.site || {}),
+				...(imported.site || {}),
+			},
+			youtube: {
+				...(current.youtube || {}),
+				...(imported.youtube || {}),
+				channel: {
+					...(current.youtube?.channel || {}),
+					...(imported.youtube?.channel || {}),
+				},
+			},
+		};
+	}
+
+	function readValue(row, candidates) {
+		const normalizedCandidates = candidates.map(normalizeKey);
+		const key = Object.keys(row).find((candidate) =>
+			normalizedCandidates.includes(normalizeKey(candidate))
+		);
+		return key ? row[key] : '';
+	}
+
+	function normalizeKey(value) {
+		return String(value || '')
+			.toLowerCase()
+			.replaceAll(' ', '')
+			.replaceAll('-', '')
+			.replaceAll('_', '')
+			.replaceAll('　', '')
+			.replace(/[()（）/%]/g, '');
+	}
+
+	function parseNumber(value) {
+		if (typeof value === 'number') return Number.isFinite(value) ? value : 0;
+		const normalized = String(value || '').replace(/[,%\s　]/g, '');
+		const number = Number(normalized);
+		return Number.isFinite(number) ? number : 0;
+	}
+
+	function parseRatio(value) {
+		if (typeof value === 'number') return value > 1 ? value / 100 : value;
+		const text = String(value || '').trim();
+		if (!text) return 0;
+		const number = parseNumber(text);
+		return text.includes('%') || number > 1 ? number / 100 : number;
+	}
+
+	function parseDuration(value) {
+		if (typeof value === 'number') return value;
+		const text = String(value || '').trim();
+		if (!text) return 0;
+		if (!text.includes(':')) return parseNumber(text);
+		return text
+			.split(':')
+			.map(Number)
+			.reduce((total, unit) => total * 60 + (Number.isFinite(unit) ? unit : 0), 0);
+	}
+
+	function render() {
+		state.insights = buildInsights(state.data);
+		renderKpis(state.data);
+		renderRecommendations(state.insights);
+		renderTables(state.data);
+		const prompt = buildPrompt(state.data, state.insights);
+		llmPrompt.value = prompt;
+		briefBox.innerHTML = buildBrief(state.insights);
+		dataStatus.textContent = `${state.data.source || 'data'} | ${new Date(state.data.generatedAt || Date.now()).toLocaleString('ja-JP')}`;
+	}
+
+	function renderKpis(data) {
+		const site = data.site || {};
+		const youtube = data.youtube || {};
+		const videos = youtube.videos || [];
+		const searchQueries = site.searchQueries || [];
+		const impressions = sum(searchQueries, 'impressions');
+		const clicks = sum(searchQueries, 'clicks');
+		const channelViews = youtube.channel?.views || sum(videos, 'views');
+		const watchHours = youtube.channel?.watchTimeHours || sum(videos, 'watchTimeHours');
+		const gained = youtube.channel?.subscribersGained || sum(videos, 'subscribersGained');
+		const lost = youtube.channel?.subscribersLost || 0;
+		const netSubscribers = gained - lost;
+
+		document.getElementById('kpiSessions').textContent = formatNumber(site.sessions);
+		document.getElementById('kpiEngagement').textContent = `Engaged ${formatNumber(site.engagedSessions)}`;
+		document.getElementById('kpiImpressions').textContent = formatNumber(impressions);
+		document.getElementById('kpiCtr').textContent = `CTR ${formatPercent(impressions ? clicks / impressions : 0)}`;
+		document.getElementById('kpiViews').textContent = formatNumber(channelViews);
+		document.getElementById('kpiWatch').textContent = `Watch ${formatNumber(watchHours)}h`;
+		document.getElementById('kpiSubs').textContent = formatNumber(netSubscribers);
+		document.getElementById('kpiSubRate').textContent = `Sub rate ${formatPercent(channelViews ? gained / channelViews : 0)}`;
+	}
+
+	function buildInsights(data) {
+		const site = data.site || {};
+		const youtube = data.youtube || {};
+		const videos = youtube.videos || [];
+		const searchQueries = site.searchQueries || [];
+		const insights = [];
+		const add = (area, severity, title, detail, action) =>
+			insights.push({ area, severity, title, detail, action });
+
+		if (!searchQueries.length || sum(searchQueries, 'impressions') === 0) {
+			add(
+				'Search',
+				'High',
+				'Search Console data is missing',
+				'Brand ranking and CTR cannot be judged from real query data yet.',
+				'Connect Search Console or import query CSV weekly.'
+			);
+		}
+
+		const brandQueries = searchQueries.filter((item) =>
+			/アーサー|arthur|hollands|不良牧師/i.test(item.query || '')
+		);
+		const brandPosition = weightedAverage(brandQueries, 'position', 'impressions');
+		if (brandQueries.length && brandPosition > 3) {
+			add(
+				'SEO',
+				'High',
+				'Brand queries are not in the top cluster',
+				`Average brand position is ${brandPosition.toFixed(1)}.`,
+				'Keep the home title, H1, visible profile copy, schema sameAs, sitemap, and llms.txt aligned around アーサーホーランド / アーサー・ホーランド / Arthur Hollands.'
+			);
+		}
+
+		searchQueries
+			.filter((item) => item.impressions >= 100 && item.ctr < 0.04)
+			.sort((a, b) => b.impressions - a.impressions)
+			.slice(0, 3)
+			.forEach((item) => {
+				add(
+					'SEO',
+					'Medium',
+					`Low CTR query: ${item.query}`,
+					`${formatNumber(item.impressions)} impressions at ${formatPercent(item.ctr)} CTR.`,
+					'Rewrite the matching title and meta description to name アーサーホーランド first and state the video value in one sentence.'
+				);
+			});
+
+		searchQueries
+			.filter((item) => /(プロフィール|経歴|誰|牧師|十字架|本|映画)/.test(item.query || '') && item.position > 5)
+			.slice(0, 3)
+			.forEach((item) => {
+				add(
+					'Content',
+					'Medium',
+					`Profile intent gap: ${item.query}`,
+					`Position ${Number(item.position || 0).toFixed(1)} leaves room for a dedicated answer page.`,
+					'Add a short profile/FAQ page and link it from the home page with clear anchor text.'
+				);
+			});
+
+		if (!videos.length || sum(videos, 'views') === 0) {
+			add(
+				'YouTube',
+				'High',
+				'YouTube Analytics data is missing',
+				'Views, retention, subscriber gain, and traffic source decisions need channel analytics.',
+				'Import YouTube Studio video CSV or connect the YouTube Analytics API.'
+			);
+		}
+
+		videos
+			.filter((video) => video.views >= 100 && video.ctr > 0 && video.ctr < 0.04)
+			.sort((a, b) => b.views - a.views)
+			.slice(0, 4)
+			.forEach((video) => {
+				add(
+					'YouTube',
+					'High',
+					`Thumbnail/title test: ${video.title}`,
+					`${formatPercent(video.ctr)} CTR with ${formatNumber(video.views)} views.`,
+					'Create two title/thumbnail variants: one with the emotional problem first, one with the Scripture promise first.'
+				);
+			});
+
+		videos
+			.filter((video) => video.views >= 100 && video.retentionPercent > 0 && video.retentionPercent < 0.35)
+			.sort((a, b) => b.views - a.views)
+			.slice(0, 4)
+			.forEach((video) => {
+				add(
+					'YouTube',
+					'High',
+					`Opening retention issue: ${video.title}`,
+					`Average viewed is ${formatPercent(video.retentionPercent)}.`,
+					'Start with the strongest spoken line or viewer pain point in the first 5 seconds, then move into context.'
+				);
+			});
+
+		videos
+			.filter((video) => video.views >= 100 && video.retentionPercent >= 0.45 && video.subscribersGained / Math.max(video.views, 1) < 0.005)
+			.sort((a, b) => b.retentionPercent - a.retentionPercent)
+			.slice(0, 4)
+			.forEach((video) => {
+				add(
+					'Subscribers',
+					'Medium',
+					`Strong video, weak subscriber conversion: ${video.title}`,
+					`Retention ${formatPercent(video.retentionPercent)} but subscriber rate ${formatPercent(video.subscribersGained / Math.max(video.views, 1))}.`,
+					'Place a calm subscribe CTA immediately after the most resonant segment and pin a comment linking the next related message.'
+				);
+			});
+
+		const topPages = site.topPages || [];
+		topPages
+			.filter((page) => page.views >= 100 && page.conversions === 0)
+			.slice(0, 3)
+			.forEach((page) => {
+				add(
+					'Site',
+					'Medium',
+					`No conversion event on ${page.path}`,
+					`${formatNumber(page.views)} views without a tracked subscribe or YouTube click event.`,
+					'Track outbound YouTube clicks and add a visible channel subscription link near the video list.'
+				);
+			});
+
+		return insights.sort((a, b) => severityRank(b.severity) - severityRank(a.severity));
+	}
+
+	function renderRecommendations(insights) {
+		recommendationList.innerHTML = '';
+		actionCount.textContent = `${insights.length} items`;
+		if (!insights.length) {
+			recommendationList.innerHTML = '<li class="empty-row">No priority actions.</li>';
+			return;
+		}
+		insights.forEach((item) => {
+			const row = document.createElement('li');
+			row.className = `recommendation severity-${item.severity.toLowerCase()}`;
+			row.innerHTML = `
+				<div class="rec-meta">
+					<span>${escapeHTML(item.area)}</span>
+					<b>${escapeHTML(item.severity)}</b>
+				</div>
+				<h3>${escapeHTML(item.title)}</h3>
+				<p>${escapeHTML(item.detail)}</p>
+				<strong>${escapeHTML(item.action)}</strong>
+			`;
+			recommendationList.append(row);
+		});
+	}
+
+	function renderTables(data) {
+		const queries = (data.site?.searchQueries || [])
+			.slice()
+			.sort((a, b) => b.impressions - a.impressions)
+			.slice(0, 10);
+		queryRows.innerHTML = queries.length
+			? queries
+					.map(
+						(item) => `<tr>
+							<td>${escapeHTML(item.query || '')}</td>
+							<td>${formatNumber(item.impressions)}</td>
+							<td>${formatPercent(item.ctr)}</td>
+							<td>${Number(item.position || 0).toFixed(1)}</td>
+						</tr>`
+					)
+					.join('')
+			: '<tr><td colspan="4">No query data</td></tr>';
+
+		const videos = (data.youtube?.videos || [])
+			.slice()
+			.sort((a, b) => b.views - a.views)
+			.slice(0, 10);
+		videoRows.innerHTML = videos.length
+			? videos
+					.map(
+						(video) => `<tr>
+							<td>${escapeHTML(video.title || video.videoId || '')}</td>
+							<td>${formatNumber(video.views)}</td>
+							<td>${formatPercent(video.retentionPercent)}</td>
+							<td>${formatNumber(video.subscribersGained)}</td>
+						</tr>`
+					)
+					.join('')
+			: '<tr><td colspan="4">No video data</td></tr>';
+	}
+
+	function buildBrief(insights) {
+		const top = insights.slice(0, 4);
+		if (!top.length) return '<p>No immediate risk detected.</p>';
+		return top
+			.map(
+				(item) => `<p><strong>${escapeHTML(item.area)}:</strong> ${escapeHTML(item.title)}. ${escapeHTML(item.action)}</p>`
+			)
+			.join('');
+	}
+
+	function buildPrompt(data, insights) {
+		const compactData = {
+			site: data.site,
+			youtube: {
+				channel: data.youtube?.channel,
+				videos: (data.youtube?.videos || []).slice(0, 30),
+			},
+		};
+		return [
+			'You are a growth analyst for THE ARTHUR HOLLANDS SHOW, a Japanese video archive for アーサーホーランド / アーサー・ホーランド / Arthur Hollands.',
+			'Analyze SEO, LLM visibility, YouTube subscriber conversion, retention, title/thumbnail opportunities, and site-to-YouTube funnel.',
+			'Return a prioritized weekly action plan with: issue, evidence, exact action, expected metric, and next test.',
+			'Current rule-based findings:',
+			JSON.stringify(insights, null, 2),
+			'Analytics data:',
+			JSON.stringify(compactData, null, 2),
+		].join('\n\n');
+	}
+
+	function readStoredData() {
+		try {
+			return JSON.parse(localStorage.getItem(storageKey) || 'null');
+		} catch {
+			return null;
+		}
+	}
+
+	function saveData() {
+		localStorage.setItem(storageKey, JSON.stringify(state.data));
+	}
+
+	function sum(rows, key) {
+		return rows.reduce((total, row) => total + Number(row[key] || 0), 0);
+	}
+
+	function weightedAverage(rows, valueKey, weightKey) {
+		const weight = sum(rows, weightKey);
+		if (!weight) return 0;
+		return rows.reduce((total, row) => total + Number(row[valueKey] || 0) * Number(row[weightKey] || 0), 0) / weight;
+	}
+
+	function severityRank(value) {
+		return { Low: 1, Medium: 2, High: 3 }[value] || 0;
+	}
+
+	function formatNumber(value) {
+		return numberFormat.format(Math.round(Number(value || 0)));
+	}
+
+	function formatPercent(value) {
+		return percentFormat.format(Number(value || 0));
+	}
+
+	function escapeHTML(value) {
+		return String(value || '')
+			.replaceAll('&', '&amp;')
+			.replaceAll('<', '&lt;')
+			.replaceAll('>', '&gt;')
+			.replaceAll('"', '&quot;')
+			.replaceAll("'", '&#039;');
+	}
+</script>
+
+<style>
+	.owner-shell {
+		--ink: #111827;
+		--muted: #6b7280;
+		--line: #d7dce2;
+		--panel: #ffffff;
+		--soft: #f4f6f8;
+		--gold: #b78b36;
+		--blue: #22577a;
+		--green: #2f6f5e;
+		background: var(--soft);
+		color: var(--ink);
+		font-family: 'Noto Sans JP', system-ui, sans-serif;
+		min-height: 100vh;
+	}
+
+	.owner-shell [hidden] {
+		display: none !important;
+	}
+
+	button,
+	input,
+	textarea {
+		font: inherit;
+	}
+
+	button {
+		align-items: center;
+		background: #111827;
+		border: 1px solid #111827;
+		color: #fff;
+		cursor: pointer;
+		display: inline-flex;
+		font-weight: 800;
+		justify-content: center;
+		min-height: 42px;
+		padding: 8px 14px;
+	}
+
+	button:hover {
+		background: var(--blue);
+		border-color: var(--blue);
+	}
+
+	.login-panel {
+		display: grid;
+		min-height: 100vh;
+		padding: 24px;
+		place-items: center;
+	}
+
+	.login-box {
+		background: #fff;
+		border: 1px solid var(--line);
+		max-width: 460px;
+		padding: 32px;
+		width: 100%;
+	}
+
+	.kicker,
+	.panel-kicker,
+	.metric-label {
+		color: var(--gold);
+		display: block;
+		font-family: 'Oswald', sans-serif;
+		font-size: 0.78rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+	h1,
+	h2,
+	h3,
+	p {
+		margin: 0;
+	}
+
+	.login-box h1,
+	.dashboard-header h1 {
+		font-size: 1.8rem;
+		line-height: 1.2;
+		margin-top: 8px;
+	}
+
+	label {
+		display: block;
+		font-size: 0.9rem;
+		font-weight: 800;
+		margin: 28px 0 8px;
+	}
+
+	.login-note {
+		color: var(--muted);
+		font-size: 0.9rem;
+		line-height: 1.6;
+		margin-top: 12px;
+	}
+
+	.login-row {
+		display: grid;
+		gap: 10px;
+		grid-template-columns: 1fr auto;
+	}
+
+	input,
+	textarea {
+		background: #fff;
+		border: 1px solid var(--line);
+		color: var(--ink);
+		min-width: 0;
+		padding: 10px 12px;
+		width: 100%;
+	}
+
+	textarea {
+		line-height: 1.5;
+		resize: vertical;
+	}
+
+	.access-error {
+		color: #9f1d20;
+		font-weight: 800;
+		margin-top: 12px;
+		min-height: 24px;
+	}
+
+	.dashboard {
+		margin: 0 auto;
+		max-width: 1240px;
+		padding: 28px;
+	}
+
+	.dashboard-header {
+		align-items: end;
+		display: flex;
+		gap: 20px;
+		justify-content: space-between;
+		margin-bottom: 22px;
+	}
+
+	.status-line {
+		color: var(--muted);
+		font-size: 0.9rem;
+		margin-top: 8px;
+	}
+
+	.header-actions,
+	.button-row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+
+	.kpi-grid {
+		display: grid;
+		gap: 12px;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		margin-bottom: 16px;
+	}
+
+	.security-note {
+		background: #fff7ed;
+		border: 1px solid #fed7aa;
+		border-left: 5px solid var(--gold);
+		color: #422006;
+		display: grid;
+		gap: 8px;
+		margin: 0 0 18px;
+		padding: 14px 16px;
+	}
+
+	.security-note p {
+		font-size: 0.9rem;
+		font-weight: 800;
+		line-height: 1.65;
+	}
+
+	.metric-card,
+	.panel {
+		background: var(--panel);
+		border: 1px solid var(--line);
+	}
+
+	.metric-card {
+		min-height: 118px;
+		padding: 18px;
+	}
+
+	.metric-card strong {
+		display: block;
+		font-size: 2rem;
+		line-height: 1;
+		margin: 12px 0 10px;
+	}
+
+	.metric-card span:last-child {
+		color: var(--muted);
+		font-size: 0.9rem;
+	}
+
+	.workspace-grid,
+	.analysis-grid {
+		display: grid;
+		gap: 16px;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		margin-top: 16px;
+	}
+
+	.analysis-grid {
+		grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+	}
+
+	.panel {
+		min-width: 0;
+		padding: 18px;
+	}
+
+	.panel-wide {
+		grid-row: span 2;
+	}
+
+	.panel-heading {
+		align-items: center;
+		display: flex;
+		gap: 12px;
+		justify-content: space-between;
+		margin-bottom: 14px;
+	}
+
+	.panel-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		justify-content: flex-end;
+	}
+
+	.panel h2 {
+		font-size: 1.15rem;
+		line-height: 1.25;
+		margin-top: 4px;
+	}
+
+	.panel-state {
+		color: var(--muted);
+		font-size: 0.84rem;
+		font-weight: 800;
+	}
+
+	.file-drop {
+		align-items: center;
+		background: #f8fafc;
+		border: 1px dashed #9aa4b2;
+		cursor: pointer;
+		display: flex;
+		justify-content: center;
+		min-height: 88px;
+		margin: 0 0 12px;
+		padding: 14px;
+		text-align: center;
+	}
+
+	.file-drop input {
+		display: none;
+	}
+
+	.file-drop span {
+		color: var(--ink);
+		font-weight: 800;
+	}
+
+	.brief-box {
+		background: #f8fafc;
+		border-left: 4px solid var(--blue);
+		color: #1f2937;
+		display: grid;
+		gap: 10px;
+		margin-bottom: 12px;
+		padding: 14px;
+	}
+
+	.server-status {
+		color: var(--muted);
+		font-size: 0.86rem;
+		font-weight: 800;
+		line-height: 1.5;
+		margin: -4px 0 12px;
+	}
+
+	.brief-box p {
+		font-size: 0.92rem;
+		line-height: 1.6;
+	}
+
+	.recommendation-list {
+		display: grid;
+		gap: 10px;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.recommendation {
+		border-left: 4px solid var(--green);
+		background: #f8fafc;
+		padding: 14px;
+	}
+
+	.severity-high {
+		border-left-color: #9f1d20;
+	}
+
+	.severity-medium {
+		border-left-color: var(--gold);
+	}
+
+	.rec-meta {
+		color: var(--muted);
+		display: flex;
+		font-size: 0.78rem;
+		font-weight: 900;
+		justify-content: space-between;
+		text-transform: uppercase;
+	}
+
+	.recommendation h3 {
+		font-size: 1rem;
+		line-height: 1.45;
+		margin-top: 8px;
+	}
+
+	.recommendation p {
+		color: var(--muted);
+		font-size: 0.9rem;
+		line-height: 1.6;
+		margin: 8px 0;
+	}
+
+	.recommendation strong {
+		display: block;
+		font-size: 0.92rem;
+		line-height: 1.55;
+	}
+
+	.empty-row {
+		color: var(--muted);
+		padding: 16px;
+	}
+
+	.table-wrap {
+		overflow-x: auto;
+	}
+
+	table {
+		border-collapse: collapse;
+		min-width: 520px;
+		width: 100%;
+	}
+
+	th,
+	td {
+		border-bottom: 1px solid var(--line);
+		font-size: 0.84rem;
+		padding: 10px 8px;
+		text-align: left;
+		vertical-align: top;
+	}
+
+	th {
+		color: var(--muted);
+		font-size: 0.74rem;
+		text-transform: uppercase;
+	}
+
+	td:not(:first-child) {
+		font-variant-numeric: tabular-nums;
+		white-space: nowrap;
+	}
+
+	@media (max-width: 960px) {
+		.dashboard-header {
+			align-items: start;
+			flex-direction: column;
+		}
+
+		.kpi-grid,
+		.workspace-grid,
+		.analysis-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.panel-wide {
+			grid-row: auto;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.dashboard {
+			padding: 16px;
+		}
+
+		.login-row {
+			grid-template-columns: 1fr;
+		}
+
+		.header-actions,
+		.button-row {
+			width: 100%;
+		}
+
+		.header-actions button,
+		.button-row button {
+			flex: 1 1 120px;
+		}
+
+		.metric-card strong {
+			font-size: 1.7rem;
+		}
+	}
+</style>
