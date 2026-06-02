@@ -13,7 +13,7 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 const messageShareTitle = `${entry.data.title} | アーサーホーランド公式YouTubeチャンネル THE ARTHUR HOLLANDS SHOW`;
 const messageShareText = entry.data.description || entry.data.title;
-const messageShareUrl = `https://arthur-show.com/messages/${entry.slug}/`;
+const messageShareUrl = `https://arthur-show.com/messages/${entry.slug}/?share=20260602`;
 const messageImage = entry.data.heroImage || `https://i.ytimg.com/vi/${entry.data.youtubeId}/hq720.jpg`;
 ---
 
