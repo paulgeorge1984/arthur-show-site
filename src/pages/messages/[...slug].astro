@@ -390,7 +390,7 @@ const messageStructuredData = [
 			}
 
 			if (notes.dataset.slideNotesTouched === 'true') return;
-			setSlideNotesMinimized(notes, Boolean(targetLanguage && slideNotesMobileQuery.matches));
+			setSlideNotesMinimized(notes, false);
 		});
 	}
 
