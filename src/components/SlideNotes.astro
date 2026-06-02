@@ -1,0 +1,35 @@
+---
+import { slideNotesByDeckId } from '../data/slideNotes';
+
+interface Props {
+	deckId: string;
+}
+
+const { deckId } = Astro.props;
+const paragraphs = (slideNotesByDeckId[deckId] || '')
+	.split(/\n{2,}/)
+	.map((paragraph) => paragraph.trim())
+	.filter(Boolean);
+---
+
+{paragraphs.length > 0 && (
+	<section class="slide-notes-fallback" data-slide-notes-fallback>
+		<div class="slide-notes-header">
+			<div>
+				<p class="slide-notes-kicker">GOOGLE SLIDES TEXT</p>
+				<h2>スライド翻訳コーナー</h2>
+			</div>
+			<button type="button" class="slide-notes-toggle" aria-expanded="true" data-slide-notes-toggle>×</button>
+		</div>
+		<div class="slide-notes-content" data-slide-notes-content>
+			<details class="slide-notes-card" open data-slide-notes-deck={deckId}>
+				<summary>このGoogleスライドの本文</summary>
+				<div class="slide-notes-copy">
+					{paragraphs.map((paragraph) => (
+						<p>{paragraph}</p>
+					))}
+				</div>
+			</details>
+		</div>
+	</section>
+)}

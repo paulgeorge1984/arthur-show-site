@@ -109,13 +109,6 @@ const messageStructuredData = [
 					<button type="button" class="slide-notes-toggle" aria-expanded="true" data-slide-notes-toggle>×</button>
 				</div>
 				<div class="slide-notes-content" data-slide-notes-content>
-					<p class="slide-notes-language" data-slide-notes-language hidden></p>
-					<p class="slide-notes-language-static">
-						この欄は、Googleスライドを選択中の言語で読みやすくするための補助コーナーです。元のスライドは上に表示しています。
-					</p>
-					<p class="slide-notes-lead">
-						Google Slides の埋め込み画面は外部サービスのため、ページ翻訳では中の文字が翻訳されない場合があります。このコーナーから、スライド本文またはテキスト版を開いて読めます。
-					</p>
 					{slideTranslationNotes.map((note) => (
 						note.paragraphs.length > 0 ? (
 							<details class="slide-notes-card" open data-slide-notes-deck={note.deckId}>
@@ -128,10 +121,6 @@ const messageStructuredData = [
 							</details>
 						) : (
 							<div class="slide-notes-card slide-notes-link-card" data-slide-notes-deck={note.deckId}>
-								<strong>Googleスライドのテキスト版</strong>
-								<p>
-									スライド内の文字が翻訳されない場合は、テキスト版を翻訳して読めます。
-								</p>
 								<a
 									class="slide-translate-button slide-translate-button-secondary"
 									href={`https://docs.google.com/presentation/d/${note.deckId}/export/txt`}
@@ -140,7 +129,7 @@ const messageStructuredData = [
 									data-slide-notes-text-link
 									data-slide-deck-id={note.deckId}
 								>
-									翻訳用テキストを開く
+									スライド本文を翻訳で開く
 								</a>
 							</div>
 						)
@@ -317,14 +306,8 @@ const messageStructuredData = [
 
 	function updateSlideTranslationLanguageNotice(language) {
 		document.querySelectorAll('[data-slide-notes-language]').forEach((notice) => {
-			if (!language) {
-				notice.hidden = true;
-				notice.textContent = '';
-				return;
-			}
-
-			notice.hidden = false;
-			notice.textContent = `${getTranslationLanguageLabel(language)} - Google Slides reading support.`;
+			notice.hidden = true;
+			notice.textContent = '';
 		});
 	}
 
@@ -490,7 +473,7 @@ const messageStructuredData = [
 				const notesLink = document.createElement('a');
 				notesLink.className = 'slide-translate-button slide-translate-button-secondary';
 				notesLink.href = '#slide-translation-text';
-				notesLink.textContent = notesHasCopy ? 'スライド本文を見る' : '翻訳コーナーを見る';
+				notesLink.textContent = notesHasCopy ? 'スライド本文を見る' : 'スライド本文を開く';
 				notesLink.addEventListener('click', (event) => {
 					event.preventDefault();
 					notes.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -503,7 +486,7 @@ const messageStructuredData = [
 				textLink.href = translatedTextUrl;
 				textLink.target = '_blank';
 				textLink.rel = 'noopener noreferrer';
-				textLink.textContent = '翻訳用テキストを開く';
+				textLink.textContent = 'スライド本文を翻訳で開く';
 				actions.append(textLink);
 			}
 
