@@ -26,8 +26,7 @@ const slideTranslationNotes = slideDeckIds
 			.split(/\n{2,}/)
 			.map((paragraph) => paragraph.trim())
 			.filter(Boolean),
-	}))
-	.filter((note) => note.paragraphs.length > 0);
+	}));
 const messageShareTitle = entry.data.title;
 const messageShareText = 'アーサーホーランド公式YouTubeチャンネル THE ARTHUR HOLLANDS SHOW';
 const messageShareUrl = `https://arthur-show.com/messages/${entry.slug}/?share=20260602`;
@@ -101,31 +100,50 @@ const messageStructuredData = [
 	<article class="content-area">
 		<Content />
 		{slideTranslationNotes.length > 0 && !hasInlineSlideNotes && (
-			<section class="slide-notes-fallback" data-slide-notes-fallback>
+			<section class="slide-notes-fallback" data-slide-notes-fallback hidden>
 				<div class="slide-notes-header">
 					<div>
 						<p class="slide-notes-kicker">GOOGLE SLIDES TEXT</p>
-						<h2>スライド翻訳用テキスト</h2>
+						<h2>スライド翻訳コーナー</h2>
 					</div>
 					<button type="button" class="slide-notes-toggle" aria-expanded="true" data-slide-notes-toggle>×</button>
 				</div>
 				<div class="slide-notes-content" data-slide-notes-content>
 					<p class="slide-notes-language" data-slide-notes-language hidden></p>
 					<p class="slide-notes-language-static">
-						この欄は、選択中の言語に翻訳したGoogleスライド本文です。元のスライドは上に表示しています。
+						この欄は、Googleスライドを選択中の言語で読みやすくするための補助コーナーです。元のスライドは上に表示しています。
 					</p>
 					<p class="slide-notes-lead">
-						Google Slides の埋め込み画面は外部サービスのため、ページ翻訳では中の文字が翻訳されない場合があります。翻訳ページでは、同じ内容をこの欄で読めるようにしています。
+						Google Slides の埋め込み画面は外部サービスのため、ページ翻訳では中の文字が翻訳されない場合があります。このコーナーから、スライド本文またはテキスト版を開いて読めます。
 					</p>
 					{slideTranslationNotes.map((note) => (
-						<details class="slide-notes-card" open data-slide-notes-deck={note.deckId}>
-							<summary>このGoogleスライドの本文</summary>
-							<div class="slide-notes-copy">
-								{note.paragraphs.map((paragraph) => (
-									<p>{paragraph}</p>
-								))}
+						note.paragraphs.length > 0 ? (
+							<details class="slide-notes-card" open data-slide-notes-deck={note.deckId}>
+								<summary>このGoogleスライドの本文</summary>
+								<div class="slide-notes-copy">
+									{note.paragraphs.map((paragraph) => (
+										<p>{paragraph}</p>
+									))}
+								</div>
+							</details>
+						) : (
+							<div class="slide-notes-card slide-notes-link-card" data-slide-notes-deck={note.deckId}>
+								<strong>Googleスライドのテキスト版</strong>
+								<p>
+									スライド内の文字が翻訳されない場合は、テキスト版を翻訳して読めます。
+								</p>
+								<a
+									class="slide-translate-button slide-translate-button-secondary"
+									href={`https://docs.google.com/presentation/d/${note.deckId}/export/txt`}
+									target="_blank"
+									rel="noopener noreferrer"
+									data-slide-notes-text-link
+									data-slide-deck-id={note.deckId}
+								>
+									翻訳用テキストを開く
+								</a>
 							</div>
-						</details>
+						)
 					))}
 				</div>
 			</section>
@@ -306,7 +324,7 @@ const messageStructuredData = [
 			}
 
 			notice.hidden = false;
-			notice.textContent = `${getTranslationLanguageLabel(language)} - Google Slides text translated from Japanese.`;
+			notice.textContent = `${getTranslationLanguageLabel(language)} - Google Slides reading support.`;
 		});
 	}
 
@@ -468,10 +486,11 @@ const messageStructuredData = [
 			actions.append(link);
 
 			if (notes) {
+				const notesHasCopy = Boolean(notes.querySelector('.slide-notes-copy'));
 				const notesLink = document.createElement('a');
 				notesLink.className = 'slide-translate-button slide-translate-button-secondary';
 				notesLink.href = '#slide-translation-text';
-				notesLink.textContent = 'スライド本文を見る';
+				notesLink.textContent = notesHasCopy ? 'スライド本文を見る' : '翻訳コーナーを見る';
 				notesLink.addEventListener('click', (event) => {
 					event.preventDefault();
 					notes.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -800,6 +819,31 @@ const messageStructuredData = [
 		letter-spacing: 0.08em;
 	}
 
+	:global(.slide-notes-link-card) {
+		display: grid;
+		gap: 12px;
+		padding: 16px;
+	}
+
+	:global(.slide-notes-link-card strong) {
+		color: #111;
+		font-size: 0.96rem;
+		font-weight: 900;
+		line-height: 1.55;
+	}
+
+	:global(.slide-notes-link-card p) {
+		margin: 0;
+		color: #555;
+		font-size: 0.9rem;
+		font-weight: 700;
+		line-height: 1.7;
+	}
+
+	:global(.slide-notes-link-card .slide-translate-button) {
+		justify-self: start;
+	}
+
 	:global(.slide-notes-copy) {
 		max-height: none;
 		overflow: visible;
@@ -949,6 +993,10 @@ const messageStructuredData = [
 			width: 100%;
 			min-height: 40px;
 			padding: 8px 12px;
+		}
+
+		:global(.slide-notes-link-card .slide-translate-button) {
+			justify-self: stretch;
 		}
 	}
 </style>
