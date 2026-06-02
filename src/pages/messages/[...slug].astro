@@ -1,6 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import { slideNotesByDeckId } from '../../data/slideNotes';
+
+const siteURL = 'https://arthur-show.com';
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('daily-messages');
@@ -11,19 +14,72 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+const slideDeckIds = Array.from(new Set(
+	[...entry.body.matchAll(/docs\.google\.com\/presentation\/d\/([^/"?#]+)/g)]
+		.map((match) => match[1])
+));
+const hasInlineSlideNotes = /<SlideNotes\b|data-slide-notes-fallback/.test(entry.body);
+const slideTranslationNotes = slideDeckIds
+	.map((deckId) => ({
+		deckId,
+		paragraphs: (slideNotesByDeckId[deckId] || '')
+			.split(/\n{2,}/)
+			.map((paragraph) => paragraph.trim())
+			.filter(Boolean),
+	}));
 const messageShareTitle = entry.data.title;
 const messageShareText = 'アーサーホーランド公式YouTubeチャンネル THE ARTHUR HOLLANDS SHOW';
 const messageShareUrl = `https://arthur-show.com/messages/${entry.slug}/?share=20260602`;
 const messageImage = entry.data.heroImage || `https://i.ytimg.com/vi/${entry.data.youtubeId}/hq720.jpg`;
+const canonicalPath = `/messages/${entry.slug}/`;
+const messageDescription = `${entry.data.description} アーサーホーランド（アーサー・ホーランド / Arthur Hollands）公式動画アーカイブより。`;
+const messageStructuredData = [
+	{
+		"@context": "https://schema.org",
+		"@type": "VideoObject",
+		"@id": `${siteURL}${canonicalPath}#video`,
+		name: entry.data.title,
+		description: messageDescription,
+		thumbnailUrl: [messageImage],
+		uploadDate: entry.data.date.toISOString(),
+		embedUrl: `https://www.youtube.com/embed/${entry.data.youtubeId}`,
+		contentUrl: `https://www.youtube.com/watch?v=${entry.data.youtubeId}`,
+		inLanguage: "ja-JP",
+		isPartOf: { "@id": `${siteURL}/#website` },
+		about: { "@id": `${siteURL}/#arthur-hollands` },
+		publisher: { "@id": `${siteURL}/#arthur-hollands` },
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		itemListElement: [
+			{
+				"@type": "ListItem",
+				position: 1,
+				name: "アーサーホーランド公式動画アーカイブ",
+				item: `${siteURL}/`,
+			},
+			{
+				"@type": "ListItem",
+				position: 2,
+				name: entry.data.title,
+				item: `${siteURL}${canonicalPath}`,
+			},
+		],
+	},
+];
 ---
 
 <Layout
 	title={entry.data.title}
-	description={entry.data.description}
+	description={messageDescription}
 	image={messageImage}
 	imageAlt={`${entry.data.title} サムネイル`}
 	imageWidth={1280}
 	imageHeight={720}
+	ogType="article"
+	canonicalPath={canonicalPath}
+	structuredData={messageStructuredData}
 >
 	
 	<div id="video-anchor" class="video-anchor">
@@ -43,6 +99,55 @@ const messageImage = entry.data.heroImage || `https://i.ytimg.com/vi/${entry.dat
 
 	<article class="content-area">
 		<Content />
+		{slideTranslationNotes.length > 0 && !hasInlineSlideNotes && (
+			<section class="slide-notes-fallback" data-slide-notes-fallback>
+				<div class="slide-notes-header">
+					<div>
+						<p class="slide-notes-kicker">GOOGLE SLIDES TEXT</p>
+						<h2>スライド翻訳用テキスト</h2>
+					</div>
+					<button type="button" class="slide-notes-toggle" aria-expanded="true" data-slide-notes-toggle>×</button>
+				</div>
+				<div class="slide-notes-content" data-slide-notes-content>
+					<p class="slide-notes-language" data-slide-notes-language hidden></p>
+					<p class="slide-notes-language-static">
+						この欄は、選択中の言語に翻訳したGoogleスライド本文です。元のスライドは上に表示しています。
+					</p>
+					<p class="slide-notes-lead">
+						Google Slides の埋め込み画面は外部サービスのため、ページ翻訳では中の文字が翻訳されない場合があります。翻訳ページでは、同じ内容をこの欄で読めるようにしています。
+					</p>
+					{slideTranslationNotes.map((note) => (
+						note.paragraphs.length > 0 ? (
+							<details class="slide-notes-card" open data-slide-notes-deck={note.deckId}>
+								<summary>このGoogleスライドの本文</summary>
+								<div class="slide-notes-copy">
+									{note.paragraphs.map((paragraph) => (
+										<p>{paragraph}</p>
+									))}
+								</div>
+							</details>
+						) : (
+							<div class="slide-notes-card slide-notes-empty" data-slide-notes-deck={note.deckId}>
+								<strong>このGoogleスライドの本文データはまだ未登録です。</strong>
+								<p>
+									下のボタンから、Google翻訳でスライドのテキスト版を開けます。
+								</p>
+								<a
+									class="slide-translate-button slide-translate-button-secondary"
+									href={`https://docs.google.com/presentation/d/${note.deckId}/export/txt`}
+									target="_blank"
+									rel="noopener noreferrer"
+									data-slide-notes-text-link
+									data-slide-deck-id={note.deckId}
+								>
+									翻訳用テキストを開く
+								</a>
+							</div>
+						)
+					))}
+				</div>
+			</section>
+		)}
 	</article>
 
 </Layout>
@@ -128,6 +233,242 @@ const messageImage = entry.data.heroImage || `https://i.ytimg.com/vi/${entry.dat
 	}
 
 	updateMessageShareButtons();
+
+	function getTargetTranslationLanguage() {
+		const params = new URLSearchParams(window.location.search);
+		const candidate = params.get('_x_tr_tl') || params.get('lang') || '';
+		const normalized = normalizeTranslationLanguage(candidate);
+		if (!normalized || normalized === 'ja') return '';
+		return normalized;
+	}
+
+	function normalizeTranslationLanguage(language) {
+		const normalized = (language || '').trim();
+		const lower = normalized.toLowerCase();
+		if (lower === 'zh-cn' || lower === 'zh-hans') return 'zh-CN';
+		if (lower === 'zh-tw' || lower === 'zh-hant') return 'zh-TW';
+		return lower;
+	}
+
+	function getTranslationLanguageLabel(language) {
+		const labels = {
+			en: 'English translation',
+			'zh-CN': '简体中文翻译',
+			'zh-TW': '繁體中文翻譯',
+			ko: '한국어 번역',
+			es: 'Traducción al español',
+			fr: 'Traduction française',
+			de: 'Deutsche Übersetzung',
+			it: 'Traduzione italiana',
+			pt: 'Tradução em português',
+			ru: 'Русский перевод',
+			ar: 'ترجمة عربية',
+			hi: 'हिन्दी अनुवाद',
+			th: 'คำแปลภาษาไทย',
+			vi: 'Bản dịch tiếng Việt',
+			id: 'Terjemahan Bahasa Indonesia',
+			ms: 'Terjemahan Bahasa Melayu',
+			tl: 'Salin sa Tagalog',
+			ne: 'नेपाली अनुवाद',
+			my: 'မြန်မာဘာသာပြန်',
+			km: 'ការបកប្រែភាសាខ្មែរ',
+			bn: 'বাংলা অনুবাদ',
+			ta: 'தமிழ் மொழிபெயர்ப்பு',
+			ur: 'اردو ترجمہ',
+			fa: 'ترجمه فارسی',
+			tr: 'Türkçe çeviri',
+		};
+
+		return labels[language] || `${language.toUpperCase()} translation`;
+	}
+
+	function updateSlideTranslationLanguageNotice(language) {
+		document.querySelectorAll('[data-slide-notes-language]').forEach((notice) => {
+			if (!language) {
+				notice.hidden = true;
+				notice.textContent = '';
+				return;
+			}
+
+			notice.hidden = false;
+			notice.textContent = `${getTranslationLanguageLabel(language)} - Google Slides text translated from Japanese.`;
+		});
+	}
+
+	function buildTranslatedTextExportUrl(deckId, language) {
+		const textExportUrl = `https://docs.google.com/presentation/d/${deckId}/export/txt`;
+		if (!language) return textExportUrl;
+
+		const translateUrl = new URL('https://translate.google.com/translate');
+		translateUrl.searchParams.set('sl', 'ja');
+		translateUrl.searchParams.set('tl', language);
+		translateUrl.searchParams.set('u', textExportUrl);
+		return translateUrl.href;
+	}
+
+	function updateSlideNotesTextLinks(language) {
+		document.querySelectorAll('[data-slide-notes-text-link]').forEach((link) => {
+			const deckId = link.dataset.slideDeckId || '';
+			if (!deckId) return;
+			link.href = buildTranslatedTextExportUrl(deckId, language);
+		});
+	}
+
+	function getOriginalSlideUrl(source) {
+		const sourceUrl = new URL(source, window.location.href);
+		const originalUrl = new URL(sourceUrl.href);
+
+		if (originalUrl.hostname === 'docs-google-com.translate.goog') {
+			originalUrl.hostname = 'docs.google.com';
+		}
+
+		['_x_tr_sl', '_x_tr_tl', '_x_tr_hl', '_x_tr_pto'].forEach((param) => {
+			originalUrl.searchParams.delete(param);
+		});
+
+		return originalUrl.href;
+	}
+
+	function getSlideDeckId(source) {
+		const sourceUrl = new URL(getOriginalSlideUrl(source), window.location.href);
+		const match = sourceUrl.pathname.match(/\/presentation\/d\/([^/]+)/);
+		return match ? match[1] : '';
+	}
+
+	function buildTranslatedSlideTextUrl(source, language) {
+		const deckId = getSlideDeckId(source);
+		if (!deckId) return getOriginalSlideUrl(source);
+
+		return buildTranslatedTextExportUrl(deckId, language);
+	}
+
+	function setSlideNotesFallbackVisibility(shouldShow) {
+		document.querySelectorAll('[data-slide-notes-fallback]').forEach((notes) => {
+			notes.hidden = !shouldShow;
+		});
+		document.querySelectorAll('.slide-translation-layout').forEach((layout) => {
+			layout.dataset.slideNotesVisible = shouldShow ? 'true' : 'false';
+		});
+	}
+
+	const slideNotesMobileQuery = window.matchMedia('(max-width: 768px)');
+
+	function setSlideNotesMinimized(notes, minimized) {
+		notes.dataset.slideNotesMinimized = minimized ? 'true' : 'false';
+		const toggle = notes.querySelector('[data-slide-notes-toggle]');
+		if (!toggle) return;
+
+		toggle.textContent = minimized ? '＋' : '×';
+		toggle.setAttribute('aria-expanded', String(!minimized));
+		toggle.setAttribute('aria-label', minimized ? 'スライド本文を表示' : 'スライド本文を最小化');
+	}
+
+	function initializeSlideNotesToggles(targetLanguage) {
+		document.querySelectorAll('[data-slide-notes-fallback]').forEach((notes) => {
+			if (notes.dataset.slideNotesToggleReady !== 'true') {
+				notes.dataset.slideNotesToggleReady = 'true';
+				notes.querySelector('[data-slide-notes-toggle]')?.addEventListener('click', () => {
+					notes.dataset.slideNotesTouched = 'true';
+					setSlideNotesMinimized(notes, notes.dataset.slideNotesMinimized !== 'true');
+				});
+			}
+
+			if (notes.dataset.slideNotesTouched === 'true') return;
+			setSlideNotesMinimized(notes, Boolean(targetLanguage && slideNotesMobileQuery.matches));
+		});
+	}
+
+	function placeSlideNotesFallback(container, notes) {
+		if (!container || !notes) return container?.parentElement || null;
+
+		const existingLayout = container.closest('.slide-translation-layout');
+		if (existingLayout) {
+			return existingLayout.querySelector('.slide-media-column') || container.parentElement;
+		}
+
+		const layout = document.createElement('div');
+		layout.className = 'slide-translation-layout';
+
+		const mediaColumn = document.createElement('div');
+		mediaColumn.className = 'slide-media-column';
+
+		container.insertAdjacentElement('beforebegin', layout);
+		mediaColumn.append(container);
+		layout.append(mediaColumn);
+		layout.append(notes);
+		notes.dataset.slideNotesPlaced = 'true';
+		document.querySelector('.content-area')?.classList.add('has-slide-translation-layout');
+
+		return mediaColumn;
+	}
+
+	function addSlideTranslationSupport() {
+		const targetLanguage = getTargetTranslationLanguage();
+		setSlideNotesFallbackVisibility(Boolean(targetLanguage));
+		updateSlideTranslationLanguageNotice(targetLanguage);
+		updateSlideNotesTextLinks(targetLanguage);
+		initializeSlideNotesToggles(targetLanguage);
+		if (!targetLanguage) return;
+
+		document.querySelectorAll('iframe[src*="docs.google.com/presentation/d/"], iframe[src*="docs-google-com.translate.goog/presentation/d/"]').forEach((iframe) => {
+			const source = iframe.getAttribute('src');
+			if (!source || iframe.dataset.slideTranslationReady === 'true') return;
+
+			const originalSlideUrl = getOriginalSlideUrl(source);
+			const translatedTextUrl = buildTranslatedSlideTextUrl(source, targetLanguage);
+			iframe.dataset.slideTranslationReady = 'true';
+			iframe.dataset.originalSlideSrc = originalSlideUrl;
+			iframe.dataset.translatedSlideTextSrc = translatedTextUrl;
+			if (source !== originalSlideUrl) {
+				iframe.setAttribute('src', originalSlideUrl);
+			}
+
+			const container = iframe.closest('.slide-container') || iframe.parentElement;
+			const notes = document.querySelector('[data-slide-notes-fallback]');
+			const actionParent = notes ? placeSlideNotesFallback(container, notes) : container;
+			if (!actionParent || actionParent.querySelector('.slide-translate-actions')) return;
+
+			const actions = document.createElement('div');
+			actions.className = 'slide-translate-actions';
+
+			const link = document.createElement('a');
+			link.className = 'slide-translate-button';
+			link.href = originalSlideUrl;
+			link.target = '_blank';
+			link.rel = 'noopener noreferrer';
+			link.textContent = 'Googleスライドを開く';
+
+			actions.append(link);
+
+			if (notes) {
+				const notesLink = document.createElement('a');
+				notesLink.className = 'slide-translate-button slide-translate-button-secondary';
+				notesLink.href = '#slide-translation-text';
+				notesLink.textContent = 'スライド本文を見る';
+				notesLink.addEventListener('click', (event) => {
+					event.preventDefault();
+					notes.scrollIntoView({ behavior: 'smooth', block: 'start' });
+				});
+				actions.append(notesLink);
+				notes.id = 'slide-translation-text';
+			} else {
+				const textLink = document.createElement('a');
+				textLink.className = 'slide-translate-button slide-translate-button-secondary';
+				textLink.href = translatedTextUrl;
+				textLink.target = '_blank';
+				textLink.rel = 'noopener noreferrer';
+				textLink.textContent = '翻訳用テキストを開く';
+				actions.append(textLink);
+			}
+
+			actionParent.append(actions);
+		});
+	}
+
+	addSlideTranslationSupport();
+	slideNotesMobileQuery.addEventListener?.('change', () => {
+		initializeSlideNotesToggles(getTargetTranslationLanguage());
+	});
 </script>
 
 <style>
@@ -167,6 +508,270 @@ const messageImage = entry.data.heroImage || `https://i.ytimg.com/vi/${entry.dat
 		background: #fff;
 		position: relative;
 		z-index: 10;
+	}
+
+	:global(.slide-translation-layout) {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+		gap: 18px;
+		align-items: start;
+		margin-top: 18px;
+	}
+
+	:global(.slide-translation-layout[data-slide-notes-visible="false"]) {
+		display: block;
+	}
+
+	:global(.slide-media-column) {
+		min-width: 0;
+	}
+
+	:global(.slide-translation-layout .slide-container) {
+		margin-top: 0;
+	}
+
+	:global(.slide-translate-actions) {
+		display: flex;
+		gap: 8px;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+		margin: 12px 0 0;
+	}
+
+	:global(.slide-translate-button) {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 38px;
+		padding: 0 14px;
+		background: #111;
+		border: 1px solid #c5a059;
+		color: #c5a059;
+		font-family: 'Oswald', sans-serif;
+		font-size: 0.82rem;
+		font-weight: 900;
+		letter-spacing: 0.08em;
+		line-height: 1;
+		text-decoration: none;
+	}
+
+	:global(.slide-translate-button:hover) {
+		background: #c5a059;
+		color: #000;
+	}
+
+	:global(.slide-translate-button-secondary) {
+		background: #fff;
+		color: #111;
+		border-color: #111;
+	}
+
+	:global(.slide-translate-button-secondary:hover) {
+		background: #111;
+		color: #fff;
+	}
+
+	:global(.slide-notes-fallback) {
+		margin: 48px 0 0;
+		padding: 28px;
+		border: 1px solid #c5a059;
+		background: #fffaf0;
+		color: #111;
+	}
+
+	:global(.slide-notes-fallback[hidden]),
+	:global(.slide-notes-language[hidden]) {
+		display: none !important;
+	}
+
+	:global(.slide-translation-layout .slide-notes-fallback) {
+		margin: 0;
+	}
+
+	:global(.slide-notes-header) {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 14px;
+		margin: 0 0 14px;
+	}
+
+	:global(.slide-notes-header > div) {
+		min-width: 0;
+	}
+
+	:global(.slide-notes-toggle) {
+		flex: 0 0 auto;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-width: 38px;
+		min-height: 38px;
+		padding: 0 9px;
+		background: #111;
+		border: 1px solid #c5a059;
+		color: #c5a059;
+		font: inherit;
+		font-family: 'Oswald', sans-serif;
+		font-size: 1rem;
+		font-weight: 900;
+		line-height: 1;
+		cursor: pointer;
+	}
+
+	:global(.slide-notes-toggle:hover),
+	:global(.slide-notes-toggle:focus-visible) {
+		background: #c5a059;
+		color: #000;
+	}
+
+	:global(.slide-notes-fallback[data-slide-notes-minimized="true"]) {
+		padding: 16px 18px;
+	}
+
+	:global(.slide-notes-fallback[data-slide-notes-minimized="true"] .slide-notes-header) {
+		margin-bottom: 0;
+	}
+
+	:global(.slide-notes-fallback[data-slide-notes-minimized="true"] .slide-notes-content) {
+		display: none;
+	}
+
+	:global(.slide-notes-kicker) {
+		margin: 0 0 8px;
+		color: #8a6a27;
+		font-family: 'Oswald', sans-serif;
+		font-size: 0.78rem;
+		font-weight: 900;
+		letter-spacing: 0.12em;
+	}
+
+	:global(.slide-notes-fallback h2) {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		display: block;
+		font-family: 'Noto Sans JP', sans-serif;
+		font-size: 1.35rem;
+		line-height: 1.35;
+		letter-spacing: 0;
+	}
+
+	:global(.article-wrap .slide-notes-fallback h2) {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		display: block;
+		font-size: 1.35rem;
+		line-height: 1.35;
+	}
+
+	:global(.article-wrap .slide-notes-fallback h2::before) {
+		content: none;
+		display: none;
+	}
+
+	:global(.slide-notes-language) {
+		display: inline-flex;
+		align-items: center;
+		margin: 0 0 14px;
+		padding: 7px 10px;
+		background: #111;
+		color: #c5a059;
+		font-family: 'Oswald', sans-serif;
+		font-size: 0.78rem;
+		font-weight: 900;
+		letter-spacing: 0.08em;
+		line-height: 1.2;
+	}
+
+	:global(.slide-notes-language-static) {
+		margin: 0 0 14px;
+		padding: 10px 12px;
+		background: #f3ead8;
+		border-left: 3px solid #c5a059;
+		color: #2f2a20;
+		font-size: 0.9rem;
+		font-weight: 800;
+		line-height: 1.65;
+	}
+
+	:global(.slide-notes-lead) {
+		margin: 0 0 20px;
+		color: #555;
+		font-size: 0.94rem;
+		line-height: 1.75;
+	}
+
+	:global(.slide-notes-card) {
+		background: #fff;
+		border: 1px solid rgba(0, 0, 0, 0.14);
+	}
+
+	:global(.slide-notes-card summary) {
+		cursor: pointer;
+		padding: 14px 16px;
+		background: #111;
+		color: #c5a059;
+		font-family: 'Oswald', sans-serif;
+		font-size: 0.86rem;
+		font-weight: 900;
+		letter-spacing: 0.08em;
+	}
+
+	:global(.slide-notes-empty) {
+		display: grid;
+		gap: 12px;
+		padding: 16px;
+	}
+
+	:global(.slide-notes-empty strong) {
+		color: #111;
+		font-size: 0.96rem;
+		font-weight: 900;
+		line-height: 1.55;
+	}
+
+	:global(.slide-notes-empty p) {
+		margin: 0;
+		color: #555;
+		font-size: 0.9rem;
+		font-weight: 700;
+		line-height: 1.7;
+	}
+
+	:global(.slide-notes-copy) {
+		max-height: none;
+		overflow: visible;
+		padding: 18px 18px 6px;
+	}
+
+	:global(.slide-notes-copy p) {
+		margin: 0 0 16px;
+		white-space: pre-line;
+		font-size: 0.95rem;
+		line-height: 1.85;
+	}
+
+	@media (min-width: 980px) {
+		:global(.content-area.has-slide-translation-layout),
+		:global(.content-area:has(.slide-translation-layout:not([data-slide-notes-visible="false"]))) {
+			max-width: 1120px;
+		}
+
+		:global(.slide-translation-layout) {
+			grid-template-columns: minmax(0, 1fr) minmax(300px, 360px);
+			gap: 22px;
+		}
+
+		:global(.slide-translation-layout .slide-notes-fallback) {
+			padding: 22px;
+		}
+
+		:global(.slide-translation-layout .slide-notes-copy) {
+			max-height: 430px;
+			overflow: auto;
+		}
 	}
 
 	/* --- PC用 PiPスタイル (右上配置) --- */
@@ -246,6 +851,33 @@ const messageImage = entry.data.heroImage || `https://i.ytimg.com/vi/${entry.dat
 		
 		.content-area {
 			padding: 20px 15px;
+		}
+
+		:global(.slide-notes-fallback) {
+			margin-top: 18px;
+			padding: 16px;
+		}
+
+		:global(.slide-notes-header) {
+			align-items: center;
+			gap: 10px;
+			margin-bottom: 12px;
+		}
+
+		:global(.slide-notes-fallback h2) {
+			font-size: 1.05rem;
+			line-height: 1.3;
+		}
+
+		:global(.slide-notes-toggle) {
+			min-width: 36px;
+			min-height: 36px;
+		}
+
+		:global(.slide-notes-content) {
+			max-height: 58vh;
+			overflow: auto;
+			padding-right: 2px;
 		}
 	}
 </style>
