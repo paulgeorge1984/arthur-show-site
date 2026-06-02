@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 const messageShareTitle = entry.data.title;
-const messageShareText = '';
+const messageShareText = 'アーサーホーランド公式YouTubeチャンネル THE ARTHUR HOLLANDS SHOW';
 const messageShareUrl = `https://arthur-show.com/messages/${entry.slug}/?share=20260602`;
 const messageImage = entry.data.heroImage || `https://i.ytimg.com/vi/${entry.data.youtubeId}/hq720.jpg`;
 ---

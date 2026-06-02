@@ -7,7 +7,7 @@ const globalNav = document.querySelector("[data-global-section-nav]");
 const shareTitle =
   "ARTHUR HOLLANDS WALK ACROSS AWAJI 2026";
 const shareText =
-  "淡路島一周十字架行進2026のメモリアルアーカイブ。祈り、出会い、洗礼、感謝に満ちた5日間の記録。";
+  "アーサーホーランド淡路島一周十字架行進2026のメモリアルアーカイブ。祈り、出会い、洗礼、感謝に満ちた5日間の記録。";
 const shareUrl = "https://arthur-show.com/walk-across-awaji2026/?share=20260602";
 
 // Add future YouTube videos here. Use the video ID from the YouTube URL.

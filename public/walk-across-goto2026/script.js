@@ -7,7 +7,7 @@ const globalNav = document.querySelector("[data-global-section-nav]");
 const shareTitle =
   "ARTHUR HOLLANDS WALK ACROSS GOTO ISLANDS 2026 | 五島列島十字架行進2026";
 const shareText =
-  "2026年6月、長崎県・五島列島を舞台に十字架を掲げて歩く祈りの旅。現地映像とドキュメンタリー映像を順次掲載します。";
+  "アーサーホーランド五島列島十字架行進2026。長崎県・五島列島を舞台に十字架を掲げて歩く祈りの旅。";
 const shareUrl = "https://arthur-show.com/walk-across-goto2026/?share=20260602";
 
 // Add field report YouTube videos here after publication.
