@@ -331,7 +331,7 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 	<script type="application/json" data-lottery-items set:html={JSON.stringify(messageLotteryItems)}></script>
 	<script is:inline>
 		const lotteryItems = JSON.parse(document.querySelector('[data-lottery-items]')?.textContent || '[]');
-		const shareTitle = 'アーサーホーランド公式YouTubeチャンネル THE ARTHUR HOLLANDS SHOW';
+		const shareTitle = 'THE ARTHUR HOLLANDS SHOW';
 		const shareText = '魂を揺さぶるメッセージアーカイブ。';
 		const shareUrl = 'https://arthur-show.com/?share=20260602';
 		const searchInput = document.querySelector('[data-message-search]');
