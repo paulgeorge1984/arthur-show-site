@@ -169,10 +169,12 @@ const newBookletBooks = bookletBookIndex.slice(39).filter((item) => item.page);
 <script type="application/json" data-booklet-pages set:html={JSON.stringify(bookletPages)}></script>
 <script type="application/json" data-booklet-related-videos set:html={JSON.stringify(dailyVerseVideosByPage)}></script>
 <script type="application/json" data-booklet-line-videos set:html={JSON.stringify(lineScriptureVideosByPage)}></script>
+<script type="application/json" data-booklet-bible-books set:html={JSON.stringify(bibleBooks)}></script>
 <script is:inline>
 	const bookletPages = JSON.parse(document.querySelector('[data-booklet-pages]')?.textContent || '[]');
 	const bookletRelatedVideos = JSON.parse(document.querySelector('[data-booklet-related-videos]')?.textContent || '{}');
 	const bookletLineVideos = JSON.parse(document.querySelector('[data-booklet-line-videos]')?.textContent || '{}');
+	const bookletBibleBooks = JSON.parse(document.querySelector('[data-booklet-bible-books]')?.textContent || '[]');
 	const bookletSearch = document.querySelector('[data-booklet-search]');
 	const bookletImage = document.querySelector('[data-booklet-image]');
 	const bookletSearchStatus = document.querySelector('[data-booklet-search-status]');
@@ -214,8 +216,78 @@ const newBookletBooks = bookletBookIndex.slice(39).filter((item) => item.page);
 			.split('\n')
 			.map((line) => line.trimEnd());
 		while (lines.length && !lines[lines.length - 1].trim()) lines.pop();
-		if (lines.at(-1)?.trim() === String(page.page)) lines.pop();
+		if (lines.at(-1)?.trim().replace(/\s+/g, '') === String(page.page)) lines.pop();
 		return lines.join('\n').trim();
+	}
+
+	function isBookletBookHeading(line) {
+		const normalizedLine = normalizeBookletQuery(line);
+		return bookletBibleBooks.some((book) => normalizeBookletQuery(book) === normalizedLine);
+	}
+
+	function isBookletReferenceLine(line, refs = []) {
+		const normalizedLine = normalizeBookletQuery(line);
+		if (!normalizedLine) return false;
+		if (refs.some((ref) => normalizeBookletQuery(ref) === normalizedLine)) return true;
+
+		return bookletBibleBooks.some((book) => {
+			const normalizedBook = normalizeBookletQuery(book);
+			const suffix = normalizedLine.slice(normalizedBook.length);
+			return normalizedLine.startsWith(normalizedBook) && /^[0-9０-９]+[:：]/.test(suffix);
+		});
+	}
+
+	function appendBookletReadableParagraph(target, lines, extraClass = '') {
+		if (!target || !lines.length) return;
+		const paragraph = document.createElement('p');
+		paragraph.className = ['booklet-readable-paragraph', extraClass].filter(Boolean).join(' ');
+		paragraph.textContent = lines.join(' ').replace(/\s+/g, ' ').trim();
+		target.appendChild(paragraph);
+	}
+
+	function renderBookletReadableBody(text, refs) {
+		if (!bookletReadableBody) return;
+		const paragraphLines = [];
+		let activeVerse = null;
+		bookletReadableBody.innerHTML = '';
+
+		const flushParagraph = () => {
+			appendBookletReadableParagraph(activeVerse || bookletReadableBody, paragraphLines.splice(0), activeVerse ? '' : 'booklet-readable-continuation');
+		};
+
+		text.split('\n').forEach((rawLine) => {
+			const line = rawLine.trim();
+			if (!line) {
+				flushParagraph();
+				return;
+			}
+
+			if (isBookletBookHeading(line)) {
+				flushParagraph();
+				activeVerse = null;
+				const heading = document.createElement('h3');
+				heading.className = 'booklet-readable-book-heading';
+				heading.textContent = line;
+				bookletReadableBody.appendChild(heading);
+				return;
+			}
+
+			if (isBookletReferenceLine(line, refs)) {
+				flushParagraph();
+				activeVerse = document.createElement('section');
+				activeVerse.className = 'booklet-readable-verse';
+				const reference = document.createElement('h4');
+				reference.className = 'booklet-readable-ref-heading';
+				reference.textContent = line;
+				activeVerse.appendChild(reference);
+				bookletReadableBody.appendChild(activeVerse);
+				return;
+			}
+
+			paragraphLines.push(line);
+		});
+
+		flushParagraph();
 	}
 
 	function renderReadableText(page) {
@@ -224,13 +296,18 @@ const newBookletBooks = bookletBookIndex.slice(39).filter((item) => item.page);
 		if (bookletReadable) bookletReadable.hidden = !shouldShow;
 		if (!shouldShow) return;
 
+		const refs = Array.isArray(page.refs) ? page.refs.filter(Boolean) : [];
 		if (bookletReadablePage) bookletReadablePage.textContent = `P.${page.page}`;
 		if (bookletReadableRefs) {
-			const refs = Array.isArray(page.refs) ? page.refs.filter(Boolean) : [];
 			bookletReadableRefs.hidden = refs.length === 0;
-			bookletReadableRefs.textContent = refs.length ? refs.join(' / ') : '';
+			bookletReadableRefs.innerHTML = '';
+			refs.forEach((ref) => {
+				const item = document.createElement('span');
+				item.textContent = ref;
+				bookletReadableRefs.appendChild(item);
+			});
 		}
-		if (bookletReadableBody) bookletReadableBody.textContent = text;
+		renderBookletReadableBody(text, refs);
 	}
 
 	function setBookletTestament(testament) {
@@ -828,10 +905,18 @@ const newBookletBooks = bookletBookIndex.slice(39).filter((item) => item.page);
 	.booklet-readable-refs {
 		color: #c5a059;
 		font-weight: 900;
+		display: grid;
+		gap: 6px;
 	}
 
 	.booklet-readable-refs[hidden] {
 		display: none;
+	}
+
+	.booklet-readable-refs span {
+		display: block;
+		padding-left: 10px;
+		border-left: 3px solid rgba(197, 160, 89, 0.58);
 	}
 
 	.booklet-readable-body {
@@ -845,7 +930,74 @@ const newBookletBooks = bookletBookIndex.slice(39).filter((item) => item.page);
 		font-size: 1rem;
 		font-weight: 700;
 		line-height: 1.85;
-		white-space: pre-wrap;
+		overflow-wrap: anywhere;
+		word-break: normal;
+	}
+
+	.booklet-readable-book-heading,
+	.booklet-readable-ref-heading,
+	.booklet-readable-verse,
+	.booklet-readable-paragraph {
+		margin: 0;
+	}
+
+	.booklet-readable-verse {
+		display: grid;
+		gap: 8px;
+		padding: 11px 12px 13px;
+		background: rgba(255, 255, 255, 0.72);
+		border: 1px solid rgba(197, 160, 89, 0.28);
+		border-left: 4px solid #c5a059;
+	}
+
+	.booklet-readable-verse + .booklet-readable-verse,
+	.booklet-readable-continuation + .booklet-readable-verse,
+	.booklet-readable-book-heading + .booklet-readable-verse {
+		margin-top: 12px;
+	}
+
+	.booklet-readable-book-heading {
+		margin: 2px 0 10px;
+		padding: 9px 11px;
+		background: #15110a;
+		color: #c5a059;
+		font-family: 'Oswald', sans-serif;
+		font-size: 1.02rem;
+		font-weight: 900;
+		letter-spacing: 0.06em;
+		line-height: 1.25;
+	}
+
+	.booklet-readable-ref-heading {
+		padding: 0 0 7px;
+		background: transparent;
+		color: #2a2110;
+		border-bottom: 1px solid rgba(197, 160, 89, 0.32);
+		font-size: 0.94rem;
+		font-weight: 900;
+		line-height: 1.35;
+	}
+
+	.booklet-readable-book-heading + .booklet-readable-ref-heading {
+		margin-top: 0;
+	}
+
+	.booklet-readable-paragraph {
+		font-size: 1rem;
+		font-weight: 700;
+		line-height: 1.9;
+	}
+
+	.booklet-readable-continuation {
+		margin-bottom: 12px;
+		padding: 11px 12px;
+		background: rgba(255, 255, 255, 0.6);
+		border-left: 4px solid rgba(197, 160, 89, 0.5);
+	}
+
+	.booklet-readable-paragraph + .booklet-readable-ref-heading,
+	.booklet-readable-paragraph + .booklet-readable-book-heading {
+		margin-top: 20px;
 	}
 
 	.booklet-related {
