@@ -490,6 +490,32 @@ const translateLanguages = [
 		box-shadow: none !important;
 	}
 
+	.site-footer,
+	.site-footer .container,
+	.site-footer .footer-grid,
+	.site-footer .footer-col,
+	.site-footer .prog-block,
+	.site-footer .social-block,
+	.site-footer .bank-card,
+	.site-footer .bank-details,
+	.site-footer .bank-row {
+		max-width: 100%;
+		min-width: 0;
+	}
+
+	.site-footer .footer-col,
+	.site-footer .footer-col *,
+	.site-footer font {
+		overflow-wrap: anywhere;
+		word-break: normal;
+	}
+
+	.site-footer .bank-row {
+		white-space: normal !important;
+		overflow: visible !important;
+		text-overflow: clip !important;
+	}
+
 	.site-header .header-inner {
 		width: 100%;
 		max-width: none;
