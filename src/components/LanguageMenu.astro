@@ -1,0 +1,634 @@
+---
+const siteUrl = 'https://arthur-show.com';
+const canonicalURL = new URL(Astro.url.pathname, siteUrl).href;
+const translateLanguages = [
+	{ code: 'en', label: 'English' },
+	{ code: 'zh-CN', label: '中文(简体)' },
+	{ code: 'zh-TW', label: '中文(繁體)' },
+	{ code: 'ko', label: '한국어' },
+	{ code: 'es', label: 'Español' },
+	{ code: 'fr', label: 'Français' },
+	{ code: 'de', label: 'Deutsch' },
+	{ code: 'it', label: 'Italiano' },
+	{ code: 'pt', label: 'Português' },
+	{ code: 'ru', label: 'Русский' },
+	{ code: 'ar', label: 'العربية' },
+	{ code: 'hi', label: 'हिन्दी' },
+	{ code: 'th', label: 'ไทย' },
+	{ code: 'vi', label: 'Tiếng Việt' },
+	{ code: 'id', label: 'Bahasa Indonesia' },
+	{ code: 'ms', label: 'Bahasa Melayu' },
+	{ code: 'tl', label: 'Tagalog' },
+	{ code: 'ne', label: 'नेपाली' },
+	{ code: 'my', label: 'မြန်မာဘာသာ' },
+	{ code: 'km', label: 'ភាសាខ្មែរ' },
+	{ code: 'bn', label: 'বাংলা' },
+	{ code: 'ta', label: 'தமிழ்' },
+	{ code: 'ur', label: 'اردو' },
+	{ code: 'fa', label: 'فارسی' },
+	{ code: 'tr', label: 'Türkçe' },
+];
+---
+
+<details class="translate-menu" data-translate-menu data-site-url={siteUrl}>
+	<summary aria-label="このページを多言語で読む">
+		<span data-current-lang-label>LANG</span>
+		<small data-current-lang-code>25</small>
+	</summary>
+	<div class="translate-list" aria-label="翻訳言語">
+		<a href={`${canonicalURL}?lang=ja`} data-translate-original rel="nofollow">日本語</a>
+		{translateLanguages.map((language) => (
+			<a
+				href={`https://translate.google.com/translate?sl=ja&tl=${language.code}&u=${encodeURIComponent(canonicalURL)}`}
+				data-translate-language={language.code}
+				rel="nofollow noopener"
+			>
+				{language.label}
+			</a>
+		))}
+	</div>
+</details>
+
+<script is:inline>
+	(() => {
+		const bootLanguageMenu = () => {
+		const menu = document.querySelector('[data-translate-menu]');
+		if (!menu || menu.dataset.translateReady === 'true') return;
+		menu.dataset.translateReady = 'true';
+
+		const siteUrl = menu.dataset.siteUrl || 'https://arthur-show.com';
+		const siteOrigin = new URL(siteUrl).origin;
+		const siteHost = new URL(siteUrl).hostname;
+		const storageKey = 'arthurPreferredLang';
+		const cookieKey = 'arthurPreferredLang';
+		const languageLinks = Array.from(document.querySelectorAll('[data-translate-language]'));
+		const originalLink = document.querySelector('[data-translate-original]');
+		const label = document.querySelector('[data-current-lang-label]');
+		const codeLabel = document.querySelector('[data-current-lang-code]');
+		const supported = new Set(languageLinks.map((link) => link.dataset.translateLanguage));
+		const isTranslateProxy = window.location.hostname.endsWith('.translate.goog');
+
+		const suppressGoogleTranslateChrome = () => {
+			if (!isTranslateProxy) return;
+			document.documentElement.style.setProperty('margin-top', '0', 'important');
+			document.documentElement.style.setProperty('overflow-x', 'hidden', 'important');
+			document.body?.style.setProperty('margin-top', '0', 'important');
+			document.body?.style.setProperty('top', '0', 'important');
+			document.body?.style.setProperty('overflow-x', 'hidden', 'important');
+			document.querySelectorAll('iframe#gt-nvframe, iframe.goog-te-banner-frame, iframe.skiptranslate, body > .skiptranslate, #goog-gt-tt, .goog-te-balloon-frame, .VIpgJd-ZVi9od-ORHb-OEVmcd').forEach((item) => {
+				item.style.setProperty('display', 'none', 'important');
+				item.style.setProperty('visibility', 'hidden', 'important');
+				item.style.setProperty('width', '0', 'important');
+				item.style.setProperty('height', '0', 'important');
+				item.style.setProperty('opacity', '0', 'important');
+				item.style.setProperty('pointer-events', 'none', 'important');
+			});
+			if (window.scrollX) window.scrollTo(0, window.scrollY);
+		};
+
+		suppressGoogleTranslateChrome();
+		if (isTranslateProxy) {
+			const translateChromeObserver = new MutationObserver(suppressGoogleTranslateChrome);
+			translateChromeObserver.observe(document.documentElement, { childList: true, subtree: true });
+			window.addEventListener('load', () => {
+				suppressGoogleTranslateChrome();
+				[300, 1000, 2400, 5000].forEach((delay) => {
+					window.setTimeout(suppressGoogleTranslateChrome, delay);
+				});
+			}, { once: true });
+		}
+
+		const readCookie = () => {
+			const match = document.cookie.match(new RegExp(`(?:^|; )${cookieKey}=([^;]*)`));
+			return match ? decodeURIComponent(match[1]) : '';
+		};
+
+		const writeCookie = (value) => {
+			document.cookie = `${cookieKey}=${encodeURIComponent(value)}; path=/; max-age=31536000; SameSite=Lax`;
+		};
+
+		const clearCookie = () => {
+			document.cookie = `${cookieKey}=; path=/; max-age=0; SameSite=Lax`;
+		};
+
+		const getStoredLanguage = () => {
+			try {
+				return localStorage.getItem(storageKey) || readCookie();
+			} catch {
+				return readCookie();
+			}
+		};
+
+		const setStoredLanguage = (language) => {
+			try {
+				localStorage.setItem(storageKey, language);
+			} catch {}
+			writeCookie(language);
+		};
+
+		const clearStoredLanguage = () => {
+			try {
+				localStorage.removeItem(storageKey);
+			} catch {}
+			clearCookie();
+		};
+
+		const normalizeLanguage = (value) => {
+			if (value === 'ja') return 'ja';
+			return supported.has(value) ? value : '';
+		};
+
+		const getSourceUrl = () => {
+			const current = new URL(window.location.href);
+			if (current.hostname.includes('translate.google.')) {
+				const translatedSource = current.searchParams.get('u') || current.searchParams.get('url');
+				if (translatedSource) return translatedSource;
+			}
+
+			const source = new URL(`${current.pathname}${current.search}${current.hash}`, siteOrigin);
+			source.searchParams.delete('lang');
+			source.searchParams.delete('_x_tr_sl');
+			source.searchParams.delete('_x_tr_tl');
+			source.searchParams.delete('_x_tr_hl');
+			source.searchParams.delete('_x_tr_pto');
+			return source.href;
+		};
+
+		const withLanguageParam = (language) => {
+			const source = new URL(getSourceUrl());
+			source.searchParams.set('lang', language);
+			return source.href;
+		};
+
+		const buildTranslateUrl = (language) =>
+			`https://translate.google.com/translate?sl=ja&tl=${encodeURIComponent(language)}&u=${encodeURIComponent(withLanguageParam(language))}`;
+
+		const buildOriginalUrl = () => withLanguageParam('ja');
+
+		const decorateInternalLinks = (language) => {
+			document.querySelectorAll('a[href]').forEach((link) => {
+				if (link.matches('[data-translate-language], [data-translate-original]')) return;
+				const rawHref = link.getAttribute('href') || '';
+				if (!rawHref || rawHref.startsWith('#') || rawHref.startsWith('mailto:') || rawHref.startsWith('tel:')) return;
+				const next = new URL(rawHref, window.location.href);
+				const isInternal = next.hostname === window.location.hostname || next.hostname === siteHost;
+				if (!isInternal || next.pathname.startsWith('/private-arthur-growth-lab-2026')) return;
+				next.searchParams.set('lang', language);
+				link.setAttribute('href', next.href);
+			});
+		};
+
+		const setMenuState = (language) => {
+			languageLinks.forEach((link) => {
+				const targetLanguage = link.dataset.translateLanguage;
+				link.href = buildTranslateUrl(targetLanguage);
+				link.toggleAttribute('aria-current', targetLanguage === language);
+			});
+			if (originalLink) originalLink.href = buildOriginalUrl();
+
+			if (language && language !== 'ja') {
+				const selected = languageLinks.find((link) => link.dataset.translateLanguage === language);
+				if (label) label.textContent = 'LANG';
+				if (codeLabel) codeLabel.textContent = selected ? selected.textContent.trim() : language;
+				decorateInternalLinks(language);
+				return;
+			}
+
+			if (label) label.textContent = 'LANG';
+			if (codeLabel) codeLabel.textContent = '25';
+		};
+
+		const currentParams = new URLSearchParams(window.location.search);
+		const urlLanguage = normalizeLanguage(currentParams.get('lang') || '');
+		let preferredLanguage = urlLanguage || normalizeLanguage(getStoredLanguage());
+
+		if (urlLanguage === 'ja') {
+			clearStoredLanguage();
+			preferredLanguage = '';
+		} else if (preferredLanguage) {
+			setStoredLanguage(preferredLanguage);
+		}
+
+		setMenuState(preferredLanguage);
+
+		const localizedShareLines = {
+			en: 'Official Arthur Hollands message archive.',
+			'zh-CN': '亚瑟・霍兰德官方信息档案。',
+			'zh-TW': '亞瑟・霍蘭德官方信息檔案。',
+			ko: '아서 홀랜즈 공식 메시지 아카이브.',
+			es: 'Archivo oficial de mensajes de Arthur Hollands.',
+			fr: 'Archives officielles des messages d’Arthur Hollands.',
+			de: 'Offizielles Botschaftsarchiv von Arthur Hollands.',
+			it: 'Archivio ufficiale dei messaggi di Arthur Hollands.',
+			pt: 'Arquivo oficial de mensagens de Arthur Hollands.',
+			ru: 'Официальный архив посланий Артура Холландса.',
+			ar: 'أرشيف رسائل آرثر هولاندز الرسمي.',
+			hi: 'आर्थर हॉलैंड्स का आधिकारिक संदेश संग्रह।',
+			th: 'คลังข้อความอย่างเป็นทางการของ Arthur Hollands.',
+			vi: 'Kho lưu trữ thông điệp chính thức của Arthur Hollands.',
+			id: 'Arsip pesan resmi Arthur Hollands.',
+			ms: 'Arkib mesej rasmi Arthur Hollands.',
+			tl: 'Opisyal na archive ng mga mensahe ni Arthur Hollands.',
+			ne: 'आर्थर होल्यान्ड्सको आधिकारिक सन्देश अभिलेख।',
+			my: 'Arthur Hollands ၏ တရားဝင် မက်ဆေ့ချ် မှတ်တမ်း။',
+			km: 'បណ្ណសារសារផ្លូវការរបស់ Arthur Hollands។',
+			bn: 'আর্থার হল্যান্ডসের অফিসিয়াল বার্তা আর্কাইভ।',
+			ta: 'ஆர்தர் ஹாலண்ட்ஸ் அதிகாரப்பூர்வ செய்தி காப்பகம்.',
+			ur: 'آرتھر ہالینڈز کا سرکاری پیغام آرکائیو۔',
+			fa: 'آرشیو رسمی پیام‌های آرتور هالندز.',
+			tr: 'Arthur Hollands resmi mesaj arşivi.',
+		};
+		const copiedLabels = {
+			en: 'Copied',
+			'zh-CN': '已复制',
+			'zh-TW': '已複製',
+			ko: '복사했습니다',
+			es: 'Copiado',
+			fr: 'Copié',
+			de: 'Kopiert',
+			it: 'Copiato',
+			pt: 'Copiado',
+			ru: 'Скопировано',
+			ar: 'تم النسخ',
+			hi: 'कॉपी किया गया',
+			th: 'คัดลอกแล้ว',
+			vi: 'Đã sao chép',
+			id: 'Disalin',
+			ms: 'Disalin',
+			tl: 'Nakopya',
+			ne: 'कपी भयो',
+			my: 'ကူးယူပြီး',
+			km: 'បានចម្លង',
+			bn: 'কপি হয়েছে',
+			ta: 'நகலெடுக்கப்பட்டது',
+			ur: 'کاپی ہو گیا',
+			fa: 'کپی شد',
+			tr: 'Kopyalandı',
+		};
+
+		const getActiveShareLanguage = () => {
+			const params = new URLSearchParams(window.location.search);
+			return normalizeLanguage(params.get('_x_tr_tl') || params.get('lang') || getStoredLanguage() || '');
+		};
+
+		const cleanShareTitle = (value) =>
+			String(value || '')
+				.replace(/\s*\|\s*THE ARTHUR HOLLANDS SHOW\s*$/i, '')
+				.replace(/\s+/g, ' ')
+				.trim();
+
+		const readVisibleShareTitle = () => {
+			const current = new URL(window.location.href);
+			const isHome = current.pathname === '/' || current.pathname === '';
+			if (!isHome) {
+				const heading = document.querySelector('main h1, article h1, .msg-title');
+				const headingText = cleanShareTitle(heading?.textContent);
+				if (headingText) return headingText;
+			}
+			return cleanShareTitle(document.title) || 'THE ARTHUR HOLLANDS SHOW';
+		};
+
+		const getLocalizedShareUrl = (language) => {
+			if (window.location.hostname.endsWith('.translate.goog')) {
+				return window.location.href;
+			}
+
+			const source = new URL(getSourceUrl());
+			source.searchParams.set('share', '20260602');
+			if (language && language !== 'ja') source.searchParams.set('lang', language);
+			return source.href;
+		};
+
+		const buildLocalizedSharePayload = () => {
+			const language = getActiveShareLanguage();
+			if (!language || language === 'ja') return null;
+
+			const title = readVisibleShareTitle();
+			const text = localizedShareLines[language] || localizedShareLines.en;
+			const url = getLocalizedShareUrl(language);
+			return {
+				language,
+				title,
+				text,
+				url,
+				textBlock: [title, text].filter(Boolean).join('\n'),
+				lineBlock: [title, text, url].filter(Boolean).join('\n'),
+				copiedLabel: copiedLabels[language] || copiedLabels.en,
+			};
+		};
+
+		const applyLocalizedShareTargets = () => {
+			const payload = buildLocalizedSharePayload();
+			if (!payload) return;
+
+			const encodedUrl = encodeURIComponent(payload.url);
+			const encodedText = encodeURIComponent(payload.textBlock);
+			const encodedLineText = encodeURIComponent(payload.lineBlock);
+
+			document.querySelectorAll('[data-share-line]').forEach((link) => {
+				link.href = `https://line.me/R/msg/text/?${encodedLineText}`;
+			});
+			document.querySelectorAll('[data-share-x]').forEach((link) => {
+				link.href = `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`;
+			});
+			document.querySelectorAll('[data-share-facebook]').forEach((link) => {
+				link.href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+			});
+		};
+
+		const copyLocalizedSharePayload = async (payload) => {
+			try {
+				await navigator.clipboard.writeText(payload.lineBlock);
+				document.querySelectorAll('[data-copy-status]').forEach((item) => {
+					const original = item.dataset.originalCopyStatus || item.textContent || '';
+					item.dataset.originalCopyStatus = original;
+					item.textContent = payload.copiedLabel;
+					window.setTimeout(() => {
+						item.textContent = item.dataset.originalCopyStatus || original;
+					}, 1800);
+				});
+			} catch {
+				window.prompt(payload.copiedLabel, payload.lineBlock);
+			}
+		};
+
+		const openLocalizedShareTarget = (target, payload) => {
+			const encodedUrl = encodeURIComponent(payload.url);
+			const encodedText = encodeURIComponent(payload.textBlock);
+			const encodedLineText = encodeURIComponent(payload.lineBlock);
+
+			if (target.matches('[data-share-line], .share-button.line')) {
+				window.open(`https://line.me/R/msg/text/?${encodedLineText}`, '_blank', 'noopener,noreferrer');
+				return;
+			}
+			if (target.matches('[data-share-x], .share-button.twitter')) {
+				window.open(`https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`, '_blank', 'noopener,noreferrer');
+				return;
+			}
+			if (target.matches('[data-share-facebook], .share-button.facebook')) {
+				window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`, '_blank', 'noopener,noreferrer');
+				return;
+			}
+		};
+
+		const handleLocalizedShareClick = async (event) => {
+			const target = event.target.closest('[data-share-native], [data-copy-link], [data-share-line], [data-share-x], [data-share-facebook], .share-button.twitter, .share-button.facebook, .share-button.line, .share-button.copy');
+			if (!target) return;
+
+			const payload = buildLocalizedSharePayload();
+			if (!payload) return;
+
+			event.preventDefault();
+			event.stopPropagation();
+			event.stopImmediatePropagation();
+
+			if (target.matches('[data-copy-link], .share-button.copy')) {
+				await copyLocalizedSharePayload(payload);
+				return;
+			}
+
+			if (target.matches('[data-share-native]')) {
+				if (navigator.share) {
+					try {
+						await navigator.share({
+							title: payload.title,
+							text: payload.text,
+							url: payload.url,
+						});
+						return;
+					} catch (error) {
+						if (error.name === 'AbortError') return;
+					}
+				}
+				await copyLocalizedSharePayload(payload);
+				return;
+			}
+
+			openLocalizedShareTarget(target, payload);
+		};
+
+		document.addEventListener('click', handleLocalizedShareClick, true);
+		applyLocalizedShareTargets();
+		window.addEventListener('load', () => {
+			applyLocalizedShareTargets();
+			window.setTimeout(applyLocalizedShareTargets, 800);
+			window.setTimeout(applyLocalizedShareTargets, 2400);
+		}, { once: true });
+
+		languageLinks.forEach((link) => {
+			link.addEventListener('click', (event) => {
+				const targetLanguage = normalizeLanguage(link.dataset.translateLanguage);
+				if (!targetLanguage) return;
+				event.preventDefault();
+				setStoredLanguage(targetLanguage);
+				window.location.href = buildTranslateUrl(targetLanguage);
+			});
+		});
+
+		originalLink?.addEventListener('click', (event) => {
+			event.preventDefault();
+			clearStoredLanguage();
+			window.location.href = buildOriginalUrl();
+		});
+
+		document.addEventListener('click', (event) => {
+			document.querySelectorAll('[data-translate-menu][open]').forEach((openMenu) => {
+				if (!openMenu.contains(event.target)) openMenu.removeAttribute('open');
+			});
+		});
+
+		const isPrivatePage = window.location.pathname.startsWith('/private-arthur-growth-lab-2026');
+		const isProductionPage = window.location.hostname === siteHost;
+		if (preferredLanguage && preferredLanguage !== 'ja' && isProductionPage && !isPrivatePage) {
+			window.location.replace(buildTranslateUrl(preferredLanguage));
+		}
+		};
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', bootLanguageMenu, { once: true });
+		} else {
+			bootLanguageMenu();
+		}
+	})();
+</script>
+
+<style is:global>
+	html,
+	body {
+		max-width: 100%;
+		overflow-x: hidden;
+	}
+
+	html.translated-ltr,
+	html.translated-rtl {
+		margin-top: 0 !important;
+	}
+
+	body.translated-ltr,
+	body.translated-rtl {
+		margin-top: 0 !important;
+		top: 0 !important;
+	}
+
+	iframe#gt-nvframe,
+	iframe.goog-te-banner-frame,
+	iframe.skiptranslate,
+	body > .skiptranslate,
+	#goog-gt-tt,
+	.goog-te-balloon-frame,
+	.VIpgJd-ZVi9od-ORHb-OEVmcd {
+		display: none !important;
+		visibility: hidden !important;
+		width: 0 !important;
+		height: 0 !important;
+		opacity: 0 !important;
+		pointer-events: none !important;
+	}
+
+	.goog-text-highlight {
+		background: transparent !important;
+		box-shadow: none !important;
+	}
+
+	.site-header .header-inner {
+		width: 100%;
+		max-width: none;
+		padding: 0 clamp(18px, 4vw, 44px);
+		display: grid;
+		grid-template-columns: minmax(72px, 1fr) auto minmax(72px, 1fr);
+		align-items: center;
+		gap: 18px;
+	}
+
+	.site-header .logo,
+	.site-header .archive-logo {
+		grid-column: 2;
+		justify-self: center;
+	}
+
+	.translate-menu {
+		position: relative;
+		grid-column: 3;
+		justify-self: end;
+		width: 62px;
+	}
+
+	.translate-menu summary {
+		display: inline-flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		width: 62px;
+		min-height: 42px;
+		color: #fff;
+		background: rgba(255, 255, 255, 0.06);
+		border: 1px solid rgba(197, 160, 89, 0.56);
+		font-family: var(--font-head, "Oswald", sans-serif);
+		line-height: 1;
+		text-align: center;
+		list-style: none;
+		cursor: pointer;
+	}
+
+	.translate-menu summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.translate-menu summary span {
+		color: var(--color-gold, #c5a059);
+		font-size: 0.9rem;
+		font-weight: 900;
+		letter-spacing: 0.04em;
+	}
+
+	.translate-menu summary small {
+		max-width: 56px;
+		margin-top: 4px;
+		overflow: hidden;
+		color: rgba(255, 255, 255, 0.78);
+		font-size: 0.62rem;
+		font-weight: 900;
+		letter-spacing: 0;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.translate-menu summary:hover,
+	.translate-menu[open] summary {
+		background: var(--color-gold, #c5a059);
+		color: #000;
+	}
+
+	.translate-menu summary:hover span,
+	.translate-menu summary:hover small,
+	.translate-menu[open] summary span,
+	.translate-menu[open] summary small {
+		color: #000;
+	}
+
+	.translate-list {
+		position: absolute;
+		top: calc(100% + 10px);
+		right: 0;
+		z-index: 130;
+		display: grid;
+		grid-template-columns: repeat(2, minmax(128px, 1fr));
+		width: min(360px, calc(100vw - 24px));
+		max-height: min(70vh, 520px);
+		overflow: auto;
+		padding: 8px;
+		background: rgba(10, 10, 10, 0.98);
+		border: 1px solid rgba(197, 160, 89, 0.62);
+		box-shadow: 0 16px 36px rgba(0, 0, 0, 0.24);
+	}
+
+	.translate-list a {
+		display: flex;
+		align-items: center;
+		min-height: 34px;
+		padding: 0 10px;
+		color: rgba(255, 255, 255, 0.88);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+		font-size: 0.82rem;
+		font-weight: 900;
+		line-height: 1.2;
+		text-decoration: none;
+		white-space: nowrap;
+	}
+
+	.translate-list a:hover,
+	.translate-list a[aria-current="true"] {
+		color: #000;
+		background: var(--color-gold, #c5a059);
+	}
+
+	@media (max-width: 720px) {
+		.site-header .header-inner {
+			grid-template-columns: 56px minmax(0, 1fr) 56px;
+			padding: 0 20px;
+			gap: 8px;
+		}
+
+		.translate-menu,
+		.translate-menu summary {
+			width: 52px;
+		}
+
+		.translate-menu summary {
+			min-height: 38px;
+		}
+
+		.translate-menu summary span {
+			font-size: 0.78rem;
+		}
+
+		.translate-menu summary small {
+			display: none;
+		}
+
+		.translate-list {
+			grid-template-columns: 1fr;
+			width: min(230px, calc(100vw - 20px));
+		}
+	}
+</style>
