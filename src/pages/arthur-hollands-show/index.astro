@@ -45,6 +45,25 @@ const years = Array.from(new Set(videos.map((video) => video.year || 'ARCHIVE'))
 	return Number(b) - Number(a);
 });
 const yearCounts = new Map(years.map((year) => [year, videos.filter((video) => (video.year || 'ARCHIVE') === year).length]));
+const walkAcrossUsa2014Archive = {
+	year: '2014',
+	title: 'WALK ACROSS USA 2014',
+	description: 'Chadさん制作による、2014年のアメリカ横断十字架行進の記録映像アーカイブ。',
+	url: '/walk-across-usa2014/',
+	thumbnail: 'https://i.ytimg.com/vi/xCH4c1yXnhw/hqdefault.jpg',
+	count: 76,
+};
+const displayYears = years.includes(walkAcrossUsa2014Archive.year)
+	? years
+	: [...years, walkAcrossUsa2014Archive.year];
+const getYearCountLabel = (year: string) => {
+	if (year === walkAcrossUsa2014Archive.year) return `${walkAcrossUsa2014Archive.count} VIDEOS`;
+	return `${yearCounts.get(year)} EPISODES`;
+};
+const getYearNavCount = (year: string) => {
+	if (year === walkAcrossUsa2014Archive.year) return walkAcrossUsa2014Archive.count;
+	return yearCounts.get(year);
+};
 const totalHours = Math.round(videos.reduce((total, video) => {
 	const match = String(video.duration || '').match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
 	if (!match) return total;
@@ -243,22 +262,41 @@ const socialImage = pickupItems[0]?.id
 			</div>
 			<div class="year-nav" aria-label="年別ジャンプ">
 				<a href="#episodes" data-show-year="all">ALL <small>{videos.length}</small></a>
-				{years.map((year) => (
-					<a href={`#year-${year}`} data-show-year={year}>{year}<small>{yearCounts.get(year)}</small></a>
+				{displayYears.map((year) => (
+					<a href={`#year-${year}`} data-show-year={year}>{year}<small>{getYearNavCount(year)}</small></a>
 				))}
 			</div>
 
 			<div class="episode-list" data-show-list>
-				{years.map((year) => (
-					<section class="year-block" id={`year-${year}`} data-year-block={year}>
-						<div class="year-title">
-							<span>{year}</span>
-							<strong>{yearCounts.get(year)} EPISODES</strong>
-						</div>
-						<div class="episode-grid">
-							{videos
-								.filter((video) => (video.year || 'ARCHIVE') === year)
-								.map((video, index) => (
+				{displayYears.map((year) => {
+					const yearVideos = videos.filter((video) => (video.year || 'ARCHIVE') === year);
+					const showWalkAcrossArchive = year === walkAcrossUsa2014Archive.year;
+					return (
+						<section class="year-block" id={`year-${year}`} data-year-block={year}>
+							<div class="year-title">
+								<span>{year}</span>
+								<strong>{getYearCountLabel(year)}</strong>
+							</div>
+							<div class="episode-grid">
+								{showWalkAcrossArchive && (
+									<a
+										class="episode-card"
+										href={walkAcrossUsa2014Archive.url}
+										data-year={year}
+										data-search={`${walkAcrossUsa2014Archive.title} ${walkAcrossUsa2014Archive.description} chad 2014 walk across usa`.toLowerCase()}
+									>
+										<span class="episode-thumb">
+											<img src={walkAcrossUsa2014Archive.thumbnail} alt={`${walkAcrossUsa2014Archive.title} サムネイル`} loading="lazy" />
+										</span>
+										<span class="episode-body">
+											<span class="episode-meta">2014 / {walkAcrossUsa2014Archive.count} VIDEOS / Chadさん制作</span>
+											<strong>{walkAcrossUsa2014Archive.title}</strong>
+											<small>{walkAcrossUsa2014Archive.description}</small>
+											<em>特設アーカイブを見る</em>
+										</span>
+									</a>
+								)}
+								{yearVideos.map((video, index) => (
 									<a
 										class="episode-card"
 										href={`https://youtu.be/${video.id}`}
@@ -282,9 +320,10 @@ const socialImage = pickupItems[0]?.id
 										</span>
 									</a>
 								))}
-						</div>
-					</section>
-				))}
+							</div>
+						</section>
+					);
+				})}
 			</div>
 			<p class="no-results" data-show-no-results hidden>該当する映像がありません。</p>
 		</section>
