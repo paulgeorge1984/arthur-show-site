@@ -138,7 +138,7 @@ const years = [...new Set([
 										<p>{playlist.region}</p>
 										<h3>{playlist.englishTitle}</h3>
 										<strong>{playlist.title}</strong>
-										<span>{videos.length ? `${videos.length} EPISODES` : 'PLAYLIST ARCHIVE'}</span>
+										<span>{videos.length ? (videos.length === 1 ? '1 VIDEO' : `${videos.length} EPISODES`) : 'PLAYLIST ARCHIVE'}</span>
 									</div>
 								</a>
 							);

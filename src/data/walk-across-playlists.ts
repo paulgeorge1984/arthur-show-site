@@ -9,6 +9,7 @@ export type WalkAcrossPlaylist = {
 	description: string;
 	featured?: boolean;
 	manualArchive?: boolean;
+	journeyStops?: { year: string; country: string }[];
 	useArchiveVideoSeries?: boolean;
 };
 
@@ -139,6 +140,23 @@ export const walkAcrossPlaylists: WalkAcrossPlaylist[] = [
 		region: '日本全国',
 		playlistId: 'PL-faIdjPoxKgmp3V2X5g5rWCqgJtb8QCy',
 		description: '全国縦断十字架行進2022のアーカイブ。',
+	},
+	{
+		slug: 'world-2014-2019',
+		title: '世界の十字架行進 総集編 2014-2019',
+		englishTitle: 'WALK ACROSS THE WORLD 2014-2019',
+		year: '2019',
+		region: 'アメリカ・韓国・キューバ・日本',
+		sourceUrl: 'https://youtu.be/__LZwUw89M8',
+		description: 'アメリカ、韓国、キューバ、日本へと続いた十字架行進の歩みを、一本の映像でたどる総集編。',
+		manualArchive: true,
+		useArchiveVideoSeries: true,
+		journeyStops: [
+			{ year: '2014-2015', country: 'アメリカ' },
+			{ year: '2017', country: '韓国' },
+			{ year: '2018', country: 'キューバ' },
+			{ year: '2019', country: '日本' },
+		],
 	},
 	{
 		slug: 'japan-2022-documentary',

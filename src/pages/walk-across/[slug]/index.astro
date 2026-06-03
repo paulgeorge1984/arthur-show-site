@@ -41,8 +41,11 @@ const videos = (archiveData.playlists?.[playlist.slug]?.videos || []).filter(isP
 const firstVideo = videos[0];
 const archiveVideoIds = videos.map((video) => video.id).filter(Boolean);
 const playlistUrl = playlist.sourceUrl || (playlist.playlistId ? `https://www.youtube.com/playlist?list=${playlist.playlistId}` : '');
+const archiveSeriesQuery = archiveVideoIds.length > 1
+	? `?playlist=${archiveVideoIds.slice(1).join(',')}&rel=0`
+	: '?rel=0';
 const embedUrl = playlist.useArchiveVideoSeries && archiveVideoIds.length
-	? `https://www.youtube.com/embed/${archiveVideoIds[0]}?playlist=${archiveVideoIds.slice(1).join(',')}&rel=0`
+	? `https://www.youtube.com/embed/${archiveVideoIds[0]}${archiveSeriesQuery}`
 	: playlist.playlistId
 		? `https://www.youtube.com/embed/videoseries?list=${playlist.playlistId}&rel=0`
 		: '';
@@ -85,7 +88,7 @@ const formatDate = (value?: string) => {
 			</div>
 			<div class="playlist-meta">
 				<p class="section-kicker">PLAYLIST</p>
-				<h2>{videos.length ? `${videos.length} EPISODES` : 'YOUTUBE PLAYLIST'}</h2>
+				<h2>{videos.length ? (videos.length === 1 ? '1 VIDEO' : `${videos.length} EPISODES`) : 'YOUTUBE PLAYLIST'}</h2>
 				<p>
 					{archiveData.fetchedAt
 						? '各地を歩いた十字架行進の記録を、映像の流れに沿ってたどることができます。'
@@ -94,6 +97,23 @@ const formatDate = (value?: string) => {
 				{playlistUrl && <a href={playlistUrl} target="_blank" rel="noopener noreferrer">YouTubeで開く</a>}
 			</div>
 		</section>
+
+		{playlist.journeyStops?.length ? (
+			<section class="journey-block">
+				<div class="story-heading">
+					<p class="section-kicker">YEARS / COUNTRIES</p>
+					<h2>歩みの記録</h2>
+				</div>
+				<div class="journey-list">
+					{playlist.journeyStops.map((stop) => (
+						<div class="journey-stop">
+							<span>{stop.year}</span>
+							<strong>{stop.country}</strong>
+						</div>
+					))}
+				</div>
+			</section>
+		) : null}
 
 		<section class="story-block">
 			<div class="story-heading">
@@ -149,6 +169,7 @@ const formatDate = (value?: string) => {
 	}
 	.detail-hero,
 	.player-block,
+	.journey-block,
 	.story-block,
 	.episode-list {
 		max-width: 1120px;
@@ -238,9 +259,34 @@ const formatDate = (value?: string) => {
 		font-weight: 900;
 		letter-spacing: 0.08em;
 	}
+	.journey-block,
 	.story-block,
 	.episode-list {
 		padding-top: 58px;
+	}
+	.journey-list {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 12px;
+		margin-top: 20px;
+	}
+	.journey-stop {
+		padding: 18px;
+		border: 1px solid rgba(207, 169, 82, 0.36);
+		background: rgba(207, 169, 82, 0.1);
+	}
+	.journey-stop span {
+		display: block;
+		color: #cfa952;
+		font-family: var(--font-head);
+		font-size: 0.82rem;
+		font-weight: 900;
+		letter-spacing: 0.12em;
+	}
+	.journey-stop strong {
+		display: block;
+		margin-top: 6px;
+		font-size: 1.05rem;
 	}
 	.main-excerpt {
 		margin-top: 18px;
@@ -315,6 +361,9 @@ const formatDate = (value?: string) => {
 		.episode-card {
 			grid-template-columns: 1fr;
 		}
+		.journey-list {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
 	}
 	@media (max-width: 640px) {
 		.walk-detail {
@@ -322,6 +371,9 @@ const formatDate = (value?: string) => {
 		}
 		.detail-hero {
 			padding-top: 58px;
+		}
+		.journey-list {
+			grid-template-columns: 1fr;
 		}
 	}
 </style>
