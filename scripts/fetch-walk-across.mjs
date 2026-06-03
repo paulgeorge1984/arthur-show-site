@@ -140,9 +140,19 @@ async function fetchPlaylistWithYtDlp(playlistId) {
 
 async function loadPlaylists() {
 	const source = await fs.readFile(playlistsPath, 'utf8');
-	const matches = [...source.matchAll(/slug:\s*'([^']+)'[\s\S]*?playlistId:\s*'([^']+)'/g)];
+	const matches = [...source.matchAll(/\{\s*slug:\s*'([^']+)'([\s\S]*?)\n\t\}/g)];
 	if (!matches.length) die('walk-across-playlists.ts から playlistId を読み取れませんでした。');
-	return matches.map((match) => ({ slug: match[1], playlistId: match[2] }));
+	return matches
+		.map((match) => {
+			const body = match[2];
+			const playlistId = body.match(/playlistId:\s*'([^']+)'/)?.[1] || '';
+			return {
+				slug: match[1],
+				playlistId,
+				manualArchive: /manualArchive:\s*true/.test(body),
+			};
+		})
+		.filter((playlist) => playlist.playlistId && !playlist.manualArchive);
 }
 
 async function refreshTokenIfNeeded() {

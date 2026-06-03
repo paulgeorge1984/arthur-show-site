@@ -4,9 +4,11 @@ export type WalkAcrossPlaylist = {
 	englishTitle: string;
 	year: string;
 	region: string;
-	playlistId: string;
+	playlistId?: string;
+	sourceUrl?: string;
 	description: string;
 	featured?: boolean;
+	manualArchive?: boolean;
 	useArchiveVideoSeries?: boolean;
 };
 
@@ -137,5 +139,16 @@ export const walkAcrossPlaylists: WalkAcrossPlaylist[] = [
 		region: '日本全国',
 		playlistId: 'PL-faIdjPoxKgmp3V2X5g5rWCqgJtb8QCy',
 		description: '全国縦断十字架行進2022のアーカイブ。',
+	},
+	{
+		slug: 'japan-2022-documentary',
+		title: '日本縦断十字架行進2022 まとめ映像集',
+		englishTitle: 'WALK ACROSS JAPAN 2022 DOCUMENTARY',
+		year: '2022',
+		region: '日本全国',
+		sourceUrl: 'https://www.youtube.com/@arthurhollands4834/videos',
+		description: 'Arthur Hollandsチャンネルにまとめられた、日本縦断十字架行進2022の映像シリーズ。',
+		manualArchive: true,
+		useArchiveVideoSeries: true,
 	},
 ];

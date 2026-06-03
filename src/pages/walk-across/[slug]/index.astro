@@ -40,10 +40,12 @@ const isPublicVideo = (video: VideoItem) => {
 const videos = (archiveData.playlists?.[playlist.slug]?.videos || []).filter(isPublicVideo);
 const firstVideo = videos[0];
 const archiveVideoIds = videos.map((video) => video.id).filter(Boolean);
-const playlistUrl = `https://www.youtube.com/playlist?list=${playlist.playlistId}`;
+const playlistUrl = playlist.sourceUrl || (playlist.playlistId ? `https://www.youtube.com/playlist?list=${playlist.playlistId}` : '');
 const embedUrl = playlist.useArchiveVideoSeries && archiveVideoIds.length
 	? `https://www.youtube.com/embed/${archiveVideoIds[0]}?playlist=${archiveVideoIds.slice(1).join(',')}&rel=0`
-	: `https://www.youtube.com/embed/videoseries?list=${playlist.playlistId}&rel=0`;
+	: playlist.playlistId
+		? `https://www.youtube.com/embed/videoseries?list=${playlist.playlistId}&rel=0`
+		: '';
 const socialImage = firstVideo?.id
 	? `https://i.ytimg.com/vi/${firstVideo.id}/hq720.jpg`
 	: '/og-image.jpg';
@@ -72,12 +74,14 @@ const formatDate = (value?: string) => {
 
 		<section class="player-block">
 			<div class="player">
-				<iframe
-					src={embedUrl}
-					title={`${playlist.title} playlist`}
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-					allowfullscreen
-				></iframe>
+				{embedUrl && (
+					<iframe
+						src={embedUrl}
+						title={`${playlist.title} playlist`}
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+						allowfullscreen
+					></iframe>
+				)}
 			</div>
 			<div class="playlist-meta">
 				<p class="section-kicker">PLAYLIST</p>
@@ -87,7 +91,7 @@ const formatDate = (value?: string) => {
 						? '各地を歩いた十字架行進の記録を、映像の流れに沿ってたどることができます。'
 						: '各地を歩いた十字架行進の映像を、このページから続けて見ることができます。'}
 				</p>
-				<a href={playlistUrl} target="_blank" rel="noopener noreferrer">YouTubeで開く</a>
+				{playlistUrl && <a href={playlistUrl} target="_blank" rel="noopener noreferrer">YouTubeで開く</a>}
 			</div>
 		</section>
 
@@ -129,7 +133,7 @@ const formatDate = (value?: string) => {
 			) : (
 				<div class="pending-list">
 					<p>映像は上のプレイリストから視聴できます。各エピソードの言葉の記録は順次整理していきます。</p>
-					<a href={playlistUrl} target="_blank" rel="noopener noreferrer">現在のプレイリストを見る</a>
+					{playlistUrl && <a href={playlistUrl} target="_blank" rel="noopener noreferrer">現在のプレイリストを見る</a>}
 				</div>
 			)}
 		</section>

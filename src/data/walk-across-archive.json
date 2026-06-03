@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-06-01T22:53:21.304Z",
+  "fetchedAt": "2026-06-03T17:30:26.912Z",
   "playlists": {
     "noto-2025": {
       "playlistId": "PL-faIdjPoxKjtHaPP9DP1jwDchOMavF4C",
@@ -7190,6 +7190,79 @@
         }
       ],
       "source": "yt-dlp filtered from Blessing News"
+    },
+    "japan-2022-documentary": {
+      "playlistId": "",
+      "sourceUrl": "https://www.youtube.com/@arthurhollands4834/videos",
+      "videos": [
+        {
+          "id": "GqfZeAx8rmo",
+          "title": "アーサー・ホーランド十字架行進 2022 ＜vol.1＞｜Arthur Hollands Cross Walk in Japan 2022",
+          "publishedAt": "2022-04-02T00:00:00.000Z",
+          "duration": "3:21",
+          "viewCount": "6143",
+          "excerpt": "アーサー・ホーランド70歳の挑戦。2022年、日本列島日本海側を十字架を担ぎ縦断する旅。Part 1は沖縄から九州までの歩み。",
+          "description": "アーサー・ホーランド70歳の挑戦。2022年、日本列島日本海側を十字架を担ぎ縦断する旅。Part 1は沖縄から九州までの歩み。",
+          "thumbnail": "https://i.ytimg.com/vi/GqfZeAx8rmo/hq720.jpg",
+          "caption": null
+        },
+        {
+          "id": "kOSfh4yC21o",
+          "title": "アーサー・ホーランド十字架行進 2022 ＜vol.2＞｜Arthur Hollands Cross Walk in Japan 2022",
+          "publishedAt": "2022-08-09T00:00:00.000Z",
+          "duration": "4:51",
+          "viewCount": "602",
+          "excerpt": "沖縄から始まった十字架行進2022。第2ステージでは小坂忠氏との約束、追悼告別式でのメッセージ、暗さの中にある希望が記録されています。",
+          "description": "沖縄から始まった十字架行進2022。第2ステージでは小坂忠氏との約束、追悼告別式でのメッセージ、暗さの中にある希望が記録されています。",
+          "thumbnail": "https://i.ytimg.com/vi/kOSfh4yC21o/hq720.jpg",
+          "caption": null
+        },
+        {
+          "id": "fzQk_cr-PMQ",
+          "title": "アーサー・ホーランド十字架行進 2022 ＜vol.3＞｜Arthur Hollands Cross Walk in Japan 2022",
+          "publishedAt": "2022-06-05T00:00:00.000Z",
+          "duration": "4:14",
+          "viewCount": "710",
+          "excerpt": "第3ステージは鳥取から始まり、京都、兵庫、福井、石川、富山を歩いて新潟へ。日本海側を進む旅路の記録です。",
+          "description": "第3ステージは鳥取から始まり、京都、兵庫、福井、石川、富山を歩いて新潟へ。日本海側を進む旅路の記録です。",
+          "thumbnail": "https://i.ytimg.com/vi/fzQk_cr-PMQ/hqdefault.jpg",
+          "caption": null
+        },
+        {
+          "id": "MoIVZ6v3vSI",
+          "title": "アーサー・ホーランド十字架行進 2022 ＜vol.4＞｜Arthur Hollands Cross Walk in Japan 2022",
+          "publishedAt": "2022-07-02T00:00:00.000Z",
+          "duration": "4:40",
+          "viewCount": "1964",
+          "excerpt": "第4ステージは新潟県糸魚川から青森、函館へ。猛暑の中、日本海側を北へ進んだ十字架行進の記録です。",
+          "description": "第4ステージは新潟県糸魚川から青森、函館へ。猛暑の中、日本海側を北へ進んだ十字架行進の記録です。",
+          "thumbnail": "https://i.ytimg.com/vi/MoIVZ6v3vSI/hqdefault.jpg",
+          "caption": null
+        },
+        {
+          "id": "CF6OEw1xtQ8",
+          "title": "アーサー・ホーランド十字架行進 2022 ＜最終章＞｜Arthur Hollands Cross Walk in Japan 2022",
+          "publishedAt": "2022-08-09T00:00:00.000Z",
+          "duration": "7:41",
+          "viewCount": "1080",
+          "excerpt": "4度目の日本列島縦断。初めて日本海側を歩いた2022年の十字架行進は、3月から7月まで88日間で完歩し、宗谷岬でゴールしました。",
+          "description": "4度目の日本列島縦断。初めて日本海側を歩いた2022年の十字架行進は、3月から7月まで88日間で完歩し、宗谷岬でゴールしました。",
+          "thumbnail": "https://i.ytimg.com/vi/CF6OEw1xtQ8/hqdefault.jpg",
+          "caption": null
+        },
+        {
+          "id": "lmIlrXJmPjQ",
+          "title": "アーサー・ホーランド十字架行進メッセージ 2022 | Arthur Hollands Ministry - Prayer Walking Across Japan 2022",
+          "publishedAt": "2022-08-11T00:00:00.000Z",
+          "duration": "5:15",
+          "viewCount": "3852",
+          "excerpt": "2022年3月から8月までの88日間、沖縄から北海道まで2650.6kmの道のりを20kgの十字架を担いで歩いた旅のメッセージ。",
+          "description": "2022年3月から8月までの88日間、沖縄から北海道まで2650.6kmの道のりを20kgの十字架を担いで歩いた旅のメッセージ。",
+          "thumbnail": "https://i.ytimg.com/vi/lmIlrXJmPjQ/hqdefault.jpg",
+          "caption": null
+        }
+      ],
+      "source": "manual channel archive @arthurhollands4834"
     }
   }
 }
