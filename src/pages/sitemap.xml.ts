@@ -24,6 +24,7 @@ export async function GET() {
 		'/arthur-hollands-show/',
 		'/friday-night/',
 		'/walk-across/',
+		'/walk-across-usa2014/',
 		'/walk-across-awaji2026/',
 		'/walk-across-goto2026/',
 		'/message-jukebox/',

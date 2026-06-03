@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { walkAcrossPlaylists } from '../../data/walk-across-playlists';
+import { chadWalkAcrossVideos } from '../../data/chad-walk-across-videos';
 import archive from '../../data/walk-across-archive.json';
 
 const archiveData = archive as {
@@ -38,16 +39,13 @@ const standaloneVideos = [
 	{
 		year: '2014',
 		title: '2014年 アメリカ横断十字架行進',
-		englishTitle: 'WALK ACROSS AMERICA 2014',
+		englishTitle: 'WALK ACROSS USA 2014',
 		region: 'アメリカ',
-		videoTitle: 'Arthur Hollands Journey',
-		videoId: 'GgQKYgFjI8c',
-		youtubeUrl: 'https://youtu.be/GgQKYgFjI8c',
-		embedUrl: 'https://www.youtube.com/embed/GgQKYgFjI8c?rel=0',
+		href: '/walk-across-usa2014/',
 		thumbnail: 'https://i.ytimg.com/vi/GgQKYgFjI8c/hqdefault.jpg',
-		description: 'Chadさん制作による、2014年のアメリカ横断十字架行進の貴重な記録映像。',
+		description: 'Chadさん制作による、2014年のアメリカ横断十字架行進の記録映像アーカイブ。',
 		credit: '映像制作: Chadさん',
-		anchorId: 'usa-2014-video',
+		count: chadWalkAcrossVideos.length,
 	},
 ];
 const years = [...new Set([
@@ -69,7 +67,7 @@ const years = [...new Set([
 	<section class="walk-archive">
 		<div class="walk-hero">
 			<p class="eyebrow">ARTHUR HOLLANDS CROSS WALK ARCHIVE</p>
-			<h1>WALK ACROSS</h1>
+			<h1><span>WALK</span> <span>ACROSS</span></h1>
 			<p class="lead">十字架を担ぎ、地を歩き、祈りを刻んできた旅の記録。</p>
 		</div>
 
@@ -89,29 +87,6 @@ const years = [...new Set([
 				</div>
 				<a class="awaji-special-button" href={special.href}>特設ページを見る</a>
 			</div>
-		))}
-
-		{standaloneVideos.map((video) => (
-			<section class="featured-video" id={video.anchorId}>
-				<div class="featured-player">
-					<iframe
-						src={video.embedUrl}
-						title={video.videoTitle}
-						loading="lazy"
-						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-						referrerpolicy="strict-origin-when-cross-origin"
-						allowfullscreen
-					></iframe>
-				</div>
-				<div class="featured-copy">
-					<p class="section-kicker">RARE FOOTAGE</p>
-					<h2>{video.englishTitle}</h2>
-					<strong>{video.title}</strong>
-					<p>{video.description}</p>
-					<span>{video.credit}</span>
-					<a class="awaji-special-button" href={video.youtubeUrl} target="_blank" rel="noopener noreferrer">YouTubeで開く</a>
-				</div>
-			</section>
 		))}
 
 		<section class="year-block" id={`year-${awajiSpecial.year}`}>
@@ -171,7 +146,7 @@ const years = [...new Set([
 					{standaloneVideos
 						.filter((video) => video.year === year)
 						.map((video) => (
-							<a class="playlist-card standalone-video-card" href={`#${video.anchorId}`}>
+							<a class="playlist-card standalone-video-card" href={video.href}>
 								<div class="thumb">
 									<img src={video.thumbnail} alt={`${video.englishTitle} サムネイル`} loading="lazy" />
 								</div>
@@ -179,7 +154,7 @@ const years = [...new Set([
 									<p>{video.region}</p>
 									<h3>{video.englishTitle}</h3>
 									<strong>{video.title}</strong>
-									<span>RARE FOOTAGE / {video.credit}</span>
+									<span>{video.count} VIDEOS / {video.credit}</span>
 								</div>
 							</a>
 						))}
@@ -199,6 +174,7 @@ const years = [...new Set([
 	}
 	.walk-hero {
 		max-width: 1120px;
+		width: 100%;
 		min-height: 58vh;
 		margin: 0 auto;
 		padding: 92px 0 58px;
@@ -222,13 +198,18 @@ const years = [...new Set([
 		letter-spacing: 0.02em;
 		line-height: 0.9;
 	}
+	h1 span {
+		display: inline-block;
+	}
 	.lead {
+		width: min(100%, 680px);
 		max-width: 680px;
 		margin-top: 22px;
 		color: rgba(246, 239, 227, 0.82);
 		font-family: var(--font-serif);
 		font-size: clamp(1.1rem, 2.5vw, 1.55rem);
 		font-weight: 700;
+		overflow-wrap: anywhere;
 	}
 	.awaji-special-button {
 		display: inline-flex;
@@ -266,7 +247,6 @@ const years = [...new Set([
 		font-weight: 900;
 	}
 	.awaji-special,
-	.featured-video,
 	.year-block {
 		max-width: 1120px;
 		margin: 0 auto;
@@ -302,64 +282,6 @@ const years = [...new Set([
 	.awaji-special p:last-child {
 		margin-top: 10px;
 		color: rgba(246, 239, 227, 0.76);
-	}
-	.featured-video {
-		display: grid;
-		grid-template-columns: minmax(0, 1.55fr) minmax(280px, 0.8fr);
-		gap: 24px;
-		align-items: stretch;
-		margin-top: 28px;
-		padding: 28px;
-		border: 1px solid rgba(207, 169, 82, 0.35);
-		background: rgba(255, 255, 255, 0.055);
-	}
-	.featured-player {
-		aspect-ratio: 16 / 9;
-		background: #050505;
-		border: 1px solid rgba(207, 169, 82, 0.32);
-	}
-	.featured-player iframe {
-		width: 100%;
-		height: 100%;
-		border: 0;
-		display: block;
-	}
-	.featured-copy {
-		display: flex;
-		min-width: 0;
-		flex-direction: column;
-		justify-content: center;
-		align-items: flex-start;
-	}
-	.featured-copy h2 {
-		margin-top: 8px;
-		font-family: var(--font-head);
-		font-size: clamp(1.9rem, 5vw, 3.4rem);
-		line-height: 1;
-	}
-	.featured-copy strong {
-		display: block;
-		margin-top: 12px;
-		color: rgba(246, 239, 227, 0.82);
-		font-family: var(--font-serif);
-		font-size: 1.08rem;
-		line-height: 1.45;
-	}
-	.featured-copy p:not(.section-kicker) {
-		margin-top: 14px;
-		color: rgba(246, 239, 227, 0.76);
-		line-height: 1.8;
-	}
-	.featured-copy span {
-		margin-top: 14px;
-		color: #cfa952;
-		font-family: var(--font-head);
-		font-size: 0.78rem;
-		font-weight: 900;
-		letter-spacing: 0.12em;
-	}
-	.featured-copy .awaji-special-button {
-		margin-top: 22px;
 	}
 	.year-block {
 		padding-top: 58px;
@@ -458,9 +380,6 @@ const years = [...new Set([
 		.awaji-special {
 			grid-template-columns: 1fr;
 		}
-		.featured-video {
-			grid-template-columns: 1fr;
-		}
 	}
 	@media (max-width: 640px) {
 		.walk-archive {
@@ -470,8 +389,20 @@ const years = [...new Set([
 			min-height: 50vh;
 			padding-top: 62px;
 		}
+		h1 {
+			font-size: clamp(3rem, 13vw, 4.6rem);
+		}
+		h1 span {
+			display: block;
+		}
 		.year-strip {
 			top: 136px;
+		}
+		.lead {
+			max-width: 20em;
+			font-size: 1.02rem;
+			line-height: 1.85;
+			word-break: break-all;
 		}
 		.playlist-grid {
 			grid-template-columns: 1fr;
