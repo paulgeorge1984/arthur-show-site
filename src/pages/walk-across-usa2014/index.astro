@@ -2,8 +2,9 @@
 import Layout from '../../layouts/Layout.astro';
 import { chadWalkAcrossVideos } from '../../data/chad-walk-across-videos';
 
-const firstVideo = chadWalkAcrossVideos[0];
-const videoIds = chadWalkAcrossVideos.map((video) => video.id);
+const chronologicalVideos = [...chadWalkAcrossVideos].reverse();
+const firstVideo = chronologicalVideos[0];
+const videoIds = chronologicalVideos.map((video) => video.id);
 const playlistIds = videoIds.slice(1).join(',');
 const embedUrl = `https://www.youtube.com/embed/${firstVideo.id}?rel=0&playlist=${playlistIds}`;
 const youtubeUrl = `https://youtu.be/${firstVideo.id}`;
@@ -13,7 +14,7 @@ const parseDuration = (value: string) => {
 	const [minutes, seconds] = value.split(':').map(Number);
 	return (minutes || 0) * 60 + (seconds || 0);
 };
-const totalSeconds = chadWalkAcrossVideos.reduce((total, video) => total + parseDuration(video.duration), 0);
+const totalSeconds = chronologicalVideos.reduce((total, video) => total + parseDuration(video.duration), 0);
 const totalHours = Math.floor(totalSeconds / 3600);
 const totalMinutes = Math.round((totalSeconds % 3600) / 60);
 const totalDuration = `${totalHours}時間${String(totalMinutes).padStart(2, '0')}分`;
@@ -23,8 +24,8 @@ const structuredData = {
 	'@type': 'ItemList',
 	name: 'WALK ACROSS USA 2014',
 	description: 'Chadさん制作による、2014年のアメリカ横断十字架行進の記録映像アーカイブ。',
-	numberOfItems: chadWalkAcrossVideos.length,
-	itemListElement: chadWalkAcrossVideos.map((video, index) => ({
+	numberOfItems: chronologicalVideos.length,
+	itemListElement: chronologicalVideos.map((video, index) => ({
 		'@type': 'ListItem',
 		position: index + 1,
 		url: `https://youtu.be/${video.id}`,
@@ -56,7 +57,7 @@ const structuredData = {
 					旅の道中のメッセージ、日々の歩み、現地での記録をこのページからたどれます。
 				</p>
 				<div class="archive-stats" aria-label="アーカイブ概要">
-					<span><strong>{chadWalkAcrossVideos.length}</strong> VIDEOS</span>
+					<span><strong>{chronologicalVideos.length}</strong> VIDEOS</span>
 					<span><strong>{totalDuration}</strong> TOTAL</span>
 					<span><strong>2014</strong> USA</span>
 				</div>
@@ -89,10 +90,10 @@ const structuredData = {
 			<div class="section-heading">
 				<p class="kicker">ALL VIDEOS</p>
 				<h2 id="videos-title">2014 ARCHIVE</h2>
-				<p>{chadWalkAcrossVideos.length}本の映像を、チャンネル掲載順でまとめています。</p>
+				<p>{chronologicalVideos.length}本の映像を、古い順でまとめています。</p>
 			</div>
 			<div class="video-grid">
-				{chadWalkAcrossVideos.map((video, index) => (
+				{chronologicalVideos.map((video, index) => (
 					<a class="video-card" href={`https://youtu.be/${video.id}`} target="_blank" rel="noopener noreferrer">
 						<span class="video-thumb">
 							<img src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`} alt={`${video.title} サムネイル`} loading="lazy" />
