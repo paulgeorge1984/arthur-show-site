@@ -90,6 +90,16 @@ const pickupItems = videos.map((video) => ({
 const socialImage = pickupItems[0]?.id
 	? `https://i.ytimg.com/vi/${pickupItems[0].id}/hq720.jpg`
 	: '/og-image.jpg';
+const journeyVideo = {
+	title: 'Arthur Hollands Journey',
+	englishTitle: 'WALK ACROSS AMERICA 2014',
+	japaneseTitle: '2014年 アメリカ横断十字架行進',
+	videoId: 'GgQKYgFjI8c',
+	embedUrl: 'https://www.youtube.com/embed/GgQKYgFjI8c?rel=0',
+	youtubeUrl: 'https://youtu.be/GgQKYgFjI8c',
+	description: 'Chadさん制作による、2014年のアメリカ横断十字架行進の貴重な記録映像。',
+	credit: '映像制作: Chadさん',
+};
 ---
 
 <Layout
@@ -151,6 +161,28 @@ const socialImage = pickupItems[0]?.id
 				<p>VOLUME</p>
 				<strong>{totalHours || '100+'}</strong>
 				<span>hours</span>
+			</div>
+		</section>
+
+		<section class="journey-video" id="arthur-journey-2014" aria-labelledby="journey-video-title">
+			<div class="journey-player">
+				<iframe
+					src={journeyVideo.embedUrl}
+					title={journeyVideo.title}
+					loading="lazy"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+					referrerpolicy="strict-origin-when-cross-origin"
+					allowfullscreen
+				></iframe>
+			</div>
+			<div class="journey-copy">
+				<p class="broadcast-label">SPECIAL ARCHIVE</p>
+				<h2 id="journey-video-title">{journeyVideo.title}</h2>
+				<strong>{journeyVideo.englishTitle}</strong>
+				<span>{journeyVideo.japaneseTitle}</span>
+				<p>{journeyVideo.description}</p>
+				<small>{journeyVideo.credit}</small>
+				<a href={journeyVideo.youtubeUrl} target="_blank" rel="noopener noreferrer">YouTubeで開く</a>
 			</div>
 		</section>
 
@@ -431,6 +463,7 @@ const socialImage = pickupItems[0]?.id
 	.show-intro,
 	.painting-series,
 	.series-section,
+	.journey-video,
 	.featured-broadcast,
 	.share-section,
 	.episode-section {
@@ -544,6 +577,90 @@ const socialImage = pickupItems[0]?.id
 		display: block;
 		margin-top: 10px;
 		color: rgba(247, 240, 228, 0.72);
+	}
+
+	.journey-video {
+		display: grid;
+		grid-template-columns: minmax(0, 1.45fr) minmax(300px, 0.8fr);
+		gap: 24px;
+		align-items: stretch;
+		margin-top: 34px;
+		padding: 26px;
+		background: rgba(255, 255, 255, 0.055);
+		border: 1px solid rgba(197, 160, 89, 0.35);
+	}
+
+	.journey-player {
+		aspect-ratio: 16 / 9;
+		background: #000;
+		border: 1px solid rgba(197, 160, 89, 0.32);
+	}
+
+	.journey-player iframe {
+		width: 100%;
+		height: 100%;
+		display: block;
+		border: 0;
+	}
+
+	.journey-copy {
+		display: flex;
+		min-width: 0;
+		flex-direction: column;
+		justify-content: center;
+		align-items: flex-start;
+	}
+
+	.journey-copy h2 {
+		margin-top: 8px;
+		font-family: var(--font-head);
+		font-size: clamp(2rem, 5vw, 4rem);
+		line-height: 0.96;
+	}
+
+	.journey-copy strong,
+	.journey-copy small {
+		margin-top: 12px;
+		color: var(--show-gold);
+		font-family: var(--font-head);
+		font-size: 0.82rem;
+		font-weight: 900;
+		letter-spacing: 0.12em;
+	}
+
+	.journey-copy span {
+		margin-top: 8px;
+		color: rgba(247, 240, 228, 0.82);
+		font-family: var(--font-serif);
+		font-size: 1.08rem;
+		font-weight: 700;
+		line-height: 1.5;
+	}
+
+	.journey-copy p:not(.broadcast-label) {
+		margin-top: 14px;
+		color: rgba(247, 240, 228, 0.75);
+		line-height: 1.8;
+	}
+
+	.journey-copy a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 42px;
+		margin-top: 22px;
+		padding: 0 16px;
+		border: 1px solid rgba(197, 160, 89, 0.8);
+		background: rgba(197, 160, 89, 0.16);
+		color: #fff;
+		font-family: var(--font-head);
+		font-weight: 900;
+		letter-spacing: 0.08em;
+	}
+
+	.journey-copy a:hover {
+		background: var(--show-gold);
+		color: #11100e;
 	}
 
 	.painting-series {
@@ -1024,6 +1141,7 @@ const socialImage = pickupItems[0]?.id
 	@media (max-width: 980px) {
 		.show-hero,
 		.show-intro,
+		.journey-video,
 		.painting-series,
 		.featured-broadcast {
 			grid-template-columns: 1fr;
