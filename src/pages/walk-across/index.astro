@@ -48,12 +48,16 @@ const standaloneVideos = [
 		count: chadWalkAcrossVideos.length,
 	},
 ];
+const getYearSortValue = (year: string) => {
+	const matchedYears = String(year).match(/\d{4}/g);
+	return Number(matchedYears?.[matchedYears.length - 1] || 0);
+};
 const years = [...new Set([
 	gotoSpecial.year,
 	awajiSpecial.year,
 	...walkAcrossPlaylists.map((playlist) => playlist.year),
 	...standaloneVideos.map((video) => video.year),
-])].sort((a, b) => Number(b) - Number(a));
+])].sort((a, b) => getYearSortValue(b) - getYearSortValue(a));
 ---
 
 <Layout

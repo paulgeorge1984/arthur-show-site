@@ -145,10 +145,10 @@ export const walkAcrossPlaylists: WalkAcrossPlaylist[] = [
 		slug: 'world-2014-2019',
 		title: '世界の十字架行進 総集編 2014-2019',
 		englishTitle: 'WALK ACROSS THE WORLD 2014-2019',
-		year: '2019',
+		year: '2014-2019',
 		region: 'アメリカ・韓国・キューバ・日本',
 		sourceUrl: 'https://youtu.be/__LZwUw89M8',
-		description: 'アメリカ、韓国、キューバ、日本へと続いた十字架行進の歩みを、一本の映像でたどる総集編。',
+		description: 'Ken Lawさんによる、貴重な各国での十字架行進を追った作品。アメリカ、韓国、キューバ、日本へと続いた歩みを一本の映像でたどります。',
 		manualArchive: true,
 		useArchiveVideoSeries: true,
 		journeyStops: [
