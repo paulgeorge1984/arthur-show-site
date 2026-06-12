@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
-import BlessingNightNotice from '../../components/BlessingNightNotice.astro';
 import { slideNotesByDeckId } from '../../data/slideNotes';
 
 const siteURL = 'https://arthur-show.com';
@@ -34,7 +33,6 @@ const messageShareUrl = `https://arthur-show.com/messages/${entry.slug}/?share=2
 const messageImage = entry.data.heroImage || `https://i.ytimg.com/vi/${entry.data.youtubeId}/hq720.jpg`;
 const canonicalPath = `/messages/${entry.slug}/`;
 const messageDescription = `${entry.data.description} アーサーホーランド（アーサー・ホーランド / Arthur Hollands）公式動画アーカイブより。`;
-const showBlessingNotice = ['2026-06-09', '2026-06-12'].includes(entry.slug);
 const messageStructuredData = [
 	{
 		"@context": "https://schema.org",
@@ -138,9 +136,8 @@ const messageStructuredData = [
 					))}
 				</div>
 			</section>
-		)}
-		{showBlessingNotice && <BlessingNightNotice variant="article" />}
-	</article>
+			)}
+		</article>
 
 </Layout>
 

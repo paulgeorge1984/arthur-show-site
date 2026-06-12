@@ -1,9 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
-import BlessingNightNotice from '../components/BlessingNightNotice.astro';
 
 const siteURL = 'https://arthur-show.com';
+const blessingNightKagurazakaUrl = 'https://www.blessingnight.jp/schedule/schedule366';
+const blessingNightKagurazakaBanner = '/assets/generated/blessing-night-kagurazaka-20260717-banner.webp';
 const blessingTimeOsakaBanner = '/assets/generated/blessing-time-osaka2026-banner.webp';
 
 // サイトのビルドが実行された現在の時刻を取得
@@ -199,7 +200,31 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 	structuredData={homeStructuredData}
 >
 	<div class="container">
-		<BlessingNightNotice />
+		<a class="blessing-time-feature blessing-night-home-feature" href={blessingNightKagurazakaUrl} target="_blank" rel="noopener noreferrer" aria-label="BLESSING NIGHT 神楽坂 2026年7月17日 詳細・申込ページを見る">
+			<img
+				src={blessingNightKagurazakaBanner}
+				alt=""
+				width="1600"
+				height="900"
+				loading="eager"
+				aria-hidden="true"
+			/>
+			<div class="blessing-time-feature-copy">
+				<p class="blessing-time-feature-kicker">NEXT BLESSING NIGHT</p>
+				<h2>BLESSING NIGHT 神楽坂</h2>
+				<p>
+					不良牧師が語る聖なる夜のトークライブ。Music Guest は Migiwa。
+					詳細と申込は公式ページからご確認ください。
+				</p>
+				<div class="blessing-time-feature-meta">
+					<span>2026年7月17日（金）</span>
+					<span>OPEN 18:30 / START 19:00</span>
+					<span>u-ma kagurazaka</span>
+					<span>Charge 3,000円（飲食代別途）</span>
+				</div>
+				<span class="blessing-time-feature-button">詳細・申込ページへ</span>
+			</div>
+		</a>
 
 		<a class="blessing-time-feature" href="/blessing-time-osaka2026/" aria-label="BLESSING TIME in OSAKA 2026年7月18日 特別ページを見る">
 			<img
@@ -659,6 +684,50 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		font-size: 0.9rem;
 		font-weight: 900;
 		line-height: 1;
+	}
+
+	.blessing-night-home-feature {
+		display: flex;
+		flex-direction: column;
+		min-height: 0;
+		background: #070706;
+	}
+
+	.blessing-night-home-feature::before {
+		display: none;
+	}
+
+	.blessing-night-home-feature > img {
+		position: relative;
+		inset: auto;
+		width: 100%;
+		height: auto;
+		aspect-ratio: 16 / 9;
+		object-fit: contain;
+		object-position: center center;
+		background: #050505;
+	}
+
+	.blessing-night-home-feature:hover > img,
+	.blessing-night-home-feature:focus-visible > img {
+		transform: none;
+	}
+
+	.blessing-night-home-feature .blessing-time-feature-copy {
+		width: 100%;
+		min-height: 0;
+		padding: clamp(28px, 4vw, 44px);
+		background: linear-gradient(135deg, #080808, #22190f 58%, #4b371d);
+		border-top: 1px solid rgba(197, 160, 89, 0.42);
+	}
+
+	.blessing-night-home-feature h2 {
+		max-width: 10.5em;
+		font-size: clamp(2.65rem, 6.4vw, 4.1rem);
+	}
+
+	.blessing-night-home-feature .blessing-time-feature-copy > p:not(.blessing-time-feature-kicker) {
+		max-width: 46em;
 	}
 
 	.awaji-feature {
@@ -1736,6 +1805,22 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		.blessing-time-feature-meta span,
 		.blessing-time-feature-button {
 			width: 100%;
+		}
+
+		.blessing-night-home-feature > img {
+			height: auto;
+			aspect-ratio: 16 / 9;
+			object-position: center center;
+		}
+
+		.blessing-night-home-feature .blessing-time-feature-copy {
+			padding: 26px 20px;
+			background: linear-gradient(135deg, #080808, #241a0f 60%, #49351c);
+		}
+
+		.blessing-night-home-feature h2 {
+			max-width: 8em;
+			font-size: 2.65rem;
 		}
 
 		.page-intro {
