@@ -22,6 +22,7 @@ export async function GET() {
 	const staticPaths = [
 		'/',
 		'/arthur-hollands-show/',
+		'/blessing-time-osaka2026/',
 		'/friday-night/',
 		'/walk-across/',
 		'/walk-across-usa2014/',

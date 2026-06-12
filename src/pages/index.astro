@@ -1,8 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import BlessingNightNotice from '../components/BlessingNightNotice.astro';
 
 const siteURL = 'https://arthur-show.com';
+const blessingTimeOsakaBanner = '/assets/generated/blessing-time-osaka2026-banner.webp';
 
 // サイトのビルドが実行された現在の時刻を取得
 const currentBuildTime = new Date(); 
@@ -197,6 +199,33 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 	structuredData={homeStructuredData}
 >
 	<div class="container">
+		<BlessingNightNotice />
+
+		<a class="blessing-time-feature" href="/blessing-time-osaka2026/" aria-label="BLESSING TIME in OSAKA 2026年7月18日 特別ページを見る">
+			<img
+				src={blessingTimeOsakaBanner}
+				alt=""
+				width="1600"
+				height="900"
+				loading="eager"
+				aria-hidden="true"
+			/>
+			<div class="blessing-time-feature-copy">
+				<p class="blessing-time-feature-kicker">SPECIAL EVENT</p>
+				<h2>BLESSING TIME in OSAKA</h2>
+				<p>
+					アーサー・ホーランド Talk Live と、豪華アーティスト陣による Worship。
+					ジーザスの愛と希望に満ちた祝福の時間を、ぜひご一緒ください。
+				</p>
+				<div class="blessing-time-feature-meta">
+					<span>2026年7月18日（土）</span>
+					<span>OPEN 14:30 / START 15:00</span>
+					<span>大阪クリスチャンセンター OCCホール</span>
+				</div>
+				<span class="blessing-time-feature-button">特別ページを見る</span>
+			</div>
+		</a>
+
 		<a class="awaji-feature goto-feature" href="/walk-across-goto2026/" aria-label="ARTHUR HOLLANDS WALK ACROSS GOTO ISLANDS 2026 特設ページを見る">
 			<div class="awaji-visual">
 				<img src="/walk-across-goto2026/assets/goto-cross-walk-2026-wide.jpg" alt="WALK ACROSS GOTO ISLANDS 2026 五島列島十字架行進の告知ビジュアル" loading="eager" />
@@ -511,6 +540,125 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		max-width: 980px;
 		margin: 0 auto;
 		padding: 0 20px;
+	}
+
+	.blessing-time-feature {
+		position: relative;
+		display: block;
+		min-height: clamp(430px, 56vw, 560px);
+		margin: 28px 0 8px;
+		overflow: hidden;
+		background: #102b3e;
+		color: #fff;
+		text-decoration: none;
+		border-left: 5px solid #c5a059;
+		box-shadow: 0 18px 42px rgba(0, 0, 0, 0.18);
+	}
+
+	.blessing-time-feature::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		z-index: 1;
+		background:
+			linear-gradient(90deg, rgba(5, 8, 12, 0.86), rgba(5, 8, 12, 0.46) 46%, rgba(5, 8, 12, 0.12)),
+			linear-gradient(0deg, rgba(5, 8, 12, 0.42), transparent 48%);
+		pointer-events: none;
+	}
+
+	.blessing-time-feature > img {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center center;
+		transition: transform 0.35s;
+	}
+
+	.blessing-time-feature:hover > img,
+	.blessing-time-feature:focus-visible > img {
+		transform: scale(1.018);
+	}
+
+	.blessing-time-feature-copy {
+		position: relative;
+		z-index: 2;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		width: min(590px, 100%);
+		min-height: inherit;
+		padding: clamp(30px, 5vw, 52px);
+	}
+
+	.blessing-time-feature-kicker {
+		width: fit-content;
+		margin-bottom: 12px;
+		padding: 6px 10px;
+		background: #c5a059;
+		color: #060606;
+		font-family: 'Oswald', sans-serif;
+		font-size: 0.78rem;
+		font-weight: 900;
+		letter-spacing: 0;
+		line-height: 1.2;
+	}
+
+	.blessing-time-feature h2 {
+		max-width: 7.4em;
+		margin-bottom: 16px;
+		font-family: 'Oswald', sans-serif;
+		font-size: 4.35rem;
+		font-weight: 900;
+		letter-spacing: 0;
+		line-height: 0.94;
+		text-shadow: 0 2px 18px rgba(0, 0, 0, 0.42);
+	}
+
+	.blessing-time-feature-copy > p:not(.blessing-time-feature-kicker) {
+		max-width: 34em;
+		margin-bottom: 18px;
+		color: rgba(255, 255, 255, 0.88);
+		font-size: 1rem;
+		font-weight: 800;
+		line-height: 1.75;
+		text-shadow: 0 1px 12px rgba(0, 0, 0, 0.34);
+	}
+
+	.blessing-time-feature-meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		margin-bottom: 22px;
+	}
+
+	.blessing-time-feature-meta span {
+		display: inline-flex;
+		align-items: center;
+		min-height: 31px;
+		padding: 0 10px;
+		background: rgba(255, 255, 255, 0.12);
+		border: 1px solid rgba(255, 255, 255, 0.22);
+		color: #fff;
+		font-size: 0.84rem;
+		font-weight: 900;
+		line-height: 1.2;
+	}
+
+	.blessing-time-feature-button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: fit-content;
+		min-height: 42px;
+		padding: 0 18px;
+		background: #c5a059;
+		color: #050505;
+		font-family: 'Oswald', sans-serif;
+		font-size: 0.9rem;
+		font-weight: 900;
+		line-height: 1;
 	}
 
 	.awaji-feature {
@@ -1552,6 +1700,44 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 			padding: 0 14px;
 		}
 
+		.blessing-time-feature {
+			display: flex;
+			flex-direction: column;
+			min-height: 0;
+			margin: 18px 0 4px;
+		}
+
+		.blessing-time-feature::before {
+			inset: 0 0 auto;
+			height: 220px;
+			background:
+				linear-gradient(90deg, rgba(5, 8, 12, 0.36), rgba(5, 8, 12, 0.08)),
+				linear-gradient(0deg, rgba(5, 8, 12, 0.52), transparent 54%);
+		}
+
+		.blessing-time-feature > img {
+			position: relative;
+			inset: auto;
+			height: 220px;
+			object-position: left center;
+		}
+
+		.blessing-time-feature-copy {
+			min-height: 0;
+			padding: 30px 24px;
+			background: linear-gradient(135deg, #071018, #102b3e);
+		}
+
+		.blessing-time-feature h2 {
+			max-width: 6.7em;
+			font-size: 3.1rem;
+		}
+
+		.blessing-time-feature-meta span,
+		.blessing-time-feature-button {
+			width: 100%;
+		}
+
 		.page-intro {
 			padding: 38px 0;
 		}
@@ -1707,6 +1893,10 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 	}
 
 	@media (max-width: 440px) {
+		.blessing-time-feature h2 {
+			font-size: 2.35rem;
+		}
+
 		.featured-body,
 		.featured-card.primary .featured-body {
 			padding: 18px;

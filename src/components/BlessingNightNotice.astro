@@ -1,0 +1,283 @@
+---
+type Props = {
+	variant?: 'home' | 'article';
+};
+
+const { variant = 'home' } = Astro.props;
+const className = `blessing-notice blessing-notice-${variant}`;
+---
+
+<a
+	class={className}
+	href="https://www.blessingnight.jp/schedule/schedule364"
+	target="_blank"
+	rel="noreferrer"
+	data-expiring-notice
+	data-expires-at="2026-06-12T15:00:00.000Z"
+	aria-label="2026年6月12日 金曜日 BLESSING NIGHT SPECIAL WORSHIP NIGHT in 成増の詳細を見る"
+>
+	<img
+		src="/assets/generated/blessing-night-narimasu-20260612-banner-v2.webp"
+		alt=""
+		loading={variant === 'home' ? 'eager' : 'lazy'}
+		aria-hidden="true"
+	/>
+	<div class="blessing-copy">
+		<p class="blessing-kicker">SPECIAL ANNOUNCEMENT</p>
+		<h2>
+			<span class="blessing-title-main">BLESSING NIGHT SPECIAL</span>
+			<strong>WORSHIP NIGHT in <span class="blessing-location">成増</span></strong>
+		</h2>
+		<p class="blessing-date">
+			2026.6.12 FRI
+			<span>18:30 OPEN / 19:00 START</span>
+		</p>
+		<p class="blessing-lead">
+			アーサー・ホーランド Talk Live。Music Guest: 三上勝久バンド with 古川初穂。
+		</p>
+		<div class="blessing-meta" aria-label="開催情報">
+			<span>入場無料 / 自由献金</span>
+			<span>キリスト兄弟団 成増教会</span>
+		</div>
+		<span class="blessing-button">詳細を見る</span>
+	</div>
+</a>
+
+<script is:inline>
+	(() => {
+		const expiringNotices = Array.from(document.querySelectorAll('[data-expiring-notice][data-expires-at]'));
+		const now = Date.now();
+		expiringNotices.forEach((notice) => {
+			const expiresAt = Date.parse(notice.dataset.expiresAt || '');
+			if (Number.isFinite(expiresAt) && now >= expiresAt) {
+				notice.hidden = true;
+			}
+		});
+	})();
+</script>
+
+<style>
+	.blessing-notice {
+		position: relative;
+		display: block;
+		min-height: clamp(420px, 52vw, 540px);
+		margin: 28px 0 20px;
+		overflow: hidden;
+		background: #050505;
+		color: #fff;
+		border-left: 5px solid #d8a847;
+		box-shadow: 0 20px 44px rgba(0, 0, 0, 0.22);
+	}
+
+	.blessing-notice-article {
+		margin: 52px 0 0;
+		min-height: clamp(420px, 60vw, 520px);
+	}
+
+	.blessing-notice[hidden] {
+		display: none;
+	}
+
+	.blessing-notice::before,
+	.blessing-notice::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		z-index: 1;
+		pointer-events: none;
+	}
+
+	.blessing-notice::before {
+		background:
+			linear-gradient(90deg, rgba(0, 0, 0, 0.94) 0%, rgba(0, 0, 0, 0.84) 43%, rgba(0, 0, 0, 0.26) 76%),
+			linear-gradient(0deg, rgba(0, 0, 0, 0.62), transparent 44%);
+	}
+
+	.blessing-notice::after {
+		inset: 14px;
+		border: 1px solid rgba(216, 168, 71, 0.42);
+		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+	}
+
+	.blessing-notice > img {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center center;
+		opacity: 0.98;
+		transition: transform 0.35s, opacity 0.35s;
+	}
+
+	.blessing-notice:hover > img {
+		transform: scale(1.018);
+		opacity: 1;
+	}
+
+	.blessing-copy {
+		position: relative;
+		z-index: 2;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		width: min(630px, 100%);
+		min-height: inherit;
+		padding: clamp(30px, 5vw, 54px);
+	}
+
+	.blessing-kicker {
+		width: fit-content;
+		margin-bottom: 14px;
+		padding: 6px 10px;
+		background: #d8a847;
+		color: #050505;
+		font-family: 'Oswald', sans-serif;
+		font-size: 0.78rem;
+		font-weight: 900;
+		letter-spacing: 0.12em;
+	}
+
+	.blessing-copy h2 {
+		display: grid;
+		gap: 8px;
+		margin-bottom: 16px;
+		color: #fff;
+		font-family: 'Oswald', sans-serif;
+		font-weight: 900;
+		line-height: 0.96;
+	}
+
+	.blessing-title-main {
+		font-size: clamp(2.05rem, 5.4vw, 4.6rem);
+	}
+
+	.blessing-copy h2 strong {
+		color: #57b8ff;
+		font-size: clamp(1.55rem, 3.75vw, 2.95rem);
+		font-weight: 900;
+		overflow-wrap: normal;
+		text-shadow: 0 0 24px rgba(87, 184, 255, 0.36);
+		word-break: keep-all;
+	}
+
+	.blessing-location {
+		display: inline-block;
+		white-space: nowrap;
+	}
+
+	.blessing-date {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px 16px;
+		align-items: center;
+		margin-bottom: 16px;
+		color: #f7d66e;
+		font-family: 'Oswald', sans-serif;
+		font-size: clamp(1.35rem, 3.5vw, 2.55rem);
+		font-weight: 900;
+		letter-spacing: 0.04em;
+		line-height: 1;
+	}
+
+	.blessing-date span {
+		color: rgba(255, 255, 255, 0.9);
+		font-size: clamp(0.95rem, 2vw, 1.25rem);
+		letter-spacing: 0.08em;
+	}
+
+	.blessing-lead {
+		max-width: 31em;
+		margin-bottom: 16px;
+		color: rgba(255, 255, 255, 0.88);
+		font-size: clamp(0.96rem, 2vw, 1.1rem);
+		font-weight: 800;
+		line-height: 1.75;
+	}
+
+	.blessing-meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		margin-bottom: 22px;
+	}
+
+	.blessing-meta span {
+		display: inline-flex;
+		align-items: center;
+		min-height: 32px;
+		padding: 0 10px;
+		background: rgba(255, 255, 255, 0.1);
+		border: 1px solid rgba(255, 255, 255, 0.22);
+		color: #fff;
+		font-size: 0.86rem;
+		font-weight: 900;
+		line-height: 1.2;
+	}
+
+	.blessing-button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: fit-content;
+		min-height: 42px;
+		padding: 0 18px;
+		background: #fff;
+		color: #050505;
+		font-size: 0.92rem;
+		font-weight: 900;
+	}
+
+	.blessing-notice:hover .blessing-button {
+		background: #d8a847;
+	}
+
+	@media (max-width: 760px) {
+		.blessing-notice,
+		.blessing-notice-article {
+			min-height: 660px;
+			margin: 18px 0 14px;
+			border-left-width: 4px;
+		}
+
+		.blessing-notice-article {
+			margin-top: 44px;
+		}
+
+		.blessing-notice::before {
+			background:
+				linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.2) 34%, rgba(0, 0, 0, 0.96) 48%, #050505 100%),
+				linear-gradient(90deg, rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.04));
+		}
+
+		.blessing-notice::after {
+			inset: 10px;
+		}
+
+		.blessing-notice > img {
+			inset: 0 0 auto;
+			height: 45%;
+			object-position: 100% center;
+			opacity: 0.96;
+		}
+
+		.blessing-copy {
+			justify-content: flex-start;
+			min-height: 660px;
+			padding: 285px 22px 30px;
+		}
+
+		.blessing-copy h2 {
+			margin-bottom: 14px;
+		}
+
+		.blessing-date {
+			align-items: flex-start;
+			flex-direction: column;
+		}
+
+		.blessing-meta span {
+			flex: 1 1 100%;
+		}
+	}
+</style>

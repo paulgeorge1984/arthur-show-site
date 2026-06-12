@@ -4,6 +4,8 @@ import Layout from '../../layouts/Layout.astro';
 const officialScheduleUrl = 'https://www.arthurhollands.com/%E3%82%B9%E3%82%B1%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB';
 const officialNotice = '本ページは参考表記のため、カレンダーの最新データ、および再来月以降のスケジュールは、必ず上記のアーサーホーランド公式サイトからご確認ください。';
 const recurringScheduleImage = '/assets/arthur-related-schedule-cycle.jpg';
+const blessingTimeOsakaUrl = '/blessing-time-osaka2026/';
+const blessingTimeOsakaBanner = '/assets/generated/blessing-time-osaka2026-banner.webp';
 const calendarShareUrl = 'https://arthur-show.com/calendar/';
 const calendarShareTitle = 'アーサーホーランド関連スケジュール | THE ARTHUR HOLLANDS SHOW';
 const encodedCalendarShareUrl = encodeURIComponent(calendarShareUrl);
@@ -45,6 +47,34 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				height="720"
 				loading="eager"
 			/>
+		</section>
+
+		<section class="calendar-special-event" aria-label="BLESSING TIME in OSAKA 特別案内">
+			<a class="calendar-special-link" href={blessingTimeOsakaUrl}>
+				<span class="calendar-special-media" aria-hidden="true">
+					<img
+						src={blessingTimeOsakaBanner}
+						alt=""
+						width="1600"
+						height="900"
+						loading="lazy"
+					/>
+				</span>
+				<span class="calendar-special-copy">
+					<span class="calendar-special-label">SPECIAL EVENT</span>
+					<strong>BLESSING TIME in OSAKA</strong>
+					<span class="calendar-special-lead">
+						アーサー・ホーランド Talk Live と、豪華アーティスト陣による Worship。
+						ジーザスの愛と希望に満ちた祝福の時間を、ぜひご一緒ください。
+					</span>
+					<span class="calendar-special-meta">
+						<span>2026年7月18日（土）</span>
+						<span>OPEN 14:30 / START 15:00</span>
+						<span>大阪クリスチャンセンター OCCホール</span>
+					</span>
+					<span class="calendar-special-button">特別ページを見る</span>
+				</span>
+			</a>
 		</section>
 
 		<section class="calendar-section" id="calendar-events" aria-labelledby="calendar-title">
@@ -100,6 +130,27 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 		const CALENDAR_SHARE_TITLE = 'アーサーホーランド関連スケジュール | THE ARTHUR HOLLANDS SHOW';
 		const TOKYO_TIME_ZONE = 'Asia/Tokyo';
 		const DAY_MS = 24 * 60 * 60 * 1000;
+		const MANUAL_EVENTS = [
+			{
+				id: 'manual-blessing-time-osaka-2026-07-18',
+				summary: 'Blessing Time in 大阪',
+				description: [
+					'OPEN 14:30 / START 15:00',
+					'大阪クリスチャンセンター OCCホール',
+					'入場無料（席上献金があります）',
+					'https://arthur-show.com/blessing-time-osaka2026/',
+				].join('\n'),
+				location: '大阪クリスチャンセンター OCCホール 大阪市中央区玉造2丁目26−47',
+				start: {
+					dateTime: '2026-07-18T15:00:00+09:00',
+					timeZone: TOKYO_TIME_ZONE,
+				},
+				end: {
+					dateTime: '2026-07-18T15:00:00+09:00',
+					timeZone: TOKYO_TIME_ZONE,
+				},
+			},
+		];
 
 		const monthContainer = document.querySelector('[data-calendar-months]');
 		const miniCalendarContainer = document.querySelector('[data-mini-calendars]');
@@ -283,11 +334,37 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			const start = getEventStart(event);
 			const end = getEventEnd(event);
 			if (Number.isNaN(end.valueOf())) return timeFormatter.format(start);
+			if (start.getTime() === end.getTime()) return timeFormatter.format(start);
 			return `${timeFormatter.format(start)} - ${timeFormatter.format(end)}`;
 		}
 
 		function monthLabelForKey(key) {
 			return monthFormatter.format(tokyoDateFromDateOnly(`${key}-01`));
+		}
+
+		function normalizeEventSummary(value = '') {
+			return String(value).replace(/ブレッシングナイ(?=[＠@\s（(]|$)/g, 'ブレッシングナイト');
+		}
+
+		function isEventInRange(event, range) {
+			const start = getEventStart(event).getTime();
+			return start >= new Date(range.timeMin).getTime() && start < new Date(range.timeMax).getTime();
+		}
+
+		function isBlessingTimeOsakaEvent(event) {
+			const startKey = event.start?.date || getDateKeyFromDate(getEventStart(event));
+			const searchableText = `${event.summary || ''} ${event.description || ''} ${event.location || ''}`;
+			return startKey === '2026-07-18' && /blessing\s*time/i.test(searchableText) && /(osaka|大阪)/i.test(searchableText);
+		}
+
+		function mergeManualEvents(events, range) {
+			const manualEventsInRange = MANUAL_EVENTS.filter((event) => isEventInRange(event, range));
+			if (!manualEventsInRange.length) return events;
+			const hasBlessingTimeOsaka = events.some((event) => isBlessingTimeOsakaEvent(event));
+			return [
+				...events,
+				...manualEventsInRange.filter((event) => !isBlessingTimeOsakaEvent(event) || !hasBlessingTimeOsaka),
+			];
 		}
 
 		function renderEventCard(event, todayStart) {
@@ -302,6 +379,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			const weekdayIndex = getWeekdayIndexFromDateKey(startKey);
 			const weekdayClass = weekdayIndex === 0 ? ' is-sunday' : weekdayIndex === 6 ? ' is-saturday' : '';
 			const timeRange = formatTimeRange(event);
+			const summary = normalizeEventSummary(event.summary || '名称未定');
 
 			return `
 				<article class="event-card${isPast ? ' is-past' : ''}">
@@ -315,7 +393,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 								${timeRange ? `<span>${escapeHtml(timeRange)}</span>` : ''}
 								${isPast ? '<em>終了</em>' : ''}
 							</div>
-							<h3>${escapeHtml(event.summary || '名称未定')}</h3>
+							<h3>${escapeHtml(summary)}</h3>
 							${description ? `<p class="event-description">${description}</p>` : ''}
 							${location ? `<p class="event-location">${escapeHtml(location)}</p>` : ''}
 						</div>
@@ -333,7 +411,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				const key = `${month.key}-${pad2(day)}`;
 				const weekdayIndex = getWeekdayIndexFromDateKey(key);
 				const events = eventsByDate.get(key) || [];
-				const eventTitles = events.map((event) => event.summary || '名称未定');
+				const eventTitles = events.map((event) => normalizeEventSummary(event.summary || '名称未定'));
 				const classNames = [
 					'mini-calendar-day',
 					weekdayIndex === 0 ? 'is-sunday' : '',
@@ -495,8 +573,10 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 
 			try {
 				const { items, updated } = await fetchCalendarEvents(range);
-				const activeEvents = items
-					.filter((event) => event.status !== 'cancelled')
+				const activeEvents = mergeManualEvents(
+					items.filter((event) => event.status !== 'cancelled'),
+					range
+				)
 					.sort((a, b) => getEventStart(a).getTime() - getEventStart(b).getTime());
 				const grouped = new Map(range.months.map((month) => [month.key, []]));
 				activeEvents.forEach((event) => {
@@ -673,6 +753,137 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			border-radius: 8px;
 			background: rgba(255, 255, 255, 0.04);
 			box-shadow: 0 18px 58px rgba(0, 0, 0, 0.34);
+		}
+
+		.calendar-special-event {
+			box-sizing: border-box;
+			max-width: 1120px;
+			width: 100%;
+			margin: 0 auto;
+			padding: 0 20px 34px;
+		}
+
+		.calendar-special-link {
+			position: relative;
+			display: grid;
+			grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.92fr);
+			min-height: 318px;
+			overflow: hidden;
+			border: 1px solid rgba(197, 160, 89, 0.38);
+			background:
+				linear-gradient(135deg, rgba(7, 10, 14, 0.98), rgba(28, 56, 72, 0.9)),
+				#101010;
+			color: var(--calendar-ink);
+			text-decoration: none;
+			box-shadow: 0 18px 58px rgba(0, 0, 0, 0.3);
+		}
+
+		.calendar-special-link::before {
+			content: "";
+			position: absolute;
+			inset: 0;
+			z-index: 1;
+			background:
+				linear-gradient(90deg, rgba(5, 5, 5, 0.16), rgba(5, 5, 5, 0.12) 52%, rgba(5, 5, 5, 0.48)),
+				linear-gradient(0deg, rgba(197, 160, 89, 0.18), transparent 46%);
+			pointer-events: none;
+		}
+
+		.calendar-special-copy,
+		.calendar-special-media {
+			position: relative;
+			z-index: 2;
+		}
+
+		.calendar-special-copy {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			padding: 34px;
+		}
+
+		.calendar-special-label {
+			width: fit-content;
+			margin-bottom: 12px;
+			padding: 6px 10px;
+			background: var(--calendar-gold);
+			color: #050505;
+			font-family: var(--font-head);
+			font-size: 0.78rem;
+			font-weight: 900;
+			line-height: 1.2;
+		}
+
+		.calendar-special-copy strong {
+			font-family: var(--font-head);
+			font-size: 3.65rem;
+			font-weight: 900;
+			letter-spacing: 0;
+			line-height: 0.95;
+		}
+
+		.calendar-special-lead {
+			max-width: 36em;
+			margin-top: 16px;
+			color: rgba(248, 243, 233, 0.84);
+			font-size: 1rem;
+			font-weight: 800;
+			line-height: 1.75;
+		}
+
+		.calendar-special-meta {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 8px;
+			margin-top: 18px;
+		}
+
+		.calendar-special-meta span {
+			display: inline-flex;
+			align-items: center;
+			min-height: 31px;
+			padding: 0 10px;
+			border: 1px solid rgba(255, 255, 255, 0.2);
+			background: rgba(255, 255, 255, 0.08);
+			font-size: 0.84rem;
+			font-weight: 900;
+			line-height: 1.2;
+		}
+
+		.calendar-special-button {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			width: fit-content;
+			min-height: 42px;
+			margin-top: 24px;
+			padding: 0 18px;
+			background: var(--calendar-gold);
+			color: #050505;
+			font-family: var(--font-head);
+			font-size: 0.9rem;
+			font-weight: 900;
+			line-height: 1;
+		}
+
+		.calendar-special-media {
+			min-height: 318px;
+			overflow: hidden;
+			background: #8bbbd6;
+		}
+
+		.calendar-special-media img {
+			display: block;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: center 28%;
+			transition: transform 0.35s;
+		}
+
+		.calendar-special-link:hover .calendar-special-media img,
+		.calendar-special-link:focus-visible .calendar-special-media img {
+			transform: scale(1.018);
 		}
 
 		.calendar-overview {
@@ -1152,6 +1363,15 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 		.calendar-share {
 			grid-template-columns: 1fr;
 		}
+
+		.calendar-special-link {
+			grid-template-columns: 1fr;
+		}
+
+		.calendar-special-media {
+			order: -1;
+			min-height: 300px;
+		}
 	}
 
 	@media (max-width: 640px) {
@@ -1162,6 +1382,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			.calendar-hero,
 			.calendar-section,
 			.recurring-schedule,
+			.calendar-special-event,
 			.calendar-overview {
 				padding-left: 14px;
 				padding-right: 14px;
@@ -1188,6 +1409,23 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 		.calendar-share-button {
 			min-height: 44px;
 			font-size: 0.78rem;
+		}
+
+		.calendar-special-copy {
+			padding: 26px;
+		}
+
+		.calendar-special-copy strong {
+			font-size: 2.45rem;
+		}
+
+		.calendar-special-media {
+			min-height: 0;
+			aspect-ratio: 16 / 9;
+		}
+
+		.calendar-special-media img {
+			object-position: left center;
 		}
 
 		.event-card {

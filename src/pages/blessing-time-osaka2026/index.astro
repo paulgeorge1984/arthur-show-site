@@ -1,0 +1,881 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const posterImage = '/assets/blessing-time-osaka2026-poster.jpg';
+const artistsImage = '/assets/blessing-time-osaka2026-artists.jpg';
+const bannerImage = '/assets/generated/blessing-time-osaka2026-banner.webp';
+const pageUrl = '/blessing-time-osaka2026/';
+const eventTitle = 'BLESSING TIME in OSAKA';
+const eventDescription = '2026年7月18日（土）、大阪クリスチャンセンター OCCホールで開催される BLESSING TIME in OSAKA。アーサー・ホーランド Talk Live と豪華アーティスト陣による Worship。';
+const messageVideoTitle = '涙はあなたの終点じゃない 『愛されている』と信じられない時にこそグッドニュースがある';
+const cgntvVideoTitle = 'CGNTVの取材映像';
+const blessingTimeShareUrl = `https://arthur-show.com${pageUrl}`;
+const blessingTimeShareTitle = `アーサーホーランド ${eventTitle} | THE ARTHUR HOLLANDS SHOW`;
+const encodedBlessingTimeShareUrl = encodeURIComponent(blessingTimeShareUrl);
+const encodedBlessingTimeShareTitle = encodeURIComponent(blessingTimeShareTitle);
+const encodedBlessingTimeLineText = encodeURIComponent(`${blessingTimeShareTitle}\n${blessingTimeShareUrl}`);
+const performers = [
+	'アーサー・ホーランド',
+	'上原令子',
+	'サルーキ＝',
+	'堀井ローレン',
+	'神山みさ',
+	'樋口 友',
+];
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'Event',
+	name: eventTitle,
+	description: eventDescription,
+	startDate: '2026-07-18T15:00:00+09:00',
+	eventStatus: 'https://schema.org/EventScheduled',
+	eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+	image: [`https://arthur-show.com${bannerImage}`],
+	url: `https://arthur-show.com${pageUrl}`,
+	location: {
+		'@type': 'Place',
+		name: '大阪クリスチャンセンター OCCホール',
+		address: {
+			'@type': 'PostalAddress',
+			addressCountry: 'JP',
+			addressRegion: '大阪府',
+			addressLocality: '大阪市中央区玉造',
+			streetAddress: '2丁目26−47',
+		},
+	},
+	performer: performers.map((name) => ({
+		'@type': 'Person',
+		name,
+	})),
+	offers: {
+		'@type': 'Offer',
+		price: '0',
+		priceCurrency: 'JPY',
+		availability: 'https://schema.org/InStock',
+		url: `https://arthur-show.com${pageUrl}`,
+	},
+};
+---
+
+<Layout
+	title={eventTitle}
+	description={eventDescription}
+	image={bannerImage}
+	imageAlt="BLESSING TIME in OSAKA 2026年7月18日 大阪クリスチャンセンター OCCホール"
+	imageWidth={1600}
+	imageHeight={900}
+	imageType="image/webp"
+	ogType="website"
+	canonicalPath={pageUrl}
+	structuredData={structuredData}
+>
+	<article class="blessing-time-page">
+		<section class="blessing-time-hero" aria-labelledby="blessing-time-title">
+			<img
+				class="blessing-time-hero-image"
+				src={bannerImage}
+				alt=""
+				width="1600"
+				height="900"
+				loading="eager"
+				aria-hidden="true"
+			/>
+			<div class="blessing-time-hero-copy">
+				<p class="blessing-time-kicker">ARTHUR HOLLANDS TALK LIVE & WORSHIP</p>
+				<h1 id="blessing-time-title">
+					BLESSING TIME
+					<span>in OSAKA</span>
+				</h1>
+				<p class="blessing-time-lead">
+					アーサー・ホーランド Talk Live と、豪華アーティスト陣による Worship。
+					ジーザスの愛と希望に満ちた祝福の時間を、ぜひご一緒ください。
+				</p>
+				<div class="blessing-time-hero-meta" aria-label="開催情報">
+					<span>2026年7月18日（土）</span>
+					<span>OPEN 14:30 / START 15:00</span>
+					<span>大阪クリスチャンセンター OCCホール</span>
+				</div>
+				<div class="blessing-time-actions">
+					<a href="#event-detail">開催概要</a>
+					<a href="#tokyo-message">東京開催のメッセージ映像</a>
+					<a href="#cgntv-report">CGNTV取材映像</a>
+				</div>
+			</div>
+		</section>
+
+		<section class="blessing-time-intro" aria-label="イベント紹介">
+			<p>
+				4月に東京で開催され、大好評だった「BLESSING TIME」が、なんと今回は大阪で開催されます。
+			</p>
+			<p>
+				関西の皆さま、ぜひこの祝福の時をご一緒ください。
+			</p>
+		</section>
+
+		<section class="blessing-time-share" aria-labelledby="blessing-time-share-title">
+			<div>
+				<p class="blessing-time-section-label">SHARE</p>
+				<h2 id="blessing-time-share-title">このページをシェア</h2>
+			</div>
+			<div class="blessing-time-share-buttons" aria-label="SNS共有ボタン">
+				<button class="blessing-time-share-button native" type="button" data-blessing-time-share-native>
+					<span>Share</span>
+					<small>端末で共有</small>
+				</button>
+				<a class="blessing-time-share-button line" href={`https://line.me/R/msg/text/?${encodedBlessingTimeLineText}`} target="_blank" rel="noopener noreferrer">
+					<span>LINE</span>
+					<small>送る</small>
+				</a>
+				<a class="blessing-time-share-button x" href={`https://twitter.com/intent/tweet?text=${encodedBlessingTimeShareTitle}&url=${encodedBlessingTimeShareUrl}`} target="_blank" rel="noopener noreferrer">
+					<span>X</span>
+					<small>投稿</small>
+				</a>
+				<a class="blessing-time-share-button facebook" href={`https://www.facebook.com/sharer/sharer.php?u=${encodedBlessingTimeShareUrl}`} target="_blank" rel="noopener noreferrer">
+					<span>Facebook</span>
+					<small>投稿</small>
+				</a>
+				<button class="blessing-time-share-button copy" type="button" data-blessing-time-copy-link>
+					<span>Copy</span>
+					<small data-blessing-time-copy-status>URLをコピー</small>
+				</button>
+			</div>
+		</section>
+
+		<section class="blessing-time-detail" id="event-detail" aria-labelledby="event-detail-title">
+			<div class="blessing-time-detail-copy">
+				<p class="blessing-time-section-label">EVENT DETAILS</p>
+				<h2 id="event-detail-title">BLESSING TIME in OSAKA</h2>
+				<dl class="blessing-time-info">
+					<div>
+						<dt>日時</dt>
+						<dd>
+							2026年7月18日（土）<br />
+							OPEN 14:30 / START 15:00
+						</dd>
+					</div>
+					<div>
+						<dt>会場</dt>
+						<dd>
+							大阪クリスチャンセンター OCCホール<br />
+							大阪市中央区玉造2丁目26−47
+						</dd>
+					</div>
+					<div>
+						<dt>入場</dt>
+						<dd>
+							入場無料<br />
+							※席上献金があります。
+						</dd>
+					</div>
+					<div>
+						<dt>お問い合わせ</dt>
+						<dd>
+							<a href="mailto:mag.manaka@gmail.com">mag.manaka@gmail.com</a>（金子）
+						</dd>
+					</div>
+				</dl>
+			</div>
+			<figure class="blessing-time-poster">
+				<img
+					src={posterImage}
+					alt="BLESSING TIME in OSAKA フライヤー"
+					width="904"
+					height="1280"
+					loading="lazy"
+				/>
+			</figure>
+		</section>
+
+		<section class="blessing-time-scripture" aria-label="詩篇30:5">
+			<p>
+				夕暮れには涙が宿っても、<br />
+				朝焼けには喜びの叫びがある。
+			</p>
+			<cite>詩篇 30:5</cite>
+		</section>
+
+		<section class="blessing-time-video" id="tokyo-message" aria-labelledby="tokyo-message-title">
+			<div class="blessing-time-video-copy">
+				<p class="blessing-time-section-label">TOKYO MESSAGE</p>
+				<h2 id="tokyo-message-title">東京開催時のメッセージ映像</h2>
+				<p>
+					「{messageVideoTitle}」（2026/04/18 伝道集会「BLESSING TIME」より）
+				</p>
+			</div>
+			<div class="blessing-time-video-frame">
+				<iframe
+					src="https://www.youtube.com/embed/reSfjdJvoew"
+					title={`${messageVideoTitle}（2026/04/18 伝道集会「BLESSING TIME」より）`}
+					loading="lazy"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+					allowfullscreen
+				></iframe>
+			</div>
+		</section>
+
+		<section class="blessing-time-video blessing-time-video-alt" id="cgntv-report" aria-labelledby="cgntv-report-title">
+			<div class="blessing-time-video-copy">
+				<p class="blessing-time-section-label">CGNTV REPORT</p>
+				<h2 id="cgntv-report-title">CGNTVの取材映像</h2>
+				<p>
+					BLESSING TIMEの雰囲気を知ることができる、CGNTVによる取材映像です。
+				</p>
+			</div>
+			<div class="blessing-time-video-frame">
+				<iframe
+					src="https://www.youtube.com/embed/A5OiL88OXdE"
+					title={cgntvVideoTitle}
+					loading="lazy"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+					allowfullscreen
+				></iframe>
+			</div>
+		</section>
+
+		<section class="blessing-time-artists" aria-labelledby="artists-title">
+			<div class="blessing-time-artists-copy">
+				<p class="blessing-time-section-label">ARTISTS</p>
+				<h2 id="artists-title">出演</h2>
+				<ul>
+					{performers.map((performer) => <li>{performer}</li>)}
+				</ul>
+			</div>
+			<figure class="blessing-time-artists-image">
+				<img
+					src={artistsImage}
+					alt="BLESSING TIME in OSAKA 出演者紹介"
+					width="904"
+					height="1280"
+					loading="lazy"
+				/>
+			</figure>
+		</section>
+	</article>
+
+	<script is:inline>
+		const BLESSING_TIME_SHARE_URL = 'https://arthur-show.com/blessing-time-osaka2026/';
+		const BLESSING_TIME_SHARE_TITLE = 'アーサーホーランド BLESSING TIME in OSAKA | THE ARTHUR HOLLANDS SHOW';
+		const blessingTimeNativeShareButtons = document.querySelectorAll('[data-blessing-time-share-native]');
+		const blessingTimeCopyButtons = document.querySelectorAll('[data-blessing-time-copy-link]');
+		const blessingTimeCopyStatusNodes = document.querySelectorAll('[data-blessing-time-copy-status]');
+
+		function blessingTimeShareMessage() {
+			return `${BLESSING_TIME_SHARE_TITLE}\n${BLESSING_TIME_SHARE_URL}`;
+		}
+
+		function setBlessingTimeCopyStatus(label) {
+			blessingTimeCopyStatusNodes.forEach((node) => {
+				node.textContent = label;
+			});
+		}
+
+		function fallbackCopyBlessingTimeText(text) {
+			const textarea = document.createElement('textarea');
+			textarea.value = text;
+			textarea.setAttribute('readonly', '');
+			textarea.style.position = 'fixed';
+			textarea.style.top = '-1000px';
+			textarea.style.left = '-1000px';
+			textarea.style.opacity = '0';
+			document.body.appendChild(textarea);
+			textarea.focus({ preventScroll: true });
+			textarea.select();
+			textarea.setSelectionRange(0, text.length);
+			let copied = false;
+			try {
+				copied = document.execCommand('copy');
+			} catch {
+				copied = false;
+			}
+			textarea.remove();
+			return copied;
+		}
+
+		async function copyBlessingTimeShareLink() {
+			const message = blessingTimeShareMessage();
+			try {
+				if (navigator.clipboard?.writeText) {
+					await navigator.clipboard.writeText(message);
+				} else if (!fallbackCopyBlessingTimeText(message)) {
+					throw new Error('copy unavailable');
+				}
+				setBlessingTimeCopyStatus('コピーしました');
+				setTimeout(() => setBlessingTimeCopyStatus('URLをコピー'), 1800);
+			} catch {
+				if (fallbackCopyBlessingTimeText(message)) {
+					setBlessingTimeCopyStatus('コピーしました');
+					setTimeout(() => setBlessingTimeCopyStatus('URLをコピー'), 1800);
+					return;
+				}
+				setBlessingTimeCopyStatus('コピーできませんでした');
+				setTimeout(() => setBlessingTimeCopyStatus('URLをコピー'), 1800);
+			}
+		}
+
+		async function shareBlessingTimePage() {
+			if (navigator.share) {
+				try {
+					await navigator.share({
+						title: BLESSING_TIME_SHARE_TITLE,
+						url: BLESSING_TIME_SHARE_URL,
+					});
+					return;
+				} catch (error) {
+					if (error.name === 'AbortError') return;
+				}
+			}
+			await copyBlessingTimeShareLink();
+		}
+
+		blessingTimeNativeShareButtons.forEach((button) => {
+			button.addEventListener('click', shareBlessingTimePage);
+		});
+		blessingTimeCopyButtons.forEach((button) => {
+			button.addEventListener('click', copyBlessingTimeShareLink);
+		});
+	</script>
+</Layout>
+
+<style>
+	.blessing-time-page {
+		--bt-ink: #141414;
+		--bt-paper: #f7f4ec;
+		--bt-sky: #dfeef5;
+		--bt-gold: #8b7d3d;
+		--bt-blue: #315c78;
+		--bt-line: rgba(20, 20, 20, 0.12);
+		background: var(--bt-paper);
+		color: var(--bt-ink);
+	}
+
+	.blessing-time-hero {
+		position: relative;
+		display: flex;
+		align-items: flex-start;
+		justify-content: flex-end;
+		min-height: min(720px, 78svh);
+		overflow: hidden;
+		padding: 92px 20px 72px;
+		background: #8ebdd4;
+	}
+
+	.blessing-time-hero::before,
+	.blessing-time-hero::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+	}
+
+	.blessing-time-hero::before {
+		z-index: 1;
+		background:
+			linear-gradient(90deg, rgba(8, 12, 16, 0.68), rgba(8, 12, 16, 0.12) 44%, rgba(247, 244, 236, 0.7) 100%),
+			linear-gradient(0deg, rgba(8, 12, 16, 0.34), transparent 42%);
+	}
+
+	.blessing-time-hero::after {
+		z-index: 2;
+		inset: auto 0 0;
+		height: 10px;
+		background: linear-gradient(90deg, #315c78, #8b7d3d, #d7a55c);
+	}
+
+	.blessing-time-hero-image {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center 30%;
+	}
+
+	.blessing-time-hero-copy {
+		position: relative;
+		z-index: 3;
+		width: min(620px, 100%);
+		color: #fff;
+		text-align: right;
+		text-shadow: 0 2px 22px rgba(0, 0, 0, 0.42);
+	}
+
+	.blessing-time-kicker,
+	.blessing-time-section-label {
+		color: #f5da97;
+		font-family: var(--font-head);
+		font-size: 0.9rem;
+		font-weight: 900;
+		letter-spacing: 0;
+		line-height: 1.2;
+		text-transform: uppercase;
+	}
+
+	.blessing-time-hero h1 {
+		margin-top: 12px;
+		font-family: var(--font-head);
+		font-size: 5.5rem;
+		font-weight: 900;
+		letter-spacing: 0;
+		line-height: 0.92;
+	}
+
+	.blessing-time-hero h1 span {
+		display: block;
+		font-size: 3.25rem;
+	}
+
+	.blessing-time-lead {
+		margin-top: 24px;
+		margin-left: auto;
+		max-width: 35em;
+		font-size: 1.08rem;
+		font-weight: 800;
+		line-height: 1.9;
+	}
+
+	.blessing-time-hero-meta {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+		gap: 8px;
+		margin-top: 24px;
+	}
+
+	.blessing-time-hero-meta span {
+		display: inline-flex;
+		align-items: center;
+		min-height: 34px;
+		padding: 0 12px;
+		border: 1px solid rgba(255, 255, 255, 0.42);
+		background: rgba(10, 10, 10, 0.28);
+		font-weight: 900;
+		line-height: 1.2;
+	}
+
+	.blessing-time-actions {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+		gap: 10px;
+		margin-top: 26px;
+	}
+
+	.blessing-time-actions a,
+	.blessing-time-info a {
+		color: inherit;
+		font-weight: 900;
+	}
+
+	.blessing-time-actions a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 44px;
+		padding: 0 18px;
+		border: 1px solid rgba(255, 255, 255, 0.54);
+		background: #fff;
+		color: #141414;
+		font-family: var(--font-head);
+		text-decoration: none;
+		text-shadow: none;
+	}
+
+	.blessing-time-actions a + a {
+		background: rgba(10, 10, 10, 0.34);
+		color: #fff;
+	}
+
+	.blessing-time-intro,
+	.blessing-time-detail,
+	.blessing-time-video,
+	.blessing-time-artists {
+		box-sizing: border-box;
+		width: min(1120px, 100%);
+		margin: 0 auto;
+		padding: 72px 20px;
+	}
+
+	.blessing-time-intro {
+		display: grid;
+		gap: 18px;
+		padding-bottom: 44px;
+		font-family: var(--font-serif);
+		font-size: 1.45rem;
+		font-weight: 800;
+		line-height: 1.85;
+	}
+
+	.blessing-time-share {
+		box-sizing: border-box;
+		display: grid;
+		grid-template-columns: minmax(220px, 0.55fr) minmax(0, 1.45fr);
+		gap: 18px;
+		align-items: center;
+		width: min(1120px, 100%);
+		margin: 0 auto 12px;
+		padding: 18px 20px;
+		border-top: 1px solid rgba(20, 20, 20, 0.12);
+		border-bottom: 1px solid rgba(20, 20, 20, 0.12);
+	}
+
+	.blessing-time-share h2 {
+		margin-top: 8px;
+		font-family: var(--font-head);
+		font-size: clamp(1.5rem, 3vw, 2.2rem);
+		letter-spacing: 0;
+		line-height: 1;
+	}
+
+	.blessing-time-share-buttons {
+		display: grid;
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+		gap: 8px;
+	}
+
+	.blessing-time-share-button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		gap: 3px;
+		min-height: 50px;
+		min-width: 0;
+		padding: 8px 10px;
+		border: 1px solid rgba(20, 20, 20, 0.12);
+		background: #fffdf8;
+		color: var(--bt-ink);
+		cursor: pointer;
+		font: inherit;
+		font-family: var(--font-head);
+		font-size: 0.82rem;
+		font-weight: 900;
+		line-height: 1;
+		text-align: center;
+		text-decoration: none;
+		transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+	}
+
+	.blessing-time-share-button:hover,
+	.blessing-time-share-button:focus-visible {
+		border-color: rgba(139, 125, 61, 0.72);
+		transform: translateY(-1px);
+		outline: none;
+	}
+
+	.blessing-time-share-button.native {
+		background: var(--bt-gold);
+		color: #fff;
+	}
+
+	.blessing-time-share-button.line {
+		border-bottom: 3px solid #06c755;
+	}
+
+	.blessing-time-share-button.x {
+		border-bottom: 3px solid #111;
+	}
+
+	.blessing-time-share-button.facebook {
+		border-bottom: 3px solid #1877f2;
+	}
+
+	.blessing-time-share-button.copy {
+		border-bottom: 3px solid var(--bt-gold);
+	}
+
+	.blessing-time-share-button small {
+		display: block;
+		max-width: 100%;
+		overflow: hidden;
+		color: rgba(20, 20, 20, 0.62);
+		font-family: var(--font-sans);
+		font-size: 0.66rem;
+		font-weight: 800;
+		line-height: 1.2;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.blessing-time-share-button.native small {
+		color: rgba(255, 255, 255, 0.78);
+	}
+
+	.blessing-time-detail,
+	.blessing-time-artists {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(300px, 420px);
+		gap: 42px;
+		align-items: start;
+	}
+
+	.blessing-time-detail h2,
+	.blessing-time-video h2,
+	.blessing-time-artists h2 {
+		margin-top: 10px;
+		font-family: var(--font-head);
+		font-size: 3.2rem;
+		letter-spacing: 0;
+		line-height: 1;
+	}
+
+	.blessing-time-info {
+		display: grid;
+		gap: 1px;
+		margin-top: 28px;
+		border: 1px solid var(--bt-line);
+		background: var(--bt-line);
+	}
+
+	.blessing-time-info div {
+		display: grid;
+		grid-template-columns: 118px minmax(0, 1fr);
+		gap: 18px;
+		background: #fffdf8;
+		padding: 20px;
+	}
+
+	.blessing-time-info dt {
+		color: var(--bt-blue);
+		font-family: var(--font-head);
+		font-weight: 900;
+	}
+
+	.blessing-time-info dd {
+		font-weight: 800;
+		line-height: 1.75;
+	}
+
+	.blessing-time-poster img,
+	.blessing-time-artists-image img {
+		display: block;
+		width: 100%;
+		height: auto;
+		border: 1px solid rgba(20, 20, 20, 0.12);
+		box-shadow: 0 22px 52px rgba(20, 20, 20, 0.18);
+	}
+
+	.blessing-time-scripture {
+		padding: 72px 20px;
+		background:
+			linear-gradient(90deg, rgba(49, 92, 120, 0.92), rgba(139, 125, 61, 0.84)),
+			var(--bt-blue);
+		color: #fff;
+		text-align: center;
+	}
+
+	.blessing-time-scripture p {
+		font-family: var(--font-serif);
+		font-size: 2.1rem;
+		font-weight: 800;
+		line-height: 1.65;
+	}
+
+	.blessing-time-scripture cite {
+		display: block;
+		margin-top: 16px;
+		font-style: normal;
+		font-weight: 900;
+	}
+
+	.blessing-time-video {
+		display: grid;
+		grid-template-columns: minmax(260px, 0.78fr) minmax(0, 1.22fr);
+		gap: 34px;
+		align-items: center;
+	}
+
+	.blessing-time-video-alt {
+		padding-top: 0;
+	}
+
+	.blessing-time-video-copy p:not(.blessing-time-section-label) {
+		margin-top: 18px;
+		font-size: 1.04rem;
+		font-weight: 800;
+		line-height: 1.85;
+	}
+
+	.blessing-time-video-frame {
+		position: relative;
+		overflow: hidden;
+		aspect-ratio: 16 / 9;
+		background: #101010;
+		box-shadow: 0 20px 46px rgba(20, 20, 20, 0.18);
+	}
+
+	.blessing-time-video-frame iframe {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		border: 0;
+	}
+
+	.blessing-time-artists {
+		background: #fffdf8;
+	}
+
+	.blessing-time-artists-copy ul {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 10px;
+		margin-top: 28px;
+		list-style: none;
+	}
+
+	.blessing-time-artists-copy li {
+		padding: 14px 16px;
+		border-left: 4px solid var(--bt-gold);
+		background: rgba(49, 92, 120, 0.08);
+		font-weight: 900;
+	}
+
+	@media (max-width: 860px) {
+		.blessing-time-hero {
+			justify-content: flex-start;
+			min-height: 74svh;
+			padding-top: 76px;
+		}
+
+		.blessing-time-hero::before {
+			background:
+				linear-gradient(90deg, rgba(8, 12, 16, 0.78), rgba(8, 12, 16, 0.22)),
+				linear-gradient(0deg, rgba(8, 12, 16, 0.46), transparent 50%);
+		}
+
+		.blessing-time-hero-copy {
+			text-align: left;
+		}
+
+		.blessing-time-lead {
+			margin-left: 0;
+		}
+
+		.blessing-time-hero-meta,
+		.blessing-time-actions {
+			justify-content: flex-start;
+		}
+
+		.blessing-time-detail,
+		.blessing-time-video,
+		.blessing-time-artists {
+			grid-template-columns: 1fr;
+		}
+
+		.blessing-time-share {
+			grid-template-columns: 1fr;
+			padding: 18px 20px;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.blessing-time-hero {
+			display: block;
+			min-height: 0;
+			padding: 0;
+			background: #071018;
+		}
+
+		.blessing-time-hero::before {
+			inset: 0 0 auto;
+			height: 240px;
+			background:
+				linear-gradient(90deg, rgba(8, 12, 16, 0.36), rgba(8, 12, 16, 0.08)),
+				linear-gradient(0deg, rgba(8, 12, 16, 0.52), transparent 54%);
+		}
+
+		.blessing-time-hero-image {
+			position: relative;
+			inset: auto;
+			display: block;
+			height: 240px;
+			object-position: left center;
+		}
+
+		.blessing-time-hero-copy {
+			width: 100%;
+			padding: 30px 16px 46px;
+			background: linear-gradient(135deg, #071018, #102b3e);
+		}
+
+		.blessing-time-hero h1 {
+			font-size: 3.4rem;
+		}
+
+		.blessing-time-hero h1 span {
+			font-size: 2.1rem;
+		}
+
+		.blessing-time-lead {
+			font-size: 0.98rem;
+			line-height: 1.75;
+		}
+
+		.blessing-time-hero-meta span,
+		.blessing-time-actions a {
+			box-sizing: border-box;
+			width: 100%;
+		}
+
+		.blessing-time-hero-meta span {
+			min-height: 38px;
+			padding: 8px 10px;
+			font-size: 0.92rem;
+			white-space: normal;
+			overflow-wrap: anywhere;
+		}
+
+		.blessing-time-actions a {
+			padding: 0 12px;
+			text-align: center;
+		}
+
+		.blessing-time-intro,
+		.blessing-time-detail,
+		.blessing-time-video,
+		.blessing-time-artists {
+			padding: 48px 16px;
+		}
+
+		.blessing-time-share {
+			padding: 18px 16px;
+		}
+
+		.blessing-time-share-buttons {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+
+		.blessing-time-share-button {
+			min-height: 46px;
+		}
+
+		.blessing-time-intro {
+			font-size: 1.15rem;
+		}
+
+		.blessing-time-detail h2,
+		.blessing-time-video h2,
+		.blessing-time-artists h2 {
+			font-size: 2.25rem;
+		}
+
+		.blessing-time-info div {
+			grid-template-columns: 1fr;
+			gap: 6px;
+			padding: 18px;
+		}
+
+		.blessing-time-scripture {
+			padding: 54px 16px;
+		}
+
+		.blessing-time-scripture p {
+			font-size: 1.45rem;
+		}
+
+		.blessing-time-artists-copy ul {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
