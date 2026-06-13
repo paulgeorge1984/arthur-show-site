@@ -22,19 +22,20 @@ export async function GET() {
 
 	const body = `# THE ARTHUR HOLLANDS SHOW
 
-Official site: ${siteURL}/
+Official YouTube site: ${siteURL}/
 YouTube: https://www.youtube.com/@arthurs-show
 Language: Japanese
 
 ## About
 
-THE ARTHUR HOLLANDS SHOW is the official video archive for アーサーホーランド, also written formally as アーサー・ホーランド and in English as Arthur Hollands. The site collects THE DAILY with ARTHUR HOLLANDS, THE ARTHUR HOLLANDS SHOW, WALK ACROSS, FRIDAY NIGHT, BIBLE JUKEBOX, and related Bible message archives.
+THE ARTHUR HOLLANDS SHOW is the official YouTube video archive for アーサーホーランド, also written formally as アーサー・ホーランド and in English as Arthur Hollands. The brand name is THE ARTHUR HOLLANDS SHOW, while the primary Japanese search phrase is アーサーホーランド. The site collects THE DAILY with ARTHUR HOLLANDS, THE ARTHUR HOLLANDS SHOW, WALK ACROSS, FRIDAY NIGHT, BIBLE JUKEBOX, and related Bible message archives.
 
 ## Primary Entity
 
 Primary Japanese search spelling: アーサーホーランド
 Formal Japanese spelling: アーサー・ホーランド
 English name: Arthur Hollands
+Brand name: THE ARTHUR HOLLANDS SHOW
 Known phrase: You are Loved
 Relevant terms: 不良牧師, 聖書メッセージ, THE DAILY with ARTHUR HOLLANDS, THE ARTHUR HOLLANDS SHOW, WALK ACROSS
 

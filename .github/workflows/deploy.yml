@@ -59,6 +59,8 @@ jobs:
         run: npm ci
       - name: Build site
         if: steps.publish_window.outputs.should_deploy == 'true'
+        env:
+          PUBLIC_GA_MEASUREMENT_ID: ${{ secrets.PUBLIC_GA_MEASUREMENT_ID }}
         run: npm run build
       - name: FTP Deploy
         if: steps.publish_window.outputs.should_deploy == 'true'

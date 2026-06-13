@@ -28,12 +28,22 @@ const slideTranslationNotes = slideDeckIds
 			.map((paragraph) => paragraph.trim())
 			.filter(Boolean),
 	}));
+const cleanMessageDescription = (value = '', fallback = '') => {
+	const cleaned = value
+		.replace(/THE ARTHUR HOLLANDS SHOW\s*YouTube公式サイトがスタートしました。?/g, ' ')
+		.replace(/https:\/\/arthur-show\.com\/messages\/[^\s"']+/g, ' ')
+		.replace(/【新企画】\s*📖?\s*3分で復習！\s*👉?THE DAILY ディボーションガイド\s*はこちら/g, ' ')
+		.replace(/THE DAILY ディボーションガイド\s*はこちら/g, ' ')
+		.replace(/\s+/g, ' ')
+		.trim();
+	return cleaned || fallback;
+};
 const messageShareTitle = entry.data.title;
-const messageShareText = 'アーサーホーランド公式YouTubeチャンネル THE ARTHUR HOLLANDS SHOW';
+const messageShareText = 'THE ARTHUR HOLLANDS SHOW';
 const messageShareUrl = `https://arthur-show.com/messages/${entry.slug}/?share=20260602`;
 const messageImage = entry.data.heroImage || `https://i.ytimg.com/vi/${entry.data.youtubeId}/hq720.jpg`;
 const canonicalPath = `/messages/${entry.slug}/`;
-const messageDescription = `${entry.data.description} アーサーホーランド（アーサー・ホーランド / Arthur Hollands）公式動画アーカイブより。`;
+const messageDescription = `${cleanMessageDescription(entry.data.description, entry.data.title)} アーサーホーランド（アーサー・ホーランド / Arthur Hollands）のメッセージアーカイブより。`;
 const messageStructuredData = [
 	{
 		"@context": "https://schema.org",

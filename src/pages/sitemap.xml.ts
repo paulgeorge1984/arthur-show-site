@@ -20,26 +20,27 @@ export async function GET() {
 		.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 	const staticPaths = [
-		'/',
-		'/arthur-hollands-show/',
-		'/blessing-time-osaka2026/',
-		'/friday-night/',
-		'/walk-across/',
-		'/walk-across-usa2014/',
-		'/walk-across-awaji2026/',
-		'/walk-across-goto2026/',
-		'/message-jukebox/',
-		'/swords-of-words/',
-		'/1000-verses/',
-		'/calendar/',
+		{ path: '/', changefreq: 'daily', priority: '1.0' },
+		{ path: '/arthur-hollands-show/', changefreq: 'weekly', priority: '0.9' },
+		{ path: '/walk-across/', changefreq: 'weekly', priority: '0.8' },
+		{ path: '/walk-across-goto2026/', changefreq: 'daily', priority: '0.9' },
+		{ path: '/walk-across-awaji2026/', changefreq: 'weekly', priority: '0.8' },
+		{ path: '/saturday-night-arthur-20260704/', changefreq: 'weekly', priority: '0.8' },
+		{ path: '/blessing-time-osaka2026/', changefreq: 'weekly', priority: '0.8' },
+		{ path: '/friday-night/', changefreq: 'weekly', priority: '0.7' },
+		{ path: '/walk-across-usa2014/', changefreq: 'monthly', priority: '0.7' },
+		{ path: '/message-jukebox/', changefreq: 'weekly', priority: '0.7' },
+		{ path: '/swords-of-words/', changefreq: 'weekly', priority: '0.7' },
+		{ path: '/1000-verses/', changefreq: 'weekly', priority: '0.7' },
+		{ path: '/calendar/', changefreq: 'weekly', priority: '0.7' },
 	];
 
 	const urls = [
-		...staticPaths.map((path) => ({
-			loc: `${siteURL}${path === '/' ? '' : path}`,
-			lastmod: messages[0]?.data.date.toISOString() || now.toISOString(),
-			changefreq: path === '/' ? 'daily' : 'weekly',
-			priority: path === '/' ? '1.0' : '0.7',
+		...staticPaths.map((page) => ({
+			loc: `${siteURL}${page.path === '/' ? '' : page.path}`,
+			lastmod: now.toISOString(),
+			changefreq: page.changefreq,
+			priority: page.priority,
 		})),
 		...walkAcrossPlaylists.map((playlist) => ({
 			loc: `${siteURL}/walk-across/${playlist.slug}/`,

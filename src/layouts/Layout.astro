@@ -2,6 +2,7 @@
 import SiteFooter from '../components/SiteFooter.astro';
 import LanguageMenu from '../components/LanguageMenu.astro';
 import MobileSavePrompt from '../components/MobileSavePrompt.astro';
+import GoogleAnalytics from '../components/GoogleAnalytics.astro';
 
 interface Props {
 	title: string;
@@ -37,8 +38,8 @@ const {
 const siteTitle = "THE ARTHUR HOLLANDS SHOW";
 const appTitle = "Arthur Calendar";
 const siteUrl = "https://arthur-show.com";
-const pageTitle = `${title} | ${siteTitle}`;
-const fallbackDescription = "アーサーホーランド（アーサー・ホーランド / Arthur Hollands）の公式動画アーカイブ。THE DAILY with ARTHUR HOLLANDS、THE ARTHUR HOLLANDS SHOW、WALK ACROSSのメッセージと活動記録を届けます。";
+const pageTitle = title.includes(siteTitle) ? title : `${title} | ${siteTitle}`;
+const fallbackDescription = "アーサーホーランド（アーサー・ホーランド / Arthur Hollands）のTHE ARTHUR HOLLANDS SHOW、THE DAILY、WALK ACROSS、イベント情報、聖書メッセージをまとめた動画アーカイブです。";
 const metaDescription = description || fallbackDescription;
 const canonicalURL = new URL(canonicalPath || Astro.url.pathname, siteUrl).href;
 const socialImageURL = new URL(image, siteUrl).href;
@@ -54,8 +55,22 @@ const baseStructuredData = [
 		name: "アーサーホーランド",
 		alternateName: ["アーサー・ホーランド", "Arthur Hollands", "不良牧師"],
 		description:
-			"アーサーホーランド（アーサー・ホーランド）は、THE ARTHUR HOLLANDS SHOW、THE DAILY with ARTHUR HOLLANDS、WALK ACROSSで聖書、人生、愛、希望を語るメッセンジャーです。",
+			"アーサーホーランド（アーサー・ホーランド / Arthur Hollands）は、THE ARTHUR HOLLANDS SHOW、THE DAILY with ARTHUR HOLLANDS、WALK ACROSSで聖書、人生、愛、希望を語るメッセンジャーです。",
 		url: siteUrl,
+		image: `${siteUrl}/og-image.jpg`,
+		mainEntityOfPage: { "@id": `${siteUrl}/#website` },
+		jobTitle: "メッセンジャー",
+		knowsAbout: [
+			"聖書メッセージ",
+			"THE ARTHUR HOLLANDS SHOW",
+			"THE DAILY with ARTHUR HOLLANDS",
+			"WALK ACROSS",
+			"You are Loved",
+		],
+		subjectOf: [
+			{ "@id": `${siteUrl}/#website` },
+			{ "@id": `${siteUrl}/#collection` },
+		],
 		sameAs: [
 			"https://www.youtube.com/@arthurs-show",
 			"https://www.arthurhollands.com/",
@@ -110,7 +125,7 @@ const navItems = [
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content={metaDescription} />
-		<meta name="keywords" content="アーサーホーランド, アーサー・ホーランド, Arthur Hollands, 不良牧師, THE ARTHUR HOLLANDS SHOW, THE DAILY with ARTHUR HOLLANDS, WALK ACROSS, You are Loved, 聖書メッセージ" />
+		<meta name="keywords" content="アーサーホーランド, アーサー・ホーランド, Arthur Hollands, 不良牧師, THE ARTHUR HOLLANDS SHOW, THE DAILY with ARTHUR HOLLANDS, WALK ACROSS, WALK ACROSS GOTO ISLANDS 2026, 五島列島十字架行進2026, You are Loved, 聖書メッセージ" />
 		<meta name="author" content="THE ARTHUR HOLLANDS SHOW" />
 		<meta name="robots" content={robotsContent} />
 		<meta name="googlebot" content={robotsContent} />
@@ -148,6 +163,7 @@ const navItems = [
 		<meta name="twitter:description" content={metaDescription} />
 		<meta name="twitter:image" content={socialImageURL} />
 		<meta name="twitter:image:alt" content={socialImageAlt} />
+		<GoogleAnalytics />
 		{structuredDataList.map((schema) => (
 			<script type="application/ld+json" set:html={JSON.stringify(schema)} />
 		))}

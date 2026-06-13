@@ -38,6 +38,16 @@ const normalizeSearchText = (value = '') => value
 	.replace(/\s+/g, ' ')
 	.trim()
 	.toLowerCase();
+const cleanArchiveDescription = (value = '', fallback = '') => {
+	const cleaned = value
+		.replace(/THE ARTHUR HOLLANDS SHOW\s*YouTube公式サイトがスタートしました。?/g, ' ')
+		.replace(/https:\/\/arthur-show\.com\/messages\/[^\s"']+/g, ' ')
+		.replace(/【新企画】\s*📖?\s*3分で復習！\s*👉?THE DAILY ディボーションガイド\s*はこちら/g, ' ')
+		.replace(/THE DAILY ディボーションガイド\s*はこちら/g, ' ')
+		.replace(/\s+/g, ' ')
+		.trim();
+	return cleaned || fallback;
+};
 const cleanInlineText = (value = '') => value
 	.replace(/<br\s*\/?>/g, ' ')
 	.replace(/<[^>]+>/g, ' ')
@@ -101,7 +111,7 @@ const archiveRows = archiveMessages.map((post) => {
 		showMonthAnchor,
 		searchText: normalizeSearchText([
 			post.data.title,
-			post.data.description,
+			cleanArchiveDescription(post.data.description, post.data.title),
 			(post.data.tags || []).join(' '),
 			post.body,
 		].join(' ')),
@@ -119,23 +129,42 @@ const messageLotteryItems = allMessages.map((post) => ({
 	date: formatDate(post.data.date),
 	url: `/messages/${post.slug}`,
 	thumb: `https://i.ytimg.com/vi/${post.data.youtubeId}/hq720.jpg`,
-	description: post.data.description,
+	description: cleanArchiveDescription(post.data.description, post.data.title),
 }));
+const homeTitle = 'THE ARTHUR HOLLANDS SHOW';
+const homeDescription = 'アーサーホーランド（アーサー・ホーランド / Arthur Hollands）のメッセージ、THE DAILY、WALK ACROSS、イベント情報をまとめた動画アーカイブです。';
+const homeFaqItems = [
+	{
+		question: 'アーサーホーランドとは？',
+		answer: 'アーサーホーランド（アーサー・ホーランド / Arthur Hollands）は、聖書、人生、愛、希望を語り、THE ARTHUR HOLLANDS SHOW、THE DAILY with ARTHUR HOLLANDS、WALK ACROSSなどでメッセージを届けているメッセンジャーです。',
+	},
+	{
+		question: 'THE ARTHUR HOLLANDS SHOWでは何が見られますか？',
+		answer: 'THE ARTHUR HOLLANDS SHOWの生配信アーカイブ、THE DAILY with ARTHUR HOLLANDSの短い聖書メッセージ、イベント映像、WALK ACROSSの十字架行進記録を探せます。',
+	},
+	{
+		question: 'WALK ACROSS GOTO ISLANDS 2026とは？',
+		answer: '2026年6月、長崎県・五島列島を舞台に十字架を掲げて歩く祈りの旅です。現地映像、ドキュメンタリー、行進記録を順次掲載します。',
+	},
+	{
+		question: '最新メッセージはどこで見られますか？',
+		answer: 'トップページの最新メッセージ欄とメッセージ一覧から、日付、キーワード、月別でアーサーホーランドの最新動画を探せます。',
+	},
+];
 const homeStructuredData = [
 	{
 		"@context": "https://schema.org",
 		"@type": "CollectionPage",
 		"@id": `${siteURL}/#collection`,
 		url: `${siteURL}/`,
-		name: "アーサーホーランド公式動画アーカイブ",
+		name: "THE ARTHUR HOLLANDS SHOW",
 		alternateName: [
 			"アーサー・ホーランド公式動画アーカイブ",
 			"Arthur Hollands official video archive",
 			"THE ARTHUR HOLLANDS SHOW",
 		],
 		inLanguage: "ja-JP",
-		description:
-			"アーサーホーランド（アーサー・ホーランド / Arthur Hollands）の公式動画アーカイブ。最新メッセージ、THE DAILY、WALK ACROSS、You are Lovedの言葉をまとめています。",
+		description: homeDescription,
 		about: { "@id": `${siteURL}/#arthur-hollands` },
 		isPartOf: { "@id": `${siteURL}/#website` },
 	},
@@ -148,6 +177,32 @@ const homeStructuredData = [
 			position: index + 1,
 			url: `${siteURL}/messages/${post.slug}/`,
 			name: post.data.title,
+		})),
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		"@id": `${siteURL}/#breadcrumb`,
+		itemListElement: [
+			{
+				"@type": "ListItem",
+				position: 1,
+				name: "THE ARTHUR HOLLANDS SHOW",
+				item: `${siteURL}/`,
+			},
+		],
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "FAQPage",
+		"@id": `${siteURL}/#faq`,
+		mainEntity: homeFaqItems.map((item) => ({
+			"@type": "Question",
+			name: item.question,
+			acceptedAnswer: {
+				"@type": "Answer",
+				text: item.answer,
+			},
 		})),
 	},
 ];
@@ -192,8 +247,8 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 ---
 
 <Layout
-	title="アーサーホーランド公式動画アーカイブ"
-	description="アーサーホーランド（アーサー・ホーランド / Arthur Hollands）の公式動画アーカイブ。THE ARTHUR HOLLANDS SHOW、THE DAILY、WALK ACROSSの最新メッセージを探せます。"
+	title={homeTitle}
+	description={homeDescription}
 	image="/walk-across-goto2026/assets/goto-cross-walk-2026-wide.jpg"
 	imageAlt="WALK ACROSS GOTO ISLANDS 2026 | THE ARTHUR HOLLANDS SHOW"
 	imageWidth={1280}
@@ -328,7 +383,7 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 			<div class="section-bar">
 				<div>
 					<p class="section-kicker">LATEST MESSAGES</p>
-					<h1 id="featured-title">最新メッセージ</h1>
+					<h2 id="featured-title">最新メッセージ</h2>
 				</div>
 				<a class="section-link" href="#archive">一覧から探す</a>
 			</div>
@@ -467,7 +522,7 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 	<script is:inline>
 		const lotteryItems = JSON.parse(document.querySelector('[data-lottery-items]')?.textContent || '[]');
 		const shareTitle = 'THE ARTHUR HOLLANDS SHOW';
-		const shareText = 'アーサーホーランド公式YouTubeチャンネルのメッセージアーカイブ。';
+		const shareText = 'アーサーホーランドのメッセージ、THE DAILY、WALK ACROSS、イベント情報をまとめた動画アーカイブ。';
 		const shareUrl = 'https://arthur-show.com/?share=20260602';
 		const searchInput = document.querySelector('[data-message-search]');
 		const items = Array.from(document.querySelectorAll('[data-archive-list] .archive-item'));
