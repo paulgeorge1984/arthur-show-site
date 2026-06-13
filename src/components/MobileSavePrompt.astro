@@ -1,0 +1,259 @@
+<div class="site-save" data-site-save hidden>
+	<button class="site-save-button" type="button" data-site-save-open aria-haspopup="dialog">
+		<img src="/favicon-32x32.png" alt="" width="24" height="24" aria-hidden="true" />
+		<span>スマホに保存</span>
+	</button>
+</div>
+
+<div class="site-save-dialog" role="dialog" aria-modal="true" aria-labelledby="site-save-title" data-site-save-dialog hidden>
+	<button class="site-save-backdrop" type="button" data-site-save-close aria-label="閉じる"></button>
+	<div class="site-save-panel" tabindex="-1" data-site-save-panel>
+		<button class="site-save-close" type="button" data-site-save-close aria-label="閉じる">×</button>
+		<img class="site-save-icon" src="/apple-touch-icon.png" alt="" width="64" height="64" aria-hidden="true" />
+		<p class="site-save-kicker">OFFICIAL SITE</p>
+		<h2 id="site-save-title">公式サイトをスマホに保存</h2>
+		<p class="site-save-copy">ホーム画面に置くと、次回からすぐ開けます。</p>
+
+		<div class="site-save-steps site-save-steps-ios">
+			<p class="site-save-device">iPhone / Safari</p>
+			<ol>
+				<li>共有ボタンを開く</li>
+				<li>「ホーム画面に追加」を選ぶ</li>
+				<li>右上の「追加」を押す</li>
+			</ol>
+		</div>
+
+		<div class="site-save-steps site-save-steps-android">
+			<p class="site-save-device">Android / Chrome</p>
+			<ol>
+				<li>メニューを開く</li>
+				<li>「ホーム画面に追加」または「アプリをインストール」を選ぶ</li>
+				<li>画面の案内に沿って追加する</li>
+			</ol>
+		</div>
+	</div>
+</div>
+
+<script is:inline>
+	(() => {
+		const root = document.querySelector('[data-site-save]');
+		const openButton = document.querySelector('[data-site-save-open]');
+		const dialog = document.querySelector('[data-site-save-dialog]');
+		const panel = document.querySelector('[data-site-save-panel]');
+		const closeButtons = document.querySelectorAll('[data-site-save-close]');
+		if (!root || !openButton || !dialog) return;
+
+		const mobileQuery = window.matchMedia('(max-width: 820px)');
+		const isStandalone = () =>
+			window.matchMedia('(display-mode: standalone)').matches ||
+			window.navigator.standalone === true;
+		const syncVisibility = () => {
+			root.hidden = !mobileQuery.matches || isStandalone();
+		};
+
+		let deferredInstallPrompt = null;
+		const userAgent = window.navigator.userAgent.toLowerCase();
+		const isIOS =
+			/iphone|ipad|ipod/.test(userAgent) ||
+			(window.navigator.platform === 'MacIntel' && window.navigator.maxTouchPoints > 1);
+		const isAndroid = /android/.test(userAgent);
+		dialog.setAttribute('data-platform', isIOS ? 'ios' : isAndroid ? 'android' : 'other');
+
+		window.addEventListener('beforeinstallprompt', (event) => {
+			event.preventDefault();
+			deferredInstallPrompt = event;
+			root.setAttribute('data-install-ready', 'true');
+		});
+
+		window.addEventListener('appinstalled', () => {
+			deferredInstallPrompt = null;
+			root.hidden = true;
+			closeDialog(false);
+		});
+
+		function openDialog() {
+			dialog.hidden = false;
+			document.body.classList.add('site-save-open');
+			requestAnimationFrame(() => panel?.focus());
+		}
+
+		function closeDialog(restoreFocus = true) {
+			dialog.hidden = true;
+			document.body.classList.remove('site-save-open');
+			if (restoreFocus) openButton.focus();
+		}
+
+		openButton.addEventListener('click', async () => {
+			if (deferredInstallPrompt) {
+				const installPrompt = deferredInstallPrompt;
+				deferredInstallPrompt = null;
+				root.removeAttribute('data-install-ready');
+				const promptResult = await installPrompt.prompt().catch(() => null);
+				const choice =
+					promptResult ||
+					(installPrompt.userChoice ? await installPrompt.userChoice.catch(() => null) : null);
+				if (choice?.outcome === 'accepted') {
+					root.hidden = true;
+					return;
+				}
+			}
+			openDialog();
+		});
+
+		closeButtons.forEach((button) => {
+			button.addEventListener('click', () => closeDialog());
+		});
+		document.addEventListener('keydown', (event) => {
+			if (event.key === 'Escape' && !dialog.hidden) closeDialog();
+		});
+
+		mobileQuery.addEventListener?.('change', syncVisibility);
+		syncVisibility();
+	})();
+</script>
+
+<style>
+	.site-save[hidden],
+	.site-save-dialog[hidden] {
+		display: none !important;
+	}
+	.site-save {
+		position: fixed;
+		right: 14px;
+		bottom: max(14px, env(safe-area-inset-bottom));
+		z-index: 170;
+	}
+	.site-save-button {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		min-height: 44px;
+		padding: 0 14px 0 10px;
+		color: #fff;
+		background: rgba(10, 10, 10, 0.94);
+		border: 1px solid rgba(197, 160, 89, 0.76);
+		border-radius: 999px;
+		box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+		font: 900 0.84rem/1 var(--font-sans);
+		letter-spacing: 0;
+		cursor: pointer;
+	}
+	.site-save-button img {
+		width: 24px;
+		height: 24px;
+		border-radius: 6px;
+	}
+	.site-save-button:hover,
+	.site-save-button:focus-visible {
+		color: #000;
+		background: var(--color-gold);
+		outline: 0;
+	}
+	.site-save-dialog {
+		position: fixed;
+		inset: 0;
+		z-index: 210;
+		display: grid;
+		align-items: end;
+		padding: 16px;
+	}
+	.site-save-backdrop {
+		position: absolute;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.56);
+		border: 0;
+		cursor: pointer;
+	}
+	.site-save-panel {
+		position: relative;
+		width: min(100%, 420px);
+		margin: 0 auto;
+		padding: 26px 20px 22px;
+		color: #111;
+		background: #fff;
+		border: 1px solid rgba(197, 160, 89, 0.56);
+		border-radius: 8px;
+		box-shadow: 0 22px 52px rgba(0, 0, 0, 0.34);
+		outline: 0;
+	}
+	.site-save-close {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		display: grid;
+		place-items: center;
+		width: 34px;
+		height: 34px;
+		color: #111;
+		background: #f2f2f2;
+		border: 0;
+		border-radius: 999px;
+		font-size: 1.35rem;
+		line-height: 1;
+		cursor: pointer;
+	}
+	.site-save-icon {
+		display: block;
+		width: 64px;
+		height: 64px;
+		margin-bottom: 12px;
+		border-radius: 14px;
+	}
+	.site-save-kicker {
+		color: var(--color-gold);
+		font-family: var(--font-head);
+		font-size: 0.76rem;
+		font-weight: 900;
+		letter-spacing: 0.12em;
+		line-height: 1;
+	}
+	.site-save-panel h2 {
+		margin: 6px 42px 8px 0;
+		font-family: var(--font-head);
+		font-size: 1.45rem;
+		line-height: 1.18;
+		letter-spacing: 0;
+	}
+	.site-save-copy {
+		color: #4a4a4a;
+		font-size: 0.94rem;
+		font-weight: 700;
+		line-height: 1.65;
+	}
+	.site-save-steps {
+		display: none;
+		margin-top: 16px;
+		padding-top: 14px;
+		border-top: 1px solid #e5e5e5;
+	}
+	.site-save-dialog[data-platform="ios"] .site-save-steps-ios,
+	.site-save-dialog[data-platform="android"] .site-save-steps-android,
+	.site-save-dialog[data-platform="other"] .site-save-steps {
+		display: block;
+	}
+	.site-save-device {
+		margin-bottom: 8px;
+		color: #111;
+		font-size: 0.78rem;
+		font-weight: 900;
+		line-height: 1.2;
+	}
+	.site-save-steps ol {
+		display: grid;
+		gap: 7px;
+		padding-left: 1.25rem;
+		color: #333;
+		font-size: 0.9rem;
+		font-weight: 700;
+		line-height: 1.5;
+	}
+	:global(body.site-save-open) {
+		overflow: hidden;
+	}
+	@media (min-width: 821px) {
+		.site-save,
+		.site-save-dialog {
+			display: none !important;
+		}
+	}
+</style>

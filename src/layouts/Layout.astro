@@ -1,6 +1,7 @@
 ---
 import SiteFooter from '../components/SiteFooter.astro';
 import LanguageMenu from '../components/LanguageMenu.astro';
+import MobileSavePrompt from '../components/MobileSavePrompt.astro';
 
 interface Props {
 	title: string;
@@ -116,7 +117,15 @@ const navItems = [
 		<meta name="format-detection" content="telephone=no">
 		<meta name="theme-color" content="#0a0a0a" />
 		
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=20260613" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=20260613" />
+		<link rel="shortcut icon" href="/favicon.ico?v=20260613" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20260613" />
+		<link rel="manifest" href="/manifest.webmanifest" />
+		<meta name="application-name" content={siteTitle} />
+		<meta name="apple-mobile-web-app-title" content={siteTitle} />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="mobile-web-app-capable" content="yes" />
 		<link rel="canonical" href={canonicalURL} />
 		<title>{pageTitle}</title>
 		
@@ -187,6 +196,7 @@ const navItems = [
 		</main>
 
 		{!hideChrome && <SiteFooter />}
+		{!hideChrome && <MobileSavePrompt />}
 		<script is:inline>
 			const globalMenuToggle = document.querySelector('[data-global-menu-toggle]');
 			const globalNavShell = document.querySelector('[data-global-nav-shell]');
