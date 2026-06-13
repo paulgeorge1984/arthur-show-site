@@ -1,0 +1,157 @@
+---
+const youtubeChannelUrl = 'https://www.youtube.com/@arthurs-show';
+const youtubeSubscribeUrl = `${youtubeChannelUrl}?sub_confirmation=1`;
+---
+
+<section class="youtube-subscribe-section" aria-labelledby="youtube-subscribe-title">
+	<div class="youtube-subscribe-copy">
+		<p class="youtube-subscribe-kicker">YOUTUBE CHANNEL</p>
+		<h2 id="youtube-subscribe-title">YouTubeで最新メッセージを受け取る</h2>
+		<p>登録後にベルをONにすると、新着メッセージの通知が届きます。</p>
+	</div>
+	<div class="youtube-subscribe-actions">
+		<a class="youtube-subscribe-button" href={youtubeSubscribeUrl} target="_blank" rel="noopener noreferrer" aria-label="YouTubeでTHE ARTHUR HOLLANDS SHOWのチャンネル登録画面を開く">
+			<span class="youtube-play-icon" aria-hidden="true">▶</span>
+			<span>登録する</span>
+		</a>
+		<span class="youtube-notify-note">通知はYouTube側で設定</span>
+	</div>
+</section>
+
+<style>
+	.youtube-subscribe-section {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		gap: 16px;
+		align-items: center;
+		margin: 18px 0 8px;
+		padding: 16px 18px;
+		background: #fff;
+		color: #111;
+		border: 1px solid #e4e4e7;
+		border-left: 4px solid #d92323;
+	}
+
+	.youtube-subscribe-copy {
+		display: grid;
+		gap: 5px;
+		min-width: 0;
+	}
+
+	.youtube-subscribe-kicker {
+		width: fit-content;
+		color: #d92323;
+		font-family: 'Oswald', sans-serif;
+		font-size: 0.7rem;
+		font-weight: 900;
+		letter-spacing: 0.12em;
+		line-height: 1.1;
+	}
+
+	.youtube-subscribe-section h2 {
+		margin: 0;
+		font-size: clamp(1.05rem, 2.4vw, 1.36rem);
+		font-weight: 900;
+		line-height: 1.35;
+		letter-spacing: 0;
+		overflow-wrap: anywhere;
+	}
+
+	.youtube-subscribe-section p {
+		margin: 0;
+	}
+
+	.youtube-subscribe-section p:not(.youtube-subscribe-kicker) {
+		max-width: 42em;
+		color: #666;
+		font-size: 0.86rem;
+		font-weight: 700;
+		line-height: 1.55;
+	}
+
+	.youtube-subscribe-actions {
+		display: grid;
+		gap: 6px;
+		justify-items: stretch;
+		min-width: min(210px, 100%);
+	}
+
+	.youtube-subscribe-button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 8px;
+		min-height: 40px;
+		padding: 0 16px;
+		background: #f4f4f5;
+		border: 1px solid #d7d7dc;
+		color: #111;
+		font-size: 0.9rem;
+		font-weight: 900;
+		line-height: 1;
+		text-align: center;
+		text-decoration: none;
+	}
+
+	.youtube-subscribe-button:hover,
+	.youtube-subscribe-button:focus-visible {
+		background: #111;
+		color: #fff;
+		border-color: #111;
+	}
+
+	.youtube-play-icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 20px;
+		height: 20px;
+		background: #d92323;
+		color: #fff;
+		font-size: 0.7rem;
+		line-height: 1;
+	}
+
+	.youtube-subscribe-button:hover .youtube-play-icon,
+	.youtube-subscribe-button:focus-visible .youtube-play-icon {
+		background: #d92323;
+		color: #fff;
+	}
+
+	.youtube-notify-note {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 28px;
+		padding: 0 10px;
+		background: #f7f7f8;
+		border: 1px solid #ececef;
+		color: #666;
+		font-size: 0.72rem;
+		font-weight: 800;
+		line-height: 1.2;
+		text-align: center;
+	}
+
+	@media (max-width: 768px) {
+		.youtube-subscribe-section {
+			grid-template-columns: 1fr;
+			gap: 12px;
+			margin: 14px 0 4px;
+			padding: 14px;
+		}
+
+		.youtube-subscribe-section h2 {
+			font-size: 1.18rem;
+		}
+
+		.youtube-subscribe-actions {
+			min-width: 0;
+		}
+
+		.youtube-subscribe-button,
+		.youtube-notify-note {
+			width: 100%;
+		}
+	}
+</style>
