@@ -2,8 +2,13 @@
 import Layout from '../../layouts/Layout.astro';
 
 const officialScheduleUrl = 'https://www.arthurhollands.com/%E3%82%B9%E3%82%B1%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB';
-const officialNotice = '本ページは参考表記のため、カレンダーの最新データ、および再来月以降のスケジュールは、必ず上記のアーサーホーランド公式サイトからご確認ください。';
+const officialNotice = '本ページは参考表記のため、カレンダーの最新データ、および3ヶ月より先のスケジュールは、必ず上記のアーサーホーランド公式サイトからご確認ください。';
 const recurringScheduleImage = '/assets/arthur-related-schedule-cycle.jpg';
+const narimasuChurchUrl = 'https://www.narimasu-church.org';
+const fridayNightUrl = 'https://ochanomizu.cc/meeting/fridaynight/';
+const blessingNightUrl = 'https://www.blessingnight.jp';
+const saturdayNightArthurUrl = '/saturday-night-arthur-20260704/';
+const saturdayNightArthurPoster = '/assets/saturday-night-arthur-20260704-poster.webp';
 const blessingTimeOsakaUrl = '/blessing-time-osaka2026/';
 const blessingTimeOsakaBanner = '/assets/generated/blessing-time-osaka2026-banner.webp';
 const blessingNightKagurazakaUrl = 'https://www.blessingnight.jp/schedule/schedule366';
@@ -17,7 +22,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 
 	<Layout
 		title="Calendar"
-		description="アーサー・ホーランド公式Googleカレンダーと同期して、今月・来月のイベントスケジュールを見やすく表示します。本ページは参考表記のため、最新データは公式サイトをご確認ください。"
+		description="アーサー・ホーランド公式Googleカレンダーと同期して、今月・来月・再来月のイベントスケジュールを見やすく表示します。本ページは参考表記のため、最新データは公式サイトをご確認ください。"
 		ogType="website"
 	>
 	<article class="calendar-page">
@@ -26,7 +31,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				<p class="calendar-label">OFFICIAL SCHEDULE SYNC</p>
 				<h1>CALENDAR</h1>
 				<p>
-					アーサー・ホーランド公式サイトで公開されているGoogleカレンダー情報から、今月と来月の予定を読み込んで表示しています。
+					アーサー・ホーランド公式サイトで公開されているGoogleカレンダー情報から、今月・来月・再来月の予定を読み込んで表示しています。
 				</p>
 				<div class="hero-actions">
 					<a href="#calendar-events">予定を見る</a>
@@ -42,13 +47,55 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 		</header>
 
 		<section class="recurring-schedule" aria-label="アーサー・ホーランド氏 関連予定">
-			<img
-				src={recurringScheduleImage}
-				alt="アーサー・ホーランド氏 関連予定。第1週金曜日フライデーナイト、お茶の水OCC、月に一回成増教会での日曜礼拝、月に一回ブレッシングナイト、u-ma神楽坂。"
-				width="1280"
-				height="720"
-				loading="eager"
-			/>
+				<img
+					src={recurringScheduleImage}
+					alt="アーサー・ホーランド氏 関連予定。第1週金曜日フライデーナイト、お茶の水OCC、月に一回成増教会での日曜礼拝、月に一回ブレッシングナイト、u-ma神楽坂。"
+					width="1280"
+					height="720"
+					loading="eager"
+				/>
+				<div class="recurring-links" aria-label="関連予定の公式リンク">
+					<a href={fridayNightUrl} target="_blank" rel="noopener noreferrer">
+						<span>フライデイナイト</span>
+						<small>お茶の水OCC</small>
+					</a>
+					<a href={narimasuChurchUrl} target="_blank" rel="noopener noreferrer">
+						<span>成増教会</span>
+						<small>公式サイト</small>
+					</a>
+					<a href={blessingNightUrl} target="_blank" rel="noopener noreferrer">
+						<span>ブレッシングナイト</span>
+						<small>公式サイト</small>
+					</a>
+				</div>
+			</section>
+
+		<section class="calendar-special-event saturday-night-arthur-feature" aria-label="Saturday Night Arthur 特別案内">
+			<a class="calendar-special-link" href={saturdayNightArthurUrl}>
+				<span class="calendar-special-media" aria-hidden="true">
+					<img
+						src={saturdayNightArthurPoster}
+						alt=""
+						width="1054"
+						height="1492"
+						loading="eager"
+					/>
+				</span>
+				<span class="calendar-special-copy">
+					<span class="calendar-special-label">SPECIAL EVENT</span>
+					<strong>Saturday Night Arthur</strong>
+					<span class="calendar-special-lead">
+						小田原市国府津「BLEND PARK」で開かれる、賛美と御言葉の夕べ。
+						青い空と星空が天井、広がる草原と大海原がフロアー。
+					</span>
+					<span class="calendar-special-meta">
+						<span>2026.7.4（SAT）</span>
+						<span>17:00 START</span>
+						<span>小田原市国府津「BLEND PARK」</span>
+					</span>
+					<span class="calendar-special-button">告知ページを見る</span>
+				</span>
+			</a>
 		</section>
 
 		<section class="calendar-special-event" aria-label="BLESSING TIME in OSAKA 特別案内">
@@ -112,7 +159,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			<div class="calendar-heading">
 				<div>
 					<p class="calendar-label">EVENT SCHEDULE</p>
-					<h2 id="calendar-title">今月・来月の予定</h2>
+					<h2 id="calendar-title">今月・来月・再来月の予定</h2>
 				</div>
 				<a href={officialScheduleUrl} target="_blank" rel="noopener noreferrer">公式スケジュールへ</a>
 			</div>
@@ -161,7 +208,42 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 		const CALENDAR_SHARE_TITLE = 'アーサーホーランド関連スケジュール | THE ARTHUR HOLLANDS SHOW';
 		const TOKYO_TIME_ZONE = 'Asia/Tokyo';
 		const DAY_MS = 24 * 60 * 60 * 1000;
+		const RELATED_EVENT_LINKS = [
+			{
+				label: 'フライデイナイト',
+				url: 'https://ochanomizu.cc/meeting/fridaynight/',
+				pattern: /(?:フライデ[ーイ]ナイト|friday\s*night|お茶の水クリスチャン|お茶の水OCC)/i,
+			},
+			{
+				label: '成増教会',
+				url: 'https://www.narimasu-church.org',
+				pattern: /成増教会|成増/i,
+			},
+			{
+				label: 'ブレッシングナイト',
+				url: 'https://www.blessingnight.jp',
+				pattern: /(?:blessing\s*night|ブレッシングナイト|ブレッシングナイ)/i,
+			},
+		];
 		const MANUAL_EVENTS = [
+			{
+				id: 'manual-saturday-night-arthur-2026-07-04',
+				summary: 'Saturday Night Arthur －賛美と御言葉の夕べ－',
+				description: [
+					'17:00 START',
+					'小田原市国府津「BLEND PARK」',
+					'https://arthur-show.com/saturday-night-arthur-20260704/',
+				].join('\n'),
+				location: '小田原市国府津「BLEND PARK」 小田原市国府津2丁目6-17',
+				start: {
+					dateTime: '2026-07-04T17:00:00+09:00',
+					timeZone: TOKYO_TIME_ZONE,
+				},
+				end: {
+					dateTime: '2026-07-04T17:00:00+09:00',
+					timeZone: TOKYO_TIME_ZONE,
+				},
+			},
 			{
 				id: 'manual-blessing-time-osaka-2026-07-18',
 				summary: 'Blessing Time in 大阪',
@@ -270,13 +352,16 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			const current = { year: now.year, month: now.month, key: monthKey(now.year, now.month) };
 			const nextParts = addMonths(now.year, now.month, 1);
 			const next = { ...nextParts, key: monthKey(nextParts.year, nextParts.month) };
-			const afterNext = addMonths(now.year, now.month, 2);
+			const followingParts = addMonths(now.year, now.month, 2);
+			const following = { ...followingParts, key: monthKey(followingParts.year, followingParts.month) };
+			const afterFollowing = addMonths(now.year, now.month, 3);
 			return {
 				current,
 				next,
-				months: [current, next],
+				following,
+				months: [current, next, following],
 				timeMin: `${current.key}-01T00:00:00+09:00`,
-				timeMax: `${monthKey(afterNext.year, afterNext.month)}-01T00:00:00+09:00`,
+				timeMax: `${monthKey(afterFollowing.year, afterFollowing.month)}-01T00:00:00+09:00`,
 				todayStart: tokyoDateFromDateOnly(`${now.year}-${pad2(now.month)}-${pad2(now.day)}`),
 			};
 		}
@@ -397,6 +482,29 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			return String(value).replace(/ブレッシングナイ(?=[＠@\s（(]|$)/g, 'ブレッシングナイト');
 		}
 
+		function resolveRelatedEventLinks(event) {
+			const searchableText = normalizeEventSummary([
+				event.summary || '',
+				textFromHtml(event.description || ''),
+				textFromHtml(event.location || ''),
+			].join(' '));
+
+			return RELATED_EVENT_LINKS.filter(({ pattern }) => pattern.test(searchableText));
+		}
+
+		function renderRelatedEventLinks(event) {
+			const links = resolveRelatedEventLinks(event);
+			if (!links.length) return '';
+
+			return `
+				<div class="event-related-links" aria-label="関連公式リンク">
+					${links.map((link) => `
+						<a href="${link.url}" target="_blank" rel="noopener noreferrer">${escapeHtml(link.label)}</a>
+					`).join('')}
+				</div>
+			`;
+		}
+
 		function isEventInRange(event, range) {
 			const start = getEventStart(event).getTime();
 			return start >= new Date(range.timeMin).getTime() && start < new Date(range.timeMax).getTime();
@@ -415,9 +523,17 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				&& /(?:blessing\s*night|ブレッシングナイト|ブレッシングナイ)/i.test(searchableText);
 		}
 
+		function isSaturdayNightArthurEvent(event) {
+			const startKey = event.start?.date || getDateKeyFromDate(getEventStart(event));
+			const searchableText = `${event.summary || ''} ${event.description || ''} ${event.location || ''}`;
+			return startKey === '2026-07-04'
+				&& /saturday\s*night\s*arthur|賛美と御言葉の夕べ/i.test(searchableText);
+		}
+
 		function mergeManualEvents(events, range) {
 			const manualEventsInRange = MANUAL_EVENTS.filter((event) => isEventInRange(event, range));
 			if (!manualEventsInRange.length) return events;
+			const hasSaturdayNightArthur = events.some((event) => isSaturdayNightArthurEvent(event));
 			const hasBlessingTimeOsaka = events.some((event) => isBlessingTimeOsakaEvent(event));
 			const hasBlessingNightKagurazaka = events.some((event) => isBlessingNightKagurazakaEvent(event));
 			const blessingNightManualEvent = manualEventsInRange.find((event) => event.id === 'manual-blessing-night-kagurazaka-2026-07-17');
@@ -437,6 +553,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			return [
 				...mergedEvents,
 				...manualEventsInRange.filter((event) => {
+					if (isSaturdayNightArthurEvent(event)) return !hasSaturdayNightArthur;
 					if (isBlessingTimeOsakaEvent(event)) return !hasBlessingTimeOsaka;
 					if (isBlessingNightKagurazakaEvent(event)) return !hasBlessingNightKagurazaka;
 					return true;
@@ -457,6 +574,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			const weekdayClass = weekdayIndex === 0 ? ' is-sunday' : weekdayIndex === 6 ? ' is-saturday' : '';
 			const timeRange = formatTimeRange(event);
 			const summary = normalizeEventSummary(event.summary || '名称未定');
+			const relatedLinks = renderRelatedEventLinks(event);
 
 			return `
 				<article class="event-card${isPast ? ' is-past' : ''}">
@@ -470,15 +588,16 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 								${timeRange ? `<span>${escapeHtml(timeRange)}</span>` : ''}
 								${isPast ? '<em>終了</em>' : ''}
 							</div>
-							<h3>${escapeHtml(summary)}</h3>
-							${description ? `<p class="event-description">${description}</p>` : ''}
-							${location ? `<p class="event-location">${escapeHtml(location)}</p>` : ''}
-						</div>
-					</article>
-				`;
+								<h3>${escapeHtml(summary)}</h3>
+								${description ? `<p class="event-description">${description}</p>` : ''}
+								${location ? `<p class="event-location">${escapeHtml(location)}</p>` : ''}
+								${relatedLinks}
+							</div>
+						</article>
+					`;
 		}
 
-		function renderMiniCalendar(month, eventsByDate, todayKey) {
+		function renderMiniCalendar(month, eventsByDate, monthEvents, todayKey) {
 			const daysInMonth = new Date(Date.UTC(month.year, month.month, 0)).getUTCDate();
 			const firstWeekday = new Date(Date.UTC(month.year, month.month - 1, 1)).getUTCDay();
 			const weekdayLabels = ['日', '月', '火', '水', '木', '金', '土'];
@@ -497,7 +616,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 					key === todayKey ? 'is-today' : '',
 				].filter(Boolean).join(' ');
 				const preview = events.length
-					? `<span class="mini-calendar-events">${eventTitles.slice(0, 2).map((title) => `<small>${escapeHtml(title)}</small>`).join('')}${events.length > 2 ? `<em>+${events.length - 2}</em>` : ''}</span>`
+					? `<span class="mini-calendar-events" aria-hidden="true"><em>${events.length}</em></span>`
 					: '';
 				const ariaLabel = events.length
 					? `${month.month}月${day}日 ${weekdayLabels[weekdayIndex]}曜日、予定${events.length}件: ${eventTitles.join('、')}`
@@ -514,6 +633,20 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				const className = index === 0 ? 'is-sunday' : index === 6 ? 'is-saturday' : '';
 				return `<span class="${className}">${label}</span>`;
 			}).join('');
+			const monthEventPreview = monthEvents.length
+				? `
+					<ul class="mini-month-events">
+						${monthEvents.map((event) => `
+							<li>
+								<a href="#month-${month.key}-events">
+									<time>${escapeHtml(formatDateRange(event))}</time>
+									<span>${escapeHtml(normalizeEventSummary(event.summary || '名称未定'))}</span>
+								</a>
+							</li>
+						`).join('')}
+					</ul>
+				`
+				: '<p class="mini-month-empty">この月の予定は現在登録されていません。</p>';
 
 			return `
 				<section class="mini-calendar-card" aria-label="${escapeHtml(monthLabelForKey(month.key))} ミニカレンダー">
@@ -526,6 +659,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 						${blanks.join('')}
 						${dayCells.join('')}
 					</div>
+					${monthEventPreview}
 				</section>
 			`;
 		}
@@ -663,11 +797,11 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				const eventsByDate = groupEventsByDate(activeEvents);
 				const todayKey = getDateKeyFromDate(range.todayStart);
 
-				if (miniCalendarContainer) {
-					miniCalendarContainer.innerHTML = range.months
-						.map((month) => renderMiniCalendar(month, eventsByDate, todayKey))
-						.join('');
-				}
+					if (miniCalendarContainer) {
+						miniCalendarContainer.innerHTML = range.months
+							.map((month) => renderMiniCalendar(month, eventsByDate, grouped.get(month.key) || [], todayKey))
+							.join('');
+					}
 				if (monthContainer) {
 					monthContainer.innerHTML = range.months
 						.map((month) => renderMonth(month, grouped.get(month.key) || [], range.todayStart))
@@ -726,13 +860,18 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 		margin: 8px 0 22px;
 	}
 
-	.hero-copy p:not(.calendar-label) {
-		max-width: 680px;
-			color: var(--calendar-muted);
-			font-size: 1.05rem;
-			line-height: 1.9;
-			overflow-wrap: anywhere;
-		}
+		.hero-copy p:not(.calendar-label) {
+			max-width: 680px;
+				color: var(--calendar-muted);
+				font-size: 1.05rem;
+				line-height: 1.9;
+				overflow-wrap: anywhere;
+			}
+
+			.hero-copy,
+			.official-note {
+				min-width: 0;
+			}
 
 	.calendar-label {
 		color: var(--calendar-gold);
@@ -820,19 +959,56 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			padding: 0 20px 32px;
 		}
 
-		.recurring-schedule img {
-			box-sizing: border-box;
-			display: block;
-			width: 100%;
+			.recurring-schedule img {
+				box-sizing: border-box;
+				display: block;
+				width: 100%;
 			max-width: 100%;
 			height: auto;
 			border: 1px solid rgba(197, 160, 89, 0.32);
 			border-radius: 8px;
 			background: rgba(255, 255, 255, 0.04);
-			box-shadow: 0 18px 58px rgba(0, 0, 0, 0.34);
-		}
+				box-shadow: 0 18px 58px rgba(0, 0, 0, 0.34);
+			}
 
-		.calendar-special-event {
+			.recurring-links {
+				display: grid;
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+				gap: 10px;
+				margin-top: 12px;
+			}
+
+			.recurring-links a {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 10px;
+				min-height: 48px;
+				padding: 0 16px;
+				border: 1px solid rgba(197, 160, 89, 0.42);
+				border-radius: 8px;
+				background: rgba(255, 255, 255, 0.055);
+				color: var(--calendar-ink);
+				font-family: var(--font-head);
+				font-weight: 900;
+				line-height: 1.1;
+				text-decoration: none;
+			}
+
+			.recurring-links a:hover,
+			.recurring-links a:focus-visible {
+				border-color: rgba(197, 160, 89, 0.78);
+				background: rgba(197, 160, 89, 0.16);
+			}
+
+			.recurring-links small {
+				color: var(--calendar-gold);
+				font-size: 0.72rem;
+				font-weight: 900;
+				text-align: right;
+			}
+
+			.calendar-special-event {
 			box-sizing: border-box;
 			max-width: 1120px;
 			width: 100%;
@@ -861,6 +1037,13 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				#0b0b0b;
 		}
 
+		.saturday-night-arthur-feature .calendar-special-link {
+			grid-template-columns: minmax(280px, 0.68fr) minmax(340px, 1.32fr);
+			background:
+				linear-gradient(135deg, rgba(5, 8, 18, 0.98), rgba(6, 37, 76, 0.86)),
+				#050814;
+		}
+
 		.calendar-special-link::before {
 			content: "";
 			position: absolute;
@@ -878,18 +1061,25 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				linear-gradient(0deg, rgba(197, 160, 89, 0.28), transparent 48%);
 		}
 
+		.saturday-night-arthur-feature .calendar-special-link::before {
+			background:
+				linear-gradient(90deg, rgba(5, 7, 16, 0.05), rgba(5, 7, 16, 0.08) 48%, rgba(5, 7, 16, 0.3)),
+				linear-gradient(0deg, rgba(197, 160, 89, 0.18), transparent 48%);
+		}
+
 		.calendar-special-copy,
 		.calendar-special-media {
 			position: relative;
 			z-index: 2;
 		}
 
-		.calendar-special-copy {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			padding: 34px;
-		}
+			.calendar-special-copy {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				min-width: 0;
+				padding: 34px;
+			}
 
 		.calendar-special-label {
 			width: fit-content;
@@ -903,29 +1093,32 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			line-height: 1.2;
 		}
 
-		.calendar-special-copy strong {
-			font-family: var(--font-head);
-			font-size: 3.65rem;
-			font-weight: 900;
-			letter-spacing: 0;
-			line-height: 0.95;
-		}
+			.calendar-special-copy strong {
+				font-family: var(--font-head);
+				font-size: 3.65rem;
+				font-weight: 900;
+				letter-spacing: 0;
+				line-height: 0.95;
+				overflow-wrap: anywhere;
+			}
 
 		.calendar-special-lead {
 			max-width: 36em;
 			margin-top: 16px;
-			color: rgba(248, 243, 233, 0.84);
-			font-size: 1rem;
-			font-weight: 800;
-			line-height: 1.75;
-		}
+				color: rgba(248, 243, 233, 0.84);
+				font-size: 1rem;
+				font-weight: 800;
+				line-height: 1.75;
+				overflow-wrap: anywhere;
+			}
 
-		.calendar-special-meta {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 8px;
-			margin-top: 18px;
-		}
+			.calendar-special-meta {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 8px;
+				margin-top: 18px;
+				min-width: 0;
+			}
 
 		.calendar-special-meta span {
 			display: inline-flex;
@@ -933,11 +1126,12 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			min-height: 31px;
 			padding: 0 10px;
 			border: 1px solid rgba(255, 255, 255, 0.2);
-			background: rgba(255, 255, 255, 0.08);
-			font-size: 0.84rem;
-			font-weight: 900;
-			line-height: 1.2;
-		}
+				background: rgba(255, 255, 255, 0.08);
+				font-size: 0.84rem;
+				font-weight: 900;
+				line-height: 1.2;
+				overflow-wrap: anywhere;
+			}
 
 		.calendar-special-button {
 			display: inline-flex;
@@ -963,6 +1157,28 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 
 		.blessing-night-feature .calendar-special-media {
 			background: #121212;
+		}
+
+		.saturday-night-arthur-feature .calendar-special-media {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 18px;
+			background:
+				radial-gradient(circle at 20% 18%, rgba(25, 111, 181, 0.36), transparent 34%),
+				radial-gradient(circle at 72% 70%, rgba(215, 170, 75, 0.28), transparent 38%),
+				linear-gradient(160deg, #020713, #071b38 58%, #2d230f);
+		}
+
+		.saturday-night-arthur-feature .calendar-special-media img {
+			width: auto;
+			height: 100%;
+			max-width: 88%;
+			max-height: 405px;
+			border: 5px solid rgba(255, 248, 235, 0.92);
+			box-shadow: 0 18px 46px rgba(0, 0, 0, 0.44);
+			object-fit: contain;
+			object-position: center;
 		}
 
 		.blessing-night-feature .calendar-special-media img {
@@ -1144,20 +1360,20 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 		line-height: 1.18;
 	}
 
-	.mini-calendar-list {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 18px;
-		margin: 0 0 36px;
-	}
+		.mini-calendar-list {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 14px;
+			margin: 0 0 36px;
+		}
 
 	.mini-calendar-card {
 		min-width: 0;
-		border: 1px solid rgba(197, 160, 89, 0.24);
-		border-radius: 8px;
-		background: rgba(255, 255, 255, 0.052);
-		padding: 18px;
-	}
+			border: 1px solid rgba(197, 160, 89, 0.24);
+			border-radius: 8px;
+			background: rgba(255, 255, 255, 0.052);
+			padding: 14px;
+		}
 
 	.mini-calendar-title {
 		display: flex;
@@ -1176,10 +1392,10 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 
 	.mini-calendar-weekdays,
 	.mini-calendar-grid {
-		display: grid;
-		grid-template-columns: repeat(7, minmax(0, 1fr));
-		gap: 6px;
-	}
+			display: grid;
+			grid-template-columns: repeat(7, minmax(0, 1fr));
+			gap: 5px;
+		}
 
 	.mini-calendar-weekdays {
 		margin-bottom: 8px;
@@ -1207,11 +1423,11 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 	.mini-calendar-day {
 		position: relative;
 		display: flex;
-		flex-direction: column;
-		gap: 5px;
-		aspect-ratio: 1 / 1;
-		min-height: 0;
-		padding: 8px;
+			flex-direction: column;
+			gap: 5px;
+			aspect-ratio: 1 / 1;
+			min-height: 0;
+			padding: 6px;
 		overflow: hidden;
 		border: 1px solid rgba(255, 255, 255, 0.08);
 		border-radius: 6px;
@@ -1263,31 +1479,81 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 		line-height: 1;
 	}
 
-	.mini-calendar-events {
+		.mini-calendar-events {
+			position: absolute;
+			right: 5px;
+			bottom: 5px;
+		}
+
+		.mini-calendar-events em {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			min-width: 17px;
+			height: 17px;
+			border-radius: 999px;
+			background: rgba(197, 160, 89, 0.92);
+			color: #050505;
+			font-family: var(--font-head);
+			font-size: 0.66rem;
+			font-style: normal;
+			font-weight: 900;
+			line-height: 1;
+	}
+
+	.mini-month-events {
 		display: grid;
-		gap: 3px;
-		min-width: 0;
-		padding-right: 6px;
+		gap: 7px;
+		margin: 14px 0 0;
+		padding: 0;
+		list-style: none;
 	}
 
-	.mini-calendar-events small {
-		display: -webkit-box;
-		overflow: hidden;
-		color: rgba(248, 243, 233, 0.82);
-		font-size: 0.62rem;
-		font-weight: 800;
-		line-height: 1.2;
-		-webkit-box-orient: vertical;
-		-webkit-line-clamp: 1;
+	.mini-month-events a {
+		display: grid;
+		grid-template-columns: 54px minmax(0, 1fr);
+		gap: 8px;
+		align-items: center;
+		min-height: 37px;
+		padding: 7px 9px;
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		border-radius: 6px;
+		background: rgba(255, 255, 255, 0.06);
+		color: var(--calendar-ink);
+		text-decoration: none;
 	}
 
-	.mini-calendar-events em {
+	.mini-month-events a:hover,
+	.mini-month-events a:focus-visible {
+		border-color: rgba(197, 160, 89, 0.58);
+		background: rgba(197, 160, 89, 0.12);
+	}
+
+	.mini-month-events time {
 		color: var(--calendar-gold);
 		font-family: var(--font-head);
-		font-size: 0.68rem;
-		font-style: normal;
+		font-size: 0.72rem;
 		font-weight: 900;
 		line-height: 1;
+	}
+
+	.mini-month-events span {
+		display: -webkit-box;
+		overflow: hidden;
+		font-size: 0.78rem;
+		font-weight: 900;
+		line-height: 1.35;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2;
+	}
+
+	.mini-month-empty {
+		display: block;
+		margin-top: 9px;
+		color: var(--calendar-muted);
+		font-size: 0.78rem;
+		font-weight: 800;
+		line-height: 1.45;
 	}
 
 	.month-list {
@@ -1415,7 +1681,36 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 		padding-left: 12px;
 	}
 
-		.empty-month,
+	.event-related-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		margin-top: 13px;
+	}
+
+	.event-related-links a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 32px;
+		padding: 0 12px;
+		border: 1px solid rgba(197, 160, 89, 0.42);
+		border-radius: 999px;
+		background: rgba(197, 160, 89, 0.12);
+		color: var(--calendar-gold);
+		font-size: 0.78rem;
+		font-weight: 900;
+		line-height: 1;
+		text-decoration: none;
+	}
+
+	.event-related-links a:hover,
+	.event-related-links a:focus-visible {
+		border-color: rgba(197, 160, 89, 0.78);
+		background: rgba(197, 160, 89, 0.22);
+	}
+
+	.empty-month,
 	.calendar-fallback {
 		border: 1px solid rgba(255, 255, 255, 0.09);
 		border-radius: 8px;
@@ -1466,25 +1761,34 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			grid-template-columns: 1fr;
 		}
 
+		.saturday-night-arthur-feature .calendar-special-link {
+			grid-template-columns: 1fr;
+		}
+
 		.calendar-special-media {
 			order: -1;
 			min-height: 300px;
 		}
 	}
 
-	@media (max-width: 640px) {
-		.calendar-page {
-			margin-top: -18px;
-		}
-
-			.calendar-hero,
-			.calendar-section,
-			.recurring-schedule,
-			.calendar-special-event,
-			.calendar-overview {
-				padding-left: 14px;
-				padding-right: 14px;
+		@media (max-width: 640px) {
+			.calendar-page {
+				margin-top: -18px;
+				width: 100%;
+				max-width: 100%;
 			}
+
+				.calendar-hero,
+				.calendar-section,
+				.recurring-schedule,
+				.calendar-special-event,
+				.calendar-overview {
+					box-sizing: border-box;
+					width: 100%;
+					max-width: 100%;
+					padding-left: 14px;
+					padding-right: 14px;
+				}
 
 		.calendar-heading,
 		.month-title {
@@ -1500,22 +1804,41 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			padding: 14px;
 		}
 
-		.calendar-share-buttons {
-			grid-template-columns: repeat(2, minmax(0, 1fr));
-		}
+			.calendar-share-buttons {
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+			}
 
-		.calendar-share-button {
-			min-height: 44px;
+			.recurring-links {
+				grid-template-columns: 1fr;
+			}
+
+			.calendar-share-button {
+				min-height: 44px;
 			font-size: 0.78rem;
 		}
 
-		.calendar-special-copy {
-			padding: 26px;
-		}
+			.calendar-special-copy {
+				width: 100%;
+				max-width: 100%;
+				min-width: 0;
+				padding: 26px;
+			}
 
-		.calendar-special-copy strong {
-			font-size: 2.45rem;
-		}
+			.calendar-special-link,
+			.calendar-special-media {
+				width: 100%;
+				max-width: 100%;
+				min-width: 0;
+			}
+
+			.calendar-special-lead,
+			.calendar-special-meta {
+				max-width: 100%;
+			}
+
+			.calendar-special-copy strong {
+				font-size: 2.15rem;
+			}
 
 		.calendar-special-media {
 			min-height: 0;
@@ -1524,6 +1847,18 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 
 		.calendar-special-media img {
 			object-position: left center;
+		}
+
+		.saturday-night-arthur-feature .calendar-special-media {
+			aspect-ratio: auto;
+			min-height: 360px;
+			padding: 20px;
+		}
+
+		.saturday-night-arthur-feature .calendar-special-media img {
+			width: min(74%, 300px);
+			height: auto;
+			max-height: none;
 		}
 
 		.event-card {
@@ -1559,17 +1894,9 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			padding: 6px;
 		}
 
-		.mini-calendar-events small {
-			display: none;
-		}
-
-		.mini-calendar-events em {
-			display: none;
-		}
-
-		.mini-calendar-day.has-events::after {
-			top: 6px;
-			right: 6px;
+			.mini-calendar-day.has-events::after {
+				top: 6px;
+				right: 6px;
 			width: 6px;
 			height: 6px;
 		}

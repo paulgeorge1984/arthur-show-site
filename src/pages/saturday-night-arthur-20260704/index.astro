@@ -1,0 +1,721 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const pageUrl = '/saturday-night-arthur-20260704/';
+const eventTitle = 'Saturday Night Arthur';
+const eventSubtitle = '賛美と御言葉の夕べ';
+const eventDescription = '2026年7月4日（土）17:00 START。小田原市国府津「BLEND PARK」で開催される Saturday Night Arthur －賛美と御言葉の夕べ－。';
+const posterImage = '/assets/saturday-night-arthur-20260704.png';
+const bannerImage = '/assets/generated/saturday-night-arthur-20260704-banner.webp';
+const mapUrl = 'https://maps.app.goo.gl/hqXBkcpq68fy58q3A?g_st=il';
+const shareUrl = `https://arthur-show.com${pageUrl}`;
+const shareTitle = `${eventTitle} －${eventSubtitle}－ | THE ARTHUR HOLLANDS SHOW`;
+const encodedShareUrl = encodeURIComponent(shareUrl);
+const encodedShareTitle = encodeURIComponent(shareTitle);
+const encodedLineText = encodeURIComponent(`${shareTitle}\n2026.7.4（SAT）17:00 START / 小田原市国府津「BLEND PARK」\n${shareUrl}`);
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'Event',
+	name: `${eventTitle} －${eventSubtitle}－`,
+	description: eventDescription,
+	startDate: '2026-07-04T17:00:00+09:00',
+	eventStatus: 'https://schema.org/EventScheduled',
+	eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+	image: [
+		`https://arthur-show.com${bannerImage}`,
+		`https://arthur-show.com${posterImage}`,
+	],
+	url: shareUrl,
+	location: {
+		'@type': 'Place',
+		name: 'BLEND PARK',
+		address: {
+			'@type': 'PostalAddress',
+			addressCountry: 'JP',
+			addressRegion: '神奈川県',
+			addressLocality: '小田原市',
+			streetAddress: '国府津2丁目6-17',
+		},
+	},
+	performer: {
+		'@type': 'Person',
+		name: 'アーサーホーランド',
+		alternateName: 'Arthur Hollands',
+	},
+};
+---
+
+<Layout
+	title={`${eventTitle} －${eventSubtitle}－`}
+	description={eventDescription}
+	image={bannerImage}
+	imageAlt="Saturday Night Arthur 2026年7月4日 小田原市国府津 BLEND PARK"
+	imageWidth={1600}
+	imageHeight={900}
+	imageType="image/webp"
+	ogType="website"
+	canonicalPath={pageUrl}
+	structuredData={structuredData}
+>
+	<article class="sna-page">
+		<section class="sna-hero" aria-labelledby="sna-title">
+			<img
+				class="sna-hero-bg"
+				src={bannerImage}
+				alt=""
+				width="1600"
+				height="900"
+				loading="eager"
+				aria-hidden="true"
+			/>
+			<div class="sna-hero-inner">
+				<div class="sna-hero-copy">
+					<p class="sna-kicker">SPECIAL EVENT / ODAWARA KOZU</p>
+					<h1 id="sna-title">Saturday Night Arthur</h1>
+					<p class="sna-subtitle">－{eventSubtitle}－</p>
+					<p class="sna-lead">
+						青い空と星空が天井、広がる草原と大海原がフロアー。
+						小田原市国府津「BLEND PARK」で開かれる、賛美と御言葉の夕べ。
+					</p>
+					<div class="sna-hero-meta" aria-label="開催情報">
+						<span>2026.7.4（SAT）</span>
+						<span>17:00 START</span>
+						<span>小田原市国府津「BLEND PARK」</span>
+					</div>
+					<div class="sna-actions">
+						<a class="primary" href={mapUrl} target="_blank" rel="noopener noreferrer">地図はこちら</a>
+						<a href="#event-detail">開催概要</a>
+						<a href="#share">シェア</a>
+					</div>
+				</div>
+				<figure class="sna-poster-frame">
+					<img
+						src={posterImage}
+						alt="Saturday Night Arthur －賛美と御言葉の夕べ－ 2026年7月4日 小田原市国府津 BLEND PARK 告知フライヤー"
+						width="1054"
+						height="1492"
+						loading="eager"
+					/>
+				</figure>
+			</div>
+		</section>
+
+		<section class="sna-quote" aria-label="アーサーホーランドの言葉">
+			<blockquote>
+				<p>
+					青い空と星空が天井、広がる草原と大海原がフロアー、鳥のさえずりに波の音・吹き抜ける風が讃美歌。ここが俺の教会だ！
+				</p>
+				<cite>アーサーホーランド</cite>
+			</blockquote>
+		</section>
+
+		<section class="sna-detail" id="event-detail" aria-labelledby="event-detail-title">
+			<div class="sna-section-head">
+				<p>EVENT DETAILS</p>
+				<h2 id="event-detail-title">開催概要</h2>
+			</div>
+			<dl class="sna-info">
+				<div>
+					<dt>イベント名</dt>
+					<dd>
+						『Saturday Night Arthur』<br />
+						－賛美と御言葉の夕べ－
+					</dd>
+				</div>
+				<div>
+					<dt>日時</dt>
+					<dd>
+						2026.7.4（SAT）<br />
+						17:00 START
+					</dd>
+				</div>
+				<div>
+					<dt>場所</dt>
+					<dd>
+						小田原市国府津『BLEND PARK』<br />
+						小田原市国府津2丁目6-17
+					</dd>
+				</div>
+				<div>
+					<dt>地図</dt>
+					<dd>
+						<a href={mapUrl} target="_blank" rel="noopener noreferrer">Googleマップで開く</a>
+					</dd>
+				</div>
+			</dl>
+		</section>
+
+		<section class="sna-access" aria-labelledby="sna-access-title">
+			<div class="sna-access-copy">
+				<p>ACCESS</p>
+				<h2 id="sna-access-title">BLEND PARKへ</h2>
+				<span>小田原市国府津2丁目6-17</span>
+			</div>
+			<a href={mapUrl} target="_blank" rel="noopener noreferrer">地図はこちら</a>
+		</section>
+
+		<section class="sna-share" id="share" aria-labelledby="sna-share-title">
+			<div class="sna-section-head">
+				<p>SHARE</p>
+				<h2 id="sna-share-title">このページをシェア</h2>
+			</div>
+			<div class="sna-share-buttons" aria-label="SNS共有ボタン">
+				<button class="sna-share-button native" type="button" data-sna-share-native>
+					<span>Share</span>
+					<small>端末で共有</small>
+				</button>
+				<a class="sna-share-button line" href={`https://line.me/R/msg/text/?${encodedLineText}`} target="_blank" rel="noopener noreferrer">
+					<span>LINE</span>
+					<small>送る</small>
+				</a>
+				<a class="sna-share-button x" href={`https://twitter.com/intent/tweet?text=${encodedShareTitle}&url=${encodedShareUrl}`} target="_blank" rel="noopener noreferrer">
+					<span>X</span>
+					<small>投稿</small>
+				</a>
+				<a class="sna-share-button facebook" href={`https://www.facebook.com/sharer/sharer.php?u=${encodedShareUrl}`} target="_blank" rel="noopener noreferrer">
+					<span>Facebook</span>
+					<small>投稿</small>
+				</a>
+				<button class="sna-share-button copy" type="button" data-sna-copy-link>
+					<span>Copy</span>
+					<small data-sna-copy-status>URLをコピー</small>
+				</button>
+			</div>
+		</section>
+	</article>
+
+	<script is:inline>
+		const SNA_SHARE_URL = 'https://arthur-show.com/saturday-night-arthur-20260704/';
+		const SNA_SHARE_TITLE = 'Saturday Night Arthur －賛美と御言葉の夕べ－ | THE ARTHUR HOLLANDS SHOW';
+		const SNA_SHARE_TEXT = '2026.7.4（SAT）17:00 START / 小田原市国府津「BLEND PARK」';
+		const nativeShareButtons = document.querySelectorAll('[data-sna-share-native]');
+		const copyButtons = document.querySelectorAll('[data-sna-copy-link]');
+		const copyStatusNodes = document.querySelectorAll('[data-sna-copy-status]');
+
+		function shareMessage() {
+			return `${SNA_SHARE_TITLE}\n${SNA_SHARE_TEXT}\n${SNA_SHARE_URL}`;
+		}
+
+		function setCopyStatus(label) {
+			copyStatusNodes.forEach((node) => {
+				node.textContent = label;
+			});
+		}
+
+		function fallbackCopyText(text) {
+			const textarea = document.createElement('textarea');
+			textarea.value = text;
+			textarea.setAttribute('readonly', '');
+			textarea.style.position = 'fixed';
+			textarea.style.top = '-1000px';
+			textarea.style.left = '-1000px';
+			textarea.style.opacity = '0';
+			document.body.appendChild(textarea);
+			textarea.focus({ preventScroll: true });
+			textarea.select();
+			textarea.setSelectionRange(0, text.length);
+			let copied = false;
+			try {
+				copied = document.execCommand('copy');
+			} catch {
+				copied = false;
+			}
+			textarea.remove();
+			return copied;
+		}
+
+		async function copyShareLink() {
+			const message = shareMessage();
+			try {
+				if (navigator.clipboard?.writeText) {
+					await navigator.clipboard.writeText(message);
+				} else if (!fallbackCopyText(message)) {
+					throw new Error('copy unavailable');
+				}
+				setCopyStatus('コピーしました');
+				setTimeout(() => setCopyStatus('URLをコピー'), 1800);
+			} catch {
+				if (fallbackCopyText(message)) {
+					setCopyStatus('コピーしました');
+					setTimeout(() => setCopyStatus('URLをコピー'), 1800);
+					return;
+				}
+				setCopyStatus('コピーできませんでした');
+				setTimeout(() => setCopyStatus('URLをコピー'), 1800);
+			}
+		}
+
+		async function sharePage() {
+			if (navigator.share) {
+				try {
+					await navigator.share({
+						title: SNA_SHARE_TITLE,
+						text: SNA_SHARE_TEXT,
+						url: SNA_SHARE_URL,
+					});
+					return;
+				} catch (error) {
+					if (error.name === 'AbortError') return;
+				}
+			}
+			await copyShareLink();
+		}
+
+		nativeShareButtons.forEach((button) => {
+			button.addEventListener('click', sharePage);
+		});
+		copyButtons.forEach((button) => {
+			button.addEventListener('click', copyShareLink);
+		});
+	</script>
+</Layout>
+
+<style>
+	.sna-page {
+		--sna-black: #050710;
+		--sna-ink: #151515;
+		--sna-paper: #fff8eb;
+		--sna-gold: #d7aa4b;
+		--sna-blue: #073a78;
+		--sna-sky: #0f6e9a;
+		--sna-line: rgba(21, 21, 21, 0.14);
+		background: var(--sna-paper);
+		color: var(--sna-ink);
+	}
+
+	.sna-hero {
+		position: relative;
+		overflow: hidden;
+		min-height: min(860px, calc(100svh - 90px));
+		background: var(--sna-black);
+		color: #fff;
+	}
+
+	.sna-hero::before,
+	.sna-hero::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+	}
+
+	.sna-hero::before {
+		z-index: 1;
+		background:
+			linear-gradient(90deg, rgba(5, 7, 16, 0.92), rgba(5, 7, 16, 0.72) 45%, rgba(5, 7, 16, 0.28)),
+			linear-gradient(0deg, rgba(5, 7, 16, 0.7), transparent 58%);
+	}
+
+	.sna-hero::after {
+		z-index: 2;
+		inset: auto 0 0;
+		height: 9px;
+		background: linear-gradient(90deg, var(--sna-blue), var(--sna-gold), #f06b24);
+	}
+
+	.sna-hero-bg {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center center;
+		filter: saturate(1.08);
+	}
+
+	.sna-hero-inner {
+		position: relative;
+		z-index: 3;
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(320px, 430px);
+		gap: clamp(28px, 5vw, 58px);
+		align-items: center;
+		width: min(1120px, 100%);
+		min-height: inherit;
+		margin: 0 auto;
+		padding: 64px 20px 72px;
+	}
+
+	.sna-kicker,
+	.sna-section-head p,
+	.sna-access-copy p {
+		color: var(--sna-gold);
+		font-family: var(--font-head);
+		font-size: 0.92rem;
+		font-weight: 900;
+		letter-spacing: 0;
+		line-height: 1.2;
+		text-transform: uppercase;
+	}
+
+	.sna-hero h1 {
+		margin-top: 14px;
+		font-family: var(--font-head);
+		font-size: clamp(3.6rem, 8vw, 7.2rem);
+		font-weight: 900;
+		letter-spacing: 0;
+		line-height: 0.88;
+		text-shadow: 0 3px 24px rgba(0, 0, 0, 0.42);
+	}
+
+	.sna-subtitle {
+		margin-top: 16px;
+		font-family: var(--font-serif);
+		font-size: clamp(1.35rem, 3vw, 2.05rem);
+		font-weight: 800;
+		line-height: 1.35;
+	}
+
+	.sna-lead {
+		max-width: 36em;
+		margin-top: 24px;
+		font-size: 1.08rem;
+		font-weight: 800;
+		line-height: 1.9;
+	}
+
+	.sna-hero-meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 9px;
+		margin-top: 26px;
+	}
+
+	.sna-hero-meta span {
+		display: inline-flex;
+		align-items: center;
+		min-height: 35px;
+		padding: 0 12px;
+		border: 1px solid rgba(255, 255, 255, 0.3);
+		background: rgba(255, 255, 255, 0.1);
+		font-weight: 900;
+		line-height: 1.2;
+	}
+
+	.sna-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		margin-top: 28px;
+	}
+
+	.sna-actions a,
+	.sna-access a,
+	.sna-info a {
+		color: inherit;
+		font-weight: 900;
+	}
+
+	.sna-actions a,
+	.sna-access a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 46px;
+		padding: 0 18px;
+		border: 1px solid rgba(255, 255, 255, 0.42);
+		background: rgba(255, 255, 255, 0.1);
+		color: #fff;
+		font-family: var(--font-head);
+		line-height: 1;
+		text-align: center;
+		text-decoration: none;
+	}
+
+	.sna-actions a.primary,
+	.sna-access a {
+		border-color: var(--sna-gold);
+		background: var(--sna-gold);
+		color: #050505;
+	}
+
+	.sna-poster-frame {
+		align-self: end;
+		margin: 0;
+		transform: rotate(1.1deg);
+	}
+
+	.sna-poster-frame img {
+		display: block;
+		width: min(430px, 100%);
+		height: auto;
+		border: 8px solid rgba(255, 248, 235, 0.94);
+		box-shadow: 0 28px 70px rgba(0, 0, 0, 0.48);
+	}
+
+	.sna-quote {
+		padding: 76px 20px;
+		background:
+			linear-gradient(120deg, rgba(7, 58, 120, 0.95), rgba(15, 110, 154, 0.88) 54%, rgba(215, 170, 75, 0.88)),
+			var(--sna-blue);
+		color: #fff;
+		text-align: center;
+	}
+
+	.sna-quote blockquote {
+		width: min(980px, 100%);
+		margin: 0 auto;
+	}
+
+	.sna-quote p {
+		font-family: var(--font-serif);
+		font-size: clamp(1.35rem, 3.6vw, 2.35rem);
+		font-weight: 800;
+		line-height: 1.7;
+	}
+
+	.sna-quote cite {
+		display: block;
+		margin-top: 18px;
+		font-style: normal;
+		font-weight: 900;
+	}
+
+	.sna-detail,
+	.sna-share {
+		box-sizing: border-box;
+		width: min(1040px, 100%);
+		margin: 0 auto;
+		padding: 70px 20px;
+	}
+
+	.sna-section-head {
+		display: flex;
+		align-items: end;
+		justify-content: space-between;
+		gap: 20px;
+		padding-bottom: 16px;
+		border-bottom: 3px solid var(--sna-ink);
+	}
+
+	.sna-section-head h2,
+	.sna-access-copy h2 {
+		font-family: var(--font-head);
+		font-size: clamp(2.1rem, 5vw, 3.4rem);
+		font-weight: 900;
+		letter-spacing: 0;
+		line-height: 1;
+	}
+
+	.sna-info {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1px;
+		margin-top: 28px;
+		border: 1px solid var(--sna-line);
+		background: var(--sna-line);
+	}
+
+	.sna-info div {
+		display: grid;
+		gap: 10px;
+		align-content: start;
+		min-height: 142px;
+		background: #fffdf8;
+		padding: 22px;
+	}
+
+	.sna-info dt {
+		color: var(--sna-blue);
+		font-family: var(--font-head);
+		font-weight: 900;
+	}
+
+	.sna-info dd {
+		font-weight: 800;
+		line-height: 1.75;
+		overflow-wrap: anywhere;
+	}
+
+	.sna-access {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		gap: 24px;
+		align-items: center;
+		padding: 52px max(20px, calc((100vw - 1040px) / 2));
+		background:
+			linear-gradient(90deg, rgba(5, 7, 16, 0.88), rgba(5, 7, 16, 0.58)),
+			url('/assets/generated/saturday-night-arthur-20260704-banner.webp') center center / cover;
+		color: #fff;
+	}
+
+	.sna-access-copy span {
+		display: block;
+		margin-top: 14px;
+		font-size: 1.05rem;
+		font-weight: 900;
+	}
+
+	.sna-share {
+		background: var(--sna-paper);
+	}
+
+	.sna-share-buttons {
+		display: grid;
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+		gap: 8px;
+		margin-top: 22px;
+	}
+
+	.sna-share-button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		gap: 3px;
+		min-height: 50px;
+		min-width: 0;
+		padding: 8px 10px;
+		border: 1px solid rgba(17, 24, 39, 0.14);
+		background: #fffdf8;
+		color: var(--sna-ink);
+		cursor: pointer;
+		font: inherit;
+		font-family: var(--font-head);
+		font-size: 0.82rem;
+		font-weight: 900;
+		line-height: 1;
+		text-align: center;
+		text-decoration: none;
+	}
+
+	.sna-share-button.native {
+		background: var(--sna-blue);
+		color: #fff;
+	}
+
+	.sna-share-button.line {
+		border-bottom: 3px solid #06c755;
+	}
+
+	.sna-share-button.x {
+		border-bottom: 3px solid #111;
+	}
+
+	.sna-share-button.facebook {
+		border-bottom: 3px solid #1877f2;
+	}
+
+	.sna-share-button.copy {
+		border-bottom: 3px solid var(--sna-gold);
+	}
+
+	.sna-share-button small {
+		display: block;
+		max-width: 100%;
+		overflow: hidden;
+		color: rgba(17, 24, 39, 0.62);
+		font-family: var(--font-sans);
+		font-size: 0.66rem;
+		font-weight: 800;
+		line-height: 1.2;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.sna-share-button.native small {
+		color: rgba(255, 255, 255, 0.78);
+	}
+
+	@media (max-width: 860px) {
+		.sna-hero {
+			min-height: 0;
+		}
+
+		.sna-hero-inner {
+			grid-template-columns: 1fr;
+			padding-top: 44px;
+		}
+
+		.sna-poster-frame {
+			justify-self: center;
+			transform: none;
+		}
+
+		.sna-poster-frame img {
+			width: min(560px, 100%);
+		}
+
+		.sna-info,
+		.sna-access {
+			grid-template-columns: 1fr;
+		}
+
+		.sna-access a {
+			width: 100%;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.sna-hero {
+			background:
+				radial-gradient(circle at 18% 18%, rgba(36, 120, 190, 0.54), transparent 34%),
+				radial-gradient(circle at 82% 42%, rgba(236, 116, 45, 0.42), transparent 38%),
+				linear-gradient(155deg, #050710 0%, #071936 48%, #8b5f20 100%);
+		}
+
+		.sna-hero::before {
+			background:
+				linear-gradient(180deg, rgba(5, 7, 16, 0.18), rgba(5, 7, 16, 0.72)),
+				linear-gradient(90deg, rgba(5, 7, 16, 0.9), rgba(5, 7, 16, 0.42));
+		}
+
+		.sna-hero-bg {
+			opacity: 0;
+		}
+
+		.sna-hero-inner {
+			padding: 34px 16px 48px;
+		}
+
+		.sna-hero h1 {
+			font-size: 3.25rem;
+		}
+
+		.sna-lead {
+			font-size: 0.98rem;
+			line-height: 1.75;
+		}
+
+		.sna-hero-meta span,
+		.sna-actions a {
+			box-sizing: border-box;
+			width: 100%;
+		}
+
+		.sna-poster-frame img {
+			border-width: 5px;
+		}
+
+		.sna-quote {
+			padding: 52px 16px;
+		}
+
+		.sna-detail,
+		.sna-share {
+			padding: 50px 16px;
+		}
+
+		.sna-section-head {
+			display: block;
+		}
+
+		.sna-info {
+			grid-template-columns: 1fr;
+		}
+
+		.sna-info div {
+			min-height: 0;
+			padding: 18px;
+		}
+
+		.sna-access {
+			padding: 44px 16px;
+		}
+
+		.sna-share-buttons {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+</style>

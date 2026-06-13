@@ -6,6 +6,9 @@ const siteURL = 'https://arthur-show.com';
 const blessingNightKagurazakaUrl = 'https://www.blessingnight.jp/schedule/schedule366';
 const blessingNightKagurazakaBanner = '/assets/generated/blessing-night-kagurazaka-20260717-banner.webp';
 const blessingTimeOsakaBanner = '/assets/generated/blessing-time-osaka2026-banner.webp';
+const saturdayNightArthurBanner = '/assets/generated/saturday-night-arthur-20260704-banner.webp';
+const youtubeChannelUrl = 'https://www.youtube.com/@arthurs-show';
+const youtubeSubscribeUrl = `${youtubeChannelUrl}?sub_confirmation=1`;
 
 // サイトのビルドが実行された現在の時刻を取得
 const currentBuildTime = new Date(); 
@@ -200,56 +203,114 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 	structuredData={homeStructuredData}
 >
 	<div class="container">
-		<a class="blessing-time-feature blessing-night-home-feature" href={blessingNightKagurazakaUrl} target="_blank" rel="noopener noreferrer" aria-label="BLESSING NIGHT 神楽坂 2026年7月17日 詳細・申込ページを見る">
-			<img
-				src={blessingNightKagurazakaBanner}
-				alt=""
-				width="1600"
-				height="900"
-				loading="eager"
-				aria-hidden="true"
-			/>
-			<div class="blessing-time-feature-copy">
-				<p class="blessing-time-feature-kicker">NEXT BLESSING NIGHT</p>
-				<h2>BLESSING NIGHT 神楽坂</h2>
-				<p>
-					不良牧師が語る聖なる夜のトークライブ。Music Guest は Migiwa。
-					詳細と申込は公式ページからご確認ください。
-				</p>
-				<div class="blessing-time-feature-meta">
-					<span>2026年7月17日（金）</span>
-					<span>OPEN 18:30 / START 19:00</span>
-					<span>u-ma kagurazaka</span>
-					<span>Charge 3,000円（飲食代別途）</span>
-				</div>
-				<span class="blessing-time-feature-button">詳細・申込ページへ</span>
-			</div>
-		</a>
+		<details class="home-event-drawer">
+			<summary class="home-event-summary">
+				<span class="home-event-summary-media" aria-hidden="true">
+					<img src={saturdayNightArthurBanner} alt="" width="1600" height="900" loading="eager" />
+				</span>
+				<span class="home-event-summary-copy">
+					<span class="home-event-summary-kicker">EVENT INFO</span>
+					<strong>イベント告知</strong>
+					<span>Saturday Night Arthur / BLESSING NIGHT 神楽坂 / BLESSING TIME in OSAKA</span>
+				</span>
+				<span class="home-event-summary-action" aria-hidden="true">
+					<span class="closed">見る</span>
+					<span class="opened">閉じる</span>
+				</span>
+			</summary>
+			<div class="home-event-panel">
+				<a class="blessing-time-feature" href="/saturday-night-arthur-20260704/" aria-label="Saturday Night Arthur 2026年7月4日 特別ページを見る">
+					<img
+						src={saturdayNightArthurBanner}
+						alt=""
+						width="1600"
+						height="900"
+						loading="eager"
+						aria-hidden="true"
+					/>
+					<div class="blessing-time-feature-copy">
+						<p class="blessing-time-feature-kicker">SPECIAL EVENT</p>
+						<h2>Saturday Night Arthur</h2>
+						<p>
+							2026年7月4日（土）、小田原市国府津「BLEND PARK」で開かれる
+							賛美と御言葉の夕べ。
+						</p>
+						<div class="blessing-time-feature-meta">
+							<span>2026.7.4（SAT）</span>
+							<span>17:00 START</span>
+							<span>小田原市国府津「BLEND PARK」</span>
+						</div>
+						<span class="blessing-time-feature-button">告知ページを見る</span>
+					</div>
+				</a>
 
-		<a class="blessing-time-feature" href="/blessing-time-osaka2026/" aria-label="BLESSING TIME in OSAKA 2026年7月18日 特別ページを見る">
-			<img
-				src={blessingTimeOsakaBanner}
-				alt=""
-				width="1600"
-				height="900"
-				loading="eager"
-				aria-hidden="true"
-			/>
-			<div class="blessing-time-feature-copy">
-				<p class="blessing-time-feature-kicker">SPECIAL EVENT</p>
-				<h2>BLESSING TIME in OSAKA</h2>
-				<p>
-					アーサー・ホーランド Talk Live と、豪華アーティスト陣による Worship。
-					ジーザスの愛と希望に満ちた祝福の時間を、ぜひご一緒ください。
-				</p>
-				<div class="blessing-time-feature-meta">
-					<span>2026年7月18日（土）</span>
-					<span>OPEN 14:30 / START 15:00</span>
-					<span>大阪クリスチャンセンター OCCホール</span>
-				</div>
-				<span class="blessing-time-feature-button">特別ページを見る</span>
+				<a class="blessing-time-feature blessing-night-home-feature" href={blessingNightKagurazakaUrl} target="_blank" rel="noopener noreferrer" aria-label="BLESSING NIGHT 神楽坂 2026年7月17日 詳細・申込ページを見る">
+					<img
+						src={blessingNightKagurazakaBanner}
+						alt=""
+						width="1600"
+						height="900"
+						loading="eager"
+						aria-hidden="true"
+					/>
+					<div class="blessing-time-feature-copy">
+						<p class="blessing-time-feature-kicker">NEXT BLESSING NIGHT</p>
+						<h2>BLESSING NIGHT 神楽坂</h2>
+						<p>
+							不良牧師が語る聖なる夜のトークライブ。Music Guest は Migiwa。
+							詳細と申込は公式ページからご確認ください。
+						</p>
+						<div class="blessing-time-feature-meta">
+							<span>2026年7月17日（金）</span>
+							<span>OPEN 18:30 / START 19:00</span>
+							<span>u-ma kagurazaka</span>
+							<span>Charge 3,000円（飲食代別途）</span>
+						</div>
+						<span class="blessing-time-feature-button">詳細・申込ページへ</span>
+					</div>
+				</a>
+
+				<a class="blessing-time-feature" href="/blessing-time-osaka2026/" aria-label="BLESSING TIME in OSAKA 2026年7月18日 特別ページを見る">
+					<img
+						src={blessingTimeOsakaBanner}
+						alt=""
+						width="1600"
+						height="900"
+						loading="eager"
+						aria-hidden="true"
+					/>
+					<div class="blessing-time-feature-copy">
+						<p class="blessing-time-feature-kicker">SPECIAL EVENT</p>
+						<h2>BLESSING TIME in OSAKA</h2>
+						<p>
+							アーサー・ホーランド Talk Live と、豪華アーティスト陣による Worship。
+							ジーザスの愛と希望に満ちた祝福の時間を、ぜひご一緒ください。
+						</p>
+						<div class="blessing-time-feature-meta">
+							<span>2026年7月18日（土）</span>
+							<span>OPEN 14:30 / START 15:00</span>
+							<span>大阪クリスチャンセンター OCCホール</span>
+						</div>
+						<span class="blessing-time-feature-button">特別ページを見る</span>
+					</div>
+				</a>
 			</div>
-		</a>
+		</details>
+
+		<section class="youtube-subscribe-section" aria-labelledby="youtube-subscribe-title">
+			<div class="youtube-subscribe-copy">
+				<p class="youtube-subscribe-kicker">YOUTUBE CHANNEL</p>
+				<h2 id="youtube-subscribe-title">YouTubeで最新メッセージを受け取る</h2>
+				<p>登録後にベルをONにすると、新着メッセージの通知が届きます。</p>
+			</div>
+			<div class="youtube-subscribe-actions">
+				<a class="youtube-subscribe-button" href={youtubeSubscribeUrl} target="_blank" rel="noopener noreferrer" aria-label="YouTubeでTHE ARTHUR HOLLANDS SHOWのチャンネル登録画面を開く">
+					<span class="youtube-play-icon" aria-hidden="true">▶</span>
+					<span>登録する</span>
+				</a>
+				<span class="youtube-notify-note">通知はYouTube側で設定</span>
+			</div>
+		</section>
 
 		<a class="awaji-feature goto-feature" href="/walk-across-goto2026/" aria-label="ARTHUR HOLLANDS WALK ACROSS GOTO ISLANDS 2026 特設ページを見る">
 			<div class="awaji-visual">
@@ -565,6 +626,240 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		max-width: 980px;
 		margin: 0 auto;
 		padding: 0 20px;
+	}
+
+	.home-event-drawer {
+		margin: 28px 0 8px;
+	}
+
+	.home-event-summary {
+		position: relative;
+		display: grid;
+		grid-template-columns: minmax(150px, 230px) minmax(0, 1fr) auto;
+		gap: 18px;
+		align-items: center;
+		min-height: 154px;
+		overflow: hidden;
+		padding: 14px 18px 14px 14px;
+		background:
+			linear-gradient(135deg, #071018, #132d41 58%, #382f1d);
+		border-left: 5px solid #c5a059;
+		color: #fff;
+		cursor: pointer;
+		box-shadow: 0 14px 32px rgba(0, 0, 0, 0.14);
+		list-style: none;
+	}
+
+	.home-event-summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.home-event-summary-media {
+		display: block;
+		aspect-ratio: 16 / 9;
+		overflow: hidden;
+		background: #050505;
+	}
+
+	.home-event-summary-media img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center center;
+	}
+
+	.home-event-summary-copy {
+		display: grid;
+		gap: 8px;
+		min-width: 0;
+	}
+
+	.home-event-summary-kicker {
+		width: fit-content;
+		padding: 5px 8px;
+		background: #c5a059;
+		color: #060606;
+		font-family: 'Oswald', sans-serif;
+		font-size: 0.72rem;
+		font-weight: 900;
+		letter-spacing: 0;
+		line-height: 1.1;
+	}
+
+	.home-event-summary-copy strong {
+		font-family: 'Oswald', sans-serif;
+		font-size: clamp(2rem, 5vw, 3.1rem);
+		font-weight: 900;
+		letter-spacing: 0;
+		line-height: 0.95;
+	}
+
+	.home-event-summary-copy span:last-child {
+		overflow: hidden;
+		color: rgba(255, 255, 255, 0.82);
+		font-size: 0.92rem;
+		font-weight: 900;
+		line-height: 1.35;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.home-event-summary-action {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-width: 76px;
+		min-height: 42px;
+		padding: 0 14px;
+		background: #c5a059;
+		color: #050505;
+		font-family: 'Oswald', sans-serif;
+		font-size: 0.9rem;
+		font-weight: 900;
+		line-height: 1;
+	}
+
+	.home-event-summary-action .opened,
+	.home-event-drawer[open] .home-event-summary-action .closed {
+		display: none;
+	}
+
+	.home-event-drawer[open] .home-event-summary-action .opened {
+		display: inline;
+	}
+
+	.home-event-panel {
+		display: grid;
+		gap: 18px;
+		padding-top: 18px;
+	}
+
+	.home-event-drawer[open] .home-event-panel {
+		animation: home-event-panel-in 0.22s ease-out;
+	}
+
+	.home-event-panel .blessing-time-feature {
+		margin: 0;
+	}
+
+	.youtube-subscribe-section {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		gap: 16px;
+		align-items: center;
+		margin: 18px 0 8px;
+		padding: 16px 18px;
+		background: #fff;
+		color: #111;
+		border: 1px solid #e4e4e7;
+		border-left: 4px solid #d92323;
+	}
+
+	.youtube-subscribe-copy {
+		display: grid;
+		gap: 5px;
+		min-width: 0;
+	}
+
+	.youtube-subscribe-kicker {
+		width: fit-content;
+		color: #d92323;
+		font-family: 'Oswald', sans-serif;
+		font-size: 0.7rem;
+		font-weight: 900;
+		letter-spacing: 0.12em;
+		line-height: 1.1;
+	}
+
+	.youtube-subscribe-section h2 {
+		font-size: clamp(1.05rem, 2.4vw, 1.36rem);
+		font-weight: 900;
+		line-height: 1.35;
+		overflow-wrap: anywhere;
+	}
+
+	.youtube-subscribe-section p:not(.youtube-subscribe-kicker) {
+		max-width: 42em;
+		color: #666;
+		font-size: 0.86rem;
+		font-weight: 700;
+		line-height: 1.55;
+	}
+
+	.youtube-subscribe-actions {
+		display: grid;
+		gap: 6px;
+		justify-items: stretch;
+		min-width: min(210px, 100%);
+	}
+
+	.youtube-subscribe-button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 8px;
+		min-height: 40px;
+		padding: 0 16px;
+		background: #f4f4f5;
+		border: 1px solid #d7d7dc;
+		color: #111;
+		font-size: 0.9rem;
+		font-weight: 900;
+		line-height: 1;
+		text-align: center;
+	}
+
+	.youtube-subscribe-button:hover,
+	.youtube-subscribe-button:focus-visible {
+		background: #111;
+		color: #fff;
+		border-color: #111;
+	}
+
+	.youtube-play-icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 20px;
+		height: 20px;
+		background: #d92323;
+		color: #fff;
+		font-size: 0.7rem;
+		line-height: 1;
+	}
+
+	.youtube-subscribe-button:hover .youtube-play-icon,
+	.youtube-subscribe-button:focus-visible .youtube-play-icon {
+		background: #d92323;
+		color: #fff;
+	}
+
+	.youtube-notify-note {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 28px;
+		padding: 0 10px;
+		background: #f7f7f8;
+		border: 1px solid #ececef;
+		color: #666;
+		font-size: 0.72rem;
+		font-weight: 800;
+		line-height: 1.2;
+		text-align: center;
+	}
+
+	@keyframes home-event-panel-in {
+		from {
+			opacity: 0;
+			transform: translateY(-8px);
+		}
+
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
 	}
 
 	.blessing-time-feature {
@@ -1767,6 +2062,73 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 	@media (max-width: 760px) {
 		.container {
 			padding: 0 14px;
+		}
+
+		.home-event-drawer {
+			margin: 18px 0 4px;
+		}
+
+		.home-event-summary {
+			grid-template-columns: 112px minmax(0, 1fr);
+			gap: 12px;
+			min-height: 0;
+			padding: 12px;
+		}
+
+		.home-event-summary-media {
+			align-self: stretch;
+			aspect-ratio: 1 / 1;
+		}
+
+		.home-event-summary-copy {
+			padding: 0;
+			gap: 6px;
+		}
+
+		.home-event-summary-copy strong {
+			font-size: 2rem;
+		}
+
+		.home-event-summary-copy span:last-child {
+			display: -webkit-box;
+			overflow: hidden;
+			font-size: 0.78rem;
+			line-height: 1.35;
+			-webkit-line-clamp: 2;
+			-webkit-box-orient: vertical;
+			white-space: normal;
+		}
+
+		.home-event-summary-action {
+			grid-column: 1 / -1;
+			width: auto;
+			min-height: 38px;
+			margin: 0;
+		}
+
+		.home-event-panel {
+			gap: 14px;
+			padding-top: 14px;
+		}
+
+		.youtube-subscribe-section {
+			grid-template-columns: 1fr;
+			gap: 12px;
+			margin: 14px 0 4px;
+			padding: 14px;
+		}
+
+		.youtube-subscribe-section h2 {
+			font-size: 1.18rem;
+		}
+
+		.youtube-subscribe-actions {
+			min-width: 0;
+		}
+
+		.youtube-subscribe-button,
+		.youtube-notify-note {
+			width: 100%;
 		}
 
 		.blessing-time-feature {
