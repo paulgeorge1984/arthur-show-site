@@ -35,6 +35,7 @@ const {
 
 // URLとタイトルを定義
 const siteTitle = "THE ARTHUR HOLLANDS SHOW";
+const appTitle = "Arthur Calendar";
 const siteUrl = "https://arthur-show.com";
 const pageTitle = `${title} | ${siteTitle}`;
 const fallbackDescription = "アーサーホーランド（アーサー・ホーランド / Arthur Hollands）の公式動画アーカイブ。THE DAILY with ARTHUR HOLLANDS、THE ARTHUR HOLLANDS SHOW、WALK ACROSSのメッセージと活動記録を届けます。";
@@ -122,8 +123,8 @@ const navItems = [
 		<link rel="shortcut icon" href="/favicon.ico?v=20260613" />
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20260613" />
 		<link rel="manifest" href="/manifest.webmanifest" />
-		<meta name="application-name" content={siteTitle} />
-		<meta name="apple-mobile-web-app-title" content={siteTitle} />
+		<meta name="application-name" content={appTitle} />
+		<meta name="apple-mobile-web-app-title" content={appTitle} />
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="mobile-web-app-capable" content="yes" />
 		<link rel="canonical" href={canonicalURL} />
@@ -215,6 +216,13 @@ const navItems = [
 			document.addEventListener('keydown', (event) => {
 				if (event.key === 'Escape') setGlobalMenu(false);
 			});
+		</script>
+		<script is:inline>
+			if ('serviceWorker' in navigator) {
+				window.addEventListener('load', () => {
+					navigator.serviceWorker.register('/sw.js').catch(() => undefined);
+				});
+			}
 		</script>
 	</body>
 </html>
