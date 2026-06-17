@@ -98,6 +98,7 @@ const structuredData = {
 				</div>
 				<div class="blessing-time-actions">
 					<a href="#event-detail">開催概要</a>
+					<a href="#support-offering">サポート献金先</a>
 					<a href="#tokyo-message">東京開催のメッセージ映像</a>
 					<a href="#cgntv-report">CGNTV取材映像</a>
 				</div>
@@ -168,6 +169,37 @@ const structuredData = {
 							※席上献金があります。
 						</dd>
 					</div>
+					<div id="support-offering">
+						<dt>サポート献金先</dt>
+						<dd>
+							<strong>BLESSING TIME in OSAKA の働きのための献金先です。</strong>
+							<p class="blessing-time-support-note">
+								ページ下部に掲載しているアーサー・ホーランド・ミニストリー／番組制作者へのサポートとは別の振込先です。
+							</p>
+							<dl class="blessing-time-transfer" aria-label="BLESSING TIME in OSAKA サポート献金 振込先">
+								<div>
+									<dt>銀行</dt>
+									<dd>みずほ銀行</dd>
+								</div>
+								<div>
+									<dt>支店</dt>
+									<dd>赤羽支店</dd>
+								</div>
+								<div>
+									<dt>種別</dt>
+									<dd>普通</dd>
+								</div>
+								<div>
+									<dt>口座番号</dt>
+									<dd>1953726</dd>
+								</div>
+								<div>
+									<dt>口座名義</dt>
+									<dd>ブレッシングナイト</dd>
+								</div>
+							</dl>
+						</dd>
+					</div>
 					<div>
 						<dt>お問い合わせ</dt>
 						<dd>
@@ -180,7 +212,7 @@ const structuredData = {
 				<img
 					src={posterImage}
 					alt="BLESSING TIME in OSAKA フライヤー"
-					width="904"
+					width="905"
 					height="1280"
 					loading="lazy"
 				/>
@@ -244,8 +276,8 @@ const structuredData = {
 			<figure class="blessing-time-artists-image">
 				<img
 					src={artistsImage}
-					alt="BLESSING TIME in OSAKA 出演者紹介"
-					width="904"
+					alt="BLESSING TIME in OSAKA 出演者紹介とサポート献金先"
+					width="905"
 					height="1280"
 					loading="lazy"
 				/>
@@ -627,7 +659,7 @@ const structuredData = {
 		background: var(--bt-line);
 	}
 
-	.blessing-time-info div {
+	.blessing-time-info > div {
 		display: grid;
 		grid-template-columns: 118px minmax(0, 1fr);
 		gap: 18px;
@@ -635,15 +667,50 @@ const structuredData = {
 		padding: 20px;
 	}
 
-	.blessing-time-info dt {
+	.blessing-time-info > div > dt {
 		color: var(--bt-blue);
 		font-family: var(--font-head);
 		font-weight: 900;
 	}
 
-	.blessing-time-info dd {
+	.blessing-time-info > div > dd {
 		font-weight: 800;
 		line-height: 1.75;
+	}
+
+	.blessing-time-support-note {
+		margin-top: 8px;
+		color: rgba(20, 20, 20, 0.72);
+		font-size: 0.95rem;
+		line-height: 1.7;
+	}
+
+	.blessing-time-transfer {
+		display: grid;
+		gap: 1px;
+		margin-top: 16px;
+		border: 1px solid rgba(49, 92, 120, 0.18);
+		background: rgba(49, 92, 120, 0.18);
+	}
+
+	.blessing-time-transfer div {
+		display: grid;
+		grid-template-columns: 92px minmax(0, 1fr);
+		gap: 12px;
+		padding: 10px 12px;
+		background: rgba(49, 92, 120, 0.06);
+	}
+
+	.blessing-time-transfer dt {
+		color: var(--bt-blue);
+		font-family: var(--font-head);
+		font-size: 0.88rem;
+		font-weight: 900;
+	}
+
+	.blessing-time-transfer dd {
+		font-weight: 900;
+		line-height: 1.5;
 	}
 
 	.blessing-time-poster img,
@@ -860,10 +927,14 @@ const structuredData = {
 			font-size: 2.25rem;
 		}
 
-		.blessing-time-info div {
+		.blessing-time-info > div {
 			grid-template-columns: 1fr;
 			gap: 6px;
 			padding: 18px;
+		}
+
+		.blessing-time-transfer div {
+			grid-template-columns: 78px minmax(0, 1fr);
 		}
 
 		.blessing-time-scripture {
