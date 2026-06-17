@@ -175,7 +175,7 @@ const structuredData = {
 						<dd>
 							Blessing Time 大阪では、当日の運営を支えてくださるボランティアスタッフを募集しています。<br />
 							ご協力いただける方は、下記までお問い合わせください。<br />
-							問合せ先：<a href="mailto:blessingtime.office@gmail.com">blessingtime.office@gmail.com</a>
+							問合せ先：<a class="blessing-time-subtle-link" href="mailto:blessingtime.office@gmail.com">blessingtime.office@gmail.com</a>
 						</dd>
 					</div>
 					<div id="support-offering">
@@ -531,7 +531,7 @@ const structuredData = {
 	.blessing-time-share {
 		box-sizing: border-box;
 		display: grid;
-		grid-template-columns: minmax(220px, 0.55fr) minmax(0, 1.45fr);
+		grid-template-columns: minmax(280px, 0.45fr) minmax(0, 1fr);
 		gap: 18px;
 		align-items: center;
 		width: min(1120px, 100%);
@@ -544,9 +544,10 @@ const structuredData = {
 	.blessing-time-share h2 {
 		margin-top: 8px;
 		font-family: var(--font-head);
-		font-size: clamp(1.5rem, 3vw, 2.2rem);
+		font-size: 1.9rem;
 		letter-spacing: 0;
 		line-height: 1;
+		white-space: nowrap;
 	}
 
 	.blessing-time-share-buttons {
@@ -686,6 +687,10 @@ const structuredData = {
 		font: inherit;
 	}
 
+	.blessing-time-info a.blessing-time-subtle-link {
+		color: rgba(20, 20, 20, 0.68);
+	}
+
 	.blessing-time-poster img,
 	.blessing-time-artists-image img {
 		display: block;
@@ -771,6 +776,13 @@ const structuredData = {
 		font-weight: 900;
 	}
 
+	@media (max-width: 980px) {
+		.blessing-time-share {
+			grid-template-columns: 1fr;
+			padding: 18px 20px;
+		}
+	}
+
 	@media (max-width: 860px) {
 		.blessing-time-hero {
 			justify-content: flex-start;
@@ -803,10 +815,6 @@ const structuredData = {
 			grid-template-columns: 1fr;
 		}
 
-		.blessing-time-share {
-			grid-template-columns: 1fr;
-			padding: 18px 20px;
-		}
 	}
 
 	@media (max-width: 640px) {
@@ -880,6 +888,10 @@ const structuredData = {
 
 		.blessing-time-share {
 			padding: 18px 16px;
+		}
+
+		.blessing-time-share h2 {
+			font-size: 1.65rem;
 		}
 
 		.blessing-time-share-buttons {
