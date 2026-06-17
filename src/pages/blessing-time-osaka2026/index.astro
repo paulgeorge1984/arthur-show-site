@@ -173,8 +173,8 @@ const structuredData = {
 					<div id="volunteer-staff">
 						<dt>ボランティアスタッフ募集</dt>
 						<dd>
-							Blessing Time 大阪のイベントを手伝ってくれる方を募集しています。<br />
-							一緒にイベントを作っていきましょう！<br />
+							Blessing Time 大阪では、当日の運営を支えてくださるボランティアスタッフを募集しています。<br />
+							ご協力いただける方は、下記までお問い合わせください。<br />
 							問合せ先：<a href="mailto:blessingtime.office@gmail.com">blessingtime.office@gmail.com</a>
 						</dd>
 					</div>
@@ -185,28 +185,9 @@ const structuredData = {
 							<p class="blessing-time-support-note">
 								当日の席上献金に加え、事前の受付口座を以下に記載しています。お振込みの際は口座名義をご確認ください。
 							</p>
-							<dl class="blessing-time-transfer" aria-label="BLESSING TIME in OSAKA サポート献金 振込先">
-								<div>
-									<dt>銀行</dt>
-									<dd>みずほ銀行</dd>
-								</div>
-								<div>
-									<dt>支店</dt>
-									<dd>赤羽支店</dd>
-								</div>
-								<div>
-									<dt>種別</dt>
-									<dd>普通</dd>
-								</div>
-								<div>
-									<dt>口座番号</dt>
-									<dd>1953726</dd>
-								</div>
-								<div>
-									<dt>口座名義</dt>
-									<dd>ブレッシングナイト</dd>
-								</div>
-							</dl>
+							<p class="blessing-time-transfer">
+								事前受付口座：みずほ銀行 赤羽支店 普通 1953726　ブレッシングナイト
+							</p>
 						</dd>
 					</div>
 					<div>
@@ -695,31 +676,11 @@ const structuredData = {
 	}
 
 	.blessing-time-transfer {
-		display: grid;
-		gap: 1px;
-		margin-top: 16px;
-		border: 1px solid rgba(49, 92, 120, 0.18);
-		background: rgba(49, 92, 120, 0.18);
-	}
-
-	.blessing-time-transfer div {
-		display: grid;
-		grid-template-columns: 92px minmax(0, 1fr);
-		gap: 12px;
-		padding: 10px 12px;
-		background: rgba(49, 92, 120, 0.06);
-	}
-
-	.blessing-time-transfer dt {
-		color: var(--bt-blue);
-		font-family: var(--font-head);
-		font-size: 0.88rem;
-		font-weight: 900;
-	}
-
-	.blessing-time-transfer dd {
-		font-weight: 900;
-		line-height: 1.5;
+		margin-top: 10px;
+		color: rgba(20, 20, 20, 0.64);
+		font-size: 0.9rem;
+		font-weight: 800;
+		line-height: 1.7;
 	}
 
 	.blessing-time-poster img,
@@ -940,10 +901,6 @@ const structuredData = {
 			grid-template-columns: 1fr;
 			gap: 6px;
 			padding: 18px;
-		}
-
-		.blessing-time-transfer div {
-			grid-template-columns: 78px minmax(0, 1fr);
 		}
 
 		.blessing-time-scripture {
