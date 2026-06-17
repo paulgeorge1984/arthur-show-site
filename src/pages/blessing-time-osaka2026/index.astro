@@ -180,8 +180,8 @@ const structuredData = {
 					</div>
 					<div id="support-offering">
 						<dt>ご支援について</dt>
-						<dd>
-							<strong>BLESSING TIME in OSAKA を覚えてくださる方へ。</strong>
+						<dd class="blessing-time-support-copy">
+							<p class="blessing-time-support-lead">BLESSING TIME in OSAKA を覚えてくださる方へ。</p>
 							<p class="blessing-time-support-note">
 								当日の席上献金に加え、事前の受付口座を以下に記載しています。お振込みの際は口座名義をご確認ください。
 							</p>
@@ -668,19 +668,31 @@ const structuredData = {
 		line-height: 1.75;
 	}
 
+	.blessing-time-support-copy {
+		font-weight: 600;
+	}
+
+	.blessing-time-support-lead {
+		font-family: var(--font-serif);
+		font-size: 1.02rem;
+		font-weight: 700;
+		line-height: 1.75;
+	}
+
 	.blessing-time-support-note {
-		margin-top: 8px;
-		color: rgba(20, 20, 20, 0.72);
+		margin-top: 6px;
+		color: rgba(20, 20, 20, 0.7);
 		font-size: 0.95rem;
+		font-weight: 600;
 		line-height: 1.7;
 	}
 
 	.blessing-time-transfer {
-		margin-top: 10px;
-		color: rgba(20, 20, 20, 0.64);
-		font-size: 0.9rem;
-		font-weight: 800;
-		line-height: 1.7;
+		margin-top: 8px;
+		color: rgba(20, 20, 20, 0.58);
+		font-size: 0.88rem;
+		font-weight: 600;
+		line-height: 1.65;
 	}
 
 	.blessing-time-poster img,
