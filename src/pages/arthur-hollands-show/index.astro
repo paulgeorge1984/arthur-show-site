@@ -24,6 +24,7 @@ type ShowSeries = {
 	playlistId: string;
 	url: string;
 	count: number;
+	countLabel?: string;
 	videos: ShowVideo[];
 };
 
@@ -215,7 +216,7 @@ const socialImage = pickupItems[0]?.id
 									<small>{series.label}</small>
 									<strong>{series.title}</strong>
 									<span>{series.description}</span>
-									<em>{series.count} EPISODES</em>
+									<em>{series.countLabel || `${series.count} EPISODES`}</em>
 								</span>
 							</a>
 						);

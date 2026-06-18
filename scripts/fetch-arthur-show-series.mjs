@@ -37,6 +37,29 @@ const series = [
 	},
 ];
 
+const manualSeries = [
+	{
+		slug: 'jericho-japan-1991-michtam',
+		kind: 'message',
+		label: 'SPECIAL RECORD',
+		title: "ジェリコ・ジャパン'91 東京有明コロシアム",
+		description: '1991年7月20日、東京有明コロシアムで行われたジェリコジャパンでのメッセージの貴重な記録。ミクタムオフィシャルYouTubeチャンネルから、貴重な記録をご覧ください。',
+		playlistId: 'manual-michtam-jericho-japan-1991',
+		url: 'https://youtu.be/cery_NEusH4?t=4538',
+		count: 1,
+		countLabel: 'START 1:15:38',
+		videos: [
+			{
+				id: 'cery_NEusH4',
+				title: "ジェリコ・ジャパン'91  1991/7/20 東京有明コロシアム ダイジェストビデオ",
+				thumbnail: 'https://i.ytimg.com/vi/cery_NEusH4/hq720.jpg',
+				duration: 'PT1H29M29S',
+				viewCount: '1825',
+			},
+		],
+	},
+];
+
 function toIsoDuration(seconds) {
 	const value = Number(seconds || 0);
 	if (!value) return '';
@@ -87,6 +110,7 @@ async function main() {
 		console.log(`Fetching ${item.slug}...`);
 		playlists.push(await fetchPlaylist(item));
 	}
+	playlists.push(...manualSeries);
 	await fs.mkdir(path.dirname(outPath), { recursive: true });
 	await fs.writeFile(outPath, `${JSON.stringify({ fetchedAt: new Date().toISOString(), playlists }, null, 2)}\n`, 'utf8');
 	console.log(`Wrote ${outPath}`);
