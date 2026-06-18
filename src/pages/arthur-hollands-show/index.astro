@@ -13,6 +13,10 @@ type ShowVideo = {
 	thumbnail?: string;
 	duration?: string;
 	viewCount?: string;
+	url?: string;
+	startLabel?: string;
+	ctaLabel?: string;
+	sourceLabel?: string;
 };
 
 type ShowSeries = {
@@ -24,7 +28,6 @@ type ShowSeries = {
 	playlistId: string;
 	url: string;
 	count: number;
-	countLabel?: string;
 	videos: ShowVideo[];
 };
 
@@ -36,16 +39,29 @@ const archiveData = archive as {
 const seriesData = seriesArchive as { fetchedAt: string | null; playlists: ShowSeries[] };
 
 const videos = archiveData.videos || [];
+const jerichoJapan1991Video: ShowVideo = {
+	id: 'cery_NEusH4',
+	title: "ジェリコ・ジャパン'91 東京有明コロシアム メッセージ",
+	excerpt: '1991年7月20日、東京有明コロシアムで行われたジェリコジャパンでのメッセージの貴重な記録。ミクタムオフィシャルYouTubeチャンネルから、貴重な記録をご覧ください。',
+	publishedAt: '1991-07-20T00:00:00+09:00',
+	year: '1991',
+	thumbnail: 'https://i.ytimg.com/vi/cery_NEusH4/hq720.jpg',
+	url: 'https://youtu.be/cery_NEusH4?t=4538',
+	startLabel: 'START 1:15:38',
+	ctaLabel: 'ミクタムオフィシャルYouTubeチャンネル',
+	sourceLabel: 'ミクタム Newオフィシャル | New MICHTAM',
+};
+const timelineVideos = [...videos, jerichoJapan1991Video];
 const excludedSeriesPlaylistIds = new Set(['PL-faIdjPoxKiA5aStAASg7VMrjT_-90_o']);
 const showSeries = (seriesData.playlists || []).filter((series) => !excludedSeriesPlaylistIds.has(series.playlistId));
 const paintingSeries = showSeries.find((series) => series.kind === 'painting');
 const relatedSeries = showSeries.filter((series) => series.kind !== 'painting');
-const years = Array.from(new Set(videos.map((video) => video.year || 'ARCHIVE'))).sort((a, b) => {
+const years = Array.from(new Set(timelineVideos.map((video) => video.year || 'ARCHIVE'))).sort((a, b) => {
 	if (a === 'ARCHIVE') return 1;
 	if (b === 'ARCHIVE') return -1;
 	return Number(b) - Number(a);
 });
-const yearCounts = new Map(years.map((year) => [year, videos.filter((video) => (video.year || 'ARCHIVE') === year).length]));
+const yearCounts = new Map(years.map((year) => [year, timelineVideos.filter((video) => (video.year || 'ARCHIVE') === year).length]));
 const walkAcrossUsa2014Archive = {
 	year: '2014',
 	title: 'WALK ACROSS USA 2014',
@@ -216,7 +232,7 @@ const socialImage = pickupItems[0]?.id
 									<small>{series.label}</small>
 									<strong>{series.title}</strong>
 									<span>{series.description}</span>
-									<em>{series.countLabel || `${series.count} EPISODES`}</em>
+									<em>{series.count} EPISODES</em>
 								</span>
 							</a>
 						);
@@ -262,7 +278,7 @@ const socialImage = pickupItems[0]?.id
 				</label>
 			</div>
 			<div class="year-nav" aria-label="年別ジャンプ">
-				<a href="#episodes" data-show-year="all">ALL <small>{videos.length}</small></a>
+				<a href="#episodes" data-show-year="all">ALL <small>{timelineVideos.length}</small></a>
 				{displayYears.map((year) => (
 					<a href={`#year-${year}`} data-show-year={year}>{year}<small>{getYearNavCount(year)}</small></a>
 				))}
@@ -270,7 +286,7 @@ const socialImage = pickupItems[0]?.id
 
 			<div class="episode-list" data-show-list>
 				{displayYears.map((year) => {
-					const yearVideos = videos.filter((video) => (video.year || 'ARCHIVE') === year);
+					const yearVideos = timelineVideos.filter((video) => (video.year || 'ARCHIVE') === year);
 					const showWalkAcrossArchive = year === walkAcrossUsa2014Archive.year;
 					return (
 						<section class="year-block" id={`year-${year}`} data-year-block={year}>
@@ -300,11 +316,11 @@ const socialImage = pickupItems[0]?.id
 								{yearVideos.map((video, index) => (
 									<a
 										class="episode-card"
-										href={`https://youtu.be/${video.id}`}
+										href={video.url || `https://youtu.be/${video.id}`}
 										target="_blank"
 										rel="noopener noreferrer"
 										data-year={year}
-										data-search={`${video.title} ${video.excerpt || ''}`.toLowerCase()}
+										data-search={`${video.title} ${video.excerpt || ''} ${video.sourceLabel || ''}`.toLowerCase()}
 									>
 										<span class="episode-thumb">
 											<img src={video.thumbnail || `https://i.ytimg.com/vi/${video.id}/hq720.jpg`} alt={`${video.title} サムネイル`} loading="lazy" />
@@ -314,10 +330,13 @@ const socialImage = pickupItems[0]?.id
 												{String(index + 1).padStart(2, '0')}
 												{formatDate(video.publishedAt) && ` / ${formatDate(video.publishedAt)}`}
 												{formatDuration(video.duration) && ` / ${formatDuration(video.duration)}`}
+												{video.startLabel && ` / ${video.startLabel}`}
 											</span>
 											<strong>{video.title}</strong>
 											{video.excerpt && <small>{video.excerpt}</small>}
-											{formatViews(video.viewCount) && <em>{formatViews(video.viewCount)} views</em>}
+											{(video.ctaLabel || formatViews(video.viewCount)) && (
+												<em>{video.ctaLabel || `${formatViews(video.viewCount)} views`}</em>
+											)}
 										</span>
 									</a>
 								))}
