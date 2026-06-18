@@ -39,19 +39,32 @@ const archiveData = archive as {
 const seriesData = seriesArchive as { fetchedAt: string | null; playlists: ShowSeries[] };
 
 const videos = archiveData.videos || [];
-const jerichoJapan1991Video: ShowVideo = {
-	id: 'cery_NEusH4',
-	title: "ジェリコ・ジャパン'91 東京有明コロシアム メッセージ",
-	excerpt: '1991年7月20日、東京有明コロシアムで行われたジェリコジャパンでのメッセージの貴重な記録。ミクタムオフィシャルYouTubeチャンネルから、貴重な記録をご覧ください。',
-	publishedAt: '1991-07-20T00:00:00+09:00',
-	year: '1991',
-	thumbnail: 'https://i.ytimg.com/vi/cery_NEusH4/hq720.jpg',
-	url: 'https://youtu.be/cery_NEusH4?t=4538',
-	startLabel: 'START 1:15:38',
-	ctaLabel: 'ミクタムオフィシャルYouTubeチャンネル',
-	sourceLabel: 'ミクタム Newオフィシャル | New MICHTAM',
-};
-const timelineVideos = [...videos, jerichoJapan1991Video];
+const manualTimelineVideos: ShowVideo[] = [
+	{
+		id: 'ClpDct8HqCs',
+		title: '【武道館ライブ】Arthur Hollands in BUDOKAN /東京リバイバルミッション 1998.9.21',
+		excerpt: '1998年9月21日、日本武道館で行われた東京リバイバルミッションの貴重な記録。',
+		publishedAt: '1998-09-21T00:00:00+09:00',
+		year: '1998',
+		thumbnail: 'https://i.ytimg.com/vi/ClpDct8HqCs/hq720.jpg',
+		duration: 'PT53M7S',
+		viewCount: '10454',
+	},
+	{
+		id: 'cery_NEusH4',
+		title: "ジェリコ・ジャパン'91 東京有明コロシアム メッセージ",
+		excerpt: '1991年7月20日、東京有明コロシアムで行われたジェリコジャパンでのメッセージの貴重な記録。ミクタムオフィシャルYouTubeチャンネルから、貴重な記録をご覧ください。',
+		publishedAt: '1991-07-20T00:00:00+09:00',
+		year: '1991',
+		thumbnail: 'https://i.ytimg.com/vi/cery_NEusH4/hq720.jpg',
+		url: 'https://youtu.be/cery_NEusH4?t=4538',
+		startLabel: 'START 1:15:38',
+		ctaLabel: 'ミクタムオフィシャルYouTubeチャンネル',
+		sourceLabel: 'ミクタム Newオフィシャル | New MICHTAM',
+	},
+];
+const videoIds = new Set(videos.map((video) => video.id));
+const timelineVideos = [...videos, ...manualTimelineVideos.filter((video) => !videoIds.has(video.id))];
 const excludedSeriesPlaylistIds = new Set(['PL-faIdjPoxKiA5aStAASg7VMrjT_-90_o']);
 const showSeries = (seriesData.playlists || []).filter((series) => !excludedSeriesPlaylistIds.has(series.playlistId));
 const paintingSeries = showSeries.find((series) => series.kind === 'painting');
