@@ -108,6 +108,7 @@ const isCurrent = (href: string) => {
 };
 const navItems = [
 	{ href: "/#messages", label: "Arthur Hollands' Message", active: currentPath === "/" },
+	{ href: "/diviner/", label: "DIVINER", active: isCurrent("/diviner/") },
 	{ href: "/arthur-hollands-show/", label: "THE ARTHUR HOLLANDS SHOW", active: isCurrent("/arthur-hollands-show/") },
 	{ href: "/friday-night/", label: "FRIDAY NIGHT", active: isCurrent("/friday-night/") },
 	{ href: "/walk-across/", label: "WALK ACROSS", active: isCurrent("/walk-across/") },

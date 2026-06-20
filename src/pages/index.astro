@@ -379,6 +379,19 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 			</div>
 		</a>
 
+		<a class="awaji-feature diviner-feature" href="/diviner/" aria-label="ARTHUR HOLLANDS × DIVINER 特設ページを見る">
+			<div class="awaji-visual diviner-visual">
+				<img src="/assets/diviner-arthur-202606/rendered/walk-closeup-cross.webp" alt="ARTHUR HOLLANDS × DIVINER" loading="eager" />
+			</div>
+			<div class="awaji-copy diviner-copy">
+				<p class="awaji-kicker">NEW COLLABORATION</p>
+				<h2>ARTHUR HOLLANDS × DIVINER</h2>
+				<p class="awaji-ja">A new signal is coming.</p>
+				<p class="awaji-text">RECKLESS LIFE / YOU ARE LOVED</p>
+				<span class="awaji-button">特設ページを見る</span>
+			</div>
+		</a>
+
 		<section class="latest-section" id="messages" aria-labelledby="featured-title">
 			<div class="section-bar">
 				<div>
@@ -1077,6 +1090,78 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 
 	.goto-feature .awaji-button {
 		background: #d9aa52;
+	}
+
+	.diviner-feature {
+		grid-template-columns: minmax(240px, 420px) 1fr;
+		gap: 28px;
+		margin-top: 28px;
+		padding: 0;
+		background:
+			linear-gradient(118deg, rgba(5, 5, 5, 0.98) 0%, rgba(18, 18, 18, 0.96) 52%, rgba(88, 16, 18, 0.9) 100%),
+			#080808;
+		border-left-color: #c93434;
+		box-shadow: 0 20px 48px rgba(0, 0, 0, 0.2);
+	}
+
+	.diviner-feature::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background:
+			linear-gradient(90deg, rgba(255, 255, 255, 0.08), transparent 32%),
+			repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.055) 0 1px, transparent 1px 46px);
+		opacity: 0.45;
+		pointer-events: none;
+	}
+
+	.diviner-feature .awaji-kicker {
+		color: #ff5b55;
+	}
+
+	.diviner-feature .awaji-copy {
+		padding: clamp(24px, 4vw, 42px) clamp(20px, 4vw, 44px) clamp(24px, 4vw, 42px) 0;
+	}
+
+	.diviner-feature h2 {
+		max-width: 11em;
+		font-size: clamp(2rem, 5vw, 4.2rem);
+	}
+
+	.diviner-feature .awaji-ja {
+		color: #fff;
+		font-family: 'Oswald', sans-serif;
+		font-size: clamp(1.2rem, 2.6vw, 1.8rem);
+		line-height: 1.15;
+	}
+
+	.diviner-feature .awaji-text {
+		color: rgba(255, 255, 255, 0.74);
+		font-family: 'Oswald', sans-serif;
+		font-size: 0.95rem;
+		font-weight: 900;
+	}
+
+	.diviner-feature .awaji-button {
+		background: #c93434;
+		color: #fff;
+	}
+
+	.diviner-feature:hover .awaji-button {
+		background: #fff;
+		color: #111;
+	}
+
+	.diviner-visual {
+		align-self: stretch;
+		aspect-ratio: 16 / 10;
+		min-height: 260px;
+		background: #050505;
+	}
+
+	.diviner-visual img {
+		object-fit: cover;
+		object-position: center top;
 	}
 
 	.latest-section,
@@ -2119,15 +2204,40 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 			margin: 0 auto;
 		}
 
-		.awaji-visual img {
-			height: auto;
-			object-fit: contain;
-		}
+			.awaji-visual img {
+				height: auto;
+				object-fit: contain;
+			}
 
-		.section-bar {
-			align-items: flex-start;
-			flex-direction: column;
-		}
+			.diviner-feature {
+				grid-template-columns: 1fr;
+				gap: 0;
+				padding: 0;
+			}
+
+			.diviner-feature .awaji-copy {
+				padding: 22px 18px 24px;
+			}
+
+			.diviner-feature h2 {
+				font-size: clamp(2.2rem, 12vw, 3.35rem);
+			}
+
+			.diviner-visual {
+				max-width: none;
+				aspect-ratio: 16 / 10;
+				min-height: 0;
+			}
+
+			.diviner-visual img {
+				height: 100%;
+				object-fit: cover;
+			}
+
+			.section-bar {
+				align-items: flex-start;
+				flex-direction: column;
+			}
 
 		.featured-grid,
 		.featured-card.primary {
