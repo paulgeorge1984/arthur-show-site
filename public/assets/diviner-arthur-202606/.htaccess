@@ -1,0 +1,11 @@
+Options -Indexes
+IndexIgnore *
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^(docs/|source/|rendered/(a4-infographic|photo-assortment|graphic-tee|photo-tee|sns-20260627-launch|story-20260627-launch)) - [F,L]
+</IfModule>
+
+<IfModule mod_headers.c>
+Header set X-Robots-Tag "noindex, nofollow, noarchive"
+</IfModule>

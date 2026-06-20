@@ -1,0 +1,163 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const updatedAt = '2026年6月20日';
+---
+
+<Layout
+	title="App Privacy Policy"
+	description="THE ARTHUR HOLLANDS SHOWアプリのプライバシーポリシー。ディボーションメモ、お気に入り、次に見るリストなどは端末内に保存され、アプリからサーバーへ送信されません。"
+	ogType="website"
+	canonicalPath="/app-privacy/"
+>
+	<article class="privacy-page">
+		<header class="privacy-hero">
+			<p class="privacy-label">MOBILE APP PRIVACY</p>
+			<h1>THE ARTHUR HOLLANDS SHOW App Privacy Policy</h1>
+			<p>
+				THE ARTHUR HOLLANDS SHOWアプリは、動画メッセージ、ディボーション記録、
+				イベント情報、口語訳聖書の御言葉表示を楽しむためのモバイルアプリです。
+			</p>
+			<small>最終更新: {updatedAt}</small>
+		</header>
+
+		<section class="privacy-section">
+			<h2>収集する情報</h2>
+			<p>
+				このアプリは、アプリ利用者の氏名、メールアドレス、電話番号、位置情報、連絡先、
+				支払い情報などの個人情報をアプリ内で収集しません。
+			</p>
+		</section>
+
+		<section class="privacy-section">
+			<h2>端末内に保存される情報</h2>
+			<p>
+				ディボーションメモ、お気に入り、次に見るリスト、最近見た項目、選択した表示言語、
+				および公開コンテンツのキャッシュは、利用者の端末内に保存されます。
+				これらの内容は、アプリからTHE ARTHUR HOLLANDS SHOWのサーバーへ送信されません。
+			</p>
+		</section>
+
+		<section class="privacy-section">
+			<h2>通信について</h2>
+			<p>
+				アプリは、公開コンテンツを更新するために
+				<code>https://arthur-show.com/app-content.json</code>を読み込みます。
+				YouTube、公式サイト、地図、Google翻訳、SNS共有などの外部サービスは、
+				利用者がボタンを押して開いた場合にのみ使用されます。
+				外部サービス上での情報の取り扱いは、各サービスのプライバシーポリシーに従います。
+			</p>
+		</section>
+
+		<section class="privacy-section">
+			<h2>印刷と共有</h2>
+			<p>
+				ディボーションメモは、利用者の操作によりPDF作成、印刷、共有ができます。
+				共有先を選択した後の情報の取り扱いは、共有先のアプリまたはサービスに依存します。
+			</p>
+		</section>
+
+		<section class="privacy-section">
+			<h2>お問い合わせ</h2>
+			<p>
+				アプリと本ポリシーに関するお問い合わせは、
+				<a href="https://arthur-show.com/">THE ARTHUR HOLLANDS SHOW</a>
+				の公式サイトからご確認ください。
+			</p>
+		</section>
+	</article>
+</Layout>
+
+<style>
+	.privacy-page {
+		width: min(960px, calc(100% - 32px));
+		margin: 0 auto;
+		padding: 72px 0 96px;
+		color: #161310;
+	}
+
+	.privacy-hero {
+		padding: 42px;
+		border-radius: 24px;
+		background: #111;
+		color: #fff;
+		box-shadow: 0 28px 70px rgba(0, 0, 0, 0.2);
+	}
+
+	.privacy-label {
+		margin: 0 0 10px;
+		color: #f3d36a;
+		font-size: 0.78rem;
+		font-weight: 900;
+		letter-spacing: 0.14em;
+	}
+
+	.privacy-hero h1 {
+		margin: 0;
+		font-size: clamp(2rem, 5vw, 4rem);
+		line-height: 0.98;
+		letter-spacing: 0;
+	}
+
+	.privacy-hero p {
+		max-width: 680px;
+		margin: 22px 0 0;
+		color: rgba(255, 255, 255, 0.84);
+		font-weight: 700;
+		line-height: 1.9;
+	}
+
+	.privacy-hero small {
+		display: inline-block;
+		margin-top: 22px;
+		color: #f3d36a;
+		font-weight: 900;
+	}
+
+	.privacy-section {
+		margin-top: 24px;
+		padding: 28px;
+		border: 1px solid rgba(0, 0, 0, 0.1);
+		border-radius: 18px;
+		background: #fffdf7;
+	}
+
+	.privacy-section h2 {
+		margin: 0;
+		font-size: 1.35rem;
+		letter-spacing: 0;
+	}
+
+	.privacy-section p {
+		margin: 14px 0 0;
+		color: #51493f;
+		font-weight: 700;
+		line-height: 1.95;
+	}
+
+	.privacy-section code {
+		padding: 0.12em 0.35em;
+		border-radius: 6px;
+		background: rgba(0, 0, 0, 0.08);
+		font-size: 0.92em;
+	}
+
+	.privacy-section a {
+		color: #8f3a2d;
+		font-weight: 900;
+		text-decoration-thickness: 0.12em;
+	}
+
+	@media (max-width: 640px) {
+		.privacy-page {
+			width: min(100% - 24px, 960px);
+			padding-top: 36px;
+		}
+
+		.privacy-hero,
+		.privacy-section {
+			padding: 24px;
+			border-radius: 18px;
+		}
+	}
+</style>

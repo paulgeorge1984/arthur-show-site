@@ -33,6 +33,7 @@ export async function GET() {
 		{ path: '/swords-of-words/', changefreq: 'weekly', priority: '0.7' },
 		{ path: '/1000-verses/', changefreq: 'weekly', priority: '0.7' },
 		{ path: '/calendar/', changefreq: 'weekly', priority: '0.7' },
+		{ path: '/app-privacy/', changefreq: 'monthly', priority: '0.3' },
 	];
 
 	const urls = [
