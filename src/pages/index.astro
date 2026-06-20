@@ -358,11 +358,16 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 				<img src="/walk-across-goto2026/assets/goto-cross-walk-2026-wide.jpg" alt="WALK ACROSS GOTO ISLANDS 2026 五島列島十字架行進の告知ビジュアル" loading="eager" />
 			</div>
 			<div class="awaji-copy">
-				<p class="awaji-kicker">SPECIAL PAGE</p>
+				<p class="awaji-kicker">LIVE PROJECT / 6.22 START</p>
 				<h2>WALK ACROSS GOTO ISLANDS 2026</h2>
-				<p class="awaji-ja">2026年6月、長崎県・五島列島を舞台に十字架を掲げて歩く祈りの旅。</p>
-				<p class="awaji-text">現地映像、ドキュメンタリー、行進記録を順次掲載します。</p>
-				<span class="awaji-button">特設ページを見る</span>
+				<p class="awaji-ja">五島列島十字架行進、月曜日から始動。</p>
+				<p class="awaji-text">現地から届く映像、行進の記録、祈りの歩みを順次公開していきます。</p>
+				<div class="goto-status-row" aria-label="WALK ACROSS GOTO ISLANDS 2026 更新予定">
+					<span>現地映像</span>
+					<span>行進記録</span>
+					<span>ドキュメンタリー</span>
+				</div>
+				<span class="awaji-button">現地レポートを見る</span>
 			</div>
 		</a>
 
@@ -1065,13 +1070,35 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 
 	.goto-feature {
 		background:
-			linear-gradient(112deg, rgba(5, 43, 58, 0.98), rgba(6, 96, 117, 0.9)),
+			linear-gradient(112deg, rgba(4, 32, 43, 0.98), rgba(4, 91, 106, 0.92) 58%, rgba(14, 136, 120, 0.88)),
 			#052b3a;
 		border-left-color: #8ed8d6;
 	}
 
 	.goto-feature .awaji-kicker {
-		color: #8ed8d6;
+		width: fit-content;
+		margin-bottom: 9px;
+		padding: 5px 9px;
+		background: rgba(142, 216, 214, 0.14);
+		border: 1px solid rgba(142, 216, 214, 0.42);
+		color: #bff7f0;
+		font-size: 0.72rem;
+	}
+
+	.goto-feature h2 {
+		font-size: clamp(1.75rem, 4.5vw, 3.08rem);
+	}
+
+	.goto-feature .awaji-ja {
+		color: #fff;
+		font-size: clamp(1.05rem, 2.4vw, 1.32rem);
+	}
+
+	.goto-feature .awaji-text {
+		max-width: 36em;
+		color: rgba(255, 255, 255, 0.84);
+		font-weight: 800;
+		line-height: 1.65;
 	}
 
 	.goto-feature .awaji-visual {
@@ -1084,7 +1111,28 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 	}
 
 	.goto-feature .awaji-button {
-		background: #d9aa52;
+		background: #f0c35b;
+		color: #071f24;
+	}
+
+	.goto-status-row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 7px;
+		margin: 2px 0 16px;
+	}
+
+	.goto-status-row span {
+		display: inline-flex;
+		align-items: center;
+		min-height: 28px;
+		padding: 0 9px;
+		background: rgba(255, 255, 255, 0.1);
+		border: 1px solid rgba(255, 255, 255, 0.24);
+		color: #fff;
+		font-size: 0.78rem;
+		font-weight: 900;
+		line-height: 1;
 	}
 
 	.diviner-feature {
