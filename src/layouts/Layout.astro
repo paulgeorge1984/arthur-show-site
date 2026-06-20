@@ -393,11 +393,13 @@ const navItems = [
 	.global-section-nav {
 		display: flex;
 		justify-content: center;
-		gap: 4px;
+		flex-wrap: wrap;
+		gap: 4px 6px;
 		width: 100%;
-		padding: 10px 20px;
-		overflow-x: auto;
-		scrollbar-width: none;
+		max-width: 1240px;
+		margin: 0 auto;
+		padding: 10px clamp(14px, 2vw, 22px);
+		overflow: visible;
 	}
 	.global-section-nav::-webkit-scrollbar {
 		display: none;
@@ -408,15 +410,15 @@ const navItems = [
 		align-items: center;
 		justify-content: center;
 		flex: 0 0 auto;
-		min-height: 34px;
-		padding: 0 14px;
+		min-height: 32px;
+		padding: 0 clamp(8px, 0.8vw, 12px);
 		color: rgba(255, 255, 255, 0.78);
 		border: 1px solid transparent;
 		border-bottom: 2px solid transparent;
 		font-family: var(--font-head);
-		font-size: 0.82rem;
+		font-size: clamp(0.72rem, 0.8vw, 0.8rem);
 		font-weight: 900;
-		letter-spacing: 0.04em;
+		letter-spacing: 0.02em;
 		line-height: 1;
 		text-align: center;
 		white-space: nowrap;
