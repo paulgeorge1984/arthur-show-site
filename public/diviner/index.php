@@ -747,32 +747,35 @@ $navItems = [
 					min-height: 0;
 					padding: 16px 18px;
 				}
-				.hero {
-					grid-template-columns: 1fr;
-					gap: 22px;
-					width: min(100% - 28px, 540px);
-					min-height: 0;
-					padding: 18px 0 78px;
-				}
-				.hero-copy {
-					order: 2;
-					padding-bottom: 0;
-				}
-				.hero-art {
-					order: 1;
-					min-height: 0;
-					height: clamp(340px, 64svh, 520px);
-				}
-				.hero h1 {
-					font-size: clamp(3.25rem, 18vw, 5.4rem);
-				}
-				.lead {
-					font-size: 1.18rem;
-				}
-				.strip {
-					bottom: 18px;
-					grid-template-columns: 1fr;
-				}
+					.hero {
+						grid-template-columns: 1fr;
+						gap: 22px;
+						width: min(100% - 28px, 540px);
+						min-height: 0;
+						padding: 18px 0 26px;
+					}
+					.hero-copy {
+						order: 2;
+						padding-bottom: 0;
+					}
+					.hero-art {
+						order: 1;
+						min-height: 0;
+						height: clamp(300px, 52svh, 430px);
+					}
+					.hero h1 {
+						font-size: clamp(2.85rem, 15.5vw, 4.35rem);
+						line-height: 0.9;
+					}
+					.lead {
+						font-size: 1.05rem;
+					}
+					.strip {
+						position: static;
+						order: 3;
+						grid-column: 1;
+						grid-template-columns: 1fr;
+					}
 				.strip span {
 					min-height: 34px;
 					padding: 8px 10px;
@@ -796,16 +799,29 @@ $navItems = [
 					display: grid;
 					gap: 14px;
 				}
-				.interview-card {
-					grid-template-columns: 1fr;
-				}
-				.interview-media img {
-					min-height: 0;
-					aspect-ratio: 16 / 10;
-				}
-				.share-actions {
-					flex-wrap: wrap;
-				}
+					.interview-card {
+						grid-template-columns: 1fr;
+						gap: 16px;
+						padding: 18px;
+					}
+					.interview-media img {
+						min-height: 0;
+						aspect-ratio: 16 / 10;
+					}
+					.article-eyebrow {
+						font-size: 0.78rem;
+					}
+					.interview-card h3 {
+						font-size: 1.55rem;
+						line-height: 1.18;
+					}
+					.interview-card p {
+						font-size: 0.94rem;
+						line-height: 1.65;
+					}
+					.share-actions {
+						flex-wrap: wrap;
+					}
 				.share-button {
 					flex: 1 1 72px;
 					width: auto;
@@ -883,7 +899,7 @@ $navItems = [
 				<?php if ($showInterviewArticle): ?>
 					<a class="interview-card" href="<?= h($interviewUrl) ?>" target="_blank" rel="noopener noreferrer" aria-label="DIVINER公式特別対談記事を読む">
 						<div class="interview-media" aria-hidden="true">
-							<img src="/assets/diviner-arthur-202606/rendered/sns-20260624-interview.png" alt="" width="1080" height="1350" loading="lazy">
+							<img src="/assets/diviner-arthur-202606/rendered/walk-closeup-cross.webp" alt="" width="1400" height="1750" loading="lazy">
 						</div>
 						<div class="interview-copy">
 							<p class="article-eyebrow">DIVINER OFFICIAL ARTICLE</p>
