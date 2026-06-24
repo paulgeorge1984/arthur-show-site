@@ -530,8 +530,8 @@ $navItems = [
 				height: 100%;
 				min-height: 220px;
 				aspect-ratio: 4 / 3;
-				object-fit: cover;
-				object-position: center;
+					object-fit: cover;
+					object-position: center 30%;
 			}
 			.interview-copy {
 				display: grid;
@@ -903,7 +903,7 @@ $navItems = [
 				<?php if ($showInterviewArticle): ?>
 					<a class="interview-card" href="<?= h($interviewUrl) ?>" target="_blank" rel="noopener noreferrer" aria-label="DIVINER公式特別対談記事を読む">
 						<div class="interview-media" aria-hidden="true">
-							<img src="/assets/diviner-arthur-202606/rendered/walk-closeup-cross.webp" alt="" width="1400" height="1750" loading="lazy">
+							<img src="/assets/diviner-arthur-202606/rendered/walk-front-cross.webp" alt="" width="1400" height="1750" loading="lazy">
 						</div>
 						<div class="interview-copy">
 							<p class="article-eyebrow">DIVINER OFFICIAL ARTICLE</p>
