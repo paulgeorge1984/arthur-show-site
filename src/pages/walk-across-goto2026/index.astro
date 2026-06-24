@@ -6,8 +6,658 @@ import GoogleAnalytics from '../../components/GoogleAnalytics.astro';
 const siteURL = 'https://arthur-show.com';
 const canonicalURL = `${siteURL}/walk-across-goto2026/`;
 const pageTitle = 'アーサーホーランド WALK ACROSS GOTO ISLANDS 2026 | THE ARTHUR HOLLANDS SHOW';
-const pageDescription = 'WALK ACROSS GOTO ISLANDS 2026。2026年6月、長崎県・五島列島を舞台に十字架を掲げて歩く祈りの旅。現地映像、ドキュメンタリー、行進記録を順次掲載します。';
-const pageImage = `${canonicalURL}assets/goto-cross-walk-2026-wide.jpg`;
+const pageDescription = 'WALK ACROSS GOTO ISLANDS 2026。五島列島十字架行進3日目、久賀島の田の浦港からカフェ さわらび方面へ。祭壇の火を絶やさないという朝の御言葉、雨の島道、牢屋の窄殉教記念教会での祈りを掲載しています。';
+const pageImage = `${canonicalURL}assets/report-20260624/goto-20260624-cross-seaside-arthur.jpg`;
+const pageImageAlt = '五島列島十字架行進3日目、久賀島の海沿いで十字架を担ぐアーサー先生';
+const featuredReportPhoto = {
+  src: './assets/report-20260621/goto-20260621-propeller-plane-apron.jpg',
+  alt: '長崎空港で五島列島へ向かうプロペラ機に乗り込む場面',
+  title: '長崎空港からプロペラ機へ',
+  caption: '大きな飛行機から小さなプロペラ機へ。島旅の空気が一気に近づいてきます。',
+};
+const reportPhotos = [
+  {
+    src: './assets/report-20260621/goto-20260621-haneda-encounter.jpg',
+    alt: '羽田空港のロビーでアーサー先生のことをご存じだった方と話す場面',
+    title: '羽田空港での思いがけない出会い',
+    caption: 'アーサー先生のことをご存じの方が声をかけてくださり、旅の始まりが温かな時間になりました。',
+  },
+  {
+    src: './assets/report-20260621/goto-20260621-haneda-terminal-walk.jpg',
+    alt: '羽田空港のターミナルを歩くアーサー先生',
+    title: '羽田空港のターミナルを歩いて',
+    caption: '出発ゲートへ向かう通路を歩くアーサー先生。これから始まる五島列島への旅の期待が高まります。',
+  },
+  {
+    src: './assets/report-20260621/goto-20260621-haneda-nagasaki-gate.jpg',
+    alt: '羽田空港の長崎行き搭乗口の表示',
+    title: '羽田から長崎へ',
+    caption: '搭乗口に表示された「長崎」の文字。五島列島へ向かう一日の始まりを印象づけるショットです。',
+  },
+  {
+    src: './assets/report-20260621/goto-20260621-fathers-day-photo.jpg',
+    alt: '父の日にお父様とのツーショット写真をスマートフォンで見せるアーサー先生',
+    title: '父の日に見せてくださった一枚',
+    caption: 'この日は父の日。お父様とのツーショット写真を見せながら、「これは西成の鶴見橋の辺りで撮ったんだよ」と語ってくださいました。',
+  },
+  {
+    src: './assets/report-20260621/goto-20260621-goto-san-sea-route.jpg',
+    alt: 'フェリーの後方に広がる航跡と五島列島へ向かう海',
+    title: '後藤さんは海路で五島へ',
+    caption: 'フェリーから届いた海の映像。青い海に航跡が伸び、島々が少しずつ近づいていきます。',
+  },
+  {
+    src: './assets/report-20260621/goto-20260621-island-rosary-shop.jpg',
+    alt: '五島列島の島内で見つけた十字架やロザリオの小物',
+    title: '島の中にある十字架とロザリオ',
+    caption: 'ひと足先に島に早入りした後藤さんが、島内を散策し、十字架やロザリオを売っているお店もあると教えてくださいました。',
+  },
+  {
+    src: './assets/report-20260621/goto-20260621-arthur-go-join.jpg',
+    alt: '五島つばき空港で後藤さんとアーサー号に合流する場面',
+    title: '五島つばき空港でアーサー号と合流',
+    caption: '海路で渡ってきた後藤さんは、レンタカーではなく、お馴染みのアーサー号で到着。陸路と海路を越えて合流しました。',
+  },
+  {
+    src: './assets/report-20260621/goto-20260621-airport-weather.jpg',
+    alt: '五島つばき空港到着後に車窓から見えた緑と空',
+    title: '思ったほど暑くない福江島',
+    caption: '空港に到着すると、思っていたほど暑くはなく、天気も穏やか。島の緑と空が旅人を迎えてくれました。',
+  },
+  {
+    src: './assets/report-20260621/goto-20260621-airport-arthur-smile-gotosan.jpg',
+    alt: '五島つばき空港で笑顔を見せるアーサー先生',
+    title: '後藤さんのカメラに映った到着の笑顔',
+    caption: '五島つばき空港での到着時、後藤さんが撮影した映像から。島に着いた喜びがそのまま表れた一枚です。',
+  },
+  {
+    src: './assets/report-20260621/goto-20260621-boarding-stairs.jpg',
+    alt: '五島列島へ向かうプロペラ機のタラップを上るアーサー先生',
+    title: 'タラップを上り、五島列島へ',
+    caption: 'プロペラ機に乗り込む瞬間。いよいよ福江島へ向かう実感が高まります。',
+  },
+  {
+    src: './assets/report-20260621/goto-20260621-propeller-window-islands.jpg',
+    alt: 'プロペラ機の窓から見える五島列島の島々',
+    title: '機窓から見えてきた島々',
+    caption: 'プロペラ機の窓の向こうに島影が見え始め、これからの旅への期待をさらに高めてくれました。',
+  },
+  {
+    src: './assets/report-20260621/goto-20260621-orc-fukue-airport.jpg',
+    alt: '五島つばき空港の滑走路脇に停まるORCのプロペラ機',
+    title: '五島つばき空港に到着したORC機',
+    caption: '山並みと海に囲まれた空港で、五島列島の旅が本格的に始まります。',
+  },
+  {
+    src: './assets/report-20260621/goto-20260621-arrival-apron.jpg',
+    alt: '到着後にプロペラ機の前でタラップを降りる参加者たち',
+    title: '空路で島へ',
+    caption: '快晴の空の下、同じ目的地へ向かう参加者たちの姿も見えました。',
+  },
+];
+const [
+  hanedaEncounterPhoto,
+  hanedaTerminalPhoto,
+  hanedaNagasakiGatePhoto,
+  fathersDayPhoto,
+  seaRoutePhoto,
+  islandRosaryPhoto,
+  arthurGoJoinPhoto,
+  airportWeatherPhoto,
+  airportArthurSmilePhoto,
+  boardingStairsPhoto,
+  propellerWindowPhoto,
+  orcFukuePhoto,
+  arrivalApronPhoto,
+] = reportPhotos;
+const eveningFeaturePhoto = {
+  src: './assets/report-20260621/goto-20260621-evening-arthur-message.jpg',
+  alt: '五島キリスト教会でメッセージを語るアーサー先生',
+  title: '五島キリスト教会でのメッセージ',
+  caption: '座って語りかけるように、アーサー先生は一人ひとりへ向けてメッセージを届けました。',
+};
+const eveningPhotos = [
+  {
+    src: './assets/report-20260621/goto-20260621-town-catholic-church.jpg',
+    alt: 'メッセージ会場へ向かう途中に見えた五島のカトリック教会の建物',
+    title: '町並みに刻まれたキリシタンの歴史',
+    caption: '会場へ向かう途中にも、立派なカトリック教会の建物が見えました。島の所々に教会があり、五島の歴史が町並みからも伝わってきます。',
+  },
+  {
+    src: './assets/report-20260621/goto-20260621-evening-pastor-welcome.jpg',
+    alt: '五島キリスト教会の中村先生がアーサー先生を温かく迎える場面',
+    title: '中村先生の温かなお迎え',
+    caption: '教会に到着すると、五島キリスト教会の中村先生が温かく迎えてくださいました。集会前から、五島で待っていてくださった思いが伝わってきます。',
+  },
+  {
+    src: './assets/report-20260621/goto-20260621-hitomi-akita.jpg',
+    alt: '秋田から来たひとみさんとお友達、アーサー先生がアーサー号のそばで話す場面',
+    title: '秋田から来たひとみさんとお友達',
+    caption: 'はるばる秋田から来られたひとみさんとお友達。アーサー号のそばで、旅の中に与えられた出会いが重なりました。',
+  },
+  {
+    src: './assets/report-20260621/goto-20260621-hiro-osaka.jpg',
+    alt: '大阪から来たHIROさんが教会へ向かう道で話している場面',
+    title: '大阪から来たHIROさん',
+    caption: '以前、沖縄でアーサー先生からカップルで洗礼を受け、その後大阪ではお母さまも洗礼を受けられたHIROさん。五島でも再び歩みが重なりました。',
+  },
+  {
+    src: './assets/report-20260621/goto-20260621-evening-church-poster.jpg',
+    alt: '五島キリスト教会の掲示板に貼られたアーサー先生メッセージ集会のポスター',
+    title: '教会の掲示板に貼られたポスター',
+    caption: '会場へ着くと、掲示板にはこの日のメッセージ集会の案内が。夕方からの時間への期待も高まっていきました。',
+  },
+  {
+    src: './assets/report-20260621/goto-20260621-evening-goto-testimony.jpg',
+    alt: '五島キリスト教会で証しを語る後藤さん',
+    title: '後藤さんの証し',
+    caption: '人生の痛みの中でアーサー先生と出会い、十字架を担ぐ歩みへ導かれていった後藤さん。神の愛は一生続くという実感が語られました。',
+  },
+  {
+    src: './assets/report-20260621/goto-20260621-evening-prayer.jpg',
+    alt: '五島キリスト教会でメッセージを聞き祈る会場の様子',
+    title: '祈りへと導かれた会場',
+    caption: 'メッセージの最後には、心の扉を開き、イエス・キリストを迎える祈りへと導かれていきました。',
+  },
+  {
+    src: './assets/report-20260621/goto-20260621-evening-group-photo.jpg',
+    alt: '五島キリスト教会での講演会後に撮影した集合写真',
+    title: '講演会後の集合写真',
+    caption: '講演会の後、教会の皆さんとともに。翌日からの十字架行進へ向けて、温かな交わりの時間となりました。',
+  },
+];
+const [
+  townCatholicPhoto,
+  pastorWelcomePhoto,
+  hitomiAkitaPhoto,
+  hiroOsakaPhoto,
+  churchPosterPhoto,
+  gotoTestimonyPhoto,
+  eveningPrayerPhoto,
+  eveningGroupPhoto,
+] = eveningPhotos;
+const day1DevotionPhoto = {
+  src: './assets/report-20260622/goto-20260622-morning-devotion.jpg',
+  alt: 'アーサー号の中で聖書を開き朝のディボーションをするアーサー先生',
+  title: 'アーサー号での朝のディボーション',
+  caption: '出発前、アーサー号の中でローマ書12章を開き、御言葉を分かち合って祈りを合わせました。',
+};
+const day1FeaturePhoto = {
+  src: './assets/report-20260622/goto-20260622-arthur-cross.jpg',
+  alt: '五島列島十字架行進1日目、十字架とともに雨の福江島を歩くアーサー先生',
+  title: '雨の道を、十字架とともに',
+  caption: '雨の福江島で、アーサー先生も十字架を担ぎ、一歩ずつ前へ進みます。',
+};
+const day1Photos = [
+  {
+    src: './assets/report-20260622/goto-20260622-port-start.jpg',
+    alt: '福江港周辺から十字架を担いで歩き出すアーサー先生と参加者',
+    title: '福江港から歩き出す',
+    caption: '初日の行程は福江港から白良ヶ浜万葉公園へ。町の道から、十字架行進が始まりました。',
+  },
+  {
+    src: './assets/report-20260622/goto-20260622-first-walk.jpg',
+    alt: '十字架を担ぐ参加者と並んで歩くアーサー先生',
+    title: '参加者と肩を並べて',
+    caption: 'アーサー先生、後藤さん、参加者たちが交代しながら、十字架を担いで進みます。',
+  },
+  {
+    src: './assets/report-20260622/goto-20260622-green-road.jpg',
+    alt: '緑の山並みを背景に十字架を担いで384号線を歩く参加者たち',
+    title: '384号線を進む',
+    caption: '島の緑と山並みを背に、白良ヶ浜万葉公園を目指して歩いていきます。',
+  },
+  {
+    src: './assets/report-20260622/goto-20260622-fields-road.jpg',
+    alt: '山あいの道を十字架を担いで歩く参加者',
+    title: '山と田畑のそばを抜けて',
+    caption: '福江島の暮らしと自然が続く道。十字架を担ぐ姿が、島の風景の中に重なります。',
+  },
+  {
+    src: './assets/report-20260622/goto-20260622-cross-with-participant.jpg',
+    alt: '十字架のそばで笑顔を見せるアーサー先生と参加者',
+    title: '十字架を囲む笑顔',
+    caption: '歩みの途中にも、参加者との出会いと笑顔が重なっていきました。',
+  },
+  {
+    src: './assets/report-20260622/goto-20260622-rest-umbrella.jpg',
+    alt: '雨の中、傘の下で休憩するアーサー先生と参加者',
+    title: '雨の中でひと息',
+    caption: '天気は次第に雨模様へ。傘を差しながら、アーサー号のそばで一息つきます。',
+  },
+  {
+    src: './assets/report-20260622/goto-20260622-arthur-go-rest.jpg',
+    alt: 'アーサー号の横で休憩するアーサー先生と参加者',
+    title: '伴走するアーサー号',
+    caption: 'アーサー号が行進を支え、参加者たちの休憩場所にもなってくれました。',
+  },
+  {
+    src: './assets/report-20260622/goto-20260622-outdoor-communion.jpg',
+    alt: '休憩中、アーサー号のそばで持たれた聖餐式の様子',
+    title: 'アウトドア聖餐式',
+    caption: '休憩の時間、アーサー号のそばで小さな聖餐式の時が持たれました。',
+  },
+  {
+    src: './assets/report-20260622/goto-20260622-bay-rain-walk.jpg',
+    alt: '初日の行進後、堂崎天主堂へ移動した先の湾で傘を差すアーサー先生たち',
+    title: '堂崎天主堂へ向かう雨の湾',
+    caption: '初日の行進を終えた後、堂崎天主堂へ移動した先で見えた雨の湾。静かな海と山が一日の歩みを包んでいました。',
+  },
+  {
+    src: './assets/report-20260622/goto-20260622-bay-arthur.jpg',
+    alt: '堂崎天主堂へ移動した後、湾を背にして立つアーサー先生',
+    title: '行進後、湾を背にして',
+    caption: '20kmを歩き終えた後に立った静かな湾。雨に煙る山並みと海が、福江島での一日を静かに物語っていました。',
+  },
+  {
+    src: './assets/report-20260622/goto-20260622-bay-view.jpg',
+    alt: '堂崎天主堂周辺から見える福江島の湾と山並み',
+    title: '堂崎天主堂周辺の海と山',
+    caption: '行進後に訪れた堂崎天主堂周辺の海辺。雨の中、五島列島らしい湾と山並みが広がっていました。',
+  },
+  {
+    src: './assets/report-20260622/goto-20260622-brick-church-arthur-exterior.jpg',
+    alt: '堂崎天主堂の外観の前に立つアーサー先生',
+    title: '堂崎天主堂の前で',
+    caption: '初日の行進を終えた後に訪れた堂崎天主堂。五島キリシタン復興と殉教者の記憶を今に伝える場所です。',
+    portrait: true,
+  },
+  {
+    src: './assets/report-20260622/goto-20260622-st-johane-goto-statue.jpg',
+    alt: '堂崎天主堂の敷地にある五島ヨハネ殉教像',
+    title: '聖ヨハネ五島の記憶',
+    caption: '堂崎天主堂の敷地に立つ五島ヨハネ殉教像。五島出身の青年が信仰のゆえに殉教した記憶を今に伝えています。',
+  },
+  {
+    src: './assets/report-20260622/goto-20260622-brick-church-fellowship.jpg',
+    alt: '堂崎天主堂の外観前でアーサー先生と参加者が並ぶ集合写真',
+    title: '堂崎天主堂の外で重なった交わり',
+    caption: '雨の中でも笑顔がこぼれるひととき。祈りを受け継いできた場所の外観を前に、参加者たちと記念の一枚を撮りました。',
+    portrait: true,
+  },
+  {
+    src: './assets/report-20260622/goto-20260622-brick-church-group.jpg',
+    alt: '堂崎天主堂の外観前でアーサー先生と参加者たちが並ぶ集合写真',
+    title: '堂崎天主堂を前にした集合写真',
+    caption: '五島の信仰の歴史を思わせる場所で、初日の歩みの記録がまた一つ残りました。',
+    portrait: true,
+  },
+];
+const [
+  day1PortStartPhoto,
+  day1FirstWalkPhoto,
+  day1GreenRoadPhoto,
+  day1FieldsRoadPhoto,
+  day1CrossParticipantPhoto,
+  day1RestUmbrellaPhoto,
+  day1ArthurGoRestPhoto,
+  day1OutdoorCommunionPhoto,
+  day1BayRainWalkPhoto,
+  day1BayArthurPhoto,
+  day1BayViewPhoto,
+  day1BrickChurchArthurPhoto,
+  day1JohaneGotoPhoto,
+  day1BrickChurchFellowshipPhoto,
+  day1BrickChurchGroupPhoto,
+] = day1Photos;
+const day2FeaturePhoto = {
+  src: './assets/report-20260623/goto-20260623-rain-cross-smile.jpg',
+  alt: pageImageAlt,
+  title: '雨の384号線を、十字架とともに',
+  caption: '2日目も雨の中、十字架を担ぎながら福江島の道を進みました。',
+};
+const day2Photos = [
+  {
+    src: './assets/report-20260623/goto-20260623-arthur-go-morning.jpg',
+    alt: '朝、アーサー号のそばで準備を進める参加者たち',
+    title: '雨の朝、アーサー号から',
+    caption: '2日目の朝も、アーサー号が行進の拠点に。雨具を整え、白良ヶ浜万葉公園からの歩みに備えます。',
+  },
+  {
+    src: './assets/report-20260623/goto-20260623-morning-devotion.jpg',
+    alt: 'アーサー号の中で聖書を開き朝の分かち合いをするアーサー先生',
+    title: '車内での朝の分かち合い',
+    caption: '出発前、アーサー号の中で御言葉を分かち合い、雨の一日を前に心を整えました。',
+  },
+  {
+    src: './assets/report-20260623/goto-20260623-rain-road-start.jpg',
+    alt: '雨の道でアーサー先生と参加者が十字架を担いで歩く',
+    title: '白良ヶ浜万葉公園から再び歩き出す',
+    caption: '初日の到着地から、2日目の行進が再開。雨の384号線を、旧たま丸乗船券売場へ向かって進みます。',
+  },
+  {
+    src: './assets/report-20260623/goto-20260623-rain-tunnel.jpg',
+    alt: '雨を避けるトンネルの中を十字架とともに歩くアーサー先生と参加者',
+    title: '雨音の中、トンネルを抜けて',
+    caption: '濡れた道、暗いトンネル、山あいの空気。雨の日の福江島ならではの表情が行進に重なりました。',
+  },
+  {
+    src: './assets/report-20260623/goto-20260623-cross-rain-walk.jpg',
+    alt: '雨の道路脇を十字架を担いで進むアーサー先生と参加者',
+    title: '一歩ずつ、同じ方向へ',
+    caption: '十字架は参加者が交代しながら担ぎます。それぞれの役割が重なり、歩みは少しずつ前へ進んでいきました。',
+  },
+  {
+    src: './assets/report-20260623/goto-20260623-bay-road.jpg',
+    alt: '雨の湾沿いの道を歩くアーサー先生',
+    title: '湾沿いに広がる五島の景色',
+    caption: '道の先には静かな湾と山並み。雨に煙る景色の中に、五島の深い美しさがありました。',
+  },
+  {
+    src: './assets/report-20260623/goto-20260623-arthur-go-rest.jpg',
+    alt: 'アーサー号の中で休憩するアーサー先生',
+    title: 'アーサー号でひと息',
+    caption: '雨の中を歩いた後、アーサー号で体を休めます。伴走する車が、行進を支える大切な場所になりました。',
+  },
+  {
+    src: './assets/report-20260623/goto-20260623-rain-bay-walk.jpg',
+    alt: '雨の湾を見渡す海沿いを歩くアーサー先生',
+    title: '雨の海を見ながら',
+    caption: '海辺に出ると、雨に潤った湾が広がりました。晴れの日とは違う、静かな五島の表情です。',
+  },
+  {
+    src: './assets/report-20260623/goto-20260623-beach-message.jpg',
+    alt: '海岸を背にYouTube視聴者へメッセージを届けるアーサー先生',
+    title: '海岸から届けたメッセージ',
+    caption: '高浜海岸を望む場所で、アーサー先生はYouTube視聴者に向けて短いメッセージを届けました。',
+  },
+  {
+    src: './assets/report-20260623/goto-20260623-final-road-cross.jpg',
+    alt: '雨の道を十字架とともに進むアーサー先生と参加者',
+    title: '雨の道をさらに先へ',
+    caption: '濡れた路面に十字架の姿が重なります。2日目の行進は、旧たま丸乗船券売場を目指して続きました。',
+  },
+  {
+    src: './assets/report-20260623/goto-20260623-van-fellowship.jpg',
+    alt: 'アーサー号の中で参加者と交わるアーサー先生',
+    title: '車内にも続く交わり',
+    caption: '歩く時間だけでなく、移動や休憩の中にも会話と祈りがありました。',
+  },
+  {
+    src: './assets/report-20260623/goto-20260623-africa-spirit-tract.jpg',
+    alt: '1997年発行のSPIRIT Vol.4、アーサー先生のアフリカ伝道旅行を伝えるトラクト',
+    title: '夕方に届いた貴重なトラクト',
+    caption: 'この日の夕方、アーサー先生から送られてきた「SPIRIT Vol.4」。1997年のアフリカ伝道旅行を伝える貴重な資料です。',
+    portrait: true,
+  },
+];
+const [
+  day2ArthurGoMorningPhoto,
+  day2MorningDevotionPhoto,
+  day2RainRoadStartPhoto,
+  day2RainTunnelPhoto,
+  day2CrossRainWalkPhoto,
+  day2BayRoadPhoto,
+  day2ArthurGoRestPhoto,
+  day2RainBayWalkPhoto,
+  day2BeachMessagePhoto,
+  day2ArthurGoLunchPhoto,
+  day2VanFellowshipPhoto,
+  day2AfricaTractPhoto,
+] = day2Photos;
+const day3FeaturePhoto = {
+  src: './assets/report-20260624/goto-20260624-cross-seaside-arthur.jpg',
+  alt: pageImageAlt,
+  title: '久賀島の海沿いを、十字架とともに',
+  caption: '3日目は田の浦港からカフェ さわらび方面へ。雨に潤った海沿いの道を、十字架とともに進みました。',
+};
+const day3Photos = [
+  {
+    src: './assets/report-20260624/goto-20260624-morning-devotion.jpg',
+    alt: 'アーサー号の中で朝のディボーションをするアーサー先生と参加者',
+    title: '祭壇の火を絶やさず',
+    caption: '朝のアーサー号ではレビ記6章13節から、心の中に与えられた信仰の火を覚えて祈りました。',
+  },
+  {
+    src: './assets/report-20260624/goto-20260624-ferry-deck-sea.jpg',
+    alt: '久賀島へ向かうフェリーのデッキから見える海と島々',
+    title: 'フェリーで久賀島へ',
+    caption: '福江島から久賀島へ。船のデッキから島々を見ながら、3日目の歩みへ向かいます。',
+  },
+  {
+    src: './assets/report-20260624/goto-20260624-ferry-deck-arthur.jpg',
+    alt: '久賀島へ向かうフェリーのデッキに立つアーサー先生',
+    title: '久賀島へ渡る船上で',
+    caption: 'フェリーのデッキに立ち、久賀島へ向かう海を見つめるアーサー先生。守られた航路の上にも、旅の緊張と期待がありました。',
+  },
+  {
+    src: './assets/report-20260624/goto-20260624-ferry-wake-arthur.jpg',
+    alt: 'フェリーの航跡と島々を見つめるアーサー先生',
+    title: '航跡の向こうに島々を見て',
+    caption: '船尾に広がる航跡と島々。海を渡って久賀島へ向かう時間が、3日目の始まりを印象づけました。',
+  },
+  {
+    src: './assets/report-20260624/goto-20260624-return-ferry-harbor.jpg',
+    alt: '久賀島の港で車を降ろすピンク色のフェリー',
+    title: '久賀島の港に着いたフェリー',
+    caption: '車も人も乗せて島へ渡るフェリー。久賀島へ向かう旅の足取りを、船体の姿がより具体的に伝えてくれます。',
+  },
+  {
+    src: './assets/report-20260624/goto-20260624-tanoura-arrival.jpg',
+    alt: '田の浦港に到着したアーサー号から見える久賀島の港',
+    title: '田の浦港に到着',
+    caption: '田の浦港に着くと、十字架を組み、久賀島での行進の準備を整えました。',
+  },
+  {
+    src: './assets/report-20260624/goto-20260624-cross-team-walk.jpg',
+    alt: '久賀島の道を十字架とともに歩く参加者たち',
+    title: '雨の道を肩を並べて',
+    caption: '十字架を担ぎながら、参加者たちと久賀島の道を進みます。',
+  },
+  {
+    src: './assets/report-20260624/goto-20260624-rain-coast-cross.jpg',
+    alt: '久賀島の海沿いの道で十字架を担いで歩くアーサー先生と参加者',
+    title: '海沿いの道を進む',
+    caption: '雨に潤った海と山を見ながら、静かな島道を一歩ずつ進みました。',
+  },
+  {
+    src: './assets/report-20260624/goto-20260624-arthur-smile-sea.jpg',
+    alt: '久賀島の海を背に笑顔で歩くアーサー先生',
+    title: '海を背にした笑顔',
+    caption: '雨の中にも、歩きながら交わる笑顔がありました。',
+  },
+  {
+    src: './assets/report-20260624/goto-20260624-green-road-walk.jpg',
+    alt: '緑に包まれた久賀島の道を歩くアーサー先生と参加者',
+    title: '緑に包まれた久賀島の道',
+    caption: '山の緑、濡れた路面、静かな集落。久賀島ならではの風景の中を進みます。',
+  },
+  {
+    src: './assets/report-20260624/goto-20260624-village-road-cross.jpg',
+    alt: '久賀島の集落のそばで十字架を担いで歩く参加者たち',
+    title: '集落のそばを抜けて',
+    caption: '島の暮らしの近くを、十字架を担ぐ歩みが通っていきます。',
+  },
+  {
+    src: './assets/report-20260624/goto-20260624-prayer-over-island.jpg',
+    alt: '久賀島の道で島のために祈るアーサー先生たち',
+    title: '島のための祈り',
+    caption: 'この地で捧げられてきた祈りを覚えながら、五島列島にさらに福音の光が届くよう祈りました。',
+  },
+  {
+    src: './assets/report-20260624/goto-20260624-rouyanosako-approach.jpg',
+    alt: '牢屋の窄へ向かう道で立ち止まるアーサー先生',
+    title: '牢屋の窄へ',
+    caption: '久賀島の信仰の歴史を今に伝える、牢屋の窄殉教記念教会へ向かいました。',
+  },
+  {
+    src: './assets/report-20260624/goto-20260624-museum-exhibit-arthur.jpg',
+    alt: '久賀島潜伏キリシタン資料館で展示を見ながら案内を聞くアーサー先生',
+    title: '久賀島潜伏キリシタン資料館で',
+    caption: '資料を前に、久賀島に受け継がれてきた信仰と迫害の歴史を案内していただきました。',
+  },
+  {
+    src: './assets/report-20260624/goto-20260624-history-guide.jpg',
+    alt: '久賀島潜伏キリシタン資料館で資料を指しながら説明する館長',
+    title: '館長との対話',
+    caption: '展示された写真や資料を前に、館長から久賀島の信仰の歴史を直接伺いました。',
+  },
+  {
+    src: './assets/report-20260624/goto-20260624-rouyanosako-church-group.jpg',
+    alt: '牢屋の窄殉教記念教会の外観前で撮影したアーサー先生と参加者たち',
+    title: '牢屋の窄殉教記念教会の前で',
+    caption: '殉教の地に建てられた教会の前で。久賀島の信仰の記憶を受け止める時間となりました。',
+    portrait: true,
+  },
+  {
+    src: './assets/report-20260624/goto-20260624-rouyanosako-memorial-team.jpg',
+    alt: '牢屋の窄殉教記念教会の慰霊碑を背に立つアーサー先生と参加者たち',
+    title: '信仰之礎の前に立つ',
+    caption: '殉教者の記憶を刻む場所で、信仰を守り抜いた人々の証しを心に刻みました。',
+  },
+  {
+    src: './assets/report-20260624/goto-20260624-goal-fishing-nets-arthur.jpg',
+    alt: 'ゴール地点の海辺で網を洗う船を背に笑顔を見せるアーサー先生',
+    title: '網を洗う船を背に',
+    caption: 'ゴール地点の海辺では、船で網を洗う光景が広がっていました。',
+  },
+  {
+    src: './assets/report-20260624/goto-20260624-goal-team-cross.jpg',
+    alt: 'ゴール地点の海辺で十字架とともに立つアーサー先生と参加者たち',
+    title: 'ゴール地点の海辺で',
+    caption: '雨の久賀島を歩き切り、海辺のゴール地点で十字架とともに記念の一枚を撮りました。',
+  },
+  {
+    src: './assets/report-20260624/goto-20260624-arthur-go-rest.jpg',
+    alt: '雨の久賀島でアーサー号のそばに立つアーサー先生と参加者',
+    title: 'アーサー号でひと息',
+    caption: '雨の中の行進を支えたアーサー号。休憩の中にも、信仰と証しの会話が続きます。',
+  },
+  {
+    src: './assets/report-20260624/goto-20260624-sawarabi-rest.jpg',
+    alt: 'カフェさわらび方面の休憩場所で腰を下ろすアーサー先生',
+    title: '船着場での休憩',
+    caption: '帰りの船を待つ間、船着場で雨を避けながら交わりの時を持ちました。',
+  },
+  {
+    src: './assets/report-20260624/goto-20260624-return-ferry-pink.jpg',
+    alt: '帰りの船に乗る直前の雨の港とピンク色のフェリー',
+    title: '帰りの船へ',
+    caption: '行進と祈りを終え、再びフェリーで福江島へ。乗船した途端、天候は20ミリほどの大雨へと突如として変わりました。',
+  },
+  {
+    src: './assets/report-20260624/goto-20260624-return-ferry-harbor.jpg',
+    alt: '雨の久賀島の港で出発を待つフェリー',
+    title: '雨の港を後にして',
+    caption: '久賀島での一日を終え、雨に濡れた港から帰路につきました。',
+  },
+];
+const [
+  day3MorningDevotionPhoto,
+  day3FerryPhoto,
+  day3FerryDeckArthurPhoto,
+  day3FerryWakeArthurPhoto,
+  day3TanouraArrivalPhoto,
+  day3CrossTeamWalkPhoto,
+  day3RainCoastCrossPhoto,
+  day3ArthurSmileSeaPhoto,
+  day3GreenRoadWalkPhoto,
+  day3VillageRoadCrossPhoto,
+  day3PrayerOverIslandPhoto,
+  day3RouyanosakoApproachPhoto,
+  day3HistoryGuidePhoto,
+  day3MuseumConversationPhoto,
+  day3RouyanosakoChurchPhoto,
+  day3RouyanosakoMemorialPhoto,
+  day3GoalFishingNetsPhoto,
+  day3GoalTeamCrossPhoto,
+  day3ArthurGoRestPhoto,
+  day3SawarabiRestPhoto,
+  day3ReturnFerryPinkPhoto,
+  day3ReturnFerryHarborPhoto,
+] = day3Photos;
+const reportDayTabs = [
+  {
+    day: 'DAY00',
+    date: '6/21',
+    label: '到着・集会',
+    href: '#day0-report',
+    status: '公開中',
+  },
+  {
+    day: 'DAY01',
+    date: '6/22',
+    label: '福江港〜白良ヶ浜万葉公園',
+    href: '#day1-report',
+    status: '公開中',
+  },
+  {
+    day: 'DAY02',
+    date: '6/23',
+    label: '白良ヶ浜〜旧たま丸乗船券売場',
+    href: '#day2-report',
+    status: '公開中',
+  },
+  {
+    day: 'DAY03',
+    date: '6/24',
+    label: '久賀島',
+    href: '#day3-report',
+    status: '公開中',
+    current: true,
+  },
+  {
+    day: 'DAY04',
+    date: '6/25',
+    label: '奈留島',
+    status: '準備中',
+    disabled: true,
+  },
+  {
+    day: 'DAY05',
+    date: '6/26',
+    label: '上五島・若松',
+    status: '準備中',
+    disabled: true,
+  },
+  {
+    day: 'DAY06',
+    date: '6/27',
+    label: '上五島・奈良尾〜有川',
+    status: '準備中',
+    disabled: true,
+  },
+];
+const crossWalkRoutes = [
+  {
+    date: '6月22日（月）',
+    island: '福江島',
+    route: '福江港 ～ 白良ヶ浜万葉公園',
+    distance: '20km',
+    detail: '384号線',
+  },
+  {
+    date: '6月23日（火）',
+    island: '福江島',
+    route: '白良ヶ浜万葉公園 ～ 旧たま丸乗船券売場',
+    distance: '20km',
+    detail: '384号線',
+  },
+  {
+    date: '6月24日（水）',
+    island: '久賀島',
+    route: '田の浦港 ～ カフェ さわらび',
+    distance: '10km',
+  },
+  {
+    date: '6月25日（木）',
+    island: '奈留島',
+    route: '奈留ターミナル ～ 江上天主堂',
+    distance: '8km',
+  },
+  {
+    date: '6月26日（金）',
+    island: '上五島',
+    route: '若松大橋駐車場 ～ 土井ノ浦港',
+    distance: '5km',
+  },
+  {
+    date: '6月27日（土）',
+    island: '上五島',
+    route: '奈良尾港 ～ ローソン上五島有川店',
+    distance: '26km',
+  },
+];
 const structuredData = [
   {
     '@context': 'https://schema.org',
@@ -26,8 +676,8 @@ const structuredData = [
     primaryImageOfPage: {
       '@type': 'ImageObject',
       url: pageImage,
-      width: 1280,
-      height: 720,
+      width: 1800,
+      height: 1013,
     },
   },
   {
@@ -107,20 +757,20 @@ const structuredData = [
     <meta property="og:image" content={pageImage} />
     <meta property="og:image:secure_url" content={pageImage} />
     <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:width" content="1280" />
-    <meta property="og:image:height" content="720" />
-    <meta property="og:image:alt" content="Arthur Hollands 五島列島十字架行進2026 告知ビジュアル" />
+    <meta property="og:image:width" content="1800" />
+    <meta property="og:image:height" content="1013" />
+    <meta property="og:image:alt" content={pageImageAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={pageDescription} />
     <meta name="twitter:image" content={pageImage} />
-    <meta name="twitter:image:alt" content="Arthur Hollands 五島列島十字架行進2026 告知ビジュアル" />
+    <meta name="twitter:image:alt" content={pageImageAlt} />
     <GoogleAnalytics />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Oswald:wght@400;700&family=Shippori+Mincho:wght@500;700;800&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=20260601-goto-page" />
+    <link rel="stylesheet" href="./styles.css?v=20260624-day03" />
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
   <body>
@@ -136,14 +786,16 @@ const structuredData = [
     <div class="global-nav-shell" data-global-nav-shell>
       <nav class="global-quick-nav" aria-label="サイト内主要メニューショートカット">
         <a href="/#messages">Arthur Hollands' Message</a>
+        <a href="/walk-across-goto2026/" class="active">GOTO ISLANDS 2026</a>
+        <a href="/diviner/">DIVINER</a>
         <a href="/arthur-hollands-show/">THE ARTHUR HOLLANDS SHOW</a>
         <a href="/friday-night/">FRIDAY NIGHT</a>
         <a href="/walk-across/">WALK ACROSS</a>
         <a href="/walk-across-awaji2026/">WALK ACROSS AWAJI 2026</a>
-        <a href="/walk-across-goto2026/" class="active">GOTO ISLANDS 2026</a>
         <a href="/message-jukebox/">BIBLE JUKEBOX</a>
         <a href="/swords-of-words/">THE SWORDS OF WORDS</a>
         <a href="/1000-verses/">厳選 1000 VERSES</a>
+        <a href="/calendar/">CALENDAR</a>
       </nav>
       <button class="global-menu-toggle" type="button" aria-expanded="false" aria-controls="global-section-nav" data-global-menu-toggle>
         <span class="menu-lines" aria-hidden="true">
@@ -155,22 +807,29 @@ const structuredData = [
       </button>
       <nav class="global-section-nav" id="global-section-nav" aria-label="サイト内主要メニュー" data-global-section-nav>
         <a href="/#messages">Arthur Hollands' Message</a>
+        <a href="/walk-across-goto2026/" class="active">GOTO ISLANDS 2026</a>
+        <a href="/diviner/">DIVINER</a>
         <a href="/arthur-hollands-show/">THE ARTHUR HOLLANDS SHOW</a>
         <a href="/friday-night/">FRIDAY NIGHT</a>
         <a href="/walk-across/">WALK ACROSS</a>
         <a href="/walk-across-awaji2026/">WALK ACROSS AWAJI 2026</a>
-        <a href="/walk-across-goto2026/" class="active">GOTO ISLANDS 2026</a>
         <a href="/message-jukebox/">BIBLE JUKEBOX</a>
         <a href="/swords-of-words/">THE SWORDS OF WORDS</a>
         <a href="/1000-verses/">厳選 1000 VERSES</a>
+        <a href="/calendar/">CALENDAR</a>
       </nav>
     </div>
     <nav class="walk-local-nav" aria-label="ページ内ナビゲーション">
       <a href="#about">概要</a>
+      <a href="#departure-report">旅レポート</a>
+      <a href="#evening-message">集会レポート</a>
+      <a href="#day1-report">1日目レポート</a>
+      <a href="#day2-report">2日目レポート</a>
+      <a href="#day3-report">3日目レポート</a>
+      <a href="#photo-report">写真</a>
       <a href="#schedule">スケジュール</a>
       <a href="#field-videos">現地映像</a>
       <a href="#documentary">ドキュメンタリー</a>
-      <a href="#updates">更新予定</a>
       <a href="#share">シェア</a>
     </nav>
 
@@ -192,8 +851,9 @@ const structuredData = [
             海を渡り、島から島へ。祈りを込めて十字架を掲げ、五島の道を歩いていきます。
           </p>
           <div class="hero-actions">
-            <a class="button primary" href="#schedule">行進スケジュールを見る</a>
-            <a class="button secondary" href="#field-videos">今後の映像掲載予定</a>
+            <a class="button primary" href="#day3-report">3日目レポートを読む</a>
+            <a class="button secondary" href="#day2-report">2日目レポートを読む</a>
+            <a class="button secondary" href="#schedule">行進スケジュールを見る</a>
           </div>
           <div class="quick-share" aria-label="シェア">
             <button class="share-native" type="button" data-share-native>このページをシェア</button>
@@ -201,6 +861,28 @@ const structuredData = [
           </div>
         </div>
       </section>
+
+      <nav class="day-tabs" aria-label="日別レポート">
+        <div class="day-tabs-inner">
+          {reportDayTabs.map((tab) => (
+            tab.disabled ? (
+              <span class="day-tab is-disabled" aria-disabled="true">
+                <span class="day-tab-kicker">{tab.date}</span>
+                <strong>{tab.day}</strong>
+                <em>{tab.label}</em>
+                <small>{tab.status}</small>
+              </span>
+            ) : (
+              <a class:list={['day-tab', { 'is-current': tab.current }]} href={tab.href} aria-current={tab.current ? 'page' : undefined}>
+                <span class="day-tab-kicker">{tab.date}</span>
+                <strong>{tab.day}</strong>
+                <em>{tab.label}</em>
+                <small>{tab.status}</small>
+              </a>
+            )
+          ))}
+        </div>
+      </nav>
 
       <section class="section intro" id="about" aria-labelledby="about-title">
         <div class="section-heading">
@@ -240,13 +922,1368 @@ const structuredData = [
         </p>
       </section>
 
+      <div class="day-anchor" id="day0-report" aria-hidden="true"></div>
+      <section class="section report-section" id="departure-report" aria-labelledby="departure-report-title">
+        <div class="section-heading">
+          <p class="eyebrow">DEPARTURE REPORT / 2026.06.21</p>
+          <h2 id="departure-report-title">快晴の空と海を越えて、五島列島へ。</h2>
+          <p>
+            羽田空港から長崎、そしてプロペラ機で福江島へ。
+            出会いと期待に満ちた、五島列島十字架行進の旅の始まりです。
+          </p>
+        </div>
+        <div class="evening-story" id="photo-report" aria-label="2026年6月21日 出発レポート写真">
+          <article class="story-row">
+            <div class="story-copy">
+              <p>
+                2026年6月21日（日）、五島列島へ向かう旅が始まりました。
+                羽田空港のロビーでは、アーサー先生のことをご存じの方が声をかけてくださり、
+                思いがけない出会いに励まされる温かなひとときとなりました。
+              </p>
+            </div>
+            <div class="story-media story-photo-pair">
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={hanedaEncounterPhoto.src} alt={hanedaEncounterPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{hanedaEncounterPhoto.title}</strong>
+                  <span>{hanedaEncounterPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={hanedaTerminalPhoto.src} alt={hanedaTerminalPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{hanedaTerminalPhoto.title}</strong>
+                  <span>{hanedaTerminalPhoto.caption}</span>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="story-row story-row-reversed">
+            <div class="story-copy">
+              <p>
+                羽田から長崎へ向かう飛行機には、今回の十字架行進に参加する方々の姿もありました。
+                羽田空港のターミナルを歩くアーサー先生の背中にも、これから始まる旅の気配が重なります。
+                参加者の顔ぶれを目にするにつれ、いよいよ五島列島での歩みが始まるのだという実感と期待が高まっていきます。
+              </p>
+              <p>
+                この日は父の日でもありました。
+                アーサー先生は、お父様とのツーショット写真をスマートフォンで見せてくださり、
+                「これは西成の鶴見橋の辺りで撮ったんだよ」と語られました。
+                五島へ向かう旅の始まりに、父を思う静かなひとときも重なりました。
+              </p>
+            </div>
+            <div class="story-media story-photo-pair">
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={hanedaNagasakiGatePhoto.src} alt={hanedaNagasakiGatePhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{hanedaNagasakiGatePhoto.title}</strong>
+                  <span>{hanedaNagasakiGatePhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={fathersDayPhoto.src} alt={fathersDayPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{fathersDayPhoto.title}</strong>
+                  <span>{fathersDayPhoto.caption}</span>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="story-row">
+            <div class="story-copy">
+              <p>
+                長崎空港で乗り継ぎの時間を過ごした後、プロペラ機に乗り換えて五島列島へ。
+                大きな飛行機から小さな機体へと移ると、旅の雰囲気も一気に島旅らしくなってきます。
+                機窓から見えてくる島々も、これからの歩みへの期待をさらに高めてくれました。
+              </p>
+            </div>
+            <div class="story-media story-photo-pair">
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={featuredReportPhoto.src} alt={featuredReportPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{featuredReportPhoto.title}</strong>
+                  <span>{featuredReportPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={boardingStairsPhoto.src} alt={boardingStairsPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{boardingStairsPhoto.title}</strong>
+                  <span>{boardingStairsPhoto.caption}</span>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="story-row story-row-reversed">
+            <div class="story-copy">
+              <p>
+                後藤さんは、私たちとは別のルートでフェリーに乗り、海から五島列島へ向かわれます。
+                私たちは空路、後藤さんは海路。それぞれ異なる道を通りながら、同じ目的地を目指します。
+                フェリーから届いた映像には、青い海に伸びる航跡と、遠くに近づく島々の姿が映っていました。
+              </p>
+              <p>
+                ひと足先に島に早入りした後藤さんは、島を散策し、
+                島の中には十字架やロザリオを売っているお店もあると教えてくださいました。
+              </p>
+            </div>
+            <div class="story-media story-photo-pair">
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={seaRoutePhoto.src} alt={seaRoutePhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{seaRoutePhoto.title}</strong>
+                  <span>{seaRoutePhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={islandRosaryPhoto.src} alt={islandRosaryPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{islandRosaryPhoto.title}</strong>
+                  <span>{islandRosaryPhoto.caption}</span>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="story-row">
+            <div class="story-copy">
+              <p>
+                五島つばき空港（福江空港）に到着すると、海路で島へ渡ってきた後藤さんと合流。
+                この日は思っていたほど暑くはなく、天気も良かったことに少し驚かされました。
+                なんと現地のレンタカーではなく、陸路と海路をはるばる走り継いで、
+                お馴染みのアーサー号で来てくださいました。
+              </p>
+              <p>
+                「せっかく来るなら、これやないと値打ちない。すでにアーサー号を見たたくさんの人が声をかけてくれて、興味を持ってくださったよ」と後藤さん。
+              </p>
+            </div>
+            <div class="story-media story-photo-pair">
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={airportWeatherPhoto.src} alt={airportWeatherPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{airportWeatherPhoto.title}</strong>
+                  <span>{airportWeatherPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={arthurGoJoinPhoto.src} alt={arthurGoJoinPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{arthurGoJoinPhoto.title}</strong>
+                  <span>{arthurGoJoinPhoto.caption}</span>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="story-row story-row-reversed">
+            <div class="story-copy">
+              <p>
+                この日は空も海も快晴。機内から見下ろす海は青く輝き、島々の姿が少しずつ近づいてきます。
+                6月21日（日）から福江島に滞在し、翌日6月22日（月）から、いよいよ五島列島での十字架行進が始まります。
+              </p>
+            </div>
+            <div class="story-media story-photo-pair story-photo-trio">
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={airportArthurSmilePhoto.src} alt={airportArthurSmilePhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{airportArthurSmilePhoto.title}</strong>
+                  <span>{airportArthurSmilePhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={propellerWindowPhoto.src} alt={propellerWindowPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{propellerWindowPhoto.title}</strong>
+                  <span>{propellerWindowPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={orcFukuePhoto.src} alt={orcFukuePhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{orcFukuePhoto.title}</strong>
+                  <span>{orcFukuePhoto.caption}</span>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section report-section" id="evening-message" aria-labelledby="evening-message-title">
+        <div class="section-heading">
+          <p class="eyebrow">EVENING REPORT / 2026.06.21</p>
+          <h2 id="evening-message-title">夕方、五島キリスト教会で語られたメッセージ。</h2>
+          <p>
+            福江島に到着したその日の夕方、五島キリスト教会でメッセージ集会が開かれました。
+            旅の始まりは、島での出会いと祈りの時間へと続いていきます。
+          </p>
+        </div>
+        <div class="evening-story">
+          <article class="story-row">
+            <div class="story-copy">
+              <p>
+                教会に到着すると、五島キリスト教会の中村先生が温かく迎えてくださいました。
+                メッセージの会場へ向かう途中にも、立派なカトリック教会の建物が見えました。
+                島の所々に教会があり、キリシタンの歴史が町並みからも感じられます。
+              </p>
+            </div>
+            <div class="story-media story-photo-pair">
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={pastorWelcomePhoto.src} alt={pastorWelcomePhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{pastorWelcomePhoto.title}</strong>
+                  <span>{pastorWelcomePhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={townCatholicPhoto.src} alt={townCatholicPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{townCatholicPhoto.title}</strong>
+                  <span>{townCatholicPhoto.caption}</span>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="story-row story-row-reversed">
+            <div class="story-copy">
+            <p>
+              夕食時には、今回、はるばる秋田からいらしたひとみさんとお友達にも出会いました。
+              さらに会場へ向かう途中には、沖縄から来た上原さん、大阪から来たHIROさんの姿もありました。
+              HIROさんは以前、沖縄でアーサー先生からカップルで洗礼を受け、
+              その後、大阪ではお母さまも洗礼を受けられた方です。
+              それぞれの場所で与えられた出会いが、五島で再び一つにつながっていきました。
+            </p>
+            </div>
+            <div class="story-media story-photo-pair">
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={hitomiAkitaPhoto.src} alt={hitomiAkitaPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{hitomiAkitaPhoto.title}</strong>
+                  <span>{hitomiAkitaPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={hiroOsakaPhoto.src} alt={hiroOsakaPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{hiroOsakaPhoto.title}</strong>
+                  <span>{hiroOsakaPhoto.caption}</span>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="story-row">
+            <div class="story-copy">
+              <p>
+              教会の掲示板には、この日のメッセージ集会のポスターが貼られていました。
+              夕方からの集会への期待も高まっていきます。
+              集会は賛美から始まり、五島キリスト教会の中村先生の案内のもと、
+              会堂には静かで温かな空気が満ちていました。
+            </p>
+            </div>
+            <figure class="story-media story-photo">
+              <div class="story-photo-frame">
+                <img src={churchPosterPhoto.src} alt={churchPosterPhoto.alt} loading="lazy" decoding="async" />
+              </div>
+              <figcaption>
+                <strong>{churchPosterPhoto.title}</strong>
+                <span>{churchPosterPhoto.caption}</span>
+              </figcaption>
+            </figure>
+          </article>
+
+          <article class="story-row story-row-reversed">
+            <div class="story-copy">
+              <p>
+              まず後藤さんが、今回の五島列島十字架行進に至るまでの歩みを証ししてくださいました。
+              バングラさんが、
+              「五島列島へ行こう」と語っていたこと。
+              その思いを受け継ぐように、今回の行進が始まったこと。
+              そして、自らの人生の深い痛みの中でアーサー先生と出会い、
+              「この神様を信じたら、自分の人生は変わるのかもしれない」と思わされ、
+              やがて十字架を担ぐ歩みへ導かれていったことが語られました。
+            </p>
+            <p>
+              後藤さんは、アーサー先生から言われた言葉として、
+              「ラッキーとかついてるっていうのは、いつ始まっていつ終わるかわからんよ。神の愛は一生続く」
+              という一言を紹介しました。
+              絶望を知っていた人が、今は島々を越えて証しを語っている。
+              その姿そのものが、五島の夜に静かな励ましを残していました。
+            </p>
+            </div>
+            <figure class="story-media story-photo">
+              <div class="story-photo-frame">
+                <img src={gotoTestimonyPhoto.src} alt={gotoTestimonyPhoto.alt} loading="lazy" decoding="async" />
+              </div>
+              <figcaption>
+                <strong>{gotoTestimonyPhoto.title}</strong>
+                <span>{gotoTestimonyPhoto.caption}</span>
+              </figcaption>
+            </figure>
+          </article>
+
+          <article class="story-row story-row-feature">
+            <div class="story-copy">
+              <p>
+              その後、アーサー先生が座って会場に語りかけるようにメッセージを届けました。
+              五島に受け継がれてきた信仰の歴史に触れながら、
+              「一粒の麦が地に落ちて死んだ時に多くの実を結ぶ」という言葉をもとに、
+              人生にどのような種をまき、どのような実を結んでいくのかを問いかけます。
+            </p>
+            <p>
+              メッセージの中心にあったのは、混沌の中に光が与えられるという希望でした。
+              人生が自分の目にはぐちゃぐちゃに見える時でも、そこに神の息吹と光が与えられるなら、
+              景色はまったく違って見えてくる。
+              「誰でも、どんな人でも、イエス・キリストの愛の中なら新しく造られる」
+              という言葉が、会堂の中に深く響いていきました。
+            </p>
+            </div>
+            <figure class="story-media story-photo">
+              <div class="story-photo-frame">
+                <img src={eveningFeaturePhoto.src} alt={eveningFeaturePhoto.alt} loading="lazy" decoding="async" />
+              </div>
+              <figcaption>
+                <strong>{eveningFeaturePhoto.title}</strong>
+                <span>{eveningFeaturePhoto.caption}</span>
+              </figcaption>
+            </figure>
+          </article>
+
+          <article class="story-row story-row-reversed">
+            <div class="story-copy">
+              <p>
+              そして翌日から始まる十字架行進について、
+              アーサー先生は、五島列島に住むすべての人々のため、
+              そしてこの地に守られてきた信仰の種から、新たな信仰復興の火種が起こされるように祈りながら歩くと語りました。
+              メッセージの最後には、心の扉を開き、イエス・キリストを迎える祈りへと導かれました。
+            </p>
+            <p>
+              集会後には、教会の皆さんと集合写真を撮影。
+              五島列島での十字架行進を前に、旅の初日は、空と海の移動だけでなく、
+              ここで与えられた出会い、証し、祈りによって締めくくられました。
+            </p>
+            </div>
+            <div class="story-media story-photo-pair">
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={eveningPrayerPhoto.src} alt={eveningPrayerPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{eveningPrayerPhoto.title}</strong>
+                  <span>{eveningPrayerPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={eveningGroupPhoto.src} alt={eveningGroupPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{eveningGroupPhoto.title}</strong>
+                  <span>{eveningGroupPhoto.caption}</span>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section report-section day-report-section" id="day1-report" aria-labelledby="day1-report-title">
+        <div class="section-heading">
+          <p class="eyebrow">DAY 01 REPORT / 2026.06.22</p>
+          <h2 id="day1-report-title">雨の福江島を、十字架とともに歩き出す。</h2>
+          <p>
+            五島列島十字架行進1日目。福江港から白良ヶ浜万葉公園へ、
+            384号線を中心に約20kmの歩みが始まりました。
+          </p>
+        </div>
+        <div class="day-route-strip" aria-label="1日目の行進ルート">
+          <span>DAY 01</span>
+          <strong>福江港 → 白良ヶ浜万葉公園</strong>
+          <em>20km / 384号線</em>
+        </div>
+
+        <div class="evening-story" aria-label="2026年6月22日 1日目レポート写真">
+          <article class="story-row">
+            <div class="story-copy">
+              <p>
+                2026年6月22日（月）の朝。
+                前日の到着と五島キリスト教会での集会を経て、いよいよ十字架行進の初日を迎えました。
+                出発前にはアーサー号の中で御言葉を分かち合い、祈りを合わせます。
+              </p>
+              <p>
+                この朝に読まれたのは、ローマ書12章。
+                一つの体に多くの器官があるように、それぞれに与えられた賜物を持ち寄り、
+                キリストにあって協力し合うことが語られました。
+                小さな力が十字架のもとで重なり、大きな歩みになっていく。
+                その思いを胸に、福江港からの一日が始まりました。
+              </p>
+            </div>
+            <div class="story-media story-photo-pair story-photo-trio">
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day1DevotionPhoto.src} alt={day1DevotionPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day1DevotionPhoto.title}</strong>
+                  <span>{day1DevotionPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day1PortStartPhoto.src} alt={day1PortStartPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day1PortStartPhoto.title}</strong>
+                  <span>{day1PortStartPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day1FirstWalkPhoto.src} alt={day1FirstWalkPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day1FirstWalkPhoto.title}</strong>
+                  <span>{day1FirstWalkPhoto.caption}</span>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="story-row story-row-feature story-row-reversed">
+            <div class="story-copy">
+              <p>
+                祈りの中では、「私たちは計画をするけれど、事を成すのは神ご自身です」
+                という言葉が置かれました。
+                秋田から来たひとみさんとお友達、沖縄から来た上原さん、大阪から来たHIROさん、
+                そして前夜の集会で温かく迎えてくださった五島キリスト教会の中村先生。
+                五島で出会う一人ひとり、
+                そしてこの地に刻まれてきた信仰の歴史を覚えながら、
+                その日の一歩一歩が守られるように祈って出発しました。
+              </p>
+              <p>
+                アーサー先生も自ら十字架を担ぎ、参加者たちと並んで歩きます。
+                曇り空の下、湿った島の空気の中を進む姿には、
+                前夜に語られた「キリスト教ではなく、キリストと生きる」というテーマがそのまま重なっていました。
+              </p>
+              <p>
+                道中では、中村先生がご自身の証も分かち合ってくださいました。
+                かつてブルーベリー農園を営んでいた時、木陰で休みながら花に集まるミツバチを見ていると、
+                風、光、花、ミツバチの働きがつながり、実を結ばせていくことに気づいたといいます。
+                「これはデザインされている」。
+                その思いが、世界を造られた神へと心を向ける神体験になったことを、静かに語ってくださいました。
+              </p>
+              <p>
+                道中では、十字架そのものについても話が及びました。
+                かつてバングラさんが作り、何度も削られ、担がれ、祈りとともに受け継がれてきた十字架。
+                その重みは、ただの木の重さではなく、これまでの歩みの記憶を帯びているようでした。
+              </p>
+            </div>
+            <figure class="story-media story-photo">
+              <div class="story-photo-frame">
+                <img src={day1FeaturePhoto.src} alt={day1FeaturePhoto.alt} loading="lazy" decoding="async" />
+              </div>
+              <figcaption>
+                <strong>{day1FeaturePhoto.title}</strong>
+                <span>{day1FeaturePhoto.caption}</span>
+              </figcaption>
+            </figure>
+          </article>
+
+          <article class="story-row">
+            <div class="story-copy">
+              <p>
+                町の道を抜けると、島の緑が深くなっていきます。
+                福江島の山並み、田畑、海へと続く道。
+                十字架は一人だけが担うものではなく、参加者が交代しながら、
+                その時その時に与えられた力で肩に受け取っていきました。
+              </p>
+              <p>
+                道中では笑顔も多く見られました。
+                十字架を囲んで写真を撮り、声をかけ合い、
+                それぞれの歩幅で同じ方向を見つめて進んでいく時間となりました。
+              </p>
+              <p>
+                途中では「十字架を担ぎたい」と願う方もいて、
+                肩に受け取ったあと、笑顔で記念の写真を撮る場面もありました。
+                その一歩を互いに支え合いながら進む交わりが、
+                行進の中に、信仰と日常が自然に結び合わされていきます。
+              </p>
+            </div>
+            <div class="story-media story-photo-pair story-photo-trio">
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day1GreenRoadPhoto.src} alt={day1GreenRoadPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day1GreenRoadPhoto.title}</strong>
+                  <span>{day1GreenRoadPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day1FieldsRoadPhoto.src} alt={day1FieldsRoadPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day1FieldsRoadPhoto.title}</strong>
+                  <span>{day1FieldsRoadPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day1CrossParticipantPhoto.src} alt={day1CrossParticipantPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day1CrossParticipantPhoto.title}</strong>
+                  <span>{day1CrossParticipantPhoto.caption}</span>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="story-row story-row-reversed">
+            <div class="story-copy">
+              <p>
+                天気は次第に雨模様へ。
+                傘を差し、アーサー号のそばで一息つきながら、歩みを整えていきます。
+                長い行程だからこそ、伴走し、待ち、声をかける存在が大きな力になります。
+              </p>
+              <p>
+                十字架行進は、前を歩く人だけで成り立つものではありません。
+                伴走し、待ち、荷物を運び、声をかける人たちもまた、
+                同じ一つの体としてこの一日に加わっていました。
+              </p>
+            </div>
+            <div class="story-media story-photo-pair story-photo-trio">
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day1RestUmbrellaPhoto.src} alt={day1RestUmbrellaPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day1RestUmbrellaPhoto.title}</strong>
+                  <span>{day1RestUmbrellaPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day1ArthurGoRestPhoto.src} alt={day1ArthurGoRestPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day1ArthurGoRestPhoto.title}</strong>
+                  <span>{day1ArthurGoRestPhoto.caption}</span>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="story-row">
+            <div class="story-copy">
+              <p>
+                休憩の時間には、アーサー号のそばで小さな聖餐式の時も持たれました。
+                アーサー先生が「こんなところでアウトドア聖餐式」と語り、
+                後藤さんが導く中で、パンと杯を分かち合い、イエス・キリストの十字架を覚えます。
+              </p>
+              <p>
+                教会堂の中だけでなく、雨の島道の途中でも、
+                同じ主を見上げ、同じ恵みにあずかる時間が置かれました。
+                道の途中の休憩場所が、そのまま祈りの場となったひとときでした。
+              </p>
+            </div>
+            <figure class="story-media story-photo">
+              <div class="story-photo-frame">
+                <img src={day1OutdoorCommunionPhoto.src} alt={day1OutdoorCommunionPhoto.alt} loading="lazy" decoding="async" />
+              </div>
+              <figcaption>
+                <strong>{day1OutdoorCommunionPhoto.title}</strong>
+                <span>{day1OutdoorCommunionPhoto.caption}</span>
+              </figcaption>
+            </figure>
+          </article>
+
+          <article class="story-row story-row-reversed">
+            <div class="story-copy">
+              <p>
+                福江港から始まった初日の行程は約20km。
+                雨の時間もありながら、一人ひとりが役割を担い、支え合い、
+                五島列島十字架行進の最初の一日を無事に歩み終えました。
+              </p>
+              <p>
+                行進を終えた後、一行は堂崎天主堂へ移動しました。
+                その途中で目にしたのは、雨に煙る山と静かな湾。
+                晴れた海の明るさとはまた違う、雨の日の五島の深い表情がそこにありました。
+              </p>
+            </div>
+            <div class="story-media story-photo-pair story-photo-trio">
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day1BayRainWalkPhoto.src} alt={day1BayRainWalkPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day1BayRainWalkPhoto.title}</strong>
+                  <span>{day1BayRainWalkPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day1BayArthurPhoto.src} alt={day1BayArthurPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day1BayArthurPhoto.title}</strong>
+                  <span>{day1BayArthurPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day1BayViewPhoto.src} alt={day1BayViewPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day1BayViewPhoto.title}</strong>
+                  <span>{day1BayViewPhoto.caption}</span>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="story-row">
+            <div class="story-copy">
+              <p>
+                湾の景色を抜けて、一行は堂崎天主堂（堂崎教会）へ向かいました。
+                雨に濡れた煉瓦の壁、正面に掲げられた十字架。
+                島のあちこちに教会があり、町並みそのものが、
+                この地で祈りが受け継がれてきたことを静かに語っているようでした。
+              </p>
+              <p>
+                堂崎天主堂は、禁教令が解かれた後、五島キリシタン復興の拠点となった場所です。
+                1880年に堂崎の地に最初の木造天主堂が建てられ、1908年に現在の煉瓦造りの教会堂が完成しました。
+                現在はキリシタン資料館として、布教の時代から迫害、そして信仰の復活へ至る歩みを伝えています。
+              </p>
+              <p>
+                また、日本二十六聖人の一人であり、五島出身の殉教者である聖ヨハネ五島の聖骨が納められている場所でもあります。
+                だからこそ、ここは美しい建物としてだけでなく、
+                命をかけて信仰を守った人々の記憶に触れる場所として、今回の十字架行進にとって大きな意味を持つ立ち寄りとなりました。
+              </p>
+              <p>
+                敷地には、五島ヨハネ殉教像も置かれています。
+                聖ヨハネ五島は五島出身の青年で、日本二十六聖人の一人として長崎・西坂で殉教した人物です。
+                その像の前に立つと、五島の信仰の歴史が単なる過去の出来事ではなく、
+                今もこの島に刻まれ続けている記憶なのだと感じさせられます。
+              </p>
+              <p>
+                外観の前で写真を撮り、参加者たちと交わりの時間を持ちました。
+                20kmを歩いた後にこの場所へ立つことで、
+                今回の十字架行進が、ただ距離を進む旅ではないことを改めて感じさせられます。
+              </p>
+            </div>
+            <div class="story-media story-photo-pair">
+              <figure class="story-photo">
+                <div class="story-photo-frame story-photo-frame-portrait">
+                  <img src={day1BrickChurchArthurPhoto.src} alt={day1BrickChurchArthurPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day1BrickChurchArthurPhoto.title}</strong>
+                  <span>{day1BrickChurchArthurPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day1JohaneGotoPhoto.src} alt={day1JohaneGotoPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day1JohaneGotoPhoto.title}</strong>
+                  <span>{day1JohaneGotoPhoto.caption}</span>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="story-row story-row-reversed story-row-compact">
+            <div class="story-copy">
+              <p>
+                雨の中でも、堂崎天主堂の外では自然に笑顔がこぼれました。
+                祈りを受け継いできた場所で、アーサー先生、後藤さん、参加者たちの歩みが重なります。
+              </p>
+            </div>
+            <div class="story-media story-photo-pair">
+              <figure class="story-photo">
+                <div class="story-photo-frame story-photo-frame-portrait">
+                  <img src={day1BrickChurchFellowshipPhoto.src} alt={day1BrickChurchFellowshipPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day1BrickChurchFellowshipPhoto.title}</strong>
+                  <span>{day1BrickChurchFellowshipPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame story-photo-frame-portrait">
+                  <img src={day1BrickChurchGroupPhoto.src} alt={day1BrickChurchGroupPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day1BrickChurchGroupPhoto.title}</strong>
+                  <span>{day1BrickChurchGroupPhoto.caption}</span>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section report-section day-report-section" id="day2-report" aria-labelledby="day2-report-title">
+        <div class="section-heading">
+          <p class="eyebrow">DAY 02 REPORT / 2026.06.23</p>
+          <h2 id="day2-report-title">雨の384号線を、旧たま丸乗船券売場へ。</h2>
+          <p>
+            五島列島十字架行進2日目。
+            白良ヶ浜万葉公園から旧たま丸乗船券売場へ、福江島の道をさらに約20km進みました。
+          </p>
+        </div>
+        <div class="day-route-strip" aria-label="2日目の行進ルート">
+          <span>DAY 02</span>
+          <strong>白良ヶ浜万葉公園 → 旧たま丸乗船券売場</strong>
+          <em>20km / 384号線</em>
+        </div>
+
+        <div class="evening-story" aria-label="2026年6月23日 2日目レポート写真">
+          <article class="story-row">
+            <div class="story-copy">
+              <p>
+                2026年6月23日（火）。
+                2日目の朝は、雨の音を聞きながらアーサー号の中で始まりました。
+                前日に歩き切った白良ヶ浜万葉公園から、旧たま丸乗船券売場へ向かう一日です。
+              </p>
+              <p>
+                出発前には、車内で御言葉を分かち合い、祈りを合わせました。
+                雨具を整え、十字架を担ぐ準備をしながら、
+                今日も与えられた道を一歩ずつ進む思いが整えられていきます。
+              </p>
+            </div>
+            <div class="story-media story-photo-pair story-photo-trio">
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day2ArthurGoMorningPhoto.src} alt={day2ArthurGoMorningPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day2ArthurGoMorningPhoto.title}</strong>
+                  <span>{day2ArthurGoMorningPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day2MorningDevotionPhoto.src} alt={day2MorningDevotionPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day2MorningDevotionPhoto.title}</strong>
+                  <span>{day2MorningDevotionPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day2RainRoadStartPhoto.src} alt={day2RainRoadStartPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day2RainRoadStartPhoto.title}</strong>
+                  <span>{day2RainRoadStartPhoto.caption}</span>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="story-row story-row-feature story-row-reversed">
+            <div class="story-copy">
+              <p>
+                この日の道は、雨の384号線。
+                アーサー先生はレインウェアに身を包み、参加者たちとともに十字架を担いで進みました。
+                足もとが濡れる道でも、声をかけ合いながら、歩みは途切れません。
+              </p>
+              <p>
+                途中、トンネルを抜け、緑の濃い山あいを進み、海へ近づいていきます。
+                福江島の道は、町の生活、山の静けさ、湾の景色が次々に現れ、
+                十字架の歩みを包み込むようでした。
+              </p>
+            </div>
+            <figure class="story-media story-photo">
+              <div class="story-photo-frame">
+                <img src={day2FeaturePhoto.src} alt={day2FeaturePhoto.alt} loading="lazy" decoding="async" />
+              </div>
+              <figcaption>
+                <strong>{day2FeaturePhoto.title}</strong>
+                <span>{day2FeaturePhoto.caption}</span>
+              </figcaption>
+            </figure>
+          </article>
+
+          <article class="story-row">
+            <div class="story-copy">
+              <p>
+                雨の日の行進には、晴れの日とは違う厳しさがあります。
+                それでも、濡れた道を進む背中には、ただ目的地へ急ぐだけではない静かな強さがありました。
+              </p>
+              <p>
+                道中では、歩く人、伴走する人、撮影する人、待って迎える人がそれぞれに役割を担いました。
+                見える場所は違っても、同じ目的地へ向かう一つのチームとして、
+                2日目の歩みが支えられていきました。
+              </p>
+            </div>
+            <div class="story-media story-photo-pair story-photo-trio">
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day2RainTunnelPhoto.src} alt={day2RainTunnelPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day2RainTunnelPhoto.title}</strong>
+                  <span>{day2RainTunnelPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day2CrossRainWalkPhoto.src} alt={day2CrossRainWalkPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day2CrossRainWalkPhoto.title}</strong>
+                  <span>{day2CrossRainWalkPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day2BayRoadPhoto.src} alt={day2BayRoadPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day2BayRoadPhoto.title}</strong>
+                  <span>{day2BayRoadPhoto.caption}</span>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="story-row story-row-reversed">
+            <div class="story-copy">
+              <p>
+                湾沿いに出ると、雨に潤った静かな海が広がりました。
+                晴れた五島の青さとは違う、雨に煙る海と山。
+                その景色は、厳しさの中にも深い美しさを見せてくれます。
+              </p>
+              <p>
+                高浜海岸を望む場所では、アーサー先生がYouTube視聴者へ向けてメッセージを届けました。
+                波の音、風、雨、海と山の景色を前に、
+                自然界を通して神の存在に心を向けること、静まって神を知ること、
+                そしてイエス・キリストへ心を開くことが語られました。
+              </p>
+              <p>
+                アーサー号はこの日も行進に寄り添い、休憩と交わりの場所になりました。
+                車内で体を整え、言葉を交わし、また道へ戻っていく。
+                雨の一日だからこそ、支え合う時間の大切さがよりはっきりと感じられました。
+              </p>
+            </div>
+            <div class="story-media story-photo-pair story-photo-trio">
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day2RainBayWalkPhoto.src} alt={day2RainBayWalkPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day2RainBayWalkPhoto.title}</strong>
+                  <span>{day2RainBayWalkPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day2ArthurGoRestPhoto.src} alt={day2ArthurGoRestPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day2ArthurGoRestPhoto.title}</strong>
+                  <span>{day2ArthurGoRestPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day2BeachMessagePhoto.src} alt={day2BeachMessagePhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day2BeachMessagePhoto.title}</strong>
+                  <span>{day2BeachMessagePhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day2VanFellowshipPhoto.src} alt={day2VanFellowshipPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day2VanFellowshipPhoto.title}</strong>
+                  <span>{day2VanFellowshipPhoto.caption}</span>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="story-row story-row-compact">
+            <div class="story-copy">
+              <p>
+                白良ヶ浜万葉公園から旧たま丸乗船券売場へ。
+                雨の時間が続く中でも、十字架行進2日目の約20kmは守られ、
+                福江島での歩みはさらに先へ進みました。
+              </p>
+              <p>
+                その日の夕方には、アーサー先生から一枚の貴重な資料も送られてきました。
+                1997年5月25日発行の「SPIRIT Vol.4」。
+                アフリカ伝道旅行を伝えるトラクトで、ナイジェリアでの歩み、
+                物質的な豊かさと霊的な貧しさを見つめた証しが記されています。
+                五島で十字架を担ぐ今の歩みと、世界へ福音を届けてきた過去の歩みが、
+                一つの線でつながって見えてくるような資料でした。
+              </p>
+            </div>
+            <div class="story-media story-photo-pair">
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day2ArthurGoLunchPhoto.src} alt={day2ArthurGoLunchPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day2ArthurGoLunchPhoto.title}</strong>
+                  <span>{day2ArthurGoLunchPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame story-photo-frame-portrait">
+                  <img src={day2AfricaTractPhoto.src} alt={day2AfricaTractPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day2AfricaTractPhoto.title}</strong>
+                  <span>{day2AfricaTractPhoto.caption}</span>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section report-section day-report-section" id="day3-report" aria-labelledby="day3-report-title">
+        <div class="section-heading">
+          <p class="eyebrow">DAY 03 REPORT / 2026.06.24</p>
+          <h2 id="day3-report-title">祭壇の火を胸に、久賀島へ。</h2>
+          <p>
+            五島列島十字架行進3日目。
+            田の浦港からカフェ さわらび方面へ、久賀島の道を約10km歩きました。
+          </p>
+        </div>
+        <div class="day-route-strip" aria-label="3日目の行進ルート">
+          <span>DAY 03</span>
+          <strong>田の浦港 → カフェ さわらび</strong>
+          <em>10km / 久賀島</em>
+        </div>
+
+        <div class="evening-story" aria-label="2026年6月24日 3日目レポート写真">
+          <article class="story-row">
+            <div class="story-copy">
+              <p>
+                2026年6月24日（水）。
+                3日目の朝は、雨音とともにアーサー号の中で始まりました。
+                土砂崩れ注意報も出ている中、フェリーが予定通り動くかどうかも含めて、
+                すべてを神に委ねながら久賀島へ向かう準備を進めます。
+              </p>
+              <p>
+                車内では賛美の後、レビ記6章13節の
+                「火は絶えず祭壇の上で燃え続けさせなければならない。消してはならない」
+                という御言葉を分かち合いました。
+                旧約のいけにえがイエス・キリストの十字架へとつながっていること、
+                そして神から与えられた信仰の火を、心の内で消さずに歩むことが語られました。
+              </p>
+            </div>
+            <div class="story-media story-photo-pair story-photo-trio">
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day3MorningDevotionPhoto.src} alt={day3MorningDevotionPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day3MorningDevotionPhoto.title}</strong>
+                  <span>{day3MorningDevotionPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day3FerryPhoto.src} alt={day3FerryPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day3FerryPhoto.title}</strong>
+                  <span>{day3FerryPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day3FerryDeckArthurPhoto.src} alt={day3FerryDeckArthurPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day3FerryDeckArthurPhoto.title}</strong>
+                  <span>{day3FerryDeckArthurPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day3FerryWakeArthurPhoto.src} alt={day3FerryWakeArthurPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day3FerryWakeArthurPhoto.title}</strong>
+                  <span>{day3FerryWakeArthurPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day3TanouraArrivalPhoto.src} alt={day3TanouraArrivalPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day3TanouraArrivalPhoto.title}</strong>
+                  <span>{day3TanouraArrivalPhoto.caption}</span>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="story-row story-row-feature story-row-reversed">
+            <div class="story-copy">
+              <p>
+                福江島からフェリーで海を渡り、田の浦港へ。
+                この日は不思議に守られ、五島の船が次々と止まる中で、
+                私たちが乗る久賀島への航路だけが動いていました。
+                港に着くと、十字架を組み、久賀島での行進が始まりました。
+                出発の祈りでは、この十字架を見る人が神を知るきっかけとなるように、
+                そしてこの島の上に主の祝福があるようにと祈りが捧げられました。
+              </p>
+              <p>
+                雨に濡れた道、海沿いに続く防波堤、緑に包まれた山の道。
+                アーサー先生は、十字架を担ぐ歩みを
+                「農夫のように信仰の種をまいている」と語りました。
+                目に見える結果だけを追うのではなく、目に見えない約束を信じて進む歩みです。
+              </p>
+            </div>
+            <figure class="story-media story-photo">
+              <div class="story-photo-frame">
+                <img src={day3FeaturePhoto.src} alt={day3FeaturePhoto.alt} loading="lazy" decoding="async" />
+              </div>
+              <figcaption>
+                <strong>{day3FeaturePhoto.title}</strong>
+                <span>{day3FeaturePhoto.caption}</span>
+              </figcaption>
+            </figure>
+          </article>
+
+          <article class="story-row">
+            <div class="story-copy">
+              <p>
+                久賀島の道は、静かな集落と深い緑、そして海の景色が近くにあります。
+                雨に濡れた島の風景の中を、参加者たちは声をかけ合いながら進みました。
+                ときに笑顔で、ときに黙って祈るように、十字架の姿が島の道に重なります。
+              </p>
+              <p>
+                歩く先々で、五島の信仰の歴史が少しずつ立ち上がってくるようでした。
+                久賀島は「長崎と天草地方の潜伏キリシタン関連遺産」の構成資産の一つでもあり、
+                この日の行進は、単なる移動ではなく、信仰を守り抜いた人々の記憶をたどる時間にもなっていきました。
+              </p>
+              <p>
+                この日は、淡路十字架行進にも来てくださっていた大分の和泉牧師の夫人、
+                そのお父さま、そしてお友達も久賀島の歩みに加わりました。
+                島を越え、これまでの行進で出会った人たちが再び同じ十字架のもとに集められていくことも、
+                この旅の大きな恵みでした。
+              </p>
+            </div>
+            <div class="story-media story-photo-pair story-photo-trio">
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day3CrossTeamWalkPhoto.src} alt={day3CrossTeamWalkPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day3CrossTeamWalkPhoto.title}</strong>
+                  <span>{day3CrossTeamWalkPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day3RainCoastCrossPhoto.src} alt={day3RainCoastCrossPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day3RainCoastCrossPhoto.title}</strong>
+                  <span>{day3RainCoastCrossPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day3ArthurSmileSeaPhoto.src} alt={day3ArthurSmileSeaPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day3ArthurSmileSeaPhoto.title}</strong>
+                  <span>{day3ArthurSmileSeaPhoto.caption}</span>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="story-row story-row-compact">
+            <div class="story-copy">
+              <p>
+                行程のゴール地点となった海辺に着くと、すぐそばでは船が網を洗っていました。
+                雨の港に響く水の音と、引き上げられた網。
+                その光景は、イエスが弟子たちに語られた「深みに漕ぎ出し、網を下ろせ」という場面を思い起こさせました。
+                見える成果がまだなくても、主の言葉に従ってもう一度網を下ろす。
+                久賀島での一日は、その招きのようにも感じられました。
+              </p>
+              <p>
+                ゴール地点の海辺で十字架を囲み、参加者たちは記念の一枚を撮りました。
+                行進中、雨はほとんど降らず、終わりには青空ものぞきました。
+                最後は皆で賛美し、礼拝を捧げる時間が与えられました。
+                そして帰りの船に乗った途端、20ミリほどの大雨に突如として変わりました。
+                一同はこの一日を守られた主の御業として受け止めました。
+              </p>
+            </div>
+            <div class="story-media story-photo-pair story-photo-trio">
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day3GreenRoadWalkPhoto.src} alt={day3GreenRoadWalkPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day3GreenRoadWalkPhoto.title}</strong>
+                  <span>{day3GreenRoadWalkPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day3VillageRoadCrossPhoto.src} alt={day3VillageRoadCrossPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day3VillageRoadCrossPhoto.title}</strong>
+                  <span>{day3VillageRoadCrossPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day3GoalFishingNetsPhoto.src} alt={day3GoalFishingNetsPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day3GoalFishingNetsPhoto.title}</strong>
+                  <span>{day3GoalFishingNetsPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day3GoalTeamCrossPhoto.src} alt={day3GoalTeamCrossPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day3GoalTeamCrossPhoto.title}</strong>
+                  <span>{day3GoalTeamCrossPhoto.caption}</span>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="story-row story-row-reversed">
+            <div class="story-copy">
+              <p>
+                ゴール後には、殉教者41名に関わる「牢屋の窄」、
+                そして久賀島潜伏キリシタン資料館（内上の杜ミュージアム）にも伺いました。
+                久賀島は、世界文化遺産「長崎と天草地方の潜伏キリシタン関連遺産」を構成する
+                「久賀島の集落」として登録されている場所です。
+                ここで語られる歴史は、観光地の説明ではなく、この島に刻まれた信仰の記憶そのものでした。
+              </p>
+              <p>
+                館内には、久賀島で守り継がれてきた信仰具や写真、迫害の歴史を伝える資料が並びます。
+                そこで触れた歴史は、あまりにも壮絶でした。
+                信仰を守り抜いた方々の苦しみと、その歩みを今に伝える重みを深く感じました。
+              </p>
+              <p>
+                展示そのものは、初めから言葉を失うほどの重みを持っていました。
+                さらに現在は、生き残られた方々の子孫にあたる方が資料館を守っておられ、
+                その方のお話からも、この地に刻まれた信仰の証しの深さを改めて教えられました。
+                久賀島の信仰の記憶は、資料の中だけではなく、この島に生きる人々の中で今も受け継がれています。
+              </p>
+            </div>
+            <div class="story-media story-photo-pair">
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day3HistoryGuidePhoto.src} alt={day3HistoryGuidePhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day3HistoryGuidePhoto.title}</strong>
+                  <span>{day3HistoryGuidePhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day3MuseumConversationPhoto.src} alt={day3MuseumConversationPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day3MuseumConversationPhoto.title}</strong>
+                  <span>{day3MuseumConversationPhoto.caption}</span>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="story-row">
+            <div class="story-copy">
+              <p>
+                牢屋の窄殉教記念教会は、久賀島の信仰の歴史を語るうえで避けて通れない場所です。
+                1868年、久賀島のキリシタンたちは信仰を表明したために捕らえられ、
+                わずか12畳ほどの牢に200名あまりが押し込められました。
+                畳1枚あたりに十数人が詰め込まれるほどの狭さで、横になることもできず、
+                排泄さえその場でしなければならないような、想像を絶する状況だったと伝えられています。
+              </p>
+              <p>
+                その状態は8か月にも及びました。
+                食事は朝夕に芋の小切れが一つずつというほどで、飢え、病、拷問の中で多くの信徒が亡くなり、
+                出牢後にも犠牲者が出ました。
+                この出来事では、40名を超える信徒が命を落としたと伝えられています。
+                これは単に「昔、迫害があった」という一言で片づけられる出来事ではありません。
+                信仰を告白した人々が、身体ごと、生活ごと、家族ごと、その信仰を問われた場所でした。
+              </p>
+              <p>
+                その惨状の中には、子どもたちの名と証も残されています。
+                6歳の子は水を求めながら亡くなり、13歳の少女は不衛生な牢内で傷つき、命を落としたと伝えられています。
+                10歳のマリアたきは「バライゾ（天国）」へ行くことを口にしながら両親に別れを告げ、
+                7歳の妹マリアさもは、イエズスの御傷に祈るよう言い残したと伝えられています。
+                幼い子どもたちの最期の言葉は、信仰を美談にするためではなく、
+                この地で何が起きたのかを忘れないための証として、今も刻まれています。
+              </p>
+              <p>
+                現在の教会は、その殉教の地に建てられています。
+                ここでアーサー先生たちは、建物がただの記念として残るだけでなく、
+                そこに刻まれた信仰のメッセージが多くの人に伝わるように祈りました。
+                この地にすでに受け継がれてきた祈りと信仰を覚えながら、
+                私たちも静かに祈りを合わせました。
+              </p>
+            </div>
+            <div class="story-media story-photo-pair story-photo-trio">
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day3RouyanosakoApproachPhoto.src} alt={day3RouyanosakoApproachPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day3RouyanosakoApproachPhoto.title}</strong>
+                  <span>{day3RouyanosakoApproachPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame story-photo-frame-portrait">
+                  <img src={day3RouyanosakoChurchPhoto.src} alt={day3RouyanosakoChurchPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day3RouyanosakoChurchPhoto.title}</strong>
+                  <span>{day3RouyanosakoChurchPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day3RouyanosakoMemorialPhoto.src} alt={day3RouyanosakoMemorialPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day3RouyanosakoMemorialPhoto.title}</strong>
+                  <span>{day3RouyanosakoMemorialPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day3PrayerOverIslandPhoto.src} alt={day3PrayerOverIslandPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day3PrayerOverIslandPhoto.title}</strong>
+                  <span>{day3PrayerOverIslandPhoto.caption}</span>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="story-row story-row-compact">
+            <div class="story-copy">
+              <p>
+                牢屋の窄を後にした後も、心には重さと希望が同時に残りました。
+                殉教した人々の信仰は過去の出来事で終わったものではなく、
+                今この地を歩く私たちにまでつながっています。
+                ヘブル人への手紙12章1節に記される「雲のように多くの証人たち」を思い起こすような時間でした。
+              </p>
+              <p>
+                祭壇の火を消してはならないという朝の御言葉は、
+                久賀島の殉教の歴史と重なり、この日の歩み全体を貫くテーマとなりました。
+                その後、私たちは再びフェリーで福江島へ戻りました。
+              </p>
+            </div>
+            <div class="story-media story-photo-pair story-photo-trio">
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day3SawarabiRestPhoto.src} alt={day3SawarabiRestPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day3SawarabiRestPhoto.title}</strong>
+                  <span>{day3SawarabiRestPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day3ArthurGoRestPhoto.src} alt={day3ArthurGoRestPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day3ArthurGoRestPhoto.title}</strong>
+                  <span>{day3ArthurGoRestPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day3ReturnFerryPinkPhoto.src} alt={day3ReturnFerryPinkPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day3ReturnFerryPinkPhoto.title}</strong>
+                  <span>{day3ReturnFerryPinkPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day3ReturnFerryHarborPhoto.src} alt={day3ReturnFerryHarborPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day3ReturnFerryHarborPhoto.title}</strong>
+                  <span>{day3ReturnFerryHarborPhoto.caption}</span>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+        </div>
+      </section>
+
       <section class="section schedule-section" id="schedule" aria-labelledby="schedule-title">
         <div class="section-heading">
           <p class="eyebrow">SCHEDULE</p>
           <h2 id="schedule-title">行進スケジュール</h2>
-          <p>行進は朝7:00スタートを基本に、各島の地形や移動状況に合わせて進めていく予定です。</p>
+          <p>具体的な十字架行進のルートが決まりました。各日の出発地、到着地、距離をわかりやすくまとめています。</p>
         </div>
-        <div class="schedule-grid">
+        <div class="route-board">
           <article class="schedule-feature">
             <time>6月21日(日) 19:00〜</time>
             <strong>五島キリスト教会にて伝道集会</strong>
@@ -254,12 +2291,21 @@ const structuredData = [
             <p>住所：〒853-0033 長崎県五島市木場町524</p>
             <a href="https://maps.app.goo.gl/ua2yB9eyhKVBn1MC6?g_st=al" target="_blank" rel="noopener noreferrer">Google Mapsで会場を見る</a>
           </article>
-          <article><time>6月22日(月)</time><strong>福江島</strong></article>
-          <article><time>6月23日(火)</time><strong>福江島</strong></article>
-          <article><time>6月24日(水)</time><strong>久賀島</strong></article>
-          <article><time>6月25日(木)</time><strong>奈留島</strong></article>
-          <article><time>6月26日(金)</time><strong>若松島</strong></article>
-          <article><time>6月27日(土)</time><strong>上五島</strong></article>
+          <div class="route-list" aria-label="十字架行進の具体的なルート">
+            {crossWalkRoutes.map((day) => (
+              <article class="route-card">
+                <div class="route-card-head">
+                  <time>{day.date}</time>
+                  <span>{day.island}</span>
+                </div>
+                <strong>{day.route}</strong>
+                <p>
+                  <span>{day.distance}</span>
+                  {day.detail && <em>{day.detail}</em>}
+                </p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 

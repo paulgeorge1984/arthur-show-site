@@ -109,10 +109,13 @@ a {
 .global-section-nav {
   display: flex;
   justify-content: center;
-  gap: 4px;
+  flex-wrap: wrap;
+  gap: 4px 6px;
   width: 100%;
-  padding: 10px 20px;
-  overflow-x: auto;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 10px clamp(14px, 2vw, 22px);
+  overflow: visible;
   scrollbar-width: none;
 }
 

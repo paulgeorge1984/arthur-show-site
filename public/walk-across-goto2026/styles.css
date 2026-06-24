@@ -107,10 +107,13 @@ a {
 .global-section-nav {
   display: flex;
   justify-content: center;
-  gap: 4px;
+  flex-wrap: wrap;
+  gap: 4px 6px;
   width: 100%;
-  padding: 10px 20px;
-  overflow-x: auto;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 10px clamp(14px, 2vw, 22px);
+  overflow: visible;
   scrollbar-width: none;
 }
 
@@ -172,6 +175,119 @@ a {
 
 .walk-local-nav a:hover {
   background: rgba(6, 96, 117, 0.08);
+}
+
+.day-tabs {
+  max-width: 1240px;
+  margin: -12px auto 10px;
+  padding: 0 clamp(14px, 5vw, 56px);
+}
+
+.day-tabs-inner {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 10px 2px 16px;
+  scrollbar-width: thin;
+}
+
+.day-tab {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    "date day"
+    "label label"
+    "status status";
+  flex: 0 0 min(220px, 72vw);
+  align-content: start;
+  min-height: 118px;
+  padding: 14px 15px 12px;
+  color: var(--ink);
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.74);
+  border: 1px solid var(--line);
+  border-bottom: 4px solid rgba(6, 96, 117, 0.18);
+  border-radius: 8px;
+  box-shadow: 0 12px 28px rgba(5, 43, 58, 0.08);
+}
+
+.day-tab:hover {
+  border-bottom-color: var(--gold);
+  transform: translateY(-1px);
+}
+
+.day-tab.is-current {
+  color: #fff;
+  background: linear-gradient(135deg, var(--sea-dark), var(--sea));
+  border-color: rgba(255, 255, 255, 0.18);
+  border-bottom-color: var(--gold);
+  box-shadow: 0 18px 36px rgba(5, 43, 58, 0.22);
+}
+
+.day-tab.is-disabled {
+  cursor: default;
+  opacity: 0.56;
+  background: rgba(255, 255, 255, 0.48);
+  box-shadow: none;
+}
+
+.day-tab-kicker {
+  grid-area: date;
+  align-self: center;
+  margin-right: 8px;
+  color: var(--gold);
+  font-family: "Oswald", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+}
+
+.day-tab strong {
+  grid-area: day;
+  font-family: "Oswald", sans-serif;
+  font-size: 1.42rem;
+  letter-spacing: 0.03em;
+  line-height: 1;
+}
+
+.day-tab em {
+  grid-area: label;
+  display: block;
+  margin-top: 12px;
+  font-style: normal;
+  font-size: 0.86rem;
+  font-weight: 900;
+  line-height: 1.45;
+}
+
+.day-tab small {
+  grid-area: status;
+  align-self: end;
+  width: fit-content;
+  margin-top: 10px;
+  padding: 4px 8px;
+  color: var(--sea-dark);
+  background: rgba(217, 170, 82, 0.22);
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.day-tab.is-current .day-tab-kicker,
+.day-tab.is-current small {
+  color: #fff;
+}
+
+.day-tab.is-current small {
+  background: rgba(217, 170, 82, 0.32);
+}
+
+.day-anchor {
+  position: relative;
+  top: -128px;
+  height: 0;
 }
 
 .hero {
@@ -341,7 +457,6 @@ section[id] {
 
 .intro-grid article,
 .update-grid article,
-.schedule-grid article,
 .video-card,
 .placeholder-card {
   background: rgba(255, 255, 255, 0.72);
@@ -401,55 +516,140 @@ section[id] {
   font-weight: 800;
 }
 
-.schedule-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
+.schedule-section .section-heading {
+  max-width: none;
+  padding: clamp(24px, 4vw, 36px);
+  color: #fff;
+  background:
+    linear-gradient(112deg, rgba(5, 43, 58, 0.98), rgba(9, 96, 117, 0.94)),
+    url("./assets/goto-cross-walk-2026-wide.jpg") center / cover;
+  border: 1px solid rgba(142, 216, 214, 0.34);
+  border-left: 8px solid var(--gold);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
 }
 
-.schedule-grid article {
+.schedule-section .section-heading .eyebrow {
+  color: var(--aqua);
+}
+
+.schedule-section .section-heading h2 {
+  color: #fff;
+  font-size: clamp(40px, 7vw, 78px);
+  line-height: 0.96;
+}
+
+.schedule-section .section-heading p:not(.eyebrow) {
+  max-width: 900px;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: clamp(17px, 2.2vw, 22px);
+  font-weight: 800;
+}
+
+.route-board {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1.8fr);
+  gap: 18px;
+  align-items: stretch;
+}
+
+.schedule-feature,
+.route-card {
   display: grid;
   gap: 8px;
-  min-height: 128px;
+  min-height: 132px;
   padding: 18px;
+  background: rgba(255, 255, 255, 0.76);
+  border: 1px solid var(--line);
   border-top: 5px solid var(--sea);
+  border-radius: 8px;
+  box-shadow: 0 14px 34px rgba(5, 43, 58, 0.08);
 }
 
-.schedule-grid .schedule-feature {
-  grid-column: span 2;
+.schedule-feature {
+  align-content: start;
+  color: #fff;
   background: linear-gradient(135deg, rgba(9, 96, 117, 0.94), rgba(19, 125, 134, 0.88));
   border-color: rgba(255, 255, 255, 0.28);
   border-top-color: var(--gold);
-  color: #fff;
 }
 
-.schedule-grid time {
+.route-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.route-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.schedule-feature time,
+.route-card time {
   color: var(--red);
   font-size: 14px;
   font-weight: 900;
   letter-spacing: 0.06em;
 }
 
-.schedule-grid .schedule-feature time {
+.schedule-feature time {
   color: #f7d18a;
 }
 
-.schedule-grid strong {
+.route-card-head span {
+  color: var(--sea);
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.schedule-feature strong,
+.route-card strong {
   font-size: 21px;
   line-height: 1.45;
 }
 
-.schedule-grid p {
+.schedule-feature p,
+.route-card p {
   margin: 0;
   color: rgba(26, 38, 45, 0.72);
   font-weight: 700;
 }
 
-.schedule-grid .schedule-feature p {
+.schedule-feature p {
   color: rgba(255, 255, 255, 0.86);
 }
 
-.schedule-grid a {
+.route-card p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.route-card p span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 3px 10px;
+  color: #fff;
+  background: var(--red);
+  border-radius: 4px;
+  font-weight: 900;
+}
+
+.route-card p em {
+  color: rgba(16, 34, 53, 0.66);
+  font-style: normal;
+  font-weight: 900;
+}
+
+.schedule-feature a {
   width: fit-content;
   color: #fff;
   font-size: 14px;
@@ -458,8 +658,244 @@ section[id] {
   border-bottom: 2px solid rgba(255, 255, 255, 0.64);
 }
 
-.schedule-grid a:hover {
+.schedule-feature a:hover {
   border-bottom-color: #fff;
+}
+
+.report-section {
+  max-width: 1180px;
+}
+
+.report-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(340px, 0.98fr);
+  gap: clamp(24px, 4vw, 42px);
+  align-items: start;
+}
+
+.report-copy {
+  padding: 4px 0 4px 24px;
+  border-left: 6px solid var(--gold);
+}
+
+.report-copy p {
+  margin-bottom: 18px;
+  color: rgba(16, 34, 53, 0.78);
+  font-size: 17px;
+  line-height: 2;
+}
+
+.report-copy p:last-child {
+  margin-bottom: 0;
+}
+
+.report-feature-photo,
+.photo-card {
+  margin: 0;
+}
+
+.report-photo-frame,
+.photo-frame {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  background: #061722;
+}
+
+.report-photo-frame {
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.report-feature-photo img,
+.photo-card img {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.report-feature-photo figcaption {
+  margin-top: 12px;
+  color: rgba(16, 34, 53, 0.72);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.report-feature-photo strong,
+.photo-card strong {
+  display: block;
+  color: var(--sea-dark);
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 1.45;
+}
+
+.report-feature-photo span,
+.photo-card span {
+  display: block;
+  margin-top: 6px;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 34px;
+}
+
+.photo-card {
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 14px 34px rgba(5, 43, 58, 0.08);
+}
+
+.photo-card figcaption {
+  min-height: 126px;
+  padding: 16px;
+  color: rgba(16, 34, 53, 0.68);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.evening-story {
+  display: grid;
+  gap: 28px;
+}
+
+.story-row {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(320px, 1.05fr);
+  gap: clamp(20px, 4vw, 38px);
+  align-items: center;
+  padding: 22px;
+  background: rgba(255, 255, 255, 0.58);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 14px 34px rgba(5, 43, 58, 0.08);
+}
+
+.story-row-reversed {
+  grid-template-columns: minmax(320px, 1.05fr) minmax(0, 0.95fr);
+}
+
+.story-row-reversed .story-copy {
+  order: 2;
+}
+
+.story-row-reversed .story-media {
+  order: 1;
+}
+
+.story-row-feature {
+  grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1.1fr);
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.story-copy p {
+  margin-bottom: 16px;
+  color: rgba(16, 34, 53, 0.78);
+  font-size: 17px;
+  line-height: 2;
+}
+
+.story-copy p:last-child {
+  margin-bottom: 0;
+}
+
+.story-media,
+.story-photo {
+  margin: 0;
+}
+
+.story-photo-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.story-photo-trio {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.story-photo-frame {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  background: #061722;
+  border-radius: 8px;
+}
+
+.story-photo-frame img {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.story-photo-frame-portrait img {
+  aspect-ratio: 4 / 5;
+  object-fit: contain;
+  background: #f6f1e7;
+}
+
+.day-route-strip {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  margin: 0 0 28px;
+  padding: 18px 20px;
+  color: #fff;
+  background: linear-gradient(112deg, rgba(5, 43, 58, 0.96), rgba(6, 96, 117, 0.92));
+  border: 1px solid rgba(142, 216, 214, 0.34);
+  border-left: 8px solid var(--gold);
+  border-radius: 8px;
+  box-shadow: 0 14px 34px rgba(5, 43, 58, 0.12);
+}
+
+.day-route-strip span,
+.day-route-strip em {
+  font-family: "Oswald", sans-serif;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.day-route-strip span {
+  padding: 5px 9px;
+  color: var(--sea-dark);
+  background: var(--gold);
+  border-radius: 4px;
+  font-size: 0.82rem;
+}
+
+.day-route-strip strong {
+  font-size: clamp(19px, 2.6vw, 28px);
+  line-height: 1.35;
+}
+
+.day-route-strip em {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.92rem;
+  font-style: normal;
+}
+
+.story-photo figcaption {
+  margin-top: 10px;
+  color: rgba(16, 34, 53, 0.7);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.story-photo strong {
+  display: block;
+  color: var(--sea-dark);
+  font-size: 17px;
+  font-weight: 900;
+  line-height: 1.45;
+}
+
+.story-photo span {
+  display: block;
+  margin-top: 5px;
 }
 
 .video-grid,
@@ -526,10 +962,29 @@ section[id] {
 
 .video-title {
   display: block;
-  padding: 16px;
+  padding: 4px 16px 0;
   font-size: 18px;
   font-weight: 800;
   line-height: 1.55;
+}
+
+.video-day {
+  display: block;
+  padding: 16px 16px 0;
+  color: var(--red);
+  font-family: "Oswald", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.video-description {
+  display: block;
+  padding: 10px 16px 18px;
+  color: rgba(30, 43, 49, 0.78);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.8;
 }
 
 .placeholder-card {
@@ -909,6 +1364,26 @@ section[id] {
     grid-template-columns: 1fr;
   }
 
+  .report-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .route-board,
+  .story-row,
+  .story-row-reversed,
+  .story-row-feature {
+    grid-template-columns: 1fr;
+  }
+
+  .story-row-reversed .story-copy,
+  .story-row-reversed .story-media {
+    order: initial;
+  }
+
+  .report-feature-photo {
+    max-width: 760px;
+  }
+
   .hero-media {
     max-width: 560px;
     margin-inline: auto;
@@ -919,10 +1394,6 @@ section[id] {
   .video-grid,
   .documentary-list {
     grid-template-columns: 1fr;
-  }
-
-  .schedule-grid {
-    grid-template-columns: repeat(2, 1fr);
   }
 
   .share-grid {
@@ -976,6 +1447,15 @@ section[id] {
     line-height: 1.75;
   }
 
+  .report-copy {
+    padding-left: 18px;
+  }
+
+  .report-copy p {
+    font-size: 15px;
+    line-height: 1.9;
+  }
+
   .section {
     padding: 44px 14px;
   }
@@ -990,12 +1470,26 @@ section[id] {
     width: 100%;
   }
 
-  .schedule-grid {
+  .route-board,
+  .route-list {
     grid-template-columns: 1fr;
   }
 
-  .schedule-grid .schedule-feature {
-    grid-column: auto;
+  .photo-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .photo-card figcaption {
+    min-height: 0;
+  }
+
+  .story-row {
+    padding: 16px;
+  }
+
+  .story-photo-pair,
+  .story-photo-trio {
+    grid-template-columns: 1fr;
   }
 
   .share-grid {

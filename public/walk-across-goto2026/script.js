@@ -7,11 +7,20 @@ const globalNav = document.querySelector("[data-global-section-nav]");
 const shareTitle =
   "アーサーホーランド WALK ACROSS GOTO ISLANDS 2026 | THE ARTHUR HOLLANDS SHOW";
 const shareText =
-  "WALK ACROSS GOTO ISLANDS 2026。2026年6月、長崎県・五島列島を舞台に十字架を掲げて歩く祈りの旅。現地映像、ドキュメンタリー、行進記録を順次掲載します。";
-const shareUrl = "https://arthur-show.com/walk-across-goto2026/?share=20260602";
+  "WALK ACROSS GOTO ISLANDS 2026。五島列島十字架行進DAY03、久賀島の田の浦港からカフェ さわらび方面へ。雨の島道、牢屋の窄殉教記念教会での祈り、現地写真を掲載しています。";
+const shareUrl = "https://arthur-show.com/walk-across-goto2026/?share=20260624#day3-report";
 
 // Add field report YouTube videos here after publication.
-const videos = [];
+const videos = [
+  {
+    id: "FwFAiKcVU1Q",
+    day: "DAY02 / 2026.06.24",
+    title:
+      "心の扉を開いて ジーザス、COME IN！今日できる一番素直な祈り",
+    description:
+      "五島列島十字架行進DAY02より。海と山に囲まれた静かな場所から、アーサー先生がYouTube視聴者へ届けた祈りのメッセージです。心の扉を開き、今日できる一番素直な祈りへと招きます。",
+  },
+];
 
 // Add documentary or digest YouTube videos here after publication.
 const documentaries = [];
@@ -29,7 +38,9 @@ function videoCard(video) {
           />
           <span class="play-button" aria-hidden="true"></span>
         </span>
+        ${video.day ? `<span class="video-day">${video.day}</span>` : ""}
         <span class="video-title">${video.title}</span>
+        ${video.description ? `<span class="video-description">${video.description}</span>` : ""}
       </a>
     </article>
   `;
