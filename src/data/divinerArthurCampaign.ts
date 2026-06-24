@@ -10,6 +10,8 @@ export type DivinerCampaignArticle = {
 	lead: string;
 	body: string[];
 	primaryAsset: string;
+	externalUrl?: string;
+	ctaLabel?: string;
 };
 
 const base = '/assets/diviner-arthur-202606';
@@ -22,6 +24,7 @@ export const divinerCampaign = {
 	title: 'ARTHUR HOLLANDS × DIVINER',
 	brand: 'ARTHUR HOLLANDS × DIVINER',
 	siteUrl: 'https://www.joker-ev.jp',
+	interviewUrl: 'https://www.joker-ev.jp/f/arthurhollands',
 	launchLabel: '2026年6月27日（土）21:00',
 	launchIso: '2026-06-27T21:00:00+09:00',
 	summary:
@@ -77,10 +80,12 @@ export const divinerArticles: DivinerCampaignArticle[] = [
 		lead:
 			'このコラボに込めたメッセージを公開。',
 		body: [
-			'公開された言葉を、ぜひ受け取ってください。',
-			'輪郭が少しずつ見えてくる。',
+			'DIVINER公式サイトで、アーサー先生の特別対談が公開されました。',
+			'十字架行進、不良牧師としての歩み、そして「You are loved」に込めた思いへ。',
 		],
 		primaryAsset: `${rendered}/walk-closeup-cross.webp`,
+		externalUrl: 'https://www.joker-ev.jp/f/arthurhollands',
+		ctaLabel: '対談記事を読む',
 	},
 	{
 		slug: '20260626-countdown',

@@ -11,6 +11,8 @@ export function getStaticPaths() {
 
 const { article } = Astro.props;
 const pagePath = `${divinerCampaign.pagePath}${article.slug}/`;
+const articleLink = article.externalUrl ?? divinerCampaign.siteUrl;
+const articleCtaLabel = article.ctaLabel ?? 'DIVINER公式サイトへ';
 const showProducts = article.slug === '20260627-launch';
 const showLaunchLine = article.slug === '20260627-launch';
 const stripCue = article.slug === '20260627-launch'
@@ -49,8 +51,8 @@ const stripCue = article.slug === '20260627-launch'
 				<p>{article.dateLabel} / {article.stage}</p>
 				<h1>{article.title}</h1>
 				<strong>{article.subtitle}</strong>
-				<a class="primary-link" href={divinerCampaign.siteUrl} target="_blank" rel="noopener noreferrer">
-					DIVINER公式サイトへ
+				<a class="primary-link" href={articleLink} target="_blank" rel="noopener noreferrer">
+					{articleCtaLabel}
 				</a>
 			</div>
 			<figure>

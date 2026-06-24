@@ -76,6 +76,8 @@ $stages = [
 
 $stage = $stages[$stageKey];
 $isLaunch = $stageKey === 'launch';
+$interviewUrl = 'https://www.joker-ev.jp/f/arthurhollands';
+$showInterviewArticle = $now >= $schedule['20260624'];
 $robots = $isLaunch
 	? 'index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1'
 	: 'noindex,nofollow,noarchive';
@@ -104,8 +106,10 @@ $siteUrl = 'https://arthur-show.com';
 $canonical = $siteUrl . '/diviner/';
 $ogImage = $siteUrl . '/assets/diviner-arthur-202606/rendered/og-diviner-arthur-collab.jpg';
 $description = $isLaunch
-	? 'ARTHUR HOLLANDS × DIVINER コラボTシャツ発売開始。DIVINER公式サイトで購入できます。'
-	: 'ARTHUR HOLLANDS × DIVINER。A new collaboration begins.';
+	? 'ARTHUR HOLLANDS × DIVINER コラボTシャツ発売開始。DIVINER公式サイトで購入できます。特別対談記事も公開中。'
+	: ($showInterviewArticle
+		? 'DIVINER公式サイトで公開された、アーサー・ホーランド特別対談への案内ページです。'
+		: 'ARTHUR HOLLANDS × DIVINER。A new collaboration begins.');
 $shareTitle = $isLaunch
 	? 'ARTHUR HOLLANDS × DIVINER コラボレーション発売開始'
 	: 'ARTHUR HOLLANDS × DIVINER';
@@ -324,6 +328,9 @@ $navItems = [
 			.hero h1,
 			.strip,
 			.cta,
+			.article-eyebrow,
+			.interview-card h3,
+			.interview-card span,
 			.product-card h3 {
 				font-family: 'Oswald', sans-serif;
 				letter-spacing: 0;
@@ -493,6 +500,76 @@ $navItems = [
 				font-size: 1.08rem;
 				font-weight: 900;
 				line-height: 1;
+			}
+			.interview-card {
+				display: grid;
+				grid-template-columns: minmax(160px, 0.44fr) minmax(0, 1fr);
+				gap: clamp(18px, 3vw, 28px);
+				align-items: stretch;
+				margin-top: 18px;
+				padding: clamp(16px, 2.5vw, 24px);
+				background:
+					linear-gradient(115deg, rgba(201, 52, 52, 0.22), rgba(255, 255, 255, 0.035)),
+					#0b0b0b;
+				border: 1px solid rgba(255, 255, 255, 0.14);
+				color: #fff;
+			}
+			.interview-card:hover {
+				border-color: rgba(255, 91, 85, 0.64);
+				background:
+					linear-gradient(115deg, rgba(201, 52, 52, 0.3), rgba(255, 255, 255, 0.055)),
+					#0b0b0b;
+			}
+			.interview-media {
+				min-height: 100%;
+				overflow: hidden;
+				background: #111;
+			}
+			.interview-media img {
+				width: 100%;
+				height: 100%;
+				min-height: 220px;
+				aspect-ratio: 4 / 3;
+				object-fit: cover;
+				object-position: center;
+			}
+			.interview-copy {
+				display: grid;
+				align-content: center;
+				gap: 12px;
+				min-width: 0;
+			}
+			.article-eyebrow {
+				margin: 0;
+				color: #ff5b55;
+				font-size: 0.88rem;
+				font-weight: 900;
+				line-height: 1.1;
+				text-transform: uppercase;
+			}
+			.interview-card h3 {
+				margin: 0;
+				font-size: clamp(1.75rem, 4vw, 3.25rem);
+				font-weight: 900;
+				line-height: 1.05;
+				overflow-wrap: anywhere;
+			}
+			.interview-card p {
+				margin: 0;
+				color: rgba(255, 255, 255, 0.78);
+				font-size: clamp(0.98rem, 1.7vw, 1.12rem);
+				font-weight: 800;
+				line-height: 1.75;
+			}
+			.interview-card span {
+				justify-self: start;
+				margin-top: 4px;
+				padding-bottom: 5px;
+				border-bottom: 2px solid #ff5b55;
+				color: #fff;
+				font-size: 1.02rem;
+				font-weight: 900;
+				line-height: 1.1;
 			}
 			.share-panel {
 				display: flex;
@@ -719,6 +796,13 @@ $navItems = [
 					display: grid;
 					gap: 14px;
 				}
+				.interview-card {
+					grid-template-columns: 1fr;
+				}
+				.interview-media img {
+					min-height: 0;
+					aspect-ratio: 16 / 10;
+				}
 				.share-actions {
 					flex-wrap: wrap;
 				}
@@ -796,6 +880,19 @@ $navItems = [
 						<?php endif; ?>
 					</div>
 				</div>
+				<?php if ($showInterviewArticle): ?>
+					<a class="interview-card" href="<?= h($interviewUrl) ?>" target="_blank" rel="noopener noreferrer" aria-label="DIVINER公式特別対談記事を読む">
+						<div class="interview-media" aria-hidden="true">
+							<img src="/assets/diviner-arthur-202606/rendered/sns-20260624-interview.png" alt="" width="1080" height="1350" loading="lazy">
+						</div>
+						<div class="interview-copy">
+							<p class="article-eyebrow">DIVINER OFFICIAL ARTICLE</p>
+							<h3>「粋を目指す野暮であれ」不良牧師アーサー・ホーランドの生き様</h3>
+							<p>DIVINER公式サイトで公開された特別対談。十字架行進、不良牧師としての歩み、そして「You are loved」に込めた思いへ。</p>
+							<span>対談記事を読む</span>
+						</div>
+					</a>
+				<?php endif; ?>
 				<div class="share-panel" aria-label="このページをシェア">
 					<div class="share-copy">
 						<span class="share-label">SHARE</span>
