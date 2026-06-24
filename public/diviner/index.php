@@ -805,8 +805,12 @@ $navItems = [
 						padding: 18px;
 					}
 					.interview-media img {
+						display: block;
 						min-height: 0;
-						aspect-ratio: 16 / 10;
+						height: auto;
+						aspect-ratio: auto;
+						object-fit: contain;
+						object-position: center top;
 					}
 					.article-eyebrow {
 						font-size: 0.78rem;
