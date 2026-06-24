@@ -818,6 +818,10 @@ section[id] {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.story-photo-featured {
+  grid-column: 1 / -1;
+}
+
 .story-photo-frame {
   display: block;
   width: 100%;
@@ -835,6 +839,15 @@ section[id] {
   aspect-ratio: 4 / 5;
   object-fit: contain;
   background: #f6f1e7;
+}
+
+.story-photo-frame-full {
+  background: #f6f1e7;
+}
+
+.story-photo-frame-full img {
+  aspect-ratio: auto;
+  object-fit: contain;
 }
 
 .day-route-strip {
@@ -1490,6 +1503,10 @@ section[id] {
   .story-photo-pair,
   .story-photo-trio {
     grid-template-columns: 1fr;
+  }
+
+  .story-photo-featured {
+    grid-column: auto;
   }
 
   .share-grid {
