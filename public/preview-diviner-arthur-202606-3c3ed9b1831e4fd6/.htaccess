@@ -1,11 +1,6 @@
 Options -Indexes
 IndexIgnore *
 
-<IfModule mod_rewrite.c>
-RewriteEngine On
-RewriteRule ^20260627-launch/ - [F,L]
-</IfModule>
-
 <IfModule mod_headers.c>
 Header set X-Robots-Tag "noindex, nofollow, noarchive"
 </IfModule>
