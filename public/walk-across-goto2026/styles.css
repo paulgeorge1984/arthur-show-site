@@ -792,6 +792,10 @@ section[id] {
   background: rgba(255, 255, 255, 0.72);
 }
 
+.story-row-baptism {
+  grid-template-columns: 1fr;
+}
+
 .story-copy p {
   margin-bottom: 16px;
   color: rgba(16, 34, 53, 0.78);
@@ -801,6 +805,85 @@ section[id] {
 
 .story-copy p:last-child {
   margin-bottom: 0;
+}
+
+.faith-steps-heading {
+  margin: 24px 0 14px;
+  padding: 16px 18px;
+  background: rgba(6, 96, 117, 0.08);
+  border: 1px solid rgba(6, 96, 117, 0.14);
+  border-left: 5px solid var(--gold);
+  border-radius: 8px;
+}
+
+.faith-steps-heading span {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--gold-dark);
+  font-family: "Oswald", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+}
+
+.faith-steps-heading h3 {
+  margin: 0 0 6px;
+  color: var(--sea-dark);
+  font-size: 1.45rem;
+  line-height: 1.35;
+}
+
+.faith-steps-heading p {
+  margin: 0;
+  color: rgba(16, 34, 53, 0.74);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.8;
+}
+
+.faith-steps {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 0;
+}
+
+.faith-steps article {
+  display: grid;
+  gap: 8px;
+  min-height: 150px;
+  padding: 16px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(247, 241, 228, 0.82));
+  border: 1px solid rgba(6, 96, 117, 0.16);
+  border-left: 5px solid var(--gold);
+  border-radius: 8px;
+}
+
+.faith-steps span {
+  width: fit-content;
+  padding: 3px 8px;
+  color: #fff;
+  background: var(--sea-dark);
+  border-radius: 4px;
+  font-family: "Oswald", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.faith-steps strong {
+  color: var(--sea-dark);
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 1.4;
+}
+
+.faith-steps p {
+  margin: 0;
+  color: rgba(16, 34, 53, 0.72);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.75;
 }
 
 .story-media,
@@ -816,6 +899,12 @@ section[id] {
 
 .story-photo-trio {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.story-photo-baptism {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
 }
 
 .story-photo-featured {
@@ -1501,7 +1590,8 @@ section[id] {
   }
 
   .story-photo-pair,
-  .story-photo-trio {
+  .story-photo-trio,
+  .faith-steps {
     grid-template-columns: 1fr;
   }
 
