@@ -7,8 +7,9 @@ const globalNav = document.querySelector("[data-global-section-nav]");
 const shareTitle =
   "アーサーホーランド WALK ACROSS GOTO ISLANDS 2026 | THE ARTHUR HOLLANDS SHOW";
 const shareText =
-  "WALK ACROSS GOTO ISLANDS 2026。五島列島十字架行進DAY03、久賀島の田の浦港からカフェ さわらび方面へ。雨の島道、牢屋の窄殉教記念教会での祈り、現地写真を掲載しています。";
-const shareUrl = "https://arthur-show.com/walk-across-goto2026/?share=20260624#day3-report";
+  "WALK ACROSS GOTO ISLANDS 2026。五島列島十字架行進の記録を、出発から帰路まで毎日更新したレポートとして掲載しています。";
+const shareUrl = "https://arthur-show.com/walk-across-goto2026/?share=20260630#day7-report";
+const sharePayload = `${shareTitle}\n${shareText}\n${shareUrl}`;
 
 // Add field report YouTube videos here after publication.
 const videos = [
@@ -73,35 +74,89 @@ if (documentaryGrid) {
 function updateShareLinks() {
   const encodedUrl = encodeURIComponent(shareUrl);
   const encodedText = encodeURIComponent(`${shareTitle}\n${shareText}`);
-  const encodedLineText = encodeURIComponent(`${shareTitle}\n${shareText}\n${shareUrl}`);
-  const line = document.querySelector("[data-share-line]");
-  const x = document.querySelector("[data-share-x]");
-  const facebook = document.querySelector("[data-share-facebook]");
+  const encodedLineText = encodeURIComponent(sharePayload);
+  const lineItems = document.querySelectorAll("[data-share-line], [data-goto-share-line]");
+  const xItems = document.querySelectorAll("[data-share-x], [data-goto-share-x]");
+  const facebookItems = document.querySelectorAll("[data-share-facebook], [data-goto-share-facebook]");
 
-  if (line) line.href = `https://line.me/R/msg/text/?${encodedLineText}`;
-  if (x) x.href = `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`;
-  if (facebook) facebook.href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+  lineItems.forEach((line) => {
+    line.href = `https://line.me/R/msg/text/?${encodedLineText}`;
+  });
+  xItems.forEach((x) => {
+    x.href = `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`;
+  });
+  facebookItems.forEach((facebook) => {
+    facebook.href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+  });
 }
 
-async function copyShareLink() {
+function setButtonFeedback(button, text, restoreText) {
+  if (!button) return;
+  const label = button.querySelector("small") || button;
+  const original = restoreText || label.dataset.originalText || label.textContent;
+  label.dataset.originalText = original;
+  label.textContent = text;
+  window.clearTimeout(button._shareFeedbackTimer);
+  button._shareFeedbackTimer = window.setTimeout(() => {
+    label.textContent = original;
+  }, 1800);
+}
+
+function showCopyStatus(text) {
   const statusItems = document.querySelectorAll("[data-copy-status]");
+  statusItems.forEach((item) => {
+    item.textContent = text;
+  });
+  window.clearTimeout(showCopyStatus._timer);
+  showCopyStatus._timer = window.setTimeout(() => {
+    statusItems.forEach((item) => {
+      item.textContent = "URLをクリップボードへ";
+    });
+  }, 1800);
+}
+
+async function writeClipboardText(text) {
+  if (navigator.clipboard?.writeText && window.isSecureContext) {
+    await navigator.clipboard.writeText(text);
+    return true;
+  }
+
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.setAttribute("readonly", "");
+  textarea.style.position = "fixed";
+  textarea.style.left = "-9999px";
+  textarea.style.top = "0";
+  document.body.appendChild(textarea);
+  textarea.focus();
+  textarea.select();
 
   try {
-    await navigator.clipboard.writeText(`${shareTitle}\n${shareText}\n${shareUrl}`);
-    statusItems.forEach((item) => {
-      item.textContent = "コピーしました";
-    });
-    setTimeout(() => {
-      statusItems.forEach((item) => {
-        item.textContent = "URLをクリップボードへ";
-      });
-    }, 1800);
-  } catch {
-    window.prompt("この内容をコピーしてください", `${shareTitle}\n${shareText}\n${shareUrl}`);
+    return document.execCommand("copy");
+  } finally {
+    textarea.remove();
   }
 }
 
-async function sharePage() {
+async function copyShareLink(event) {
+  const button = event?.currentTarget;
+
+  try {
+    const copied = await writeClipboardText(sharePayload);
+    if (!copied) throw new Error("copy command failed");
+    showCopyStatus("コピーしました");
+    setButtonFeedback(button, "コピーしました");
+    return true;
+  } catch {
+    window.prompt("この内容をコピーしてください", sharePayload);
+    showCopyStatus("コピー用の画面を開きました");
+    setButtonFeedback(button, "コピー用の画面を開きました");
+    return false;
+  }
+}
+
+async function sharePage(event) {
+  const button = event?.currentTarget;
   if (navigator.share) {
     try {
       await navigator.share({
@@ -115,7 +170,33 @@ async function sharePage() {
     }
   }
 
-  await copyShareLink();
+  const shareSection = document.querySelector("#share");
+  if (shareSection && button?.closest(".quick-share")) {
+    shareSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    setButtonFeedback(button, "共有方法を選んでください", "このページをシェア");
+    return;
+  }
+
+  await copyShareLink(event);
+}
+
+function setGotoSharePanel(open) {
+  const panel = document.querySelector("[data-goto-share-panel]");
+  const trigger = document.querySelector("[data-goto-share-menu]");
+  if (!panel || !trigger) return;
+
+  panel.hidden = !open;
+  trigger.setAttribute("aria-expanded", String(open));
+}
+
+async function openGotoShareMenu(event) {
+  const button = event?.currentTarget;
+  const panel = document.querySelector("[data-goto-share-panel]");
+  const shouldOpen = panel?.hidden ?? true;
+  setGotoSharePanel(shouldOpen);
+  if (shouldOpen) {
+    setButtonFeedback(button, "共有方法を選んでください", "このページをシェア");
+  }
 }
 
 function setGlobalMenu(open) {
@@ -140,6 +221,19 @@ document.querySelectorAll("[data-share-native]").forEach((button) => {
 
 document.querySelectorAll("[data-copy-link]").forEach((button) => {
   button.addEventListener("click", copyShareLink);
+});
+
+document.querySelectorAll("[data-goto-share-menu]").forEach((button) => {
+  button.addEventListener("click", openGotoShareMenu);
+});
+
+document.querySelectorAll("[data-goto-copy-link]").forEach((button) => {
+  button.addEventListener("click", copyShareLink);
+});
+
+document.addEventListener("click", (event) => {
+  if (event.target.closest("[data-goto-share-menu], [data-goto-share-panel]")) return;
+  setGotoSharePanel(false);
 });
 
 document.querySelectorAll("[data-full]").forEach((button) => {
@@ -171,6 +265,7 @@ lightbox?.addEventListener("click", (event) => {
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
     setGlobalMenu(false);
+    setGotoSharePanel(false);
     if (lightbox && !lightbox.hidden) closeLightbox();
   }
 });

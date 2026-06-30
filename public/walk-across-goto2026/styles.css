@@ -388,6 +388,7 @@ p {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  position: relative;
 }
 
 .hero-actions {
@@ -409,6 +410,51 @@ p {
   font: inherit;
   font-size: 14px;
   font-weight: 800;
+}
+
+.quick-share-panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  z-index: 30;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(92px, 1fr));
+  gap: 8px;
+  width: min(480px, calc(100vw - 40px));
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(6, 96, 117, 0.22);
+  border-radius: 8px;
+  box-shadow: 0 18px 48px rgba(5, 43, 58, 0.22);
+}
+
+.quick-share-panel[hidden] {
+  display: none;
+}
+
+.quick-share-panel a,
+.quick-share-panel button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 12px;
+  color: var(--ink);
+  text-align: center;
+  text-decoration: none;
+  background: rgba(239, 245, 246, 0.9);
+  border: 1px solid rgba(6, 96, 117, 0.16);
+  border-radius: 6px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.quick-share-panel a:hover,
+.quick-share-panel button:hover {
+  color: white;
+  background: var(--sea);
 }
 
 .button {
@@ -804,6 +850,44 @@ section[id] {
 }
 
 .story-copy p:last-child {
+  margin-bottom: 0;
+}
+
+.story-callout {
+  margin: 22px 0;
+  padding: 18px 20px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(246, 229, 184, 0.32));
+  border: 1px solid rgba(180, 126, 38, 0.28);
+  border-left: 5px solid var(--gold);
+  border-radius: 8px;
+  box-shadow: 0 12px 28px rgba(5, 43, 58, 0.08);
+}
+
+.story-callout span {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--gold-dark);
+  font-family: "Oswald", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.11em;
+}
+
+.story-callout h3 {
+  margin: 0 0 10px;
+  color: var(--ink);
+  font-size: clamp(1.08rem, 2vw, 1.28rem);
+  line-height: 1.55;
+}
+
+.story-copy .story-callout p {
+  margin-bottom: 10px;
+  color: rgba(16, 34, 53, 0.8);
+  font-size: 16px;
+  line-height: 1.9;
+}
+
+.story-copy .story-callout p:last-child {
   margin-bottom: 0;
 }
 

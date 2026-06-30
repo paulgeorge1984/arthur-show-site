@@ -121,6 +121,26 @@ $shareTitleEncoded = rawurlencode($shareTitle);
 $shareLineEncoded = rawurlencode($shareText);
 $graphicProduct = $isLaunch ? data_uri('/assets/diviner-arthur-202606/rendered/graphic-tee-product.webp', 'image/webp') : '';
 $photoProduct = $isLaunch ? data_uri('/assets/diviner-arthur-202606/rendered/photo-tee-product.webp', 'image/webp') : '';
+$instagramPosts = [
+	[
+		'url' => 'https://www.instagram.com/p/DZ4ysi-icG2/',
+		'title' => 'ARTHUR HOLLANDS × DIVINER',
+		'body' => 'Instagramに掲載されたコラボレーション投稿です。',
+		'image' => data_uri('/assets/diviner-arthur-202606/rendered/sns-20260627-launch.png', 'image/png'),
+	],
+	[
+		'url' => 'https://www.instagram.com/diviner_official/p/DaDF-suiZDo/',
+		'title' => 'DIVINER OFFICIAL POST',
+		'body' => 'DIVINER公式Instagramの関連投稿です。',
+		'image' => data_uri('/assets/diviner-arthur-202606/rendered/graphic-tee-product.webp', 'image/webp'),
+	],
+	[
+		'url' => 'https://www.instagram.com/diviner_official/p/DZ9BQmQJH-J/',
+		'title' => 'DIVINER OFFICIAL POST',
+		'body' => 'DIVINER公式Instagramの関連投稿です。',
+		'image' => data_uri('/assets/diviner-arthur-202606/rendered/photo-tee-product.webp', 'image/webp'),
+	],
+];
 $navItems = [
 	['href' => '/#messages', 'label' => "Arthur Hollands' Message", 'active' => false],
 	['href' => '/walk-across-goto2026/', 'label' => 'GOTO ISLANDS 2026', 'active' => false],
@@ -571,6 +591,57 @@ $navItems = [
 				font-weight: 900;
 				line-height: 1.1;
 			}
+			.instagram-list {
+				display: grid;
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+				gap: 14px;
+				margin-top: 18px;
+			}
+			.instagram-card {
+				display: grid;
+				align-content: start;
+				gap: 12px;
+				padding: 14px;
+				background: #0b0b0b;
+				border: 1px solid rgba(255, 255, 255, 0.14);
+				color: #fff;
+			}
+			.instagram-card:hover {
+				border-color: rgba(255, 91, 85, 0.64);
+				background: rgba(255, 255, 255, 0.045);
+			}
+			.instagram-card img {
+				width: 100%;
+				aspect-ratio: 4 / 5;
+				object-fit: cover;
+				object-position: center;
+				background: #111;
+			}
+			.instagram-card h3 {
+				margin: 0;
+				font-family: 'Oswald', sans-serif;
+				font-size: clamp(1.2rem, 2.6vw, 1.65rem);
+				font-weight: 900;
+				line-height: 1.05;
+				text-transform: uppercase;
+			}
+			.instagram-card p {
+				margin: 0;
+				color: rgba(255, 255, 255, 0.74);
+				font-size: 0.92rem;
+				font-weight: 800;
+				line-height: 1.6;
+			}
+			.instagram-card span {
+				justify-self: start;
+				padding-bottom: 5px;
+				border-bottom: 2px solid #ff5b55;
+				color: #fff;
+				font-family: 'Oswald', sans-serif;
+				font-size: 0.98rem;
+				font-weight: 900;
+				line-height: 1.1;
+			}
 			.share-panel {
 				display: flex;
 				align-items: center;
@@ -645,9 +716,10 @@ $navItems = [
 				border: 1px solid rgba(255, 255, 255, 0.18);
 			}
 			.product-card img {
+				display: block;
 				width: 100%;
-				aspect-ratio: 1 / 1;
-				object-fit: contain;
+				height: auto;
+				aspect-ratio: 4 / 5;
 				background: #f7f7f7;
 			}
 			.product-card h3 {
@@ -833,6 +905,9 @@ $navItems = [
 				.products {
 					grid-template-columns: 1fr;
 				}
+				.instagram-list {
+					grid-template-columns: 1fr;
+				}
 			}
 		</style>
 	</head>
@@ -913,6 +988,16 @@ $navItems = [
 						</div>
 					</a>
 				<?php endif; ?>
+				<div class="instagram-list" aria-label="Instagram関連投稿">
+					<?php foreach ($instagramPosts as $post): ?>
+						<a class="instagram-card" href="<?= h($post['url']) ?>" target="_blank" rel="noopener noreferrer" aria-label="<?= h($post['title']) ?>をInstagramで見る">
+							<img src="<?= h($post['image']) ?>" alt="" loading="lazy">
+							<h3><?= h($post['title']) ?></h3>
+							<p><?= h($post['body']) ?></p>
+							<span>Instagramで見る</span>
+						</a>
+					<?php endforeach; ?>
+				</div>
 				<div class="share-panel" aria-label="このページをシェア">
 					<div class="share-copy">
 						<span class="share-label">SHARE</span>

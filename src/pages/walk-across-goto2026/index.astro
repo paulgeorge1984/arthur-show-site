@@ -6,9 +6,9 @@ import GoogleAnalytics from '../../components/GoogleAnalytics.astro';
 const siteURL = 'https://arthur-show.com';
 const canonicalURL = `${siteURL}/walk-across-goto2026/`;
 const pageTitle = 'アーサーホーランド WALK ACROSS GOTO ISLANDS 2026 | THE ARTHUR HOLLANDS SHOW';
-const pageDescription = 'WALK ACROSS GOTO ISLANDS 2026。五島列島十字架行進6日目、最終日は奈良尾港からローソン上五島有川店まで約20kmを歩き、蛤浜で洗礼式と聖餐式が行われた一日を掲載しています。';
-const pageImage = `${canonicalURL}assets/report-20260627/goto-20260627-hamagurihama-cross.jpg`;
-const pageImageAlt = '五島列島十字架行進6日目、蛤浜の海を背に十字架とともに立つアーサー先生たち';
+const pageDescription = 'WALK ACROSS GOTO ISLANDS 2026。五島列島十字架行進7日目、六日間の歩みを終え、フェリーと空路で東京へ戻る帰路の記録を掲載しています。';
+const pageImage = `${canonicalURL}assets/report-20260628/goto-20260628-arthur-go-morning.jpg`;
+const pageImageAlt = '五島列島十字架行進7日目、帰路の朝にアーサー号の中で語るアーサー先生';
 const featuredReportPhoto = {
   src: './assets/report-20260621/goto-20260621-propeller-plane-apron.jpg',
   alt: '長崎空港で五島列島へ向かうプロペラ機に乗り込む場面',
@@ -870,6 +870,86 @@ const [
   day6EveningFellowshipPhoto,
   day6SunsetHarborPhoto,
 ] = day6Photos;
+const day7FeaturePhoto = {
+  src: './assets/report-20260628/goto-20260628-arthur-go-morning.jpg',
+  alt: pageImageAlt,
+  title: '帰路の朝、アーサー号の中で',
+  caption: '六日間の行進を終えた朝。五島を離れる道の中でも、御言葉と証しをめぐる対話が続きました。',
+};
+const day7Photos = [
+  {
+    src: './assets/report-20260628/goto-20260628-arthur-go-word.jpg',
+    alt: '帰路のアーサー号の中で聖書と証しについて語るアーサー先生',
+    title: '御言葉をめぐる対話',
+    caption: '創世記から荒野の誘惑、そして十字架へ。帰路のアーサー号でも、旅で受け取った御言葉が語られていきました。',
+  },
+  {
+    src: './assets/report-20260628/goto-20260628-ferry-approach.jpg',
+    alt: '山に囲まれた港へ近づくフェリーつばき',
+    title: '港へ近づくフェリー',
+    caption: '五島列島を離れる朝、港にはフェリーつばきが近づいてきました。島の山並みと海が、帰路の始まりを静かに見送ります。',
+  },
+  {
+    src: './assets/report-20260628/goto-20260628-ferry-tsubaki.jpg',
+    alt: '青空の下、港に停泊するフェリーつばき',
+    title: 'フェリーつばきで海を渡る',
+    caption: '車ごとフェリーに乗り込み、五島を後にします。空と海の明るさが、六日間の歩みを終えた朝を包んでいました。',
+  },
+  {
+    src: './assets/report-20260628/goto-20260628-ferry-deck.jpg',
+    alt: 'フェリーつばきの車両甲板へ入るアーサー号',
+    title: 'アーサー号もフェリーへ',
+    caption: '陸路と海路を走り抜けてきたアーサー号も、フェリーの車両甲板へ。旅を支えた車も、ともに島を離れていきます。',
+  },
+  {
+    src: './assets/report-20260628/goto-20260628-ferry-conversation.jpg',
+    alt: 'フェリー船内で五島列島の信仰の歴史について語るアーサー先生',
+    title: '船内で続いた証し',
+    caption: 'フェリーの船内でも、五島で見た信仰の歴史、出会い、これから伝えていくべきことが語られていきました。',
+  },
+  {
+    src: './assets/report-20260628/goto-20260628-airport-cafe.jpg',
+    alt: '空港のカフェで笑顔を見せるアーサー先生',
+    title: '空港でも途切れない会話',
+    caption: '島を離れてからも、会話は止まりません。次にこの地へ戻る時のこと、映像で伝えていくことが語られていきました。',
+  },
+  {
+    src: './assets/report-20260628/goto-20260628-airport-departures.jpg',
+    alt: '長崎空港で日本聖書協会の職員の方と偶然出会うアーサー先生',
+    title: '帰りの空港での摂理の出会い',
+    caption: '保安検査場で偶然前に並んでいたのは、日本聖書協会の職員の方でした。行きだけでなく帰りにも、不思議な出会いが用意されていました。',
+  },
+  {
+    src: './assets/report-20260628/goto-20260628-see-you-again.jpg',
+    alt: '長崎空港で羽田便を待つアーサー先生',
+    title: '搭乗前、長崎空港で',
+    caption: '羽田へ向かう便を待つ時間にも、アーサー先生のまわりでは旅を振り返る言葉が交わされていました。',
+  },
+  {
+    src: './assets/report-20260628/goto-20260628-boarding-bridge.jpg',
+    alt: '長崎空港の保安検査場で手続きを進めるアーサー先生',
+    title: '保安検査場へ',
+    caption: '長崎空港で羽田便へ。荷物を整え、保安検査場へ向かう一つひとつの場面にも、帰路の実感がありました。',
+  },
+  {
+    src: './assets/report-20260628/goto-20260628-plane-cabin.jpg',
+    alt: '羽田空港へ到着し手荷物を待つアーサー先生',
+    title: '羽田へ戻って',
+    caption: '長崎から羽田へ。六日間の歩みを終え、東京に戻ってからも、五島で受け取ったものは心に残り続けていました。',
+  },
+];
+const [
+  day7ArthurGoWordPhoto,
+  day7FerryApproachPhoto,
+  day7FerryTsubakiPhoto,
+  day7FerryDeckPhoto,
+  day7FerryConversationPhoto,
+  day7AirportCafePhoto,
+  day7AirportDeparturesPhoto,
+  day7SeeYouAgainPhoto,
+  day7BoardingBridgePhoto,
+  day7PlaneCabinPhoto,
+] = day7Photos;
 const reportDayTabs = [
   {
     day: 'DAY00',
@@ -918,6 +998,13 @@ const reportDayTabs = [
     date: '6/27',
     label: '上五島・奈良尾〜有川',
     href: '#day6-report',
+    status: '公開中',
+  },
+  {
+    day: 'DAY07',
+    date: '6/28',
+    label: '五島列島〜東京',
+    href: '#day7-report',
     status: '公開中',
     current: true,
   },
@@ -992,7 +1079,7 @@ const structuredData = [
     alternateName: ['アーサーホーランド五島列島十字架行進2026', '五島列島十字架行進2026'],
     description: pageDescription,
     startDate: '2026-06-21T19:00:00+09:00',
-    endDate: '2026-06-27T18:00:00+09:00',
+    endDate: '2026-06-28T18:00:00+09:00',
     eventStatus: 'https://schema.org/EventScheduled',
     eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
     image: [pageImage],
@@ -1074,7 +1161,7 @@ const structuredData = [
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Oswald:wght@400;700&family=Shippori+Mincho:wght@500;700;800&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=20260624-day03" />
+    <link rel="stylesheet" href="./styles.css?v=20260630-day07" />
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
   <body>
@@ -1133,6 +1220,7 @@ const structuredData = [
       <a href="#day4-report">4日目レポート</a>
       <a href="#day5-report">5日目レポート</a>
       <a href="#day6-report">6日目レポート</a>
+      <a href="#day7-report">7日目レポート</a>
       <a href="#photo-report">写真</a>
       <a href="#schedule">スケジュール</a>
       <a href="#field-videos">現地映像</a>
@@ -1154,17 +1242,23 @@ const structuredData = [
             <strong>アーサーホーランド 五島列島十字架行進 2026</strong>
           </h1>
           <p>
-            2026年6月、長崎県・五島列島を舞台に十字架行進が続いています。
-            海を渡り、島から島へ。祈りを込めて十字架を掲げ、五島の道を歩く日々を更新しています。
+            2026年6月、長崎県・五島列島を舞台に十字架行進が行われました。
+            海を渡り、島から島へ。祈りを込めて十字架を掲げ、五島の道を歩いた日々を記録しています。
           </p>
           <div class="hero-actions">
-            <a class="button primary" href="#day6-report">6日目レポートを読む</a>
-            <a class="button secondary" href="#day5-report">5日目レポートを読む</a>
+            <a class="button primary" href="#day7-report">7日目レポートを読む</a>
+            <a class="button secondary" href="#day6-report">6日目レポートを読む</a>
             <a class="button secondary" href="#schedule">行進スケジュールを見る</a>
           </div>
           <div class="quick-share" aria-label="シェア">
-            <button class="share-native" type="button" data-share-native>このページをシェア</button>
-            <button type="button" data-copy-link>リンクをコピー</button>
+            <button class="share-native" type="button" data-goto-share-menu aria-expanded="false" aria-controls="goto-share-panel">このページをシェア</button>
+            <button type="button" data-goto-copy-link>リンクをコピー</button>
+            <div class="quick-share-panel" id="goto-share-panel" data-goto-share-panel hidden>
+              <a href="https://line.me/R/msg/text/?https%3A%2F%2Farthur-show.com%2Fwalk-across-goto2026%2F" data-goto-share-line target="_blank" rel="noreferrer">LINE</a>
+              <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farthur-show.com%2Fwalk-across-goto2026%2F" data-goto-share-x target="_blank" rel="noreferrer">X</a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farthur-show.com%2Fwalk-across-goto2026%2F" data-goto-share-facebook target="_blank" rel="noreferrer">Facebook</a>
+              <button type="button" data-goto-copy-link>コピー</button>
+            </div>
           </div>
         </div>
       </section>
@@ -3553,6 +3647,272 @@ const structuredData = [
         </div>
       </section>
 
+      <section class="section report-section day-report-section" id="day7-report" aria-labelledby="day7-report-title">
+        <div class="section-heading">
+          <p class="eyebrow">DAY 07 REPORT / 2026.06.28</p>
+          <h2 id="day7-report-title">五島列島から東京へ。帰路の海と空の上で、次の祈りが始まっていた。</h2>
+          <p>
+            五島列島十字架行進7日目。
+            六日間の歩みを終え、この日はフェリーと空路で東京へ戻る一日となりました。
+          </p>
+        </div>
+        <div class="day-route-strip" aria-label="7日目の帰路">
+          <span>DAY 07</span>
+          <strong>五島列島 → 長崎 → 東京</strong>
+          <em>帰路 / エピローグ</em>
+        </div>
+
+        <div class="evening-story" aria-label="2026年6月28日 7日目レポート写真">
+          <article class="story-row">
+            <div class="story-copy">
+              <p>
+                2026年6月28日（日）。
+                蛤浜での洗礼式と聖餐式、そして港に沈む夕陽を見届けた翌朝、
+                一行は五島列島を離れ、東京へ戻る帰路につきました。
+                けれど、この日は単なる移動日ではありませんでした。
+                アーサー号の中では、六日間の行進で見たこと、聞いたこと、祈ったことが、
+                もう一度、御言葉に照らされながら語られていきました。
+              </p>
+              <p>
+                朝の車内で語られたのは、創世記のはじめに記された人間の姿でした。
+                神の言葉を聞きながら、それでも見て、欲し、手を伸ばしてしまう人間の弱さ。
+                アーサー先生は、その流れがジーザスの荒野の誘惑にもつながっていることを語りました。
+                石をパンに変えるよう試みられた時、ジーザスは
+                「人はパンだけで生きるものではなく、神の口から出る一つ一つの言葉による」
+                と答えられました。
+              </p>
+              <p>
+                五島列島の道を十字架とともに歩いた後だからこそ、
+                その言葉は、ただ知識としてではなく、旅の体験と重なって響きます。
+                天候、船、道、出会い。
+                自分の思い通りに動かせないものの中で、なお神の言葉を心に留めて歩く。
+                帰路の朝、アーサー号の中にあったのは、旅を終えた安堵だけではなく、
+                これから自分たちがどう生き、どう伝えていくのかという問いでもありました。
+              </p>
+            </div>
+            <div class="story-media story-photo-pair">
+              <figure class="story-photo story-photo-featured">
+                <div class="story-photo-frame">
+                  <img src={day7FeaturePhoto.src} alt={day7FeaturePhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day7FeaturePhoto.title}</strong>
+                  <span>{day7FeaturePhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day7ArthurGoWordPhoto.src} alt={day7ArthurGoWordPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day7ArthurGoWordPhoto.title}</strong>
+                  <span>{day7ArthurGoWordPhoto.caption}</span>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="story-row story-row-reversed">
+            <div class="story-copy">
+              <p>
+                港に着くと、海の向こうからフェリーつばきが近づいてきました。
+                青い空、山に囲まれた港、静かな海。
+                六日間、島から島へ、道から道へと導かれてきた十字架行進は、
+                この日、海を渡って五島列島を離れていきます。
+              </p>
+              <p>
+                車両甲板へ入っていくアーサー号の姿も印象的でした。
+                レンタカーではなく、陸路と海路を越えて五島まで走ってきたアーサー号。
+                その車が再びフェリーに乗り込む場面には、
+                今回の旅全体を支えてきたものが一緒に帰っていくような重みがありました。
+              </p>
+              <p>
+                けれど、それは終わりのための帰り道ではありません。
+                「ここは、また来なければならない」。
+                五島の道を歩き、教会を訪ね、殉教の歴史に触れ、島の人々と出会ったからこそ、
+                その思いはよりはっきりしていきました。
+                帰りのフェリーは、旅の終わりを告げる船であると同時に、
+                次にこの地へ戻る祈りを乗せた船でもありました。
+              </p>
+            </div>
+            <div class="story-media story-photo-pair story-photo-trio">
+              <figure class="story-photo story-photo-featured">
+                <div class="story-photo-frame">
+                  <img src={day7FerryApproachPhoto.src} alt={day7FerryApproachPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day7FerryApproachPhoto.title}</strong>
+                  <span>{day7FerryApproachPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day7FerryTsubakiPhoto.src} alt={day7FerryTsubakiPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day7FerryTsubakiPhoto.title}</strong>
+                  <span>{day7FerryTsubakiPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day7FerryDeckPhoto.src} alt={day7FerryDeckPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day7FerryDeckPhoto.title}</strong>
+                  <span>{day7FerryDeckPhoto.caption}</span>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="story-row story-row-feature">
+            <div class="story-copy">
+              <p>
+                フェリーの船内でも、会話は途切れませんでした。
+                何度も語られたのは、五島で触れた信仰の歴史です。
+                久賀島で聞いた迫害の証し、牢屋の窄で見た記憶、資料を守り伝えている人たちの存在。
+                それらは、帰り道になっても簡単に心から離れるものではありませんでした。
+              </p>
+              <p>
+                アーサー先生は、この地で起こったことを、もっと多くの人に見てもらいたいと語りました。
+                本で読むだけではなく、実際に島へ来て、道を歩き、海を渡り、
+                その場所に立つことで初めて受け取れるものがある。
+                特に都会にいる牧師やクリスチャンにも、この五島列島の信仰の歴史を知ってほしい。
+                その言葉には、今回の旅で受け取ったものを次へ渡していく責任が込められていました。
+              </p>
+              <p>
+                映像を通して伝えること、もう一度この地を訪ねること、
+                十字架を担いで歩く姿を島の人々の記憶に残していくこと。
+                帰路の船内で交わされた会話は、旅の反省会ではなく、
+                次の歩みを具体的に考え始める時間になっていきました。
+              </p>
+            </div>
+            <figure class="story-media story-photo">
+              <div class="story-photo-frame">
+                <img src={day7FerryConversationPhoto.src} alt={day7FerryConversationPhoto.alt} loading="lazy" decoding="async" />
+              </div>
+              <figcaption>
+                <strong>{day7FerryConversationPhoto.title}</strong>
+                <span>{day7FerryConversationPhoto.caption}</span>
+              </figcaption>
+            </figure>
+          </article>
+
+          <article class="story-row">
+            <div class="story-copy">
+              <p>
+                フェリーで海を渡り、長崎へ。
+                空港に着いてからも、話題は五島列島のことへ戻っていきます。
+                今回、島の道で十字架を見た人たちがいました。
+                アーサー号を見て声をかけてくれた人たちもいました。
+                一度で終わるのではなく、何度も訪ね、歩き、祈り続けるなら、
+                その姿は島の記憶の中に残っていく。
+                その確信が、帰路の会話の中で少しずつ形になっていきました。
+              </p>
+              <div class="story-callout">
+                <span>COLUMN</span>
+                <h3>帰りの空港でも、思いがけない出会いが待っていた</h3>
+                <p>
+                  長崎空港の保安検査場で、偶然アーサー先生の前に並んでいたのは、
+                  日本聖書協会の職員の方でした。
+                  かつてアーサー先生が日本聖書協会でメッセージをしたことがあり、
+                  そのつながりが分かった瞬間、帰りの空港での時間までもが、
+                  神の導きの中に置かれていたことを思わされました。
+                </p>
+                <p>
+                  羽田から長崎へ向かう行きの飛行機でも、
+                  アーサー先生のことをご存じの方との出会いがありました。
+                  そして帰りの空港でも、またこのような偶然が用意されていた。
+                  あまりにも自然に、しかし確かに重なる出会いの中に、
+                  神の摂理を感じずにはいられない帰路となりました。
+                </p>
+              </div>
+              <p>
+                旅の終わりに近づくほど、今回の六日間がただの記録ではなく、
+                次の証しのために渡された素材であることが見えてきます。
+                道で出会った人、フェリーで渡った海、教会で祈った時間、
+                洗礼式で起こされた決断。
+                それらをどう伝えるのか。
+                空港での時間にも、その問いは静かに続いていました。
+              </p>
+            </div>
+            <div class="story-media story-photo-pair">
+              <figure class="story-photo story-photo-featured">
+                <div class="story-photo-frame">
+                  <img src={day7AirportCafePhoto.src} alt={day7AirportCafePhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day7AirportCafePhoto.title}</strong>
+                  <span>{day7AirportCafePhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day7AirportDeparturesPhoto.src} alt={day7AirportDeparturesPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day7AirportDeparturesPhoto.title}</strong>
+                  <span>{day7AirportDeparturesPhoto.caption}</span>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="story-row story-row-reversed story-row-compact">
+            <div class="story-copy">
+              <p>
+                長崎空港で羽田便を待つ時間にも、旅はまだ終わっていませんでした。
+                コーヒーを前に言葉を交わし、荷物を整え、保安検査場へ向かう。
+                その一つひとつの場面の中に、六日間の歩みを受け取ったあとの静かな余韻がありました。
+              </p>
+              <p>
+                六日間の十字架行進は終わりました。
+                けれど、五島で見たもの、聞いた証し、出会った人々、与えられた祈りは、
+                それぞれの場所へ持ち帰られていきます。
+                帰ることは、終わることではなく、受け取ったものを次の場所で生き始めることでもあります。
+              </p>
+              <p>
+                フェリーで海を越え、飛行機で空を越え、東京へ。
+                五島列島十字架行進2026の帰路は、
+                静かに幕を閉じながらも、すでに次の歩みへ向かって開かれていました。
+                羽田に戻ってからも、五島で受け取った祈りと証しは、
+                アーサー先生の言葉の中に続いていました。
+              </p>
+            </div>
+            <div class="story-media story-photo-pair">
+              <figure class="story-photo story-photo-featured">
+                <div class="story-photo-frame">
+                  <img src={day7SeeYouAgainPhoto.src} alt={day7SeeYouAgainPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day7SeeYouAgainPhoto.title}</strong>
+                  <span>{day7SeeYouAgainPhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day7BoardingBridgePhoto.src} alt={day7BoardingBridgePhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day7BoardingBridgePhoto.title}</strong>
+                  <span>{day7BoardingBridgePhoto.caption}</span>
+                </figcaption>
+              </figure>
+              <figure class="story-photo">
+                <div class="story-photo-frame">
+                  <img src={day7PlaneCabinPhoto.src} alt={day7PlaneCabinPhoto.alt} loading="lazy" decoding="async" />
+                </div>
+                <figcaption>
+                  <strong>{day7PlaneCabinPhoto.title}</strong>
+                  <span>{day7PlaneCabinPhoto.caption}</span>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+        </div>
+      </section>
+
       <section class="section schedule-section" id="schedule" aria-labelledby="schedule-title">
         <div class="section-heading">
           <p class="eyebrow">SCHEDULE</p>
@@ -3669,6 +4029,6 @@ const structuredData = [
       <img alt="" />
     </div>
 
-    <script is:inline src="/walk-across-goto2026/script.js"></script>
+    <script is:inline src="/walk-across-goto2026/script.js?v=20260630-sharefix"></script>
   </body>
 </html>
