@@ -5,10 +5,17 @@ import GoogleAnalytics from '../../components/GoogleAnalytics.astro';
 
 const siteURL = 'https://arthur-show.com';
 const canonicalURL = `${siteURL}/walk-across-goto2026/`;
+const digestVideoId = '04mpIA2fFZw';
+const digestVideoTitle = '不良牧師、殉教の島へ。五島列島十字架行進ダイジェスト【潜伏キリシタンの島】';
+const digestVideoUrl = `https://youtu.be/${digestVideoId}`;
+const digestVideoEmbedUrl = `https://www.youtube.com/embed/${digestVideoId}?rel=0&modestbranding=1`;
+const digestVideoThumbnail = `https://i.ytimg.com/vi/${digestVideoId}/maxresdefault.jpg`;
+const digestVideoDescription = '不良牧師アーサー・ホーランドが、潜伏キリシタンと殉教の歴史が刻まれた五島列島を十字架と共に歩いたダイジェスト映像です。';
+const digestMusicCredit = 'Music: Turn Your Eyes Upon Jesus - Stephen McWhirter';
 const pageTitle = 'アーサーホーランド WALK ACROSS GOTO ISLANDS 2026 | THE ARTHUR HOLLANDS SHOW';
-const pageDescription = 'WALK ACROSS GOTO ISLANDS 2026。五島列島十字架行進7日目、六日間の歩みを終え、フェリーと空路で東京へ戻る帰路の記録を掲載しています。';
-const pageImage = `${canonicalURL}assets/report-20260628/goto-20260628-arthur-go-morning.jpg`;
-const pageImageAlt = '五島列島十字架行進7日目、帰路の朝にアーサー号の中で語るアーサー先生';
+const pageDescription = '不良牧師、殉教の島へ。五島列島十字架行進ダイジェスト【潜伏キリシタンの島】をページ上部に掲載。五島列島を歩いた十字架行進2026の記録を写真とレポートでまとめています。';
+const pageImage = digestVideoThumbnail;
+const pageImageAlt = digestVideoTitle;
 const featuredReportPhoto = {
   src: './assets/report-20260621/goto-20260621-propeller-plane-apron.jpg',
   alt: '長崎空港で五島列島へ向かうプロペラ機に乗り込む場面',
@@ -1064,13 +1071,14 @@ const structuredData = [
       { '@id': `${siteURL}/#arthur-hollands` },
       { '@id': `${canonicalURL}#event` },
     ],
-    primaryImageOfPage: {
-      '@type': 'ImageObject',
-      url: pageImage,
-      width: 1800,
-      height: 1013,
-    },
-  },
+	    primaryImageOfPage: {
+	      '@type': 'ImageObject',
+	      url: pageImage,
+	      width: 1280,
+	      height: 720,
+	    },
+	    video: { '@id': `${canonicalURL}#digest-video-object` },
+	  },
   {
     '@context': 'https://schema.org',
     '@type': 'Event',
@@ -1096,10 +1104,27 @@ const structuredData = [
     performer: { '@id': `${siteURL}/#arthur-hollands` },
     url: canonicalURL,
   },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    '@id': `${canonicalURL}#breadcrumb`,
+	  {
+	    '@context': 'https://schema.org',
+	    '@type': 'VideoObject',
+	    '@id': `${canonicalURL}#digest-video-object`,
+	    name: digestVideoTitle,
+	    description: digestVideoDescription,
+	    thumbnailUrl: [digestVideoThumbnail],
+	    uploadDate: '2026-07-05',
+	    duration: 'PT4M19S',
+	    embedUrl: digestVideoEmbedUrl,
+	    url: digestVideoUrl,
+	    publisher: {
+	      '@type': 'Organization',
+	      name: 'THE ARTHUR HOLLANDS SHOW',
+	      url: siteURL,
+	    },
+	  },
+	  {
+	    '@context': 'https://schema.org',
+	    '@type': 'BreadcrumbList',
+	    '@id': `${canonicalURL}#breadcrumb`,
     itemListElement: [
       {
         '@type': 'ListItem',
@@ -1148,8 +1173,8 @@ const structuredData = [
     <meta property="og:image" content={pageImage} />
     <meta property="og:image:secure_url" content={pageImage} />
     <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:width" content="1800" />
-    <meta property="og:image:height" content="1013" />
+	    <meta property="og:image:width" content="1280" />
+	    <meta property="og:image:height" content="720" />
     <meta property="og:image:alt" content={pageImageAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
@@ -1161,7 +1186,7 @@ const structuredData = [
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Oswald:wght@400;700&family=Shippori+Mincho:wght@500;700;800&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=20260630-day07" />
+	    <link rel="stylesheet" href="./styles.css?v=20260706-digest" />
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
   <body>
@@ -1210,8 +1235,9 @@ const structuredData = [
         <a href="/calendar/">CALENDAR</a>
       </nav>
     </div>
-    <nav class="walk-local-nav" aria-label="ページ内ナビゲーション">
-      <a href="#about">概要</a>
+	    <nav class="walk-local-nav" aria-label="ページ内ナビゲーション">
+	      <a href="#digest-video">ダイジェスト</a>
+	      <a href="#about">概要</a>
       <a href="#departure-report">旅レポート</a>
       <a href="#evening-message">集会レポート</a>
       <a href="#day1-report">1日目レポート</a>
@@ -1228,8 +1254,37 @@ const structuredData = [
       <a href="#share">シェア</a>
     </nav>
 
-    <main>
-      <section class="hero" aria-labelledby="hero-title">
+	    <main>
+	      <section class="digest-spotlight" id="digest-video" aria-labelledby="digest-title">
+	        <div class="digest-copy">
+	          <p class="eyebrow">NEW DIGEST MOVIE</p>
+	          <h2 id="digest-title">
+	            <span>不良牧師、</span>
+	            <span>殉教の島へ。</span>
+	          </h2>
+	          <p class="digest-subtitle">五島列島十字架行進ダイジェスト【潜伏キリシタンの島】</p>
+	          <p>
+	            潜伏キリシタンと殉教の歴史が刻まれた五島列島で、
+	            アーサー・ホーランドが十字架を背負い、祈りながら歩いた旅の記録をダイジェストで公開しました。
+	          </p>
+	          <div class="hero-actions digest-actions">
+	            <a class="button primary" href={digestVideoUrl} target="_blank" rel="noopener noreferrer">YouTubeで見る</a>
+	            <a class="button secondary" href="#day1-report">行進レポートを読む</a>
+	          </div>
+	          <p class="music-credit">{digestMusicCredit}</p>
+	        </div>
+	        <div class="digest-player" aria-label={`${digestVideoTitle} YouTube動画`}>
+	          <iframe
+	            src={digestVideoEmbedUrl}
+	            title={digestVideoTitle}
+	            loading="eager"
+	            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+	            allowfullscreen
+	          ></iframe>
+	        </div>
+	      </section>
+
+	      <section class="hero" aria-labelledby="hero-title">
         <div class="hero-media">
           <button type="button" data-full="./assets/goto-cross-walk-2026.jpg" aria-label="五島列島十字架行進2026 告知ビジュアルを拡大表示">
             <img src="./assets/goto-cross-walk-2026.jpg" alt="Arthur Hollands 五島列島十字架行進2026 告知ビジュアル" />
@@ -3956,12 +4011,11 @@ const structuredData = [
 
       <section class="section documentary-section" id="documentary" aria-labelledby="documentary-title">
         <div class="documentary-panel">
-          <p class="eyebrow">DOCUMENTARY ARCHIVE</p>
-          <h2 id="documentary-title">ドキュメンタリー映像の公開場所</h2>
-          <p>
-            五島列島十字架行進の歩みをまとめたドキュメンタリー映像、ダイジェスト、後日公開される特別映像を、
-            公開後このセクションに掲載します。
-          </p>
+	          <p class="eyebrow">DOCUMENTARY ARCHIVE</p>
+	          <h2 id="documentary-title">ドキュメンタリー映像</h2>
+	          <p>
+	            五島列島十字架行進の歩みをまとめたダイジェスト、ドキュメンタリー、特別映像をこのセクションにまとめます。
+	          </p>
           <div class="documentary-list" data-documentary-grid></div>
         </div>
       </section>

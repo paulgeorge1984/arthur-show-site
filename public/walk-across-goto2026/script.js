@@ -7,8 +7,8 @@ const globalNav = document.querySelector("[data-global-section-nav]");
 const shareTitle =
   "アーサーホーランド WALK ACROSS GOTO ISLANDS 2026 | THE ARTHUR HOLLANDS SHOW";
 const shareText =
-  "WALK ACROSS GOTO ISLANDS 2026。五島列島十字架行進の記録を、出発から帰路まで毎日更新したレポートとして掲載しています。";
-const shareUrl = "https://arthur-show.com/walk-across-goto2026/?share=20260630#day7-report";
+  "不良牧師、殉教の島へ。五島列島十字架行進ダイジェスト【潜伏キリシタンの島】をページ上部に掲載しています。";
+const shareUrl = "https://arthur-show.com/walk-across-goto2026/?share=20260706#digest-video";
 const sharePayload = `${shareTitle}\n${shareText}\n${shareUrl}`;
 
 // Add field report YouTube videos here after publication.
@@ -24,7 +24,16 @@ const videos = [
 ];
 
 // Add documentary or digest YouTube videos here after publication.
-const documentaries = [];
+const documentaries = [
+  {
+    id: "04mpIA2fFZw",
+    day: "DIGEST / 2026.07.05",
+    title:
+      "不良牧師、殉教の島へ。五島列島十字架行進ダイジェスト【潜伏キリシタンの島】",
+    description:
+      "潜伏キリシタンと殉教の歴史が刻まれた五島列島で、アーサー・ホーランドが十字架を背負い祈りながら歩いた旅のダイジェスト映像です。",
+  },
+];
 
 function videoCard(video) {
   return `
