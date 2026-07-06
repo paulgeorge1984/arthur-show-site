@@ -4,15 +4,28 @@ import Layout from '../../layouts/Layout.astro';
 const pageUrl = '/the-essence-akita-20261114/';
 const eventTitle = 'THE ESSENCE';
 const eventSubtitle = 'きれいごとでは終われない、人生の本質を問う夜';
-const eventDescription = '2026年11月14日（土）19:00〜21:00、秋田キャッスルホテル 弥生の間で開催。不良牧師アーサーホーランドが、人生の本質を問う夜。';
+const eventDescription = '人生を見つめ直したい人へ。きれいごとでは終われない人生に、希望のメッセージを。2026年11月14日（土）19:00、秋田キャッスルホテルで不良牧師アーサーホーランドが語ります。入場無料。';
 const posterImage = '/assets/the-essence-akita-20261114.jpg';
 const posterBackImage = '/assets/the-essence-akita-20261114-back.jpg';
 const accessUrl = 'https://www.castle-hotel.jp/access/';
 const shareUrl = `https://arthur-show.com${pageUrl}`;
-const shareTitle = `${eventTitle} | 秋田キャッスルホテル | THE ARTHUR HOLLANDS SHOW`;
+const shareTitle = '人生を見つめ直したい人へ。THE ESSENCE 秋田';
+const shareText = [
+	'きれいごとでは終われない人生に、希望のメッセージを。',
+	'不良牧師アーサー・ホーランドが「本当に大切なものとは何か」を語ります。',
+	'2026年11月14日（土）19:00〜21:00',
+	'秋田キャッスルホテル 弥生の間 / 入場無料',
+].join('\n');
+const xShareText = [
+	shareTitle,
+	'きれいごとでは終われない人生に、希望のメッセージを。',
+	'11/14（土）19:00 秋田キャッスルホテル',
+	'入場無料',
+	'#THEESSENCE #秋田 #アーサーホーランド',
+].join('\n');
 const encodedShareUrl = encodeURIComponent(shareUrl);
-const encodedShareTitle = encodeURIComponent(shareTitle);
-const encodedLineText = encodeURIComponent(`${shareTitle}\n2026年11月14日（土）19:00〜21:00 / 秋田キャッスルホテル 弥生の間\n${shareUrl}`);
+const encodedXShareText = encodeURIComponent(xShareText);
+const encodedLineText = encodeURIComponent(`${shareTitle}\n${shareText}\n${shareUrl}`);
 
 const structuredData = {
 	'@context': 'https://schema.org',
@@ -57,7 +70,7 @@ const structuredData = {
 ---
 
 <Layout
-	title={`${eventTitle} | ${eventSubtitle}`}
+	title={shareTitle}
 	description={eventDescription}
 	image={posterImage}
 	imageAlt="THE ESSENCE 2026年11月14日 秋田キャッスルホテル 告知フライヤー"
@@ -96,7 +109,7 @@ const structuredData = {
 					</div>
 					<div class="ess-actions">
 						<a class="primary" href="#event-detail">開催概要</a>
-						<a href="#flyer-back">チラシ裏面</a>
+						<a href="#flyer-back">ご案内を見る</a>
 						<a href={accessUrl} target="_blank" rel="noopener noreferrer">アクセス</a>
 						<a href="#share">シェア</a>
 					</div>
@@ -160,13 +173,13 @@ const structuredData = {
 
 		<section class="ess-flyer" id="flyer-back" aria-labelledby="flyer-back-title">
 			<div class="ess-section-head">
-				<p>FLYER BACK</p>
-				<h2 id="flyer-back-title">チラシ裏面</h2>
+				<p>INFORMATION</p>
+				<h2 id="flyer-back-title">ご来場のご案内</h2>
 			</div>
 			<figure class="ess-flyer-frame">
 				<img
 					src={posterBackImage}
-					alt="THE ESSENCE チラシ裏面。アーサー・ホーランドのプロフィール、参加をおすすめする方、初めての方への案内、秋田キャッスルホテル会場案内、問い合わせ先を掲載。"
+					alt="THE ESSENCE ご来場のご案内。アーサー・ホーランドのプロフィール、参加をおすすめする方、初めての方への案内、秋田キャッスルホテル会場案内、問い合わせ先を掲載。"
 					width="905"
 					height="1280"
 					loading="lazy"
@@ -250,7 +263,7 @@ const structuredData = {
 					<span>LINE</span>
 					<small>送る</small>
 				</a>
-				<a class="ess-share-button x" href={`https://twitter.com/intent/tweet?text=${encodedShareTitle}&url=${encodedShareUrl}`} target="_blank" rel="noopener noreferrer">
+				<a class="ess-share-button x" href={`https://twitter.com/intent/tweet?text=${encodedXShareText}&url=${encodedShareUrl}`} target="_blank" rel="noopener noreferrer">
 					<span>X</span>
 					<small>投稿</small>
 				</a>
@@ -268,8 +281,13 @@ const structuredData = {
 
 	<script is:inline>
 		const ESS_SHARE_URL = 'https://arthur-show.com/the-essence-akita-20261114/';
-		const ESS_SHARE_TITLE = 'THE ESSENCE | 秋田キャッスルホテル | THE ARTHUR HOLLANDS SHOW';
-		const ESS_SHARE_TEXT = '2026年11月14日（土）19:00〜21:00 / 秋田キャッスルホテル 弥生の間';
+		const ESS_SHARE_TITLE = '人生を見つめ直したい人へ。THE ESSENCE 秋田';
+		const ESS_SHARE_TEXT = [
+			'きれいごとでは終われない人生に、希望のメッセージを。',
+			'不良牧師アーサー・ホーランドが「本当に大切なものとは何か」を語ります。',
+			'2026年11月14日（土）19:00〜21:00',
+			'秋田キャッスルホテル 弥生の間 / 入場無料',
+		].join('\n');
 		const nativeShareButtons = document.querySelectorAll('[data-ess-share-native]');
 		const copyButtons = document.querySelectorAll('[data-ess-copy-link]');
 		const copyStatusNodes = document.querySelectorAll('[data-ess-copy-status]');
