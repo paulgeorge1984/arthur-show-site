@@ -154,14 +154,21 @@ a {
 }
 
 .walk-local-nav {
+  position: relative;
+  z-index: 20;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
   gap: 8px;
-  max-width: 1040px;
-  margin: -8px auto 18px;
-  padding: 0 18px;
+  width: 100%;
+  max-width: none;
+  margin: 0 auto;
+  padding: 12px clamp(18px, 5vw, 64px) 14px;
+  background: rgba(255, 255, 255, 0.96);
+  border-top: 1px solid rgba(16, 34, 53, 0.08);
+  border-bottom: 1px solid rgba(16, 34, 53, 0.14);
+  box-shadow: 0 12px 30px rgba(5, 43, 58, 0.08);
   font-size: 14px;
   font-weight: 700;
 }
@@ -169,8 +176,10 @@ a {
 .walk-local-nav a {
   padding: 10px 12px;
   text-decoration: none;
+  border: 1px solid rgba(16, 34, 53, 0.08);
   border-radius: 4px;
-  background: rgba(255, 255, 255, 0.72);
+  background: #fff;
+  box-shadow: 0 6px 14px rgba(5, 43, 58, 0.05);
 }
 
 .walk-local-nav a:hover {
@@ -298,7 +307,7 @@ a {
   width: 100%;
   max-width: 100%;
   overflow: hidden;
-  margin-top: -22px;
+  margin-top: 0;
   padding: clamp(34px, 5vw, 74px) clamp(18px, 5vw, 64px);
   color: #fff;
   background:
@@ -1651,7 +1660,7 @@ section[id] {
 
   .digest-spotlight {
     grid-template-columns: minmax(0, 1fr);
-    margin-top: -18px;
+    margin-top: 0;
   }
 
   .digest-copy {
@@ -1711,7 +1720,7 @@ section[id] {
 
   .walk-local-nav {
     justify-content: flex-start;
-    margin-top: -4px;
+    margin-top: 0;
     overflow-x: auto;
     flex-wrap: nowrap;
   }
