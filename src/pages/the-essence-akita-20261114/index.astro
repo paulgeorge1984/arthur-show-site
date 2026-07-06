@@ -6,6 +6,7 @@ const eventTitle = 'THE ESSENCE';
 const eventSubtitle = 'きれいごとでは終われない、人生の本質を問う夜';
 const eventDescription = '2026年11月14日（土）19:00〜21:00、秋田キャッスルホテル 弥生の間で開催。不良牧師アーサーホーランドが、人生の本質を問う夜。';
 const posterImage = '/assets/the-essence-akita-20261114.jpg';
+const posterBackImage = '/assets/the-essence-akita-20261114-back.jpg';
 const accessUrl = 'https://www.castle-hotel.jp/access/';
 const shareUrl = `https://arthur-show.com${pageUrl}`;
 const shareTitle = `${eventTitle} | 秋田キャッスルホテル | THE ARTHUR HOLLANDS SHOW`;
@@ -23,7 +24,10 @@ const structuredData = {
 	doorTime: '2026-11-14T18:30:00+09:00',
 	eventStatus: 'https://schema.org/EventScheduled',
 	eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-	image: [`https://arthur-show.com${posterImage}`],
+	image: [
+		`https://arthur-show.com${posterImage}`,
+		`https://arthur-show.com${posterBackImage}`,
+	],
 	url: shareUrl,
 	location: {
 		'@type': 'Place',
@@ -92,6 +96,7 @@ const structuredData = {
 					</div>
 					<div class="ess-actions">
 						<a class="primary" href="#event-detail">開催概要</a>
+						<a href="#flyer-back">チラシ裏面</a>
 						<a href={accessUrl} target="_blank" rel="noopener noreferrer">アクセス</a>
 						<a href="#share">シェア</a>
 					</div>
@@ -151,6 +156,22 @@ const structuredData = {
 				<p>秋田の夜に、</p>
 				<h2>あなたの心にまっすぐ届くメッセージを。</h2>
 			</div>
+		</section>
+
+		<section class="ess-flyer" id="flyer-back" aria-labelledby="flyer-back-title">
+			<div class="ess-section-head">
+				<p>FLYER BACK</p>
+				<h2 id="flyer-back-title">チラシ裏面</h2>
+			</div>
+			<figure class="ess-flyer-frame">
+				<img
+					src={posterBackImage}
+					alt="THE ESSENCE チラシ裏面。アーサー・ホーランドのプロフィール、参加をおすすめする方、初めての方への案内、秋田キャッスルホテル会場案内、問い合わせ先を掲載。"
+					width="905"
+					height="1280"
+					loading="lazy"
+				/>
+			</figure>
 		</section>
 
 		<section class="ess-detail" id="event-detail" aria-labelledby="event-detail-title">
@@ -507,6 +528,7 @@ const structuredData = {
 	}
 
 	.ess-message,
+	.ess-flyer,
 	.ess-detail,
 	.ess-share {
 		box-sizing: border-box;
@@ -575,6 +597,23 @@ const structuredData = {
 		font-weight: 900;
 		letter-spacing: 0;
 		line-height: 1.45;
+	}
+
+	.ess-flyer {
+		background: var(--ess-paper);
+	}
+
+	.ess-flyer-frame {
+		margin: 30px auto 0;
+		width: min(720px, 100%);
+	}
+
+	.ess-flyer-frame img {
+		display: block;
+		width: 100%;
+		height: auto;
+		border: 8px solid #fffdf8;
+		box-shadow: 0 20px 54px rgba(5, 7, 13, 0.18);
 	}
 
 	.ess-info {
@@ -780,9 +819,14 @@ const structuredData = {
 		}
 
 		.ess-message,
+		.ess-flyer,
 		.ess-detail,
 		.ess-share {
 			padding: 50px 16px;
+		}
+
+		.ess-flyer-frame img {
+			border-width: 5px;
 		}
 
 		.ess-section-head {
