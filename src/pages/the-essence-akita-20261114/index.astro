@@ -7,8 +7,10 @@ const eventSubtitle = 'きれいごとでは終われない、人生の本質を
 const eventDescription = '人生を見つめ直したい人へ。きれいごとでは終われない人生に、希望のメッセージを。2026年11月14日（土）19:00、秋田キャッスルホテルで不良牧師アーサーホーランドが語ります。入場無料。';
 const posterImage = '/assets/the-essence-akita-20261114.jpg';
 const posterBackImage = '/assets/the-essence-akita-20261114-back.jpg';
+const socialImage = '/assets/the-essence-akita-20261114-og.jpg';
 const accessUrl = 'https://www.castle-hotel.jp/access/';
 const shareUrl = `https://arthur-show.com${pageUrl}`;
+const metaTitle = 'THE ESSENCE 秋田｜11/14（土）入場無料';
 const shareTitle = '人生を見つめ直したい人へ。THE ESSENCE 秋田';
 const shareText = [
 	'きれいごとでは終われない人生に、希望のメッセージを。',
@@ -38,6 +40,7 @@ const structuredData = {
 	eventStatus: 'https://schema.org/EventScheduled',
 	eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
 	image: [
+		`https://arthur-show.com${socialImage}`,
 		`https://arthur-show.com${posterImage}`,
 		`https://arthur-show.com${posterBackImage}`,
 	],
@@ -70,16 +73,17 @@ const structuredData = {
 ---
 
 <Layout
-	title={shareTitle}
+	title={metaTitle}
 	description={eventDescription}
-	image={posterImage}
-	imageAlt="THE ESSENCE 2026年11月14日 秋田キャッスルホテル 告知フライヤー"
-	imageWidth={905}
-	imageHeight={1280}
+	image={socialImage}
+	imageAlt="THE ESSENCE 秋田。2026年11月14日19時、秋田キャッスルホテル弥生の間。入場無料。"
+	imageWidth={1200}
+	imageHeight={630}
 	imageType="image/jpeg"
 	ogType="website"
 	canonicalPath={pageUrl}
 	structuredData={structuredData}
+	appendSiteTitle={false}
 >
 	<article class="ess-page">
 		<section class="ess-hero" aria-labelledby="ess-title">

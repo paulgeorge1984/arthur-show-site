@@ -17,6 +17,7 @@ interface Props {
 	canonicalPath?: string;
 	structuredData?: Record<string, unknown> | Record<string, unknown>[];
 	hideChrome?: boolean;
+	appendSiteTitle?: boolean;
 }
 
 const {
@@ -32,13 +33,14 @@ const {
 	canonicalPath,
 	structuredData,
 	hideChrome = false,
+	appendSiteTitle = true,
 } = Astro.props;
 
 // URLとタイトルを定義
 const siteTitle = "THE ARTHUR HOLLANDS SHOW";
 const appTitle = "Arthur Calendar";
 const siteUrl = "https://arthur-show.com";
-const pageTitle = title.includes(siteTitle) ? title : `${title} | ${siteTitle}`;
+const pageTitle = !appendSiteTitle || title.includes(siteTitle) ? title : `${title} | ${siteTitle}`;
 const fallbackDescription = "アーサーホーランド（アーサー・ホーランド / Arthur Hollands）のTHE ARTHUR HOLLANDS SHOW、THE DAILY、WALK ACROSS、イベント情報、聖書メッセージをまとめた動画アーカイブです。";
 const metaDescription = description || fallbackDescription;
 const canonicalURL = new URL(canonicalPath || Astro.url.pathname, siteUrl).href;
