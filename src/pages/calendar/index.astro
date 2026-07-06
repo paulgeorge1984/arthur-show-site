@@ -9,6 +9,8 @@ const fridayNightUrl = 'https://ochanomizu.cc/meeting/fridaynight/';
 const blessingNightUrl = 'https://www.blessingnight.jp';
 const saturdayNightArthurUrl = '/saturday-night-arthur-20260704/';
 const saturdayNightArthurPoster = '/assets/saturday-night-arthur-20260704-poster.webp';
+const theEssenceAkitaUrl = '/the-essence-akita-20261114/';
+const theEssenceAkitaPoster = '/assets/the-essence-akita-20261114.jpg';
 const blessingTimeOsakaUrl = '/blessing-time-osaka2026/';
 const blessingTimeOsakaBanner = '/assets/generated/blessing-time-osaka2026-banner.webp';
 const blessingNightKagurazakaUrl = 'https://www.blessingnight.jp/schedule/schedule366';
@@ -69,6 +71,34 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 					</a>
 				</div>
 			</section>
+
+		<section class="calendar-special-event the-essence-akita-feature" aria-label="THE ESSENCE 秋田 特別案内">
+			<a class="calendar-special-link" href={theEssenceAkitaUrl}>
+				<span class="calendar-special-media" aria-hidden="true">
+					<img
+						src={theEssenceAkitaPoster}
+						alt=""
+						width="905"
+						height="1280"
+						loading="eager"
+					/>
+				</span>
+				<span class="calendar-special-copy">
+					<span class="calendar-special-label">SPECIAL MESSAGE</span>
+					<strong>THE ESSENCE</strong>
+					<span class="calendar-special-lead">
+						きれいごとでは終われない、人生の本質を問う夜。
+						不良牧師アーサーホーランドを秋田キャッスルホテルに迎えます。
+					</span>
+					<span class="calendar-special-meta">
+						<span>2026年11月14日（土）</span>
+						<span>19:00〜21:00</span>
+						<span>秋田キャッスルホテル 弥生の間</span>
+					</span>
+					<span class="calendar-special-button">特別ページを見る</span>
+				</span>
+			</a>
+		</section>
 
 		<section class="calendar-special-event saturday-night-arthur-feature" aria-label="Saturday Night Arthur 特別案内">
 			<a class="calendar-special-link" href={saturdayNightArthurUrl}>
@@ -280,6 +310,26 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				},
 				end: {
 					dateTime: '2026-07-17T19:00:00+09:00',
+					timeZone: TOKYO_TIME_ZONE,
+				},
+			},
+			{
+				id: 'manual-the-essence-akita-2026-11-14',
+				summary: 'THE ESSENCE',
+				description: [
+					'きれいごとでは終われない、人生の本質を問う夜',
+					'OPEN 18:30 / 19:00〜21:00',
+					'秋田キャッスルホテル 弥生の間',
+					'入場無料（席上献金あり）',
+					'https://arthur-show.com/the-essence-akita-20261114/',
+				].join('\n'),
+				location: '秋田キャッスルホテル 弥生の間 〒010-0001 秋田県秋田市中通1丁目3番5号',
+				start: {
+					dateTime: '2026-11-14T19:00:00+09:00',
+					timeZone: TOKYO_TIME_ZONE,
+				},
+				end: {
+					dateTime: '2026-11-14T21:00:00+09:00',
 					timeZone: TOKYO_TIME_ZONE,
 				},
 			},
@@ -530,12 +580,20 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				&& /saturday\s*night\s*arthur|賛美と御言葉の夕べ/i.test(searchableText);
 		}
 
+		function isTheEssenceAkitaEvent(event) {
+			const startKey = event.start?.date || getDateKeyFromDate(getEventStart(event));
+			const searchableText = `${event.summary || ''} ${event.description || ''} ${event.location || ''}`;
+			return startKey === '2026-11-14'
+				&& /the\s*essence|人生の本質|秋田キャッスル/i.test(searchableText);
+		}
+
 		function mergeManualEvents(events, range) {
 			const manualEventsInRange = MANUAL_EVENTS.filter((event) => isEventInRange(event, range));
 			if (!manualEventsInRange.length) return events;
 			const hasSaturdayNightArthur = events.some((event) => isSaturdayNightArthurEvent(event));
 			const hasBlessingTimeOsaka = events.some((event) => isBlessingTimeOsakaEvent(event));
 			const hasBlessingNightKagurazaka = events.some((event) => isBlessingNightKagurazakaEvent(event));
+			const hasTheEssenceAkita = events.some((event) => isTheEssenceAkitaEvent(event));
 			const blessingNightManualEvent = manualEventsInRange.find((event) => event.id === 'manual-blessing-night-kagurazaka-2026-07-17');
 			const mergedEvents = blessingNightManualEvent && hasBlessingNightKagurazaka
 				? events.map((event) => {
@@ -556,6 +614,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 					if (isSaturdayNightArthurEvent(event)) return !hasSaturdayNightArthur;
 					if (isBlessingTimeOsakaEvent(event)) return !hasBlessingTimeOsaka;
 					if (isBlessingNightKagurazakaEvent(event)) return !hasBlessingNightKagurazaka;
+					if (isTheEssenceAkitaEvent(event)) return !hasTheEssenceAkita;
 					return true;
 				}),
 			];
@@ -1044,6 +1103,13 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				#050814;
 		}
 
+		.the-essence-akita-feature .calendar-special-link {
+			grid-template-columns: minmax(280px, 0.72fr) minmax(340px, 1.28fr);
+			background:
+				linear-gradient(135deg, rgba(5, 7, 13, 0.98), rgba(6, 47, 120, 0.88) 58%, rgba(237, 16, 109, 0.62)),
+				#05070d;
+		}
+
 		.calendar-special-link::before {
 			content: "";
 			position: absolute;
@@ -1065,6 +1131,12 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			background:
 				linear-gradient(90deg, rgba(5, 7, 16, 0.05), rgba(5, 7, 16, 0.08) 48%, rgba(5, 7, 16, 0.3)),
 				linear-gradient(0deg, rgba(197, 160, 89, 0.18), transparent 48%);
+		}
+
+		.the-essence-akita-feature .calendar-special-link::before {
+			background:
+				linear-gradient(90deg, rgba(5, 7, 13, 0.05), rgba(5, 7, 13, 0.08) 48%, rgba(5, 7, 13, 0.32)),
+				linear-gradient(0deg, rgba(240, 194, 26, 0.18), transparent 48%);
 		}
 
 		.calendar-special-copy,
@@ -1170,7 +1242,27 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				linear-gradient(160deg, #020713, #071b38 58%, #2d230f);
 		}
 
+		.the-essence-akita-feature .calendar-special-media {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 18px;
+			background:
+				linear-gradient(150deg, #020714, #072655 56%, #37112a);
+		}
+
 		.saturday-night-arthur-feature .calendar-special-media img {
+			width: auto;
+			height: 100%;
+			max-width: 88%;
+			max-height: 405px;
+			border: 5px solid rgba(255, 248, 235, 0.92);
+			box-shadow: 0 18px 46px rgba(0, 0, 0, 0.44);
+			object-fit: contain;
+			object-position: center;
+		}
+
+		.the-essence-akita-feature .calendar-special-media img {
 			width: auto;
 			height: 100%;
 			max-width: 88%;
@@ -1765,6 +1857,10 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			grid-template-columns: 1fr;
 		}
 
+		.the-essence-akita-feature .calendar-special-link {
+			grid-template-columns: 1fr;
+		}
+
 		.calendar-special-media {
 			order: -1;
 			min-height: 300px;
@@ -1856,6 +1952,18 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 		}
 
 		.saturday-night-arthur-feature .calendar-special-media img {
+			width: min(74%, 300px);
+			height: auto;
+			max-height: none;
+		}
+
+		.the-essence-akita-feature .calendar-special-media {
+			aspect-ratio: auto;
+			min-height: 360px;
+			padding: 20px;
+		}
+
+		.the-essence-akita-feature .calendar-special-media img {
 			width: min(74%, 300px);
 			height: auto;
 			max-height: none;

@@ -135,6 +135,19 @@ const scheduleEvents = [
 		url: 'https://arthur-show.com/blessing-time-osaka2026/',
 		mapUrl: 'https://maps.google.com/?q=大阪クリスチャンセンター%20OCCホール',
 	},
+	{
+		id: 'the-essence-akita-2026-11-14',
+		title: 'THE ESSENCE',
+		label: 'SPECIAL MESSAGE',
+		startsAt: '2026-11-14T19:00:00+09:00',
+		timeLabel: '2026.11.14 SAT / OPEN 18:30 / 19:00-21:00',
+		location: '秋田キャッスルホテル 弥生の間',
+		address: '秋田県秋田市中通1丁目3番5号',
+		description: 'きれいごとでは終われない、人生の本質を問う夜。不良牧師アーサーホーランドが秋田で語ります。',
+		image: 'https://arthur-show.com/assets/the-essence-akita-20261114.jpg',
+		url: 'https://arthur-show.com/the-essence-akita-20261114/',
+		mapUrl: 'https://www.castle-hotel.jp/access/',
+	},
 ];
 
 const bible = {

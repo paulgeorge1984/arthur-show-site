@@ -1,0 +1,833 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const pageUrl = '/the-essence-akita-20261114/';
+const eventTitle = 'THE ESSENCE';
+const eventSubtitle = 'きれいごとでは終われない、人生の本質を問う夜';
+const eventDescription = '2026年11月14日（土）19:00〜21:00、秋田キャッスルホテル 弥生の間で開催。不良牧師アーサーホーランドが、人生の本質を問う夜。';
+const posterImage = '/assets/the-essence-akita-20261114.jpg';
+const accessUrl = 'https://www.castle-hotel.jp/access/';
+const shareUrl = `https://arthur-show.com${pageUrl}`;
+const shareTitle = `${eventTitle} | 秋田キャッスルホテル | THE ARTHUR HOLLANDS SHOW`;
+const encodedShareUrl = encodeURIComponent(shareUrl);
+const encodedShareTitle = encodeURIComponent(shareTitle);
+const encodedLineText = encodeURIComponent(`${shareTitle}\n2026年11月14日（土）19:00〜21:00 / 秋田キャッスルホテル 弥生の間\n${shareUrl}`);
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'Event',
+	name: `${eventTitle} - ${eventSubtitle}`,
+	description: eventDescription,
+	startDate: '2026-11-14T19:00:00+09:00',
+	endDate: '2026-11-14T21:00:00+09:00',
+	doorTime: '2026-11-14T18:30:00+09:00',
+	eventStatus: 'https://schema.org/EventScheduled',
+	eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+	image: [`https://arthur-show.com${posterImage}`],
+	url: shareUrl,
+	location: {
+		'@type': 'Place',
+		name: '秋田キャッスルホテル 弥生の間',
+		address: {
+			'@type': 'PostalAddress',
+			addressCountry: 'JP',
+			addressRegion: '秋田県',
+			addressLocality: '秋田市',
+			streetAddress: '中通1丁目3番5号',
+			postalCode: '010-0001',
+		},
+	},
+	performer: {
+		'@type': 'Person',
+		name: 'アーサーホーランド',
+		alternateName: 'Arthur Hollands',
+	},
+	offers: {
+		'@type': 'Offer',
+		price: '0',
+		priceCurrency: 'JPY',
+		availability: 'https://schema.org/InStock',
+		url: shareUrl,
+	},
+};
+---
+
+<Layout
+	title={`${eventTitle} | ${eventSubtitle}`}
+	description={eventDescription}
+	image={posterImage}
+	imageAlt="THE ESSENCE 2026年11月14日 秋田キャッスルホテル 告知フライヤー"
+	imageWidth={905}
+	imageHeight={1280}
+	imageType="image/jpeg"
+	ogType="website"
+	canonicalPath={pageUrl}
+	structuredData={structuredData}
+>
+	<article class="ess-page">
+		<section class="ess-hero" aria-labelledby="ess-title">
+			<img
+				class="ess-hero-bg"
+				src={posterImage}
+				alt=""
+				width="905"
+				height="1280"
+				loading="eager"
+				aria-hidden="true"
+			/>
+			<div class="ess-hero-inner">
+				<div class="ess-hero-copy">
+					<p class="ess-kicker">ARTHUR HOLLANDS' SPECIAL MESSAGE / AKITA</p>
+					<h1 id="ess-title">THE ESSENCE</h1>
+					<p class="ess-subtitle">{eventSubtitle}</p>
+					<p class="ess-lead">
+						人生の本質とは何か。痛み、挫折、孤独をきれいごとで終わらせず、
+						本当に大切なものへ立ち返るための夜。
+					</p>
+					<div class="ess-hero-meta" aria-label="開催情報">
+						<span>2026年11月14日（土）</span>
+						<span>19:00〜21:00</span>
+						<span>開場 18:30</span>
+						<span>秋田キャッスルホテル 弥生の間</span>
+					</div>
+					<div class="ess-actions">
+						<a class="primary" href="#event-detail">開催概要</a>
+						<a href={accessUrl} target="_blank" rel="noopener noreferrer">アクセス</a>
+						<a href="#share">シェア</a>
+					</div>
+				</div>
+				<figure class="ess-poster-frame">
+					<img
+						src={posterImage}
+						alt="THE ESSENCE きれいごとでは終われない、人生の本質を問う夜。2026年11月14日、秋田キャッスルホテルで開催。"
+						width="905"
+						height="1280"
+						loading="eager"
+					/>
+				</figure>
+			</div>
+		</section>
+
+		<section class="ess-message" aria-labelledby="ess-message-title">
+			<div class="ess-section-head">
+				<p>THE QUESTION</p>
+				<h2 id="ess-message-title">人生の本質とは何か。</h2>
+			</div>
+			<div class="ess-prose">
+				<p>うまく生きているように見えても、心の奥では迷い、傷つき、何かを探し続けている。</p>
+				<p>
+					何を握りしめ、何を手放すのか。
+					何に流され、何に立ち返るのか。
+					そして、自分はどこへ向かって歩んでいくのか。
+				</p>
+				<p>
+					人生は、きれいごとだけでは語れません。
+					痛みもある。挫折もある。孤独もある。
+					それでもなお、人は立ち上がり、前へ進むことができる。
+				</p>
+				<p>今回、秋田にお迎えするのは、不良牧師アーサーホーランド。</p>
+				<p>
+					飾らない言葉で、人生の闇も、弱さも、葛藤も真正面から受け止めながら語られるメッセージ。
+					それは、ただの講演ではなく、心の奥に眠っていた問いを呼び覚ます時間です。
+				</p>
+				<p>
+					本当に大切なものとは何か。
+					自分らしく生きるとはどういうことか。
+					この時代のただ中で、何を選び、どんな一歩を踏み出すのか。
+				</p>
+				<p>
+					答えを押しつけるのではなく、
+					あなた自身の人生に、静かに、しかし確かに問いかける夜。
+				</p>
+				<p>
+					初めての方も、どなたでもご参加いただけます。
+					人生を見つめ直したい方、心に新しい風を受け取りたい方、本質に触れる言葉を聞きたい方、ぜひお越しください。
+				</p>
+			</div>
+		</section>
+
+		<section class="ess-callout" aria-label="秋田の夜への招き">
+			<div>
+				<p>秋田の夜に、</p>
+				<h2>あなたの心にまっすぐ届くメッセージを。</h2>
+			</div>
+		</section>
+
+		<section class="ess-detail" id="event-detail" aria-labelledby="event-detail-title">
+			<div class="ess-section-head">
+				<p>EVENT DETAILS</p>
+				<h2 id="event-detail-title">開催概要</h2>
+			</div>
+			<dl class="ess-info">
+				<div>
+					<dt>イベント名</dt>
+					<dd>
+						THE ESSENCE<br />
+						きれいごとでは終われない、人生の本質を問う夜
+					</dd>
+				</div>
+				<div>
+					<dt>日時</dt>
+					<dd>
+						2026年11月14日（土）<br />
+						19:00〜21:00（開場 18:30）
+					</dd>
+				</div>
+				<div>
+					<dt>会場</dt>
+					<dd>
+						秋田キャッスルホテル<br />
+						講演会場 弥生の間
+					</dd>
+				</div>
+				<div>
+					<dt>住所</dt>
+					<dd>〒010-0001 秋田県秋田市中通1丁目3番5号</dd>
+				</div>
+				<div>
+					<dt>入場</dt>
+					<dd>入場無料（席上献金あり）</dd>
+				</div>
+				<div>
+					<dt>アクセス</dt>
+					<dd>
+						<a href={accessUrl} target="_blank" rel="noopener noreferrer">
+							秋田キャッスルホテル公式アクセスページ
+						</a>
+					</dd>
+				</div>
+				<div>
+					<dt>お問い合わせ</dt>
+					<dd>
+						後藤<br />
+						<a href="tel:08039271165">080-3927-1165</a>
+					</dd>
+				</div>
+			</dl>
+		</section>
+
+		<section class="ess-access" aria-labelledby="ess-access-title">
+			<div class="ess-access-copy">
+				<p>ACCESS</p>
+				<h2 id="ess-access-title">秋田キャッスルホテル</h2>
+				<span>〒010-0001 秋田県秋田市中通1丁目3番5号</span>
+			</div>
+			<a href={accessUrl} target="_blank" rel="noopener noreferrer">公式アクセスページ</a>
+		</section>
+
+		<section class="ess-share" id="share" aria-labelledby="ess-share-title">
+			<div class="ess-section-head">
+				<p>SHARE</p>
+				<h2 id="ess-share-title">このページをシェア</h2>
+			</div>
+			<div class="ess-share-buttons" aria-label="SNS共有ボタン">
+				<button class="ess-share-button native" type="button" data-ess-share-native>
+					<span>Share</span>
+					<small>端末で共有</small>
+				</button>
+				<a class="ess-share-button line" href={`https://line.me/R/msg/text/?${encodedLineText}`} target="_blank" rel="noopener noreferrer">
+					<span>LINE</span>
+					<small>送る</small>
+				</a>
+				<a class="ess-share-button x" href={`https://twitter.com/intent/tweet?text=${encodedShareTitle}&url=${encodedShareUrl}`} target="_blank" rel="noopener noreferrer">
+					<span>X</span>
+					<small>投稿</small>
+				</a>
+				<a class="ess-share-button facebook" href={`https://www.facebook.com/sharer/sharer.php?u=${encodedShareUrl}`} target="_blank" rel="noopener noreferrer">
+					<span>Facebook</span>
+					<small>投稿</small>
+				</a>
+				<button class="ess-share-button copy" type="button" data-ess-copy-link>
+					<span>Copy</span>
+					<small data-ess-copy-status>URLをコピー</small>
+				</button>
+			</div>
+		</section>
+	</article>
+
+	<script is:inline>
+		const ESS_SHARE_URL = 'https://arthur-show.com/the-essence-akita-20261114/';
+		const ESS_SHARE_TITLE = 'THE ESSENCE | 秋田キャッスルホテル | THE ARTHUR HOLLANDS SHOW';
+		const ESS_SHARE_TEXT = '2026年11月14日（土）19:00〜21:00 / 秋田キャッスルホテル 弥生の間';
+		const nativeShareButtons = document.querySelectorAll('[data-ess-share-native]');
+		const copyButtons = document.querySelectorAll('[data-ess-copy-link]');
+		const copyStatusNodes = document.querySelectorAll('[data-ess-copy-status]');
+
+		function shareMessage() {
+			return `${ESS_SHARE_TITLE}\n${ESS_SHARE_TEXT}\n${ESS_SHARE_URL}`;
+		}
+
+		function setCopyStatus(label) {
+			copyStatusNodes.forEach((node) => {
+				node.textContent = label;
+			});
+		}
+
+		function fallbackCopyText(text) {
+			const textarea = document.createElement('textarea');
+			textarea.value = text;
+			textarea.setAttribute('readonly', '');
+			textarea.style.position = 'fixed';
+			textarea.style.top = '-1000px';
+			textarea.style.left = '-1000px';
+			textarea.style.opacity = '0';
+			document.body.appendChild(textarea);
+			textarea.focus({ preventScroll: true });
+			textarea.select();
+			textarea.setSelectionRange(0, text.length);
+			let copied = false;
+			try {
+				copied = document.execCommand('copy');
+			} catch {
+				copied = false;
+			}
+			textarea.remove();
+			return copied;
+		}
+
+		async function copyShareLink() {
+			const message = shareMessage();
+			try {
+				if (navigator.clipboard?.writeText) {
+					await navigator.clipboard.writeText(message);
+				} else if (!fallbackCopyText(message)) {
+					throw new Error('copy unavailable');
+				}
+				setCopyStatus('コピーしました');
+				setTimeout(() => setCopyStatus('URLをコピー'), 1800);
+			} catch {
+				if (fallbackCopyText(message)) {
+					setCopyStatus('コピーしました');
+					setTimeout(() => setCopyStatus('URLをコピー'), 1800);
+					return;
+				}
+				setCopyStatus('コピーできませんでした');
+				setTimeout(() => setCopyStatus('URLをコピー'), 1800);
+			}
+		}
+
+		async function sharePage() {
+			if (navigator.share) {
+				try {
+					await navigator.share({
+						title: ESS_SHARE_TITLE,
+						text: ESS_SHARE_TEXT,
+						url: ESS_SHARE_URL,
+					});
+					return;
+				} catch (error) {
+					if (error.name === 'AbortError') return;
+				}
+			}
+			await copyShareLink();
+		}
+
+		nativeShareButtons.forEach((button) => {
+			button.addEventListener('click', sharePage);
+		});
+		copyButtons.forEach((button) => {
+			button.addEventListener('click', copyShareLink);
+		});
+	</script>
+</Layout>
+
+<style>
+	.ess-page {
+		--ess-black: #05070d;
+		--ess-ink: #151515;
+		--ess-paper: #fff8eb;
+		--ess-gold: #f0c21a;
+		--ess-blue: #062f78;
+		--ess-cyan: #1a88c8;
+		--ess-pink: #ed106d;
+		--ess-line: rgba(21, 21, 21, 0.14);
+		background: var(--ess-paper);
+		color: var(--ess-ink);
+	}
+
+	.ess-hero {
+		position: relative;
+		overflow: hidden;
+		min-height: min(860px, calc(100svh - 90px));
+		background: var(--ess-black);
+		color: #fff;
+	}
+
+	.ess-hero::before,
+	.ess-hero::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+	}
+
+	.ess-hero::before {
+		z-index: 1;
+		background:
+			linear-gradient(90deg, rgba(5, 7, 13, 0.96), rgba(5, 7, 13, 0.76) 48%, rgba(5, 7, 13, 0.42)),
+			linear-gradient(0deg, rgba(5, 7, 13, 0.76), transparent 58%);
+	}
+
+	.ess-hero::after {
+		z-index: 2;
+		inset: auto 0 0;
+		height: 9px;
+		background: linear-gradient(90deg, var(--ess-blue), var(--ess-pink), var(--ess-gold));
+	}
+
+	.ess-hero-bg {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center center;
+		filter: saturate(1.08);
+	}
+
+	.ess-hero-inner {
+		position: relative;
+		z-index: 3;
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(300px, 420px);
+		gap: 52px;
+		align-items: center;
+		width: min(1120px, 100%);
+		min-height: inherit;
+		margin: 0 auto;
+		padding: 64px 20px 74px;
+	}
+
+	.ess-kicker,
+	.ess-section-head p,
+	.ess-access-copy p {
+		color: var(--ess-gold);
+		font-family: var(--font-head);
+		font-size: 0.92rem;
+		font-weight: 900;
+		letter-spacing: 0;
+		line-height: 1.2;
+		text-transform: uppercase;
+	}
+
+	.ess-hero h1 {
+		margin-top: 14px;
+		font-family: var(--font-head);
+		font-size: 5.65rem;
+		font-weight: 900;
+		letter-spacing: 0;
+		line-height: 0.88;
+		text-shadow: 0 3px 24px rgba(0, 0, 0, 0.45);
+	}
+
+	.ess-subtitle {
+		max-width: 16em;
+		margin-top: 18px;
+		font-family: var(--font-serif);
+		font-size: 1.72rem;
+		font-weight: 900;
+		line-height: 1.35;
+	}
+
+	.ess-lead {
+		max-width: 37em;
+		margin-top: 24px;
+		font-size: 1.08rem;
+		font-weight: 800;
+		line-height: 1.9;
+	}
+
+	.ess-hero-meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 9px;
+		margin-top: 26px;
+	}
+
+	.ess-hero-meta span {
+		display: inline-flex;
+		align-items: center;
+		min-height: 35px;
+		padding: 0 12px;
+		border: 1px solid rgba(255, 255, 255, 0.3);
+		background: rgba(255, 255, 255, 0.1);
+		font-weight: 900;
+		line-height: 1.2;
+	}
+
+	.ess-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		margin-top: 28px;
+	}
+
+	.ess-actions a,
+	.ess-access a,
+	.ess-info a {
+		color: inherit;
+		font-weight: 900;
+	}
+
+	.ess-actions a,
+	.ess-access a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 46px;
+		padding: 0 18px;
+		border: 1px solid rgba(255, 255, 255, 0.42);
+		background: rgba(255, 255, 255, 0.1);
+		color: #fff;
+		font-family: var(--font-head);
+		line-height: 1;
+		text-align: center;
+		text-decoration: none;
+	}
+
+	.ess-actions a.primary,
+	.ess-access a {
+		border-color: var(--ess-gold);
+		background: var(--ess-gold);
+		color: #050505;
+	}
+
+	.ess-poster-frame {
+		align-self: end;
+		margin: 0;
+		transform: rotate(1deg);
+	}
+
+	.ess-poster-frame img {
+		display: block;
+		width: min(420px, 100%);
+		height: auto;
+		border: 8px solid rgba(255, 248, 235, 0.94);
+		box-shadow: 0 28px 70px rgba(0, 0, 0, 0.5);
+	}
+
+	.ess-message,
+	.ess-detail,
+	.ess-share {
+		box-sizing: border-box;
+		width: min(1040px, 100%);
+		margin: 0 auto;
+		padding: 70px 20px;
+	}
+
+	.ess-section-head {
+		display: flex;
+		align-items: end;
+		justify-content: space-between;
+		gap: 20px;
+		padding-bottom: 16px;
+		border-bottom: 3px solid var(--ess-ink);
+	}
+
+	.ess-section-head h2,
+	.ess-access-copy h2 {
+		font-family: var(--font-head);
+		font-size: 3.1rem;
+		font-weight: 900;
+		letter-spacing: 0;
+		line-height: 1;
+	}
+
+	.ess-prose {
+		display: grid;
+		gap: 18px;
+		max-width: 760px;
+		margin-top: 28px;
+	}
+
+	.ess-prose p {
+		font-size: 1.08rem;
+		font-weight: 800;
+		line-height: 2.05;
+	}
+
+	.ess-callout {
+		padding: 72px 20px;
+		background:
+			linear-gradient(120deg, rgba(6, 47, 120, 0.96), rgba(237, 16, 109, 0.86) 58%, rgba(240, 194, 26, 0.9)),
+			var(--ess-blue);
+		color: #fff;
+		text-align: center;
+	}
+
+	.ess-callout div {
+		width: min(940px, 100%);
+		margin: 0 auto;
+	}
+
+	.ess-callout p {
+		color: rgba(255, 255, 255, 0.84);
+		font-family: var(--font-serif);
+		font-size: 1.35rem;
+		font-weight: 900;
+		line-height: 1.5;
+	}
+
+	.ess-callout h2 {
+		margin-top: 8px;
+		font-family: var(--font-serif);
+		font-size: 2.25rem;
+		font-weight: 900;
+		letter-spacing: 0;
+		line-height: 1.45;
+	}
+
+	.ess-info {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1px;
+		margin-top: 28px;
+		border: 1px solid var(--ess-line);
+		background: var(--ess-line);
+	}
+
+	.ess-info div {
+		display: grid;
+		gap: 10px;
+		align-content: start;
+		min-height: 142px;
+		background: #fffdf8;
+		padding: 22px;
+	}
+
+	.ess-info dt {
+		color: var(--ess-blue);
+		font-family: var(--font-head);
+		font-weight: 900;
+	}
+
+	.ess-info dd {
+		font-weight: 800;
+		line-height: 1.75;
+		overflow-wrap: anywhere;
+	}
+
+	.ess-access {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		gap: 24px;
+		align-items: center;
+		padding: 52px max(20px, calc((100vw - 1040px) / 2));
+		background:
+			linear-gradient(90deg, rgba(5, 7, 13, 0.92), rgba(5, 7, 13, 0.62)),
+			url('/assets/the-essence-akita-20261114.jpg') center center / cover;
+		color: #fff;
+	}
+
+	.ess-access-copy span {
+		display: block;
+		margin-top: 14px;
+		font-size: 1.05rem;
+		font-weight: 900;
+		line-height: 1.5;
+	}
+
+	.ess-share {
+		background: var(--ess-paper);
+	}
+
+	.ess-share-buttons {
+		display: grid;
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+		gap: 8px;
+		margin-top: 22px;
+	}
+
+	.ess-share-button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		gap: 3px;
+		min-height: 50px;
+		min-width: 0;
+		padding: 8px 10px;
+		border: 1px solid rgba(17, 24, 39, 0.14);
+		background: #fffdf8;
+		color: var(--ess-ink);
+		cursor: pointer;
+		font: inherit;
+		font-family: var(--font-head);
+		font-size: 0.82rem;
+		font-weight: 900;
+		line-height: 1;
+		text-align: center;
+		text-decoration: none;
+	}
+
+	.ess-share-button.native {
+		background: var(--ess-blue);
+		color: #fff;
+	}
+
+	.ess-share-button.line {
+		border-bottom: 3px solid #06c755;
+	}
+
+	.ess-share-button.x {
+		border-bottom: 3px solid #111;
+	}
+
+	.ess-share-button.facebook {
+		border-bottom: 3px solid #1877f2;
+	}
+
+	.ess-share-button.copy {
+		border-bottom: 3px solid var(--ess-pink);
+	}
+
+	.ess-share-button small {
+		display: block;
+		max-width: 100%;
+		overflow: hidden;
+		color: rgba(17, 24, 39, 0.62);
+		font-family: var(--font-sans);
+		font-size: 0.66rem;
+		font-weight: 800;
+		line-height: 1.2;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.ess-share-button.native small {
+		color: rgba(255, 255, 255, 0.78);
+	}
+
+	@media (max-width: 860px) {
+		.ess-hero {
+			min-height: 0;
+		}
+
+		.ess-hero-inner {
+			grid-template-columns: 1fr;
+			gap: 34px;
+			padding-top: 44px;
+		}
+
+		.ess-hero h1 {
+			font-size: 4.4rem;
+		}
+
+		.ess-subtitle {
+			font-size: 1.48rem;
+		}
+
+		.ess-poster-frame {
+			justify-self: center;
+			transform: none;
+		}
+
+		.ess-poster-frame img {
+			width: min(560px, 100%);
+		}
+
+		.ess-info,
+		.ess-access {
+			grid-template-columns: 1fr;
+		}
+
+		.ess-access a {
+			width: 100%;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.ess-hero {
+			background:
+				linear-gradient(155deg, #05070d 0%, #061a42 50%, #361025 100%);
+		}
+
+		.ess-hero::before {
+			background:
+				linear-gradient(180deg, rgba(5, 7, 13, 0.18), rgba(5, 7, 13, 0.78)),
+				linear-gradient(90deg, rgba(5, 7, 13, 0.94), rgba(5, 7, 13, 0.48));
+		}
+
+		.ess-hero-bg {
+			opacity: 0;
+		}
+
+		.ess-hero-inner {
+			padding: 34px 16px 48px;
+		}
+
+		.ess-hero h1 {
+			font-size: 3.1rem;
+		}
+
+		.ess-subtitle {
+			font-size: 1.22rem;
+		}
+
+		.ess-lead {
+			font-size: 0.98rem;
+			line-height: 1.75;
+		}
+
+		.ess-hero-meta span,
+		.ess-actions a {
+			box-sizing: border-box;
+			width: 100%;
+		}
+
+		.ess-poster-frame img {
+			border-width: 5px;
+		}
+
+		.ess-message,
+		.ess-detail,
+		.ess-share {
+			padding: 50px 16px;
+		}
+
+		.ess-section-head {
+			display: block;
+		}
+
+		.ess-section-head h2,
+		.ess-access-copy h2 {
+			margin-top: 6px;
+			font-size: 2.15rem;
+			line-height: 1.08;
+		}
+
+		.ess-prose p {
+			font-size: 1rem;
+			line-height: 1.9;
+		}
+
+		.ess-callout {
+			padding: 54px 16px;
+		}
+
+		.ess-callout p {
+			font-size: 1.08rem;
+		}
+
+		.ess-callout h2 {
+			font-size: 1.55rem;
+		}
+
+		.ess-info {
+			grid-template-columns: 1fr;
+		}
+
+		.ess-info div {
+			min-height: 0;
+			padding: 18px;
+		}
+
+		.ess-access {
+			padding: 44px 16px;
+		}
+
+		.ess-share-buttons {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+</style>
