@@ -1,0 +1,1181 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+
+const pagePath = '/the-lords-angels/20260704/';
+const pageTitle = "走る証し — The Lord's Angels";
+const pageDescription =
+	"元不良たちを惹きつけてきた不良牧師アーサーホーランドと、そのバイクチーム The Lord's Angels（ロードエンジェルス）。2026年7月4日、小田原・国府津 BLEND PARK「Saturday Night Arthur」までの一日を、当日の映像・音声記録から再構成したドキュメント。";
+const heroImage = '/the-lords-angels/20260704/assets/arthur-leather-portrait.jpg';
+const shareUrl = `https://arthur-show.com${pagePath}`;
+const shareTitle = `${pageTitle} | THE ARTHUR HOLLANDS SHOW`;
+const encodedShareUrl = encodeURIComponent(shareUrl);
+const encodedShareTitle = encodeURIComponent(shareTitle);
+const encodedLineText = encodeURIComponent(`${shareTitle}\n2026.7.4 / The Lord's Angels（ロードエンジェルス）走る証しの一日\n${shareUrl}`);
+
+const timeline = [
+	{
+		time: '12:42',
+		label: 'ASSEMBLE',
+		title: '国府津に集結。',
+		text:
+			'海を背にした道に、エンブレムを背負ったベストが次々と揃っていく。ハーレー、ゴールドウィング、それぞれのマシン。走る前のロードエンジェルスには、点呼のような静かな高揚がありました。',
+		image: '/the-lords-angels/20260704/assets/lunch-vests-outdoor.jpg',
+		alt: '海沿いの道でチームエンブレムのベストを着て集まったThe Lord\'s Angelsのメンバー',
+	},
+	{
+		time: '13:58',
+		label: 'GEAR UP',
+		title: 'ヘルメットをかぶる。',
+		text:
+			'軽口と笑い声はそのままに、それぞれがマシンへ向かう。ヘルメットをかぶり、ゴーグルを合わせ、あご紐を締める。エンジンをかける直前、ふっと空気が変わる。',
+		image: '/the-lords-angels/20260704/assets/arthur-gear-up.jpg',
+		alt: 'ヘルメットのあご紐を締めるアーサーホーランド',
+	},
+	{
+		time: '14:08',
+		label: 'RIDE',
+		title: '隊列、国府津の街へ。',
+		text:
+			'エンブレムを背負った隊列が、街へ出ていく。信号で停まるたび、背中の天使が街の視線を集める。The Lord\'s Angelsにとって、走ることはそのまま証しです。',
+		image: '/the-lords-angels/20260704/assets/ride-convoy-street.jpg',
+		alt: '国府津の街を隊列で走るThe Lord\'s Angels',
+	},
+	{
+		time: '14:30',
+		label: 'STREET',
+		title: 'バイクを降りれば、路上が祈りの場になる。',
+		text:
+			'会場周辺に到着すると、ベンチの周りに自然と輪ができる。腰を落とし、頭を垂れて祈る者。マシンを挟んで語り込む者。道の上が、このチームの現場です。',
+		image: '/the-lords-angels/20260704/assets/street-prayer-circle.jpg',
+		alt: '到着後の路上で輪になって祈るメンバーたち',
+	},
+	{
+		time: '17:00',
+		label: 'SATURDAY NIGHT ARTHUR',
+		title: 'BLEND PARK、開演。',
+		text:
+			'木の梁が組まれた倉庫のような会場に、世代を越えて人が集まる。賛美と御言葉の夕べ「Saturday Night Arthur」。バイクの音で始まった一日が、ここで御言葉に変わっていきます。',
+		image: '/the-lords-angels/20260704/assets/venue-wide.jpg',
+		alt: 'BLEND PARKで開かれたSaturday Night Arthurの会場全景',
+	},
+	{
+		time: '19:20',
+		label: 'MINISTRY',
+		title: 'メッセージの後、一人ひとりへ。',
+		text:
+			'語り終えたアーサー先生は、壇を降りてからが長い。肩に手を置き、頭を垂れ、一人のために祈る。集会の熱がそのまま、近い距離の祈りに変わっていきました。',
+		image: '/the-lords-angels/20260704/assets/after-message-laying-hands.jpg',
+		alt: 'メッセージ後に参加者の肩に手を置いて祈るアーサーホーランド',
+	},
+	{
+		time: '21:00',
+		label: 'BROTHERS',
+		title: '夜、また同じテーブルに戻る。',
+		text:
+			'走って、語って、祈った一日の終わり。アーサー先生はメンバーと同じテーブルに戻り、声を上げて笑っていました。このチームの結び目は、最後まで人と人です。',
+		image: '/the-lords-angels/20260704/assets/night-dinner-laugh.jpg',
+		alt: '夜のテーブルで声を上げて笑うアーサーホーランド',
+	},
+];
+
+const gallery = [
+	{
+		src: '/the-lords-angels/20260704/assets/riverside-emblem-talk.jpg',
+		alt: "川沿いでチームエンブレムを背負って語り合うThe Lord's Angelsのメンバー",
+		caption: '出発前、川沿いで。背中の天使が風を受ける。',
+		featured: true,
+	},
+	{
+		src: '/the-lords-angels/20260704/assets/after-message-prayer-hands.jpg',
+		alt: 'メッセージ後に参加者のために祈るアーサーホーランド',
+		caption: 'メッセージの後。求める人のところへ、アーサー先生の方から歩いていく。',
+		featured: true,
+	},
+	{
+		src: '/the-lords-angels/20260704/assets/arthur-flame-bike-talk.jpg',
+		alt: 'ファイアーペイントのバイクを挟んで語り合うアーサーホーランドとメンバー',
+		caption: 'バイクを挟んで、話は尽きない。',
+	},
+	{
+		src: '/the-lords-angels/20260704/assets/ride-emblem-solo.jpg',
+		alt: 'チームエンブレムを背負って国府津の街を走るThe Lord\'s Angelsのメンバー',
+		caption: '背中の天使と走る。道の上が、このチームの現場。',
+	},
+	{
+		src: '/the-lords-angels/20260704/assets/arthur-lunch-laugh.jpg',
+		alt: 'レザーキャップ姿でメンバーと語り合うアーサーホーランド',
+		caption: '出発前のひと笑い。レザーキャップの下の素顔。',
+	},
+	{
+		src: '/the-lords-angels/20260704/assets/family-photo.jpg',
+		alt: '終演後に参加者と並ぶアーサーホーランド',
+		caption: '終演後の一枚。ステージと客席の距離が、そのまま消えていく。',
+	},
+	{
+		src: '/the-lords-angels/20260704/assets/event-poster.jpg',
+		alt: 'Saturday Night Arthur 2026年7月4日告知ポスター',
+		caption: 'Saturday Night Arthur。この夜の旗印。',
+	},
+];
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'Article',
+	headline: pageTitle,
+	description: pageDescription,
+	inLanguage: 'ja-JP',
+	datePublished: '2026-07-04T17:00:00+09:00',
+	dateModified: new Date().toISOString(),
+	image: `https://arthur-show.com${heroImage}`,
+	mainEntityOfPage: shareUrl,
+	author: {
+		'@type': 'Organization',
+		name: 'THE ARTHUR HOLLANDS SHOW',
+	},
+	about: [
+		{
+			'@type': 'Person',
+			name: 'アーサーホーランド',
+			alternateName: 'Arthur Hollands',
+		},
+		{
+			'@type': 'Organization',
+			name: "The Lord's Angels",
+			alternateName: ["LORD'S ANGELS", 'ロードエンジェルス'],
+		},
+	],
+};
+---
+
+<Layout
+	title={pageTitle}
+	description={pageDescription}
+	image={heroImage}
+	imageAlt="海を背に、レザーキャップと赤いバンダナ姿で立つアーサーホーランド"
+	imageWidth={2000}
+	imageHeight={1126}
+	imageType="image/jpeg"
+	ogType="article"
+	canonicalPath={pagePath}
+	structuredData={structuredData}
+>
+	<article class="la-page">
+		<section class="la-hero" aria-labelledby="la-title">
+			<img class="la-hero-image" src={heroImage} alt="" width="2000" height="1126" loading="eager" aria-hidden="true" />
+			<div class="la-hero-copy">
+				<p class="la-kicker">ARTHUR HOLLANDS / THE LORD'S ANGELS</p>
+				<h1 id="la-title">走る証し。</h1>
+				<p class="la-lead">
+					十字架を担いで日本列島を、そしてアメリカ大陸4000キロを歩き抜いた不良牧師が、
+					この日はゴーグルを合わせ、あご紐を締めた。
+					アーサーホーランドとバイクチーム <em>The Lord's Angels</em>。
+					2026年7月4日、小田原・国府津 — 隊列は BLEND PARK「Saturday Night Arthur」へ向かう。
+				</p>
+				<div class="la-meta" aria-label="記事概要">
+					<span>2026.07.04</span>
+					<span>ODAWARA KOZU</span>
+					<span>BLEND PARK</span>
+				</div>
+			</div>
+		</section>
+
+		<nav class="la-local-nav" aria-label="ページ内ナビゲーション">
+			<a href="#story">一日の記録</a>
+			<a href="#ride">On the Road</a>
+			<a href="#night">Saturday Night</a>
+			<a href="#gallery">写真</a>
+			<a href="#share">シェア</a>
+		</nav>
+
+		<section class="la-intro" aria-labelledby="intro-title">
+			<div class="la-intro-copy">
+				<p class="la-kicker">THE LORD'S ANGELS</p>
+				<h2 id="intro-title">背中に天使、胸に十字架。</h2>
+				<p>
+					The Lord's Angels（ロードエンジェルス）— 背中に掲げるのは、馬にまたがる天使のチームエンブレム。
+					アーサーホーランド率いるモーターサイクルクラブです。
+					革とクロームと排気音。共に走り、集会へ向かい、行く先々で人と出会っていく。
+				</p>
+				<p>
+					この夜のステージでは、メンバーの一人がこう証ししました。
+					十字架を担いで日本を縦断していたアーサー先生を、バイク仲間と滋賀まで追いかけた。
+					初めて二人で十字架を担ぎながら「俺が宗教やってると思ってるの？俺はクリスチャンだぜ」という言葉を聞いた——。
+					道の上の出会いから始まった関係が、いまチームとして走っている。
+					彼らにとって、走ることと信じることは最初から一つながりです。
+				</p>
+			</div>
+			<figure class="la-intro-photo">
+				<img src="/the-lords-angels/20260704/assets/arthur-seaside-talk.jpg" alt="海沿いの集合場所でメンバーと語るアーサーホーランド" width="2000" height="1126" loading="lazy" />
+				<figcaption>集合場所の海沿いで。走る前の語らい。</figcaption>
+			</figure>
+		</section>
+
+		<section class="la-style" aria-labelledby="style-title">
+			<div class="la-section-head">
+				<p class="la-kicker">THE LOOK</p>
+				<h2 id="style-title">革に打たれた、天使のエンブレム。</h2>
+			</div>
+			<div class="la-style-layout">
+				<figure class="la-style-main">
+					<img src="/the-lords-angels/20260704/assets/arthur-blend-smile.jpg" alt="レザーキャップ姿で笑うアーサーホーランド" loading="lazy" />
+					<figcaption>黒のレザーキャップ、赤いバンダナ、胸に十字架。開演前のBLEND PARKで。</figcaption>
+				</figure>
+				<div class="la-style-stack">
+					<figure>
+						<img src="/the-lords-angels/20260704/assets/team-emblem-badge.jpg" alt="レザーに打たれたTHE LORD'S ANGELS JAPAN M.C.の銀のチームエンブレム" loading="lazy" />
+						<figcaption>THE LORD'S ANGELS JAPAN M.C. — 革に打たれた銀のチームエンブレム。</figcaption>
+					</figure>
+					<figure>
+						<img src="/the-lords-angels/20260704/assets/riverside-back-patch.jpg" alt="背中に馬にまたがる天使のチームエンブレムを背負ったメンバー" loading="lazy" />
+						<figcaption>背中には、馬にまたがる天使。これがチームの旗印。</figcaption>
+					</figure>
+				</div>
+			</div>
+		</section>
+
+		<section class="la-three" aria-label="この日の三つの軸">
+			<div>
+				<span>01</span>
+				<h2>走る</h2>
+				<p>隊列そのものがメッセージになる。街の視線が、背中の天使に集まる。</p>
+			</div>
+			<div>
+				<span>02</span>
+				<h2>語る</h2>
+				<p>証しとメッセージ。道で起きた本当の話だけが、人の心を動かす。</p>
+			</div>
+			<div>
+				<span>03</span>
+				<h2>祈る</h2>
+				<p>路上でも、会場でも。求める人がいれば、そこが祈りの場になる。</p>
+			</div>
+		</section>
+
+		<section class="la-story" id="story" aria-labelledby="story-title">
+			<div class="la-section-head">
+				<p class="la-kicker">DAY STORY</p>
+				<h2 id="story-title">この一日の記録。</h2>
+			</div>
+			<div class="la-timeline">
+				{timeline.map((item) => (
+					<article class="la-timeline-item">
+						<figure>
+							<img src={item.image} alt={item.alt} loading="lazy" />
+						</figure>
+						<div class="la-timeline-copy">
+							<p>
+								<time>{item.time}</time>
+								<span>{item.label}</span>
+							</p>
+							<h3>{item.title}</h3>
+							<p>{item.text}</p>
+						</div>
+					</article>
+				))}
+			</div>
+		</section>
+
+		<section class="la-band la-ride" id="ride" aria-labelledby="ride-title">
+			<div class="la-band-copy">
+				<p class="la-kicker">ON THE ROAD</p>
+				<h2 id="ride-title">背中の天使が、街を走る。</h2>
+				<p>
+					信号待ちの交差点でも、海沿いの直線でも、道行く人の目は自然とあの背中に吸い寄せられる。
+					馬にまたがる天使のエンブレムは、走っている間じゅう、街に向かって掲げられ続ける旗です。
+					ロードエンジェルスの走りは、目立つための演出ではありません。
+					道そのものを出会いの場所に変えるための、このチームのやり方です。
+				</p>
+			</div>
+			<div class="la-ride-grid">
+				<img src="/the-lords-angels/20260704/assets/ride-emblem-pair.jpg" alt="チームエンブレムを背負って並走するThe Lord's Angelsのメンバー" loading="lazy" />
+				<img src="/the-lords-angels/20260704/assets/bikes-street-lineup.jpg" alt="出発前に路肩へ並んだThe Lord's Angelsのマシン" loading="lazy" />
+				<img src="/the-lords-angels/20260704/assets/flame-tank-detail.jpg" alt="ファイアーパターンが描かれた赤いタンク" loading="lazy" />
+			</div>
+		</section>
+
+		<section class="la-night" id="night" aria-labelledby="night-title">
+			<div class="la-section-head">
+				<p class="la-kicker">SATURDAY NIGHT ARTHUR</p>
+				<h2 id="night-title">「ここが俺の教会だ」</h2>
+			</div>
+			<p class="la-night-lead">
+				夕方5時、BLEND PARK。木の梁がむき出しの会場で「Saturday Night Arthur －賛美と御言葉の夕べ－」が始まりました。
+				賛美、スクリーンに映るWALK ACROSSの記録、そしてメッセージ。
+				<a href="/saturday-night-arthur-20260704/">この日の告知ページはこちら</a>。
+			</p>
+			<div class="la-gathering-layout">
+				<figure>
+					<img src="/the-lords-angels/20260704/assets/worship-wide.jpg" alt="BLEND PARKでのSaturday Night Arthurの賛美の時間" width="2200" height="1650" loading="lazy" />
+					<figcaption>ギターとマイクと木の梁。倉庫が礼拝堂に変わる。</figcaption>
+				</figure>
+				<div class="la-gathering-copy">
+					<p>
+						ステージに立ったアーサー先生が語ったのは、還暦から歩いたアメリカ大陸4000キロの話。
+						週6日、1日32キロ。7ヶ月かけて歩き抜いた道の上で起きた出会いの数々です。
+						十字架を担ぐ姿を見ただけで離婚を思いとどまったトラック運転手。
+						ブルックリンの路上で「その十字架、担がせてくれ」と並んで歩いた男。
+						財布から最後の5ドルを差し出した路上の男。
+					</p>
+					<p>
+						道の上で起きた本当の話だけを、アーサー先生は一つずつ積み上げていきます。
+					</p>
+				</div>
+			</div>
+
+			<blockquote class="la-quote-band">
+				<p>
+					語らずして語る、ということが本当にあるんだよ。
+				</p>
+				<cite>アーサーホーランド — この夜のメッセージから</cite>
+			</blockquote>
+
+			<div class="la-message-layout">
+				<div class="la-message-copy">
+					<h3>山上の説教と、ミッションバラバ。</h3>
+					<p>
+						メッセージの核心は、山上の説教でした。「心の貧しい者は幸いだ。神の国はその人のものだから」。
+						ガンジーがこの言葉に撃たれて「イエスのような生き方をしたい」と非暴力運動を始めた、その言葉です。
+						地位も名誉も持たない者、世の中にのけ者にされた者のところへ、神の方から来る——
+						アーサー先生の語りは、2000年前の丘の上と国府津の倉庫を一本の線でつなぎました。
+					</p>
+					<p>
+						そして自身の歩みの話へ。初めて十字架を担いで日本列島を縦断したとき、
+						行く先々の集会に元暴力団員たちが現れ、涙を流し、次々と信仰を持った——
+						気づけば8人。彼らと「ミッションバラバ」というチームを組んで渡米すると、
+						その物語は通信社のニュースになり、映画『親分はイエス様』になった。
+						彼らはいま牧師として、依存症や出所者の更生の現場に立っている、とアーサー先生は語りました。
+						ジーザスを「義理と人情の源」と呼び、「俺はこの方に惚れてるんだ」と言い切る語り口に、
+						会場は引き込まれていきます。
+					</p>
+					<p class="la-message-punch">
+						「彼らが変えられるなら、あなたも変えられる」。
+					</p>
+					<p>
+						会場のあちこちで手が挙がり、アーメンの声が重なりました。
+						メッセージの後、アーサー先生は壇を降り、一人ひとりの肩に手を置いて祈っていきます。
+						「このファミリーを祝福してください」— その祈りのまま、夜は更けていきました。
+					</p>
+				</div>
+				<figure>
+					<img src="/the-lords-angels/20260704/assets/message-wide.jpg" alt="Saturday Night Arthurでメッセージを語るアーサーホーランド" loading="lazy" />
+					<figcaption>ステージから客席へ。道の上の実話だけを積み上げていく。</figcaption>
+				</figure>
+			</div>
+		</section>
+
+		<section class="la-closing" aria-labelledby="closing-title">
+			<img src="/the-lords-angels/20260704/assets/night-dinner-wine.jpg" alt="夜のテーブルでグラスを前に語るアーサーホーランド" loading="lazy" />
+			<div>
+				<p class="la-kicker">AFTER HOURS</p>
+				<h2 id="closing-title">走って、語って、祈って。最後は同じテーブルへ。</h2>
+				<p>
+					終演後、アーサー先生はメンバーたちと同じテーブルに戻りました。
+					話題は仲間の近況から、それぞれのマシンの話へ。
+					笑い声の絶えないテーブルに、走って、語って、祈った一日がゆっくりと流れ込んでいきます。
+					このチームの物語は、まだ序章です。
+				</p>
+			</div>
+		</section>
+
+		<section class="la-gallery" id="gallery" aria-labelledby="gallery-title">
+			<div class="la-section-head">
+				<p class="la-kicker">PHOTO REPORT</p>
+				<h2 id="gallery-title">写真で振り返る。</h2>
+			</div>
+			<div class="la-gallery-grid">
+				{gallery.map((photo) => (
+					<figure data-featured={photo.featured ? 'true' : undefined}>
+						<img src={photo.src} alt={photo.alt} loading="lazy" />
+						<figcaption>{photo.caption}</figcaption>
+					</figure>
+				))}
+			</div>
+		</section>
+
+		<section class="la-share" id="share" aria-labelledby="share-title">
+			<div>
+				<p class="la-kicker">SHARE</p>
+				<h2 id="share-title">この記録をシェア</h2>
+			</div>
+			<div class="la-share-buttons" aria-label="SNS共有ボタン">
+				<button type="button" data-la-share-native>Share</button>
+				<a href={`https://line.me/R/msg/text/?${encodedLineText}`} target="_blank" rel="noopener noreferrer">LINE</a>
+				<a href={`https://twitter.com/intent/tweet?text=${encodedShareTitle}&url=${encodedShareUrl}`} target="_blank" rel="noopener noreferrer">X</a>
+				<a href={`https://www.facebook.com/sharer/sharer.php?u=${encodedShareUrl}`} target="_blank" rel="noopener noreferrer">Facebook</a>
+				<button type="button" data-la-copy-link><span data-la-copy-status>Copy URL</span></button>
+			</div>
+		</section>
+	</article>
+
+	<script is:inline>
+		const LA_SHARE_URL = 'https://arthur-show.com/the-lords-angels/20260704/';
+		const LA_SHARE_TITLE = "走る証し — The Lord's Angels | THE ARTHUR HOLLANDS SHOW";
+		const LA_SHARE_TEXT = "2026.7.4 / The Lord's Angels（ロードエンジェルス）走る証しの一日";
+		const nativeShareButtons = document.querySelectorAll('[data-la-share-native]');
+		const copyButtons = document.querySelectorAll('[data-la-copy-link]');
+		const copyStatusNodes = document.querySelectorAll('[data-la-copy-status]');
+
+		function shareMessage() {
+			return `${LA_SHARE_TITLE}\n${LA_SHARE_TEXT}\n${LA_SHARE_URL}`;
+		}
+
+		function setCopyStatus(label) {
+			copyStatusNodes.forEach((node) => {
+				node.textContent = label;
+			});
+		}
+
+		function fallbackCopyText(text) {
+			const textarea = document.createElement('textarea');
+			textarea.value = text;
+			textarea.setAttribute('readonly', '');
+			textarea.style.position = 'fixed';
+			textarea.style.top = '-1000px';
+			textarea.style.left = '-1000px';
+			textarea.style.opacity = '0';
+			document.body.appendChild(textarea);
+			textarea.focus({ preventScroll: true });
+			textarea.select();
+			textarea.setSelectionRange(0, text.length);
+			let copied = false;
+			try {
+				copied = document.execCommand('copy');
+			} catch {
+				copied = false;
+			}
+			textarea.remove();
+			return copied;
+		}
+
+		async function copyShareLink() {
+			const message = shareMessage();
+			try {
+				if (navigator.clipboard?.writeText) {
+					await navigator.clipboard.writeText(message);
+				} else if (!fallbackCopyText(message)) {
+					throw new Error('copy unavailable');
+				}
+				setCopyStatus('Copied');
+				setTimeout(() => setCopyStatus('Copy URL'), 1800);
+			} catch {
+				if (fallbackCopyText(message)) {
+					setCopyStatus('Copied');
+					setTimeout(() => setCopyStatus('Copy URL'), 1800);
+					return;
+				}
+				setCopyStatus('Failed');
+				setTimeout(() => setCopyStatus('Copy URL'), 1800);
+			}
+		}
+
+		async function sharePage() {
+			if (navigator.share) {
+				try {
+					await navigator.share({
+						title: LA_SHARE_TITLE,
+						text: LA_SHARE_TEXT,
+						url: LA_SHARE_URL,
+					});
+					return;
+				} catch (error) {
+					if (error.name === 'AbortError') return;
+				}
+			}
+			await copyShareLink();
+		}
+
+		nativeShareButtons.forEach((button) => {
+			button.addEventListener('click', sharePage);
+		});
+		copyButtons.forEach((button) => {
+			button.addEventListener('click', copyShareLink);
+		});
+	</script>
+</Layout>
+
+<style>
+	.la-page {
+		--la-black: #070707;
+		--la-ink: #171512;
+		--la-paper: #fbf6ec;
+		--la-line: rgba(23, 21, 18, 0.16);
+		--la-gold: #d3a64b;
+		--la-red: #b7342d;
+		--la-teal: #2a6967;
+		--la-steel: #4a5561;
+		background: var(--la-paper);
+		color: var(--la-ink);
+		font-family: var(--font-sans);
+	}
+
+	.la-page img {
+		display: block;
+		max-width: 100%;
+	}
+
+	.la-kicker {
+		margin: 0;
+		color: var(--la-gold);
+		font-family: var(--font-head);
+		font-size: 0.86rem;
+		font-weight: 900;
+		letter-spacing: 0;
+		line-height: 1.2;
+		text-transform: uppercase;
+	}
+
+	.la-hero {
+		position: relative;
+		isolation: isolate;
+		min-height: min(620px, 66svh);
+		overflow: hidden;
+		background: var(--la-black);
+		color: #fff;
+	}
+
+	.la-hero::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		z-index: 1;
+		background:
+			linear-gradient(270deg, rgba(7, 7, 7, 0.86), rgba(7, 7, 7, 0.5) 44%, rgba(7, 7, 7, 0.08)),
+			linear-gradient(0deg, rgba(7, 7, 7, 0.72), transparent 52%);
+	}
+
+	.la-hero::after {
+		content: "";
+		position: absolute;
+		inset: auto 0 0;
+		z-index: 2;
+		height: 8px;
+		background: linear-gradient(90deg, var(--la-red), var(--la-gold), var(--la-teal));
+	}
+
+	.la-hero-image {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: 20% center;
+	}
+
+	.la-hero-copy {
+		position: relative;
+		z-index: 3;
+		display: grid;
+		align-content: center;
+		width: min(1120px, 100%);
+		min-height: inherit;
+		margin: 0 auto;
+		padding: clamp(30px, 4vw, 44px) 20px;
+	}
+
+	.la-hero-copy > * {
+		width: min(600px, 100%);
+		margin-left: auto;
+	}
+
+	.la-hero h1 {
+		max-width: 8.6em;
+		margin-top: 16px;
+		font-family: var(--font-head);
+		font-size: clamp(3.2rem, 7vw, 5.8rem);
+		font-weight: 900;
+		letter-spacing: 0;
+		line-height: 0.95;
+		text-wrap: balance;
+	}
+
+	.la-lead {
+		max-width: 42em;
+		margin-top: 20px;
+		font-family: var(--font-serif);
+		font-size: clamp(1.04rem, 2vw, 1.3rem);
+		font-weight: 800;
+		line-height: 1.72;
+		text-shadow: 0 2px 18px rgba(0, 0, 0, 0.42);
+	}
+
+	.la-lead em {
+		font-style: normal;
+		color: #fff0c4;
+	}
+
+	.la-meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		margin-top: 22px;
+	}
+
+	.la-meta span {
+		display: inline-flex;
+		align-items: center;
+		min-height: 34px;
+		padding: 0 12px;
+		border: 1px solid rgba(255, 255, 255, 0.34);
+		background: rgba(255, 255, 255, 0.1);
+		font-family: var(--font-head);
+		font-size: 0.83rem;
+		font-weight: 900;
+		line-height: 1.1;
+	}
+
+	.la-local-nav {
+		position: sticky;
+		top: 0;
+		z-index: 10;
+		display: flex;
+		gap: 1px;
+		overflow-x: auto;
+		background: var(--la-black);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+	}
+
+	.la-local-nav a {
+		flex: 0 0 auto;
+		min-height: 42px;
+		padding: 13px 16px 11px;
+		color: #fff;
+		font-family: var(--font-head);
+		font-size: 0.78rem;
+		font-weight: 900;
+		text-decoration: none;
+		text-transform: uppercase;
+		white-space: nowrap;
+	}
+
+	.la-local-nav a:hover {
+		background: rgba(255, 255, 255, 0.1);
+	}
+
+	.la-intro,
+	.la-style,
+	.la-story,
+	.la-night,
+	.la-gallery,
+	.la-share {
+		width: min(1120px, 100%);
+		margin: 0 auto;
+		padding: clamp(62px, 9vw, 104px) 20px;
+	}
+
+	.la-intro {
+		display: grid;
+		grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.75fr);
+		gap: clamp(28px, 5vw, 64px);
+		align-items: center;
+	}
+
+	.la-intro h2,
+	.la-section-head h2,
+	.la-band h2,
+	.la-closing h2,
+	.la-share h2 {
+		margin: 8px 0 0;
+		font-family: var(--font-head);
+		font-size: clamp(2.3rem, 5.6vw, 4.4rem);
+		font-weight: 900;
+		letter-spacing: 0;
+		line-height: 0.98;
+		text-wrap: balance;
+	}
+
+	.la-intro-copy > p:not(.la-kicker),
+	.la-band p,
+	.la-gathering-copy > p,
+	.la-message-copy > p,
+	.la-night-lead,
+	.la-closing p {
+		margin: 22px 0 0;
+		font-size: 1.02rem;
+		font-weight: 700;
+		line-height: 2;
+	}
+
+	.la-night-lead {
+		max-width: 46em;
+	}
+
+	.la-night-lead a {
+		color: var(--la-red);
+		font-weight: 800;
+	}
+
+	.la-intro-photo,
+	.la-style figure,
+	.la-night figure,
+	.la-gallery figure {
+		margin: 0;
+	}
+
+	.la-intro-photo img,
+	.la-style figure img,
+	.la-night figure img,
+	.la-gallery figure img,
+	.la-closing img {
+		width: 100%;
+		height: auto;
+		object-fit: cover;
+		border-radius: 8px;
+	}
+
+	.la-intro-photo figcaption,
+	.la-style figcaption,
+	.la-night figcaption,
+	.la-gallery figcaption {
+		margin-top: 10px;
+		color: rgba(23, 21, 18, 0.72);
+		font-size: 0.86rem;
+		font-weight: 800;
+		line-height: 1.6;
+	}
+
+	.la-three {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1px;
+		background: var(--la-black);
+	}
+
+	.la-three div {
+		min-height: 260px;
+		padding: clamp(28px, 5vw, 52px);
+		background: #11100e;
+		color: #fff;
+	}
+
+	.la-three span {
+		display: block;
+		color: var(--la-gold);
+		font-family: var(--font-head);
+		font-size: 0.92rem;
+		font-weight: 900;
+	}
+
+	.la-three h2 {
+		margin: 18px 0 0;
+		font-family: var(--font-head);
+		font-size: clamp(2rem, 4.2vw, 3.8rem);
+		font-weight: 900;
+		letter-spacing: 0;
+		line-height: 1;
+	}
+
+	.la-three p {
+		max-width: 19em;
+		margin: 18px 0 0;
+		color: rgba(255, 255, 255, 0.78);
+		font-weight: 800;
+		line-height: 1.8;
+	}
+
+	.la-section-head {
+		display: flex;
+		align-items: end;
+		justify-content: space-between;
+		gap: 20px;
+		padding-bottom: 18px;
+		border-bottom: 3px solid var(--la-ink);
+	}
+
+	.la-style-layout {
+		display: grid;
+		grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.62fr);
+		gap: 18px;
+		margin-top: 36px;
+		align-items: stretch;
+	}
+
+	.la-style-main,
+	.la-style-stack figure {
+		position: relative;
+		overflow: hidden;
+		border-radius: 8px;
+		background: #11100e;
+		color: #fff;
+	}
+
+	.la-style-layout .la-style-main img,
+	.la-style-layout .la-style-stack img {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		min-height: 0;
+		object-fit: cover;
+		border-radius: 0;
+	}
+
+	.la-style-main {
+		min-height: 520px;
+	}
+
+	.la-style-stack {
+		display: grid;
+		gap: 18px;
+	}
+
+	.la-style-stack figure {
+		min-height: 250px;
+	}
+
+	.la-style figcaption {
+		position: absolute;
+		inset: auto 0 0;
+		margin: 0;
+		padding: 42px 18px 16px;
+		background: linear-gradient(0deg, rgba(7, 7, 7, 0.82), transparent);
+		color: rgba(255, 255, 255, 0.9);
+	}
+
+	.la-timeline {
+		display: grid;
+		gap: 28px;
+		margin-top: 36px;
+	}
+
+	.la-timeline-item {
+		display: grid;
+		grid-template-columns: minmax(300px, 0.95fr) minmax(0, 1fr);
+		gap: clamp(22px, 4vw, 44px);
+		align-items: center;
+	}
+
+	.la-timeline-item:nth-child(even) figure {
+		order: 2;
+	}
+
+	.la-timeline-item figure {
+		margin: 0;
+	}
+
+	.la-timeline-item img {
+		width: 100%;
+		aspect-ratio: 16 / 9;
+		object-fit: cover;
+		border-radius: 8px;
+	}
+
+	.la-timeline-copy p:first-child {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		margin: 0;
+		color: var(--la-red);
+		font-family: var(--font-head);
+		font-weight: 900;
+	}
+
+	.la-timeline-copy time {
+		font-size: clamp(2rem, 5vw, 3.6rem);
+		line-height: 1;
+	}
+
+	.la-timeline-copy span {
+		padding-top: 4px;
+		color: var(--la-steel);
+		font-size: 0.84rem;
+	}
+
+	.la-timeline-copy h3 {
+		margin: 12px 0 0;
+		font-family: var(--font-serif);
+		font-size: clamp(1.45rem, 3vw, 2.05rem);
+		font-weight: 800;
+		line-height: 1.45;
+	}
+
+	.la-timeline-copy p:last-child {
+		margin: 14px 0 0;
+		font-weight: 700;
+		line-height: 1.9;
+	}
+
+	.la-band {
+		display: grid;
+		grid-template-columns: minmax(320px, 0.72fr) minmax(0, 1fr);
+		gap: clamp(24px, 5vw, 54px);
+		align-items: center;
+		padding: clamp(64px, 9vw, 106px) max(20px, calc((100vw - 1120px) / 2));
+		background: #141414;
+		color: #fff;
+	}
+
+	.la-band p {
+		color: rgba(255, 255, 255, 0.82);
+	}
+
+	.la-ride-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 10px;
+	}
+
+	.la-ride-grid img {
+		width: 100%;
+		aspect-ratio: 16 / 10;
+		object-fit: cover;
+		border-radius: 8px;
+	}
+
+	.la-ride-grid img:first-child {
+		grid-row: span 2;
+		aspect-ratio: auto;
+		height: 100%;
+	}
+
+	.la-gathering-layout {
+		display: grid;
+		grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.72fr);
+		gap: clamp(24px, 5vw, 56px);
+		margin-top: 36px;
+		align-items: start;
+	}
+
+	.la-quote-band {
+		margin: clamp(48px, 7vw, 80px) 0 0;
+		padding: clamp(36px, 6vw, 64px) clamp(24px, 5vw, 64px);
+		border-radius: 10px;
+		background: #11100e;
+		color: #fff;
+	}
+
+	.la-quote-band p {
+		max-width: 24em;
+		margin: 0;
+		font-family: var(--font-serif);
+		font-size: clamp(1.4rem, 3.2vw, 2.2rem);
+		font-weight: 800;
+		line-height: 1.7;
+	}
+
+	.la-quote-band cite {
+		display: block;
+		margin-top: 20px;
+		color: var(--la-gold);
+		font-family: var(--font-head);
+		font-size: 0.88rem;
+		font-style: normal;
+		font-weight: 900;
+	}
+
+	.la-message-layout {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(300px, 0.78fr);
+		gap: clamp(24px, 5vw, 56px);
+		margin-top: clamp(48px, 7vw, 80px);
+		align-items: start;
+	}
+
+	.la-message-copy h3 {
+		margin: 0;
+		font-family: var(--font-serif);
+		font-size: clamp(1.5rem, 3vw, 2.1rem);
+		font-weight: 800;
+		line-height: 1.5;
+	}
+
+	.la-message-punch {
+		color: var(--la-red);
+		font-family: var(--font-serif);
+		font-size: clamp(1.2rem, 2.4vw, 1.55rem);
+		font-weight: 800;
+	}
+
+	.la-closing {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(300px, 0.86fr);
+		gap: clamp(24px, 5vw, 54px);
+		align-items: center;
+		padding: clamp(64px, 9vw, 104px) max(20px, calc((100vw - 1120px) / 2));
+		background: #ece0cf;
+	}
+
+	.la-gallery-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 18px;
+		margin-top: 36px;
+	}
+
+	.la-gallery figure {
+		background: #fffaf2;
+		border: 1px solid var(--la-line);
+		border-radius: 8px;
+		overflow: hidden;
+	}
+
+	.la-gallery figure img {
+		aspect-ratio: 4 / 3;
+		border-radius: 0;
+		object-fit: cover;
+	}
+
+	.la-gallery figure.featured,
+	.la-gallery figure[data-featured="true"] {
+		grid-column: span 2;
+	}
+
+	.la-gallery figure.featured img,
+	.la-gallery figure[data-featured="true"] img {
+		aspect-ratio: 16 / 10;
+	}
+
+	.la-gallery figcaption {
+		margin: 0;
+		padding: 14px 14px 16px;
+	}
+
+	.la-share {
+		display: grid;
+		grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr);
+		gap: 24px;
+		align-items: center;
+		border-top: 1px solid var(--la-line);
+	}
+
+	.la-share-buttons {
+		display: grid;
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+		gap: 8px;
+	}
+
+	.la-share-buttons a,
+	.la-share-buttons button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 48px;
+		min-width: 0;
+		padding: 8px 10px;
+		border: 1px solid var(--la-line);
+		border-bottom: 3px solid var(--la-gold);
+		border-radius: 8px;
+		background: #fffaf2;
+		color: var(--la-ink);
+		cursor: pointer;
+		font: inherit;
+		font-family: var(--font-head);
+		font-size: 0.82rem;
+		font-weight: 900;
+		line-height: 1;
+		text-align: center;
+		text-decoration: none;
+		white-space: nowrap;
+	}
+
+	.la-share-buttons button:first-child {
+		background: var(--la-ink);
+		color: #fff;
+	}
+
+	@media (max-width: 900px) {
+		.la-hero {
+			min-height: 72svh;
+		}
+
+		.la-hero::before {
+			background:
+				linear-gradient(0deg, rgba(7, 7, 7, 0.88), rgba(7, 7, 7, 0.36) 58%, rgba(7, 7, 7, 0.14)),
+				linear-gradient(90deg, rgba(7, 7, 7, 0.5), transparent);
+		}
+
+		.la-hero-image {
+			object-position: 32% center;
+		}
+
+		.la-hero-copy > * {
+			width: min(560px, 100%);
+		}
+
+		.la-intro,
+		.la-style-layout,
+		.la-timeline-item,
+		.la-band,
+		.la-gathering-layout,
+		.la-message-layout,
+		.la-closing,
+		.la-share {
+			grid-template-columns: 1fr;
+		}
+
+		.la-three {
+			grid-template-columns: 1fr;
+		}
+
+		.la-three div {
+			min-height: auto;
+		}
+
+		.la-timeline-item:nth-child(even) figure {
+			order: initial;
+		}
+
+		.la-gallery-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+
+		.la-style-main,
+		.la-style-stack figure {
+			min-height: 340px;
+		}
+
+		.la-share-buttons {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 620px) {
+		.la-hero {
+			min-height: 70svh;
+		}
+
+		.la-hero-copy {
+			align-content: end;
+			padding-bottom: 42px;
+		}
+
+		.la-hero h1 {
+			font-size: clamp(3rem, 15vw, 4.4rem);
+		}
+
+		.la-hero-image {
+			object-position: 30% center;
+		}
+
+		.la-lead {
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 3;
+			overflow: hidden;
+		}
+
+		.la-local-nav a {
+			padding-inline: 12px;
+			font-size: 0.72rem;
+		}
+
+		.la-section-head {
+			display: block;
+		}
+
+		.la-ride-grid,
+		.la-gallery-grid,
+		.la-share-buttons {
+			grid-template-columns: 1fr;
+		}
+
+		.la-gallery figure.featured,
+		.la-gallery figure[data-featured="true"] {
+			grid-column: auto;
+		}
+
+		.la-ride-grid img:first-child {
+			height: auto;
+			aspect-ratio: 16 / 10;
+		}
+	}
+</style>

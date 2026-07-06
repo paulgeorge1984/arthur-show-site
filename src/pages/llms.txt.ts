@@ -28,7 +28,7 @@ Language: Japanese
 
 ## About
 
-THE ARTHUR HOLLANDS SHOW is the official YouTube video archive for アーサーホーランド, also written formally as アーサー・ホーランド and in English as Arthur Hollands. The brand name is THE ARTHUR HOLLANDS SHOW, while the primary Japanese search phrase is アーサーホーランド. The site collects THE DAILY with ARTHUR HOLLANDS, THE ARTHUR HOLLANDS SHOW, WALK ACROSS, FRIDAY NIGHT, BIBLE JUKEBOX, and related Bible message archives.
+THE ARTHUR HOLLANDS SHOW is the official YouTube video archive for アーサーホーランド, also written formally as アーサー・ホーランド and in English as Arthur Hollands. The brand name is THE ARTHUR HOLLANDS SHOW, while the primary Japanese search phrase is アーサーホーランド. The site collects THE DAILY with ARTHUR HOLLANDS, THE ARTHUR HOLLANDS SHOW, WALK ACROSS, The Lord's Angels, FRIDAY NIGHT, BIBLE JUKEBOX, and related Bible message archives.
 
 ## Primary Entity
 
@@ -44,6 +44,7 @@ Relevant terms: 不良牧師, 聖書メッセージ, THE DAILY with ARTHUR HOLLA
 - Home and latest messages: ${siteURL}/
 - THE ARTHUR HOLLANDS SHOW: ${siteURL}/arthur-hollands-show/
 - WALK ACROSS archive: ${siteURL}/walk-across/
+- The Lord's Angels: ${siteURL}/the-lords-angels/
 - FRIDAY NIGHT: ${siteURL}/friday-night/
 - BIBLE JUKEBOX: ${siteURL}/message-jukebox/
 - XML sitemap: ${siteURL}/sitemap.xml

@@ -1,0 +1,320 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const pagePath = '/the-lords-angels/';
+const pageTitle = "The Lord's Angels";
+const pageDescription =
+	"アーサーホーランドの歴史あるバイクチーム The Lord's Angels（ロードエンジェルス）の活動記録。走る証し、祈り、集会、仲間との歩みを記事としてまとめます。";
+const heroImage = '/the-lords-angels/20260704/assets/ride-emblem-solo.jpg';
+const siteURL = 'https://arthur-show.com';
+
+const articles = [
+	{
+		title: "走る証し — The Lord's Angels",
+		date: '2026.07.04',
+		place: '小田原・国府津 / BLEND PARK',
+		href: '/the-lords-angels/20260704/',
+		image: '/the-lords-angels/20260704/assets/arthur-leather-portrait.jpg',
+		alt: '海を背にレザーキャップと赤いバンダナ姿で立つアーサーホーランド',
+		description:
+			'集結、隊列、路上の祈り、そしてBLEND PARK「Saturday Night Arthur」。当日の映像と音声記録から再構成した、The Lord\'s Angelsの一日のドキュメント。',
+	},
+];
+
+const structuredData = [
+	{
+		'@context': 'https://schema.org',
+		'@type': 'CollectionPage',
+		name: pageTitle,
+		description: pageDescription,
+		inLanguage: 'ja-JP',
+		url: `${siteURL}${pagePath}`,
+		image: `${siteURL}${heroImage}`,
+		about: [
+			{
+				'@type': 'Person',
+				name: 'アーサーホーランド',
+				alternateName: 'Arthur Hollands',
+			},
+			{
+				'@type': 'Organization',
+				name: "The Lord's Angels",
+				alternateName: ['ロードエンジェルス', "LORD'S ANGELS"],
+			},
+		],
+	},
+	{
+		'@context': 'https://schema.org',
+		'@type': 'ItemList',
+		name: "The Lord's Angels 記事一覧",
+		itemListElement: articles.map((article, index) => ({
+			'@type': 'ListItem',
+			position: index + 1,
+			url: `${siteURL}${article.href}`,
+			name: article.title,
+		})),
+	},
+];
+---
+
+<Layout
+	title={pageTitle}
+	description={pageDescription}
+	image={heroImage}
+	imageAlt="チームエンブレムを背負って国府津の街を走るThe Lord's Angels"
+	imageWidth={2000}
+	imageHeight={1126}
+	imageType="image/jpeg"
+	ogType="website"
+	canonicalPath={pagePath}
+	structuredData={structuredData}
+>
+	<div class="angels-page">
+		<section class="angels-hero" aria-labelledby="angels-title">
+			<img src={heroImage} alt="" width="2000" height="1126" loading="eager" aria-hidden="true" />
+			<div class="angels-hero-copy">
+				<p class="angels-kicker">ARTHUR HOLLANDS MOTORCYCLE TEAM</p>
+				<h1 id="angels-title">The Lord's Angels</h1>
+				<p>
+					アーサー先生の歴史あるバイクチーム、The Lord's Angels。
+					ここでは、走る証し、祈り、集会、仲間との歩みを、一つひとつの記事として記録していきます。
+				</p>
+			</div>
+		</section>
+
+		<section class="angels-intro" aria-labelledby="angels-intro-title">
+			<div>
+				<p class="angels-kicker">ABOUT</p>
+				<h2 id="angels-intro-title">道を走り、人のそばへ向かうチーム。</h2>
+			</div>
+			<p>
+				The Lord's Angels（ロードエンジェルス）は、アーサーホーランドの活動の中で歴史を重ねてきたバイクチームです。
+				バイクの存在感、レザーに刻まれた十字架、仲間同士の結びつき。そのすべてが、会場の中だけに留まらないメッセージを形にしています。
+			</p>
+		</section>
+
+		<section class="angels-articles" aria-labelledby="angels-articles-title">
+			<div class="angels-section-head">
+				<p class="angels-kicker">REPORTS</p>
+				<h2 id="angels-articles-title">記事一覧</h2>
+			</div>
+			<div class="angels-list">
+				{articles.map((article) => (
+					<a class="angels-article" href={article.href}>
+						<img src={article.image} alt={article.alt} width="1920" height="1080" loading="lazy" />
+						<div>
+							<p>{article.date} / {article.place}</p>
+							<h3>{article.title}</h3>
+							<span>{article.description}</span>
+						</div>
+					</a>
+				))}
+			</div>
+		</section>
+	</div>
+</Layout>
+
+<style>
+	.angels-page {
+		--angels-black: #070707;
+		--angels-ink: #171512;
+		--angels-paper: #fbf6ec;
+		--angels-gold: #d3a64b;
+		--angels-red: #b7342d;
+		--angels-teal: #2a6967;
+		background: var(--angels-paper);
+		color: var(--angels-ink);
+	}
+
+	.angels-page img {
+		display: block;
+		max-width: 100%;
+	}
+
+	.angels-kicker {
+		margin: 0;
+		color: var(--angels-gold);
+		font-family: var(--font-head);
+		font-size: 0.86rem;
+		font-weight: 900;
+		letter-spacing: 0;
+		line-height: 1.2;
+		text-transform: uppercase;
+	}
+
+	.angels-hero {
+		position: relative;
+		isolation: isolate;
+		min-height: min(620px, 68svh);
+		overflow: hidden;
+		background: var(--angels-black);
+		color: #fff;
+	}
+
+	.angels-hero::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		z-index: 1;
+		background:
+			linear-gradient(90deg, rgba(7, 7, 7, 0.88), rgba(7, 7, 7, 0.58) 48%, rgba(7, 7, 7, 0.08)),
+			linear-gradient(0deg, rgba(7, 7, 7, 0.78), transparent 58%);
+	}
+
+	.angels-hero::after {
+		content: "";
+		position: absolute;
+		inset: auto 0 0;
+		z-index: 2;
+		height: 8px;
+		background: linear-gradient(90deg, var(--angels-red), var(--angels-gold), var(--angels-teal));
+	}
+
+	.angels-hero img {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: 30% center;
+		filter: saturate(1.04) contrast(1.04);
+	}
+
+	.angels-hero-copy {
+		position: relative;
+		z-index: 3;
+		display: grid;
+		align-content: center;
+		width: min(1120px, 100%);
+		min-height: inherit;
+		margin: 0 auto;
+		padding: clamp(34px, 5vw, 56px) 20px;
+	}
+
+	.angels-hero h1 {
+		max-width: 8.2em;
+		margin: 16px 0 0;
+		font-family: var(--font-head);
+		font-size: clamp(3.4rem, 8.4vw, 7.2rem);
+		font-weight: 900;
+		letter-spacing: 0;
+		line-height: 0.9;
+		text-wrap: balance;
+	}
+
+	.angels-hero p:last-child {
+		max-width: 42em;
+		margin: 22px 0 0;
+		font-family: var(--font-serif);
+		font-size: clamp(1.08rem, 2.1vw, 1.42rem);
+		font-weight: 800;
+		line-height: 1.75;
+		text-shadow: 0 2px 18px rgba(0, 0, 0, 0.42);
+	}
+
+	.angels-intro,
+	.angels-articles {
+		width: min(1120px, 100%);
+		margin: 0 auto;
+		padding: clamp(62px, 9vw, 104px) 20px;
+	}
+
+	.angels-intro {
+		display: grid;
+		grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+		gap: clamp(28px, 5vw, 64px);
+		align-items: start;
+	}
+
+	.angels-intro h2,
+	.angels-section-head h2 {
+		margin: 8px 0 0;
+		font-family: var(--font-head);
+		font-size: clamp(2.4rem, 5.6vw, 4.6rem);
+		font-weight: 900;
+		letter-spacing: 0;
+		line-height: 0.98;
+		text-wrap: balance;
+	}
+
+	.angels-intro > p {
+		margin: 0;
+		font-size: 1.04rem;
+		font-weight: 700;
+		line-height: 2;
+	}
+
+	.angels-section-head {
+		display: flex;
+		align-items: end;
+		justify-content: space-between;
+		gap: 20px;
+		padding-bottom: 18px;
+		border-bottom: 3px solid var(--angels-ink);
+	}
+
+	.angels-list {
+		display: grid;
+		gap: 26px;
+		margin-top: 34px;
+	}
+
+	.angels-article {
+		display: grid;
+		grid-template-columns: minmax(280px, 0.78fr) minmax(0, 1fr);
+		gap: clamp(22px, 4vw, 44px);
+		align-items: center;
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.angels-article img {
+		width: 100%;
+		aspect-ratio: 16 / 9;
+		object-fit: cover;
+		border-radius: 8px;
+	}
+
+	.angels-article p {
+		margin: 0;
+		color: var(--angels-red);
+		font-family: var(--font-head);
+		font-size: 0.9rem;
+		font-weight: 900;
+		line-height: 1.35;
+	}
+
+	.angels-article h3 {
+		margin: 10px 0 0;
+		font-family: var(--font-serif);
+		font-size: clamp(1.5rem, 3vw, 2.2rem);
+		font-weight: 800;
+		line-height: 1.45;
+	}
+
+	.angels-article span {
+		display: block;
+		margin-top: 14px;
+		font-weight: 700;
+		line-height: 1.9;
+	}
+
+	.angels-article:hover h3 {
+		color: var(--angels-red);
+	}
+
+	@media (max-width: 760px) {
+		.angels-hero {
+			min-height: 560px;
+		}
+
+		.angels-hero h1 {
+			font-size: clamp(3rem, 18vw, 4.8rem);
+		}
+
+		.angels-intro,
+		.angels-article {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
