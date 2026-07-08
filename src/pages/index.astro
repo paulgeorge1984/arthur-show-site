@@ -7,6 +7,7 @@ const siteURL = 'https://arthur-show.com';
 const blessingNightKagurazakaUrl = 'https://www.blessingnight.jp/schedule/schedule366';
 const blessingNightKagurazakaBanner = '/assets/generated/blessing-night-kagurazaka-20260717-banner.webp';
 const blessingTimeOsakaBanner = '/assets/generated/blessing-time-osaka2026-banner.webp';
+const gospelTalkSummerBanner = '/assets/generated/gospel-talk-summer-osaka20260719-banner.webp';
 const saturdayNightArthurBanner = '/assets/generated/saturday-night-arthur-20260704-banner.webp';
 const theEssenceAkitaBanner = '/assets/the-essence-akita-20261114-og-v3.jpg';
 
@@ -261,12 +262,12 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		<details class="home-event-drawer">
 			<summary class="home-event-summary">
 				<span class="home-event-summary-media" aria-hidden="true">
-					<img src={theEssenceAkitaBanner} alt="" width="1200" height="630" loading="eager" />
+					<img src={gospelTalkSummerBanner} alt="" width="1600" height="900" loading="eager" />
 				</span>
 				<span class="home-event-summary-copy">
 					<span class="home-event-summary-kicker">EVENT INFO</span>
 					<strong>イベント告知</strong>
-					<span>THE ESSENCE 秋田 / BLESSING NIGHT 神楽坂 / BLESSING TIME in OSAKA</span>
+					<span>Gospel Talk in the Summer / BLESSING TIME in OSAKA / BLESSING NIGHT 神楽坂</span>
 				</span>
 				<span class="home-event-summary-action" aria-hidden="true">
 					<span class="closed">見る</span>
@@ -372,6 +373,32 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 							<span>大阪クリスチャンセンター OCCホール</span>
 						</div>
 						<span class="blessing-time-feature-button">特別ページを見る</span>
+					</div>
+				</a>
+
+				<a class="blessing-time-feature gospel-talk-home-feature" href="/gospel-talk-summer-osaka20260719/" aria-label="Gospel Talk in the Summer 2026年7月19日 告知ページを見る">
+					<img
+						src={gospelTalkSummerBanner}
+						alt=""
+						width="1600"
+						height="900"
+						loading="eager"
+						aria-hidden="true"
+					/>
+					<div class="blessing-time-feature-copy">
+						<p class="blessing-time-feature-kicker">SPECIAL EVENT</p>
+						<h2>Gospel Talk in the Summer</h2>
+						<p>
+							テーマは「神の言葉を語る」。
+							アーサー・ホーランドが、今を生きる一人ひとりに向けて福音のメッセージを語ります。
+						</p>
+						<div class="blessing-time-feature-meta">
+							<span>2026年7月19日（日）</span>
+							<span>11:00am</span>
+							<span>J. Disciple Church Osaka・大阪弟子教会</span>
+							<span>入場無料（席上献金あり）</span>
+						</div>
+						<span class="blessing-time-feature-button">告知ページを見る</span>
 					</div>
 				</a>
 			</div>
@@ -946,6 +973,15 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		font-size: 0.9rem;
 		font-weight: 900;
 		line-height: 1;
+	}
+
+	.gospel-talk-home-feature > img {
+		object-position: center center;
+	}
+
+	.gospel-talk-home-feature h2 {
+		max-width: 8.6em;
+		font-size: clamp(3rem, 6.2vw, 4.35rem);
 	}
 
 	.blessing-night-home-feature {
@@ -2250,6 +2286,15 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		.blessing-time-feature h2 {
 			max-width: 6.7em;
 			font-size: 3.1rem;
+		}
+
+		.gospel-talk-home-feature > img {
+			object-position: right center;
+		}
+
+		.gospel-talk-home-feature h2 {
+			max-width: 8em;
+			font-size: 2.75rem;
 		}
 
 		.blessing-time-feature-meta span,

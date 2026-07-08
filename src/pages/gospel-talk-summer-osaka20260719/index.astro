@@ -1,0 +1,737 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const pageUrl = '/gospel-talk-summer-osaka20260719/';
+const eventTitle = 'Gospel Talk in the Summer';
+const eventSubtitle = '神の言葉を語る';
+const eventDescription = '2026年7月19日（日）11:00より、J. Disciple Church Osaka・大阪弟子教会にて開催される「Gospel Talk in the Summer」。アーサー・ホーランドが、これまでの歩みとともに福音のメッセージを語ります。';
+const posterImage = '/assets/gospel-talk-summer-osaka20260719-poster.webp';
+const bannerImage = '/assets/generated/gospel-talk-summer-osaka20260719-banner.webp';
+const mapUrl = 'https://www.google.com/maps/search/?api=1&query=J.%20Disciple%20Church%20Osaka%20%E5%A4%A7%E9%98%AA%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E9%AB%98%E6%B4%A51-3-6%20JDC%E3%83%93%E3%83%AB';
+const shareUrl = `https://arthur-show.com${pageUrl}`;
+const shareTitle = `${eventTitle} －${eventSubtitle}－ | THE ARTHUR HOLLANDS SHOW`;
+const encodedShareUrl = encodeURIComponent(shareUrl);
+const encodedShareTitle = encodeURIComponent(shareTitle);
+const encodedLineText = encodeURIComponent(`${shareTitle}\n2026年7月19日（日）11:00 / J. Disciple Church Osaka・大阪弟子教会\n${shareUrl}`);
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'Event',
+	name: `${eventTitle} －${eventSubtitle}－`,
+	description: eventDescription,
+	startDate: '2026-07-19T11:00:00+09:00',
+	eventStatus: 'https://schema.org/EventScheduled',
+	eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+	image: [
+		`https://arthur-show.com${bannerImage}`,
+		`https://arthur-show.com${posterImage}`,
+	],
+	url: shareUrl,
+	isAccessibleForFree: true,
+	offers: {
+		'@type': 'Offer',
+		price: '0',
+		priceCurrency: 'JPY',
+		availability: 'https://schema.org/InStock',
+		url: shareUrl,
+	},
+	location: {
+		'@type': 'Place',
+		name: 'J. Disciple Church Osaka / 大阪弟子教会',
+		address: {
+			'@type': 'PostalAddress',
+			postalCode: '542-0078',
+			addressCountry: 'JP',
+			addressRegion: '大阪府',
+			addressLocality: '大阪市中央区',
+			streetAddress: '高津1-3-6 JDCビル',
+		},
+	},
+	performer: {
+		'@type': 'Person',
+		name: 'アーサー・ホーランド',
+		alternateName: 'Arthur Hollands',
+	},
+};
+---
+
+<Layout
+	title={`${eventTitle} －${eventSubtitle}－`}
+	description={eventDescription}
+	image={bannerImage}
+	imageAlt="Gospel Talk in the Summer 2026年7月19日 J. Disciple Church Osaka"
+	imageWidth={1600}
+	imageHeight={900}
+	imageType="image/webp"
+	ogType="website"
+	canonicalPath={pageUrl}
+	structuredData={structuredData}
+>
+	<article class="gts-page">
+		<section class="gts-hero" aria-labelledby="gts-title">
+			<img
+				class="gts-hero-bg"
+				src={bannerImage}
+				alt=""
+				width="1600"
+				height="900"
+				loading="eager"
+				aria-hidden="true"
+			/>
+			<div class="gts-hero-inner">
+				<div class="gts-hero-copy">
+					<p class="gts-kicker">SPECIAL EVENT / OSAKA</p>
+					<h1 id="gts-title">Gospel Talk in the Summer</h1>
+					<p class="gts-subtitle">－{eventSubtitle}－</p>
+					<p class="gts-lead">
+						アーサー・ホーランドが、これまでの歩みとともに、
+						今を生きる一人ひとりに向けて福音のメッセージを語ります。
+					</p>
+					<div class="gts-hero-meta" aria-label="開催情報">
+						<span>2026年7月19日（日）</span>
+						<span>11:00am</span>
+						<span>J. Disciple Church Osaka</span>
+					</div>
+					<div class="gts-actions">
+						<a class="primary" href="#event-detail">開催概要</a>
+						<a href={mapUrl} target="_blank" rel="noopener noreferrer">Googleマップ</a>
+						<a href="#share">シェア</a>
+					</div>
+				</div>
+				<figure class="gts-poster-frame">
+					<img
+						src={posterImage}
+						alt="Gospel Talk in the Summer 2026年7月19日 大阪弟子教会 告知フライヤー"
+						width="905"
+						height="1280"
+						loading="eager"
+					/>
+				</figure>
+			</div>
+		</section>
+
+		<section class="gts-message" aria-labelledby="gts-message-title">
+			<div>
+				<p class="gts-kicker">MESSAGE THEME</p>
+				<h2 id="gts-message-title">神の言葉を語る</h2>
+			</div>
+			<p>
+				心に響く言葉、励まし、そして新しい一歩につながる時間となりますように。
+				ぜひご家族、ご友人とお誘い合わせのうえ、ご参加ください。
+			</p>
+		</section>
+
+		<section class="gts-detail" id="event-detail" aria-labelledby="event-detail-title">
+			<div class="gts-section-head">
+				<p>EVENT DETAILS</p>
+				<h2 id="event-detail-title">開催概要</h2>
+			</div>
+			<dl class="gts-info">
+				<div>
+					<dt>イベント名</dt>
+					<dd>Gospel Talk in the Summer</dd>
+				</div>
+				<div>
+					<dt>テーマ</dt>
+					<dd>神の言葉を語る</dd>
+				</div>
+				<div>
+					<dt>日時</dt>
+					<dd>
+						2026年7月19日（日）<br />
+						11:00am
+					</dd>
+				</div>
+				<div>
+					<dt>会場</dt>
+					<dd>
+						J. Disciple Church Osaka<br />
+						大阪弟子教会
+					</dd>
+				</div>
+				<div>
+					<dt>住所</dt>
+					<dd>
+						〒542-0078<br />
+						大阪市中央区高津1-3-6 JDCビル
+					</dd>
+				</div>
+				<div>
+					<dt>入場</dt>
+					<dd>
+						入場無料<br />
+						席上献金があります。
+					</dd>
+				</div>
+			</dl>
+		</section>
+
+		<section class="gts-access" aria-labelledby="gts-access-title">
+			<div class="gts-access-copy">
+				<p>ACCESS</p>
+				<h2 id="gts-access-title">J. Disciple Church Osaka</h2>
+				<span>大阪市中央区高津1-3-6 JDCビル</span>
+			</div>
+			<a href={mapUrl} target="_blank" rel="noopener noreferrer">Googleマップで開く</a>
+		</section>
+
+		<section class="gts-share" id="share" aria-labelledby="gts-share-title">
+			<div class="gts-section-head">
+				<p>SHARE</p>
+				<h2 id="gts-share-title">このページをシェア</h2>
+			</div>
+			<div class="gts-share-buttons" aria-label="SNS共有ボタン">
+				<button class="gts-share-button native" type="button" data-gts-share-native>
+					<span>Share</span>
+					<small>端末で共有</small>
+				</button>
+				<a class="gts-share-button line" href={`https://line.me/R/msg/text/?${encodedLineText}`} target="_blank" rel="noopener noreferrer">
+					<span>LINE</span>
+					<small>送る</small>
+				</a>
+				<a class="gts-share-button x" href={`https://twitter.com/intent/tweet?text=${encodedShareTitle}&url=${encodedShareUrl}`} target="_blank" rel="noopener noreferrer">
+					<span>X</span>
+					<small>投稿</small>
+				</a>
+				<a class="gts-share-button facebook" href={`https://www.facebook.com/sharer/sharer.php?u=${encodedShareUrl}`} target="_blank" rel="noopener noreferrer">
+					<span>Facebook</span>
+					<small>投稿</small>
+				</a>
+				<button class="gts-share-button copy" type="button" data-gts-copy-link>
+					<span>Copy</span>
+					<small data-gts-copy-status>URLをコピー</small>
+				</button>
+			</div>
+		</section>
+	</article>
+
+	<script is:inline>
+		const GTS_SHARE_URL = 'https://arthur-show.com/gospel-talk-summer-osaka20260719/';
+		const GTS_SHARE_TITLE = 'Gospel Talk in the Summer －神の言葉を語る－ | THE ARTHUR HOLLANDS SHOW';
+		const GTS_SHARE_TEXT = '2026年7月19日（日）11:00 / J. Disciple Church Osaka・大阪弟子教会';
+		const nativeShareButtons = document.querySelectorAll('[data-gts-share-native]');
+		const copyButtons = document.querySelectorAll('[data-gts-copy-link]');
+		const copyStatusNodes = document.querySelectorAll('[data-gts-copy-status]');
+
+		function shareMessage() {
+			return `${GTS_SHARE_TITLE}\n${GTS_SHARE_TEXT}\n${GTS_SHARE_URL}`;
+		}
+
+		function setCopyStatus(label) {
+			copyStatusNodes.forEach((node) => {
+				node.textContent = label;
+			});
+		}
+
+		function fallbackCopyText(text) {
+			const textarea = document.createElement('textarea');
+			textarea.value = text;
+			textarea.setAttribute('readonly', '');
+			textarea.style.position = 'fixed';
+			textarea.style.top = '-1000px';
+			textarea.style.left = '-1000px';
+			textarea.style.opacity = '0';
+			document.body.appendChild(textarea);
+			textarea.focus({ preventScroll: true });
+			textarea.select();
+			textarea.setSelectionRange(0, text.length);
+			let copied = false;
+			try {
+				copied = document.execCommand('copy');
+			} catch {
+				copied = false;
+			}
+			textarea.remove();
+			return copied;
+		}
+
+		async function copyShareLink() {
+			const message = shareMessage();
+			try {
+				if (navigator.clipboard?.writeText) {
+					await navigator.clipboard.writeText(message);
+				} else if (!fallbackCopyText(message)) {
+					throw new Error('copy unavailable');
+				}
+				setCopyStatus('コピーしました');
+				setTimeout(() => setCopyStatus('URLをコピー'), 1800);
+			} catch {
+				if (fallbackCopyText(message)) {
+					setCopyStatus('コピーしました');
+					setTimeout(() => setCopyStatus('URLをコピー'), 1800);
+					return;
+				}
+				setCopyStatus('コピーできませんでした');
+				setTimeout(() => setCopyStatus('URLをコピー'), 1800);
+			}
+		}
+
+		async function sharePage() {
+			if (navigator.share) {
+				try {
+					await navigator.share({
+						title: GTS_SHARE_TITLE,
+						text: GTS_SHARE_TEXT,
+						url: GTS_SHARE_URL,
+					});
+					return;
+				} catch (error) {
+					if (error.name === 'AbortError') return;
+				}
+			}
+			await copyShareLink();
+		}
+
+		nativeShareButtons.forEach((button) => {
+			button.addEventListener('click', sharePage);
+		});
+		copyButtons.forEach((button) => {
+			button.addEventListener('click', copyShareLink);
+		});
+	</script>
+</Layout>
+
+<style>
+	.gts-page {
+		--gts-black: #05070c;
+		--gts-ink: #171717;
+		--gts-paper: #fff9ef;
+		--gts-gold: #d7aa4b;
+		--gts-sea: #0f7185;
+		--gts-green: #1f8f75;
+		--gts-line: rgba(23, 23, 23, 0.14);
+		background: var(--gts-paper);
+		color: var(--gts-ink);
+	}
+
+	.gts-hero {
+		position: relative;
+		overflow: hidden;
+		min-height: min(860px, calc(100svh - 90px));
+		background: var(--gts-black);
+		color: #fff;
+	}
+
+	.gts-hero::before,
+	.gts-hero::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+	}
+
+	.gts-hero::before {
+		z-index: 1;
+		background:
+			linear-gradient(90deg, rgba(5, 7, 12, 0.94), rgba(5, 7, 12, 0.72) 48%, rgba(5, 7, 12, 0.22)),
+			linear-gradient(0deg, rgba(5, 7, 12, 0.62), transparent 58%);
+	}
+
+	.gts-hero::after {
+		z-index: 2;
+		inset: auto 0 0;
+		height: 9px;
+		background: linear-gradient(90deg, var(--gts-sea), var(--gts-gold), var(--gts-green));
+	}
+
+	.gts-hero-bg {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center center;
+		filter: saturate(1.08);
+	}
+
+	.gts-hero-inner {
+		position: relative;
+		z-index: 3;
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(300px, 405px);
+		gap: clamp(28px, 5vw, 58px);
+		align-items: center;
+		width: min(1120px, 100%);
+		min-height: inherit;
+		margin: 0 auto;
+		padding: 64px 20px 72px;
+	}
+
+	.gts-kicker,
+	.gts-section-head p,
+	.gts-access-copy p {
+		color: var(--gts-gold);
+		font-family: var(--font-head);
+		font-size: 0.9rem;
+		font-weight: 900;
+		letter-spacing: 0;
+		line-height: 1.2;
+		text-transform: uppercase;
+	}
+
+	.gts-hero h1 {
+		max-width: 8.2em;
+		margin-top: 14px;
+		font-family: var(--font-head);
+		font-size: clamp(3.15rem, 7vw, 6.4rem);
+		font-weight: 900;
+		letter-spacing: 0;
+		line-height: 0.9;
+		text-shadow: 0 3px 24px rgba(0, 0, 0, 0.46);
+	}
+
+	.gts-subtitle {
+		margin-top: 16px;
+		font-family: var(--font-serif);
+		font-size: clamp(1.35rem, 3vw, 2.05rem);
+		font-weight: 800;
+		line-height: 1.35;
+	}
+
+	.gts-lead {
+		max-width: 38em;
+		margin-top: 24px;
+		font-size: 1.08rem;
+		font-weight: 800;
+		line-height: 1.9;
+	}
+
+	.gts-hero-meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 9px;
+		margin-top: 26px;
+	}
+
+	.gts-hero-meta span {
+		display: inline-flex;
+		align-items: center;
+		min-height: 35px;
+		padding: 0 12px;
+		border: 1px solid rgba(255, 255, 255, 0.3);
+		background: rgba(255, 255, 255, 0.1);
+		font-weight: 900;
+		line-height: 1.2;
+	}
+
+	.gts-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		margin-top: 28px;
+	}
+
+	.gts-actions a,
+	.gts-access a,
+	.gts-info a {
+		color: inherit;
+		font-weight: 900;
+	}
+
+	.gts-actions a,
+	.gts-access a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 46px;
+		padding: 0 18px;
+		border: 1px solid rgba(255, 255, 255, 0.42);
+		background: rgba(255, 255, 255, 0.1);
+		color: #fff;
+		font-family: var(--font-head);
+		line-height: 1;
+		text-align: center;
+		text-decoration: none;
+	}
+
+	.gts-actions a.primary,
+	.gts-access a {
+		border-color: var(--gts-gold);
+		background: var(--gts-gold);
+		color: #050505;
+	}
+
+	.gts-poster-frame {
+		align-self: center;
+		margin: 0;
+		transform: rotate(0.9deg);
+	}
+
+	.gts-poster-frame img {
+		display: block;
+		width: min(405px, 100%);
+		height: auto;
+		border: 8px solid rgba(255, 248, 235, 0.94);
+		box-shadow: 0 28px 70px rgba(0, 0, 0, 0.5);
+	}
+
+	.gts-message {
+		display: grid;
+		grid-template-columns: minmax(230px, 0.8fr) minmax(0, 1.2fr);
+		gap: clamp(24px, 5vw, 54px);
+		align-items: center;
+		width: min(1040px, 100%);
+		margin: 0 auto;
+		padding: 74px 20px 58px;
+	}
+
+	.gts-message h2 {
+		margin-top: 10px;
+		font-family: var(--font-serif);
+		font-size: clamp(2.1rem, 5vw, 3.5rem);
+		font-weight: 900;
+		line-height: 1.2;
+	}
+
+	.gts-message > p {
+		font-size: 1.1rem;
+		font-weight: 800;
+		line-height: 1.95;
+	}
+
+	.gts-detail,
+	.gts-share {
+		box-sizing: border-box;
+		width: min(1040px, 100%);
+		margin: 0 auto;
+		padding: 70px 20px;
+	}
+
+	.gts-section-head {
+		display: flex;
+		align-items: end;
+		justify-content: space-between;
+		gap: 20px;
+		padding-bottom: 16px;
+		border-bottom: 3px solid var(--gts-ink);
+	}
+
+	.gts-section-head h2,
+	.gts-access-copy h2 {
+		font-family: var(--font-head);
+		font-size: clamp(2.1rem, 5vw, 3.4rem);
+		font-weight: 900;
+		letter-spacing: 0;
+		line-height: 1;
+	}
+
+	.gts-info {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1px;
+		margin-top: 28px;
+		border: 1px solid var(--gts-line);
+		background: var(--gts-line);
+	}
+
+	.gts-info div {
+		display: grid;
+		gap: 10px;
+		align-content: start;
+		min-height: 142px;
+		background: #fffdf8;
+		padding: 22px;
+	}
+
+	.gts-info dt {
+		color: var(--gts-sea);
+		font-family: var(--font-head);
+		font-weight: 900;
+	}
+
+	.gts-info dd {
+		font-weight: 800;
+		line-height: 1.75;
+		overflow-wrap: anywhere;
+	}
+
+	.gts-access {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		gap: 24px;
+		align-items: center;
+		padding: 52px max(20px, calc((100vw - 1040px) / 2));
+		background:
+			linear-gradient(90deg, rgba(5, 7, 12, 0.9), rgba(5, 7, 12, 0.6)),
+			url('/assets/generated/gospel-talk-summer-osaka20260719-banner.webp') center center / cover;
+		color: #fff;
+	}
+
+	.gts-access-copy span {
+		display: block;
+		margin-top: 14px;
+		font-size: 1.05rem;
+		font-weight: 900;
+		line-height: 1.45;
+	}
+
+	.gts-share {
+		background: var(--gts-paper);
+	}
+
+	.gts-share-buttons {
+		display: grid;
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+		gap: 8px;
+		margin-top: 22px;
+	}
+
+	.gts-share-button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		gap: 3px;
+		min-height: 50px;
+		min-width: 0;
+		padding: 8px 10px;
+		border: 1px solid rgba(17, 24, 39, 0.14);
+		background: #fffdf8;
+		color: var(--gts-ink);
+		cursor: pointer;
+		font: inherit;
+		font-family: var(--font-head);
+		font-size: 0.82rem;
+		font-weight: 900;
+		line-height: 1;
+		text-align: center;
+		text-decoration: none;
+	}
+
+	.gts-share-button.native {
+		background: var(--gts-sea);
+		color: #fff;
+	}
+
+	.gts-share-button.line {
+		border-bottom: 3px solid #06c755;
+	}
+
+	.gts-share-button.x {
+		border-bottom: 3px solid #111;
+	}
+
+	.gts-share-button.facebook {
+		border-bottom: 3px solid #1877f2;
+	}
+
+	.gts-share-button.copy {
+		border-bottom: 3px solid var(--gts-gold);
+	}
+
+	.gts-share-button small {
+		display: block;
+		max-width: 100%;
+		overflow: hidden;
+		color: rgba(17, 24, 39, 0.62);
+		font-family: var(--font-sans);
+		font-size: 0.66rem;
+		font-weight: 800;
+		line-height: 1.2;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.gts-share-button.native small {
+		color: rgba(255, 255, 255, 0.78);
+	}
+
+	@media (max-width: 860px) {
+		.gts-hero {
+			min-height: 0;
+		}
+
+		.gts-hero-inner,
+		.gts-message {
+			grid-template-columns: 1fr;
+		}
+
+		.gts-hero-inner {
+			padding-top: 44px;
+		}
+
+		.gts-poster-frame {
+			justify-self: center;
+			transform: none;
+		}
+
+		.gts-poster-frame img {
+			width: min(500px, 100%);
+		}
+
+		.gts-info,
+		.gts-access {
+			grid-template-columns: 1fr;
+		}
+
+		.gts-access a {
+			width: 100%;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.gts-hero {
+			background: linear-gradient(155deg, #05070c 0%, #0f3542 52%, #7a5c23 100%);
+		}
+
+		.gts-hero::before {
+			background:
+				linear-gradient(180deg, rgba(5, 7, 12, 0.14), rgba(5, 7, 12, 0.78)),
+				linear-gradient(90deg, rgba(5, 7, 12, 0.92), rgba(5, 7, 12, 0.46));
+		}
+
+		.gts-hero-bg {
+			opacity: 0;
+		}
+
+		.gts-hero-inner {
+			padding: 34px 16px 48px;
+		}
+
+		.gts-hero h1 {
+			font-size: 3rem;
+		}
+
+		.gts-lead {
+			font-size: 0.98rem;
+			line-height: 1.75;
+		}
+
+		.gts-hero-meta span,
+		.gts-actions a {
+			box-sizing: border-box;
+			width: 100%;
+		}
+
+		.gts-poster-frame img {
+			border-width: 5px;
+		}
+
+		.gts-message,
+		.gts-detail,
+		.gts-share {
+			padding: 50px 16px;
+		}
+
+		.gts-section-head {
+			display: block;
+		}
+
+		.gts-info {
+			grid-template-columns: 1fr;
+		}
+
+		.gts-info div {
+			min-height: 0;
+			padding: 18px;
+		}
+
+		.gts-access {
+			padding: 44px 16px;
+		}
+
+		.gts-share-buttons {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+</style>

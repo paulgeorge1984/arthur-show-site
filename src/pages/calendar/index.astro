@@ -13,6 +13,8 @@ const theEssenceAkitaUrl = '/the-essence-akita-20261114/';
 const theEssenceAkitaPoster = '/assets/the-essence-akita-20261114.jpg';
 const blessingTimeOsakaUrl = '/blessing-time-osaka2026/';
 const blessingTimeOsakaBanner = '/assets/generated/blessing-time-osaka2026-banner.webp';
+const gospelTalkSummerUrl = '/gospel-talk-summer-osaka20260719/';
+const gospelTalkSummerPoster = '/assets/gospel-talk-summer-osaka20260719-poster.webp';
 const blessingNightKagurazakaUrl = 'https://www.blessingnight.jp/schedule/schedule366';
 const blessingNightKagurazakaBanner = '/assets/generated/blessing-night-kagurazaka-20260717-banner.webp';
 const calendarShareUrl = 'https://arthur-show.com/calendar/';
@@ -156,6 +158,35 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			</a>
 		</section>
 
+		<section class="calendar-special-event gospel-talk-osaka-feature" aria-label="Gospel Talk in the Summer 特別案内">
+			<a class="calendar-special-link" href={gospelTalkSummerUrl}>
+				<span class="calendar-special-media" aria-hidden="true">
+					<img
+						src={gospelTalkSummerPoster}
+						alt=""
+						width="905"
+						height="1280"
+						loading="eager"
+					/>
+				</span>
+				<span class="calendar-special-copy">
+					<span class="calendar-special-label">SPECIAL EVENT</span>
+					<strong>Gospel Talk in the Summer</strong>
+					<span class="calendar-special-lead">
+						今回のテーマは「神の言葉を語る」。
+						アーサー・ホーランドが、これまでの歩みとともに福音のメッセージを語ります。
+					</span>
+					<span class="calendar-special-meta">
+						<span>2026年7月19日（日）</span>
+						<span>11:00am</span>
+						<span>J. Disciple Church Osaka・大阪弟子教会</span>
+						<span>入場無料（席上献金あり）</span>
+					</span>
+					<span class="calendar-special-button">告知ページを見る</span>
+				</span>
+			</a>
+		</section>
+
 		<section class="calendar-special-event blessing-night-feature" aria-label="BLESSING NIGHT 神楽坂 特別案内">
 			<a class="calendar-special-link" href={blessingNightKagurazakaUrl} target="_blank" rel="noopener noreferrer">
 				<span class="calendar-special-media" aria-hidden="true">
@@ -254,6 +285,11 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				url: 'https://www.blessingnight.jp',
 				pattern: /(?:blessing\s*night|ブレッシングナイト|ブレッシングナイ)/i,
 			},
+			{
+				label: 'Gospel Talk 告知ページ',
+				url: '/gospel-talk-summer-osaka20260719/',
+				pattern: /gospel\s*talk|神の言葉を語る|大阪弟子教会|j\.\s*disciple/i,
+			},
 		];
 		const MANUAL_EVENTS = [
 			{
@@ -290,6 +326,25 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				},
 				end: {
 					dateTime: '2026-07-18T15:00:00+09:00',
+					timeZone: TOKYO_TIME_ZONE,
+				},
+			},
+			{
+				id: 'manual-gospel-talk-summer-osaka-2026-07-19',
+				summary: 'Gospel Talk in the Summer －神の言葉を語る－',
+				description: [
+					'11:00am',
+					'J. Disciple Church Osaka・大阪弟子教会',
+					'入場無料（席上献金があります）',
+					'https://arthur-show.com/gospel-talk-summer-osaka20260719/',
+				].join('\n'),
+				location: 'J. Disciple Church Osaka・大阪弟子教会 〒542-0078 大阪市中央区高津1-3-6 JDCビル',
+				start: {
+					dateTime: '2026-07-19T11:00:00+09:00',
+					timeZone: TOKYO_TIME_ZONE,
+				},
+				end: {
+					dateTime: '2026-07-19T11:00:00+09:00',
 					timeZone: TOKYO_TIME_ZONE,
 				},
 			},
@@ -587,6 +642,13 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				&& /the\s*essence|人生の本質|秋田キャッスル/i.test(searchableText);
 		}
 
+		function isGospelTalkSummerEvent(event) {
+			const startKey = event.start?.date || getDateKeyFromDate(getEventStart(event));
+			const searchableText = `${event.summary || ''} ${event.description || ''} ${event.location || ''}`;
+			return startKey === '2026-07-19'
+				&& /gospel\s*talk|神の言葉を語る|大阪弟子教会|j\.\s*disciple/i.test(searchableText);
+		}
+
 		function mergeManualEvents(events, range) {
 			const manualEventsInRange = MANUAL_EVENTS.filter((event) => isEventInRange(event, range));
 			if (!manualEventsInRange.length) return events;
@@ -594,9 +656,12 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			const hasBlessingTimeOsaka = events.some((event) => isBlessingTimeOsakaEvent(event));
 			const hasBlessingNightKagurazaka = events.some((event) => isBlessingNightKagurazakaEvent(event));
 			const hasTheEssenceAkita = events.some((event) => isTheEssenceAkitaEvent(event));
+			const hasGospelTalkSummer = events.some((event) => isGospelTalkSummerEvent(event));
 			const blessingNightManualEvent = manualEventsInRange.find((event) => event.id === 'manual-blessing-night-kagurazaka-2026-07-17');
-			const mergedEvents = blessingNightManualEvent && hasBlessingNightKagurazaka
-				? events.map((event) => {
+			const gospelTalkManualEvent = manualEventsInRange.find((event) => event.id === 'manual-gospel-talk-summer-osaka-2026-07-19');
+			let mergedEvents = events;
+			if (blessingNightManualEvent && hasBlessingNightKagurazaka) {
+				mergedEvents = mergedEvents.map((event) => {
 					if (!isBlessingNightKagurazakaEvent(event)) return event;
 					return {
 						...event,
@@ -606,8 +671,21 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 						start: blessingNightManualEvent.start,
 						end: blessingNightManualEvent.end,
 					};
-				})
-				: events;
+				});
+			}
+			if (gospelTalkManualEvent && hasGospelTalkSummer) {
+				mergedEvents = mergedEvents.map((event) => {
+					if (!isGospelTalkSummerEvent(event)) return event;
+					return {
+						...event,
+						summary: gospelTalkManualEvent.summary,
+						description: gospelTalkManualEvent.description,
+						location: gospelTalkManualEvent.location,
+						start: gospelTalkManualEvent.start,
+						end: gospelTalkManualEvent.end,
+					};
+				});
+			}
 			return [
 				...mergedEvents,
 				...manualEventsInRange.filter((event) => {
@@ -615,6 +693,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 					if (isBlessingTimeOsakaEvent(event)) return !hasBlessingTimeOsaka;
 					if (isBlessingNightKagurazakaEvent(event)) return !hasBlessingNightKagurazaka;
 					if (isTheEssenceAkitaEvent(event)) return !hasTheEssenceAkita;
+					if (isGospelTalkSummerEvent(event)) return !hasGospelTalkSummer;
 					return true;
 				}),
 			];
@@ -1103,6 +1182,13 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				#050814;
 		}
 
+		.gospel-talk-osaka-feature .calendar-special-link {
+			grid-template-columns: minmax(280px, 0.68fr) minmax(340px, 1.32fr);
+			background:
+				linear-gradient(135deg, rgba(5, 9, 12, 0.98), rgba(8, 67, 78, 0.9) 58%, rgba(97, 74, 31, 0.72)),
+				#05090c;
+		}
+
 		.the-essence-akita-feature .calendar-special-link {
 			grid-template-columns: minmax(280px, 0.72fr) minmax(340px, 1.28fr);
 			background:
@@ -1131,6 +1217,12 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			background:
 				linear-gradient(90deg, rgba(5, 7, 16, 0.05), rgba(5, 7, 16, 0.08) 48%, rgba(5, 7, 16, 0.3)),
 				linear-gradient(0deg, rgba(197, 160, 89, 0.18), transparent 48%);
+		}
+
+		.gospel-talk-osaka-feature .calendar-special-link::before {
+			background:
+				linear-gradient(90deg, rgba(5, 9, 12, 0.05), rgba(5, 9, 12, 0.08) 48%, rgba(5, 9, 12, 0.32)),
+				linear-gradient(0deg, rgba(31, 143, 117, 0.2), transparent 48%);
 		}
 
 		.the-essence-akita-feature .calendar-special-link::before {
@@ -1242,6 +1334,15 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				linear-gradient(160deg, #020713, #071b38 58%, #2d230f);
 		}
 
+		.gospel-talk-osaka-feature .calendar-special-media {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 18px;
+			background:
+				linear-gradient(150deg, #02080b, #0d4e5c 56%, #4f3914);
+		}
+
 		.the-essence-akita-feature .calendar-special-media {
 			display: flex;
 			align-items: center;
@@ -1252,6 +1353,17 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 		}
 
 		.saturday-night-arthur-feature .calendar-special-media img {
+			width: auto;
+			height: 100%;
+			max-width: 88%;
+			max-height: 405px;
+			border: 5px solid rgba(255, 248, 235, 0.92);
+			box-shadow: 0 18px 46px rgba(0, 0, 0, 0.44);
+			object-fit: contain;
+			object-position: center;
+		}
+
+		.gospel-talk-osaka-feature .calendar-special-media img {
 			width: auto;
 			height: 100%;
 			max-width: 88%;
@@ -1857,6 +1969,10 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			grid-template-columns: 1fr;
 		}
 
+		.gospel-talk-osaka-feature .calendar-special-link {
+			grid-template-columns: 1fr;
+		}
+
 		.the-essence-akita-feature .calendar-special-link {
 			grid-template-columns: 1fr;
 		}
@@ -1952,6 +2068,18 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 		}
 
 		.saturday-night-arthur-feature .calendar-special-media img {
+			width: min(74%, 300px);
+			height: auto;
+			max-height: none;
+		}
+
+		.gospel-talk-osaka-feature .calendar-special-media {
+			aspect-ratio: auto;
+			min-height: 360px;
+			padding: 20px;
+		}
+
+		.gospel-talk-osaka-feature .calendar-special-media img {
 			width: min(74%, 300px);
 			height: auto;
 			max-height: none;
