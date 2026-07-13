@@ -7,13 +7,26 @@ import { slideNotesByDeckId } from '../../data/slideNotes';
 const siteURL = 'https://arthur-show.com';
 
 export async function getStaticPaths() {
-  const blogEntries = await getCollection('daily-messages');
-  return blogEntries.map(entry => ({
-    params: { slug: entry.slug }, props: { entry },
-  }));
+  const privatePreviewSlugs: Record<string, string> = {
+    '2026-07-14-fridaynight': 'preview-20260714-fridaynight-0296389b38de',
+  };
+  const currentBuildTime = new Date();
+  const allEntries = await getCollection('daily-messages');
+  const publishedPaths = allEntries
+    .filter((entry) => entry.data.date <= currentBuildTime)
+    .map(entry => ({
+      params: { slug: entry.slug }, props: { entry },
+    }));
+  const privatePreviewPaths = allEntries.flatMap((entry) => {
+    const previewSlug = privatePreviewSlugs[entry.slug];
+    return previewSlug
+      ? [{ params: { slug: previewSlug }, props: { entry, isPreview: true } }]
+      : [];
+  });
+  return [...publishedPaths, ...privatePreviewPaths];
 }
 
-const { entry } = Astro.props;
+const { entry, isPreview = false } = Astro.props;
 const { Content } = await entry.render();
 const slideDeckIds = Array.from(new Set(
 	[...entry.body.matchAll(/docs\.google\.com\/presentation\/d\/([^/"?#]+)/g)]
@@ -90,8 +103,15 @@ const messageStructuredData = [
 	imageHeight={720}
 	ogType="article"
 	canonicalPath={canonicalPath}
-	structuredData={messageStructuredData}
+	structuredData={isPreview ? undefined : messageStructuredData}
+	noindex={isPreview}
 >
+	{isPreview && (
+		<aside class="private-preview-notice" role="status">
+			<strong>公開前プレビュー</strong>
+			<span>記事本文はこのままスマートフォンで確認できます。動画は公開時刻まで非公開の場合があります。</span>
+		</aside>
+	)}
 	
 	<div id="video-anchor" class="video-anchor">
 		<div id="floating-player" class="player-container">
@@ -514,6 +534,25 @@ const messageStructuredData = [
 
 <style>
 	/* --- 共通設定 --- */
+	.private-preview-notice {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 12px;
+		width: min(1000px, 100%);
+		margin: 0 auto;
+		padding: 12px 18px;
+		background: #fff4cc;
+		border-bottom: 1px solid #d2af4f;
+		color: #211b0c;
+		font-size: 0.9rem;
+		line-height: 1.6;
+	}
+
+	.private-preview-notice strong {
+		white-space: nowrap;
+	}
+
 	.video-anchor {
 		width: 100%;
 		aspect-ratio: 16 / 9;
@@ -929,6 +968,14 @@ const messageStructuredData = [
 
 	/* --- スマホ用 (スティッキー維持) --- */
 	@media (max-width: 768px) {
+		.private-preview-notice {
+			align-items: flex-start;
+			flex-direction: column;
+			gap: 2px;
+			padding: 10px 14px;
+			font-size: 0.78rem;
+		}
+
 		.video-anchor {
 			aspect-ratio: auto;
 			height: auto;
