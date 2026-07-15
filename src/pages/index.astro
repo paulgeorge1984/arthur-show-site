@@ -291,15 +291,40 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 			</div>
 		</a>
 
+		<a
+			class="gospel-talk-home-companion"
+			href="/gospel-talk-summer-osaka20260719/"
+			aria-label="翌日7月19日開催 Gospel Talk in the Summer 詳細と地図を見る"
+			data-gospel-talk-campaign-window
+			data-gospel-talk-campaign-link
+			data-campaign-placement="home_blessing_companion"
+		>
+			<span class="gospel-talk-home-companion-media" aria-hidden="true">
+				<img
+					src={gospelTalkSummerBanner}
+					alt=""
+					width="1600"
+					height="900"
+					loading="eager"
+				/>
+			</span>
+			<span class="gospel-talk-home-companion-copy">
+				<span class="gospel-talk-home-companion-kicker">大阪2DAYS / 翌日も大阪</span>
+				<strong>7/19（日）11:00｜Gospel Talk in the Summer</strong>
+				<span>「神の言葉を語る」・大阪弟子教会｜入場無料（席上献金あり）</span>
+			</span>
+			<span class="gospel-talk-home-companion-action">7/19の詳細・地図を見る <span aria-hidden="true">→</span></span>
+		</a>
+
 		<details class="home-event-drawer">
 			<summary class="home-event-summary">
 				<span class="home-event-summary-media" aria-hidden="true">
-					<img src={gospelTalkSummerBanner} alt="" width="1600" height="900" loading="eager" />
+					<img src={blessingNightKagurazakaBanner} alt="" width="1600" height="900" loading="eager" />
 				</span>
 				<span class="home-event-summary-copy">
 					<span class="home-event-summary-kicker">EVENT INFO</span>
 					<strong>ほかのイベント</strong>
-					<span>BLESSING NIGHT 神楽坂 / Gospel Talk in the Summer / THE ESSENCE</span>
+					<span>BLESSING NIGHT 神楽坂 / THE ESSENCE</span>
 				</span>
 				<span class="home-event-summary-action" aria-hidden="true">
 					<span class="closed">見る</span>
@@ -333,32 +358,6 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 					</div>
 				</a>
 
-				<a class="blessing-time-feature gospel-talk-home-feature" href="/gospel-talk-summer-osaka20260719/" aria-label="Gospel Talk in the Summer 2026年7月19日 告知ページを見る">
-					<img
-						src={gospelTalkSummerBanner}
-						alt=""
-						width="1600"
-						height="900"
-						loading="lazy"
-						aria-hidden="true"
-					/>
-					<div class="blessing-time-feature-copy">
-						<p class="blessing-time-feature-kicker">SPECIAL EVENT</p>
-						<h2>Gospel Talk in the Summer</h2>
-						<p>
-							テーマは「神の言葉を語る」。
-							アーサー・ホーランドが、今を生きる一人ひとりに向けて福音のメッセージを語ります。
-						</p>
-						<div class="blessing-time-feature-meta">
-							<span>2026年7月19日（日）</span>
-							<span>11:00am</span>
-							<span>J. Disciple Church Osaka・大阪弟子教会</span>
-							<span>入場無料（席上献金あり）</span>
-						</div>
-						<span class="blessing-time-feature-button">告知ページを見る</span>
-					</div>
-				</a>
-
 				<a class="blessing-time-feature the-essence-home-feature" href="/the-essence-akita-20261114/" aria-label="THE ESSENCE 2026年11月14日 秋田キャッスルホテル 特別ページを見る">
 					<img
 						src={theEssenceAkitaBanner}
@@ -385,6 +384,46 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 				</a>
 			</div>
 		</details>
+
+		<script is:inline>
+			(() => {
+				const campaignEnd = new Date('2026-07-20T00:00:00+09:00').getTime();
+
+				function sendGospelTalkCampaignEvent(eventName, placement) {
+					if (typeof window.gtag !== 'function') return;
+					window.gtag('event', eventName, {
+						campaign_name: 'gospel_talk_summer_osaka_2026',
+						campaign_placement: placement,
+					});
+				}
+
+				function initializeGospelTalkCampaign() {
+					const active = Date.now() < campaignEnd;
+					document.querySelectorAll('[data-gospel-talk-campaign-window]').forEach((element) => {
+						element.hidden = !active;
+					});
+					if (!active) return;
+
+					const viewedPlacements = new Set();
+					document.querySelectorAll('[data-gospel-talk-campaign-link]').forEach((link) => {
+						const placement = link.dataset.campaignPlacement || 'unknown';
+						if (!viewedPlacements.has(placement)) {
+							viewedPlacements.add(placement);
+							sendGospelTalkCampaignEvent('gospel_talk_campaign_view', placement);
+						}
+						link.addEventListener('click', () => {
+							sendGospelTalkCampaignEvent('gospel_talk_campaign_click', placement);
+						});
+					});
+				}
+
+				if (document.readyState === 'loading') {
+					document.addEventListener('DOMContentLoaded', initializeGospelTalkCampaign, { once: true });
+				} else {
+					initializeGospelTalkCampaign();
+				}
+			})();
+		</script>
 
 		<YoutubeSubscribeBanner />
 
@@ -715,6 +754,98 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		margin: 28px 0 8px;
 	}
 
+	.gospel-talk-home-companion[hidden] {
+		display: none !important;
+	}
+
+	.gospel-talk-home-companion {
+		display: grid;
+		grid-template-columns: minmax(170px, 230px) minmax(0, 1fr) auto;
+		gap: 18px;
+		align-items: center;
+		min-height: 132px;
+		margin: 12px 0 8px;
+		overflow: hidden;
+		padding: 12px 14px 12px 12px;
+		background: linear-gradient(115deg, #08131d, #17364d 64%, #725628);
+		border-left: 5px solid #f4d36f;
+		color: #fff;
+		text-decoration: none;
+		box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
+		transition: transform 0.2s, box-shadow 0.2s;
+	}
+
+	.gospel-talk-home-companion:hover,
+	.gospel-talk-home-companion:focus-visible {
+		transform: translateY(-2px);
+		box-shadow: 0 16px 34px rgba(0, 0, 0, 0.22);
+		outline: 3px solid #f4d36f;
+		outline-offset: 2px;
+	}
+
+	.gospel-talk-home-companion-media {
+		display: block;
+		align-self: stretch;
+		min-height: 106px;
+		overflow: hidden;
+		background: #050505;
+	}
+
+	.gospel-talk-home-companion-media img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center center;
+	}
+
+	.gospel-talk-home-companion-copy {
+		display: grid;
+		gap: 6px;
+		min-width: 0;
+	}
+
+	.gospel-talk-home-companion-kicker {
+		width: fit-content;
+		padding: 5px 8px;
+		background: #f4d36f;
+		color: #171006;
+		font-size: 0.72rem;
+		font-weight: 900;
+		line-height: 1.1;
+	}
+
+	.gospel-talk-home-companion-copy strong {
+		font-family: 'Oswald', sans-serif;
+		font-size: clamp(1.4rem, 3.2vw, 2.25rem);
+		font-weight: 900;
+		letter-spacing: 0;
+		line-height: 1.05;
+	}
+
+	.gospel-talk-home-companion-copy > span:last-child {
+		color: rgba(255, 255, 255, 0.86);
+		font-size: 0.85rem;
+		font-weight: 900;
+		line-height: 1.45;
+	}
+
+	.gospel-talk-home-companion-action {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 8px;
+		min-height: 44px;
+		padding: 0 14px;
+		background: #fff;
+		color: #111;
+		font-size: 0.78rem;
+		font-weight: 900;
+		line-height: 1.2;
+		text-align: center;
+		white-space: nowrap;
+	}
+
 	.home-event-summary {
 		position: relative;
 		display: grid;
@@ -976,15 +1107,6 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		font-size: 0.9rem;
 		font-weight: 900;
 		line-height: 1;
-	}
-
-	.gospel-talk-home-feature > img {
-		object-position: center center;
-	}
-
-	.gospel-talk-home-feature h2 {
-		max-width: 8.6em;
-		font-size: clamp(3rem, 6.2vw, 4.35rem);
 	}
 
 	.blessing-night-home-feature {
@@ -2215,6 +2337,52 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 			margin: 18px 0 4px;
 		}
 
+		.gospel-talk-home-companion {
+			grid-template-columns: 106px minmax(0, 1fr);
+			gap: 11px;
+			min-height: 0;
+			margin: 10px 0 4px;
+			padding: 10px;
+			border-left-width: 6px;
+		}
+
+		.gospel-talk-home-companion-media {
+			min-height: 106px;
+			aspect-ratio: 1 / 1;
+		}
+
+		.gospel-talk-home-companion-media img {
+			object-position: right center;
+		}
+
+		.gospel-talk-home-companion-copy {
+			gap: 5px;
+		}
+
+		.gospel-talk-home-companion-kicker {
+			font-size: 0.66rem;
+		}
+
+		.gospel-talk-home-companion-copy strong {
+			font-size: clamp(1.16rem, 5vw, 1.55rem);
+			line-height: 1.08;
+		}
+
+		.gospel-talk-home-companion-copy > span:last-child {
+			display: -webkit-box;
+			overflow: hidden;
+			font-size: 0.72rem;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 2;
+		}
+
+		.gospel-talk-home-companion-action {
+			grid-column: 1 / -1;
+			width: 100%;
+			min-height: 48px;
+			font-size: 0.8rem;
+		}
+
 		.blessing-time-feature.blessing-time-home-priority {
 			margin-top: 18px;
 			border-left-width: 6px;
@@ -2302,15 +2470,6 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		.blessing-time-feature h2 {
 			max-width: 6.7em;
 			font-size: 3.1rem;
-		}
-
-		.gospel-talk-home-feature > img {
-			object-position: right center;
-		}
-
-		.gospel-talk-home-feature h2 {
-			max-width: 8em;
-			font-size: 2.75rem;
 		}
 
 		.blessing-time-feature-meta span,
