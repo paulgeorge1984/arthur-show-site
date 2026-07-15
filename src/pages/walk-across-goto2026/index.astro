@@ -2,6 +2,7 @@
 import SiteFooter from '../../components/SiteFooter.astro';
 import LanguageMenu from '../../components/LanguageMenu.astro';
 import GoogleAnalytics from '../../components/GoogleAnalytics.astro';
+import BlessingTimeCampaignBar from '../../components/BlessingTimeCampaignBar.astro';
 
 const siteURL = 'https://arthur-show.com';
 const canonicalURL = `${siteURL}/walk-across-goto2026/`;
@@ -1201,6 +1202,7 @@ const structuredData = [
     </header>
     <div class="global-nav-shell" data-global-nav-shell>
       <nav class="global-quick-nav" aria-label="サイト内主要メニューショートカット">
+        <a class="blessing-nav-item" href="/blessing-time-osaka2026/" data-blessing-campaign-window data-blessing-campaign-link data-campaign-placement="nav">今週土曜 7.18｜大阪・入場無料</a>
         <a href="/#messages">Arthur Hollands' Message</a>
         <a href="/walk-across-goto2026/" class="active">GOTO ISLANDS 2026</a>
         <a href="/the-lords-angels/">The Lord's Angels</a>
@@ -1223,6 +1225,7 @@ const structuredData = [
         <strong>SITE MENU</strong>
       </button>
       <nav class="global-section-nav" id="global-section-nav" aria-label="サイト内主要メニュー" data-global-section-nav>
+        <a class="blessing-nav-item" href="/blessing-time-osaka2026/" data-blessing-campaign-window data-blessing-campaign-link data-campaign-placement="nav">今週土曜 7.18｜大阪・入場無料</a>
         <a href="/#messages">Arthur Hollands' Message</a>
         <a href="/walk-across-goto2026/" class="active">GOTO ISLANDS 2026</a>
         <a href="/the-lords-angels/">The Lord's Angels</a>
@@ -1237,6 +1240,7 @@ const structuredData = [
         <a href="/calendar/">CALENDAR</a>
       </nav>
     </div>
+	<BlessingTimeCampaignBar />
 	    <nav class="walk-local-nav" aria-label="ページ内ナビゲーション">
 	      <a href="#digest-video">ダイジェスト</a>
 	      <a href="#about">概要</a>

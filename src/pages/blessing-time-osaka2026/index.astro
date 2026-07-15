@@ -14,6 +14,7 @@ const blessingTimeShareTitle = `アーサーホーランド ${eventTitle} | THE 
 const encodedBlessingTimeShareUrl = encodeURIComponent(blessingTimeShareUrl);
 const encodedBlessingTimeShareTitle = encodeURIComponent(blessingTimeShareTitle);
 const encodedBlessingTimeLineText = encodeURIComponent(`${blessingTimeShareTitle}\n${blessingTimeShareUrl}`);
+const venueMapUrl = 'https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%98%AA%E3%82%AF%E3%83%AA%E3%82%B9%E3%83%81%E3%83%A3%E3%83%B3%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC%20OCC%E3%83%9B%E3%83%BC%E3%83%AB%20%E5%A4%A7%E9%98%AA%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E7%8E%89%E9%80%A02%E4%B8%81%E7%9B%AE26-47';
 const performers = [
 	'アーサー・ホーランド',
 	'上原令子',
@@ -95,8 +96,19 @@ const structuredData = {
 					<span>2026年7月18日（土）</span>
 					<span>OPEN 14:30 / START 15:00</span>
 					<span>大阪クリスチャンセンター OCCホール</span>
+					<span>入場無料・予約不要・自由席（席上献金あり）</span>
 				</div>
 				<div class="blessing-time-actions">
+					<a
+						class="blessing-time-map-action"
+						href={venueMapUrl}
+						target="_blank"
+						rel="noopener noreferrer"
+						data-blessing-campaign-link
+						data-campaign-placement="event_map"
+					>
+						会場をGoogleマップで見る
+					</a>
 					<a href="#event-detail">開催概要</a>
 					<a href="#volunteer-staff">ボランティア募集</a>
 					<a href="#support-offering">ご支援について</a>
@@ -160,7 +172,8 @@ const structuredData = {
 						<dt>会場</dt>
 						<dd>
 							大阪クリスチャンセンター OCCホール<br />
-							大阪市中央区玉造2丁目26−47
+							大阪市中央区玉造2丁目26−47<br />
+							<a class="blessing-time-map-link" href={venueMapUrl} target="_blank" rel="noopener noreferrer">Googleマップでアクセスを確認</a>
 						</dd>
 					</div>
 					<div>
@@ -508,6 +521,12 @@ const structuredData = {
 		color: #fff;
 	}
 
+	.blessing-time-actions a.blessing-time-map-action {
+		background: #f4d36f;
+		border-color: #f4d36f;
+		color: #141414;
+	}
+
 	.blessing-time-intro,
 	.blessing-time-detail,
 	.blessing-time-video,
@@ -689,6 +708,17 @@ const structuredData = {
 
 	.blessing-time-info a.blessing-time-subtle-link {
 		color: rgba(20, 20, 20, 0.68);
+	}
+
+	.blessing-time-info a.blessing-time-map-link {
+		display: inline-flex;
+		align-items: center;
+		min-height: 38px;
+		margin-top: 10px;
+		padding: 0 12px;
+		background: var(--bt-blue);
+		color: #fff;
+		text-decoration: none;
 	}
 
 	.blessing-time-poster img,

@@ -3,6 +3,7 @@ import SiteFooter from '../components/SiteFooter.astro';
 import LanguageMenu from '../components/LanguageMenu.astro';
 import MobileSavePrompt from '../components/MobileSavePrompt.astro';
 import GoogleAnalytics from '../components/GoogleAnalytics.astro';
+import BlessingTimeCampaignBar from '../components/BlessingTimeCampaignBar.astro';
 
 interface Props {
 	title: string;
@@ -109,6 +110,7 @@ const isCurrent = (href: string) => {
 	return currentPath.startsWith(href);
 };
 const navItems = [
+	{ href: "/blessing-time-osaka2026/", label: "今週土曜 7.18｜大阪・入場無料", active: isCurrent("/blessing-time-osaka2026/"), featured: true },
 	{ href: "/#messages", label: "Arthur Hollands' Message", active: currentPath === "/" },
 	{ href: "/walk-across-goto2026/", label: "GOTO ISLANDS 2026", active: isCurrent("/walk-across-goto2026/") },
 	{ href: "/the-lords-angels/", label: "The Lord's Angels", active: isCurrent("/the-lords-angels/") },
@@ -192,7 +194,15 @@ const navItems = [
 				<div class="global-nav-shell" data-global-nav-shell>
 					<nav class="global-quick-nav" aria-label="サイト内主要メニューショートカット">
 						{navItems.map((item) => (
-							<a href={item.href} class:list={{ active: item.active }}>{item.label}</a>
+							<a
+								href={item.href}
+								class:list={{ active: item.active, 'blessing-nav-item': item.featured }}
+								data-blessing-campaign-link={item.featured}
+								data-blessing-campaign-window={item.featured}
+								data-campaign-placement={item.featured ? 'nav' : undefined}
+							>
+								{item.label}
+							</a>
 						))}
 					</nav>
 					<button class="global-menu-toggle" type="button" aria-expanded="false" aria-controls="global-section-nav" data-global-menu-toggle>
@@ -205,10 +215,19 @@ const navItems = [
 					</button>
 					<nav class="global-section-nav" id="global-section-nav" aria-label="サイト内主要メニュー" data-global-section-nav>
 						{navItems.map((item) => (
-							<a href={item.href} class:list={{ active: item.active }}>{item.label}</a>
+							<a
+								href={item.href}
+								class:list={{ active: item.active, 'blessing-nav-item': item.featured }}
+								data-blessing-campaign-link={item.featured}
+								data-blessing-campaign-window={item.featured}
+								data-campaign-placement={item.featured ? 'nav' : undefined}
+							>
+								{item.label}
+							</a>
 						))}
 					</nav>
 				</div>
+				<BlessingTimeCampaignBar />
 			</>
 		)}
 

@@ -8,7 +8,6 @@ const blessingNightKagurazakaUrl = 'https://www.blessingnight.jp/schedule/schedu
 const blessingNightKagurazakaBanner = '/assets/generated/blessing-night-kagurazaka-20260717-banner.webp';
 const blessingTimeOsakaBanner = '/assets/generated/blessing-time-osaka2026-banner.webp';
 const gospelTalkSummerBanner = '/assets/generated/gospel-talk-summer-osaka20260719-banner.webp';
-const saturdayNightArthurBanner = '/assets/generated/saturday-night-arthur-20260704-banner.webp';
 const theEssenceAkitaBanner = '/assets/the-essence-akita-20261114-og-v3.jpg';
 
 // サイトのビルドが実行された現在の時刻を取得
@@ -259,6 +258,39 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 	structuredData={homeStructuredData}
 >
 	<div class="container">
+		<a
+			class="blessing-time-feature blessing-time-home-priority"
+			href="/blessing-time-osaka2026/"
+			aria-label="今週土曜開催 BLESSING TIME in OSAKA 2026年7月18日 詳細とアクセスを見る"
+			data-blessing-campaign-window
+			data-blessing-campaign-link
+			data-campaign-placement="home_hero"
+		>
+			<img
+				src={blessingTimeOsakaBanner}
+				alt=""
+				width="1600"
+				height="900"
+				loading="eager"
+				aria-hidden="true"
+			/>
+			<div class="blessing-time-feature-copy">
+				<p class="blessing-time-feature-kicker">THIS SATURDAY / 今週土曜開催</p>
+				<h2>BLESSING TIME in OSAKA</h2>
+				<p>
+					大阪・今週土曜。アーサー・ホーランドの Talk Live と豪華アーティスト陣による Worship。
+					ジーザスの愛と希望に満ちた祝福の時間を、ぜひご一緒ください。
+				</p>
+				<div class="blessing-time-feature-meta">
+					<span>2026年7月18日（土）</span>
+					<span>OPEN 14:30 / START 15:00</span>
+					<span>大阪クリスチャンセンター OCCホール</span>
+					<span>入場無料・予約不要・自由席（席上献金あり）</span>
+				</div>
+				<span class="blessing-time-feature-button">詳細・アクセスを見る</span>
+			</div>
+		</a>
+
 		<details class="home-event-drawer">
 			<summary class="home-event-summary">
 				<span class="home-event-summary-media" aria-hidden="true">
@@ -266,8 +298,8 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 				</span>
 				<span class="home-event-summary-copy">
 					<span class="home-event-summary-kicker">EVENT INFO</span>
-					<strong>イベント告知</strong>
-					<span>Gospel Talk in the Summer / BLESSING TIME in OSAKA / BLESSING NIGHT 神楽坂</span>
+					<strong>ほかのイベント</strong>
+					<span>Gospel Talk in the Summer / BLESSING NIGHT 神楽坂 / THE ESSENCE</span>
 				</span>
 				<span class="home-event-summary-action" aria-hidden="true">
 					<span class="closed">見る</span>
@@ -281,7 +313,7 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 						alt=""
 						width="1200"
 						height="630"
-						loading="eager"
+						loading="lazy"
 						aria-hidden="true"
 					/>
 					<div class="blessing-time-feature-copy">
@@ -300,38 +332,13 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 					</div>
 				</a>
 
-				<a class="blessing-time-feature" href="/saturday-night-arthur-20260704/" aria-label="Saturday Night Arthur 2026年7月4日 特別ページを見る">
-					<img
-						src={saturdayNightArthurBanner}
-						alt=""
-						width="1600"
-						height="900"
-						loading="eager"
-						aria-hidden="true"
-					/>
-					<div class="blessing-time-feature-copy">
-						<p class="blessing-time-feature-kicker">SPECIAL EVENT</p>
-						<h2>Saturday Night Arthur</h2>
-						<p>
-							2026年7月4日（土）、小田原市国府津「BLEND PARK」で開かれる
-							賛美と御言葉の夕べ。
-						</p>
-						<div class="blessing-time-feature-meta">
-							<span>2026.7.4（SAT）</span>
-							<span>17:00 START</span>
-							<span>小田原市国府津「BLEND PARK」</span>
-						</div>
-						<span class="blessing-time-feature-button">告知ページを見る</span>
-					</div>
-				</a>
-
 				<a class="blessing-time-feature blessing-night-home-feature" href={blessingNightKagurazakaUrl} target="_blank" rel="noopener noreferrer" aria-label="BLESSING NIGHT 神楽坂 2026年7月17日 詳細・申込ページを見る">
 					<img
 						src={blessingNightKagurazakaBanner}
 						alt=""
 						width="1600"
 						height="900"
-						loading="eager"
+						loading="lazy"
 						aria-hidden="true"
 					/>
 					<div class="blessing-time-feature-copy">
@@ -351,38 +358,13 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 					</div>
 				</a>
 
-				<a class="blessing-time-feature" href="/blessing-time-osaka2026/" aria-label="BLESSING TIME in OSAKA 2026年7月18日 特別ページを見る">
-					<img
-						src={blessingTimeOsakaBanner}
-						alt=""
-						width="1600"
-						height="900"
-						loading="eager"
-						aria-hidden="true"
-					/>
-					<div class="blessing-time-feature-copy">
-						<p class="blessing-time-feature-kicker">SPECIAL EVENT</p>
-						<h2>BLESSING TIME in OSAKA</h2>
-						<p>
-							アーサー・ホーランド Talk Live と、豪華アーティスト陣による Worship。
-							ジーザスの愛と希望に満ちた祝福の時間を、ぜひご一緒ください。
-						</p>
-						<div class="blessing-time-feature-meta">
-							<span>2026年7月18日（土）</span>
-							<span>OPEN 14:30 / START 15:00</span>
-							<span>大阪クリスチャンセンター OCCホール</span>
-						</div>
-						<span class="blessing-time-feature-button">特別ページを見る</span>
-					</div>
-				</a>
-
 				<a class="blessing-time-feature gospel-talk-home-feature" href="/gospel-talk-summer-osaka20260719/" aria-label="Gospel Talk in the Summer 2026年7月19日 告知ページを見る">
 					<img
 						src={gospelTalkSummerBanner}
 						alt=""
 						width="1600"
 						height="900"
-						loading="eager"
+						loading="lazy"
 						aria-hidden="true"
 					/>
 					<div class="blessing-time-feature-copy">
@@ -842,6 +824,27 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 
 	.home-event-panel .blessing-time-feature {
 		margin: 0;
+	}
+
+	.blessing-time-feature.blessing-time-home-priority[hidden] {
+		display: none !important;
+	}
+
+	.blessing-time-feature.blessing-time-home-priority {
+		margin-top: 28px;
+		border-left: 8px solid #cf3b28;
+		box-shadow: 0 22px 54px rgba(109, 26, 17, 0.28);
+	}
+
+	.blessing-time-home-priority .blessing-time-feature-kicker {
+		background: #cf3b28;
+		color: #fff;
+	}
+
+	.blessing-time-home-priority .blessing-time-feature-button {
+		min-height: 48px;
+		padding-inline: 22px;
+		background: #f4d36f;
 	}
 
 	@keyframes home-event-panel-in {
@@ -2210,6 +2213,19 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 
 		.home-event-drawer {
 			margin: 18px 0 4px;
+		}
+
+		.blessing-time-feature.blessing-time-home-priority {
+			margin-top: 18px;
+			border-left-width: 6px;
+		}
+
+		.blessing-time-feature.blessing-time-home-priority > img {
+			height: 245px;
+		}
+
+		.blessing-time-home-priority .blessing-time-feature-button {
+			min-height: 50px;
 		}
 
 		.home-event-summary {

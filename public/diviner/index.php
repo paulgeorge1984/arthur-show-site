@@ -142,6 +142,7 @@ $instagramPosts = [
 	],
 ];
 $navItems = [
+	['href' => '/blessing-time-osaka2026/', 'label' => '今週土曜 7.18｜大阪・入場無料', 'active' => false, 'campaign' => true],
 	['href' => '/#messages', 'label' => "Arthur Hollands' Message", 'active' => false],
 	['href' => '/walk-across-goto2026/', 'label' => 'GOTO ISLANDS 2026', 'active' => false],
 	['href' => '/diviner/', 'label' => 'DIVINER', 'active' => true],
@@ -909,6 +910,130 @@ $navItems = [
 					grid-template-columns: 1fr;
 				}
 			}
+			[data-blessing-campaign-window][hidden] {
+				display: none !important;
+			}
+			.global-quick-nav a.blessing-nav-item,
+			.global-section-nav a.blessing-nav-item {
+				color: #111;
+				background: #f4d36f;
+				border-color: rgba(255, 255, 255, 0.78);
+				border-bottom-color: #fff;
+				font-family: 'Noto Sans JP', sans-serif;
+				font-weight: 900;
+			}
+			.global-quick-nav a.blessing-nav-item:hover,
+			.global-section-nav a.blessing-nav-item:hover {
+				color: #fff;
+				background: #b42e1f;
+				border-color: #f4d36f;
+			}
+			.blessing-global-push {
+				position: relative;
+				z-index: 88;
+				width: min(1180px, calc(100% - 28px));
+				margin: -10px auto 22px;
+				color: #fff;
+				background: linear-gradient(105deg, #8b1f16, #ce3b27 42%, #142f43 100%);
+				border: 1px solid rgba(255, 255, 255, 0.34);
+				border-left: 6px solid #f4d36f;
+				box-shadow: 0 12px 28px rgba(0, 0, 0, 0.24);
+			}
+			.blessing-global-push-link {
+				display: grid;
+				grid-template-columns: auto minmax(0, 1fr) auto;
+				align-items: center;
+				gap: 16px;
+				min-height: 58px;
+				padding: 8px 12px 8px 10px;
+			}
+			.blessing-global-push-urgent {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				min-height: 34px;
+				padding: 0 10px;
+				color: #161006;
+				background: #f4d36f;
+				font-size: 0.78rem;
+				font-weight: 900;
+				white-space: nowrap;
+			}
+			.blessing-global-push-copy {
+				display: flex;
+				align-items: baseline;
+				gap: 12px;
+				min-width: 0;
+			}
+			.blessing-global-push-copy strong {
+				font: 900 clamp(1rem, 2.1vw, 1.35rem)/1.15 'Oswald', sans-serif;
+			}
+			.blessing-global-push-copy small {
+				color: rgba(255, 255, 255, 0.88);
+				font-size: 0.78rem;
+				font-weight: 900;
+			}
+			.blessing-global-push-action {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				gap: 8px;
+				min-height: 38px;
+				padding: 0 14px;
+				color: #111;
+				background: #fff;
+				font-size: 0.8rem;
+				font-weight: 900;
+				white-space: nowrap;
+			}
+			@media (max-width: 820px) {
+				.blessing-global-push {
+					position: fixed;
+					inset: auto 0 0;
+					z-index: 165;
+					width: 100%;
+					margin: 0;
+					border: 0;
+					border-top: 3px solid #f4d36f;
+					box-shadow: 0 -10px 28px rgba(0, 0, 0, 0.34);
+				}
+				.blessing-global-push-link {
+					grid-template-columns: auto minmax(0, 1fr) auto;
+					gap: 8px;
+					min-height: 68px;
+					padding: 7px 9px max(7px, env(safe-area-inset-bottom));
+				}
+				.blessing-global-push-urgent {
+					min-height: 30px;
+					padding: 0 7px;
+					font-size: 0.68rem;
+				}
+				.blessing-global-push-copy {
+					display: grid;
+					gap: 2px;
+				}
+				.blessing-global-push-copy strong,
+				.blessing-global-push-copy small {
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+				}
+				.blessing-global-push-copy strong { font-size: clamp(0.86rem, 3.6vw, 1rem); }
+				.blessing-global-push-copy small { font-size: 0.67rem; }
+				.blessing-global-push-action {
+					min-height: 42px;
+					max-width: 82px;
+					padding: 0 8px;
+					font-size: 0.72rem;
+					line-height: 1.2;
+					text-align: center;
+					white-space: normal;
+				}
+				.blessing-global-push-action span { display: none; }
+				body.blessing-campaign-active {
+					padding-bottom: calc(72px + env(safe-area-inset-bottom));
+				}
+			}
 		</style>
 	</head>
 	<body>
@@ -923,7 +1048,11 @@ $navItems = [
 		<div class="global-nav-shell" data-global-nav-shell>
 			<nav class="global-quick-nav" aria-label="サイト内主要メニューショートカット">
 				<?php foreach ($navItems as $item): ?>
-					<a href="<?= h($item['href']) ?>" class="<?= $item['active'] ? 'active' : '' ?>"><?= h($item['label']) ?></a>
+					<a
+						href="<?= h($item['href']) ?>"
+						class="<?= trim(($item['active'] ? 'active ' : '') . (!empty($item['campaign']) ? 'blessing-nav-item' : '')) ?>"
+						<?= !empty($item['campaign']) ? 'data-blessing-campaign-window data-blessing-campaign-link data-campaign-placement="nav"' : '' ?>
+					><?= h($item['label']) ?></a>
 				<?php endforeach; ?>
 			</nav>
 			<button class="global-menu-toggle" type="button" aria-expanded="false" aria-controls="global-section-nav" data-global-menu-toggle>
@@ -932,10 +1061,24 @@ $navItems = [
 			</button>
 			<nav class="global-section-nav" id="global-section-nav" aria-label="サイト内主要メニュー" data-global-section-nav>
 				<?php foreach ($navItems as $item): ?>
-					<a href="<?= h($item['href']) ?>" class="<?= $item['active'] ? 'active' : '' ?>"><?= h($item['label']) ?></a>
+					<a
+						href="<?= h($item['href']) ?>"
+						class="<?= trim(($item['active'] ? 'active ' : '') . (!empty($item['campaign']) ? 'blessing-nav-item' : '')) ?>"
+						<?= !empty($item['campaign']) ? 'data-blessing-campaign-window data-blessing-campaign-link data-campaign-placement="nav"' : '' ?>
+					><?= h($item['label']) ?></a>
 				<?php endforeach; ?>
 			</nav>
 		</div>
+		<aside class="blessing-global-push" aria-label="今週末の特別イベント" data-blessing-campaign-window>
+			<a class="blessing-global-push-link" href="/blessing-time-osaka2026/" data-blessing-campaign-link data-campaign-placement="sitewide">
+				<span class="blessing-global-push-urgent">今週土曜</span>
+				<span class="blessing-global-push-copy">
+					<strong>7/18 BLESSING TIME in OSAKA</strong>
+					<small>15:00・大阪 OCCホール｜入場無料・予約不要</small>
+				</span>
+				<span class="blessing-global-push-action">詳細・地図を見る <span aria-hidden="true">→</span></span>
+			</a>
+		</aside>
 		<main class="page">
 			<section class="hero" aria-labelledby="campaign-title">
 				<div class="hero-copy">
@@ -1028,6 +1171,34 @@ $navItems = [
 			</section>
 		</main>
 		<script>
+			var blessingCampaignActive = Date.now() < new Date('2026-07-19T00:00:00+09:00').getTime();
+			var blessingCampaignWindows = document.querySelectorAll('[data-blessing-campaign-window]');
+			for (var campaignWindowIndex = 0; campaignWindowIndex < blessingCampaignWindows.length; campaignWindowIndex += 1) {
+				blessingCampaignWindows[campaignWindowIndex].hidden = !blessingCampaignActive;
+			}
+			document.body.classList.toggle('blessing-campaign-active', blessingCampaignActive);
+			if (blessingCampaignActive) {
+				var blessingCampaignLinks = document.querySelectorAll('[data-blessing-campaign-link]');
+				var blessingViewedPlacements = {};
+				for (var campaignLinkIndex = 0; campaignLinkIndex < blessingCampaignLinks.length; campaignLinkIndex += 1) {
+					(function (link) {
+						var placement = link.getAttribute('data-campaign-placement') || 'unknown';
+						if (!blessingViewedPlacements[placement]) {
+							blessingViewedPlacements[placement] = true;
+							gtag('event', 'blessing_time_campaign_view', {
+								campaign_name: 'blessing_time_osaka_2026',
+								campaign_placement: placement
+							});
+						}
+						link.addEventListener('click', function () {
+							gtag('event', 'blessing_time_campaign_click', {
+								campaign_name: 'blessing_time_osaka_2026',
+								campaign_placement: placement
+							});
+						});
+					})(blessingCampaignLinks[campaignLinkIndex]);
+				}
+			}
 			var globalMenuToggle = document.querySelector('[data-global-menu-toggle]');
 			var globalNavShell = document.querySelector('[data-global-nav-shell]');
 			var globalNav = document.querySelector('[data-global-section-nav]');
