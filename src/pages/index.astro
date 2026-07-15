@@ -291,6 +291,42 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 			</div>
 		</a>
 
+		<section
+			class="blessing-time-short-feature"
+			aria-labelledby="blessing-time-short-home-title"
+			data-blessing-campaign-window
+		>
+			<div class="blessing-time-short-copy">
+				<p class="blessing-time-short-kicker">60 SEC PREVIEW / 今週土曜・大阪</p>
+				<h2 id="blessing-time-short-home-title">魂に火を灯す賛美</h2>
+				<p>
+					アーサー・ホーランドの Talk Live と、5組のアーティストによる Worship。
+					BLESSING TIMEの熱を、このショートで。
+				</p>
+				<div class="blessing-time-short-meta" aria-label="開催情報">
+					<strong>7.18 SAT / 15:00</strong>
+					<span>大阪 OCCホール・入場無料</span>
+				</div>
+				<a
+					class="blessing-time-short-action"
+					href="/blessing-time-osaka2026/"
+					data-blessing-campaign-link
+					data-campaign-placement="home_short"
+				>
+					詳細・アクセスを見る <span aria-hidden="true">→</span>
+				</a>
+			</div>
+			<div class="blessing-time-short-player">
+				<iframe
+					src="https://www.youtube.com/embed/0ynCzIaaxpE?rel=0&playsinline=1"
+					title="BLESSING TIME in OSAKA 2026 60秒ショート映像"
+					loading="lazy"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+					allowfullscreen
+				></iframe>
+			</div>
+		</section>
+
 		<a
 			class="gospel-talk-home-companion"
 			href="/gospel-talk-summer-osaka20260719/"
@@ -976,6 +1012,142 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		min-height: 48px;
 		padding-inline: 22px;
 		background: #f4d36f;
+	}
+
+	.blessing-time-short-feature[hidden] {
+		display: none !important;
+	}
+
+	.blessing-time-short-feature {
+		position: relative;
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(250px, 320px);
+		gap: clamp(28px, 5vw, 54px);
+		align-items: center;
+		margin: 18px 0 8px;
+		overflow: hidden;
+		padding: clamp(26px, 5vw, 48px);
+		background:
+			radial-gradient(circle at 88% 18%, rgba(244, 211, 111, 0.2), transparent 32%),
+			linear-gradient(135deg, #071018, #102f45 58%, #281c11);
+		border-left: 8px solid #cf3b28;
+		color: #fff;
+		box-shadow: 0 22px 54px rgba(9, 28, 42, 0.28);
+	}
+
+	.blessing-time-short-feature::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(115deg, transparent 58%, rgba(244, 211, 111, 0.08));
+		pointer-events: none;
+	}
+
+	.blessing-time-short-copy,
+	.blessing-time-short-player {
+		position: relative;
+		z-index: 1;
+	}
+
+	.blessing-time-short-copy {
+		display: grid;
+		gap: 18px;
+	}
+
+	.blessing-time-short-kicker {
+		width: fit-content;
+		padding: 7px 10px;
+		background: #cf3b28;
+		color: #fff;
+		font-family: 'Oswald', sans-serif;
+		font-size: 0.78rem;
+		font-weight: 900;
+		line-height: 1.2;
+	}
+
+	.blessing-time-short-copy h2 {
+		max-width: 8em;
+		font-family: 'Oswald', 'Noto Sans JP', sans-serif;
+		font-size: clamp(2.8rem, 6vw, 4.7rem);
+		font-weight: 900;
+		letter-spacing: 0;
+		line-height: 1.04;
+		text-shadow: 0 3px 22px rgba(0, 0, 0, 0.38);
+	}
+
+	.blessing-time-short-copy > p:not(.blessing-time-short-kicker) {
+		max-width: 36em;
+		color: rgba(255, 255, 255, 0.88);
+		font-size: 1rem;
+		font-weight: 800;
+		line-height: 1.8;
+	}
+
+	.blessing-time-short-meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+
+	.blessing-time-short-meta strong,
+	.blessing-time-short-meta span {
+		display: inline-flex;
+		align-items: center;
+		min-height: 34px;
+		padding: 0 11px;
+		border: 1px solid rgba(255, 255, 255, 0.24);
+		background: rgba(255, 255, 255, 0.1);
+		font-size: 0.84rem;
+		font-weight: 900;
+		line-height: 1.2;
+	}
+
+	.blessing-time-short-meta strong {
+		background: #f4d36f;
+		border-color: #f4d36f;
+		color: #111;
+	}
+
+	.blessing-time-short-action {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 8px;
+		width: fit-content;
+		min-height: 48px;
+		padding: 0 20px;
+		background: #fff;
+		color: #111;
+		font-size: 0.88rem;
+		font-weight: 900;
+		line-height: 1.2;
+		text-decoration: none;
+		transition: transform 0.2s, box-shadow 0.2s;
+	}
+
+	.blessing-time-short-action:hover,
+	.blessing-time-short-action:focus-visible {
+		transform: translateY(-2px);
+		box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+		outline: 3px solid #f4d36f;
+		outline-offset: 2px;
+	}
+
+	.blessing-time-short-player {
+		justify-self: center;
+		width: min(100%, 320px);
+		aspect-ratio: 9 / 16;
+		overflow: hidden;
+		background: #050505;
+		border: 1px solid rgba(255, 255, 255, 0.28);
+		box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
+	}
+
+	.blessing-time-short-player iframe {
+		display: block;
+		width: 100%;
+		height: 100%;
+		border: 0;
 	}
 
 	@keyframes home-event-panel-in {
@@ -2394,6 +2566,42 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 
 		.blessing-time-home-priority .blessing-time-feature-button {
 			min-height: 50px;
+		}
+
+		.blessing-time-short-feature {
+			grid-template-columns: 1fr;
+			gap: 28px;
+			margin: 12px 0 4px;
+			padding: 28px 20px 32px;
+			border-left-width: 6px;
+		}
+
+		.blessing-time-short-copy {
+			gap: 15px;
+		}
+
+		.blessing-time-short-copy h2 {
+			max-width: none;
+			font-size: clamp(2.45rem, 12vw, 3.6rem);
+		}
+
+		.blessing-time-short-meta,
+		.blessing-time-short-action {
+			width: 100%;
+		}
+
+		.blessing-time-short-meta strong,
+		.blessing-time-short-meta span {
+			box-sizing: border-box;
+			justify-content: center;
+			flex: 1 1 100%;
+			min-height: 40px;
+			padding: 8px 10px;
+			text-align: center;
+		}
+
+		.blessing-time-short-player {
+			width: min(100%, 320px);
 		}
 
 		.home-event-summary {

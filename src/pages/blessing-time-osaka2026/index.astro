@@ -109,12 +109,44 @@ const structuredData = {
 					>
 						会場をGoogleマップで見る
 					</a>
+					<a
+						href="#osaka-short"
+						data-blessing-campaign-window
+						data-blessing-campaign-link
+						data-campaign-placement="event_short_jump"
+					>60秒の映像を見る</a>
 					<a href="#event-detail">開催概要</a>
 					<a href="#volunteer-staff">ボランティア募集</a>
 					<a href="#support-offering">ご支援について</a>
 					<a href="#tokyo-message">東京開催のメッセージ映像</a>
 					<a href="#cgntv-report">CGNTV取材映像</a>
 				</div>
+			</div>
+		</section>
+
+		<section
+			class="blessing-time-video blessing-time-video-short"
+			id="osaka-short"
+			aria-labelledby="osaka-short-title"
+			data-blessing-campaign-window
+		>
+			<div class="blessing-time-video-copy">
+				<p class="blessing-time-section-label">60 SEC PREVIEW / OSAKA</p>
+				<h2 id="osaka-short-title">魂に火を灯す賛美</h2>
+				<p>
+					アーサー・ホーランドの Talk Live と、5組のアーティストによる Worship。
+					今週土曜、大阪で待っています。
+				</p>
+				<p class="blessing-time-short-date">7.18 SAT / 15:00 START / 入場無料</p>
+			</div>
+			<div class="blessing-time-video-frame blessing-time-video-frame-short">
+				<iframe
+					src="https://www.youtube.com/embed/0ynCzIaaxpE?rel=0&playsinline=1"
+					title="BLESSING TIME in OSAKA 2026 60秒ショート映像"
+					loading="lazy"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+					allowfullscreen
+				></iframe>
 			</div>
 		</section>
 
@@ -764,6 +796,66 @@ const structuredData = {
 		padding-top: 0;
 	}
 
+	.blessing-time-video-short {
+		position: relative;
+		grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+		margin-top: 28px;
+		overflow: hidden;
+		background:
+			radial-gradient(circle at 84% 16%, rgba(245, 218, 151, 0.2), transparent 30%),
+			linear-gradient(135deg, #071018, #14364d 62%, #3d2c17);
+		border-left: 8px solid #b93b2e;
+		color: #fff;
+		box-shadow: 0 24px 60px rgba(9, 28, 42, 0.28);
+	}
+
+	.blessing-time-video-short::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(115deg, transparent 56%, rgba(245, 218, 151, 0.08));
+		pointer-events: none;
+	}
+
+	.blessing-time-video-short > * {
+		position: relative;
+		z-index: 1;
+	}
+
+	.blessing-time-video-short h2 {
+		max-width: 8em;
+		color: #fff;
+		font-size: clamp(3.1rem, 6vw, 5rem);
+		line-height: 1.04;
+		text-shadow: 0 3px 24px rgba(0, 0, 0, 0.42);
+	}
+
+	.blessing-time-video-short .blessing-time-video-copy > p:not(.blessing-time-section-label) {
+		color: rgba(255, 255, 255, 0.88);
+	}
+
+	.blessing-time-video-short .blessing-time-short-date {
+		display: inline-flex;
+		align-items: center;
+		width: fit-content;
+		min-height: 42px;
+		padding: 8px 13px;
+		background: #f4d36f;
+		color: #141414 !important;
+		font-family: var(--font-head);
+		font-size: 0.92rem !important;
+		font-weight: 900;
+		line-height: 1.2 !important;
+	}
+
+	.blessing-time-video-frame.blessing-time-video-frame-short {
+		justify-self: center;
+		width: min(100%, 360px);
+		aspect-ratio: 9 / 16;
+		border: 1px solid rgba(255, 255, 255, 0.28);
+		box-shadow: 0 24px 48px rgba(0, 0, 0, 0.38);
+	}
+
 	.blessing-time-video-copy p:not(.blessing-time-section-label) {
 		margin-top: 18px;
 		font-size: 1.04rem;
@@ -845,6 +937,10 @@ const structuredData = {
 			grid-template-columns: 1fr;
 		}
 
+		.blessing-time-video-short {
+			width: calc(100% - 40px);
+		}
+
 	}
 
 	@media (max-width: 640px) {
@@ -914,6 +1010,29 @@ const structuredData = {
 		.blessing-time-video,
 		.blessing-time-artists {
 			padding: 48px 16px;
+		}
+
+		.blessing-time-video-short {
+			width: calc(100% - 24px);
+			margin-top: 12px;
+			padding: 38px 18px 32px;
+			border-left-width: 6px;
+		}
+
+		.blessing-time-video-short h2 {
+			max-width: none;
+			font-size: clamp(2.55rem, 12vw, 3.5rem);
+		}
+
+		.blessing-time-video-short .blessing-time-short-date {
+			box-sizing: border-box;
+			justify-content: center;
+			width: 100%;
+			text-align: center;
+		}
+
+		.blessing-time-video-frame-short {
+			width: min(100%, 320px);
 		}
 
 		.blessing-time-share {
