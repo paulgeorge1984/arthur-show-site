@@ -32,8 +32,11 @@ jobs:
           const path = require('path');
           const contentDir = path.join(process.cwd(), 'src/content/daily-messages');
           const now = new Date();
-          const windowStart = new Date(now.getTime() - 90 * 60 * 1000);
+          // Scheduled GitHub Actions can start several hours late. Keep a full-day
+          // recovery window, then check the live URL so each article deploys once.
+          const windowStart = new Date(now.getTime() - 24 * 60 * 60 * 1000);
           let shouldDeploy = false;
+          const candidates = [];
 
           for (const file of fs.readdirSync(contentDir)) {
             if (!file.endsWith('.mdx')) continue;
@@ -42,12 +45,39 @@ jobs:
             if (!match) continue;
             const publishDate = new Date(match[1].trim().replace(/^["']|["']$/g, ''));
             if (publishDate > windowStart && publishDate <= now) {
-              shouldDeploy = true;
-              break;
+              candidates.push(file.replace(/\.mdx$/, ''));
             }
           }
 
-          console.log(`should_deploy=${shouldDeploy ? 'true' : 'false'}`);
+          async function isAlreadyLive(slug) {
+            const url = `https://arthur-show.com/messages/${encodeURIComponent(slug)}/`;
+            try {
+              const response = await fetch(url, {
+                redirect: 'follow',
+                signal: AbortSignal.timeout(10000),
+                headers: { 'user-agent': 'arthur-show-scheduled-publish-check' },
+              });
+              response.body?.cancel();
+              return response.ok;
+            } catch (error) {
+              console.error(`Could not verify ${url}: ${error.message}`);
+              return false;
+            }
+          }
+
+          (async () => {
+            for (const slug of candidates) {
+              if (!(await isAlreadyLive(slug))) {
+                console.error(`Scheduled article is ready but not live: ${slug}`);
+                shouldDeploy = true;
+                break;
+              }
+            }
+            console.log(`should_deploy=${shouldDeploy ? 'true' : 'false'}`);
+          })().catch((error) => {
+            console.error(error);
+            console.log('should_deploy=true');
+          });
           NODE
 
       - uses: actions/setup-node@v3

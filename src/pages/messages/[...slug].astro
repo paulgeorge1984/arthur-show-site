@@ -10,6 +10,7 @@ export async function getStaticPaths() {
   const privatePreviewSlugs: Record<string, string> = {
     '2026-07-14-fridaynight': 'preview-20260714-fridaynight-0296389b38de',
     '2026-07-16': 'preview-20260716-goto-church-93c0790b657f',
+    '2026-07-18-stayfastchurch': 'preview-20260718-stayfastchurch-e5a6b7f4e687',
   };
   const currentBuildTime = new Date();
   const allEntries = await getCollection('daily-messages');
