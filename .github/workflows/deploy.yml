@@ -39,12 +39,14 @@ jobs:
             if (!file.endsWith('.mdx')) continue;
             const body = fs.readFileSync(path.join(contentDir, file), 'utf8');
             const match = body.match(/^date:\s*(.+)$/m);
-            if (!match) continue;
+            const youtubeMatch = body.match(/^youtubeId:\s*["']?([A-Za-z0-9_-]{11})["']?\s*$/m);
+            if (!match || !youtubeMatch) continue;
             const publishDate = new Date(match[1].trim().replace(/^["']|["']$/g, ''));
             if (!Number.isNaN(publishDate.getTime()) && publishDate <= now) {
               publishable.push({
                 slug: file.replace(/\.mdx$/, ''),
                 publishedAt: publishDate.getTime(),
+                youtubeId: youtubeMatch[1],
               });
             }
           }
@@ -58,10 +60,9 @@ jobs:
           );
           const candidates = publishable
             .filter((item) => item.publishedAt === newestTimestamp)
-            .map((item) => item.slug);
 
-          async function isAlreadyLive(slug) {
-            const url = `https://arthur-show.com/messages/${encodeURIComponent(slug)}/`;
+          async function isAlreadyLive(candidate) {
+            const url = `https://arthur-show.com/messages/${encodeURIComponent(candidate.slug)}/`;
             try {
               const response = await fetch(url, {
                 redirect: 'follow',
@@ -70,7 +71,8 @@ jobs:
               });
               const html = await response.text();
               const canonical = `<link rel="canonical" href="${url}">`;
-              return response.ok && html.includes(canonical);
+              const videoMarker = `/embed/${candidate.youtubeId}?rel=0`;
+              return response.ok && html.includes(canonical) && html.includes(videoMarker);
             } catch (error) {
               console.error(`Could not verify ${url}: ${error.message}`);
               return false;
@@ -78,9 +80,9 @@ jobs:
           }
 
           (async () => {
-            for (const slug of candidates) {
-              if (!(await isAlreadyLive(slug))) {
-                console.error(`Scheduled article is ready but not live: ${slug}`);
+            for (const candidate of candidates) {
+              if (!(await isAlreadyLive(candidate))) {
+                console.error(`Scheduled article is ready but not live: ${candidate.slug}`);
                 shouldDeploy = true;
                 break;
               }
