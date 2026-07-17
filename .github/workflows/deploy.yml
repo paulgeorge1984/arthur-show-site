@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Check scheduled publish window
+      - name: Check scheduled publish state
         id: publish_window
         run: |
           if [ "${{ github.event_name }}" != "schedule" ]; then
@@ -32,11 +32,8 @@ jobs:
           const path = require('path');
           const contentDir = path.join(process.cwd(), 'src/content/daily-messages');
           const now = new Date();
-          // Scheduled GitHub Actions can start several hours late. Keep a full-day
-          // recovery window, then check the live URL so each article deploys once.
-          const windowStart = new Date(now.getTime() - 24 * 60 * 60 * 1000);
           let shouldDeploy = false;
-          const candidates = [];
+          const publishable = [];
 
           for (const file of fs.readdirSync(contentDir)) {
             if (!file.endsWith('.mdx')) continue;
@@ -44,10 +41,24 @@ jobs:
             const match = body.match(/^date:\s*(.+)$/m);
             if (!match) continue;
             const publishDate = new Date(match[1].trim().replace(/^["']|["']$/g, ''));
-            if (publishDate > windowStart && publishDate <= now) {
-              candidates.push(file.replace(/\.mdx$/, ''));
+            if (!Number.isNaN(publishDate.getTime()) && publishDate <= now) {
+              publishable.push({
+                slug: file.replace(/\.mdx$/, ''),
+                publishedAt: publishDate.getTime(),
+              });
             }
           }
+
+          // A build containing the newest due article also contains every older
+          // due article. Checking the newest timestamp lets any later cron recover
+          // after an arbitrarily long Actions delay without repeatedly deploying.
+          const newestTimestamp = publishable.reduce(
+            (latest, item) => Math.max(latest, item.publishedAt),
+            -Infinity,
+          );
+          const candidates = publishable
+            .filter((item) => item.publishedAt === newestTimestamp)
+            .map((item) => item.slug);
 
           async function isAlreadyLive(slug) {
             const url = `https://arthur-show.com/messages/${encodeURIComponent(slug)}/`;
@@ -57,8 +68,9 @@ jobs:
                 signal: AbortSignal.timeout(10000),
                 headers: { 'user-agent': 'arthur-show-scheduled-publish-check' },
               });
-              response.body?.cancel();
-              return response.ok;
+              const html = await response.text();
+              const canonical = `<link rel="canonical" href="${url}">`;
+              return response.ok && html.includes(canonical);
             } catch (error) {
               console.error(`Could not verify ${url}: ${error.message}`);
               return false;
