@@ -15,8 +15,6 @@ const blessingTimeOsakaUrl = '/blessing-time-osaka2026/';
 const blessingTimeOsakaBanner = '/assets/generated/blessing-time-osaka2026-banner.webp';
 const gospelTalkSummerUrl = '/gospel-talk-summer-osaka20260719/';
 const gospelTalkSummerPoster = '/assets/gospel-talk-summer-osaka20260719-poster.webp';
-const blessingNightKagurazakaUrl = 'https://www.blessingnight.jp/schedule/schedule366';
-const blessingNightKagurazakaBanner = '/assets/generated/blessing-night-kagurazaka-20260717-banner.webp';
 const calendarShareUrl = 'https://arthur-show.com/calendar/';
 const calendarShareTitle = 'アーサーホーランド関連スケジュール | THE ARTHUR HOLLANDS SHOW';
 const encodedCalendarShareUrl = encodeURIComponent(calendarShareUrl);
@@ -187,35 +185,6 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			</a>
 		</section>
 
-		<section class="calendar-special-event blessing-night-feature" aria-label="BLESSING NIGHT 神楽坂 特別案内">
-			<a class="calendar-special-link" href={blessingNightKagurazakaUrl} target="_blank" rel="noopener noreferrer">
-				<span class="calendar-special-media" aria-hidden="true">
-					<img
-						src={blessingNightKagurazakaBanner}
-						alt=""
-						width="1600"
-						height="900"
-						loading="lazy"
-					/>
-				</span>
-				<span class="calendar-special-copy">
-					<span class="calendar-special-label">NEXT BLESSING NIGHT</span>
-					<strong>BLESSING NIGHT 神楽坂</strong>
-					<span class="calendar-special-lead">
-						不良牧師が語る聖なる夜のトークライブ。
-						Music Guest は Migiwa。詳細と申込は公式ページからご確認ください。
-					</span>
-					<span class="calendar-special-meta">
-						<span>2026年7月17日（金）</span>
-						<span>OPEN 18:30 / START 19:00</span>
-						<span>u-ma kagurazaka</span>
-						<span>Charge 3,000円（飲食代別途）</span>
-					</span>
-					<span class="calendar-special-button">詳細・申込ページへ</span>
-				</span>
-			</a>
-		</section>
-
 		<section class="calendar-section" id="calendar-events" aria-labelledby="calendar-title">
 			<div class="calendar-heading">
 				<div>
@@ -345,26 +314,6 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				},
 				end: {
 					dateTime: '2026-07-19T11:00:00+09:00',
-					timeZone: TOKYO_TIME_ZONE,
-				},
-			},
-			{
-				id: 'manual-blessing-night-kagurazaka-2026-07-17',
-				summary: 'BLESSING NIGHT 神楽坂',
-				description: [
-					'Arthur Hollands Talk Live',
-					'Music Guest: Migiwa',
-					'OPEN 18:30 / START 19:00',
-					'Charge 3,000円（飲食代別途）',
-					'https://www.blessingnight.jp/schedule/schedule366',
-				].join('\n'),
-				location: 'u-ma kagurazaka 〒162-0805 東京都新宿区矢来町132-5',
-				start: {
-					dateTime: '2026-07-17T19:00:00+09:00',
-					timeZone: TOKYO_TIME_ZONE,
-				},
-				end: {
-					dateTime: '2026-07-17T19:00:00+09:00',
 					timeZone: TOKYO_TIME_ZONE,
 				},
 			},
@@ -654,25 +603,10 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			if (!manualEventsInRange.length) return events;
 			const hasSaturdayNightArthur = events.some((event) => isSaturdayNightArthurEvent(event));
 			const hasBlessingTimeOsaka = events.some((event) => isBlessingTimeOsakaEvent(event));
-			const hasBlessingNightKagurazaka = events.some((event) => isBlessingNightKagurazakaEvent(event));
 			const hasTheEssenceAkita = events.some((event) => isTheEssenceAkitaEvent(event));
 			const hasGospelTalkSummer = events.some((event) => isGospelTalkSummerEvent(event));
-			const blessingNightManualEvent = manualEventsInRange.find((event) => event.id === 'manual-blessing-night-kagurazaka-2026-07-17');
 			const gospelTalkManualEvent = manualEventsInRange.find((event) => event.id === 'manual-gospel-talk-summer-osaka-2026-07-19');
 			let mergedEvents = events;
-			if (blessingNightManualEvent && hasBlessingNightKagurazaka) {
-				mergedEvents = mergedEvents.map((event) => {
-					if (!isBlessingNightKagurazakaEvent(event)) return event;
-					return {
-						...event,
-						summary: blessingNightManualEvent.summary,
-						description: blessingNightManualEvent.description,
-						location: blessingNightManualEvent.location,
-						start: blessingNightManualEvent.start,
-						end: blessingNightManualEvent.end,
-					};
-				});
-			}
 			if (gospelTalkManualEvent && hasGospelTalkSummer) {
 				mergedEvents = mergedEvents.map((event) => {
 					if (!isGospelTalkSummerEvent(event)) return event;
@@ -691,7 +625,6 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				...manualEventsInRange.filter((event) => {
 					if (isSaturdayNightArthurEvent(event)) return !hasSaturdayNightArthur;
 					if (isBlessingTimeOsakaEvent(event)) return !hasBlessingTimeOsaka;
-					if (isBlessingNightKagurazakaEvent(event)) return !hasBlessingNightKagurazaka;
 					if (isTheEssenceAkitaEvent(event)) return !hasTheEssenceAkita;
 					if (isGospelTalkSummerEvent(event)) return !hasGospelTalkSummer;
 					return true;
@@ -923,7 +856,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			try {
 				const { items, updated } = await fetchCalendarEvents(range);
 				const activeEvents = mergeManualEvents(
-					items.filter((event) => event.status !== 'cancelled'),
+					items.filter((event) => event.status !== 'cancelled' && !isBlessingNightKagurazakaEvent(event)),
 					range
 				)
 					.sort((a, b) => getEventStart(a).getTime() - getEventStart(b).getTime());
@@ -1169,12 +1102,6 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			box-shadow: 0 18px 58px rgba(0, 0, 0, 0.3);
 		}
 
-		.blessing-night-feature .calendar-special-link {
-			background:
-				linear-gradient(135deg, rgba(8, 9, 12, 0.98), rgba(37, 28, 15, 0.88)),
-				#0b0b0b;
-		}
-
 		.saturday-night-arthur-feature .calendar-special-link {
 			grid-template-columns: minmax(280px, 0.68fr) minmax(340px, 1.32fr);
 			background:
@@ -1205,12 +1132,6 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				linear-gradient(90deg, rgba(5, 5, 5, 0.16), rgba(5, 5, 5, 0.12) 52%, rgba(5, 5, 5, 0.48)),
 				linear-gradient(0deg, rgba(197, 160, 89, 0.18), transparent 46%);
 			pointer-events: none;
-		}
-
-		.blessing-night-feature .calendar-special-link::before {
-			background:
-				linear-gradient(90deg, rgba(5, 5, 5, 0.08), rgba(5, 5, 5, 0.1) 52%, rgba(5, 5, 5, 0.5)),
-				linear-gradient(0deg, rgba(197, 160, 89, 0.28), transparent 48%);
 		}
 
 		.saturday-night-arthur-feature .calendar-special-link::before {
@@ -1319,10 +1240,6 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			background: #8bbbd6;
 		}
 
-		.blessing-night-feature .calendar-special-media {
-			background: #121212;
-		}
-
 		.saturday-night-arthur-feature .calendar-special-media {
 			display: flex;
 			align-items: center;
@@ -1381,11 +1298,6 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			max-height: 405px;
 			border: 5px solid rgba(255, 248, 235, 0.92);
 			box-shadow: 0 18px 46px rgba(0, 0, 0, 0.44);
-			object-fit: contain;
-			object-position: center;
-		}
-
-		.blessing-night-feature .calendar-special-media img {
 			object-fit: contain;
 			object-position: center;
 		}
