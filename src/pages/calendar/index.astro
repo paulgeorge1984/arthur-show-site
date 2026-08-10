@@ -7,6 +7,8 @@ const recurringScheduleImage = '/assets/arthur-related-schedule-cycle.jpg';
 const narimasuChurchUrl = 'https://www.narimasu-church.org';
 const fridayNightUrl = 'https://ochanomizu.cc/meeting/fridaynight/';
 const blessingNightUrl = 'https://www.blessingnight.jp';
+const gospelArtTsukubaPoster = '/assets/gospel-art-tsukuba-20260815.jpg';
+const gospelArtTsukubaUrl = gospelArtTsukubaPoster;
 const blessingNightShimokitazawaUrl = '/blessing-night-shimokitazawa-20261009/';
 const blessingNightShimokitazawaPoster = '/assets/blessing-night-shimokitazawa-20261009-front.webp';
 const theEssenceAkitaUrl = '/the-essence-akita-20261114/';
@@ -67,6 +69,34 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 					</a>
 				</div>
 			</section>
+
+		<section class="calendar-special-event the-essence-akita-feature gospel-art-tsukuba-feature" aria-label="Gospel Art 2026年8月15日 茨城県つくば美術館 特別案内">
+			<a class="calendar-special-link" href={gospelArtTsukubaUrl} target="_blank" rel="noopener noreferrer">
+				<span class="calendar-special-media" aria-hidden="true">
+					<img
+						src={gospelArtTsukubaPoster}
+						alt=""
+						width="905"
+						height="1280"
+						loading="eager"
+					/>
+				</span>
+				<span class="calendar-special-copy">
+					<span class="calendar-special-label">THIS SATURDAY / 8.15</span>
+					<strong>Gospel Art</strong>
+					<span class="calendar-special-lead">
+						アーサー・ホーランドが語る「神が人類に与えた愛のストーリー」。
+					</span>
+					<span class="calendar-special-meta">
+						<span>2026年8月15日（土）</span>
+						<span>13:30開演</span>
+						<span>茨城県つくば美術館</span>
+						<span>入場無料</span>
+					</span>
+					<span class="calendar-special-button">チラシを拡大して見る</span>
+				</span>
+			</a>
+		</section>
 
 		<section class="calendar-special-event the-essence-akita-feature blessing-night-shimokitazawa-feature" aria-label="BLESSING NIGHT 下北沢 特別案内">
 			<a class="calendar-special-link" href={blessingNightShimokitazawaUrl}>
@@ -201,6 +231,25 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			},
 		];
 		const MANUAL_EVENTS = [
+			{
+				id: 'manual-gospel-art-tsukuba-2026-08-15',
+				summary: 'Gospel Art｜アーサー・ホーランドが語る 神が人類に与えた愛のストーリー',
+				description: [
+					'13:30開演',
+					'入場無料',
+					'つくばTX「つくば駅」A2出口から徒歩3分',
+					'会場電話：029-856-3711',
+					'主催・問い合わせ：柴田紀代',
+					'shibata@cosmic-art-mira.moo.jp',
+					'https://arthur-show.com/assets/gospel-art-tsukuba-20260815.jpg',
+				].join('\n'),
+				location: '茨城県つくば美術館 〒305-0031 茨城県つくば市吾妻2-8',
+				start: {
+					dateTime: '2026-08-15T13:30:00+09:00',
+					timeZone: TOKYO_TIME_ZONE,
+				},
+				end: null,
+			},
 			{
 				id: 'manual-blessing-night-shimokitazawa-2026-10-09',
 				summary: 'BLESSING NIGHT 下北沢',
@@ -495,6 +544,13 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 		}
 
 		function resolveRelatedEventLinks(event) {
+			if (isGospelArtTsukubaEvent(event)) {
+				return [{
+					label: 'Gospel Art チラシを見る',
+					url: '/assets/gospel-art-tsukuba-20260815.jpg',
+				}];
+			}
+
 			if (isBlessingNightShimokitazawaEvent(event)) {
 				return [{
 					label: 'BLESSING NIGHT 下北沢 詳細',
@@ -542,6 +598,13 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				&& /(?:blessing\s*night|ブレッシングナイト|ブレッシングナイ)/i.test(searchableText);
 		}
 
+		function isGospelArtTsukubaEvent(event) {
+			const startKey = event.start?.date || getDateKeyFromDate(getEventStart(event));
+			const searchableText = `${event.summary || ''} ${event.description || ''} ${event.location || ''}`;
+			return startKey === '2026-08-15'
+				&& /gospel\s*art|愛のストーリー|つくば美術館/i.test(searchableText);
+		}
+
 		function isBlessingNightShimokitazawaEvent(event) {
 			const startKey = event.start?.date || getDateKeyFromDate(getEventStart(event));
 			const searchableText = `${event.summary || ''} ${event.description || ''} ${event.location || ''}`;
@@ -577,8 +640,10 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			const hasBlessingTimeOsaka = events.some((event) => isBlessingTimeOsakaEvent(event));
 			const hasTheEssenceAkita = events.some((event) => isTheEssenceAkitaEvent(event));
 			const hasGospelTalkSummer = events.some((event) => isGospelTalkSummerEvent(event));
+			const hasGospelArtTsukuba = events.some((event) => isGospelArtTsukubaEvent(event));
 			const hasBlessingNightShimokitazawa = events.some((event) => isBlessingNightShimokitazawaEvent(event));
 			const gospelTalkManualEvent = manualEventsInRange.find((event) => event.id === 'manual-gospel-talk-summer-osaka-2026-07-19');
+			const gospelArtTsukubaManualEvent = manualEventsInRange.find((event) => event.id === 'manual-gospel-art-tsukuba-2026-08-15');
 			const blessingNightManualEvent = manualEventsInRange.find((event) => event.id === 'manual-blessing-night-shimokitazawa-2026-10-09');
 			let mergedEvents = events;
 			if (blessingNightManualEvent && hasBlessingNightShimokitazawa) {
@@ -592,6 +657,22 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 						start: blessingNightManualEvent.start,
 						end: blessingNightManualEvent.end,
 					};
+				});
+			}
+			if (gospelArtTsukubaManualEvent && hasGospelArtTsukuba) {
+				let gospelArtMerged = false;
+				mergedEvents = mergedEvents.flatMap((event) => {
+					if (!isGospelArtTsukubaEvent(event)) return [event];
+					if (gospelArtMerged) return [];
+					gospelArtMerged = true;
+					return [{
+						...event,
+						summary: gospelArtTsukubaManualEvent.summary,
+						description: gospelArtTsukubaManualEvent.description,
+						location: gospelArtTsukubaManualEvent.location,
+						start: gospelArtTsukubaManualEvent.start,
+						end: gospelArtTsukubaManualEvent.end,
+					}];
 				});
 			}
 			if (gospelTalkManualEvent && hasGospelTalkSummer) {
@@ -610,6 +691,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			return [
 				...mergedEvents,
 				...manualEventsInRange.filter((event) => {
+					if (isGospelArtTsukubaEvent(event)) return !hasGospelArtTsukuba;
 					if (isBlessingNightShimokitazawaEvent(event)) return !hasBlessingNightShimokitazawa;
 					if (isSaturdayNightArthurEvent(event)) return !hasSaturdayNightArthur;
 					if (isBlessingTimeOsakaEvent(event)) return !hasBlessingTimeOsaka;
@@ -1318,6 +1400,28 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 		.calendar-special-link:hover .calendar-special-media img,
 		.calendar-special-link:focus-visible .calendar-special-media img {
 			transform: scale(1.018);
+		}
+
+		.gospel-art-tsukuba-feature .calendar-special-link {
+			background:
+				linear-gradient(135deg, rgba(8, 7, 4, 0.99), rgba(72, 62, 35, 0.92) 58%, rgba(151, 119, 37, 0.7)),
+				#080704;
+		}
+
+		.gospel-art-tsukuba-feature .calendar-special-link::before {
+			background:
+				linear-gradient(90deg, rgba(8, 7, 4, 0.04), rgba(8, 7, 4, 0.1) 48%, rgba(8, 7, 4, 0.34)),
+				linear-gradient(0deg, rgba(203, 164, 58, 0.22), transparent 48%);
+		}
+
+		.gospel-art-tsukuba-feature .calendar-special-media {
+			background: linear-gradient(150deg, #090806, #5a4f31 56%, #a7842c);
+		}
+
+		.gospel-art-tsukuba-feature .calendar-special-label,
+		.gospel-art-tsukuba-feature .calendar-special-button {
+			background: #d2ad3d;
+			color: #090806;
 		}
 
 		.calendar-overview {
