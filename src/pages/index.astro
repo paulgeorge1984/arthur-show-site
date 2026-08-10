@@ -7,8 +7,8 @@ const siteURL = 'https://arthur-show.com';
 const blessingTimeOsakaBanner = '/assets/generated/blessing-time-osaka2026-banner.webp';
 const gospelTalkSummerBanner = '/assets/generated/gospel-talk-summer-osaka20260719-banner.webp';
 const theEssenceAkitaBanner = '/assets/the-essence-akita-20261114-og-v3.jpg';
+const blessingNightKagurazakaAugustUrl = 'https://www.blessingnight.jp/schedule/schedule373';
 const blessingNightShimokitazawaPoster = '/assets/blessing-night-shimokitazawa-20261009-front.webp';
-const blessingNightShimokitazawaBanner = '/assets/blessing-night-shimokitazawa-20261009-og.webp';
 
 // サイトのビルドが実行された現在の時刻を取得
 const currentBuildTime = new Date(); 
@@ -354,13 +354,14 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 
 		<details class="home-event-drawer">
 			<summary class="home-event-summary">
-				<span class="home-event-summary-media" aria-hidden="true">
-					<img src={blessingNightShimokitazawaBanner} alt="" width="1200" height="630" loading="eager" />
+				<span class="home-event-summary-media blessing-night-kagurazaka-summary-media" aria-hidden="true">
+					<strong>AUG 14</strong>
+					<small>KAGURAZAKA</small>
 				</span>
 				<span class="home-event-summary-copy">
 					<span class="home-event-summary-kicker">EVENT INFO</span>
 					<strong>イベント案内</strong>
-					<span>10/9 BLESSING NIGHT 下北沢／11/14 THE ESSENCE</span>
+					<span>8/14 BLESSING NIGHT 神楽坂／10/9 下北沢／11/14 THE ESSENCE</span>
 				</span>
 				<span class="home-event-summary-action" aria-hidden="true">
 					<span class="closed">見る</span>
@@ -368,6 +369,31 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 				</span>
 			</summary>
 			<div class="home-event-panel">
+				<a
+					class="blessing-time-feature blessing-night-kagurazaka-home-feature"
+					href={blessingNightKagurazakaAugustUrl}
+					target="_blank"
+					rel="noopener noreferrer"
+					aria-label="BLESSING NIGHT 神楽坂 2026年8月14日 公式の詳細・申込ページを見る"
+				>
+					<div class="blessing-time-feature-copy">
+						<p class="blessing-time-feature-kicker">NEXT EVENT / 8.14 FRI</p>
+						<h2>BLESSING NIGHT 神楽坂</h2>
+						<p>
+							不良牧師アーサー・ホーランドが語る、聖なる夜のトークライブ。
+							今月はゲストに須郷裕介を迎えます。
+						</p>
+						<div class="blessing-time-feature-meta">
+							<span>2026年8月14日（金）</span>
+							<span>OPEN 18:30 / START 19:00</span>
+							<span>ゲスト：須郷裕介</span>
+							<span>u-ma kagurazaka</span>
+							<span>3,000円（税込／飲食代別途）</span>
+						</div>
+						<span class="blessing-time-feature-button">公式の詳細・申込ページへ</span>
+					</div>
+				</a>
+
 				<a class="blessing-time-feature the-essence-home-feature blessing-night-home-feature" href="/blessing-night-shimokitazawa-20261009/" aria-label="BLESSING NIGHT 下北沢 2026年10月9日 Com.Cafe 音倉 特別ページを見る">
 					<img
 						src={blessingNightShimokitazawaPoster}
@@ -913,6 +939,36 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		background: #050505;
 	}
 
+	.blessing-night-kagurazaka-summary-media {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		gap: 7px;
+		border: 1px solid rgba(197, 160, 89, 0.52);
+		background:
+			radial-gradient(circle at 78% 20%, rgba(197, 160, 89, 0.32), transparent 34%),
+			linear-gradient(145deg, #071018, #17382f 58%, #654c1e);
+		color: #fff;
+	}
+
+	.blessing-night-kagurazaka-summary-media strong {
+		font-family: 'Oswald', sans-serif;
+		font-size: clamp(2rem, 5vw, 3.25rem);
+		font-weight: 900;
+		letter-spacing: 0.02em;
+		line-height: 0.9;
+	}
+
+	.blessing-night-kagurazaka-summary-media small {
+		color: #f4d36f;
+		font-family: 'Oswald', sans-serif;
+		font-size: 0.72rem;
+		font-weight: 900;
+		letter-spacing: 0.13em;
+		line-height: 1;
+	}
+
 	.home-event-summary-media img {
 		display: block;
 		width: 100%;
@@ -1281,6 +1337,33 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		font-size: 0.9rem;
 		font-weight: 900;
 		line-height: 1;
+	}
+
+	.blessing-night-kagurazaka-home-feature {
+		min-height: 0;
+		background:
+			radial-gradient(circle at 86% 18%, rgba(197, 160, 89, 0.24), transparent 30%),
+			linear-gradient(135deg, rgba(6, 8, 11, 0.99), rgba(30, 47, 43, 0.94) 58%, rgba(75, 55, 24, 0.88)),
+			#06080b;
+	}
+
+	.blessing-night-kagurazaka-home-feature::before {
+		background:
+			linear-gradient(90deg, rgba(5, 5, 5, 0.08), transparent 64%, rgba(197, 160, 89, 0.12)),
+			linear-gradient(0deg, rgba(197, 160, 89, 0.18), transparent 52%);
+	}
+
+	.blessing-night-kagurazaka-home-feature .blessing-time-feature-copy {
+		width: 100%;
+		min-height: 0;
+		padding: clamp(34px, 6vw, 58px);
+	}
+
+	.blessing-night-kagurazaka-home-feature h2 {
+		max-width: none;
+		font-size: clamp(3rem, 5.5vw, 3.9rem);
+		line-height: 0.98;
+		word-break: keep-all;
 	}
 
 	.the-essence-home-feature {
