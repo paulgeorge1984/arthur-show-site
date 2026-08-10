@@ -32,6 +32,7 @@ export async function GET() {
 		{ path: '/the-essence-akita-20261114/', changefreq: 'weekly', priority: '0.8' },
 		{ path: '/blessing-time-osaka2026/', changefreq: 'weekly', priority: '0.8' },
 		{ path: '/gospel-talk-summer-osaka20260719/', changefreq: 'weekly', priority: '0.8' },
+		{ path: '/gospel-art-tsukuba-20260815/', changefreq: 'weekly', priority: '0.8' },
 		{ path: '/friday-night/', changefreq: 'weekly', priority: '0.7' },
 		{ path: '/walk-across-usa2014/', changefreq: 'monthly', priority: '0.7' },
 		{ path: '/message-jukebox/', changefreq: 'weekly', priority: '0.7' },

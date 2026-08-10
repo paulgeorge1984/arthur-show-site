@@ -1,0 +1,872 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const pagePath = '/gospel-art-tsukuba-20260815/';
+const pageUrl = `https://arthur-show.com${pagePath}`;
+const posterImage = '/assets/gospel-art-tsukuba-20260815.jpg';
+const eventTitle = 'Gospel Art';
+const eventTheme = '神が人類に与えた愛のストーリー';
+const eventDescription = '2026年8月15日（土）13:30より、茨城県つくば美術館で開催される「Gospel Art」。アーサー・ホーランドが「神が人類に与えた愛のストーリー」を語ります。入場無料。';
+const mapUrl = 'https://www.google.com/maps/search/?api=1&query=%E8%8C%A8%E5%9F%8E%E7%9C%8C%E3%81%A4%E3%81%8F%E3%81%B0%E7%BE%8E%E8%A1%93%E9%A4%A8%20%E8%8C%A8%E5%9F%8E%E7%9C%8C%E3%81%A4%E3%81%8F%E3%81%B0%E5%B8%82%E5%90%BE%E5%A6%BB2-8';
+const contactEmail = 'shibata@cosmic-art-mira.moo.jp';
+const shareTitle = `${eventTitle}｜${eventTheme} | THE ARTHUR HOLLANDS SHOW`;
+const shareText = '2026年8月15日（土）13:30開演／茨城県つくば美術館／入場無料';
+const encodedShareUrl = encodeURIComponent(pageUrl);
+const encodedShareTitle = encodeURIComponent(shareTitle);
+const encodedLineText = encodeURIComponent(`${shareTitle}\n${shareText}\n${pageUrl}`);
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'Event',
+	'@id': `${pageUrl}#event`,
+	name: `${eventTitle}｜アーサー・ホーランドが語る「${eventTheme}」`,
+	description: eventDescription,
+	startDate: '2026-08-15T13:30:00+09:00',
+	eventStatus: 'https://schema.org/EventScheduled',
+	eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+	image: [`https://arthur-show.com${posterImage}`],
+	url: pageUrl,
+	isAccessibleForFree: true,
+	offers: {
+		'@type': 'Offer',
+		price: '0',
+		priceCurrency: 'JPY',
+		availability: 'https://schema.org/InStock',
+		url: pageUrl,
+	},
+	location: {
+		'@type': 'Place',
+		name: '茨城県つくば美術館',
+		telephone: '029-856-3711',
+		address: {
+			'@type': 'PostalAddress',
+			postalCode: '305-0031',
+			addressCountry: 'JP',
+			addressRegion: '茨城県',
+			addressLocality: 'つくば市',
+			streetAddress: '吾妻2-8',
+		},
+	},
+	performer: {
+		'@type': 'Person',
+		'@id': 'https://arthur-show.com/#arthur-hollands',
+		name: 'アーサー・ホーランド',
+		alternateName: 'Arthur Hollands',
+	},
+	organizer: {
+		'@type': 'Person',
+		name: '柴田紀代',
+		email: contactEmail,
+	},
+};
+---
+
+<Layout
+	title="Gospel Art｜2026年8月15日 茨城県つくば美術館"
+	description={eventDescription}
+	image={posterImage}
+	imageAlt="Gospel Art アーサー・ホーランド 2026年8月15日 茨城県つくば美術館 告知フライヤー"
+	imageWidth={905}
+	imageHeight={1280}
+	imageType="image/jpeg"
+	ogType="website"
+	canonicalPath={pagePath}
+	structuredData={structuredData}
+>
+	<article class="ga-page">
+		<section class="ga-hero" aria-labelledby="ga-title">
+			<div class="ga-hero-inner">
+				<div class="ga-hero-copy">
+					<p class="ga-kicker">GOSPEL ART / TSUKUBA 2026</p>
+					<h1 id="ga-title">Gospel Art</h1>
+					<p class="ga-speaker">アーサー・ホーランドが語る</p>
+					<p class="ga-theme">神が人類に与えた<br />愛のストーリー</p>
+					<div class="ga-hero-meta" aria-label="開催情報">
+						<span>2026年8月15日（土）</span>
+						<span>13:30開演</span>
+						<span>茨城県つくば美術館</span>
+						<strong>入場無料</strong>
+					</div>
+					<div class="ga-actions">
+						<a class="primary" href="#event-detail">開催概要を見る</a>
+						<a href={mapUrl} target="_blank" rel="noopener noreferrer">Googleマップ</a>
+						<a href="#share">シェア</a>
+					</div>
+				</div>
+
+				<figure class="ga-poster-frame">
+					<img
+						src={posterImage}
+						alt="Gospel Art。アーサー・ホーランドが語る、神が人類に与えた愛のストーリー。2026年8月15日土曜日13時30分開演、茨城県つくば美術館、入場無料。"
+						width="905"
+						height="1280"
+						loading="eager"
+					/>
+					<figcaption>
+						<a href={posterImage} target="_blank" rel="noopener noreferrer">チラシを原寸で見る</a>
+					</figcaption>
+				</figure>
+			</div>
+		</section>
+
+		<section class="ga-message" aria-labelledby="ga-message-title">
+			<div>
+				<p class="ga-kicker">MESSAGE THEME</p>
+				<h2 id="ga-message-title">愛のストーリー</h2>
+			</div>
+			<p>
+				魂のロッカー、不良牧師アーサー・ホーランドが、
+				「神が人類に与えた愛のストーリー」を語ります。
+			</p>
+		</section>
+
+		<section class="ga-detail" id="event-detail" aria-labelledby="event-detail-title">
+			<div class="ga-section-head">
+				<p>EVENT DETAILS</p>
+				<h2 id="event-detail-title">開催概要</h2>
+			</div>
+			<dl class="ga-info">
+				<div>
+					<dt>イベント名</dt>
+					<dd>Gospel Art</dd>
+				</div>
+				<div>
+					<dt>メッセージ</dt>
+					<dd>神が人類に与えた愛のストーリー</dd>
+				</div>
+				<div>
+					<dt>日時</dt>
+					<dd>2026年8月15日（土）<br /><strong>13:30開演</strong></dd>
+				</div>
+				<div>
+					<dt>会場</dt>
+					<dd>茨城県つくば美術館</dd>
+				</div>
+				<div>
+					<dt>住所</dt>
+					<dd>〒305-0031<br />茨城県つくば市吾妻2-8</dd>
+				</div>
+				<div class="ga-free-entry">
+					<dt>入場</dt>
+					<dd>入場無料</dd>
+				</div>
+			</dl>
+		</section>
+
+		<section class="ga-access" aria-labelledby="ga-access-title">
+			<div class="ga-access-copy">
+				<p class="ga-kicker">ACCESS</p>
+				<h2 id="ga-access-title">茨城県つくば美術館</h2>
+				<address>
+					〒305-0031 茨城県つくば市吾妻2-8<br />
+					つくばTX「つくば駅」A2出口から徒歩3分
+				</address>
+				<div class="ga-contact-links">
+					<a href="tel:0298563711">会場電話 029-856-3711</a>
+					<a href={mapUrl} target="_blank" rel="noopener noreferrer">Googleマップで開く</a>
+				</div>
+			</div>
+			<aside class="ga-contact" aria-labelledby="ga-contact-title">
+				<p>ORGANIZER / CONTACT</p>
+				<h3 id="ga-contact-title">主催・お問い合わせ</h3>
+				<strong>柴田紀代</strong>
+				<a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+			</aside>
+		</section>
+
+		<section class="ga-flyer" aria-labelledby="ga-flyer-title">
+			<div>
+				<p class="ga-kicker">EVENT FLYER</p>
+				<h2 id="ga-flyer-title">告知チラシ</h2>
+				<p>タップすると、チラシを原寸で確認できます。</p>
+			</div>
+			<a class="ga-flyer-link" href={posterImage} target="_blank" rel="noopener noreferrer">
+				<img
+					src={posterImage}
+					alt="Gospel Art 告知チラシを原寸で開く"
+					width="905"
+					height="1280"
+					loading="lazy"
+				/>
+				<span>チラシを原寸で開く</span>
+			</a>
+		</section>
+
+		<section class="ga-share" id="share" aria-labelledby="ga-share-title">
+			<div class="ga-section-head">
+				<p>SHARE</p>
+				<h2 id="ga-share-title">このイベントをシェア</h2>
+			</div>
+			<div class="ga-share-buttons" aria-label="SNS共有ボタン">
+				<button class="ga-share-button native" type="button" data-gospel-art-share-native>
+					<span>Share</span>
+					<small>端末で共有</small>
+				</button>
+				<a class="ga-share-button line" href={`https://line.me/R/msg/text/?${encodedLineText}`} target="_blank" rel="noopener noreferrer">
+					<span>LINE</span>
+					<small>送る</small>
+				</a>
+				<a class="ga-share-button x" href={`https://twitter.com/intent/tweet?text=${encodedShareTitle}&url=${encodedShareUrl}`} target="_blank" rel="noopener noreferrer">
+					<span>X</span>
+					<small>投稿</small>
+				</a>
+				<a class="ga-share-button facebook" href={`https://www.facebook.com/sharer/sharer.php?u=${encodedShareUrl}`} target="_blank" rel="noopener noreferrer">
+					<span>Facebook</span>
+					<small>投稿</small>
+				</a>
+				<button class="ga-share-button copy" type="button" data-gospel-art-copy-link>
+					<span>Copy</span>
+					<small data-gospel-art-copy-status>URLをコピー</small>
+				</button>
+			</div>
+		</section>
+
+		<nav class="ga-page-nav" aria-label="イベントページの関連リンク">
+			<a href="/calendar/">スケジュールを見る</a>
+			<a href="/">トップページへ戻る</a>
+		</nav>
+	</article>
+
+	<script is:inline>
+		const GOSPEL_ART_SHARE_URL = 'https://arthur-show.com/gospel-art-tsukuba-20260815/';
+		const GOSPEL_ART_SHARE_TITLE = 'Gospel Art｜神が人類に与えた愛のストーリー | THE ARTHUR HOLLANDS SHOW';
+		const GOSPEL_ART_SHARE_TEXT = '2026年8月15日（土）13:30開演／茨城県つくば美術館／入場無料';
+		const nativeShareButtons = document.querySelectorAll('[data-gospel-art-share-native]');
+		const copyButtons = document.querySelectorAll('[data-gospel-art-copy-link]');
+		const copyStatusNodes = document.querySelectorAll('[data-gospel-art-copy-status]');
+
+		function shareMessage() {
+			return `${GOSPEL_ART_SHARE_TITLE}\n${GOSPEL_ART_SHARE_TEXT}\n${GOSPEL_ART_SHARE_URL}`;
+		}
+
+		function setCopyStatus(label) {
+			copyStatusNodes.forEach((node) => {
+				node.textContent = label;
+			});
+		}
+
+		function fallbackCopyText(text) {
+			const textarea = document.createElement('textarea');
+			textarea.value = text;
+			textarea.setAttribute('readonly', '');
+			textarea.style.position = 'fixed';
+			textarea.style.top = '-1000px';
+			textarea.style.left = '-1000px';
+			textarea.style.opacity = '0';
+			document.body.appendChild(textarea);
+			textarea.focus({ preventScroll: true });
+			textarea.select();
+			textarea.setSelectionRange(0, text.length);
+			let copied = false;
+			try {
+				copied = document.execCommand('copy');
+			} catch {
+				copied = false;
+			}
+			textarea.remove();
+			return copied;
+		}
+
+		async function copyShareLink() {
+			const message = shareMessage();
+			try {
+				if (navigator.clipboard?.writeText) {
+					await navigator.clipboard.writeText(message);
+				} else if (!fallbackCopyText(message)) {
+					throw new Error('copy unavailable');
+				}
+				setCopyStatus('コピーしました');
+				setTimeout(() => setCopyStatus('URLをコピー'), 1800);
+			} catch {
+				if (fallbackCopyText(message)) {
+					setCopyStatus('コピーしました');
+					setTimeout(() => setCopyStatus('URLをコピー'), 1800);
+					return;
+				}
+				setCopyStatus('コピーできませんでした');
+				setTimeout(() => setCopyStatus('URLをコピー'), 1800);
+			}
+		}
+
+		async function sharePage() {
+			if (navigator.share) {
+				try {
+					await navigator.share({
+						title: GOSPEL_ART_SHARE_TITLE,
+						text: GOSPEL_ART_SHARE_TEXT,
+						url: GOSPEL_ART_SHARE_URL,
+					});
+					return;
+				} catch (error) {
+					if (error.name === 'AbortError') return;
+				}
+			}
+			await copyShareLink();
+		}
+
+		nativeShareButtons.forEach((button) => button.addEventListener('click', sharePage));
+		copyButtons.forEach((button) => button.addEventListener('click', copyShareLink));
+	</script>
+</Layout>
+
+<style>
+	.ga-page {
+		--ga-black: #090907;
+		--ga-ink: #17150f;
+		--ga-paper: #f4ecda;
+		--ga-paper-light: #fffaf0;
+		--ga-gold: #d9b84b;
+		--ga-gold-light: #f2d66d;
+		--ga-sepia: #75694d;
+		--ga-line: rgba(60, 50, 27, 0.2);
+		background: var(--ga-paper);
+		color: var(--ga-ink);
+	}
+
+	.ga-hero {
+		position: relative;
+		overflow: hidden;
+		background:
+			radial-gradient(circle at 16% 18%, rgba(217, 184, 75, 0.18), transparent 34%),
+			radial-gradient(circle at 92% 84%, rgba(255, 255, 255, 0.08), transparent 30%),
+			linear-gradient(140deg, #050504 0%, #242018 58%, #75694d 100%);
+		color: #fff;
+	}
+
+	.ga-hero::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background-image:
+			linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+			linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+		background-size: 44px 44px;
+		mask-image: linear-gradient(90deg, #000, transparent 76%);
+		pointer-events: none;
+	}
+
+	.ga-hero::after {
+		content: "";
+		position: absolute;
+		inset: auto 0 0;
+		height: 8px;
+		background: linear-gradient(90deg, #6f5b21, var(--ga-gold-light), #6f5b21);
+	}
+
+	.ga-hero-inner {
+		position: relative;
+		z-index: 1;
+		display: grid;
+		grid-template-columns: minmax(0, 1.12fr) minmax(300px, 430px);
+		gap: clamp(34px, 6vw, 76px);
+		align-items: center;
+		width: min(1160px, 100%);
+		min-height: min(850px, calc(100svh - 90px));
+		margin: 0 auto;
+		padding: 64px 20px 78px;
+		box-sizing: border-box;
+	}
+
+	.ga-kicker,
+	.ga-section-head > p,
+	.ga-contact > p {
+		color: var(--ga-gold-light);
+		font-family: var(--font-head);
+		font-size: 0.82rem;
+		font-weight: 900;
+		letter-spacing: 0.14em;
+		line-height: 1.3;
+	}
+
+	.ga-hero h1 {
+		margin-top: 12px;
+		color: var(--ga-gold-light);
+		font-family: var(--font-serif);
+		font-size: clamp(4.4rem, 10vw, 8.6rem);
+		font-weight: 800;
+		letter-spacing: -0.045em;
+		line-height: 0.88;
+		text-shadow: 0 5px 28px rgba(0, 0, 0, 0.62);
+	}
+
+	.ga-speaker {
+		margin-top: 24px;
+		font-size: clamp(1rem, 2.2vw, 1.3rem);
+		font-weight: 900;
+		letter-spacing: 0.08em;
+	}
+
+	.ga-theme {
+		margin-top: 10px;
+		font-family: var(--font-serif);
+		font-size: clamp(1.75rem, 4vw, 3rem);
+		font-weight: 800;
+		line-height: 1.38;
+	}
+
+	.ga-hero-meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 9px;
+		margin-top: 28px;
+	}
+
+	.ga-hero-meta span,
+	.ga-hero-meta strong {
+		display: inline-flex;
+		align-items: center;
+		min-height: 37px;
+		padding: 0 12px;
+		border: 1px solid rgba(255, 255, 255, 0.28);
+		background: rgba(255, 255, 255, 0.08);
+		font-size: 0.88rem;
+		font-weight: 900;
+		line-height: 1.2;
+	}
+
+	.ga-hero-meta strong {
+		border-color: var(--ga-gold);
+		background: var(--ga-gold);
+		color: var(--ga-black);
+	}
+
+	.ga-actions,
+	.ga-contact-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		margin-top: 28px;
+	}
+
+	.ga-actions a,
+	.ga-contact-links a,
+	.ga-page-nav a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 46px;
+		padding: 0 18px;
+		border: 1px solid rgba(255, 255, 255, 0.38);
+		background: rgba(255, 255, 255, 0.08);
+		color: #fff;
+		font-weight: 900;
+		line-height: 1.2;
+		text-align: center;
+		text-decoration: none;
+	}
+
+	.ga-actions a.primary,
+	.ga-contact-links a,
+	.ga-page-nav a:first-child {
+		border-color: var(--ga-gold);
+		background: var(--ga-gold);
+		color: var(--ga-black);
+	}
+
+	.ga-actions a:hover,
+	.ga-actions a:focus-visible,
+	.ga-contact-links a:hover,
+	.ga-contact-links a:focus-visible,
+	.ga-page-nav a:hover,
+	.ga-page-nav a:focus-visible,
+	.ga-flyer-link:hover,
+	.ga-flyer-link:focus-visible,
+	.ga-share-button:hover,
+	.ga-share-button:focus-visible {
+		outline: 3px solid var(--ga-gold-light);
+		outline-offset: 3px;
+	}
+
+	.ga-poster-frame {
+		margin: 0;
+		transform: rotate(0.7deg);
+	}
+
+	.ga-poster-frame img {
+		display: block;
+		width: 100%;
+		height: auto;
+		border: 7px solid rgba(247, 236, 207, 0.92);
+		box-shadow: 0 30px 75px rgba(0, 0, 0, 0.54);
+		box-sizing: border-box;
+	}
+
+	.ga-poster-frame figcaption {
+		margin-top: 13px;
+		text-align: center;
+	}
+
+	.ga-poster-frame a {
+		color: var(--ga-gold-light);
+		font-size: 0.86rem;
+		font-weight: 900;
+		text-underline-offset: 4px;
+	}
+
+	.ga-message,
+	.ga-detail,
+	.ga-flyer,
+	.ga-share {
+		box-sizing: border-box;
+		width: min(1040px, 100%);
+		margin: 0 auto;
+		padding: 70px 20px;
+	}
+
+	.ga-message {
+		display: grid;
+		grid-template-columns: minmax(220px, 0.78fr) minmax(0, 1.22fr);
+		gap: clamp(28px, 6vw, 64px);
+		align-items: center;
+	}
+
+	.ga-message .ga-kicker,
+	.ga-flyer .ga-kicker {
+		color: #75601f;
+	}
+
+	.ga-message h2,
+	.ga-flyer h2 {
+		margin-top: 10px;
+		font-family: var(--font-serif);
+		font-size: clamp(2.2rem, 5vw, 3.7rem);
+		font-weight: 800;
+		line-height: 1.15;
+	}
+
+	.ga-message > p {
+		font-family: var(--font-serif);
+		font-size: 1.12rem;
+		font-weight: 700;
+		line-height: 2;
+	}
+
+	.ga-detail,
+	.ga-share {
+		background: var(--ga-paper-light);
+	}
+
+	.ga-section-head {
+		display: flex;
+		align-items: end;
+		justify-content: space-between;
+		gap: 20px;
+		padding-bottom: 17px;
+		border-bottom: 3px solid var(--ga-ink);
+	}
+
+	.ga-section-head > p {
+		color: #75601f;
+	}
+
+	.ga-section-head h2,
+	.ga-access h2 {
+		font-family: var(--font-head);
+		font-size: clamp(2.15rem, 5vw, 3.5rem);
+		font-weight: 900;
+		line-height: 1;
+	}
+
+	.ga-info {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1px;
+		margin-top: 28px;
+		border: 1px solid var(--ga-line);
+		background: var(--ga-line);
+	}
+
+	.ga-info div {
+		display: grid;
+		gap: 10px;
+		align-content: start;
+		min-height: 130px;
+		padding: 22px;
+		background: #fffdf8;
+	}
+
+	.ga-info dt {
+		color: #75601f;
+		font-family: var(--font-head);
+		font-size: 0.82rem;
+		font-weight: 900;
+	}
+
+	.ga-info dd {
+		font-weight: 800;
+		line-height: 1.75;
+		overflow-wrap: anywhere;
+	}
+
+	.ga-free-entry dd {
+		color: #6e5817;
+		font-size: 1.45rem;
+		font-weight: 900;
+	}
+
+	.ga-access {
+		display: grid;
+		grid-template-columns: minmax(0, 1.3fr) minmax(260px, 0.7fr);
+		gap: clamp(28px, 5vw, 58px);
+		align-items: center;
+		padding: 64px max(20px, calc((100vw - 1040px) / 2));
+		background:
+			radial-gradient(circle at 83% 20%, rgba(217, 184, 75, 0.22), transparent 32%),
+			linear-gradient(135deg, #080806, #29251a 64%, #65583a);
+		color: #fff;
+	}
+
+	.ga-access address {
+		margin-top: 18px;
+		font-style: normal;
+		font-weight: 800;
+		line-height: 1.9;
+	}
+
+	.ga-contact-links a {
+		min-height: 42px;
+		padding-inline: 14px;
+		font-size: 0.86rem;
+	}
+
+	.ga-contact {
+		display: grid;
+		gap: 12px;
+		padding: 26px;
+		border: 1px solid rgba(217, 184, 75, 0.48);
+		background: rgba(0, 0, 0, 0.24);
+	}
+
+	.ga-contact h3 {
+		font-family: var(--font-head);
+		font-size: 1.45rem;
+	}
+
+	.ga-contact strong {
+		font-size: 1.1rem;
+	}
+
+	.ga-contact a {
+		color: var(--ga-gold-light);
+		font-size: 0.84rem;
+		font-weight: 900;
+		overflow-wrap: anywhere;
+		text-underline-offset: 4px;
+	}
+
+	.ga-flyer {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(250px, 360px);
+		gap: clamp(32px, 6vw, 68px);
+		align-items: center;
+	}
+
+	.ga-flyer > div > p:last-child {
+		margin-top: 18px;
+		font-weight: 800;
+		line-height: 1.8;
+	}
+
+	.ga-flyer-link {
+		position: relative;
+		display: block;
+		color: #fff;
+		text-decoration: none;
+		box-shadow: 0 18px 42px rgba(45, 37, 18, 0.25);
+	}
+
+	.ga-flyer-link img {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+
+	.ga-flyer-link span {
+		position: absolute;
+		inset: auto 12px 12px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 42px;
+		background: rgba(8, 8, 6, 0.9);
+		font-size: 0.84rem;
+		font-weight: 900;
+	}
+
+	.ga-share-buttons {
+		display: grid;
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+		gap: 8px;
+		margin-top: 24px;
+	}
+
+	.ga-share-button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		gap: 4px;
+		min-width: 0;
+		min-height: 52px;
+		padding: 8px 10px;
+		border: 1px solid var(--ga-line);
+		background: #fff;
+		color: var(--ga-ink);
+		cursor: pointer;
+		font: inherit;
+		font-family: var(--font-head);
+		font-size: 0.84rem;
+		font-weight: 900;
+		line-height: 1;
+		text-align: center;
+		text-decoration: none;
+	}
+
+	.ga-share-button.native {
+		background: var(--ga-ink);
+		color: #fff;
+	}
+
+	.ga-share-button.line { border-bottom: 3px solid #06c755; }
+	.ga-share-button.x { border-bottom: 3px solid #111; }
+	.ga-share-button.facebook { border-bottom: 3px solid #1877f2; }
+	.ga-share-button.copy { border-bottom: 3px solid var(--ga-gold); }
+
+	.ga-share-button small {
+		display: block;
+		max-width: 100%;
+		overflow: hidden;
+		color: rgba(23, 21, 15, 0.62);
+		font-family: var(--font-sans);
+		font-size: 0.66rem;
+		font-weight: 800;
+		line-height: 1.2;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.ga-share-button.native small { color: rgba(255, 255, 255, 0.72); }
+
+	.ga-page-nav {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 10px;
+		padding: 0 20px 72px;
+		background: var(--ga-paper-light);
+	}
+
+	.ga-page-nav a {
+		border-color: var(--ga-ink);
+		background: transparent;
+		color: var(--ga-ink);
+	}
+
+	@media (max-width: 860px) {
+		.ga-hero-inner,
+		.ga-message,
+		.ga-access,
+		.ga-flyer {
+			grid-template-columns: 1fr;
+		}
+
+		.ga-hero-inner {
+			min-height: 0;
+			padding-top: 48px;
+		}
+
+		.ga-poster-frame {
+			justify-self: center;
+			width: min(520px, 100%);
+			transform: none;
+		}
+
+		.ga-contact {
+			max-width: 520px;
+		}
+
+		.ga-flyer-link {
+			justify-self: center;
+			width: min(400px, 100%);
+		}
+	}
+
+	@media (max-width: 640px) {
+		.ga-hero-inner {
+			padding: 38px 16px 56px;
+		}
+
+		.ga-hero h1 {
+			font-size: clamp(4rem, 23vw, 6.2rem);
+		}
+
+		.ga-theme {
+			font-size: 1.65rem;
+		}
+
+		.ga-hero-meta span,
+		.ga-hero-meta strong,
+		.ga-actions a,
+		.ga-contact-links a {
+			box-sizing: border-box;
+			justify-content: center;
+			width: 100%;
+		}
+
+		.ga-poster-frame img {
+			border-width: 5px;
+		}
+
+		.ga-message,
+		.ga-detail,
+		.ga-flyer,
+		.ga-share {
+			padding: 50px 16px;
+		}
+
+		.ga-section-head {
+			display: block;
+		}
+
+		.ga-section-head h2 {
+			margin-top: 9px;
+		}
+
+		.ga-info {
+			grid-template-columns: 1fr;
+		}
+
+		.ga-info div {
+			min-height: 0;
+			padding: 18px;
+		}
+
+		.ga-access {
+			padding: 50px 16px;
+		}
+
+		.ga-contact {
+			padding: 22px 18px;
+		}
+
+		.ga-share-buttons {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+
+		.ga-page-nav {
+			padding: 0 16px 54px;
+		}
+
+		.ga-page-nav a {
+			box-sizing: border-box;
+			width: 100%;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.ga-page * {
+			scroll-behavior: auto !important;
+			transition: none !important;
+		}
+	}
+</style>

@@ -9,7 +9,7 @@ const fridayNightUrl = 'https://ochanomizu.cc/meeting/fridaynight/';
 const blessingNightUrl = 'https://www.blessingnight.jp';
 const blessingNightKagurazakaAugustUrl = 'https://www.blessingnight.jp/schedule/schedule373';
 const gospelArtTsukubaPoster = '/assets/gospel-art-tsukuba-20260815.jpg';
-const gospelArtTsukubaUrl = gospelArtTsukubaPoster;
+const gospelArtTsukubaUrl = '/gospel-art-tsukuba-20260815/';
 const blessingNightShimokitazawaUrl = '/blessing-night-shimokitazawa-20261009/';
 const blessingNightShimokitazawaPoster = '/assets/blessing-night-shimokitazawa-20261009-front.webp';
 const theEssenceAkitaUrl = '/the-essence-akita-20261114/';
@@ -93,7 +93,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 		</section>
 
 		<section class="calendar-special-event the-essence-akita-feature gospel-art-tsukuba-feature" aria-label="Gospel Art 2026年8月15日 茨城県つくば美術館 特別案内">
-			<a class="calendar-special-link" href={gospelArtTsukubaUrl} target="_blank" rel="noopener noreferrer">
+			<a class="calendar-special-link" href={gospelArtTsukubaUrl}>
 				<span class="calendar-special-media" aria-hidden="true">
 					<img
 						src={gospelArtTsukubaPoster}
@@ -115,7 +115,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 						<span>茨城県つくば美術館</span>
 						<span>入場無料</span>
 					</span>
-					<span class="calendar-special-button">チラシを拡大して見る</span>
+					<span class="calendar-special-button">詳細・アクセス・チラシを見る</span>
 				</span>
 			</a>
 		</section>
@@ -280,7 +280,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 					'会場電話：029-856-3711',
 					'主催・問い合わせ：柴田紀代',
 					'shibata@cosmic-art-mira.moo.jp',
-					'https://arthur-show.com/assets/gospel-art-tsukuba-20260815.jpg',
+					'https://arthur-show.com/gospel-art-tsukuba-20260815/',
 				].join('\n'),
 				location: '茨城県つくば美術館 〒305-0031 茨城県つくば市吾妻2-8',
 				start: {
@@ -585,8 +585,8 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 		function resolveRelatedEventLinks(event) {
 			if (isGospelArtTsukubaEvent(event)) {
 				return [{
-					label: 'Gospel Art チラシを見る',
-					url: '/assets/gospel-art-tsukuba-20260815.jpg',
+					label: 'Gospel Art 詳細・チラシを見る',
+					url: '/gospel-art-tsukuba-20260815/',
 				}];
 			}
 
@@ -620,7 +620,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			return `
 				<div class="event-related-links" aria-label="関連公式リンク">
 					${links.map((link) => `
-						<a href="${link.url}" target="_blank" rel="noopener noreferrer">${escapeHtml(link.label)}</a>
+						<a href="${link.url}"${link.url.startsWith('/') ? '' : ' target="_blank" rel="noopener noreferrer"'}>${escapeHtml(link.label)}</a>
 					`).join('')}
 				</div>
 			`;

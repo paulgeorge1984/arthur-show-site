@@ -8,6 +8,8 @@ const blessingTimeOsakaBanner = '/assets/generated/blessing-time-osaka2026-banne
 const gospelTalkSummerBanner = '/assets/generated/gospel-talk-summer-osaka20260719-banner.webp';
 const theEssenceAkitaBanner = '/assets/the-essence-akita-20261114-og-v3.jpg';
 const blessingNightKagurazakaAugustUrl = 'https://www.blessingnight.jp/schedule/schedule373';
+const gospelArtTsukubaUrl = '/gospel-art-tsukuba-20260815/';
+const gospelArtTsukubaPoster = '/assets/gospel-art-tsukuba-20260815.jpg';
 const blessingNightShimokitazawaPoster = '/assets/blessing-night-shimokitazawa-20261009-front.webp';
 
 // サイトのビルドが実行された現在の時刻を取得
@@ -361,7 +363,7 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 				<span class="home-event-summary-copy">
 					<span class="home-event-summary-kicker">EVENT INFO</span>
 					<strong>イベント案内</strong>
-					<span>8/14 BLESSING NIGHT 神楽坂／10/9 下北沢／11/14 THE ESSENCE</span>
+					<span>8/14 BLESSING NIGHT 神楽坂／8/15 Gospel Art／10/9 下北沢／11/14 THE ESSENCE</span>
 				</span>
 				<span class="home-event-summary-action" aria-hidden="true">
 					<span class="closed">見る</span>
@@ -391,6 +393,35 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 							<span>3,000円（税込／飲食代別途）</span>
 						</div>
 						<span class="blessing-time-feature-button">公式の詳細・申込ページへ</span>
+					</div>
+				</a>
+
+				<a
+					class="blessing-time-feature the-essence-home-feature gospel-art-home-feature"
+					href={gospelArtTsukubaUrl}
+					aria-label="Gospel Art 2026年8月15日 茨城県つくば美術館 特別ページを見る"
+				>
+					<img
+						src={gospelArtTsukubaPoster}
+						alt=""
+						width="905"
+						height="1280"
+						loading="eager"
+						aria-hidden="true"
+					/>
+					<div class="blessing-time-feature-copy">
+						<p class="blessing-time-feature-kicker">THIS SATURDAY / 8.15</p>
+						<h2>Gospel Art</h2>
+						<p>
+							アーサー・ホーランドが語る「神が人類に与えた愛のストーリー」。
+						</p>
+						<div class="blessing-time-feature-meta">
+							<span>2026年8月15日（土）</span>
+							<span>13:30開演</span>
+							<span>茨城県つくば美術館</span>
+							<span>入場無料</span>
+						</div>
+						<span class="blessing-time-feature-button">詳細・アクセス・チラシを見る</span>
 					</div>
 				</a>
 
@@ -1428,6 +1459,38 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 	.blessing-night-home-feature h2 {
 		max-width: 10em;
 		font-size: clamp(3rem, 6.5vw, 4.25rem);
+		line-height: 0.98;
+	}
+
+	.the-essence-home-feature.gospel-art-home-feature {
+		background: #17140d;
+		border-left: 7px solid #d9b84b;
+	}
+
+	.the-essence-home-feature.gospel-art-home-feature > img {
+		background:
+			radial-gradient(circle at 42% 24%, rgba(238, 220, 169, 0.34), transparent 40%),
+			linear-gradient(150deg, #29261e, #817761 58%, #17140d);
+		filter: sepia(0.12) contrast(1.03);
+	}
+
+	.the-essence-home-feature.gospel-art-home-feature .blessing-time-feature-copy {
+		background:
+			radial-gradient(circle at 88% 18%, rgba(217, 184, 75, 0.22), transparent 32%),
+			linear-gradient(135deg, rgba(8, 8, 6, 0.99), rgba(48, 43, 29, 0.96) 60%, rgba(104, 85, 29, 0.78)),
+			#090907;
+	}
+
+	.gospel-art-home-feature .blessing-time-feature-kicker,
+	.gospel-art-home-feature .blessing-time-feature-button {
+		background: #d9b84b;
+		color: #0b0a07;
+	}
+
+	.gospel-art-home-feature h2 {
+		max-width: 8em;
+		color: #f3d36a;
+		font-size: clamp(3rem, 6.5vw, 4.5rem);
 		line-height: 0.98;
 	}
 
