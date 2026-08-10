@@ -424,6 +424,8 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		<script is:inline>
 			(() => {
 				const campaignEnd = new Date('2026-07-20T00:00:00+09:00').getTime();
+				const active = Date.now() < campaignEnd;
+				document.documentElement.classList.toggle('gospel-talk-campaign-visible', active);
 
 				function sendGospelTalkCampaignEvent(eventName, placement) {
 					if (typeof window.gtag !== 'function') return;
@@ -434,7 +436,6 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 				}
 
 				function initializeGospelTalkCampaign() {
-					const active = Date.now() < campaignEnd;
 					document.querySelectorAll('[data-gospel-talk-campaign-window]').forEach((element) => {
 						element.hidden = !active;
 					});
@@ -790,6 +791,7 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		margin: 28px 0 8px;
 	}
 
+	:global(html:not(.gospel-talk-campaign-visible) [data-gospel-talk-campaign-window]),
 	.gospel-talk-home-companion[hidden] {
 		display: none !important;
 	}

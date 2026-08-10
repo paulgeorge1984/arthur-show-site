@@ -24,6 +24,8 @@ const isEventPage = Astro.url.pathname === eventPath;
 <script is:inline>
 	(() => {
 		const campaignEnd = new Date('2026-07-19T00:00:00+09:00').getTime();
+		const active = Date.now() < campaignEnd;
+		document.documentElement.classList.toggle('blessing-campaign-visible', active);
 
 		function sendCampaignEvent(eventName, placement) {
 			if (typeof window.gtag !== 'function') return;
@@ -34,7 +36,6 @@ const isEventPage = Astro.url.pathname === eventPath;
 		}
 
 		function initializeBlessingCampaign() {
-			const active = Date.now() < campaignEnd;
 			const campaignWindows = document.querySelectorAll('[data-blessing-campaign-window]');
 			campaignWindows.forEach((element) => {
 				element.hidden = !active;
@@ -67,6 +68,10 @@ const isEventPage = Astro.url.pathname === eventPath;
 </script>
 
 <style>
+	:global(html:not(.blessing-campaign-visible) [data-blessing-campaign-window]) {
+		display: none !important;
+	}
+
 	.blessing-global-push[hidden] {
 		display: none !important;
 	}

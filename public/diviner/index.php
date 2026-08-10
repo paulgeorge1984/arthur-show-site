@@ -1051,7 +1051,7 @@ $navItems = [
 					<a
 						href="<?= h($item['href']) ?>"
 						class="<?= trim(($item['active'] ? 'active ' : '') . (!empty($item['campaign']) ? 'blessing-nav-item' : '')) ?>"
-						<?= !empty($item['campaign']) ? 'data-blessing-campaign-window data-blessing-campaign-link data-campaign-placement="nav"' : '' ?>
+						<?= !empty($item['campaign']) ? 'hidden data-blessing-campaign-window data-blessing-campaign-link data-campaign-placement="nav"' : '' ?>
 					><?= h($item['label']) ?></a>
 				<?php endforeach; ?>
 			</nav>
@@ -1064,12 +1064,12 @@ $navItems = [
 					<a
 						href="<?= h($item['href']) ?>"
 						class="<?= trim(($item['active'] ? 'active ' : '') . (!empty($item['campaign']) ? 'blessing-nav-item' : '')) ?>"
-						<?= !empty($item['campaign']) ? 'data-blessing-campaign-window data-blessing-campaign-link data-campaign-placement="nav"' : '' ?>
+						<?= !empty($item['campaign']) ? 'hidden data-blessing-campaign-window data-blessing-campaign-link data-campaign-placement="nav"' : '' ?>
 					><?= h($item['label']) ?></a>
 				<?php endforeach; ?>
 			</nav>
 		</div>
-		<aside class="blessing-global-push" aria-label="今週末の特別イベント" data-blessing-campaign-window>
+		<aside class="blessing-global-push" aria-label="今週末の特別イベント" data-blessing-campaign-window hidden>
 			<a class="blessing-global-push-link" href="/blessing-time-osaka2026/" data-blessing-campaign-link data-campaign-placement="sitewide">
 				<span class="blessing-global-push-urgent">今週土曜</span>
 				<span class="blessing-global-push-copy">
