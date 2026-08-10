@@ -7,6 +7,8 @@ const recurringScheduleImage = '/assets/arthur-related-schedule-cycle.jpg';
 const narimasuChurchUrl = 'https://www.narimasu-church.org';
 const fridayNightUrl = 'https://ochanomizu.cc/meeting/fridaynight/';
 const blessingNightUrl = 'https://www.blessingnight.jp';
+const blessingNightShimokitazawaUrl = '/blessing-night-shimokitazawa-20261009/';
+const blessingNightShimokitazawaPoster = '/assets/blessing-night-shimokitazawa-20261009-front.webp';
 const saturdayNightArthurUrl = '/saturday-night-arthur-20260704/';
 const saturdayNightArthurPoster = '/assets/saturday-night-arthur-20260704-poster.webp';
 const theEssenceAkitaUrl = '/the-essence-akita-20261114/';
@@ -71,6 +73,35 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 					</a>
 				</div>
 			</section>
+
+		<section class="calendar-special-event the-essence-akita-feature blessing-night-shimokitazawa-feature" aria-label="BLESSING NIGHT 下北沢 特別案内">
+			<a class="calendar-special-link" href={blessingNightShimokitazawaUrl}>
+				<span class="calendar-special-media" aria-hidden="true">
+					<img
+						src={blessingNightShimokitazawaPoster}
+						alt=""
+						width="1025"
+						height="1280"
+						loading="eager"
+					/>
+				</span>
+				<span class="calendar-special-copy">
+					<span class="calendar-special-label">NEXT EVENT</span>
+					<strong>BLESSING NIGHT 下北沢</strong>
+					<span class="calendar-special-lead">
+						不良牧師アーサー・ホーランドが語る、聖なる夜のトークライブ。
+						音楽ゲストにSEISHI TOYA（遠谷政史）を迎えます。
+					</span>
+					<span class="calendar-special-meta">
+						<span>2026年10月9日（金）</span>
+						<span>OPEN 18:30 / START 19:00</span>
+						<span>Com.Cafe 音倉</span>
+						<span>3,000円（飲食代別途）</span>
+					</span>
+					<span class="calendar-special-button">詳細・ご予約案内を見る</span>
+				</span>
+			</a>
+		</section>
 
 		<section class="calendar-special-event the-essence-akita-feature" aria-label="THE ESSENCE 秋田 特別案内">
 			<a class="calendar-special-link" href={theEssenceAkitaUrl}>
@@ -261,6 +292,24 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			},
 		];
 		const MANUAL_EVENTS = [
+			{
+				id: 'manual-blessing-night-shimokitazawa-2026-10-09',
+				summary: 'BLESSING NIGHT 下北沢',
+				description: [
+					'不良牧師アーサー・ホーランドが語る聖なる夜のトークライブ',
+					'OPEN 18:30 / START 19:00',
+					'音楽ゲスト：SEISHI TOYA（遠谷政史）',
+					'3,000円（飲食代別途）',
+					'Com.Cafe 音倉',
+					'https://arthur-show.com/blessing-night-shimokitazawa-20261009/',
+				].join('\n'),
+				location: 'Com.Cafe 音倉 〒155-0031 東京都世田谷区北沢2-26-23 EL NIU B1F',
+				start: {
+					dateTime: '2026-10-09T19:00:00+09:00',
+					timeZone: TOKYO_TIME_ZONE,
+				},
+				end: null,
+			},
 			{
 				id: 'manual-saturday-night-arthur-2026-07-04',
 				summary: 'Saturday Night Arthur －賛美と御言葉の夕べ－',
@@ -537,6 +586,13 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 		}
 
 		function resolveRelatedEventLinks(event) {
+			if (isBlessingNightShimokitazawaEvent(event)) {
+				return [{
+					label: 'BLESSING NIGHT 下北沢 詳細',
+					url: '/blessing-night-shimokitazawa-20261009/',
+				}];
+			}
+
 			const searchableText = normalizeEventSummary([
 				event.summary || '',
 				textFromHtml(event.description || ''),
@@ -577,6 +633,13 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				&& /(?:blessing\s*night|ブレッシングナイト|ブレッシングナイ)/i.test(searchableText);
 		}
 
+		function isBlessingNightShimokitazawaEvent(event) {
+			const startKey = event.start?.date || getDateKeyFromDate(getEventStart(event));
+			const searchableText = `${event.summary || ''} ${event.description || ''} ${event.location || ''}`;
+			return startKey === '2026-10-09'
+				&& /(?:blessing\s*night|ブレッシングナイト|ブレッシングナイ)/i.test(searchableText);
+		}
+
 		function isSaturdayNightArthurEvent(event) {
 			const startKey = event.start?.date || getDateKeyFromDate(getEventStart(event));
 			const searchableText = `${event.summary || ''} ${event.description || ''} ${event.location || ''}`;
@@ -605,8 +668,23 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			const hasBlessingTimeOsaka = events.some((event) => isBlessingTimeOsakaEvent(event));
 			const hasTheEssenceAkita = events.some((event) => isTheEssenceAkitaEvent(event));
 			const hasGospelTalkSummer = events.some((event) => isGospelTalkSummerEvent(event));
+			const hasBlessingNightShimokitazawa = events.some((event) => isBlessingNightShimokitazawaEvent(event));
 			const gospelTalkManualEvent = manualEventsInRange.find((event) => event.id === 'manual-gospel-talk-summer-osaka-2026-07-19');
+			const blessingNightManualEvent = manualEventsInRange.find((event) => event.id === 'manual-blessing-night-shimokitazawa-2026-10-09');
 			let mergedEvents = events;
+			if (blessingNightManualEvent && hasBlessingNightShimokitazawa) {
+				mergedEvents = mergedEvents.map((event) => {
+					if (!isBlessingNightShimokitazawaEvent(event)) return event;
+					return {
+						...event,
+						summary: blessingNightManualEvent.summary,
+						description: blessingNightManualEvent.description,
+						location: blessingNightManualEvent.location,
+						start: blessingNightManualEvent.start,
+						end: blessingNightManualEvent.end,
+					};
+				});
+			}
 			if (gospelTalkManualEvent && hasGospelTalkSummer) {
 				mergedEvents = mergedEvents.map((event) => {
 					if (!isGospelTalkSummerEvent(event)) return event;
@@ -623,6 +701,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			return [
 				...mergedEvents,
 				...manualEventsInRange.filter((event) => {
+					if (isBlessingNightShimokitazawaEvent(event)) return !hasBlessingNightShimokitazawa;
 					if (isSaturdayNightArthurEvent(event)) return !hasSaturdayNightArthur;
 					if (isBlessingTimeOsakaEvent(event)) return !hasBlessingTimeOsaka;
 					if (isTheEssenceAkitaEvent(event)) return !hasTheEssenceAkita;
@@ -1121,6 +1200,22 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			background:
 				linear-gradient(135deg, rgba(5, 7, 13, 0.98), rgba(6, 47, 120, 0.88) 58%, rgba(237, 16, 109, 0.62)),
 				#05070d;
+		}
+
+		.blessing-night-shimokitazawa-feature .calendar-special-link {
+			background:
+				linear-gradient(135deg, rgba(5, 5, 5, 0.99), rgba(23, 63, 67, 0.9) 58%, rgba(87, 91, 148, 0.68)),
+				#050505;
+		}
+
+		.blessing-night-shimokitazawa-feature .calendar-special-media {
+			background: linear-gradient(150deg, #050505, #173f43 58%, #34375d);
+		}
+
+		.blessing-night-shimokitazawa-feature .calendar-special-label,
+		.blessing-night-shimokitazawa-feature .calendar-special-button {
+			background: #787db4;
+			color: #fff;
 		}
 
 		.calendar-special-link::before {

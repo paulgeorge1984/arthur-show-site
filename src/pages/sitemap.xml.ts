@@ -28,6 +28,7 @@ export async function GET() {
 		{ path: '/the-lords-angels/', changefreq: 'weekly', priority: '0.8' },
 		{ path: '/the-lords-angels/20260704/', changefreq: 'weekly', priority: '0.8' },
 		{ path: '/saturday-night-arthur-20260704/', changefreq: 'weekly', priority: '0.8' },
+		{ path: '/blessing-night-shimokitazawa-20261009/', changefreq: 'weekly', priority: '0.8' },
 		{ path: '/the-essence-akita-20261114/', changefreq: 'weekly', priority: '0.8' },
 		{ path: '/blessing-time-osaka2026/', changefreq: 'weekly', priority: '0.8' },
 		{ path: '/gospel-talk-summer-osaka20260719/', changefreq: 'weekly', priority: '0.8' },

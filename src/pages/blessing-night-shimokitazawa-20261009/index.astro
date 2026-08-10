@@ -1,0 +1,685 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const pageUrl = '/blessing-night-shimokitazawa-20261009/';
+const shareUrl = `https://arthur-show.com${pageUrl}`;
+const eventTitle = 'BLESSING NIGHT 下北沢';
+const eventDescription = '2026年10月9日（金）、下北沢 Com.Cafe 音倉で開催。不良牧師アーサー・ホーランドが語る聖なる夜のトークライブ。音楽ゲストはSEISHI TOYA（遠谷政史）。開場18:30、開演19:00。';
+const posterFront = '/assets/blessing-night-shimokitazawa-20261009-front.webp';
+const posterBack = '/assets/blessing-night-shimokitazawa-20261009-back.webp';
+const socialImage = '/assets/blessing-night-shimokitazawa-20261009-og.webp';
+const officialUrl = 'https://www.blessingnight.jp/';
+const mapUrl = 'https://www.google.com/maps/search/?api=1&query=Com.Cafe%20%E9%9F%B3%E5%80%89%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%B8%96%E7%94%B0%E8%B0%B7%E5%8C%BA%E5%8C%97%E6%B2%A22-26-23';
+const shareTitle = `${eventTitle}｜2026年10月9日（金）`;
+const shareText = [
+	'不良牧師アーサー・ホーランドが語る、聖なる夜のトークライブ。',
+	'音楽ゲスト：SEISHI TOYA（遠谷政史）',
+	'開場18:30／開演19:00・Com.Cafe 音倉',
+].join('\n');
+const encodedShareUrl = encodeURIComponent(shareUrl);
+const encodedXText = encodeURIComponent(`${shareTitle}\n${shareText}\n#BLESSINGNIGHT #アーサーホーランド #下北沢`);
+const encodedLineText = encodeURIComponent(`${shareTitle}\n${shareText}\n${shareUrl}`);
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'Event',
+	name: eventTitle,
+	description: eventDescription,
+	startDate: '2026-10-09T19:00:00+09:00',
+	doorTime: '2026-10-09T18:30:00+09:00',
+	eventStatus: 'https://schema.org/EventScheduled',
+	eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+	image: [
+		`https://arthur-show.com${socialImage}`,
+		`https://arthur-show.com${posterFront}`,
+		`https://arthur-show.com${posterBack}`,
+	],
+	url: shareUrl,
+	isAccessibleForFree: false,
+	location: {
+		'@type': 'Place',
+		name: 'Com.Cafe 音倉',
+		address: {
+			'@type': 'PostalAddress',
+			postalCode: '155-0031',
+			addressCountry: 'JP',
+			addressRegion: '東京都',
+			addressLocality: '世田谷区',
+			streetAddress: '北沢2-26-23 EL NIU B1F',
+		},
+	},
+	performer: [
+		{
+			'@type': 'Person',
+			name: 'アーサー・ホーランド',
+			alternateName: 'Arthur Hollands',
+		},
+		{
+			'@type': 'Person',
+			name: 'SEISHI TOYA',
+			alternateName: '遠谷政史',
+		},
+	],
+	organizer: {
+		'@type': 'Organization',
+		name: 'BLESSING NIGHT',
+		url: officialUrl,
+	},
+	offers: {
+		'@type': 'Offer',
+		price: '3000',
+		priceCurrency: 'JPY',
+		url: officialUrl,
+	},
+};
+---
+
+<Layout
+	title="BLESSING NIGHT 下北沢｜2026年10月9日"
+	description={eventDescription}
+	image={socialImage}
+	imageAlt="BLESSING NIGHT 下北沢。2026年10月9日、Com.Cafe 音倉で開催。"
+	imageWidth={1200}
+	imageHeight={630}
+	imageType="image/webp"
+	ogType="website"
+	canonicalPath={pageUrl}
+	structuredData={structuredData}
+>
+	<article class="bn-page">
+		<section class="bn-hero" aria-labelledby="bn-title">
+			<img class="bn-hero-bg" src={posterFront} alt="" width="1025" height="1280" aria-hidden="true" />
+			<div class="bn-hero-inner">
+				<div class="bn-hero-copy">
+					<p class="bn-kicker">ARTHUR HOLLANDS TALK LIVE / SHIMOKITAZAWA</p>
+					<h1 id="bn-title">BLESSING<br />NIGHT</h1>
+					<p class="bn-place">下北沢</p>
+					<p class="bn-subtitle">不良牧師が語る、聖なる夜のトークライブ。</p>
+					<div class="bn-hero-meta" aria-label="開催情報">
+						<span>2026年10月9日（金）</span>
+						<span>OPEN 18:30 / START 19:00</span>
+						<span>Com.Cafe 音倉</span>
+					</div>
+					<div class="bn-actions">
+						<a class="primary" href="#event-detail">開催概要</a>
+						<a href={mapUrl} target="_blank" rel="noopener noreferrer">Googleマップ</a>
+						<a href={officialUrl} target="_blank" rel="noopener noreferrer">公式サイト</a>
+					</div>
+				</div>
+				<figure class="bn-poster-frame">
+					<img
+						src={posterFront}
+						alt="BLESSING NIGHT 下北沢。2026年10月9日金曜日、18時30分開場、19時開演。アーサー・ホーランド、音楽ゲストSEISHI TOYA。会場はCom.Cafe 音倉。"
+						width="1025"
+						height="1280"
+						loading="eager"
+					/>
+				</figure>
+			</div>
+		</section>
+
+		<section class="bn-message" aria-labelledby="bn-message-title">
+			<div class="bn-section-head">
+				<p>WORDS &amp; MUSIC</p>
+				<h2 id="bn-message-title">心に響く言葉と音楽を。</h2>
+			</div>
+			<div class="bn-prose">
+				<p>
+					10月のBLESSING NIGHTは、下北沢のCom.Cafe 音倉で開催します。
+					不良牧師アーサー・ホーランドが、飾らない言葉で人生と希望を語るトークライブです。
+				</p>
+				<p>
+					音楽ゲストには、ゴスペルシンガーのSEISHI TOYA（遠谷政史）さんをお迎えします。
+					言葉と音楽が響き合う特別な夜を、ぜひ一緒にお過ごしください。
+				</p>
+			</div>
+		</section>
+
+		<section class="bn-guest" aria-labelledby="bn-guest-title">
+			<figure>
+				<img
+					src={posterBack}
+					alt="アーサー・ホーランドと音楽ゲストSEISHI TOYA（遠谷政史）のプロフィール"
+					width="998"
+					height="1280"
+					loading="lazy"
+				/>
+			</figure>
+			<div class="bn-guest-copy">
+				<p class="bn-kicker">MUSIC GUEST</p>
+				<h2 id="bn-guest-title">SEISHI TOYA</h2>
+				<strong>遠谷政史</strong>
+				<p>
+					ゴスペルシンガー、ソングライター、ディレクター。
+					アーサー・ホーランドのトークと、SEISHI TOYAの歌声が重なる一夜をお楽しみください。
+				</p>
+				<a href="#flyers">フライヤー裏面のプロフィールを見る</a>
+			</div>
+		</section>
+
+		<section class="bn-detail" id="event-detail" aria-labelledby="event-detail-title">
+			<div class="bn-section-head">
+				<p>EVENT DETAILS</p>
+				<h2 id="event-detail-title">開催概要</h2>
+			</div>
+			<dl class="bn-info">
+				<div>
+					<dt>イベント名</dt>
+					<dd>BLESSING NIGHT 下北沢</dd>
+				</div>
+				<div>
+					<dt>日時</dt>
+					<dd>2026年10月9日（金）<br />開場 18:30／開演 19:00</dd>
+				</div>
+				<div>
+					<dt>出演</dt>
+					<dd>アーサー・ホーランド<br />音楽ゲスト：SEISHI TOYA（遠谷政史）</dd>
+				</div>
+				<div>
+					<dt>料金</dt>
+					<dd>3,000円<br />※飲食代別途</dd>
+				</div>
+				<div>
+					<dt>会場</dt>
+					<dd>Com.Cafe 音倉</dd>
+				</div>
+				<div>
+					<dt>住所</dt>
+					<dd>〒155-0031<br />東京都世田谷区北沢2-26-23 EL NIU B1F</dd>
+				</div>
+				<div>
+					<dt>ご予約</dt>
+					<dd><a href="tel:0367511311">03-6751-1311</a><br />受付 16:00〜23:00</dd>
+				</div>
+				<div>
+					<dt>メール</dt>
+					<dd>
+						<a href="mailto:info@otokura.jp">info@otokura.jp</a><br />
+						お問い合わせ：<a href="mailto:mag.manaka@gmail.com">mag.manaka@gmail.com</a>（MAG金子）
+					</dd>
+				</div>
+			</dl>
+			<div class="bn-detail-actions">
+				<a class="primary" href={officialUrl} target="_blank" rel="noopener noreferrer">BLESSING NIGHT公式サイト</a>
+				<a href={mapUrl} target="_blank" rel="noopener noreferrer">会場をGoogleマップで見る</a>
+			</div>
+		</section>
+
+		<section class="bn-flyers" id="flyers" aria-labelledby="bn-flyers-title">
+			<div class="bn-section-head">
+				<p>FLYER</p>
+				<h2 id="bn-flyers-title">イベントフライヤー</h2>
+			</div>
+			<div class="bn-flyer-grid">
+				<figure>
+					<img src={posterFront} alt="BLESSING NIGHT 下北沢 イベントフライヤー表面" width="1025" height="1280" loading="lazy" />
+					<figcaption>イベント案内</figcaption>
+				</figure>
+				<figure>
+					<img src={posterBack} alt="アーサー・ホーランド、SEISHI TOYAプロフィール掲載フライヤー" width="998" height="1280" loading="lazy" />
+					<figcaption>出演者プロフィール</figcaption>
+				</figure>
+			</div>
+		</section>
+
+		<section class="bn-share" id="share" aria-labelledby="bn-share-title">
+			<div class="bn-section-head">
+				<p>SHARE</p>
+				<h2 id="bn-share-title">このイベントをシェア</h2>
+			</div>
+			<div class="bn-share-buttons" aria-label="SNS共有ボタン">
+				<button class="bn-share-button native" type="button" data-bn-share-native><span>Share</span><small>端末で共有</small></button>
+				<a class="bn-share-button line" href={`https://line.me/R/msg/text/?${encodedLineText}`} target="_blank" rel="noopener noreferrer"><span>LINE</span><small>送る</small></a>
+				<a class="bn-share-button x" href={`https://twitter.com/intent/tweet?text=${encodedXText}&url=${encodedShareUrl}`} target="_blank" rel="noopener noreferrer"><span>X</span><small>投稿</small></a>
+				<a class="bn-share-button facebook" href={`https://www.facebook.com/sharer/sharer.php?u=${encodedShareUrl}`} target="_blank" rel="noopener noreferrer"><span>Facebook</span><small>投稿</small></a>
+				<button class="bn-share-button copy" type="button" data-bn-copy-link><span>Copy</span><small data-bn-copy-status>URLをコピー</small></button>
+			</div>
+		</section>
+
+		<nav class="bn-footer-nav" aria-label="関連ページ">
+			<a href="/calendar/">カレンダーを見る</a>
+			<a href="/">トップページへ戻る</a>
+		</nav>
+	</article>
+
+	<script is:inline>
+		const BN_SHARE_URL = 'https://arthur-show.com/blessing-night-shimokitazawa-20261009/';
+		const BN_SHARE_TITLE = 'BLESSING NIGHT 下北沢｜2026年10月9日（金）';
+		const BN_SHARE_TEXT = [
+			'不良牧師アーサー・ホーランドが語る、聖なる夜のトークライブ。',
+			'音楽ゲスト：SEISHI TOYA（遠谷政史）',
+			'開場18:30／開演19:00・Com.Cafe 音倉',
+		].join('\n');
+		const nativeShareButtons = document.querySelectorAll('[data-bn-share-native]');
+		const copyButtons = document.querySelectorAll('[data-bn-copy-link]');
+		const copyStatusNodes = document.querySelectorAll('[data-bn-copy-status]');
+
+		function setCopyStatus(label) {
+			copyStatusNodes.forEach((node) => { node.textContent = label; });
+		}
+
+		function fallbackCopyText(text) {
+			const textarea = document.createElement('textarea');
+			textarea.value = text;
+			textarea.setAttribute('readonly', '');
+			textarea.style.position = 'fixed';
+			textarea.style.top = '-1000px';
+			document.body.appendChild(textarea);
+			textarea.select();
+			let copied = false;
+			try { copied = document.execCommand('copy'); } catch { copied = false; }
+			textarea.remove();
+			return copied;
+		}
+
+		async function copyShareLink() {
+			const message = `${BN_SHARE_TITLE}\n${BN_SHARE_TEXT}\n${BN_SHARE_URL}`;
+			try {
+				if (navigator.clipboard?.writeText) await navigator.clipboard.writeText(message);
+				else if (!fallbackCopyText(message)) throw new Error('copy unavailable');
+				setCopyStatus('コピーしました');
+				setTimeout(() => setCopyStatus('URLをコピー'), 1800);
+			} catch {
+				if (fallbackCopyText(message)) {
+					setCopyStatus('コピーしました');
+					setTimeout(() => setCopyStatus('URLをコピー'), 1800);
+					return;
+				}
+				setCopyStatus('コピーできませんでした');
+			}
+		}
+
+		async function sharePage() {
+			if (navigator.share) {
+				try {
+					await navigator.share({ title: BN_SHARE_TITLE, text: BN_SHARE_TEXT, url: BN_SHARE_URL });
+					return;
+				} catch (error) {
+					if (error.name === 'AbortError') return;
+				}
+			}
+			await copyShareLink();
+		}
+
+		nativeShareButtons.forEach((button) => button.addEventListener('click', sharePage));
+		copyButtons.forEach((button) => button.addEventListener('click', copyShareLink));
+	</script>
+</Layout>
+
+<style>
+	.bn-page {
+		--bn-black: #070707;
+		--bn-ink: #111827;
+		--bn-paper: #f5f3ee;
+		--bn-blue: #575b94;
+		--bn-teal: #173f43;
+		--bn-gold: #c7a15a;
+		background: var(--bn-paper);
+		color: var(--bn-ink);
+	}
+
+	.bn-hero {
+		position: relative;
+		overflow: hidden;
+		min-height: min(860px, calc(100svh - 90px));
+		background: var(--bn-black);
+		color: #fff;
+	}
+
+	.bn-hero::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		z-index: 1;
+		background:
+			linear-gradient(90deg, rgba(5, 5, 5, 0.96), rgba(5, 5, 5, 0.78) 52%, rgba(5, 5, 5, 0.48)),
+			linear-gradient(0deg, rgba(5, 5, 5, 0.8), transparent 58%);
+		pointer-events: none;
+	}
+
+	.bn-hero::after {
+		content: "";
+		position: absolute;
+		inset: auto 0 0;
+		z-index: 3;
+		height: 8px;
+		background: linear-gradient(90deg, var(--bn-gold), var(--bn-blue), var(--bn-teal));
+	}
+
+	.bn-hero-bg {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center 34%;
+		filter: blur(2px) saturate(0.82);
+		transform: scale(1.04);
+	}
+
+	.bn-hero-inner {
+		position: relative;
+		z-index: 2;
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(300px, 430px);
+		gap: clamp(34px, 6vw, 70px);
+		align-items: center;
+		width: min(1120px, 100%);
+		min-height: inherit;
+		margin: 0 auto;
+		padding: 64px 20px 74px;
+	}
+
+	.bn-kicker,
+	.bn-section-head > p {
+		color: var(--bn-gold);
+		font-family: var(--font-head);
+		font-size: 0.86rem;
+		font-weight: 900;
+		letter-spacing: 0.08em;
+		line-height: 1.3;
+	}
+
+	.bn-hero h1 {
+		margin-top: 14px;
+		font-family: var(--font-head);
+		font-size: clamp(4.1rem, 9vw, 7.1rem);
+		font-weight: 900;
+		letter-spacing: -0.035em;
+		line-height: 0.82;
+		text-shadow: 0 4px 32px rgba(0, 0, 0, 0.6);
+	}
+
+	.bn-place {
+		width: fit-content;
+		margin-top: 20px;
+		padding: 7px 14px;
+		background: var(--bn-blue);
+		font-size: clamp(1.45rem, 4vw, 2.4rem);
+		font-weight: 900;
+		line-height: 1;
+	}
+
+	.bn-subtitle {
+		max-width: 30em;
+		margin-top: 24px;
+		font-family: var(--font-serif);
+		font-size: clamp(1.12rem, 2.4vw, 1.55rem);
+		font-weight: 900;
+		line-height: 1.65;
+	}
+
+	.bn-hero-meta,
+	.bn-actions,
+	.bn-detail-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 9px;
+		margin-top: 26px;
+	}
+
+	.bn-hero-meta span {
+		display: inline-flex;
+		align-items: center;
+		min-height: 35px;
+		padding: 0 12px;
+		border: 1px solid rgba(255, 255, 255, 0.28);
+		background: rgba(255, 255, 255, 0.09);
+		font-weight: 900;
+		line-height: 1.2;
+	}
+
+	.bn-actions a,
+	.bn-detail-actions a,
+	.bn-guest-copy a,
+	.bn-footer-nav a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 46px;
+		padding: 0 18px;
+		border: 1px solid currentColor;
+		color: inherit;
+		font-weight: 900;
+		line-height: 1.2;
+		text-align: center;
+		text-decoration: none;
+	}
+
+	.bn-actions a.primary,
+	.bn-detail-actions a.primary {
+		border-color: var(--bn-gold);
+		background: var(--bn-gold);
+		color: #090909;
+	}
+
+	.bn-poster-frame,
+	.bn-guest figure,
+	.bn-flyer-grid figure {
+		margin: 0;
+	}
+
+	.bn-poster-frame img {
+		display: block;
+		width: 100%;
+		height: auto;
+		border: 7px solid rgba(255, 255, 255, 0.92);
+		box-shadow: 0 28px 72px rgba(0, 0, 0, 0.56);
+		transform: rotate(1deg);
+	}
+
+	.bn-message,
+	.bn-detail,
+	.bn-flyers,
+	.bn-share {
+		box-sizing: border-box;
+		width: min(1040px, 100%);
+		margin: 0 auto;
+		padding: 70px 20px;
+	}
+
+	.bn-section-head {
+		display: flex;
+		align-items: end;
+		justify-content: space-between;
+		gap: 24px;
+		padding-bottom: 16px;
+		border-bottom: 3px solid var(--bn-ink);
+	}
+
+	.bn-section-head h2,
+	.bn-guest-copy h2 {
+		font-family: var(--font-head);
+		font-size: clamp(2.25rem, 5vw, 3.3rem);
+		font-weight: 900;
+		letter-spacing: -0.02em;
+		line-height: 1;
+	}
+
+	.bn-prose {
+		display: grid;
+		gap: 18px;
+		max-width: 800px;
+		margin-top: 28px;
+	}
+
+	.bn-prose p,
+	.bn-guest-copy > p:last-of-type {
+		font-size: 1.06rem;
+		font-weight: 800;
+		line-height: 1.95;
+	}
+
+	.bn-guest {
+		display: grid;
+		grid-template-columns: minmax(280px, 0.92fr) minmax(0, 1.08fr);
+		gap: clamp(28px, 6vw, 70px);
+		align-items: center;
+		padding: 70px max(20px, calc((100vw - 1040px) / 2));
+		background: linear-gradient(135deg, #071010, #173f43 62%, #202044);
+		color: #fff;
+	}
+
+	.bn-guest figure img {
+		display: block;
+		width: 100%;
+		height: auto;
+		border: 6px solid rgba(255, 255, 255, 0.9);
+		box-shadow: 0 22px 58px rgba(0, 0, 0, 0.42);
+	}
+
+	.bn-guest-copy {
+		display: grid;
+		gap: 16px;
+	}
+
+	.bn-guest-copy strong {
+		color: rgba(255, 255, 255, 0.76);
+		font-size: 1.2rem;
+	}
+
+	.bn-guest-copy a {
+		width: fit-content;
+		margin-top: 8px;
+	}
+
+	.bn-info {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1px;
+		margin-top: 28px;
+		border: 1px solid rgba(17, 24, 39, 0.14);
+		background: rgba(17, 24, 39, 0.14);
+	}
+
+	.bn-info div {
+		display: grid;
+		gap: 9px;
+		align-content: start;
+		min-height: 132px;
+		padding: 22px;
+		background: #fff;
+	}
+
+	.bn-info dt {
+		color: var(--bn-blue);
+		font-family: var(--font-head);
+		font-weight: 900;
+	}
+
+	.bn-info dd {
+		font-weight: 800;
+		line-height: 1.7;
+		overflow-wrap: anywhere;
+	}
+
+	.bn-info a {
+		color: var(--bn-teal);
+	}
+
+	.bn-detail-actions a:not(.primary),
+	.bn-footer-nav a {
+		background: #fff;
+		color: var(--bn-ink);
+	}
+
+	.bn-flyers {
+		padding-top: 30px;
+	}
+
+	.bn-flyer-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 24px;
+		margin-top: 28px;
+	}
+
+	.bn-flyer-grid img {
+		display: block;
+		width: 100%;
+		height: auto;
+		border: 6px solid #fff;
+		box-shadow: 0 18px 42px rgba(0, 0, 0, 0.16);
+	}
+
+	.bn-flyer-grid figcaption {
+		margin-top: 10px;
+		color: #5f6672;
+		font-size: 0.86rem;
+		font-weight: 900;
+		text-align: center;
+	}
+
+	.bn-share-buttons {
+		display: grid;
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+		gap: 8px;
+		margin-top: 22px;
+	}
+
+	.bn-share-button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		gap: 3px;
+		min-height: 52px;
+		min-width: 0;
+		padding: 8px 10px;
+		border: 1px solid rgba(17, 24, 39, 0.16);
+		background: #fff;
+		color: var(--bn-ink);
+		cursor: pointer;
+		font: inherit;
+		font-family: var(--font-head);
+		font-size: 0.82rem;
+		font-weight: 900;
+		text-align: center;
+		text-decoration: none;
+	}
+
+	.bn-share-button.native { background: var(--bn-blue); color: #fff; }
+	.bn-share-button.line { border-bottom: 3px solid #06c755; }
+	.bn-share-button.x { border-bottom: 3px solid #111; }
+	.bn-share-button.facebook { border-bottom: 3px solid #1877f2; }
+	.bn-share-button.copy { border-bottom: 3px solid var(--bn-gold); }
+	.bn-share-button small { color: #69707c; font-size: 0.66rem; }
+	.bn-share-button.native small { color: rgba(255, 255, 255, 0.78); }
+
+	.bn-footer-nav {
+		display: flex;
+		justify-content: center;
+		gap: 10px;
+		padding: 0 20px 70px;
+	}
+
+	@media (max-width: 860px) {
+		.bn-hero { min-height: 0; }
+		.bn-hero-inner,
+		.bn-guest { grid-template-columns: 1fr; }
+		.bn-poster-frame { justify-self: center; width: min(560px, 100%); }
+		.bn-poster-frame img { transform: none; }
+		.bn-guest figure { width: min(620px, 100%); margin: 0 auto; }
+	}
+
+	@media (max-width: 640px) {
+		.bn-hero-inner { padding: 38px 16px 50px; }
+		.bn-hero h1 { font-size: clamp(3.7rem, 19vw, 5.2rem); }
+		.bn-hero-meta span,
+		.bn-actions a,
+		.bn-detail-actions a,
+		.bn-footer-nav a { box-sizing: border-box; width: 100%; }
+		.bn-message,
+		.bn-detail,
+		.bn-flyers,
+		.bn-share { padding: 50px 16px; }
+		.bn-section-head { display: block; }
+		.bn-section-head h2 { margin-top: 7px; line-height: 1.08; }
+		.bn-guest { padding: 52px 16px; }
+		.bn-info,
+		.bn-flyer-grid { grid-template-columns: 1fr; }
+		.bn-info div { min-height: 0; padding: 18px; }
+		.bn-share-buttons { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+		.bn-footer-nav { flex-direction: column; padding: 0 16px 50px; }
+	}
+</style>
