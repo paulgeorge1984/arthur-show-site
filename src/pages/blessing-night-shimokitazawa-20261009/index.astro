@@ -4,7 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 const pageUrl = '/blessing-night-shimokitazawa-20261009/';
 const shareUrl = `https://arthur-show.com${pageUrl}`;
 const eventTitle = 'BLESSING NIGHT 下北沢';
-const eventDescription = '2026年10月9日（金）、下北沢 Com.Cafe 音倉で開催。不良牧師アーサー・ホーランドが語る聖なる夜のトークライブ。音楽ゲストはSEISHI TOYA（遠谷政史）。開場18:30、開演19:00。';
+const eventDescription = '2026年10月9日（金）、下北沢 Com.Cafe 音倉で開催。不良牧師アーサー・ホーランドが語る聖なる夜のトークライブ。音楽ゲストはSEISHI TOYA（遠谷政史）。Background VocalsはThe Sistafrees、Keyboardは松崎陽平。開場18:30、開演19:00。';
 const posterFront = '/assets/blessing-night-shimokitazawa-20261009-front.webp';
 const posterBack = '/assets/blessing-night-shimokitazawa-20261009-back.webp';
 const socialImage = '/assets/blessing-night-shimokitazawa-20261009-og.webp';
@@ -14,6 +14,7 @@ const shareTitle = `${eventTitle}｜2026年10月9日（金）`;
 const shareText = [
 	'不良牧師アーサー・ホーランドが語る、聖なる夜のトークライブ。',
 	'音楽ゲスト：SEISHI TOYA（遠谷政史）',
+	'Background Vocals: The Sistafrees / Keyboard: 松崎陽平',
 	'開場18:30／開演19:00・Com.Cafe 音倉',
 ].join('\n');
 const encodedShareUrl = encodeURIComponent(shareUrl);
@@ -58,6 +59,15 @@ const structuredData = {
 			'@type': 'Person',
 			name: 'SEISHI TOYA',
 			alternateName: '遠谷政史',
+		},
+		{
+			'@type': 'MusicGroup',
+			name: 'The Sistafrees',
+		},
+		{
+			'@type': 'Person',
+			name: '松崎陽平',
+			jobTitle: 'Keyboard',
 		},
 	],
 	organizer: {
@@ -130,6 +140,7 @@ const structuredData = {
 				</p>
 				<p>
 					音楽ゲストには、ゴスペルシンガーのSEISHI TOYA（遠谷政史）さんをお迎えします。
+					Background VocalsはThe Sistafrees、Keyboardは松崎陽平です。
 					言葉と音楽が響き合う特別な夜を、ぜひ一緒にお過ごしください。
 				</p>
 			</div>
@@ -153,6 +164,10 @@ const structuredData = {
 					ゴスペルシンガー、ソングライター、ディレクター。
 					アーサー・ホーランドのトークと、SEISHI TOYAの歌声が重なる一夜をお楽しみください。
 				</p>
+				<p class="bn-guest-credits">
+					Background Vocals: The Sistafrees<br />
+					Keyboard: 松崎陽平
+				</p>
 				<a href="#flyers">フライヤー裏面のプロフィールを見る</a>
 			</div>
 		</section>
@@ -173,7 +188,12 @@ const structuredData = {
 				</div>
 				<div>
 					<dt>出演</dt>
-					<dd>アーサー・ホーランド<br />音楽ゲスト：SEISHI TOYA（遠谷政史）</dd>
+					<dd>
+						アーサー・ホーランド<br />
+						音楽ゲスト：SEISHI TOYA（遠谷政史）<br />
+						Background Vocals: The Sistafrees<br />
+						Keyboard: 松崎陽平
+					</dd>
 				</div>
 				<div>
 					<dt>料金</dt>
@@ -248,6 +268,7 @@ const structuredData = {
 		const BN_SHARE_TEXT = [
 			'不良牧師アーサー・ホーランドが語る、聖なる夜のトークライブ。',
 			'音楽ゲスト：SEISHI TOYA（遠谷政史）',
+			'Background Vocals: The Sistafrees / Keyboard: 松崎陽平',
 			'開場18:30／開演19:00・Com.Cafe 音倉',
 		].join('\n');
 		const nativeShareButtons = document.querySelectorAll('[data-bn-share-native]');
@@ -536,6 +557,14 @@ const structuredData = {
 	.bn-guest-copy strong {
 		color: rgba(255, 255, 255, 0.76);
 		font-size: 1.2rem;
+	}
+
+	.bn-guest-credits {
+		color: var(--bn-gold);
+		font-family: var(--font-head);
+		font-size: 1.02rem;
+		font-weight: 900;
+		line-height: 1.8;
 	}
 
 	.bn-guest-copy a {
