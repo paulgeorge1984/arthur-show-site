@@ -1,4 +1,4 @@
-const CACHE_NAME = 'arthur-calendar-v1';
+const CACHE_NAME = 'arthur-calendar-v2';
 const APP_SHELL = [
 	'/',
 	'/calendar/',
