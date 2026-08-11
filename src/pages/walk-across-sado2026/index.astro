@@ -64,11 +64,11 @@ const routes = [
 ] as const;
 
 const stops = [
-	{ marker: '発着', name: '両津夷', lat: 38.0876397, lng: 138.434285, direction: 'left' },
-	{ marker: '1', name: '長石海水浴場', lat: 37.9705636, lng: 138.3432168, direction: 'left' },
-	{ marker: '2', name: '小木町', lat: 37.8156801, lng: 138.2804536, direction: 'top' },
-	{ marker: '3', name: '松ケ崎西側', lat: 37.9191723, lng: 138.4890406, direction: 'right' },
-	{ marker: '4', name: '羽二生', lat: 38.0727054, lng: 138.5250852, direction: 'right' },
+	{ marker: '1', name: '両津夷', lat: 38.0876397, lng: 138.434285, direction: 'left' },
+	{ marker: '2', name: '長石海水浴場', lat: 37.9705636, lng: 138.3432168, direction: 'left' },
+	{ marker: '3', name: '小木町', lat: 37.8156801, lng: 138.2804536, direction: 'top' },
+	{ marker: '4', name: '松ケ崎西側', lat: 37.9191723, lng: 138.4890406, direction: 'right' },
+	{ marker: '5', name: '羽二生', lat: 38.0727054, lng: 138.5250852, direction: 'right' },
 ] as const;
 
 const mapRoutes = routes.map(({ day, from, to, color, coordinates }) => ({ day, from, to, color, coordinates }));
