@@ -1,0 +1,143 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const flyerPath = '/walk-across-sado/sado-island-2026-flyer.jpg';
+const pageTitle = 'SADO ISLAND 2026';
+const pageDescription = '佐渡島十字架行進 2026のお知らせ。';
+---
+
+<Layout
+	title={pageTitle}
+	description={pageDescription}
+	image={flyerPath}
+	imageAlt="SADO ISLAND 2026 佐渡島十字架行進の告知チラシ"
+	imageWidth={904}
+	imageHeight={1280}
+	imageType="image/jpeg"
+	canonicalPath="/walk-across-sado/"
+	noindex={true}
+	hideChrome={true}
+	>
+	<div class="notice-page">
+		<div class="notice-shell">
+			<header class="notice-header">
+				<p class="notice-kicker">PRIVATE PREVIEW / SADO ISLAND 2026</p>
+				<h1>佐渡島十字架行進 2026</h1>
+				<p class="notice-lead">アーサー・ホーランドとともに歩く、佐渡島五日間の行進のお知らせです。</p>
+			</header>
+
+			<figure class="flyer-frame">
+				<a href={flyerPath} target="_blank" rel="noreferrer" aria-label="チラシ画像を開く">
+					<img src={flyerPath} alt="SADO ISLAND 2026 佐渡島十字架行進の告知チラシ" width="904" height="1280" fetchpriority="high" />
+				</a>
+			</figure>
+
+			<footer class="notice-note">
+				<p>このページは事前確認用です。</p>
+				<p>正式公開・サイトメニューへの掲載は、確認後に行います。</p>
+			</footer>
+		</div>
+	</div>
+</Layout>
+
+<style>
+	:global(html) {
+		background: #061119;
+	}
+
+	:global(body) {
+		margin: 0;
+		background: #061119;
+	}
+
+	.notice-page {
+		min-height: 100vh;
+		background:
+			radial-gradient(circle at 50% 0%, rgba(28, 100, 140, 0.34), transparent 42rem),
+			#061119;
+		color: #f4f7f8;
+		padding: clamp(32px, 7vw, 86px) 18px 72px;
+	}
+
+	.notice-shell {
+		width: min(100%, 920px);
+		margin: 0 auto;
+	}
+
+	.notice-header {
+		text-align: center;
+		margin: 0 auto clamp(24px, 5vw, 48px);
+	}
+
+	.notice-kicker {
+		margin: 0 0 14px;
+		color: #e2b94e;
+		font-family: 'Oswald', 'Arial Narrow', sans-serif;
+		font-size: clamp(0.72rem, 1.6vw, 0.94rem);
+		font-weight: 700;
+		letter-spacing: 0.18em;
+	}
+
+	h1 {
+		margin: 0;
+		font-family: 'Noto Sans JP', sans-serif;
+		font-size: clamp(1.65rem, 5vw, 3.7rem);
+		font-weight: 900;
+		letter-spacing: 0.06em;
+		line-height: 1.18;
+	}
+
+	.notice-lead {
+		margin: 16px auto 0;
+		color: rgba(244, 247, 248, 0.78);
+		font-family: 'Noto Sans JP', sans-serif;
+		font-size: clamp(0.88rem, 2vw, 1.08rem);
+		line-height: 1.9;
+	}
+
+	.flyer-frame {
+		width: min(100%, 904px);
+		margin: 0 auto;
+		padding: clamp(8px, 1.4vw, 14px);
+		background: linear-gradient(145deg, #f6f1e4, #c7a75d 52%, #f6f1e4);
+		box-shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
+	}
+
+	.flyer-frame a,
+	.flyer-frame img {
+		display: block;
+	}
+
+	.flyer-frame img {
+		width: 100%;
+		height: auto;
+		background: #f4f1e7;
+	}
+
+	.notice-note {
+		margin: clamp(24px, 5vw, 44px) auto 0;
+		color: rgba(244, 247, 248, 0.64);
+		font-family: 'Noto Sans JP', sans-serif;
+		font-size: 0.82rem;
+		line-height: 1.8;
+		text-align: center;
+	}
+
+	.notice-note p {
+		margin: 0;
+	}
+
+	@media (max-width: 560px) {
+		.notice-page {
+			padding-inline: 10px;
+		}
+
+		.notice-header {
+			margin-bottom: 22px;
+		}
+
+		.flyer-frame {
+			padding: 6px;
+		}
+	}
+</style>
