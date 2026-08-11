@@ -1,0 +1,375 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const siteUrl = 'https://arthur-show.com';
+const canonicalPath = '/walk-across-sado2026/';
+
+const routes = [
+	{
+		day: 'DAY 01',
+		date: '8月23日（日）',
+		from: '両津夷',
+		to: '長石海水浴場',
+		distance: '16.7km',
+		color: '#d71920',
+		mapUrl: 'https://www.google.com/maps/dir/?api=1&origin=38.0876397,138.434285&destination=37.9705636,138.3432168&travelmode=walking',
+		coordinates: [
+			[38.08764, 138.43429],
+			[38.06105, 138.42088],
+			[38.03770, 138.39454],
+			[38.01176, 138.37680],
+			[37.98964, 138.35047],
+			[37.97063, 138.34316],
+		],
+	},
+	{
+		day: 'DAY 02',
+		date: '8月24日（月）',
+		from: '長石海水浴場',
+		to: '小木町',
+		distance: '22.5km',
+		color: '#b76600',
+		mapUrl: 'https://www.google.com/maps/dir/?api=1&origin=37.9705636,138.3432168&destination=37.8156801,138.2804536&travelmode=walking&waypoints=37.9053519,138.2953834%7C37.8500000,138.2770000',
+		coordinates: [
+			[37.97063, 138.34316],
+			[37.95200, 138.34070],
+			[37.93000, 138.32000],
+			[37.90535, 138.29538],
+			[37.88000, 138.28500],
+			[37.85000, 138.27700],
+			[37.81572, 138.28038],
+		],
+	},
+	{
+		day: 'DAY 03',
+		date: '8月25日（火）',
+		from: '小木町',
+		to: '松ケ崎西側',
+		distance: '24.3km',
+		color: '#14817f',
+		mapUrl: 'https://www.google.com/maps/dir/?api=1&origin=37.8156801,138.2804536&destination=37.9191723,138.4890406&travelmode=walking',
+		coordinates: [
+			[37.81572, 138.28038],
+			[37.82676, 138.30424],
+			[37.84268, 138.37881],
+			[37.86074, 138.39963],
+			[37.88090, 138.43042],
+			[37.90061, 138.47143],
+			[37.91922, 138.48898],
+		],
+	},
+	{
+		day: 'DAY 04',
+		date: '8月26日（水）',
+		from: '松ケ崎西側',
+		to: '羽二生',
+		distance: '25.7km',
+		color: '#356fab',
+		mapUrl: 'https://www.google.com/maps/dir/?api=1&origin=37.9191723,138.4890406&destination=38.0727054,138.5250852&travelmode=walking&waypoints=37.9438422,138.5003471%7C37.9622000,138.5108399%7C37.9939475,138.5298300%7C38.0400000,138.5230000',
+		coordinates: [
+			[37.91922, 138.48898],
+			[37.93200, 138.49500],
+			[37.94384, 138.50035],
+			[37.96220, 138.51084],
+			[37.97773, 138.51940],
+			[37.99395, 138.52983],
+			[38.01500, 138.52800],
+			[38.04000, 138.52300],
+			[38.06000, 138.52600],
+			[38.07269, 138.52508],
+		],
+	},
+	{
+		day: 'DAY 05',
+		date: '8月27日（木）',
+		from: '羽二生',
+		to: '両津夷',
+		distance: '9.8km',
+		color: '#7652a8',
+		mapUrl: 'https://www.google.com/maps/dir/?api=1&origin=38.0727054,138.5250852&destination=38.0876209,138.4343011&travelmode=walking',
+		coordinates: [
+			[38.07269, 138.52508],
+			[38.06924, 138.50726],
+			[38.06472, 138.47045],
+			[38.07157, 138.44660],
+			[38.08118, 138.43558],
+			[38.08762, 138.43430],
+		],
+	},
+] as const;
+
+const stops = [
+	{ label: '発着', name: '両津夷', position: [38.08764, 138.43429] },
+	{ label: '1', name: '長石海水浴場', position: [37.97063, 138.34316] },
+	{ label: '2', name: '小木町', position: [37.81572, 138.28038] },
+	{ label: '3', name: '松ケ崎西側', position: [37.91922, 138.48898] },
+	{ label: '4', name: '羽二生', position: [38.07269, 138.52508] },
+] as const;
+
+const mapRoutes = routes.map(({ day, from, to, color, coordinates }) => ({
+	day,
+	from,
+	to,
+	color,
+	coordinates,
+}));
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'Event',
+	name: '佐渡島十字架行進 2026',
+	description: 'アーサー・ホーランドが十字架を携え、佐渡島を5日間歩く祈りの旅。',
+	startDate: '2026-08-23',
+	endDate: '2026-08-27',
+	eventStatus: 'https://schema.org/EventScheduled',
+	location: { '@type': 'Place', name: '佐渡島', address: '新潟県佐渡市' },
+	organizer: { '@type': 'Person', name: 'アーサー・ホーランド', url: siteUrl },
+	url: `${siteUrl}${canonicalPath}`,
+};
+---
+
+<Layout
+	title="佐渡島十字架行進 2026"
+	description="2026年8月23日から27日まで、アーサー・ホーランドが十字架を携えて佐渡島を歩く5日間。海岸線と主要道路を優先した行進ルート、日程、Googleマップを掲載します。"
+	canonicalPath={canonicalPath}
+	image="/og-image.jpg"
+	imageAlt="佐渡島十字架行進 2026"
+	ogType="website"
+	structuredData={structuredData}
+>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+
+	<section class="sado-page" id="top">
+		<nav class="sado-local-nav" aria-label="佐渡島ページ内メニュー">
+			<a href="#about">概要</a>
+			<a href="#route">行進ルート</a>
+			<a href="#schedule">5日間の予定</a>
+			<a href="#notes">注意事項</a>
+		</nav>
+
+		<header class="sado-hero">
+			<div class="sado-hero-inner">
+				<div>
+					<p class="sado-eyebrow">WALK ACROSS SADO ISLAND 2026</p>
+					<h1>佐渡島を、<br /><span>祈りとともに歩く。</span></h1>
+					<p class="sado-lead">アーサー・ホーランドが十字架を携え、両津を起点に佐渡島の海岸線と町の道をつないで歩きます。</p>
+					<div class="sado-facts" aria-label="行進概要">
+						<div><span>DATE</span><strong>8.23 — 8.27</strong></div>
+						<div><span>DISTANCE</span><strong>約99km / 5 DAYS</strong></div>
+						<div><span>PLACE</span><strong>SADO ISLAND, NIIGATA</strong></div>
+					</div>
+				</div>
+				<div class="sado-cross-panel" aria-hidden="true">
+					<span class="sado-cross-vertical"></span>
+					<span class="sado-cross-horizontal"></span>
+					<p>YOU ARE LOVED</p>
+				</div>
+			</div>
+		</header>
+
+		<section class="sado-intro" id="about" aria-labelledby="about-title">
+			<div class="sado-wrap">
+				<p class="sado-eyebrow sado-eyebrow-red">THE WALK</p>
+				<h2 id="about-title">距離だけを縮めるのではなく、<br />歩ける道を選ぶ。</h2>
+				<p>佐渡島の行進ルートは、直線距離だけで山側へ寄せるのではなく、海岸線・集落・主要道路を優先した「歩くための概略線」として整理しました。実際の歩道、安全、天候による変更は、各日のGoogleマップと現地判断で確認します。</p>
+			</div>
+		</section>
+
+		<section class="sado-route-section" id="route" aria-labelledby="route-title">
+			<div class="sado-wrap">
+				<div class="sado-section-heading">
+					<div>
+						<p class="sado-eyebrow">ROUTE MAP</p>
+						<h2 id="route-title">5日間の歩行ルート</h2>
+					</div>
+					<p>山側へのショートカットを避け、<br />海岸線寄りの道を見える形にしています。</p>
+				</div>
+
+				<div class="sado-map-layout">
+					<div class="sado-map-card">
+						<div id="sado-route-map" class="sado-route-map" role="img" aria-label="佐渡島十字架行進の5日間のルート地図"></div>
+						<p class="sado-map-credit">地図データ © OpenStreetMap contributors</p>
+					</div>
+					<ol class="sado-route-list" aria-label="日別ルート一覧">
+						{routes.map((route) => (
+							<li style={`--route-color:${route.color}`}>
+								<div>
+									<span>{route.day}</span>
+									<strong>{route.from} <i aria-hidden="true">→</i> {route.to}</strong>
+									<small>{route.date} ・ {route.distance}</small>
+								</div>
+								<a href={route.mapUrl} target="_blank" rel="noreferrer">Googleマップ <span aria-hidden="true">↗</span></a>
+							</li>
+						))}
+					</ol>
+				</div>
+				<p class="sado-map-note">※ 地図の線は、平坦路・海岸線寄りを優先して見せる行程の概略線です。Googleマップの経由地点は、山道への短絡を避けるために設定しています。</p>
+			</div>
+		</section>
+
+		<section class="sado-schedule-section" id="schedule" aria-labelledby="schedule-title">
+			<div class="sado-wrap">
+				<div class="sado-section-heading">
+					<div>
+						<p class="sado-eyebrow sado-eyebrow-red">SCHEDULE</p>
+						<h2 id="schedule-title">5日間の予定</h2>
+					</div>
+					<p>両津から南へ、<br />そして東海岸を北へ。</p>
+				</div>
+				<div class="sado-schedule-grid">
+					{routes.map((route, index) => (
+						<article class="sado-day-card" style={`--route-color:${route.color}`}>
+							<div class="sado-day-card-top"><span>{route.day}</span><strong>{route.date}</strong></div>
+							<h3>{route.from} <i aria-hidden="true">→</i> {route.to}</h3>
+							<div class="sado-day-meta"><span>DAY {String(index + 1).padStart(2, '0')}</span><strong>{route.distance}</strong></div>
+							<p>{index === 0 ? '両津から南へ。佐渡での最初の一歩を踏み出します。' : index === 1 ? '西側の海岸線と集落の道をつなぎ、小木を目指します。' : index === 2 ? '小木から東へ。南側の海岸線をつないで歩きます。' : index === 3 ? '東海岸を北へ。海岸線寄りの主要道路を優先します。' : '歩みをつなぎ、出発の地・両津でゴールを迎えます。'}</p>
+							<a href={route.mapUrl} target="_blank" rel="noreferrer">区間をGoogleマップで見る ↗</a>
+						</article>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<section class="sado-notes" id="notes" aria-labelledby="notes-title">
+			<div class="sado-wrap">
+				<p class="sado-eyebrow">ON THE ROAD</p>
+				<h2 id="notes-title">歩みは、状況に合わせて。</h2>
+				<div class="sado-note-grid">
+					<article><strong>01</strong><h3>道路状況を優先</h3><p>工事、通行止め、歩道の有無を現地で確認し、安全な道へ変更します。</p></article>
+					<article><strong>02</strong><h3>天候に合わせて調整</h3><p>出発時刻、休憩、区間は天候と体調を見ながら無理のない形にします。</p></article>
+					<article><strong>03</strong><h3>最終案内は地図で確認</h3><p>各日のGoogleマップを開くと、現在の道路情報と詳細な徒歩案内を確認できます。</p></article>
+				</div>
+				<p class="sado-bottom-note">2026年8月23日（日）— 27日（木）｜佐渡島・新潟県</p>
+			</div>
+		</section>
+	</section>
+
+	<script is:inline src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+	<script is:inline define:vars={{ mapRoutes, stops }}>
+		(() => {
+			const mapElement = document.getElementById('sado-route-map');
+			if (!mapElement || !window.L) return;
+			const map = window.L.map(mapElement, { scrollWheelZoom: false, zoomControl: true });
+			window.L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+				maxZoom: 18,
+				attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap contributors</a>',
+			}).addTo(map);
+			const layer = window.L.featureGroup().addTo(map);
+			mapRoutes.forEach((route) => {
+				window.L.polyline(route.coordinates, { color: route.color, weight: 6, opacity: 0.92, lineCap: 'round', lineJoin: 'round' })
+					.bindTooltip(`${route.day}｜${route.from} → ${route.to}`, { sticky: true, className: 'sado-map-tooltip' })
+					.addTo(layer);
+			});
+			stops.forEach((stop) => {
+				window.L.marker(stop.position, {
+					icon: window.L.divIcon({ className: 'sado-stop-icon', html: `<span>${stop.label}</span>`, iconSize: [38, 38], iconAnchor: [19, 19] }),
+					title: stop.name,
+				}).bindTooltip(stop.name, { permanent: true, direction: 'top', offset: [0, -17], className: 'sado-place-label' }).addTo(layer);
+			});
+			map.fitBounds(layer.getBounds(), { padding: [22, 22] });
+			window.addEventListener('resize', () => map.invalidateSize(), { passive: true });
+		})();
+	</script>
+</Layout>
+
+<style>
+	.sado-page { margin: -22px 0 -80px; background: #f5f0e6; color: #132632; }
+	.sado-wrap { width: min(1180px, calc(100% - 56px)); margin: 0 auto; }
+	.sado-local-nav { position: sticky; top: 82px; z-index: 40; display: flex; justify-content: center; gap: 0; overflow-x: auto; background: #fff; border-bottom: 1px solid #d9d1c4; box-shadow: 0 5px 18px rgba(20, 34, 42, .08); }
+	.sado-local-nav a { flex: 0 0 auto; padding: 14px 19px; color: #355563; font-size: .78rem; font-weight: 900; white-space: nowrap; }
+	.sado-local-nav a:hover { color: #b82622; background: #fbf8f1; }
+	.sado-hero { background: linear-gradient(118deg, #062d3b, #071827 62%, #461417); color: #fff; border-bottom: 5px solid #d7a94a; }
+	.sado-hero-inner { width: min(1180px, calc(100% - 56px)); min-height: 610px; margin: 0 auto; padding: 85px 0 70px; display: grid; grid-template-columns: 1fr 300px; align-items: center; gap: 70px; }
+	.sado-eyebrow { margin: 0; color: #e2bd63; font-family: var(--font-head); font-size: .8rem; font-weight: 900; letter-spacing: .18em; }
+	.sado-eyebrow-red { color: #b82622; }
+	.sado-hero h1 { margin: 20px 0 0; font-family: var(--font-serif); font-size: clamp(2.9rem, 7vw, 6.2rem); font-weight: 800; line-height: 1.13; letter-spacing: -.07em; }
+	.sado-hero h1 span { color: #f0d18e; }
+	.sado-lead { max-width: 690px; margin: 28px 0 0; color: rgba(255,255,255,.75); font-size: 1.05rem; font-weight: 700; line-height: 2; }
+	.sado-facts { margin-top: 42px; padding-top: 22px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid rgba(255,255,255,.2); }
+	.sado-facts div { padding-right: 25px; }
+	.sado-facts div + div { padding-left: 25px; border-left: 1px solid rgba(255,255,255,.16); }
+	.sado-facts span, .sado-facts strong { display: block; }
+	.sado-facts span { color: #e2bd63; font-family: var(--font-head); font-size: .7rem; font-weight: 900; letter-spacing: .14em; }
+	.sado-facts strong { margin-top: 7px; font-size: .85rem; line-height: 1.5; }
+	.sado-cross-panel { width: 260px; height: 360px; position: relative; justify-self: center; border: 1px solid rgba(226,189,99,.55); background: radial-gradient(circle at 50% 38%, rgba(226,189,99,.18), transparent 42%); }
+	.sado-cross-vertical, .sado-cross-horizontal { position: absolute; display: block; background: #e2bd63; box-shadow: 0 0 24px rgba(226,189,99,.26); }
+	.sado-cross-vertical { width: 20px; height: 270px; top: 43px; left: 120px; }
+	.sado-cross-horizontal { width: 150px; height: 20px; top: 122px; left: 55px; }
+	.sado-cross-panel p { position: absolute; right: 19px; bottom: 22px; margin: 0; color: rgba(255,255,255,.65); font-family: var(--font-head); font-size: .65rem; letter-spacing: .18em; }
+	.sado-intro { padding: 95px 0 88px; background: #f5f0e6; }
+	.sado-intro h2, .sado-section-heading h2, .sado-notes h2 { margin: 12px 0 0; font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 3.4rem); line-height: 1.3; letter-spacing: -.06em; }
+	.sado-intro > .sado-wrap > p:last-child { max-width: 800px; margin: 28px 0 0; color: #5f6d74; font-size: .98rem; font-weight: 700; line-height: 2.1; }
+	.sado-route-section { padding: 95px 0 105px; background: #092c39; color: #fff; border-top: 5px solid #d7a94a; border-bottom: 5px solid #d7a94a; }
+	.sado-section-heading { margin-bottom: 38px; display: flex; align-items: end; justify-content: space-between; gap: 30px; }
+	.sado-section-heading > p { margin: 0; color: rgba(255,255,255,.62); font-size: .82rem; font-weight: 700; line-height: 1.8; text-align: right; }
+	.sado-schedule-section .sado-section-heading > p, .sado-intro .sado-section-heading > p { color: #6a767d; }
+	.sado-map-layout { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(300px, .75fr); gap: 20px; align-items: stretch; }
+	.sado-map-card { min-width: 0; padding: 12px; background: #fff; border-radius: 5px; box-shadow: 0 22px 46px rgba(0,0,0,.2); }
+	.sado-route-map { min-height: 650px; width: 100%; background: #b9d9e2; }
+	.sado-map-credit { margin: 8px 4px 0; color: #637278; font-size: .65rem; }
+	.sado-route-list { margin: 0; padding: 0; display: grid; grid-template-rows: repeat(5, 1fr); gap: 10px; list-style: none; }
+	.sado-route-list li { min-width: 0; padding: 20px 18px; display: flex; flex-direction: column; justify-content: space-between; gap: 14px; background: #f7f2e9; color: #132632; border-left: 5px solid var(--route-color); border-radius: 4px; }
+	.sado-route-list li span, .sado-route-list li small { display: block; }
+	.sado-route-list li div > span { color: var(--route-color); font-family: var(--font-head); font-size: .7rem; font-weight: 900; letter-spacing: .13em; }
+	.sado-route-list li strong { display: block; margin-top: 9px; font-family: var(--font-serif); font-size: 1.08rem; line-height: 1.5; }
+	.sado-route-list li strong i { color: #d7a94a; font-style: normal; }
+	.sado-route-list li small { margin-top: 8px; color: #6b777d; font-size: .72rem; }
+	.sado-route-list li a { width: fit-content; color: var(--route-color); font-size: .72rem; font-weight: 900; }
+	.sado-route-list li a:hover { text-decoration: underline; }
+	.sado-map-note { margin: 20px 0 0; color: rgba(255,255,255,.56); font-size: .72rem; line-height: 1.8; }
+	.sado-schedule-section { padding: 100px 0 115px; background: #f5f0e6; }
+	.sado-schedule-section .sado-section-heading h2 { color: #132632; }
+	.sado-schedule-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+	.sado-day-card { min-width: 0; padding: 28px; background: #fff; border-top: 5px solid var(--route-color); border-radius: 5px; box-shadow: 0 15px 35px rgba(20,34,42,.08); }
+	.sado-day-card:last-child { grid-column: 1 / -1; }
+	.sado-day-card-top { display: flex; justify-content: space-between; gap: 18px; align-items: center; }
+	.sado-day-card-top span { color: var(--route-color); font-family: var(--font-head); font-size: .7rem; font-weight: 900; letter-spacing: .15em; }
+	.sado-day-card-top strong { color: #67747a; font-size: .75rem; }
+	.sado-day-card h3 { margin: 22px 0 0; font-family: var(--font-serif); font-size: 1.55rem; line-height: 1.45; }
+	.sado-day-card h3 i { color: #d7a94a; font-style: normal; }
+	.sado-day-meta { margin-top: 21px; display: flex; align-items: baseline; justify-content: space-between; gap: 18px; border-top: 1px solid #e6ded1; padding-top: 14px; }
+	.sado-day-meta span { color: #718087; font-family: var(--font-head); font-size: .7rem; font-weight: 900; letter-spacing: .1em; }
+	.sado-day-meta strong { color: var(--route-color); font-family: var(--font-head); font-size: 1.6rem; }
+	.sado-day-card p { min-height: 52px; margin: 17px 0 0; color: #66747b; font-size: .8rem; font-weight: 700; line-height: 1.9; }
+	.sado-day-card > a { display: inline-flex; margin-top: 14px; color: var(--route-color); font-size: .75rem; font-weight: 900; }
+	.sado-day-card > a:hover { text-decoration: underline; }
+	.sado-notes { padding: 94px 0 110px; background: #071b27; color: #fff; border-top: 5px solid #d7a94a; }
+	.sado-notes h2 { color: #fff; }
+	.sado-note-grid { margin-top: 42px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+	.sado-note-grid article { padding: 25px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.13); border-top: 3px solid #d7a94a; }
+	.sado-note-grid strong { color: #e2bd63; font-family: var(--font-head); font-size: 1.6rem; }
+	.sado-note-grid h3 { margin: 12px 0 0; font-family: var(--font-serif); font-size: 1.18rem; }
+	.sado-note-grid p { margin: 10px 0 0; color: rgba(255,255,255,.62); font-size: .78rem; line-height: 1.9; }
+	.sado-bottom-note { margin: 42px 0 0; color: rgba(255,255,255,.45); font-size: .72rem; text-align: right; }
+	.sado-stop-icon { display: grid; place-items: center; background: #071b27; border: 3px solid #fff; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,.35); }
+	.sado-stop-icon span { color: #fff; font-family: var(--font-head); font-size: .72rem; font-weight: 900; }
+	.sado-map-tooltip, .sado-place-label { font-family: var(--font-sans); font-weight: 700; }
+	.sado-place-label { padding: 4px 7px; border: 0; border-radius: 0; background: #071b27; color: #fff; box-shadow: 0 2px 6px rgba(0,0,0,.25); }
+	.sado-place-label::before { border-top-color: #071b27; }
+	@media (max-width: 860px) {
+		.sado-hero-inner { grid-template-columns: 1fr; gap: 45px; padding-top: 60px; }
+		.sado-cross-panel { width: 180px; height: 230px; justify-self: start; }
+		.sado-cross-vertical { width: 14px; height: 172px; top: 27px; left: 83px; }
+		.sado-cross-horizontal { width: 108px; height: 14px; top: 76px; left: 36px; }
+		.sado-facts { grid-template-columns: 1fr; gap: 15px; }
+		.sado-facts div, .sado-facts div + div { padding: 0; border: 0; }
+		.sado-map-layout { grid-template-columns: 1fr; }
+		.sado-route-list { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: none; }
+		.sado-route-list li:last-child { grid-column: 1 / -1; }
+		.sado-note-grid { grid-template-columns: 1fr; }
+	}
+	@media (max-width: 560px) {
+		.sado-wrap, .sado-hero-inner { width: min(100% - 34px, 1180px); }
+		.sado-local-nav { justify-content: flex-start; top: 74px; }
+		.sado-local-nav a { padding-inline: 14px; font-size: .7rem; }
+		.sado-hero h1 { font-size: clamp(2.45rem, 13vw, 4.4rem); }
+		.sado-hero-inner { min-height: auto; padding-bottom: 55px; }
+		.sado-section-heading { display: block; }
+		.sado-section-heading > p { margin-top: 18px; text-align: left; }
+		.sado-route-map { min-height: 470px; }
+		.sado-route-list, .sado-schedule-grid { grid-template-columns: 1fr; }
+		.sado-route-list li:last-child, .sado-day-card:last-child { grid-column: auto; }
+		.sado-day-card { padding: 22px; }
+		.sado-day-card h3 { font-size: 1.25rem; }
+	}
+</style>
