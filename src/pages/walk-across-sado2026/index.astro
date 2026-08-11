@@ -123,8 +123,35 @@ const structuredData = {
 </Layout>
 
 <style is:global>
-	.sado-archive-page { background: var(--paper); color: var(--ink); font-family: Noto Sans JP, Yu Gothic, Hiragino Kaku Gothic ProN, sans-serif; font-size: 16px; line-height: 1.8; }
+	.sado-archive-page {
+		--ink: #071318;
+		--night: #050706;
+		--navy: #052d3c;
+		--navy-deep: #03232f;
+		--teal: #0d6f76;
+		--teal-bright: #11858b;
+		--paper: #f4f1e7;
+		--white: #fff;
+		--gold: #d6a935;
+		--red: #d71920;
+		--muted: #657178;
+		--line: #d8d8d0;
+		--shadow: 0 14px 34px #051e261a;
+		background: var(--paper);
+		color: var(--ink);
+		font-family: Noto Sans JP, Yu Gothic, Hiragino Kaku Gothic ProN, sans-serif;
+		font-size: 16px;
+		line-height: 1.8;
+	}
 	.sado-archive-page main { display: block; }
 	.sado-archive-page img { width: 100%; display: block; }
 	.sado-archive-page .section-nav { margin-top: 0; }
+	@media (min-width: 901px) {
+		.sado-archive-page .schedule-shell { max-width: 1120px; }
+		.sado-archive-page .schedule-intro,
+		.sado-archive-page .schedule-list,
+		.sado-archive-page .schedule-caution { width: min(900px, 100%); margin-inline: auto; }
+		.sado-archive-page .route-map-layout { grid-template-columns: minmax(0, 1.75fr) minmax(280px, .65fr); }
+		.sado-archive-page .sado-map-canvas { height: 640px; }
+	}
 </style>
