@@ -260,6 +260,24 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 	structuredData={homeStructuredData}
 >
 	<div class="container">
+		<a class="awaji-feature sado-feature" href="/walk-across-sado/" aria-label="SADO ISLAND 2026 佐渡島十字架行進の特設ページを見る">
+			<div class="awaji-visual">
+				<img src="/walk-across-sado/assets/arthur-open-road.jpg" alt="十字架を担いで歩くアーサー・ホーランド" width="2000" height="1500" loading="eager" />
+			</div>
+			<div class="awaji-copy">
+				<p class="awaji-kicker">NEW PROJECT / SUMMER 2026</p>
+				<h2>SADO ISLAND 2026</h2>
+				<p class="awaji-ja">佐渡島十字架行進</p>
+				<p class="awaji-text">アーサー・ホーランドが十字架を担ぎ、佐渡島を祈りとともに歩きます。</p>
+				<div class="sado-status-row" aria-label="佐渡島十字架行進2026の開催情報">
+					<span>8.23 SUN — 8.27 THU</span>
+					<span>5 DAYS</span>
+					<span>ROUTE MAP</span>
+				</div>
+				<span class="awaji-button">行進の詳細を見る</span>
+			</div>
+		</a>
+
 		<a
 			class="blessing-time-feature blessing-time-home-priority"
 			href="/blessing-time-osaka2026/"
@@ -1601,6 +1619,73 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 			linear-gradient(112deg, rgba(4, 32, 43, 0.98), rgba(4, 91, 106, 0.92) 58%, rgba(14, 136, 120, 0.88)),
 			#052b3a;
 		border-left-color: #8ed8d6;
+	}
+
+	.sado-feature {
+		background:
+			linear-gradient(112deg, rgba(5, 24, 37, 0.98), rgba(7, 68, 84, 0.94) 58%, rgba(129, 33, 32, 0.86)),
+			#062231;
+		border-left-color: #e2b94f;
+	}
+
+	.sado-feature .awaji-kicker {
+		width: fit-content;
+		margin-bottom: 9px;
+		padding: 5px 9px;
+		background: rgba(226, 185, 79, 0.15);
+		border: 1px solid rgba(226, 185, 79, 0.52);
+		color: #f6d776;
+		font-size: 0.72rem;
+	}
+
+	.sado-feature h2 {
+		font-size: clamp(1.75rem, 4.5vw, 3.08rem);
+	}
+
+	.sado-feature .awaji-ja {
+		color: #fff;
+		font-size: clamp(1.05rem, 2.4vw, 1.32rem);
+	}
+
+	.sado-feature .awaji-text {
+		max-width: 36em;
+		color: rgba(255, 255, 255, 0.86);
+		font-weight: 800;
+		line-height: 1.65;
+	}
+
+	.sado-feature .awaji-visual {
+		aspect-ratio: 16 / 9;
+	}
+
+	.sado-feature .awaji-visual img {
+		object-fit: cover;
+		object-position: center 44%;
+	}
+
+	.sado-feature .awaji-button {
+		background: #f0c35b;
+		color: #102535;
+	}
+
+	.sado-status-row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 7px;
+		margin: 2px 0 16px;
+	}
+
+	.sado-status-row span {
+		display: inline-flex;
+		align-items: center;
+		min-height: 28px;
+		padding: 0 9px;
+		background: rgba(255, 255, 255, 0.1);
+		border: 1px solid rgba(255, 255, 255, 0.24);
+		color: #fff;
+		font-size: 0.78rem;
+		font-weight: 900;
+		line-height: 1;
 	}
 
 	.goto-feature .awaji-kicker {
