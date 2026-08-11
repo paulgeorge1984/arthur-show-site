@@ -24,6 +24,7 @@ export async function GET() {
 		{ path: '/arthur-hollands-show/', changefreq: 'weekly', priority: '0.9' },
 		{ path: '/walk-across/', changefreq: 'weekly', priority: '0.8' },
 		{ path: '/walk-across-goto2026/', changefreq: 'daily', priority: '0.9' },
+		{ path: '/walk-across-sado/', changefreq: 'weekly', priority: '0.9' },
 		{ path: '/walk-across-awaji2026/', changefreq: 'weekly', priority: '0.8' },
 		{ path: '/the-lords-angels/', changefreq: 'weekly', priority: '0.8' },
 		{ path: '/the-lords-angels/20260704/', changefreq: 'weekly', priority: '0.8' },

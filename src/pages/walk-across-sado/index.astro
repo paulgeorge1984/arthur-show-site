@@ -1,143 +1,243 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import '../walk-across-sado2026/archive.css';
 
-const flyerPath = '/walk-across-sado/sado-island-2026-flyer.jpg';
-const pageTitle = 'SADO ISLAND 2026';
-const pageDescription = '佐渡島十字架行進 2026のお知らせ。';
+const siteUrl = 'https://arthur-show.com';
+const canonicalPath = '/walk-across-sado/';
+const pageTitle = '佐渡島十字架行進 2026';
+const pageDescription = '2026年8月23日〜27日、アーサー・ホーランドが十字架を担ぎ、佐渡島約99kmを歩く5日間。';
+
+const routes = [
+	{
+		day: '01', date: '8月23日（日）', startTime: '9:00', from: '両津夷', to: '長石海水浴場', distance: '16.7km', color: '#d71920',
+		note: '両津から南へ。海を横目に、佐渡での最初の一歩を踏み出します。',
+		map: 'https://www.google.com/maps/dir/?api=1&origin=38.0876397,138.434285&destination=37.9705636,138.3432168&travelmode=walking',
+		coordinates: [[38.08764,138.43429],[38.06105,138.42088],[38.03770,138.39454],[38.01176,138.37680],[37.98964,138.35047],[37.97063,138.34316]],
+	},
+	{
+		day: '02', date: '8月24日（月）', startTime: '7:00', from: '長石海水浴場', to: '小木町', distance: '22.5km', color: '#b76600',
+		note: '海沿いの道をたどり、島の南端・小木を目指します。',
+		map: 'https://www.google.com/maps/dir/?api=1&origin=37.9705636,138.3432168&destination=37.8156801,138.2804536&travelmode=walking&waypoints=37.9053519,138.2953834%7C37.8500000,138.2770000',
+		coordinates: [[37.97063,138.34316],[37.95200,138.34070],[37.93000,138.32000],[37.90535,138.29538],[37.88000,138.28500],[37.85000,138.27700],[37.81572,138.28038]],
+	},
+	{
+		day: '03', date: '8月25日（火）', startTime: '7:00', from: '小木町', to: '松ケ崎西側', distance: '24.3km', color: '#14817f',
+		note: '小木から東へ。祈りを携えて、長い海岸線を歩きます。',
+		map: 'https://www.google.com/maps/dir/?api=1&origin=37.8156801,138.2804536&destination=37.9191723,138.4890406&travelmode=walking',
+		coordinates: [[37.81572,138.28038],[37.82676,138.30424],[37.84268,138.37881],[37.86074,138.39963],[37.88090,138.43042],[37.90061,138.47143],[37.91922,138.48898]],
+	},
+	{
+		day: '04', date: '8月26日（水）', startTime: '7:00', from: '松ケ崎西側', to: '羽二生', distance: '25.7km', color: '#356fab',
+		note: '佐渡一周線（県道45号）に沿い、東海岸を北へ進みます。',
+		map: 'https://www.google.com/maps/dir/?api=1&origin=37.9191723,138.4890406&destination=38.0727054,138.5250852&travelmode=walking&waypoints=37.9431604,138.5026881%7C37.9607907,138.5123278%7C37.9845876,138.5272821%7C38.0059324,138.5431652%7C38.0214936,138.5511363%7C38.0459046,138.5624995%7C38.0665244,138.5721079%7C38.0812084,138.5534798',
+		// OpenStreetMapの佐渡一周線（県道45号）の道路形状1,015点を、表示用に簡略化。
+		coordinates: [
+			[37.919267,138.489045],[37.919846,138.49025],[37.920226,138.493125],[37.920108,138.497804],
+			[37.920859,138.499111],[37.921572,138.499303],[37.923231,138.498541],[37.925206,138.498775],
+			[37.928079,138.500371],[37.928906,138.501317],[37.931663,138.501454],[37.93697,138.503587],
+			[37.941229,138.502597],[37.944739,138.502932],[37.946479,138.504323],[37.947301,138.505745],
+			[37.951957,138.508074],[37.953786,138.510201],[37.961361,138.512552],[37.964409,138.515678],
+			[37.966791,138.516975],[37.968421,138.517199],[37.971635,138.518647],[37.97241,138.519892],
+			[37.97369,138.52076],[37.97669,138.520311],[37.978717,138.521168],[37.9802,138.522618],
+			[37.98154,138.525037],[37.983301,138.526903],[37.985004,138.527458],[37.988014,138.529795],
+			[37.991292,138.530765],[37.994976,138.534358],[37.995688,138.535835],[37.996861,138.536271],
+			[37.999141,138.538117],[38.000858,138.538054],[38.003243,138.539022],[38.003837,138.54053],
+			[38.005147,138.541748],[38.007905,138.546177],[38.009424,138.546274],[38.01445,138.549417],
+			[38.016057,138.549405],[38.020747,138.551161],[38.022932,138.550504],[38.02417,138.550614],
+			[38.026562,138.552303],[38.030872,138.55327],[38.034735,138.557472],[38.037091,138.557554],
+			[38.040199,138.560475],[38.050188,138.564258],[38.055656,138.56711],[38.062335,138.572515],
+			[38.064133,138.570978],[38.067099,138.572295],[38.068244,138.571632],[38.069742,138.571951],
+			[38.07242,138.571209],[38.07396,138.568976],[38.076124,138.57093],[38.077968,138.571529],
+			[38.08202,138.56662],[38.082785,138.561532],[38.080873,138.556352],[38.081655,138.554783],
+			[38.081124,138.553108],[38.081457,138.552026],[38.080582,138.548549],[38.080683,138.544856],
+			[38.078967,138.540966],[38.079225,138.537559],[38.077438,138.535679],[38.076869,138.534154],
+			[38.074508,138.532792],[38.074443,138.531692],[38.075003,138.530555],[38.074121,138.529619],
+			[38.072697,138.526007],[38.072695,138.52515],
+		],
+	},
+	{
+		day: '05', date: '8月27日（木）', startTime: '7:00', from: '羽二生', to: '両津夷', distance: '9.8km', color: '#7652a8',
+		note: '祈りの歩みをつなぎ、出発の地・両津でゴールを迎えます。',
+		map: 'https://www.google.com/maps/dir/?api=1&origin=38.0727054,138.5250852&destination=38.0876209,138.4343011&travelmode=walking',
+		coordinates: [[38.07269,138.52508],[38.06924,138.50726],[38.06472,138.47045],[38.07157,138.44660],[38.08118,138.43558],[38.08762,138.43430]],
+	},
+] as const;
+
+const stops = [
+	{ marker: '1', name: '両津夷', lat: 38.0876397, lng: 138.434285, direction: 'left' },
+	{ marker: '2', name: '長石海水浴場', lat: 37.9705636, lng: 138.3432168, direction: 'left' },
+	{ marker: '3', name: '小木町', lat: 37.8156801, lng: 138.2804536, direction: 'top' },
+	{ marker: '4', name: '松ケ崎西側', lat: 37.9191723, lng: 138.4890406, direction: 'right' },
+	{ marker: '5', name: '羽二生', lat: 38.0727054, lng: 138.5250852, direction: 'right' },
+] as const;
+
+// OpenStreetMapの佐渡島（relation 5337717）の外接範囲。行進区間だけでなく島全体を初期表示する。
+const sadoIslandBounds = [[37.8023386, 138.2037970], [38.3322960, 138.5745420]] as const;
+const mapRoutes = routes.map(({ day, from, to, color, coordinates }) => ({ day, from, to, color, coordinates }));
+const structuredData = {
+	'@context': 'https://schema.org', '@type': 'Event', name: pageTitle, description: pageDescription,
+	startDate: '2026-08-23', endDate: '2026-08-27', eventStatus: 'https://schema.org/EventScheduled',
+	location: { '@type': 'Place', name: '佐渡島', address: '新潟県佐渡市' },
+};
 ---
 
-<Layout
-	title={pageTitle}
-	description={pageDescription}
-	image={flyerPath}
-	imageAlt="SADO ISLAND 2026 佐渡島十字架行進の告知チラシ"
-	imageWidth={904}
-	imageHeight={1280}
-	imageType="image/jpeg"
-	canonicalPath="/walk-across-sado/"
-	noindex={true}
-	hideChrome={true}
-	>
-	<div class="notice-page">
-		<div class="notice-shell">
-			<header class="notice-header">
-				<p class="notice-kicker">PRIVATE PREVIEW / SADO ISLAND 2026</p>
-				<h1>佐渡島十字架行進 2026</h1>
-				<p class="notice-lead">アーサー・ホーランドとともに歩く、佐渡島五日間の行進のお知らせです。</p>
-			</header>
+<Layout title={pageTitle} description={pageDescription} image="/walk-across-sado/sado-island-2026-flyer.jpg" imageAlt="SADO ISLAND 2026 佐渡島十字架行進の告知チラシ" imageWidth={904} imageHeight={1280} canonicalPath={canonicalPath} structuredData={structuredData}>
+	<div class="sado-archive-page">
+		<nav class="section-nav" aria-label="ページ内メニュー">
+			<div class="page-shell"><a href="#about">概要</a><a href="#flyer">チラシ</a><a href="#schedule">スケジュール</a><a href="#photos">写真</a><a href="#previous">これまでの行進</a></div>
+		</nav>
+		<main>
+			<section class="hero" aria-labelledby="hero-title">
+				<div class="page-shell hero-grid">
+					<figure class="hero-media"><img src="/walk-across-sado2026/assets/arthur-open-road.jpg" alt="一本道で十字架を担いで歩くアーサー・ホーランド" fetchpriority="high" /></figure>
+					<div class="hero-copy"><p class="eyebrow">ARTHUR HOLLANDS</p><h1 id="hero-title"><span>WALK ACROSS<br />SADO ISLAND 2026</span><strong>アーサー・ホーランド<br />佐渡島十字架行進 2026</strong></h1><p class="hero-summary">2026年8月、十字架を携え、祈りとともに佐渡島約99kmを歩く5日間。両津を出発し、島の南側から東海岸をつないで、再び両津を目指します。</p><dl class="hero-facts"><div><dt>DATE</dt><dd>8.23 SUN — 8.27 THU</dd></div><div><dt>DISTANCE</dt><dd>99.0 KM / 5 DAYS</dd></div><div><dt>PLACE</dt><dd>SADO ISLAND, NIIGATA</dd></div></dl><a class="button button-primary" href="#schedule">5日間のスケジュールを見る</a></div>
+				</div>
+			</section>
 
-			<figure class="flyer-frame">
-				<a href={flyerPath} target="_blank" rel="noreferrer" aria-label="チラシ画像を開く">
-					<img src={flyerPath} alt="SADO ISLAND 2026 佐渡島十字架行進の告知チラシ" width="904" height="1280" fetchpriority="high" />
-				</a>
-			</figure>
+			<section class="section flyer-section" id="flyer" aria-labelledby="flyer-title">
+				<div class="page-shell flyer-grid">
+					<div class="section-heading flyer-copy">
+						<p class="eyebrow eyebrow-red">ANNOUNCEMENT</p>
+						<h2 id="flyer-title">佐渡島十字架行進 2026</h2>
+						<p>日程と各日のコースをまとめた、今回のお知らせチラシです。</p>
+						<p class="flyer-hint">画像をタップすると大きく表示できます。</p>
+					</div>
+					<figure class="flyer-card">
+						<a href="/walk-across-sado/sado-island-2026-flyer.jpg" target="_blank" rel="noreferrer" aria-label="佐渡島十字架行進2026のチラシを拡大表示する">
+							<img src="/walk-across-sado/sado-island-2026-flyer.jpg" alt="SADO ISLAND 2026 佐渡島十字架行進の告知チラシ" width="904" height="1280" loading="eager" />
+						</a>
+					</figure>
+				</div>
+			</section>
 
-			<footer class="notice-note">
-				<p>このページは事前確認用です。</p>
-				<p>正式公開・サイトメニューへの掲載は、確認後に行います。</p>
-			</footer>
-		</div>
+			<section class="section about-section" id="about" aria-labelledby="about-title"><div class="page-shell"><div class="section-heading"><p class="eyebrow eyebrow-red">ABOUT THE WALK</p><h2 id="about-title">佐渡島を、祈りとともに歩く。</h2><p>2026年8月23日（日）から27日（木）まで、アーサー・ホーランドが十字架を携え、両津を起点に佐渡島約99kmを5日間で歩く予定です。</p></div><div class="point-grid"><article><span>01</span><h3>両津から、両津へ</h3><p>島の南側から東海岸をつなぎ、5日目に両津へ戻る行程です。</p></article><article><span>02</span><h3>5日間・約99km</h3><p>各日の出発予定時刻、区間、距離、Googleマップを掲載しています。</p></article><article><span>03</span><h3>祈りを携えて</h3><p>佐渡に暮らす人々と島の平安を覚えながら、一歩ずつ歩きます。</p></article></div></div></section>
+
+			<section class="journey-section" aria-labelledby="journey-title"><div class="page-shell journey-grid"><figure><img src="/walk-across-sado2026/assets/arthur-long-road.jpg" alt="緑に囲まれた一本道を歩くアーサー・ホーランド" loading="lazy" /></figure><div class="journey-copy"><p class="eyebrow">THE WALK CONTINUES</p><h2 id="journey-title">これまでの歩みを、佐渡へ。</h2><p>十字架を担ぎ、いくつもの道を歩いてきたアーサー・ホーランド。その歩みは、2026年夏、佐渡島へ続きます。</p></div></div></section>
+
+			<section class="section schedule-section" id="schedule" aria-labelledby="schedule-title"><div class="page-shell schedule-shell"><div class="schedule-intro"><p class="eyebrow">SCHEDULE</p><h2 id="schedule-title">佐渡島十字架行進<br />5日間の予定</h2><p>佐渡島全体のルートと、各日の出発予定時刻、区間、距離をまとめています。</p></div>
+				<section class="route-overview" aria-labelledby="route-overview-title"><div class="route-overview-heading"><div><p>佐渡島をめぐる全行程</p><h3 id="route-overview-title">5日間のルート</h3></div><span>約99km</span></div><div class="route-map-layout"><div class="sado-map-frame"><div id="sado-map" class="sado-map-canvas" role="region" aria-label="佐渡島十字架行進の5日間のルート地図"></div></div><ol class="route-legend" aria-label="日別ルート一覧">{routes.map((route) => <li style={`--route-color:${route.color}`}><a href={route.map} target="_blank" rel="noreferrer" aria-label={`DAY ${route.day} ${route.from}から${route.to}までのルートをGoogleマップで見る`}><span class="route-day">DAY {route.day}</span><strong>{route.from}<i aria-hidden="true">→</i>{route.to}</strong><small>{route.date}・{route.distance}</small><b>Googleマップ <span aria-hidden="true">↗</span></b></a></li>)}</ol></div><div class="route-map-note"><p>ルート線は行程の概略です。詳細は各日のGoogleマップでご確認ください。</p><p>地図データ © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap contributors</a></p></div></section>
+				<div class="schedule-list">{routes.map((route) => <article class="schedule-card" style={`--route-color:${route.color}`}><div class="schedule-card-top"><p>{route.date}</p><span>DAY {route.day}</span></div><h3><span>{route.from}</span><i aria-hidden="true">→</i><span>{route.to}</span></h3><div class="schedule-meta"><p><span>出発予定</span><strong>{route.startTime}</strong></p><p><span>距離</span><strong>{route.distance}</strong></p></div><p class="schedule-description">{route.note}</p><a href={route.map} target="_blank" rel="noreferrer">Googleマップで区間を見る</a></article>)}</div><p class="schedule-caution">※ 距離は計画時のGoogleマップ表示値です。出発時刻・コースは天候、道路状況、安全上の判断により変更になる場合があります。</p></div></section>
+
+			<section class="section photo-section" id="photos" aria-labelledby="photo-title"><div class="page-shell"><div class="section-heading photo-heading"><p class="eyebrow eyebrow-red">PHOTO STORY</p><h2 id="photo-title">十字架とともに歩いた、これまでの記録。</h2><p>十字架を担ぎ、ひとり道を歩き続けてきたアーサー・ホーランド。その歩みは、2026年夏、佐渡島へ続きます。</p></div><figure class="photo-feature"><img src="/walk-across-sado2026/assets/arthur-cross-close.jpg" alt="一本道で木の十字架を担ぐアーサー・ホーランド" loading="lazy" /></figure></div></section>
+			<section class="previous-section" id="previous" aria-labelledby="previous-title"><div class="page-shell previous-grid"><div><p class="eyebrow">PREVIOUS CROSS WALKS</p><h2 id="previous-title">これまでの十字架行進</h2><p>これまでの行進レポートや写真は、こちらからご覧いただけます。</p></div><div class="previous-links"><a href="https://arthur-show.com/walk-across-goto2026/" target="_blank" rel="noreferrer"><span>2026 / GOTO ISLANDS</span><strong>五島列島十字架行進</strong><i aria-hidden="true">→</i></a><a href="https://arthur-show.com/walk-across-awaji2026/" target="_blank" rel="noreferrer"><span>2026 / AWAJI ISLAND</span><strong>淡路島一周十字架行進</strong><i aria-hidden="true">→</i></a></div></div></section>
+		</main>
 	</div>
+
+	<script is:inline src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+	<script is:inline define:vars={{ mapRoutes, stops, sadoIslandBounds }}>
+		(() => {
+			const element = document.getElementById('sado-map');
+			if (!element || !window.L) return;
+			const map = window.L.map(element, { scrollWheelZoom: false, zoomControl: true, zoomSnap: .25, zoomDelta: .5 });
+			window.L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap contributors</a>' }).addTo(map);
+			const layer = window.L.featureGroup().addTo(map);
+			mapRoutes.forEach((route) => window.L.polyline(route.coordinates, { color: route.color, opacity: .96, weight: 6 }).bindTooltip(`DAY ${route.day}｜${route.from} → ${route.to}`, { sticky: true, className: 'route-line-label' }).addTo(layer));
+			stops.forEach((stop) => window.L.marker([stop.lat, stop.lng], { alt: stop.name, icon: window.L.divIcon({ className: 'route-marker-shell', html: `<span>${stop.marker}</span>`, iconAnchor: [19, 19], iconSize: [38, 38] }) }).bindTooltip(stop.name, { permanent: true, direction: stop.direction, offset: stop.direction === 'top' ? [0, -18] : stop.direction === 'left' ? [-18, 0] : [18, 0], className: 'route-place-label' }).addTo(layer));
+			const islandBounds = window.L.latLngBounds(sadoIslandBounds).pad(.035);
+			const fitWholeIsland = () => {
+				map.invalidateSize();
+				map.fitBounds(islandBounds, { animate: false, padding: [32, 32] });
+			};
+			fitWholeIsland();
+			window.L.control.scale({ imperial: false, position: 'bottomleft' }).addTo(map);
+			let resizeFrame;
+			window.addEventListener('resize', () => {
+				window.cancelAnimationFrame(resizeFrame);
+				resizeFrame = window.requestAnimationFrame(fitWholeIsland);
+			}, { passive: true });
+		})();
+	</script>
 </Layout>
 
-<style>
-	:global(html) {
-		background: #061119;
-	}
-
-	:global(body) {
-		margin: 0;
-		background: #061119;
-	}
-
-	.notice-page {
-		min-height: 100vh;
-		background:
-			radial-gradient(circle at 50% 0%, rgba(28, 100, 140, 0.34), transparent 42rem),
-			#061119;
-		color: #f4f7f8;
-		padding: clamp(32px, 7vw, 86px) 18px 72px;
-	}
-
-	.notice-shell {
-		width: min(100%, 920px);
-		margin: 0 auto;
-	}
-
-	.notice-header {
-		text-align: center;
-		margin: 0 auto clamp(24px, 5vw, 48px);
-	}
-
-	.notice-kicker {
-		margin: 0 0 14px;
-		color: #e2b94e;
-		font-family: 'Oswald', 'Arial Narrow', sans-serif;
-		font-size: clamp(0.72rem, 1.6vw, 0.94rem);
-		font-weight: 700;
-		letter-spacing: 0.18em;
-	}
-
-	h1 {
-		margin: 0;
-		font-family: 'Noto Sans JP', sans-serif;
-		font-size: clamp(1.65rem, 5vw, 3.7rem);
-		font-weight: 900;
-		letter-spacing: 0.06em;
-		line-height: 1.18;
-	}
-
-	.notice-lead {
-		margin: 16px auto 0;
-		color: rgba(244, 247, 248, 0.78);
-		font-family: 'Noto Sans JP', sans-serif;
-		font-size: clamp(0.88rem, 2vw, 1.08rem);
-		line-height: 1.9;
-	}
-
-	.flyer-frame {
-		width: min(100%, 904px);
-		margin: 0 auto;
-		padding: clamp(8px, 1.4vw, 14px);
-		background: linear-gradient(145deg, #f6f1e4, #c7a75d 52%, #f6f1e4);
-		box-shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
-	}
-
-	.flyer-frame a,
-	.flyer-frame img {
-		display: block;
-	}
-
-	.flyer-frame img {
-		width: 100%;
-		height: auto;
-		background: #f4f1e7;
-	}
-
-	.notice-note {
-		margin: clamp(24px, 5vw, 44px) auto 0;
-		color: rgba(244, 247, 248, 0.64);
-		font-family: 'Noto Sans JP', sans-serif;
-		font-size: 0.82rem;
+<style is:global>
+	.sado-archive-page {
+		--ink: #071318;
+		--night: #050706;
+		--navy: #052d3c;
+		--navy-deep: #03232f;
+		--teal: #0d6f76;
+		--teal-bright: #11858b;
+		--paper: #f4f1e7;
+		--white: #fff;
+		--gold: #d6a935;
+		--red: #d71920;
+		--muted: #657178;
+		--line: #d8d8d0;
+		--shadow: 0 14px 34px #051e261a;
+		background: var(--paper);
+		color: var(--ink);
+		font-family: Noto Sans JP, Yu Gothic, Hiragino Kaku Gothic ProN, sans-serif;
+		font-size: 16px;
 		line-height: 1.8;
-		text-align: center;
+	}
+	.sado-archive-page main { display: block; }
+	.sado-archive-page img { width: 100%; display: block; }
+	.sado-archive-page .section-nav { margin-top: 0; }
+	.sado-archive-page .sado-map-canvas { height: 680px; }
+	@media (min-width: 901px) {
+		.sado-archive-page .schedule-shell { max-width: 1120px; }
+		.sado-archive-page .schedule-intro,
+		.sado-archive-page .schedule-list,
+		.sado-archive-page .schedule-caution { width: min(900px, 100%); margin-inline: auto; }
+		.sado-archive-page .route-map-layout { grid-template-columns: minmax(0, 1.75fr) minmax(280px, .65fr); }
+		.sado-archive-page .sado-map-canvas { height: 760px; }
+	}
+	@media (max-width: 640px) {
+		.sado-archive-page .sado-map-canvas { height: 560px; }
+	}
+</style>
+
+<style>
+	.sado-archive-page .flyer-section {
+		background: linear-gradient(135deg, #e8e2d6 0%, #f7f4ec 58%, #e0d7c5 100%);
 	}
 
-	.notice-note p {
-		margin: 0;
+	.sado-archive-page .flyer-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 0.72fr) minmax(280px, 1fr);
+		gap: clamp(28px, 6vw, 84px);
+		align-items: center;
 	}
 
-	@media (max-width: 560px) {
-		.notice-page {
-			padding-inline: 10px;
+	.sado-archive-page .flyer-copy {
+		max-width: 420px;
+	}
+
+	.sado-archive-page .flyer-copy h2 {
+		max-width: 9em;
+	}
+
+	.sado-archive-page .flyer-hint {
+		margin-top: 18px;
+		color: #657178;
+		font-size: 0.88rem;
+	}
+
+	.sado-archive-page .flyer-card {
+		max-width: 620px;
+		margin: 0 auto;
+		padding: 12px;
+		background: #fff;
+		box-shadow: 14px 18px 0 rgba(5, 45, 60, 0.14), 0 20px 48px rgba(5, 45, 60, 0.2);
+		transform: rotate(1deg);
+	}
+
+	.sado-archive-page .flyer-card img {
+		border: 1px solid rgba(5, 45, 60, 0.16);
+	}
+
+	@media (max-width: 760px) {
+		.sado-archive-page .flyer-grid {
+			grid-template-columns: 1fr;
+			gap: 28px;
 		}
 
-		.notice-header {
-			margin-bottom: 22px;
+		.sado-archive-page .flyer-copy {
+			max-width: none;
 		}
 
-		.flyer-frame {
-			padding: 6px;
+		.sado-archive-page .flyer-card {
+			width: min(100%, 560px);
 		}
 	}
 </style>
