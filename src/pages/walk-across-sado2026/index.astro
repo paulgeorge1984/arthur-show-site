@@ -71,6 +71,8 @@ const stops = [
 	{ marker: '5', name: '羽二生', lat: 38.0727054, lng: 138.5250852, direction: 'right' },
 ] as const;
 
+// OpenStreetMapの佐渡島（relation 5337717）の外接範囲。行進区間だけでなく島全体を初期表示する。
+const sadoIslandBounds = [[37.8023386, 138.2037970], [38.3322960, 138.5745420]] as const;
 const mapRoutes = routes.map(({ day, from, to, color, coordinates }) => ({ day, from, to, color, coordinates }));
 const structuredData = {
 	'@context': 'https://schema.org', '@type': 'Event', name: pageTitle, description: pageDescription,
@@ -106,18 +108,27 @@ const structuredData = {
 	</div>
 
 	<script is:inline src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
-	<script is:inline define:vars={{ mapRoutes, stops }}>
+	<script is:inline define:vars={{ mapRoutes, stops, sadoIslandBounds }}>
 		(() => {
 			const element = document.getElementById('sado-map');
 			if (!element || !window.L) return;
-			const map = window.L.map(element, { scrollWheelZoom: false, zoomControl: true });
+			const map = window.L.map(element, { scrollWheelZoom: false, zoomControl: true, zoomSnap: .25, zoomDelta: .5 });
 			window.L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap contributors</a>' }).addTo(map);
 			const layer = window.L.featureGroup().addTo(map);
 			mapRoutes.forEach((route) => window.L.polyline(route.coordinates, { color: route.color, opacity: .96, weight: 6 }).bindTooltip(`DAY ${route.day}｜${route.from} → ${route.to}`, { sticky: true, className: 'route-line-label' }).addTo(layer));
 			stops.forEach((stop) => window.L.marker([stop.lat, stop.lng], { alt: stop.name, icon: window.L.divIcon({ className: 'route-marker-shell', html: `<span>${stop.marker}</span>`, iconAnchor: [19, 19], iconSize: [38, 38] }) }).bindTooltip(stop.name, { permanent: true, direction: stop.direction, offset: stop.direction === 'top' ? [0, -18] : stop.direction === 'left' ? [-18, 0] : [18, 0], className: 'route-place-label' }).addTo(layer));
-			map.fitBounds(layer.getBounds(), { maxZoom: 11, padding: [28, 28] });
+			const islandBounds = window.L.latLngBounds(sadoIslandBounds).pad(.035);
+			const fitWholeIsland = () => {
+				map.invalidateSize();
+				map.fitBounds(islandBounds, { animate: false, padding: [32, 32] });
+			};
+			fitWholeIsland();
 			window.L.control.scale({ imperial: false, position: 'bottomleft' }).addTo(map);
-			window.addEventListener('resize', () => map.invalidateSize(), { passive: true });
+			let resizeFrame;
+			window.addEventListener('resize', () => {
+				window.cancelAnimationFrame(resizeFrame);
+				resizeFrame = window.requestAnimationFrame(fitWholeIsland);
+			}, { passive: true });
 		})();
 	</script>
 </Layout>
@@ -146,12 +157,16 @@ const structuredData = {
 	.sado-archive-page main { display: block; }
 	.sado-archive-page img { width: 100%; display: block; }
 	.sado-archive-page .section-nav { margin-top: 0; }
+	.sado-archive-page .sado-map-canvas { height: 680px; }
 	@media (min-width: 901px) {
 		.sado-archive-page .schedule-shell { max-width: 1120px; }
 		.sado-archive-page .schedule-intro,
 		.sado-archive-page .schedule-list,
 		.sado-archive-page .schedule-caution { width: min(900px, 100%); margin-inline: auto; }
 		.sado-archive-page .route-map-layout { grid-template-columns: minmax(0, 1.75fr) minmax(280px, .65fr); }
-		.sado-archive-page .sado-map-canvas { height: 640px; }
+		.sado-archive-page .sado-map-canvas { height: 760px; }
+	}
+	@media (max-width: 640px) {
+		.sado-archive-page .sado-map-canvas { height: 560px; }
 	}
 </style>
