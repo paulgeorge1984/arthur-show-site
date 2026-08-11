@@ -177,33 +177,22 @@ const structuredData = {
 
 <style>
 	.sado-archive-page .hero-grid {
-		grid-template-columns: minmax(340px, 0.95fr) minmax(0, 1.05fr);
-		gap: clamp(32px, 4vw, 56px);
+		grid-template-columns: minmax(300px, 0.86fr) minmax(0, 1.14fr);
+		align-items: center;
+		gap: clamp(32px, 4vw, 52px);
 	}
 
 	.sado-archive-page .hero-media {
-		width: min(100%, 500px);
+		width: min(100%, 460px);
 		justify-self: center;
-		background: #f8f4eb;
-		border: 1px solid rgba(214, 169, 53, 0.86);
-		padding: clamp(12px, 1.5vw, 18px);
-		position: relative;
-		box-shadow: 0 0 0 5px rgba(214, 169, 53, 0.12), 0 24px 58px rgba(0, 0, 0, 0.32);
-	}
-
-	.sado-archive-page .hero-media::before {
-		content: "";
-		pointer-events: none;
-		border: 1px solid rgba(7, 19, 24, 0.14);
-		position: absolute;
-		inset: 7px;
-		z-index: 1;
+		background: #fff;
+		border: 1px solid rgba(255, 255, 255, 0.72);
+		padding: clamp(10px, 1.2vw, 14px);
+		box-shadow: 0 20px 52px rgba(0, 0, 0, 0.3);
 	}
 
 	.sado-archive-page .hero-media a {
 		display: block;
-		position: relative;
-		z-index: 2;
 	}
 
 	.sado-archive-page .hero-media img {
@@ -220,11 +209,12 @@ const structuredData = {
 
 	@media (max-width: 900px) {
 		.sado-archive-page .hero-grid {
-			grid-template-columns: 1fr;
+			grid-template-columns: minmax(0, 1fr);
+			gap: 32px;
 		}
 
 		.sado-archive-page .hero-media {
-			width: min(100%, 500px);
+			width: min(100%, 420px);
 		}
 
 		.sado-archive-page .hero-copy {
@@ -234,8 +224,9 @@ const structuredData = {
 
 	@media (max-width: 640px) {
 		.sado-archive-page .hero-media {
-			width: calc(100% - 12px);
-			box-shadow: 0 0 0 4px rgba(214, 169, 53, 0.12), 0 16px 36px rgba(0, 0, 0, 0.3);
+			width: min(100%, 340px);
+			padding: 8px;
+			box-shadow: 0 14px 30px rgba(0, 0, 0, 0.28);
 		}
 	}
 </style>
