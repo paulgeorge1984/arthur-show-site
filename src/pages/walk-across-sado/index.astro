@@ -87,26 +87,14 @@ const structuredData = {
 			<div class="page-shell"><a href="#about">概要</a><a href="#flyer">チラシ</a><a href="#schedule">スケジュール</a><a href="#photos">写真</a><a href="#previous">これまでの行進</a></div>
 		</nav>
 		<main>
-			<section class="hero" aria-labelledby="hero-title">
+			<section class="hero" id="flyer" aria-labelledby="hero-title">
 				<div class="page-shell hero-grid">
-					<figure class="hero-media"><img src="/walk-across-sado/assets/arthur-open-road.jpg" alt="一本道で十字架を担いで歩くアーサー・ホーランド" fetchpriority="high" /></figure>
-					<div class="hero-copy"><p class="eyebrow">ARTHUR HOLLANDS</p><h1 id="hero-title"><span>WALK ACROSS<br />SADO ISLAND 2026</span><strong>アーサー・ホーランド<br />佐渡島十字架行進 2026</strong></h1><p class="hero-summary">2026年8月、十字架を携え、祈りとともに佐渡島約99kmを歩く5日間。両津を出発し、島の南側から東海岸をつないで、再び両津を目指します。</p><dl class="hero-facts"><div><dt>DATE</dt><dd>8.23 SUN — 8.27 THU</dd></div><div><dt>DISTANCE</dt><dd>99.0 KM / 5 DAYS</dd></div><div><dt>PLACE</dt><dd>SADO ISLAND, NIIGATA</dd></div></dl><a class="button button-primary" href="#schedule">5日間のスケジュールを見る</a></div>
-				</div>
-			</section>
-
-			<section class="section flyer-section" id="flyer" aria-labelledby="flyer-title">
-				<div class="page-shell flyer-grid">
-					<div class="section-heading flyer-copy">
-						<p class="eyebrow eyebrow-red">ANNOUNCEMENT</p>
-						<h2 id="flyer-title">佐渡島十字架行進 2026</h2>
-						<p>日程と各日のコースをまとめた、今回のお知らせチラシです。</p>
-						<p class="flyer-hint">画像をタップすると大きく表示できます。</p>
-					</div>
-					<figure class="flyer-card">
+					<figure class="hero-media">
 						<a href="/walk-across-sado/sado-island-2026-flyer.jpg" target="_blank" rel="noreferrer" aria-label="佐渡島十字架行進2026のチラシを拡大表示する">
-							<img src="/walk-across-sado/sado-island-2026-flyer.jpg" alt="SADO ISLAND 2026 佐渡島十字架行進の告知チラシ" width="904" height="1280" loading="eager" />
+							<img src="/walk-across-sado/sado-island-2026-flyer.jpg" alt="SADO ISLAND 2026 佐渡島十字架行進の告知チラシ" width="904" height="1280" fetchpriority="high" />
 						</a>
 					</figure>
+					<div class="hero-copy"><p class="eyebrow">ARTHUR HOLLANDS</p><h1 id="hero-title"><span>WALK ACROSS<br />SADO ISLAND 2026</span><strong>アーサー・ホーランド<br />佐渡島十字架行進 2026</strong></h1><p class="hero-summary">2026年8月、十字架を携え、祈りとともに佐渡島約99kmを歩く5日間。両津を出発し、島の南側から東海岸をつないで、再び両津を目指します。</p><dl class="hero-facts"><div><dt>DATE</dt><dd>8.23 SUN — 8.27 THU</dd></div><div><dt>DISTANCE</dt><dd>99.0 KM / 5 DAYS</dd></div><div><dt>PLACE</dt><dd>SADO ISLAND, NIIGATA</dd></div></dl><a class="button button-primary" href="#schedule">5日間のスケジュールを見る</a></div>
 				</div>
 			</section>
 
@@ -118,7 +106,7 @@ const structuredData = {
 				<section class="route-overview" aria-labelledby="route-overview-title"><div class="route-overview-heading"><div><p>佐渡島をめぐる全行程</p><h3 id="route-overview-title">5日間のルート</h3></div><span>約99km</span></div><div class="route-map-layout"><div class="sado-map-frame"><div id="sado-map" class="sado-map-canvas" role="region" aria-label="佐渡島十字架行進の5日間のルート地図"></div></div><ol class="route-legend" aria-label="日別ルート一覧">{routes.map((route) => <li style={`--route-color:${route.color}`}><a href={route.map} target="_blank" rel="noreferrer" aria-label={`DAY ${route.day} ${route.from}から${route.to}までのルートをGoogleマップで見る`}><span class="route-day">DAY {route.day}</span><strong>{route.from}<i aria-hidden="true">→</i>{route.to}</strong><small>{route.date}・{route.distance}</small><b>Googleマップ <span aria-hidden="true">↗</span></b></a></li>)}</ol></div><div class="route-map-note"><p>ルート線は行程の概略です。詳細は各日のGoogleマップでご確認ください。</p><p>地図データ © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap contributors</a></p></div></section>
 				<div class="schedule-list">{routes.map((route) => <article class="schedule-card" style={`--route-color:${route.color}`}><div class="schedule-card-top"><p>{route.date}</p><span>DAY {route.day}</span></div><h3><span>{route.from}</span><i aria-hidden="true">→</i><span>{route.to}</span></h3><div class="schedule-meta"><p><span>出発予定</span><strong>{route.startTime}</strong></p><p><span>距離</span><strong>{route.distance}</strong></p></div><p class="schedule-description">{route.note}</p><a href={route.map} target="_blank" rel="noreferrer">Googleマップで区間を見る</a></article>)}</div><p class="schedule-caution">※ 距離は計画時のGoogleマップ表示値です。出発時刻・コースは天候、道路状況、安全上の判断により変更になる場合があります。</p></div></section>
 
-			<section class="section photo-section" id="photos" aria-labelledby="photo-title"><div class="page-shell"><div class="section-heading photo-heading"><p class="eyebrow eyebrow-red">PHOTO STORY</p><h2 id="photo-title">十字架とともに歩いた、これまでの記録。</h2><p>十字架を担ぎ、日本や世界の各地を歩き続けてきたアーサー・ホーランド。その歩みは、2026年夏、佐渡島へ続きます。</p></div><figure class="photo-feature"><img src="/walk-across-sado/assets/arthur-cross-close.jpg" alt="一本道で木の十字架を担ぐアーサー・ホーランド" loading="lazy" /></figure></div></section>
+			<section class="section photo-section" id="photos" aria-labelledby="photo-title"><div class="page-shell"><div class="section-heading photo-heading"><p class="eyebrow eyebrow-red">PHOTO STORY</p><h2 id="photo-title">十字架とともに歩いた、これまでの記録。</h2><p>十字架を担いで歩く姿を写真で振り返りながら、佐渡島へ続く歩みを見つめます。</p></div><figure class="photo-feature"><img src="/walk-across-sado/assets/arthur-cross-close.jpg" alt="一本道で木の十字架を担ぐアーサー・ホーランド" loading="lazy" /></figure></div></section>
 			<section class="previous-section" id="previous" aria-labelledby="previous-title"><div class="page-shell previous-grid"><div><p class="eyebrow">PREVIOUS CROSS WALKS</p><h2 id="previous-title">これまでの十字架行進</h2><p>これまでの行進レポートや写真は、こちらからご覧いただけます。</p></div><div class="previous-links"><a href="https://arthur-show.com/walk-across-goto2026/" target="_blank" rel="noreferrer"><span>2026 / GOTO ISLANDS</span><strong>五島列島十字架行進</strong><i aria-hidden="true">→</i></a><a href="https://arthur-show.com/walk-across-awaji2026/" target="_blank" rel="noreferrer"><span>2026 / AWAJI ISLAND</span><strong>淡路島一周十字架行進</strong><i aria-hidden="true">→</i></a></div></div></section>
 		</main>
 	</div>
