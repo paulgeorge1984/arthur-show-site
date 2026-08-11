@@ -87,14 +87,29 @@ const structuredData = {
 			<div class="page-shell"><a href="#about">概要</a><a href="#flyer">チラシ</a><a href="#schedule">スケジュール</a><a href="#photos">写真</a><a href="#previous">これまでの行進</a></div>
 		</nav>
 		<main>
-			<section class="hero" id="flyer" aria-labelledby="hero-title">
+			<section class="hero" aria-labelledby="hero-title">
 				<div class="page-shell hero-grid">
 					<figure class="hero-media">
-						<a href="/walk-across-sado/sado-island-2026-flyer.jpg" target="_blank" rel="noreferrer" aria-label="佐渡島十字架行進2026のチラシを拡大表示する">
-							<img src="/walk-across-sado/sado-island-2026-flyer.jpg" alt="SADO ISLAND 2026 佐渡島十字架行進の告知チラシ" width="904" height="1280" fetchpriority="high" />
-						</a>
+						<img src="/walk-across-sado/assets/arthur-open-road.jpg" alt="一本道を十字架とともに歩くアーサー・ホーランド" fetchpriority="high" />
 					</figure>
 					<div class="hero-copy"><p class="eyebrow">ARTHUR HOLLANDS</p><h1 id="hero-title"><span>WALK ACROSS<br />SADO ISLAND 2026</span><strong>アーサー・ホーランド<br />佐渡島十字架行進 2026</strong></h1><p class="hero-summary">2026年8月、十字架を携え、祈りとともに佐渡島約99kmを歩く5日間。両津を出発し、島の南側から東海岸をつないで、再び両津を目指します。</p><dl class="hero-facts"><div><dt>DATE</dt><dd>8.23 SUN — 8.27 THU</dd></div><div><dt>DISTANCE</dt><dd>99.0 KM / 5 DAYS</dd></div><div><dt>PLACE</dt><dd>SADO ISLAND, NIIGATA</dd></div></dl><a class="button button-primary" href="#schedule">5日間のスケジュールを見る</a></div>
+				</div>
+			</section>
+
+			<section class="section flyer-section" id="flyer" aria-labelledby="flyer-title">
+				<div class="page-shell flyer-grid">
+					<div class="section-heading flyer-copy">
+						<p class="eyebrow eyebrow-red">ORIGINAL FLYER</p>
+						<h2 id="flyer-title">佐渡島十字架行進 2026</h2>
+						<p>日程と各日のコースをまとめた、今回のお知らせチラシです。</p>
+						<p class="flyer-hint">画像をタップすると大きく表示できます。</p>
+					</div>
+					<figure class="flyer-card">
+						<a href="/walk-across-sado/sado-island-2026-flyer.jpg" target="_blank" rel="noreferrer" aria-label="佐渡島十字架行進2026のチラシを拡大表示する">
+							<img src="/walk-across-sado/sado-island-2026-flyer.jpg" alt="SADO ISLAND 2026 佐渡島十字架行進の告知チラシ" width="904" height="1280" loading="lazy" />
+						</a>
+						<figcaption>CLICK / TAP TO OPEN FULL SIZE</figcaption>
+					</figure>
 				</div>
 			</section>
 
@@ -184,7 +199,7 @@ const structuredData = {
 		display: grid;
 		grid-template-columns: minmax(0, 0.72fr) minmax(280px, 1fr);
 		gap: clamp(28px, 6vw, 84px);
-		align-items: center;
+		align-items: start;
 	}
 
 	.sado-archive-page .flyer-copy {
@@ -204,17 +219,31 @@ const structuredData = {
 	.sado-archive-page .flyer-card {
 		max-width: 620px;
 		margin: 0 auto;
-		padding: 12px;
-		background: #fff;
-		box-shadow: 14px 18px 0 rgba(5, 45, 60, 0.14), 0 20px 48px rgba(5, 45, 60, 0.2);
-		transform: rotate(1deg);
+		padding: 12px 12px 0;
+		background: linear-gradient(145deg, #fffdf7, #f6efe2);
+		border: 1px solid rgba(214, 169, 53, 0.72);
+		box-shadow: 0 0 0 5px rgba(214, 169, 53, 0.13), 0 22px 48px rgba(5, 45, 60, 0.2);
 	}
 
 	.sado-archive-page .flyer-card img {
 		border: 1px solid rgba(5, 45, 60, 0.16);
 	}
 
+	.sado-archive-page .flyer-card figcaption {
+		color: #657178;
+		letter-spacing: 0.16em;
+		padding: 11px 4px 10px;
+		font-family: Arial Narrow, Arial, sans-serif;
+		font-size: 0.6rem;
+		font-weight: 800;
+		text-align: right;
+	}
+
 	@media (max-width: 760px) {
+		.sado-archive-page .section-nav .page-shell {
+			justify-content: flex-start;
+		}
+
 		.sado-archive-page .flyer-grid {
 			grid-template-columns: 1fr;
 			gap: 28px;
