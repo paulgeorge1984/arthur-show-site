@@ -3,7 +3,8 @@
 
 }
 
-.sado-archive-page .hero-grid{grid-template-columns:minmax(280px,.78fr) minmax(0,1.22fr)}
-.sado-archive-page .hero-media{background:#f4f1e7;padding:clamp(10px,1.3vw,16px)}
+.sado-archive-page .hero-grid{grid-template-columns:minmax(340px,.95fr) minmax(0,1.05fr);gap:clamp(32px,4vw,56px)}
+.sado-archive-page .hero-media{width:min(100%,500px);justify-self:center;background:#fffaf0;border:2px solid var(--gold);padding:clamp(12px,1.5vw,18px);transform:rotate(-1.2deg);box-shadow:0 0 0 7px #d6a93533,18px 20px 0 var(--red),0 30px 52px #0000004d}
 .sado-archive-page .hero-media a{display:block}
 .sado-archive-page .hero-media img{aspect-ratio:904/1280;object-fit:contain;object-position:center}
+@media (width<=640px){.sado-archive-page .hero-media{width:calc(100% - 12px);transform:none;box-shadow:0 0 0 5px #d6a93533,10px 12px 0 var(--red),0 20px 34px #00000040}}
