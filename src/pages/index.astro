@@ -262,7 +262,7 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 	<div class="container">
 		<a class="awaji-feature sado-feature" href="/walk-across-sado/" aria-label="SADO ISLAND 2026 佐渡島十字架行進の特設ページを見る">
 			<div class="awaji-visual">
-				<img src="/walk-across-sado/assets/arthur-open-road.jpg" alt="十字架を担いで歩くアーサー・ホーランド" width="2000" height="1500" loading="eager" />
+				<img src="/walk-across-sado/sado-island-2026-flyer.jpg" alt="SADO ISLAND 2026 佐渡島十字架行進の告知フライヤー" width="904" height="1280" loading="eager" />
 			</div>
 			<div class="awaji-copy">
 				<p class="awaji-kicker">NEW PROJECT / SUMMER 2026</p>
@@ -1655,12 +1655,15 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 	}
 
 	.sado-feature .awaji-visual {
-		aspect-ratio: 16 / 9;
+		aspect-ratio: 904 / 1280;
+		max-width: 230px;
+		justify-self: center;
 	}
 
 	.sado-feature .awaji-visual img {
-		object-fit: cover;
-		object-position: center 44%;
+		object-fit: contain;
+		object-position: center center;
+		background: #07131d;
 	}
 
 	.sado-feature .awaji-button {
