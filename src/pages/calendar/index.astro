@@ -10,6 +10,8 @@ const blessingNightUrl = 'https://www.blessingnight.jp';
 const blessingNightKagurazakaAugustUrl = 'https://www.blessingnight.jp/schedule/schedule373';
 const gospelArtTsukubaPoster = '/assets/gospel-art-tsukuba-20260815.jpg';
 const gospelArtTsukubaUrl = '/gospel-art-tsukuba-20260815/';
+const tsukubaChurchPoster = '/assets/arthur-hollands-tsukuba-church-20260816.png';
+const tsukubaChurchUrl = '/arthur-hollands-tsukuba-20260816/';
 const igniteHiscallPoster = '/assets/ignite-hiscall-20260821.jpg';
 const blessingNightShimokitazawaUrl = '/blessing-night-shimokitazawa-20261009/';
 const blessingNightShimokitazawaPoster = '/assets/blessing-night-shimokitazawa-20261009-front.webp';
@@ -115,6 +117,26 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 						<span>13:30開演</span>
 						<span>茨城県つくば美術館</span>
 						<span>入場無料</span>
+					</span>
+					<span class="calendar-special-button">詳細・アクセス・チラシを見る</span>
+				</span>
+			</a>
+		</section>
+
+		<section class="calendar-special-event tsukuba-church-feature" aria-label="Arthur Hollands Special Message 2026年8月16日 つくばキリストの愛教会 特別案内">
+			<a class="calendar-special-link" href={tsukubaChurchUrl}>
+				<span class="calendar-special-media" aria-hidden="true">
+					<img src={tsukubaChurchPoster} alt="" width="1054" height="1492" loading="eager" />
+				</span>
+				<span class="calendar-special-copy">
+					<span class="calendar-special-label">THE NEXT DAY / 8.16</span>
+					<strong>Arthur Hollands Special Message</strong>
+					<span class="calendar-special-lead">アーサー・ホーランド伝道メッセージ。つくばキリストの愛教会の主日礼拝（二部）です。</span>
+					<span class="calendar-special-meta">
+						<span>2026年8月16日（日）</span>
+						<span>主日礼拝（二部）11:00〜</span>
+						<span>つくばキリストの愛教会</span>
+						<span>予約不要・参加無料</span>
 					</span>
 					<span class="calendar-special-button">詳細・アクセス・チラシを見る</span>
 				</span>
@@ -320,6 +342,23 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				location: '茨城県つくば美術館 〒305-0031 茨城県つくば市吾妻2-8',
 				start: {
 					dateTime: '2026-08-15T13:30:00+09:00',
+					timeZone: TOKYO_TIME_ZONE,
+				},
+				end: null,
+			},
+			{
+				id: 'manual-arthur-hollands-tsukuba-church-2026-08-16',
+				summary: 'Arthur Hollands Special Message｜アーサー・ホーランド伝道メッセージ',
+				description: [
+					'主日礼拝（二部）11:00〜',
+					'予約不要・参加無料',
+					'どなたでもご参加いただけます',
+					'つくばキリストの愛教会 アクセス：https://tsukuba-church.jp/access/',
+					'https://arthur-show.com/arthur-hollands-tsukuba-20260816/',
+				].join('\n'),
+				location: 'つくばキリストの愛教会 〒305-0035 茨城県つくば市松代2-14-7',
+				start: {
+					dateTime: '2026-08-16T11:00:00+09:00',
 					timeZone: TOKYO_TIME_ZONE,
 				},
 				end: null,
@@ -1627,9 +1666,31 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			background: linear-gradient(150deg, #090806, #5a4f31 56%, #a7842c);
 		}
 
-		.gospel-art-tsukuba-feature .calendar-special-label,
-		.gospel-art-tsukuba-feature .calendar-special-button {
+	.gospel-art-tsukuba-feature .calendar-special-label,
+	.gospel-art-tsukuba-feature .calendar-special-button {
 			background: #d2ad3d;
+			color: #090806;
+		}
+
+		.tsukuba-church-feature .calendar-special-link {
+			background:
+				linear-gradient(135deg, rgba(5, 13, 23, 0.99), rgba(15, 42, 66, 0.94) 58%, rgba(170, 125, 37, 0.7)),
+				#07101c;
+		}
+
+		.tsukuba-church-feature .calendar-special-link::before {
+			background:
+				linear-gradient(90deg, rgba(5, 13, 23, 0.04), rgba(5, 13, 23, 0.12) 48%, rgba(5, 13, 23, 0.38)),
+				linear-gradient(0deg, rgba(217, 184, 75, 0.22), transparent 48%);
+		}
+
+		.tsukuba-church-feature .calendar-special-media {
+			background: linear-gradient(150deg, #07101c, #1c4568 56%, #a7842c);
+		}
+
+		.tsukuba-church-feature .calendar-special-label,
+		.tsukuba-church-feature .calendar-special-button {
+			background: #e0bd56;
 			color: #090806;
 		}
 

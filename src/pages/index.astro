@@ -10,6 +10,8 @@ const theEssenceAkitaBanner = '/assets/the-essence-akita-20261114-og-v3.jpg';
 const blessingNightKagurazakaAugustUrl = 'https://www.blessingnight.jp/schedule/schedule373';
 const gospelArtTsukubaUrl = '/gospel-art-tsukuba-20260815/';
 const gospelArtTsukubaPoster = '/assets/gospel-art-tsukuba-20260815.jpg';
+const tsukubaChurchUrl = '/arthur-hollands-tsukuba-20260816/';
+const tsukubaChurchPoster = '/assets/arthur-hollands-tsukuba-church-20260816.png';
 const blessingNightShimokitazawaPoster = '/assets/blessing-night-shimokitazawa-20261009-front.webp';
 const igniteHiscallPoster = '/assets/ignite-hiscall-20260821.jpg';
 
@@ -445,6 +447,26 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 				</a>
 
 				<a
+					class="blessing-time-feature tsukuba-church-home-feature"
+					href={tsukubaChurchUrl}
+					aria-label="Arthur Hollands Special Message 2026年8月16日 つくばキリストの愛教会 特別ページを見る"
+				>
+					<img src={tsukubaChurchPoster} alt="" width="1054" height="1492" loading="eager" aria-hidden="true" />
+					<div class="blessing-time-feature-copy">
+						<p class="blessing-time-feature-kicker">THE NEXT DAY / 8.16</p>
+						<h2>Arthur Hollands<br />Special Message</h2>
+						<p>アーサー・ホーランド伝道メッセージ。つくばキリストの愛教会の主日礼拝（二部）です。</p>
+						<div class="blessing-time-feature-meta">
+							<span>2026年8月16日（日）</span>
+							<span>主日礼拝（二部）11:00〜</span>
+							<span>つくばキリストの愛教会</span>
+							<span>予約不要・参加無料</span>
+						</div>
+						<span class="blessing-time-feature-button">詳細・アクセス・チラシを見る</span>
+					</div>
+				</a>
+
+				<a
 					class="blessing-time-feature ignite-home-feature"
 					href="/calendar/#calendar-events"
 					aria-label="IGNITE アーサー・ホーランド講演会 2026年8月21日 名古屋レジェンドホール カレンダーで詳細を見る"
@@ -572,6 +594,18 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		<YoutubeSubscribeBanner />
 
 		<div id="messages" class="messages-anchor" aria-hidden="true"></div>
+
+		<section class="message-event-recommendation" aria-labelledby="message-event-recommendation-title">
+			<a class="message-event-recommendation-link" href={tsukubaChurchUrl}>
+				<img src={tsukubaChurchPoster} alt="" width="1054" height="1492" loading="eager" aria-hidden="true" />
+				<span class="message-event-recommendation-copy">
+					<span class="message-event-recommendation-kicker">RECOMMENDED / 8.16</span>
+					<strong id="message-event-recommendation-title">Arthur Hollands Special Message</strong>
+					<span>8/16（日）11:00〜｜つくばキリストの愛教会｜予約不要・参加無料</span>
+					<em>特別ページを見る →</em>
+				</span>
+			</a>
+		</section>
 
 		<section class="latest-section" aria-labelledby="featured-title">
 			<div class="section-bar">
@@ -1511,6 +1545,118 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		color: #f3d36a;
 		font-size: clamp(3rem, 6.5vw, 4.5rem);
 		line-height: 0.98;
+	}
+
+	.tsukuba-church-home-feature {
+		display: grid;
+		grid-template-columns: minmax(250px, 0.72fr) minmax(0, 1.28fr);
+		min-height: 0;
+		background: #07101c;
+		border-left: 7px solid #e0bd56;
+	}
+
+	.tsukuba-church-home-feature::before {
+		display: none;
+	}
+
+	.tsukuba-church-home-feature > img {
+		position: relative;
+		inset: auto;
+		box-sizing: border-box;
+		width: 100%;
+		height: 100%;
+		min-height: 420px;
+		padding: 18px;
+		background: linear-gradient(150deg, #07101c, #1d466a 58%, #70531a);
+		object-fit: contain;
+		object-position: center center;
+	}
+
+	.tsukuba-church-home-feature:hover > img,
+	.tsukuba-church-home-feature:focus-visible > img {
+		transform: none;
+	}
+
+	.tsukuba-church-home-feature .blessing-time-feature-copy {
+		width: 100%;
+		min-height: 0;
+		padding: 46px;
+		background:
+			linear-gradient(135deg, rgba(4, 10, 18, 0.98), rgba(11, 59, 98, 0.92) 58%, rgba(197, 160, 89, 0.76)),
+			#040a12;
+	}
+
+	.tsukuba-church-home-feature .blessing-time-feature-kicker,
+	.tsukuba-church-home-feature .blessing-time-feature-button {
+		background: #e0bd56;
+		color: #090806;
+	}
+
+	.tsukuba-church-home-feature h2 {
+		max-width: 10em;
+		color: #f4d36f;
+		font-size: clamp(2.5rem, 5.7vw, 4.2rem);
+		line-height: 0.98;
+	}
+
+	.message-event-recommendation {
+		margin-top: 28px;
+		background: #07101c;
+		border-left: 5px solid #e0bd56;
+		box-shadow: 0 14px 34px rgba(0, 0, 0, 0.14);
+	}
+
+	.message-event-recommendation-link {
+		display: grid;
+		grid-template-columns: 132px minmax(0, 1fr);
+		align-items: center;
+		gap: 20px;
+		padding: 14px;
+		color: #fff;
+		text-decoration: none;
+	}
+
+	.message-event-recommendation-link img {
+		width: 100%;
+		aspect-ratio: 1054 / 1492;
+		object-fit: contain;
+		background: #132a40;
+	}
+
+	.message-event-recommendation-copy {
+		display: grid;
+		gap: 7px;
+	}
+
+	.message-event-recommendation-kicker {
+		color: #e0bd56;
+		font-family: 'Oswald', sans-serif;
+		font-size: 0.78rem;
+		font-weight: 700;
+		letter-spacing: 0.16em;
+	}
+
+	.message-event-recommendation-copy strong {
+		font-family: 'Oswald', sans-serif;
+		font-size: clamp(1.5rem, 4vw, 2.65rem);
+		line-height: 1.05;
+	}
+
+	.message-event-recommendation-copy span:not(.message-event-recommendation-kicker) {
+		color: rgba(255, 255, 255, 0.82);
+		font-size: 0.94rem;
+		font-weight: 800;
+		line-height: 1.6;
+	}
+
+	.message-event-recommendation-copy em {
+		width: fit-content;
+		padding: 7px 11px;
+		background: #e0bd56;
+		color: #090806;
+		font-size: 0.83rem;
+		font-style: normal;
+		font-weight: 900;
 	}
 
 	.ignite-home-feature {
@@ -2976,6 +3122,25 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		.featured-grid,
 		.featured-card.primary {
 			grid-template-columns: 1fr;
+		}
+
+		.tsukuba-church-home-feature {
+			grid-template-columns: 1fr;
+		}
+
+		.tsukuba-church-home-feature > img {
+			min-height: 0;
+			max-height: 560px;
+		}
+
+		.tsukuba-church-home-feature .blessing-time-feature-copy {
+			padding: 30px 24px;
+		}
+
+		.message-event-recommendation-link {
+			grid-template-columns: 86px minmax(0, 1fr);
+			gap: 14px;
+			padding: 12px;
 		}
 
 		.featured-card.primary .featured-thumb {

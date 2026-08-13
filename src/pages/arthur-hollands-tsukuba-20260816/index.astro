@@ -1,18 +1,16 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 
-const pagePath = '/gospel-art-tsukuba-20260815/';
+const pagePath = '/arthur-hollands-tsukuba-20260816/';
 const pageUrl = `https://arthur-show.com${pagePath}`;
-const posterImage = '/assets/gospel-art-tsukuba-20260815.jpg';
-const nextDayPosterImage = '/assets/arthur-hollands-tsukuba-church-20260816.png';
-const nextDayEventUrl = '/arthur-hollands-tsukuba-20260816/';
-const eventTitle = 'Gospel Art';
-const eventTheme = '神が人類に与えた愛のストーリー';
-const eventDescription = '2026年8月15日（土）13:30より、茨城県つくば美術館で開催される「Gospel Art」。アーサー・ホーランドが「神が人類に与えた愛のストーリー」を語ります。入場無料。';
-const mapUrl = 'https://www.google.com/maps/search/?api=1&query=%E8%8C%A8%E5%9F%8E%E7%9C%8C%E3%81%A4%E3%81%8F%E3%81%B0%E7%BE%8E%E8%A1%93%E9%A4%A8%20%E8%8C%A8%E5%9F%8E%E7%9C%8C%E3%81%A4%E3%81%8F%E3%81%B0%E5%B8%82%E5%90%BE%E5%A6%BB2-8';
-const contactEmail = 'shibata@cosmic-art-mira.moo.jp';
+const posterImage = '/assets/arthur-hollands-tsukuba-church-20260816.png';
+const eventTitle = 'Arthur Hollands Special Message';
+const eventTheme = 'アーサー・ホーランド伝道メッセージ';
+const eventDescription = '2026年8月16日（日）11:00より、つくばキリストの愛教会の主日礼拝（二部）でアーサー・ホーランドが特別メッセージを語ります。予約不要・参加無料。';
+const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('つくばキリストの愛教会 茨城県つくば市松代2-14-7')}`;
+const churchAccessUrl = 'https://tsukuba-church.jp/access/';
 const shareTitle = `${eventTitle}｜${eventTheme} | THE ARTHUR HOLLANDS SHOW`;
-const shareText = '2026年8月15日（土）13:30開演／茨城県つくば美術館／入場無料';
+const shareText = '2026年8月16日（日）11:00〜／つくばキリストの愛教会／予約不要・参加無料';
 const encodedShareUrl = encodeURIComponent(pageUrl);
 const encodedShareTitle = encodeURIComponent(shareTitle);
 const encodedLineText = encodeURIComponent(`${shareTitle}\n${shareText}\n${pageUrl}`);
@@ -21,9 +19,9 @@ const structuredData = {
 	'@context': 'https://schema.org',
 	'@type': 'Event',
 	'@id': `${pageUrl}#event`,
-	name: `${eventTitle}｜アーサー・ホーランドが語る「${eventTheme}」`,
+	name: `${eventTitle}｜${eventTheme}`,
 	description: eventDescription,
-	startDate: '2026-08-15T13:30:00+09:00',
+	startDate: '2026-08-16T11:00:00+09:00',
 	eventStatus: 'https://schema.org/EventScheduled',
 	eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
 	image: [`https://arthur-show.com${posterImage}`],
@@ -38,15 +36,15 @@ const structuredData = {
 	},
 	location: {
 		'@type': 'Place',
-		name: '茨城県つくば美術館',
-		telephone: '029-856-3711',
+		name: 'つくばキリストの愛教会',
+		url: churchAccessUrl,
 		address: {
 			'@type': 'PostalAddress',
-			postalCode: '305-0031',
+			postalCode: '305-0035',
 			addressCountry: 'JP',
 			addressRegion: '茨城県',
 			addressLocality: 'つくば市',
-			streetAddress: '吾妻2-8',
+			streetAddress: '松代2-14-7',
 		},
 	},
 	performer: {
@@ -55,22 +53,17 @@ const structuredData = {
 		name: 'アーサー・ホーランド',
 		alternateName: 'Arthur Hollands',
 	},
-	organizer: {
-		'@type': 'Person',
-		name: '柴田紀代',
-		email: contactEmail,
-	},
 };
 ---
 
 <Layout
-	title="Gospel Art｜2026年8月15日 茨城県つくば美術館"
+	title="Arthur Hollands Special Message｜2026年8月16日 つくばキリストの愛教会"
 	description={eventDescription}
 	image={posterImage}
-	imageAlt="Gospel Art アーサー・ホーランド 2026年8月15日 茨城県つくば美術館 告知フライヤー"
-	imageWidth={905}
-	imageHeight={1280}
-	imageType="image/jpeg"
+	imageAlt="Arthur Hollands Special Message アーサー・ホーランド伝道メッセージ 2026年8月16日 つくばキリストの愛教会 告知チラシ"
+	imageWidth={1054}
+	imageHeight={1492}
+	imageType="image/png"
 	ogType="website"
 	canonicalPath={pagePath}
 	structuredData={structuredData}
@@ -79,15 +72,15 @@ const structuredData = {
 		<section class="ga-hero" aria-labelledby="ga-title">
 			<div class="ga-hero-inner">
 				<div class="ga-hero-copy">
-					<p class="ga-kicker">GOSPEL ART / TSUKUBA 2026</p>
-					<h1 id="ga-title">Gospel Art</h1>
-					<p class="ga-speaker">アーサー・ホーランドが語る</p>
-					<p class="ga-theme">神が人類に与えた<br />愛のストーリー</p>
+					<p class="ga-kicker">SPECIAL MESSAGE / TSUKUBA 2026</p>
+					<h1 id="ga-title">Arthur Hollands</h1>
+					<p class="ga-speaker">Arthur Hollands Special Message</p>
+					<p class="ga-theme">アーサー・ホーランド<br />伝道メッセージ</p>
 					<div class="ga-hero-meta" aria-label="開催情報">
-						<span>2026年8月15日（土）</span>
-						<span>13:30開演</span>
-						<span>茨城県つくば美術館</span>
-						<strong>入場無料</strong>
+						<span>2026年8月16日（日）</span>
+						<span>主日礼拝（二部）11:00〜</span>
+						<span>つくばキリストの愛教会</span>
+						<strong>予約不要・参加無料</strong>
 					</div>
 					<div class="ga-actions">
 						<a class="primary" href="#event-detail">開催概要を見る</a>
@@ -99,9 +92,9 @@ const structuredData = {
 				<figure class="ga-poster-frame">
 					<img
 						src={posterImage}
-						alt="Gospel Art。アーサー・ホーランドが語る、神が人類に与えた愛のストーリー。2026年8月15日土曜日13時30分開演、茨城県つくば美術館、入場無料。"
-						width="905"
-						height="1280"
+						alt="Arthur Hollands Special Message。アーサー・ホーランド伝道メッセージ。2026年8月16日日曜日、主日礼拝二部11時から、つくばキリストの愛教会、予約不要・参加無料。"
+						width="1054"
+						height="1492"
 						loading="eager"
 					/>
 					<figcaption>
@@ -114,24 +107,12 @@ const structuredData = {
 		<section class="ga-message" aria-labelledby="ga-message-title">
 			<div>
 				<p class="ga-kicker">MESSAGE THEME</p>
-				<h2 id="ga-message-title">愛のストーリー</h2>
+				<h2 id="ga-message-title">伝道メッセージ</h2>
 			</div>
 			<p>
 				魂のロッカー、不良牧師アーサー・ホーランドが、
-				「神が人類に与えた愛のストーリー」を語ります。
+				主日礼拝（二部）で特別メッセージを語ります。
 			</p>
-		</section>
-
-		<section class="ga-next-event" aria-labelledby="ga-next-event-title">
-			<a class="ga-next-event-link" href={nextDayEventUrl}>
-				<img src={nextDayPosterImage} alt="" width="1054" height="1492" loading="lazy" aria-hidden="true" />
-				<span class="ga-next-event-copy">
-					<span class="ga-kicker">THE NEXT DAY / 8.16</span>
-					<strong id="ga-next-event-title">こちらもおすすめ<br />Arthur Hollands Special Message</strong>
-					<span>8月16日（日）11:00〜｜つくばキリストの愛教会｜主日礼拝（二部）</span>
-					<em>特別ページ・アクセスを見る →</em>
-				</span>
-			</a>
 		</section>
 
 		<section class="ga-detail" id="event-detail" aria-labelledby="event-detail-title">
@@ -142,27 +123,27 @@ const structuredData = {
 			<dl class="ga-info">
 				<div>
 					<dt>イベント名</dt>
-					<dd>Gospel Art</dd>
+					<dd>Arthur Hollands Special Message</dd>
 				</div>
 				<div>
 					<dt>メッセージ</dt>
-					<dd>神が人類に与えた愛のストーリー</dd>
+					<dd>アーサー・ホーランド伝道メッセージ</dd>
 				</div>
 				<div>
 					<dt>日時</dt>
-					<dd>2026年8月15日（土）<br /><strong>13:30開演</strong></dd>
+					<dd>2026年8月16日（日）<br /><strong>主日礼拝（二部）11:00〜</strong></dd>
 				</div>
 				<div>
 					<dt>会場</dt>
-					<dd>茨城県つくば美術館</dd>
+					<dd>つくばキリストの愛教会</dd>
 				</div>
 				<div>
 					<dt>住所</dt>
-					<dd>〒305-0031<br />茨城県つくば市吾妻2-8</dd>
+					<dd>〒305-0035<br />茨城県つくば市松代2-14-7</dd>
 				</div>
 				<div class="ga-free-entry">
 					<dt>入場</dt>
-					<dd>入場無料</dd>
+					<dd>予約不要・参加無料</dd>
 				</div>
 			</dl>
 		</section>
@@ -170,21 +151,20 @@ const structuredData = {
 		<section class="ga-access" aria-labelledby="ga-access-title">
 			<div class="ga-access-copy">
 				<p class="ga-kicker">ACCESS</p>
-				<h2 id="ga-access-title">茨城県つくば美術館</h2>
+				<h2 id="ga-access-title">つくばキリストの愛教会</h2>
 				<address>
-					〒305-0031 茨城県つくば市吾妻2-8<br />
-					つくばTX「つくば駅」A2出口から徒歩3分
+					〒305-0035 茨城県つくば市松代2-14-7
 				</address>
 				<div class="ga-contact-links">
-					<a href="tel:0298563711">会場電話 029-856-3711</a>
+					<a href={churchAccessUrl} target="_blank" rel="noopener noreferrer">教会のアクセス案内</a>
 					<a href={mapUrl} target="_blank" rel="noopener noreferrer">Googleマップで開く</a>
 				</div>
 			</div>
 			<aside class="ga-contact" aria-labelledby="ga-contact-title">
-				<p>ORGANIZER / CONTACT</p>
-				<h3 id="ga-contact-title">主催・お問い合わせ</h3>
-				<strong>柴田紀代</strong>
-				<a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+				<p>WELCOME</p>
+				<h3 id="ga-contact-title">どなたでも参加できます</h3>
+				<strong>予約不要・参加無料</strong>
+				<span>教会前の駐車スペースなど、当日の案内は教会のアクセス情報をご確認ください。</span>
 			</aside>
 		</section>
 
@@ -197,9 +177,9 @@ const structuredData = {
 			<a class="ga-flyer-link" href={posterImage} target="_blank" rel="noopener noreferrer">
 				<img
 					src={posterImage}
-					alt="Gospel Art 告知チラシを原寸で開く"
-					width="905"
-					height="1280"
+					alt="Arthur Hollands Special Message 告知チラシを原寸で開く"
+					width="1054"
+					height="1492"
 					loading="lazy"
 				/>
 				<span>チラシを原寸で開く</span>
@@ -242,9 +222,9 @@ const structuredData = {
 	</article>
 
 	<script is:inline>
-		const GOSPEL_ART_SHARE_URL = 'https://arthur-show.com/gospel-art-tsukuba-20260815/';
-		const GOSPEL_ART_SHARE_TITLE = 'Gospel Art｜神が人類に与えた愛のストーリー | THE ARTHUR HOLLANDS SHOW';
-		const GOSPEL_ART_SHARE_TEXT = '2026年8月15日（土）13:30開演／茨城県つくば美術館／入場無料';
+		const GOSPEL_ART_SHARE_URL = 'https://arthur-show.com/arthur-hollands-tsukuba-20260816/';
+		const GOSPEL_ART_SHARE_TITLE = 'Arthur Hollands Special Message｜アーサー・ホーランド伝道メッセージ | THE ARTHUR HOLLANDS SHOW';
+		const GOSPEL_ART_SHARE_TEXT = '2026年8月16日（日）主日礼拝（二部）11:00〜／つくばキリストの愛教会／予約不要・参加無料';
 		const nativeShareButtons = document.querySelectorAll('[data-gospel-art-share-native]');
 		const copyButtons = document.querySelectorAll('[data-gospel-art-copy-link]');
 		const copyStatusNodes = document.querySelectorAll('[data-gospel-art-copy-status]');
@@ -555,69 +535,6 @@ const structuredData = {
 		line-height: 2;
 	}
 
-	.ga-next-event {
-		box-sizing: border-box;
-		width: min(1040px, 100%);
-		margin: 0 auto;
-		padding: 0 20px 70px;
-	}
-
-	.ga-next-event-link {
-		display: grid;
-		grid-template-columns: 132px minmax(0, 1fr);
-		align-items: center;
-		gap: 22px;
-		padding: 15px;
-		background:
-			linear-gradient(135deg, #07101c, #173d5e 60%, #6d531d),
-			#07101c;
-		border-left: 5px solid var(--ga-gold);
-		box-shadow: 0 16px 36px rgba(45, 37, 18, 0.2);
-		color: #fff;
-		text-decoration: none;
-	}
-
-	.ga-next-event-link:hover,
-	.ga-next-event-link:focus-visible {
-		outline: 3px solid var(--ga-gold-light);
-		outline-offset: 3px;
-	}
-
-	.ga-next-event-link img {
-		width: 100%;
-		aspect-ratio: 1054 / 1492;
-		object-fit: contain;
-		background: #17324c;
-	}
-
-	.ga-next-event-copy {
-		display: grid;
-		gap: 8px;
-	}
-
-	.ga-next-event-copy strong {
-		font-family: var(--font-head);
-		font-size: clamp(1.45rem, 4vw, 2.7rem);
-		font-weight: 900;
-		line-height: 1.07;
-	}
-
-	.ga-next-event-copy > span:not(.ga-kicker) {
-		color: rgba(255, 255, 255, 0.84);
-		font-weight: 800;
-		line-height: 1.6;
-	}
-
-	.ga-next-event-copy em {
-		width: fit-content;
-		padding: 7px 11px;
-		background: var(--ga-gold);
-		color: var(--ga-black);
-		font-size: 0.83rem;
-		font-style: normal;
-		font-weight: 900;
-	}
-
 	.ga-detail,
 	.ga-share {
 		background: var(--ga-paper-light);
@@ -899,16 +816,6 @@ const structuredData = {
 		.ga-flyer,
 		.ga-share {
 			padding: 50px 16px;
-		}
-
-		.ga-next-event {
-			padding: 0 16px 50px;
-		}
-
-		.ga-next-event-link {
-			grid-template-columns: 86px minmax(0, 1fr);
-			gap: 14px;
-			padding: 12px;
 		}
 
 		.ga-section-head {
