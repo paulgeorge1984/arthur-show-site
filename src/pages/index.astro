@@ -384,7 +384,7 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 				<span class="home-event-summary-copy">
 					<span class="home-event-summary-kicker">EVENT INFO</span>
 					<strong>イベント案内</strong>
-					<span>8/14 BLESSING NIGHT 神楽坂／8/15 Gospel Art／8/21 IGNITE／10/9 下北沢／11/14 THE ESSENCE</span>
+					<span>8/14 BLESSING NIGHT 神楽坂／8/15 Gospel Art／8/16 Special Message／8/21 IGNITE／10/9 下北沢／11/14 THE ESSENCE</span>
 				</span>
 				<span class="home-event-summary-action" aria-hidden="true">
 					<span class="closed">見る</span>
@@ -594,18 +594,6 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		<YoutubeSubscribeBanner />
 
 		<div id="messages" class="messages-anchor" aria-hidden="true"></div>
-
-		<section class="message-event-recommendation" aria-labelledby="message-event-recommendation-title">
-			<a class="message-event-recommendation-link" href={tsukubaChurchUrl}>
-				<img src={tsukubaChurchPoster} alt="" width="1054" height="1492" loading="eager" aria-hidden="true" />
-				<span class="message-event-recommendation-copy">
-					<span class="message-event-recommendation-kicker">RECOMMENDED / 8.16</span>
-					<strong id="message-event-recommendation-title">Arthur Hollands Special Message</strong>
-					<span>8/16（日）11:00〜｜つくばキリストの愛教会｜予約不要・参加無料</span>
-					<em>特別ページを見る →</em>
-				</span>
-			</a>
-		</section>
 
 		<section class="latest-section" aria-labelledby="featured-title">
 			<div class="section-bar">
@@ -1133,6 +1121,10 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 
 	.home-event-panel .blessing-time-feature {
 		margin: 0;
+		box-sizing: border-box;
+		width: 100%;
+		max-width: 100%;
+		min-width: 0;
 	}
 
 	.blessing-time-feature.blessing-time-home-priority[hidden] {
@@ -1551,6 +1543,7 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		display: grid;
 		grid-template-columns: minmax(250px, 0.72fr) minmax(0, 1.28fr);
 		min-height: 0;
+		align-items: stretch;
 		background: #07101c;
 		border-left: 7px solid #e0bd56;
 	}
@@ -1565,7 +1558,8 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		box-sizing: border-box;
 		width: 100%;
 		height: 100%;
-		min-height: 420px;
+		min-height: 0;
+		aspect-ratio: 1054 / 1492;
 		padding: 18px;
 		background: linear-gradient(150deg, #07101c, #1d466a 58%, #70531a);
 		object-fit: contain;
@@ -1580,6 +1574,7 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 	.tsukuba-church-home-feature .blessing-time-feature-copy {
 		width: 100%;
 		min-height: 0;
+		box-sizing: border-box;
 		padding: 46px;
 		background:
 			linear-gradient(135deg, rgba(4, 10, 18, 0.98), rgba(11, 59, 98, 0.92) 58%, rgba(197, 160, 89, 0.76)),
@@ -1597,66 +1592,6 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		color: #f4d36f;
 		font-size: clamp(2.5rem, 5.7vw, 4.2rem);
 		line-height: 0.98;
-	}
-
-	.message-event-recommendation {
-		margin-top: 28px;
-		background: #07101c;
-		border-left: 5px solid #e0bd56;
-		box-shadow: 0 14px 34px rgba(0, 0, 0, 0.14);
-	}
-
-	.message-event-recommendation-link {
-		display: grid;
-		grid-template-columns: 132px minmax(0, 1fr);
-		align-items: center;
-		gap: 20px;
-		padding: 14px;
-		color: #fff;
-		text-decoration: none;
-	}
-
-	.message-event-recommendation-link img {
-		width: 100%;
-		aspect-ratio: 1054 / 1492;
-		object-fit: contain;
-		background: #132a40;
-	}
-
-	.message-event-recommendation-copy {
-		display: grid;
-		gap: 7px;
-	}
-
-	.message-event-recommendation-kicker {
-		color: #e0bd56;
-		font-family: 'Oswald', sans-serif;
-		font-size: 0.78rem;
-		font-weight: 700;
-		letter-spacing: 0.16em;
-	}
-
-	.message-event-recommendation-copy strong {
-		font-family: 'Oswald', sans-serif;
-		font-size: clamp(1.5rem, 4vw, 2.65rem);
-		line-height: 1.05;
-	}
-
-	.message-event-recommendation-copy span:not(.message-event-recommendation-kicker) {
-		color: rgba(255, 255, 255, 0.82);
-		font-size: 0.94rem;
-		font-weight: 800;
-		line-height: 1.6;
-	}
-
-	.message-event-recommendation-copy em {
-		width: fit-content;
-		padding: 7px 11px;
-		background: #e0bd56;
-		color: #090806;
-		font-size: 0.83rem;
-		font-style: normal;
-		font-weight: 900;
 	}
 
 	.ignite-home-feature {
@@ -3125,22 +3060,27 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		}
 
 		.tsukuba-church-home-feature {
+			display: grid;
 			grid-template-columns: 1fr;
+			width: 100%;
+			max-width: 100%;
+			min-width: 0;
 		}
 
 		.tsukuba-church-home-feature > img {
+			width: 100%;
+			height: auto;
 			min-height: 0;
-			max-height: 560px;
+			max-height: none;
+			padding: 14px;
+			aspect-ratio: 1054 / 1492;
+			object-fit: contain;
 		}
 
 		.tsukuba-church-home-feature .blessing-time-feature-copy {
-			padding: 30px 24px;
-		}
-
-		.message-event-recommendation-link {
-			grid-template-columns: 86px minmax(0, 1fr);
-			gap: 14px;
-			padding: 12px;
+			width: auto;
+			min-width: 0;
+			padding: 26px 20px;
 		}
 
 		.featured-card.primary .featured-thumb {
