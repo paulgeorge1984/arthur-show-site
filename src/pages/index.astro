@@ -11,6 +11,7 @@ const blessingNightKagurazakaAugustUrl = 'https://www.blessingnight.jp/schedule/
 const gospelArtTsukubaUrl = '/gospel-art-tsukuba-20260815/';
 const gospelArtTsukubaPoster = '/assets/gospel-art-tsukuba-20260815.jpg';
 const blessingNightShimokitazawaPoster = '/assets/blessing-night-shimokitazawa-20261009-front.webp';
+const igniteHiscallPoster = '/assets/ignite-hiscall-20260821.jpg';
 
 // サイトのビルドが実行された現在の時刻を取得
 const currentBuildTime = new Date(); 
@@ -381,7 +382,7 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 				<span class="home-event-summary-copy">
 					<span class="home-event-summary-kicker">EVENT INFO</span>
 					<strong>イベント案内</strong>
-					<span>8/14 BLESSING NIGHT 神楽坂／8/15 Gospel Art／10/9 下北沢／11/14 THE ESSENCE</span>
+					<span>8/14 BLESSING NIGHT 神楽坂／8/15 Gospel Art／8/21 IGNITE／10/9 下北沢／11/14 THE ESSENCE</span>
 				</span>
 				<span class="home-event-summary-action" aria-hidden="true">
 					<span class="closed">見る</span>
@@ -440,6 +441,36 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 							<span>入場無料</span>
 						</div>
 						<span class="blessing-time-feature-button">詳細・アクセス・チラシを見る</span>
+					</div>
+				</a>
+
+				<a
+					class="blessing-time-feature ignite-home-feature"
+					href="/calendar/#calendar-events"
+					aria-label="IGNITE アーサー・ホーランド講演会 2026年8月21日 名古屋レジェンドホール カレンダーで詳細を見る"
+				>
+					<img
+						src={igniteHiscallPoster}
+						alt="IGNITE アーサー・ホーランド講演会 2026年8月21日 名古屋レジェンドホールの告知フライヤー"
+						width="904"
+						height="1280"
+						loading="eager"
+					/>
+					<div class="blessing-time-feature-copy">
+						<p class="blessing-time-feature-kicker">NEXT EVENT / 8.21 FRI</p>
+						<h2>IGNITE</h2>
+						<p>
+							HISCALL CHURCH PRESENTS。アーサー・ホーランド講演会「ハートに火を灯せ！」。
+						</p>
+						<div class="blessing-time-feature-meta">
+							<span>2026年8月21日（金）</span>
+							<span>18:00開場 / 18:30開演</span>
+							<span>名古屋レジェンドホール</span>
+							<span>参加無料（自由献金あり）</span>
+							<span>申込み不要・初めての方も大歓迎</span>
+							<span>大須1-7-26 / THEY'S CAFE 052-228-7677</span>
+						</div>
+						<span class="blessing-time-feature-button">カレンダーで詳細を見る</span>
 					</div>
 				</a>
 
@@ -1477,6 +1508,58 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 	.gospel-art-home-feature h2 {
 		max-width: 8em;
 		color: #f3d36a;
+		font-size: clamp(3rem, 6.5vw, 4.5rem);
+		line-height: 0.98;
+	}
+
+	.ignite-home-feature {
+		display: grid;
+		grid-template-columns: minmax(250px, 0.72fr) minmax(0, 1.28fr);
+		min-height: 0;
+		background: #061426;
+		border-left: 7px solid #e0b84d;
+	}
+
+	.ignite-home-feature::before {
+		display: none;
+	}
+
+	.ignite-home-feature > img {
+		position: relative;
+		inset: auto;
+		box-sizing: border-box;
+		width: 100%;
+		height: 100%;
+		min-height: 420px;
+		padding: 18px;
+		background: linear-gradient(150deg, #061426, #0b5fa9 58%, #5f4817);
+		object-fit: contain;
+		object-position: center center;
+	}
+
+	.ignite-home-feature:hover > img,
+	.ignite-home-feature:focus-visible > img {
+		transform: none;
+	}
+
+	.ignite-home-feature .blessing-time-feature-copy {
+		width: 100%;
+		min-height: 0;
+		padding: 46px;
+		background:
+			linear-gradient(135deg, rgba(4, 10, 18, 0.98), rgba(10, 74, 137, 0.9) 58%, rgba(197, 160, 89, 0.76)),
+			#040a12;
+	}
+
+	.ignite-home-feature .blessing-time-feature-kicker,
+	.ignite-home-feature .blessing-time-feature-button {
+		background: #e0b84d;
+		color: #090806;
+	}
+
+	.ignite-home-feature h2 {
+		max-width: 8em;
+		color: #f4d36f;
 		font-size: clamp(3rem, 6.5vw, 4.5rem);
 		line-height: 0.98;
 	}
@@ -2835,6 +2918,26 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		}
 
 		.the-essence-home-feature h2 {
+			max-width: 8em;
+			font-size: 2.8rem;
+		}
+
+		.ignite-home-feature > img {
+			height: auto;
+			min-height: 0;
+			padding: 14px;
+			aspect-ratio: 904 / 1280;
+			object-position: center center;
+		}
+
+		.ignite-home-feature .blessing-time-feature-copy {
+			padding: 26px 20px;
+			background:
+				linear-gradient(135deg, rgba(4, 10, 18, 0.98), rgba(10, 74, 137, 0.88) 60%, rgba(197, 160, 89, 0.72)),
+				#040a12;
+		}
+
+		.ignite-home-feature h2 {
 			max-width: 8em;
 			font-size: 2.8rem;
 		}
