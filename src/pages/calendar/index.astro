@@ -10,6 +10,7 @@ const blessingNightUrl = 'https://www.blessingnight.jp';
 const blessingNightKagurazakaAugustUrl = 'https://www.blessingnight.jp/schedule/schedule373';
 const gospelArtTsukubaPoster = '/assets/gospel-art-tsukuba-20260815.jpg';
 const gospelArtTsukubaUrl = '/gospel-art-tsukuba-20260815/';
+const igniteHiscallPoster = '/assets/ignite-hiscall-20260821.jpg';
 const blessingNightShimokitazawaUrl = '/blessing-night-shimokitazawa-20261009/';
 const blessingNightShimokitazawaPoster = '/assets/blessing-night-shimokitazawa-20261009-front.webp';
 const theEssenceAkitaUrl = '/the-essence-akita-20261114/';
@@ -116,6 +117,39 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 						<span>入場無料</span>
 					</span>
 					<span class="calendar-special-button">詳細・アクセス・チラシを見る</span>
+				</span>
+			</a>
+		</section>
+
+		<section class="calendar-special-event ignite-hiscall-feature" aria-label="2026年8月21日 IGNITE 名古屋レジェンドホール 特別案内">
+			<a class="calendar-special-link" href="#calendar-events">
+				<span class="calendar-special-media">
+					<img
+						src={igniteHiscallPoster}
+						alt="HISCALL CHURCH PRESENTS アーサー・ホーランド講演会 IGNITE ハートに火を灯せ。2026年8月21日、名古屋レジェンドホールで開催。"
+						width="904"
+						height="1280"
+						loading="eager"
+					/>
+				</span>
+				<span class="calendar-special-copy">
+					<span class="calendar-special-label">IGNITE / 2026.08.21</span>
+					<strong>IGNITE</strong>
+					<span class="calendar-special-lead">
+						HISCALL CHURCH PRESENTS。
+						アーサー・ホーランド講演会「ハートに火を灯せ！」
+					</span>
+					<span class="calendar-special-meta">
+						<span>2026年8月21日（金）</span>
+						<span>18:00開場 / 18:30開演</span>
+						<span>名古屋レジェンドホール</span>
+						<span>参加無料（自由献金あり）</span>
+						<span>申込み不要</span>
+						<span>初めての方も大歓迎</span>
+						<span>愛知県名古屋市中区大須1丁目7-26</span>
+						<span>問合せ：THEY'S CAFE 052-228-7677</span>
+					</span>
+					<span class="calendar-special-button">8/21の予定詳細を見る</span>
 				</span>
 			</a>
 		</section>
@@ -285,6 +319,28 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				location: '茨城県つくば美術館 〒305-0031 茨城県つくば市吾妻2-8',
 				start: {
 					dateTime: '2026-08-15T13:30:00+09:00',
+					timeZone: TOKYO_TIME_ZONE,
+				},
+				end: null,
+			},
+			{
+				id: 'manual-ignite-hiscall-2026-08-21',
+				summary: 'IGNITE',
+				description: [
+					'HISCALL CHURCH PRESENTS',
+					'アーサー・ホーランド講演会「IGNITE ハートに火を灯せ！」',
+					'18:00開場 / 18:30開演',
+					'参加無料（自由献金あり）',
+					'申込み不要。当日直接会場へお越しください。',
+					'どなたでもお気軽にご参加いただけます（初めての方も大歓迎）。',
+					'主催：ヒズコールチャーチ',
+					"問合せ：THEY'S CAFE 052-228-7677",
+					'今後のIGNITE：9月18日（金）・10月16日（金）・11月27日（金）',
+					'※12月はIGNITEはお休みです。12月20日（日）は別行事のクリスマス礼拝ゲストメッセージです。',
+				].join('\n'),
+				location: '名古屋レジェンドホール 愛知県名古屋市中区大須1丁目7-26（地下鉄大須観音駅④すぐ）',
+				start: {
+					dateTime: '2026-08-21T18:30:00+09:00',
 					timeZone: TOKYO_TIME_ZONE,
 				},
 				end: null,
@@ -658,6 +714,13 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				&& /gospel\s*art|愛のストーリー|つくば美術館/i.test(searchableText);
 		}
 
+		function isIgniteHiscallEvent(event) {
+			const startKey = event.start?.date || getDateKeyFromDate(getEventStart(event));
+			const searchableText = [event.summary || '', event.description || '', event.location || ''].join(' ');
+			return startKey === '2026-08-21'
+				&& /ignite|hiscall|ヒズコール/i.test(searchableText);
+		}
+
 		function isBlessingNightShimokitazawaEvent(event) {
 			const startKey = event.start?.date || getDateKeyFromDate(getEventStart(event));
 			const searchableText = `${event.summary || ''} ${event.description || ''} ${event.location || ''}`;
@@ -695,10 +758,12 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			const hasGospelTalkSummer = events.some((event) => isGospelTalkSummerEvent(event));
 			const hasBlessingNightKagurazakaAugust = events.some((event) => isBlessingNightKagurazakaAugustEvent(event));
 			const hasGospelArtTsukuba = events.some((event) => isGospelArtTsukubaEvent(event));
+			const hasIgniteHiscall = events.some((event) => isIgniteHiscallEvent(event));
 			const hasBlessingNightShimokitazawa = events.some((event) => isBlessingNightShimokitazawaEvent(event));
 			const gospelTalkManualEvent = manualEventsInRange.find((event) => event.id === 'manual-gospel-talk-summer-osaka-2026-07-19');
 			const blessingNightKagurazakaAugustManualEvent = manualEventsInRange.find((event) => event.id === 'manual-blessing-night-kagurazaka-2026-08-14');
 			const gospelArtTsukubaManualEvent = manualEventsInRange.find((event) => event.id === 'manual-gospel-art-tsukuba-2026-08-15');
+			const igniteHiscallManualEvent = manualEventsInRange.find((event) => event.id === 'manual-ignite-hiscall-2026-08-21');
 			const blessingNightManualEvent = manualEventsInRange.find((event) => event.id === 'manual-blessing-night-shimokitazawa-2026-10-09');
 			let mergedEvents = events;
 			if (blessingNightManualEvent && hasBlessingNightShimokitazawa) {
@@ -743,6 +808,19 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 					}];
 				});
 			}
+			if (igniteHiscallManualEvent && hasIgniteHiscall) {
+				mergedEvents = mergedEvents.map((event) => {
+					if (!isIgniteHiscallEvent(event)) return event;
+					return {
+						...event,
+						summary: igniteHiscallManualEvent.summary,
+						description: igniteHiscallManualEvent.description,
+						location: igniteHiscallManualEvent.location,
+						start: igniteHiscallManualEvent.start,
+						end: igniteHiscallManualEvent.end,
+					};
+				});
+			}
 			if (gospelTalkManualEvent && hasGospelTalkSummer) {
 				mergedEvents = mergedEvents.map((event) => {
 					if (!isGospelTalkSummerEvent(event)) return event;
@@ -761,6 +839,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				...manualEventsInRange.filter((event) => {
 					if (isBlessingNightKagurazakaAugustEvent(event)) return !hasBlessingNightKagurazakaAugust;
 					if (isGospelArtTsukubaEvent(event)) return !hasGospelArtTsukuba;
+					if (isIgniteHiscallEvent(event)) return !hasIgniteHiscall;
 					if (isBlessingNightShimokitazawaEvent(event)) return !hasBlessingNightShimokitazawa;
 					if (isSaturdayNightArthurEvent(event)) return !hasSaturdayNightArthur;
 					if (isBlessingTimeOsakaEvent(event)) return !hasBlessingTimeOsaka;
@@ -1494,6 +1573,43 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			transform: scale(1.018);
 		}
 
+		.ignite-hiscall-feature .calendar-special-link {
+			background:
+				linear-gradient(135deg, rgba(4, 10, 18, 0.99), rgba(10, 74, 137, 0.9) 58%, rgba(197, 160, 89, 0.76)),
+				#040a12;
+		}
+
+		.ignite-hiscall-feature .calendar-special-link::before {
+			background:
+				linear-gradient(90deg, rgba(4, 10, 18, 0.03), rgba(4, 10, 18, 0.08) 48%, rgba(4, 10, 18, 0.34)),
+				linear-gradient(0deg, rgba(197, 160, 89, 0.22), transparent 48%);
+		}
+
+		.ignite-hiscall-feature .calendar-special-media {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 18px;
+			background: linear-gradient(150deg, #061426, #0b5fa9 58%, #5f4817);
+		}
+
+		.ignite-hiscall-feature .calendar-special-media img {
+			width: auto;
+			height: 100%;
+			max-width: 88%;
+			max-height: 405px;
+			border: 5px solid rgba(255, 248, 235, 0.92);
+			box-shadow: 0 18px 46px rgba(0, 0, 0, 0.44);
+			object-fit: contain;
+			object-position: center;
+		}
+
+		.ignite-hiscall-feature .calendar-special-label,
+		.ignite-hiscall-feature .calendar-special-button {
+			background: #e0b84d;
+			color: #090806;
+		}
+
 		.gospel-art-tsukuba-feature .calendar-special-link {
 			background:
 				linear-gradient(135deg, rgba(8, 7, 4, 0.99), rgba(72, 62, 35, 0.92) 58%, rgba(151, 119, 37, 0.7)),
@@ -2204,6 +2320,18 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 		}
 
 		.the-essence-akita-feature .calendar-special-media img {
+			width: min(74%, 300px);
+			height: auto;
+			max-height: none;
+		}
+
+		.ignite-hiscall-feature .calendar-special-media {
+			aspect-ratio: auto;
+			min-height: 360px;
+			padding: 20px;
+		}
+
+		.ignite-hiscall-feature .calendar-special-media img {
 			width: min(74%, 300px);
 			height: auto;
 			max-height: none;
