@@ -5,7 +5,10 @@ import '../walk-across-sado2026/archive.css';
 const siteUrl = 'https://arthur-show.com';
 const canonicalPath = '/walk-across-sado/';
 const pageTitle = '佐渡島十字架行進 2026';
-const pageDescription = '2026年8月23日〜27日、アーサー・ホーランドが十字架を担ぎ、佐渡島約99kmを歩く5日間。';
+const pageDescription = '2026年8月23日〜27日、アーサー・ホーランドが十字架を担ぎ、佐渡島約99kmを歩く5日間。8月26日18時から真野シェアベースカフェで伝道集会を開催。';
+const meetingFlyerPath = '/walk-across-sado/sado-evangelistic-meeting-2026-bilingual-a4.jpg';
+const meetingInstagramUrl = 'https://www.instagram.com/mano_sharebase_cafe/';
+const meetingMapUrl = 'https://www.google.com/maps/search/?api=1&query=%E6%96%B0%E6%BD%9F%E7%9C%8C%E4%BD%90%E6%B8%A1%E5%B8%82%E5%90%89%E5%B2%A1917-6';
 
 const routes = [
 	{
@@ -79,12 +82,35 @@ const structuredData = {
 	startDate: '2026-08-23', endDate: '2026-08-27', eventStatus: 'https://schema.org/EventScheduled',
 	location: { '@type': 'Place', name: '佐渡島', address: '新潟県佐渡市' },
 };
+const meetingStructuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'Event',
+	name: '伝道集会 | EVANGELICAL GATHERING IN SADO',
+	description: '佐渡島十字架行進の期間中、アーサー・ホーランドが真野シェアベースカフェで語る伝道集会です。',
+	startDate: '2026-08-26T18:00:00+09:00',
+	eventStatus: 'https://schema.org/EventScheduled',
+	eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+	url: `${siteUrl}${canonicalPath}#evangelistic-meeting`,
+	image: [`${siteUrl}${meetingFlyerPath}`],
+	performer: { '@type': 'Person', name: 'アーサー・ホーランド', alternateName: 'ARTHUR HOLLANDS' },
+	location: {
+		'@type': 'Place',
+		name: '真野シェアベースカフェ',
+		address: {
+			'@type': 'PostalAddress',
+			streetAddress: '吉岡917-6',
+			addressLocality: '佐渡市',
+			addressRegion: '新潟県',
+			addressCountry: 'JP',
+		},
+	},
+};
 ---
 
-<Layout title={pageTitle} description={pageDescription} image="/walk-across-sado/sado-island-2026-flyer.jpg" imageAlt="SADO ISLAND 2026 佐渡島十字架行進の告知チラシ" imageWidth={904} imageHeight={1280} canonicalPath={canonicalPath} structuredData={structuredData}>
+<Layout title={pageTitle} description={pageDescription} image="/walk-across-sado/sado-island-2026-flyer.jpg" imageAlt="SADO ISLAND 2026 佐渡島十字架行進の告知チラシ" imageWidth={904} imageHeight={1280} canonicalPath={canonicalPath} structuredData={[structuredData, meetingStructuredData]}>
 	<div class="sado-archive-page">
 		<nav class="section-nav" aria-label="ページ内メニュー">
-			<div class="page-shell"><a href="#about">概要</a><a href="#flyer">チラシ</a><a href="#schedule">スケジュール</a><a href="#photos">写真</a><a href="#previous">これまでの行進</a></div>
+			<div class="page-shell"><a class="meeting-nav-link" href="#evangelistic-meeting">伝道集会</a><a href="#about">概要</a><a href="#flyer">チラシ</a><a href="#schedule">スケジュール</a><a href="#photos">写真</a><a href="#previous">これまでの行進</a></div>
 		</nav>
 		<main>
 			<section class="hero" id="flyer" aria-labelledby="hero-title">
@@ -99,6 +125,34 @@ const structuredData = {
 			</section>
 
 			<section class="section about-section" id="about" aria-labelledby="about-title"><div class="page-shell"><div class="section-heading"><p class="eyebrow eyebrow-red">ABOUT THE WALK</p><h2 id="about-title">佐渡島を、祈りとともに歩く。</h2><p>2026年8月23日（日）から27日（木）まで、アーサー・ホーランドが十字架を携え、両津を起点に佐渡島約99kmを5日間で歩く予定です。</p></div><div class="point-grid"><article><span>01</span><h3>両津から、両津へ</h3><p>島の南側から東海岸をつなぎ、5日目に両津へ戻る行程です。</p></article><article><span>02</span><h3>5日間・約99km</h3><p>各日の出発予定時刻、区間、距離、Googleマップを掲載しています。</p></article><article><span>03</span><h3>祈りを携えて</h3><p>佐渡に暮らす人々と島の平安を覚えながら、一歩ずつ歩きます。</p></article></div></div></section>
+
+			<section class="meeting-section" id="evangelistic-meeting" aria-labelledby="meeting-title">
+				<div class="page-shell meeting-grid">
+					<div class="meeting-copy">
+						<p class="eyebrow">WALK ACROSS SADO ISLAND 2026</p>
+						<p class="meeting-date-mark">2026.08.26 WED <span>18:00</span></p>
+						<h2 id="meeting-title"><span>佐渡島十字架行進 2026</span>伝道集会</h2>
+						<p class="meeting-title-en">EVANGELICAL GATHERING <span>IN SADO</span></p>
+						<p class="meeting-lead">佐渡島十字架行進の期間中、8月26日（水）18時から、真野シェアベースカフェにて伝道集会を開催します。アーサー・ホーランドのメッセージを、ぜひ会場でお聴きください。</p>
+						<dl class="meeting-facts">
+							<div><dt>日時</dt><dd><strong>2026年8月26日（水）</strong><span>18:00 開始</span></dd></div>
+							<div><dt>会場</dt><dd><strong>真野シェアベースカフェ</strong><span>新潟県佐渡市吉岡917-6</span></dd></div>
+							<div><dt>メッセンジャー</dt><dd><strong>アーサー・ホーランド</strong><span>ARTHUR HOLLANDS</span></dd></div>
+						</dl>
+						<div class="meeting-actions">
+							<a class="button meeting-button-primary" href={meetingInstagramUrl} target="_blank" rel="noreferrer">会場Instagramを見る <span aria-hidden="true">↗</span></a>
+							<a class="button meeting-button-secondary" href={meetingMapUrl} target="_blank" rel="noreferrer">Googleマップで場所を見る <span aria-hidden="true">↗</span></a>
+						</div>
+						<p class="meeting-contact">会場へのお問い合わせは <a href={meetingInstagramUrl} target="_blank" rel="noreferrer">@mano_sharebase_cafe</a> のInstagram DMから。</p>
+					</div>
+					<figure class="meeting-flyer">
+						<a href={meetingFlyerPath} target="_blank" rel="noreferrer" aria-label="アーサー・ホーランド伝道集会のA4チラシを拡大表示する">
+							<img src={meetingFlyerPath} alt="アーサー・ホーランド伝道集会 2026年8月26日18時 真野シェアベースカフェのA4告知チラシ" width="2480" height="3508" loading="lazy" />
+						</a>
+						<figcaption><a href={meetingFlyerPath} target="_blank" rel="noreferrer">A4チラシを大きく見る <span aria-hidden="true">↗</span></a></figcaption>
+					</figure>
+				</div>
+			</section>
 
 			<section class="journey-section" aria-labelledby="journey-title"><div class="page-shell journey-grid"><figure><img src="/walk-across-sado/assets/arthur-long-road.jpg" alt="緑に囲まれた一本道を歩くアーサー・ホーランド" loading="lazy" /></figure><div class="journey-copy"><p class="eyebrow">THE WALK CONTINUES</p><h2 id="journey-title">これまでの歩みを、佐渡へ。</h2><p>十字架を担ぎ、日本や世界の各地を歩き続けてきたアーサー・ホーランド。その歩みは、2026年夏、佐渡島へ続きます。</p></div></div></section>
 
@@ -201,6 +255,243 @@ const structuredData = {
 		object-position: center;
 	}
 
+	.sado-archive-page .meeting-nav-link {
+		color: #f0bd3f;
+		font-weight: 900;
+	}
+
+	.sado-archive-page .meeting-section {
+		position: relative;
+		isolation: isolate;
+		overflow: hidden;
+		scroll-margin-top: 72px;
+		padding: clamp(72px, 9vw, 124px) 0;
+		background:
+			radial-gradient(circle at 8% 12%, rgba(215, 25, 32, 0.2), transparent 32%),
+			radial-gradient(circle at 95% 82%, rgba(214, 169, 53, 0.15), transparent 28%),
+			#050706;
+		color: #fff;
+	}
+
+	.sado-archive-page .meeting-section::before {
+		position: absolute;
+		z-index: -1;
+		top: 0;
+		left: 50%;
+		width: min(100%, 1440px);
+		height: 1px;
+		background: linear-gradient(90deg, transparent, rgba(214, 169, 53, 0.86), transparent);
+		content: '';
+		transform: translateX(-50%);
+	}
+
+	.sado-archive-page .meeting-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.72fr);
+		align-items: center;
+		gap: clamp(48px, 7vw, 96px);
+	}
+
+	.sado-archive-page .meeting-copy {
+		max-width: 690px;
+	}
+
+	.sado-archive-page .meeting-copy .eyebrow {
+		margin-bottom: 18px;
+		color: #d6a935;
+		letter-spacing: 0.22em;
+	}
+
+	.sado-archive-page .meeting-date-mark {
+		display: flex;
+		align-items: baseline;
+		gap: 16px;
+		margin: 0 0 20px;
+		color: rgba(255, 255, 255, 0.75);
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: clamp(0.85rem, 1.4vw, 1rem);
+		font-weight: 800;
+		letter-spacing: 0.16em;
+	}
+
+	.sado-archive-page .meeting-date-mark span {
+		color: #fff;
+		font-size: clamp(1.35rem, 2.4vw, 2rem);
+		letter-spacing: 0.04em;
+	}
+
+	.sado-archive-page .meeting-copy h2 {
+		margin: 0;
+		color: #fff;
+		font-size: clamp(3.5rem, 8vw, 7.2rem);
+		font-weight: 950;
+		letter-spacing: -0.065em;
+		line-height: 0.92;
+	}
+
+	.sado-archive-page .meeting-copy h2 span {
+		display: block;
+		margin-bottom: 14px;
+		color: #d6a935;
+		font-size: clamp(0.92rem, 1.7vw, 1.3rem);
+		font-weight: 800;
+		letter-spacing: 0.14em;
+		line-height: 1.5;
+	}
+
+	.sado-archive-page .meeting-title-en {
+		margin: 22px 0 0;
+		color: #fff;
+		font-family: Arial Black, Arial, Helvetica, sans-serif;
+		font-size: clamp(1.35rem, 3.1vw, 2.45rem);
+		font-weight: 900;
+		letter-spacing: 0.035em;
+		line-height: 1.05;
+	}
+
+	.sado-archive-page .meeting-title-en span {
+		color: #d6a935;
+	}
+
+	.sado-archive-page .meeting-lead {
+		max-width: 620px;
+		margin: 28px 0 0;
+		color: rgba(255, 255, 255, 0.82);
+		font-size: clamp(1rem, 1.7vw, 1.12rem);
+		line-height: 2;
+	}
+
+	.sado-archive-page .meeting-facts {
+		margin: 36px 0 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.17);
+	}
+
+	.sado-archive-page .meeting-facts > div {
+		display: grid;
+		grid-template-columns: 120px minmax(0, 1fr);
+		gap: 18px;
+		padding: 19px 0;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.17);
+	}
+
+	.sado-archive-page .meeting-facts dt {
+		color: #d6a935;
+		font-size: 0.78rem;
+		font-weight: 900;
+		letter-spacing: 0.12em;
+		white-space: nowrap;
+	}
+
+	.sado-archive-page .meeting-facts dd {
+		margin: 0;
+		line-height: 1.65;
+	}
+
+	.sado-archive-page .meeting-facts dd strong,
+	.sado-archive-page .meeting-facts dd span {
+		display: block;
+	}
+
+	.sado-archive-page .meeting-facts dd strong {
+		font-size: clamp(1.03rem, 1.8vw, 1.18rem);
+	}
+
+	.sado-archive-page .meeting-facts dd span {
+		color: rgba(255, 255, 255, 0.64);
+		font-size: 0.92rem;
+	}
+
+	.sado-archive-page .meeting-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
+		margin-top: 34px;
+	}
+
+	.sado-archive-page .meeting-actions .button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 10px;
+		min-height: 52px;
+		padding: 13px 20px;
+		font-size: 0.88rem;
+		font-weight: 900;
+		letter-spacing: 0.02em;
+		text-align: center;
+	}
+
+	.sado-archive-page .meeting-button-primary {
+		background: #d71920;
+		color: #fff;
+	}
+
+	.sado-archive-page .meeting-button-secondary {
+		border: 1px solid rgba(255, 255, 255, 0.3);
+		background: transparent;
+		color: #fff;
+	}
+
+	.sado-archive-page .meeting-button-primary:hover,
+	.sado-archive-page .meeting-button-primary:focus-visible {
+		background: #f02a31;
+	}
+
+	.sado-archive-page .meeting-button-secondary:hover,
+	.sado-archive-page .meeting-button-secondary:focus-visible {
+		border-color: #d6a935;
+		background: rgba(214, 169, 53, 0.1);
+	}
+
+	.sado-archive-page .meeting-contact {
+		margin: 18px 0 0;
+		color: rgba(255, 255, 255, 0.56);
+		font-size: 0.84rem;
+	}
+
+	.sado-archive-page .meeting-contact a {
+		color: #e2bc59;
+		font-weight: 800;
+	}
+
+	.sado-archive-page .meeting-flyer {
+		width: min(100%, 460px);
+		margin: 0;
+		justify-self: end;
+	}
+
+	.sado-archive-page .meeting-flyer > a {
+		display: block;
+		padding: clamp(8px, 1vw, 12px);
+		background: #fff;
+		box-shadow: 0 28px 70px rgba(0, 0, 0, 0.55);
+		transform: rotate(1deg);
+		transition: transform 180ms ease, box-shadow 180ms ease;
+	}
+
+	.sado-archive-page .meeting-flyer > a:hover,
+	.sado-archive-page .meeting-flyer > a:focus-visible {
+		box-shadow: 0 32px 82px rgba(0, 0, 0, 0.65);
+		transform: rotate(0deg) translateY(-3px);
+	}
+
+	.sado-archive-page .meeting-flyer img {
+		aspect-ratio: 2480 / 3508;
+		object-fit: contain;
+	}
+
+	.sado-archive-page .meeting-flyer figcaption {
+		margin-top: 18px;
+		text-align: center;
+	}
+
+	.sado-archive-page .meeting-flyer figcaption a {
+		color: rgba(255, 255, 255, 0.72);
+		font-size: 0.84rem;
+		font-weight: 800;
+		letter-spacing: 0.06em;
+	}
+
 	@media (max-width: 760px) {
 		.sado-archive-page .section-nav .page-shell {
 			justify-content: flex-start;
@@ -220,6 +511,20 @@ const structuredData = {
 		.sado-archive-page .hero-copy {
 			max-width: 700px;
 		}
+
+		.sado-archive-page .meeting-grid {
+			grid-template-columns: minmax(0, 1fr);
+			gap: 52px;
+		}
+
+		.sado-archive-page .meeting-copy {
+			max-width: 760px;
+		}
+
+		.sado-archive-page .meeting-flyer {
+			width: min(100%, 520px);
+			justify-self: center;
+		}
 	}
 
 	@media (max-width: 640px) {
@@ -227,6 +532,43 @@ const structuredData = {
 			width: min(100%, 340px);
 			padding: 8px;
 			box-shadow: 0 14px 30px rgba(0, 0, 0, 0.28);
+		}
+
+		.sado-archive-page .meeting-section {
+			padding: 64px 0 72px;
+		}
+
+		.sado-archive-page .meeting-copy h2 {
+			font-size: clamp(3.35rem, 20vw, 5.1rem);
+		}
+
+		.sado-archive-page .meeting-copy .eyebrow {
+			font-size: 0.7rem;
+			letter-spacing: 0.14em;
+		}
+
+		.sado-archive-page .meeting-title-en {
+			font-size: clamp(1.28rem, 6.3vw, 1.7rem);
+			line-height: 1.15;
+		}
+
+		.sado-archive-page .meeting-lead {
+			margin-top: 26px;
+			line-height: 1.85;
+		}
+
+		.sado-archive-page .meeting-facts > div {
+			grid-template-columns: 104px minmax(0, 1fr);
+			gap: 12px;
+		}
+
+		.sado-archive-page .meeting-actions {
+			display: grid;
+			grid-template-columns: minmax(0, 1fr);
+		}
+
+		.sado-archive-page .meeting-actions .button {
+			width: 100%;
 		}
 	}
 </style>
