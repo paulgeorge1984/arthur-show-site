@@ -6,7 +6,7 @@ const siteUrl = 'https://arthur-show.com';
 const canonicalPath = '/walk-across-sado/';
 const pageTitle = '佐渡島十字架行進 2026';
 const pageDescription = '2026年8月23日〜27日、アーサー・ホーランドが十字架を担ぎ、佐渡島約99kmを歩く5日間。8月26日18時から真野シェアベースカフェで伝道集会を開催。';
-const meetingFlyerPath = '/walk-across-sado/sado-evangelistic-meeting-2026-bilingual-a4.jpg';
+const meetingFlyerPath = '/walk-across-sado/sado-evangelistic-meeting-2026-clean-bilingual-a4.jpg';
 const meetingInstagramUrl = 'https://www.instagram.com/mano_sharebase_cafe/';
 const meetingMapUrl = 'https://www.google.com/maps/search/?api=1&query=%E6%96%B0%E6%BD%9F%E7%9C%8C%E4%BD%90%E6%B8%A1%E5%B8%82%E5%90%89%E5%B2%A1917-6';
 
@@ -129,15 +129,14 @@ const meetingStructuredData = {
 			<section class="meeting-section" id="evangelistic-meeting" aria-labelledby="meeting-title">
 				<div class="page-shell meeting-grid">
 					<div class="meeting-copy">
-						<p class="eyebrow">WALK ACROSS SADO ISLAND 2026</p>
-						<p class="meeting-date-mark">2026.08.26 WED <span>18:00</span></p>
-						<h2 id="meeting-title"><span>佐渡島十字架行進 2026</span>伝道集会</h2>
-						<p class="meeting-title-en">EVANGELICAL GATHERING <span>IN SADO</span></p>
+						<p class="eyebrow">2026.8.26 WED · 18:00 START</p>
+						<h2 id="meeting-title">伝道集会</h2>
+						<p class="meeting-title-en">EVANGELICAL GATHERING IN SADO</p>
+						<p class="meeting-speaker"><strong>ARTHUR HOLLANDS</strong><span>アーサー・ホーランド</span></p>
 						<p class="meeting-lead">佐渡島十字架行進の期間中、8月26日（水）18時から、真野シェアベースカフェにて伝道集会を開催します。アーサー・ホーランドのメッセージを、ぜひ会場でお聴きください。</p>
 						<dl class="meeting-facts">
 							<div><dt>日時</dt><dd><strong>2026年8月26日（水）</strong><span>18:00 開始</span></dd></div>
 							<div><dt>会場</dt><dd><strong>真野シェアベースカフェ</strong><span>新潟県佐渡市吉岡917-6</span></dd></div>
-							<div><dt>メッセンジャー</dt><dd><strong>アーサー・ホーランド</strong><span>ARTHUR HOLLANDS</span></dd></div>
 						</dl>
 						<div class="meeting-actions">
 							<a class="button meeting-button-primary" href={meetingInstagramUrl} target="_blank" rel="noreferrer">会場Instagramを見る <span aria-hidden="true">↗</span></a>
@@ -256,130 +255,102 @@ const meetingStructuredData = {
 	}
 
 	.sado-archive-page .meeting-nav-link {
-		color: #f0bd3f;
+		color: #ba261d;
 		font-weight: 900;
 	}
 
 	.sado-archive-page .meeting-section {
-		position: relative;
-		isolation: isolate;
-		overflow: hidden;
 		scroll-margin-top: 72px;
-		padding: clamp(72px, 9vw, 124px) 0;
-		background:
-			radial-gradient(circle at 8% 12%, rgba(215, 25, 32, 0.2), transparent 32%),
-			radial-gradient(circle at 95% 82%, rgba(214, 169, 53, 0.15), transparent 28%),
-			#050706;
-		color: #fff;
-	}
-
-	.sado-archive-page .meeting-section::before {
-		position: absolute;
-		z-index: -1;
-		top: 0;
-		left: 50%;
-		width: min(100%, 1440px);
-		height: 1px;
-		background: linear-gradient(90deg, transparent, rgba(214, 169, 53, 0.86), transparent);
-		content: '';
-		transform: translateX(-50%);
+		padding: clamp(72px, 9vw, 112px) 0;
+		border-top: 1px solid #e4dfd7;
+		border-bottom: 1px solid #e4dfd7;
+		background: #f7f4ee;
+		color: #141414;
 	}
 
 	.sado-archive-page .meeting-grid {
 		display: grid;
-		grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.72fr);
+		grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.75fr);
 		align-items: center;
-		gap: clamp(48px, 7vw, 96px);
+		gap: clamp(48px, 8vw, 112px);
 	}
 
 	.sado-archive-page .meeting-copy {
-		max-width: 690px;
+		max-width: 620px;
 	}
 
 	.sado-archive-page .meeting-copy .eyebrow {
-		margin-bottom: 18px;
-		color: #d6a935;
-		letter-spacing: 0.22em;
-	}
-
-	.sado-archive-page .meeting-date-mark {
-		display: flex;
-		align-items: baseline;
-		gap: 16px;
-		margin: 0 0 20px;
-		color: rgba(255, 255, 255, 0.75);
-		font-family: Arial, Helvetica, sans-serif;
-		font-size: clamp(0.85rem, 1.4vw, 1rem);
-		font-weight: 800;
-		letter-spacing: 0.16em;
-	}
-
-	.sado-archive-page .meeting-date-mark span {
-		color: #fff;
-		font-size: clamp(1.35rem, 2.4vw, 2rem);
-		letter-spacing: 0.04em;
+		margin-bottom: 22px;
+		color: #ba261d;
+		letter-spacing: 0.14em;
 	}
 
 	.sado-archive-page .meeting-copy h2 {
 		margin: 0;
-		color: #fff;
-		font-size: clamp(3.5rem, 8vw, 7.2rem);
+		color: #111;
+		font-size: clamp(3.6rem, 7vw, 6.4rem);
 		font-weight: 950;
-		letter-spacing: -0.065em;
-		line-height: 0.92;
-	}
-
-	.sado-archive-page .meeting-copy h2 span {
-		display: block;
-		margin-bottom: 14px;
-		color: #d6a935;
-		font-size: clamp(0.92rem, 1.7vw, 1.3rem);
-		font-weight: 800;
-		letter-spacing: 0.14em;
-		line-height: 1.5;
+		letter-spacing: -0.055em;
+		line-height: 1;
 	}
 
 	.sado-archive-page .meeting-title-en {
-		margin: 22px 0 0;
-		color: #fff;
-		font-family: Arial Black, Arial, Helvetica, sans-serif;
-		font-size: clamp(1.35rem, 3.1vw, 2.45rem);
-		font-weight: 900;
-		letter-spacing: 0.035em;
-		line-height: 1.05;
+		max-width: 560px;
+		margin: 18px 0 0;
+		color: #1a1a1a;
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: clamp(1.18rem, 2.4vw, 1.75rem);
+		font-weight: 700;
+		letter-spacing: 0.04em;
+		line-height: 1.2;
 	}
 
-	.sado-archive-page .meeting-title-en span {
-		color: #d6a935;
+	.sado-archive-page .meeting-speaker {
+		display: grid;
+		gap: 4px;
+		margin: 34px 0 0;
+		padding-left: 16px;
+		border-left: 3px solid #d93625;
+	}
+
+	.sado-archive-page .meeting-speaker strong {
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: 1.08rem;
+		letter-spacing: 0.08em;
+	}
+
+	.sado-archive-page .meeting-speaker span {
+		color: #5f5a54;
+		font-size: 0.94rem;
+		font-weight: 700;
 	}
 
 	.sado-archive-page .meeting-lead {
-		max-width: 620px;
-		margin: 28px 0 0;
-		color: rgba(255, 255, 255, 0.82);
-		font-size: clamp(1rem, 1.7vw, 1.12rem);
-		line-height: 2;
+		max-width: 580px;
+		margin: 30px 0 0;
+		color: #4f4a44;
+		font-size: clamp(0.98rem, 1.6vw, 1.08rem);
+		line-height: 1.9;
 	}
 
 	.sado-archive-page .meeting-facts {
-		margin: 36px 0 0;
-		border-top: 1px solid rgba(255, 255, 255, 0.17);
+		margin: 32px 0 0;
+		border-top: 1px solid #d7d1c8;
 	}
 
 	.sado-archive-page .meeting-facts > div {
 		display: grid;
-		grid-template-columns: 120px minmax(0, 1fr);
+		grid-template-columns: 72px minmax(0, 1fr);
 		gap: 18px;
-		padding: 19px 0;
-		border-bottom: 1px solid rgba(255, 255, 255, 0.17);
+		padding: 17px 0;
+		border-bottom: 1px solid #d7d1c8;
 	}
 
 	.sado-archive-page .meeting-facts dt {
-		color: #d6a935;
+		color: #ba261d;
 		font-size: 0.78rem;
 		font-weight: 900;
 		letter-spacing: 0.12em;
-		white-space: nowrap;
 	}
 
 	.sado-archive-page .meeting-facts dd {
@@ -397,7 +368,7 @@ const meetingStructuredData = {
 	}
 
 	.sado-archive-page .meeting-facts dd span {
-		color: rgba(255, 255, 255, 0.64);
+		color: #6b655e;
 		font-size: 0.92rem;
 	}
 
@@ -422,14 +393,14 @@ const meetingStructuredData = {
 	}
 
 	.sado-archive-page .meeting-button-primary {
-		background: #d71920;
+		background: #bd2b20;
 		color: #fff;
 	}
 
 	.sado-archive-page .meeting-button-secondary {
-		border: 1px solid rgba(255, 255, 255, 0.3);
+		border: 1px solid #bdb6ac;
 		background: transparent;
-		color: #fff;
+		color: #191919;
 	}
 
 	.sado-archive-page .meeting-button-primary:hover,
@@ -439,18 +410,18 @@ const meetingStructuredData = {
 
 	.sado-archive-page .meeting-button-secondary:hover,
 	.sado-archive-page .meeting-button-secondary:focus-visible {
-		border-color: #d6a935;
-		background: rgba(214, 169, 53, 0.1);
+		border-color: #bd2b20;
+		background: #fff;
 	}
 
 	.sado-archive-page .meeting-contact {
 		margin: 18px 0 0;
-		color: rgba(255, 255, 255, 0.56);
+		color: #777069;
 		font-size: 0.84rem;
 	}
 
 	.sado-archive-page .meeting-contact a {
-		color: #e2bc59;
+		color: #a6241b;
 		font-weight: 800;
 	}
 
@@ -462,17 +433,16 @@ const meetingStructuredData = {
 
 	.sado-archive-page .meeting-flyer > a {
 		display: block;
-		padding: clamp(8px, 1vw, 12px);
-		background: #fff;
-		box-shadow: 0 28px 70px rgba(0, 0, 0, 0.55);
-		transform: rotate(1deg);
+		border: 1px solid #ded8cf;
+		background: #faf8f4;
+		box-shadow: 0 20px 55px rgba(54, 44, 31, 0.14);
 		transition: transform 180ms ease, box-shadow 180ms ease;
 	}
 
 	.sado-archive-page .meeting-flyer > a:hover,
 	.sado-archive-page .meeting-flyer > a:focus-visible {
-		box-shadow: 0 32px 82px rgba(0, 0, 0, 0.65);
-		transform: rotate(0deg) translateY(-3px);
+		box-shadow: 0 24px 62px rgba(54, 44, 31, 0.2);
+		transform: translateY(-3px);
 	}
 
 	.sado-archive-page .meeting-flyer img {
@@ -486,7 +456,7 @@ const meetingStructuredData = {
 	}
 
 	.sado-archive-page .meeting-flyer figcaption a {
-		color: rgba(255, 255, 255, 0.72);
+		color: #5d5751;
 		font-size: 0.84rem;
 		font-weight: 800;
 		letter-spacing: 0.06em;
@@ -539,7 +509,7 @@ const meetingStructuredData = {
 		}
 
 		.sado-archive-page .meeting-copy h2 {
-			font-size: clamp(3.35rem, 20vw, 5.1rem);
+			font-size: clamp(3.1rem, 16vw, 4.2rem);
 		}
 
 		.sado-archive-page .meeting-copy .eyebrow {
@@ -558,7 +528,7 @@ const meetingStructuredData = {
 		}
 
 		.sado-archive-page .meeting-facts > div {
-			grid-template-columns: 104px minmax(0, 1fr);
+			grid-template-columns: 64px minmax(0, 1fr);
 			gap: 12px;
 		}
 
