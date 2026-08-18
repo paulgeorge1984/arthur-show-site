@@ -13,6 +13,8 @@ const gospelArtTsukubaUrl = '/gospel-art-tsukuba-20260815/';
 const tsukubaChurchPoster = '/assets/arthur-hollands-tsukuba-church-20260816.png';
 const tsukubaChurchUrl = '/arthur-hollands-tsukuba-20260816/';
 const igniteHiscallPoster = '/assets/ignite-hiscall-20260821.jpg';
+const sadoEvangelisticMeetingPoster = '/walk-across-sado/sado-evangelistic-meeting-2026-neon-hat-live-bilingual-a4.jpg';
+const sadoEvangelisticMeetingUrl = '/walk-across-sado/#evangelistic-meeting';
 const blessingNightShimokitazawaUrl = '/blessing-night-shimokitazawa-20261009/';
 const blessingNightShimokitazawaPoster = '/assets/blessing-night-shimokitazawa-20261009-front.webp';
 const theEssenceAkitaUrl = '/the-essence-akita-20261114/';
@@ -173,6 +175,35 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 						<span>問合せ：THE Y'S CAFE 052-228-7677</span>
 					</span>
 					<span class="calendar-special-button">8/21の予定詳細を見る</span>
+				</span>
+			</a>
+		</section>
+
+		<section class="calendar-special-event sado-evangelistic-feature" aria-label="2026年8月26日 佐渡島 伝道集会 真野シェアベースカフェ 特別案内">
+			<a class="calendar-special-link" href={sadoEvangelisticMeetingUrl}>
+				<span class="calendar-special-media" aria-hidden="true">
+					<img
+						src={sadoEvangelisticMeetingPoster}
+						alt=""
+						width="2480"
+						height="3508"
+						loading="eager"
+					/>
+				</span>
+				<span class="calendar-special-copy">
+					<span class="calendar-special-label">SADO ISLAND / 2026.08.26</span>
+					<strong>佐渡島 伝道集会</strong>
+					<span class="calendar-special-lead">
+						EVANGELICAL GATHERING IN SADO。ARTHUR HOLLANDS / アーサー・ホーランドが語ります。
+					</span>
+					<span class="calendar-special-meta">
+						<span>2026年8月26日（水）</span>
+						<span>18:00開始</span>
+						<span>真野シェアベースカフェ</span>
+						<span>新潟県佐渡市吉岡917-6</span>
+						<span>予約：後藤 080-3927-1165</span>
+					</span>
+					<span class="calendar-special-button">伝道集会の詳細を見る</span>
 				</span>
 			</a>
 		</section>
@@ -381,6 +412,23 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				location: '名古屋レジェンドホール 愛知県名古屋市中区大須1丁目7-26（地下鉄大須観音駅④すぐ）',
 				start: {
 					dateTime: '2026-08-21T18:30:00+09:00',
+					timeZone: TOKYO_TIME_ZONE,
+				},
+				end: null,
+			},
+			{
+				id: 'manual-sado-evangelistic-meeting-2026-08-26',
+				summary: '佐渡島 伝道集会',
+				description: [
+					'EVANGELICAL GATHERING IN SADO',
+					'ARTHUR HOLLANDS / アーサー・ホーランド',
+					'18:00開始',
+					'予約：後藤 080-3927-1165',
+					'https://arthur-show.com/walk-across-sado/#evangelistic-meeting',
+				].join('\n'),
+				location: '真野シェアベースカフェ 新潟県佐渡市吉岡917-6',
+				start: {
+					dateTime: '2026-08-26T18:00:00+09:00',
 					timeZone: TOKYO_TIME_ZONE,
 				},
 				end: null,
@@ -679,6 +727,13 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 		}
 
 		function resolveRelatedEventLinks(event) {
+			if (isSadoEvangelisticMeetingEvent(event)) {
+				return [{
+					label: '佐渡島 伝道集会 詳細・会場案内',
+					url: '/walk-across-sado/#evangelistic-meeting',
+				}];
+			}
+
 			if (isGospelArtTsukubaEvent(event)) {
 				return [{
 					label: 'Gospel Art 詳細・チラシを見る',
@@ -761,6 +816,16 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				&& /ignite|hiscall|ヒズコール/i.test(searchableText);
 		}
 
+		function isSadoEvangelisticMeetingEvent(event) {
+			const startKey = event.start?.date || getDateKeyFromDate(getEventStart(event));
+			const searchableText = [event.summary || '', event.description || '', event.location || ''].join(' ');
+			const isMeeting = /伝道集会|evangelical\s+gathering/i.test(searchableText);
+			const isSado = /佐渡(?:島)?|sado/i.test(searchableText);
+			const hasVenue = /真野シェアベース|吉岡\s*917[-ー−]6/i.test(searchableText);
+			return startKey === '2026-08-26'
+				&& ((isMeeting && isSado) || hasVenue);
+		}
+
 		function isBlessingNightShimokitazawaEvent(event) {
 			const startKey = event.start?.date || getDateKeyFromDate(getEventStart(event));
 			const searchableText = `${event.summary || ''} ${event.description || ''} ${event.location || ''}`;
@@ -799,11 +864,13 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			const hasBlessingNightKagurazakaAugust = events.some((event) => isBlessingNightKagurazakaAugustEvent(event));
 			const hasGospelArtTsukuba = events.some((event) => isGospelArtTsukubaEvent(event));
 			const hasIgniteHiscall = events.some((event) => isIgniteHiscallEvent(event));
+			const hasSadoEvangelisticMeeting = events.some((event) => isSadoEvangelisticMeetingEvent(event));
 			const hasBlessingNightShimokitazawa = events.some((event) => isBlessingNightShimokitazawaEvent(event));
 			const gospelTalkManualEvent = manualEventsInRange.find((event) => event.id === 'manual-gospel-talk-summer-osaka-2026-07-19');
 			const blessingNightKagurazakaAugustManualEvent = manualEventsInRange.find((event) => event.id === 'manual-blessing-night-kagurazaka-2026-08-14');
 			const gospelArtTsukubaManualEvent = manualEventsInRange.find((event) => event.id === 'manual-gospel-art-tsukuba-2026-08-15');
 			const igniteHiscallManualEvent = manualEventsInRange.find((event) => event.id === 'manual-ignite-hiscall-2026-08-21');
+			const sadoEvangelisticMeetingManualEvent = manualEventsInRange.find((event) => event.id === 'manual-sado-evangelistic-meeting-2026-08-26');
 			const blessingNightManualEvent = manualEventsInRange.find((event) => event.id === 'manual-blessing-night-shimokitazawa-2026-10-09');
 			let mergedEvents = events;
 			if (blessingNightManualEvent && hasBlessingNightShimokitazawa) {
@@ -861,6 +928,22 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 					};
 				});
 			}
+			if (sadoEvangelisticMeetingManualEvent && hasSadoEvangelisticMeeting) {
+				let sadoMerged = false;
+				mergedEvents = mergedEvents.flatMap((event) => {
+					if (!isSadoEvangelisticMeetingEvent(event)) return [event];
+					if (sadoMerged) return [];
+					sadoMerged = true;
+					return [{
+						...event,
+						summary: sadoEvangelisticMeetingManualEvent.summary,
+						description: sadoEvangelisticMeetingManualEvent.description,
+						location: sadoEvangelisticMeetingManualEvent.location,
+						start: sadoEvangelisticMeetingManualEvent.start,
+						end: sadoEvangelisticMeetingManualEvent.end,
+					}];
+				});
+			}
 			if (gospelTalkManualEvent && hasGospelTalkSummer) {
 				mergedEvents = mergedEvents.map((event) => {
 					if (!isGospelTalkSummerEvent(event)) return event;
@@ -880,6 +963,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 					if (isBlessingNightKagurazakaAugustEvent(event)) return !hasBlessingNightKagurazakaAugust;
 					if (isGospelArtTsukubaEvent(event)) return !hasGospelArtTsukuba;
 					if (isIgniteHiscallEvent(event)) return !hasIgniteHiscall;
+					if (isSadoEvangelisticMeetingEvent(event)) return !hasSadoEvangelisticMeeting;
 					if (isBlessingNightShimokitazawaEvent(event)) return !hasBlessingNightShimokitazawa;
 					if (isSaturdayNightArthurEvent(event)) return !hasSaturdayNightArthur;
 					if (isBlessingTimeOsakaEvent(event)) return !hasBlessingTimeOsaka;
@@ -1650,6 +1734,43 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			color: #090806;
 		}
 
+		.sado-evangelistic-feature .calendar-special-link {
+			background:
+				linear-gradient(135deg, rgba(4, 10, 14, 0.99), rgba(6, 72, 82, 0.92) 58%, rgba(197, 160, 89, 0.76)),
+				#040a0e;
+		}
+
+		.sado-evangelistic-feature .calendar-special-link::before {
+			background:
+				linear-gradient(90deg, rgba(4, 10, 14, 0.03), rgba(4, 10, 14, 0.08) 48%, rgba(4, 10, 14, 0.34)),
+				linear-gradient(0deg, rgba(22, 194, 205, 0.22), transparent 48%);
+		}
+
+		.sado-evangelistic-feature .calendar-special-media {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 18px;
+			background: linear-gradient(150deg, #061318, #0fa8b6 58%, #5f4817);
+		}
+
+		.sado-evangelistic-feature .calendar-special-media img {
+			width: auto;
+			height: 100%;
+			max-width: 88%;
+			max-height: 405px;
+			border: 5px solid rgba(255, 248, 235, 0.92);
+			box-shadow: 0 18px 46px rgba(0, 0, 0, 0.44);
+			object-fit: contain;
+			object-position: center;
+		}
+
+		.sado-evangelistic-feature .calendar-special-label,
+		.sado-evangelistic-feature .calendar-special-button {
+			background: #f0c35b;
+			color: #061318;
+		}
+
 		.gospel-art-tsukuba-feature .calendar-special-link {
 			background:
 				linear-gradient(135deg, rgba(8, 7, 4, 0.99), rgba(72, 62, 35, 0.92) 58%, rgba(151, 119, 37, 0.7)),
@@ -2394,6 +2515,18 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 		}
 
 		.ignite-hiscall-feature .calendar-special-media img {
+			width: min(74%, 300px);
+			height: auto;
+			max-height: none;
+		}
+
+		.sado-evangelistic-feature .calendar-special-media {
+			aspect-ratio: auto;
+			min-height: 360px;
+			padding: 20px;
+		}
+
+		.sado-evangelistic-feature .calendar-special-media img {
 			width: min(74%, 300px);
 			height: auto;
 			max-height: none;

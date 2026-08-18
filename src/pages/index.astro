@@ -14,6 +14,8 @@ const tsukubaChurchUrl = '/arthur-hollands-tsukuba-20260816/';
 const tsukubaChurchPoster = '/assets/arthur-hollands-tsukuba-church-20260816.png';
 const blessingNightShimokitazawaPoster = '/assets/blessing-night-shimokitazawa-20261009-front.webp';
 const igniteHiscallPoster = '/assets/ignite-hiscall-20260821.jpg';
+const sadoGatheringUrl = '/walk-across-sado/#evangelistic-meeting';
+const sadoGatheringPoster = '/walk-across-sado/sado-evangelistic-meeting-2026-neon-hat-live-bilingual-a4.jpg';
 
 // サイトのビルドが実行された現在の時刻を取得
 const currentBuildTime = new Date(); 
@@ -384,7 +386,7 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 				<span class="home-event-summary-copy">
 					<span class="home-event-summary-kicker">EVENT INFO</span>
 					<strong>イベント案内</strong>
-					<span>8/14 BLESSING NIGHT 神楽坂／8/15 Gospel Art／8/16 Special Message／8/21 IGNITE／10/9 下北沢／11/14 THE ESSENCE</span>
+					<span>8/14 BLESSING NIGHT 神楽坂／8/15 Gospel Art／8/16 Special Message／8/21 IGNITE／8/26 佐渡島 伝道集会／10/9 下北沢／11/14 THE ESSENCE</span>
 				</span>
 				<span class="home-event-summary-action" aria-hidden="true">
 					<span class="closed">見る</span>
@@ -494,6 +496,34 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 							<span>大須1-7-26 / THE Y'S CAFE 052-228-7677</span>
 						</div>
 						<span class="blessing-time-feature-button">カレンダーで詳細を見る</span>
+					</div>
+				</a>
+
+				<a
+					class="blessing-time-feature the-essence-home-feature sado-gathering-home-feature"
+					href={sadoGatheringUrl}
+					aria-label="佐渡島 伝道集会 2026年8月26日18時 真野シェアベースカフェの詳細とA4チラシを見る"
+				>
+					<img
+						src={sadoGatheringPoster}
+						alt=""
+						width="2480"
+						height="3508"
+						loading="lazy"
+						aria-hidden="true"
+					/>
+					<div class="blessing-time-feature-copy">
+						<p class="blessing-time-feature-kicker">EVANGELICAL GATHERING IN SADO / 8.26</p>
+						<h2>佐渡島<br />伝道集会</h2>
+						<p>佐渡島十字架行進の期間中、アーサー・ホーランドがメッセージを語ります。</p>
+						<div class="blessing-time-feature-meta">
+							<span>2026年8月26日（水）18:00開始</span>
+							<span>真野シェアベースカフェ</span>
+							<span>新潟県佐渡市吉岡917-6</span>
+							<span>ARTHUR HOLLANDS / アーサー・ホーランド</span>
+							<span>予約・お問い合わせ：後藤 080-3927-1165</span>
+						</div>
+						<span class="blessing-time-feature-button">詳細・アクセス・A4チラシを見る</span>
 					</div>
 				</a>
 
@@ -1642,6 +1672,38 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 	.ignite-home-feature h2 {
 		max-width: 8em;
 		color: #f4d36f;
+		font-size: clamp(3rem, 6.5vw, 4.5rem);
+		line-height: 0.98;
+	}
+
+	.the-essence-home-feature.sado-gathering-home-feature {
+		background: #040707;
+		border-left: 7px solid #fff200;
+	}
+
+	.the-essence-home-feature.sado-gathering-home-feature > img {
+		background:
+			radial-gradient(circle at 18% 18%, rgba(0, 197, 239, 0.24), transparent 34%),
+			linear-gradient(150deg, #010303, #062a34 58%, #665f00);
+		filter: none;
+	}
+
+	.the-essence-home-feature.sado-gathering-home-feature .blessing-time-feature-copy {
+		background:
+			radial-gradient(circle at 86% 18%, rgba(0, 197, 239, 0.18), transparent 30%),
+			linear-gradient(135deg, rgba(3, 5, 5, 0.99), rgba(7, 38, 44, 0.96) 60%, rgba(126, 115, 0, 0.78)),
+			#030505;
+	}
+
+	.sado-gathering-home-feature .blessing-time-feature-kicker,
+	.sado-gathering-home-feature .blessing-time-feature-button {
+		background: #fff200;
+		color: #050505;
+	}
+
+	.sado-gathering-home-feature h2 {
+		max-width: 9em;
+		color: #fff200;
 		font-size: clamp(3rem, 6.5vw, 4.5rem);
 		line-height: 0.98;
 	}
