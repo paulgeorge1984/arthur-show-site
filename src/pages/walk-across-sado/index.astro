@@ -5,8 +5,8 @@ import '../walk-across-sado2026/archive.css';
 const siteUrl = 'https://arthur-show.com';
 const canonicalPath = '/walk-across-sado/';
 const pageTitle = '佐渡島十字架行進 2026';
-const pageDescription = '2026年8月23日〜27日、アーサー・ホーランドが十字架を担ぎ、佐渡島約99kmを歩く5日間。8月26日18時から真野シェアベースカフェで伝道集会を開催。';
-const meetingFlyerPath = '/walk-across-sado/sado-evangelistic-meeting-2026-neon-hat-live-bilingual-a4.jpg';
+const pageDescription = '2026年8月23日〜27日、アーサー・ホーランドが十字架を担ぎ、佐渡島約99kmを歩く5日間。8月26日18時から真野シェアベースカフェで伝道集会を開催。ミュージックゲストはサルーキ＝CHIYOと神山みさ。';
+const meetingFlyerPath = '/walk-across-sado/sado-evangelistic-meeting-2026-neon-performers-image2-a4.jpg';
 const meetingReservationPhone = '080-3927-1165';
 const meetingReservationPhoneHref = 'tel:08039271165';
 const meetingMapUrl = 'https://www.google.com/maps/search/?api=1&query=%E6%96%B0%E6%BD%9F%E7%9C%8C%E4%BD%90%E6%B8%A1%E5%B8%82%E5%90%89%E5%B2%A1917-6';
@@ -87,13 +87,17 @@ const meetingStructuredData = {
 	'@context': 'https://schema.org',
 	'@type': 'Event',
 	name: '伝道集会 | EVANGELICAL GATHERING IN SADO',
-	description: '佐渡島十字架行進の期間中、アーサー・ホーランドが真野シェアベースカフェで語る伝道集会です。',
+		description: '佐渡島十字架行進の期間中、アーサー・ホーランドが真野シェアベースカフェで語り、サルーキ＝CHIYO（千代延 大介 / ちよのぶ だいすけ）と神山みさがミュージックゲストとして出演する伝道集会です。',
 	startDate: '2026-08-26T18:00:00+09:00',
 	eventStatus: 'https://schema.org/EventScheduled',
 	eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
 	url: `${siteUrl}${canonicalPath}#evangelistic-meeting`,
 	image: [`${siteUrl}${meetingFlyerPath}`],
-	performer: { '@type': 'Person', name: 'アーサー・ホーランド', alternateName: 'ARTHUR HOLLANDS' },
+		performer: [
+			{ '@type': 'Person', name: 'アーサー・ホーランド', alternateName: 'ARTHUR HOLLANDS' },
+			{ '@type': 'Person', name: 'サルーキ＝CHIYO', alternateName: '千代延 大介' },
+			{ '@type': 'Person', name: '神山みさ', alternateName: 'Misa Kamiyama' },
+		],
 	organizer: { '@type': 'Person', name: '後藤', telephone: '+81-80-3927-1165' },
 	location: {
 		'@type': 'Place',
@@ -140,8 +144,8 @@ const meetingStructuredData = {
 						<p class="eyebrow">2026.8.26 WED · 18:00 START</p>
 						<h2 id="meeting-title">伝道集会</h2>
 						<p class="meeting-title-en">EVANGELICAL GATHERING IN SADO</p>
-						<p class="meeting-speaker"><strong>ARTHUR HOLLANDS</strong><span>アーサー・ホーランド</span></p>
-						<p class="meeting-lead">佐渡島十字架行進の期間中、8月26日（水）18時から、真野シェアベースカフェにて伝道集会を開催します。アーサー・ホーランドのメッセージを、ぜひ会場でお聴きください。</p>
+						<p class="meeting-speaker"><strong>ARTHUR HOLLANDS</strong><span>メッセージ：アーサー・ホーランド</span><span>MUSIC GUEST：サルーキ＝CHIYO（千代延 大介 / ちよのぶ だいすけ）</span><span>MUSIC GUEST：神山みさ</span></p>
+						<p class="meeting-lead">佐渡島十字架行進の期間中、8月26日（水）18時から、真野シェアベースカフェにて伝道集会を開催します。アーサー・ホーランドのメッセージに加え、ミュージックゲストとしてサルーキ＝CHIYO、神山みさが出演します。</p>
 						<dl class="meeting-facts">
 							<div><dt>日時</dt><dd><strong>2026年8月26日（水）</strong><span>18:00 開始</span></dd></div>
 							<div><dt>会場</dt><dd><strong>真野シェアベースカフェ</strong><span>新潟県佐渡市吉岡917-6</span></dd></div>
@@ -153,8 +157,8 @@ const meetingStructuredData = {
 						</div>
 					</div>
 					<figure class="meeting-flyer">
-						<a href={meetingFlyerPath} target="_blank" rel="noreferrer" aria-label="アーサー・ホーランド伝道集会のA4チラシを拡大表示する">
-							<img src={meetingFlyerPath} alt="アーサー・ホーランド伝道集会 2026年8月26日18時 真野シェアベースカフェのA4告知チラシ" width="2480" height="3508" loading="lazy" />
+							<a href={meetingFlyerPath} target="_blank" rel="noreferrer" aria-label="アーサー・ホーランド、サルーキ＝CHIYO、神山みさ出演の伝道集会A4チラシを拡大表示する">
+								<img src={meetingFlyerPath} alt="2026年8月26日18時 真野シェアベースカフェ伝道集会。メッセージはアーサー・ホーランド、ミュージックゲストはサルーキ＝CHIYOと神山みさ" width="2480" height="3508" loading="lazy" />
 						</a>
 						<figcaption><a href={meetingFlyerPath} target="_blank" rel="noreferrer">A4チラシを大きく見る <span aria-hidden="true">↗</span></a></figcaption>
 					</figure>
