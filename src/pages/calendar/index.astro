@@ -179,7 +179,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			</a>
 		</section>
 
-			<section class="calendar-special-event sado-evangelistic-feature" aria-label="2026年8月26日 アーサー・ホーランド、サルーキ＝CHIYO、神山みさ出演 佐渡島伝道集会 特別案内">
+			<section class="calendar-special-event sado-evangelistic-feature" aria-label="2026年8月26日 アーサー・ホーランド、サルーキ＝CHIYO、神山みさ出演 佐渡島TALK & LIVE 特別案内">
 			<a class="calendar-special-link" href={sadoEvangelisticMeetingUrl}>
 				<span class="calendar-special-media" aria-hidden="true">
 					<img
@@ -192,9 +192,9 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				</span>
 				<span class="calendar-special-copy">
 					<span class="calendar-special-label">SADO ISLAND / 2026.08.26</span>
-					<strong>佐渡島 伝道集会</strong>
+					<strong>佐渡島 TALK &amp; LIVE</strong>
 					<span class="calendar-special-lead">
-							EVANGELICAL GATHERING IN SADO。アーサー・ホーランドが語り、サルーキ＝CHIYOと神山みさがミュージックゲストとして出演します。
+							TALK &amp; LIVE IN SADO。アーサー・ホーランドが語り、サルーキ＝CHIYOと神山みさが音楽ゲストとして出演します。
 					</span>
 					<span class="calendar-special-meta">
 						<span>2026年8月26日（水）</span>
@@ -205,7 +205,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 							<span>MUSIC GUEST：神山みさ</span>
 							<span>予約：後藤 080-3927-1165</span>
 					</span>
-					<span class="calendar-special-button">伝道集会の詳細を見る</span>
+					<span class="calendar-special-button">TALK &amp; LIVEの詳細を見る</span>
 				</span>
 			</a>
 		</section>
@@ -420,7 +420,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			},
 			{
 				id: 'manual-sado-evangelistic-meeting-2026-08-26',
-				summary: '佐渡島 伝道集会',
+				summary: '佐渡島 TALK & LIVE',
 				description: [
 					'EVANGELICAL GATHERING IN SADO',
 						'ARTHUR HOLLANDS / アーサー・ホーランド',
@@ -733,7 +733,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 		function resolveRelatedEventLinks(event) {
 			if (isSadoEvangelisticMeetingEvent(event)) {
 				return [{
-					label: '佐渡島 伝道集会 詳細・会場案内',
+				label: '佐渡島 TALK & LIVE 詳細・会場案内',
 					url: '/walk-across-sado/#evangelistic-meeting',
 				}];
 			}
@@ -823,7 +823,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 		function isSadoEvangelisticMeetingEvent(event) {
 			const startKey = event.start?.date || getDateKeyFromDate(getEventStart(event));
 			const searchableText = [event.summary || '', event.description || '', event.location || ''].join(' ');
-			const isMeeting = /伝道集会|evangelical\s+gathering/i.test(searchableText);
+			const isMeeting = /伝道集会|talk\s*&\s*live|evangelical\s+gathering/i.test(searchableText);
 			const isSado = /佐渡(?:島)?|sado/i.test(searchableText);
 			const hasVenue = /真野シェアベース|吉岡\s*917[-ー−]6/i.test(searchableText);
 			return startKey === '2026-08-26'

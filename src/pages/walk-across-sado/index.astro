@@ -5,7 +5,7 @@ import '../walk-across-sado2026/archive.css';
 const siteUrl = 'https://arthur-show.com';
 const canonicalPath = '/walk-across-sado/';
 const pageTitle = '佐渡島十字架行進 2026';
-const pageDescription = '2026年8月23日〜27日、アーサー・ホーランドが十字架を担ぎ、佐渡島約99kmを歩く5日間。8月26日18時から真野シェアベースカフェで伝道集会を開催。ミュージックゲストはサルーキ＝CHIYOと神山みさ。';
+const pageDescription = '2026年8月23日〜27日、アーサー・ホーランドが十字架を担ぎ、佐渡島約99kmを歩く5日間。8月26日18時から真野シェアベースカフェでTALK & LIVEを開催。ミュージックゲストはサルーキ＝CHIYOと神山みさ。';
 const meetingFlyerPath = '/walk-across-sado/sado-talk-live-2026-a4.jpg';
 const meetingReservationPhone = '080-3927-1165';
 const meetingReservationPhoneHref = 'tel:08039271165';
@@ -86,8 +86,8 @@ const structuredData = {
 const meetingStructuredData = {
 	'@context': 'https://schema.org',
 	'@type': 'Event',
-	name: '伝道集会 | EVANGELICAL GATHERING IN SADO',
-		description: '佐渡島十字架行進の期間中、アーサー・ホーランドが真野シェアベースカフェで語り、サルーキ＝CHIYO（千代延 大介 / ちよのぶ だいすけ）と神山みさがミュージックゲストとして出演する伝道集会です。',
+	name: 'TALK & LIVE | SADO ISLAND',
+	description: '佐渡島十字架行進の期間中、アーサー・ホーランドが真野シェアベースカフェで語り、サルーキ＝CHIYO（千代延 大介 / ちよのぶ だいすけ）と神山みさがミュージックゲストとして出演するTALK & LIVEです。',
 	startDate: '2026-08-26T18:00:00+09:00',
 	eventStatus: 'https://schema.org/EventScheduled',
 	eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
@@ -116,7 +116,7 @@ const meetingStructuredData = {
 <Layout title={pageTitle} description={pageDescription} image="/walk-across-sado/sado-island-2026-flyer.jpg" imageAlt="SADO ISLAND 2026 佐渡島十字架行進の告知チラシ" imageWidth={904} imageHeight={1280} canonicalPath={canonicalPath} structuredData={[structuredData, meetingStructuredData]}>
 	<div class="sado-archive-page">
 		<nav class="section-nav" aria-label="ページ内メニュー">
-			<div class="page-shell"><a href="#about">概要</a><a href="#flyer">チラシ</a><a href="#schedule">スケジュール</a><a class="meeting-nav-link" href="#evangelistic-meeting">伝道集会</a><a href="#photos">写真</a><a href="#previous">これまでの行進</a></div>
+			<div class="page-shell"><a href="#about">概要</a><a href="#flyer">チラシ</a><a href="#schedule">スケジュール</a><a class="meeting-nav-link" href="#evangelistic-meeting">TALK &amp; LIVE</a><a href="#photos">写真</a><a href="#previous">これまでの行進</a></div>
 		</nav>
 		<main>
 			<section class="hero" id="flyer" aria-labelledby="hero-title">
@@ -142,10 +142,10 @@ const meetingStructuredData = {
 				<div class="page-shell meeting-grid">
 					<div class="meeting-copy">
 						<p class="eyebrow">2026.8.26 WED · 18:00 START</p>
-						<h2 id="meeting-title">伝道集会</h2>
+						<h2 id="meeting-title">TALK &amp; LIVE</h2>
 						<p class="meeting-title-en">EVANGELICAL GATHERING IN SADO</p>
 						<p class="meeting-speaker"><strong>ARTHUR HOLLANDS</strong><span>メッセージ：アーサー・ホーランド</span><span>MUSIC GUEST：サルーキ＝CHIYO（千代延 大介 / ちよのぶ だいすけ）</span><span>MUSIC GUEST：神山みさ</span></p>
-						<p class="meeting-lead">佐渡島十字架行進の期間中、8月26日（水）18時から、真野シェアベースカフェにて伝道集会を開催します。アーサー・ホーランドのメッセージに加え、ミュージックゲストとしてサルーキ＝CHIYO、神山みさが出演します。</p>
+						<p class="meeting-lead">佐渡島十字架行進の期間中、8月26日（水）18時から、真野シェアベースカフェにてTALK &amp; LIVEを開催します。アーサー・ホーランドのトークに加え、サルーキ＝CHIYO、神山みさが音楽ゲストとして出演します。</p>
 						<dl class="meeting-facts">
 							<div><dt>日時</dt><dd><strong>2026年8月26日（水）</strong><span>18:00 開始</span></dd></div>
 							<div><dt>会場</dt><dd><strong>真野シェアベースカフェ</strong><span>新潟県佐渡市吉岡917-6</span></dd></div>
@@ -157,8 +157,8 @@ const meetingStructuredData = {
 						</div>
 					</div>
 					<figure class="meeting-flyer">
-							<a href={meetingFlyerPath} target="_blank" rel="noreferrer" aria-label="アーサー・ホーランド、サルーキ＝CHIYO、神山みさ出演の伝道集会A4チラシを拡大表示する">
-								<img src={meetingFlyerPath} alt="2026年8月26日18時 真野シェアベースカフェ伝道集会。メッセージはアーサー・ホーランド、ミュージックゲストはサルーキ＝CHIYOと神山みさ" width="1054" height="1492" loading="lazy" />
+							<a href={meetingFlyerPath} target="_blank" rel="noreferrer" aria-label="アーサー・ホーランド、サルーキ＝CHIYO、神山みさ出演のTALK & LIVE A4チラシを拡大表示する">
+								<img src={meetingFlyerPath} alt="2026年8月26日18時 真野シェアベースカフェTALK & LIVE。トークはアーサー・ホーランド、音楽ゲストはサルーキ＝CHIYOと神山みさ" width="1054" height="1492" loading="lazy" />
 						</a>
 						<figcaption><a href={meetingFlyerPath} target="_blank" rel="noreferrer">A4チラシを大きく見る <span aria-hidden="true">↗</span></a></figcaption>
 					</figure>
