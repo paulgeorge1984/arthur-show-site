@@ -4,8 +4,14 @@ import '../walk-across-sado2026/archive.css';
 
 const siteUrl = 'https://arthur-show.com';
 const canonicalPath = '/walk-across-sado/';
-const pageTitle = '佐渡島十字架行進 2026';
-const pageDescription = '2026年8月23日〜27日、アーサー・ホーランドが十字架を担ぎ、佐渡島約99kmを歩く5日間。8月26日18時から真野シェアベースカフェでTALK & LIVEを開催。ミュージックゲストはサルーキ＝CHIYOと神山みさ。';
+const pageTitle = '佐渡島十字架行進 2026｜1日目「見てください、水があります」';
+const pageDescription = '2026年8月23日、海を渡り、十字架を担ぎ、片山さんご一家の洗礼へ。アーサー・ホーランドと仲間たちが歩いた、佐渡島十字架行進1日目の記録。';
+const shareUrl = `${siteUrl}${canonicalPath}#day1-report`;
+const shareTitle = '佐渡島十字架行進 2026｜1日目「見てください、水があります」';
+const shareText = '海を渡り、十字架を担ぎ、片山さんご一家の洗礼へ。佐渡島十字架行進1日目の記録。';
+const encodedShareUrl = encodeURIComponent(shareUrl);
+const encodedShareText = encodeURIComponent(`${shareTitle}\n${shareText}`);
+const encodedLineText = encodeURIComponent(`${shareTitle}\n${shareText}\n${shareUrl}`);
 const meetingFlyerPath = '/walk-across-sado/sado-talk-live-2026-a4.jpg';
 const meetingReservationPhone = '080-3927-1165';
 const meetingReservationPhoneHref = 'tel:08039271165';
@@ -13,7 +19,7 @@ const meetingMapUrl = 'https://www.google.com/maps/search/?api=1&query=%E6%96%B0
 
 const routes = [
 	{
-		day: '01', date: '8月23日（日）', startTime: '9:00', from: '両津夷', to: '長石海水浴場', distance: '16.7km', color: '#d71920',
+		day: '01', date: '8月23日（日）', startTime: '9:00', from: '両津夷', to: '長石海水浴場', distance: '計画16.7km', color: '#d71920',
 		note: '両津から南へ。海を横目に、佐渡での最初の一歩を踏み出します。',
 		map: 'https://www.google.com/maps/dir/?api=1&origin=38.0876397,138.434285&destination=37.9705636,138.3432168&travelmode=walking',
 		coordinates: [[38.08764,138.43429],[38.06105,138.42088],[38.03770,138.39454],[38.01176,138.37680],[37.98964,138.35047],[37.97063,138.34316]],
@@ -79,7 +85,7 @@ const stops = [
 const sadoIslandBounds = [[37.8023386, 138.2037970], [38.3322960, 138.5745420]] as const;
 const mapRoutes = routes.map(({ day, from, to, color, coordinates }) => ({ day, from, to, color, coordinates }));
 const structuredData = {
-	'@context': 'https://schema.org', '@type': 'Event', name: pageTitle, description: pageDescription,
+	'@context': 'https://schema.org', '@type': 'Event', name: '佐渡島十字架行進 2026', description: pageDescription,
 	startDate: '2026-08-23', endDate: '2026-08-27', eventStatus: 'https://schema.org/EventScheduled',
 	location: { '@type': 'Place', name: '佐渡島', address: '新潟県佐渡市' },
 };
@@ -113,10 +119,10 @@ const meetingStructuredData = {
 };
 ---
 
-<Layout title={pageTitle} description={pageDescription} image="/walk-across-sado/sado-island-2026-flyer.jpg" imageAlt="SADO ISLAND 2026 佐渡島十字架行進の告知チラシ" imageWidth={904} imageHeight={1280} canonicalPath={canonicalPath} structuredData={[structuredData, meetingStructuredData]}>
+<Layout title={pageTitle} description={pageDescription} image="/walk-across-sado/assets/day01-20260823/day01-father-carries-cross.jpg" imageAlt="佐渡の道で十字架を担ぐダイスケさんと、その隣を歩くアーサー・ホーランド" imageWidth={1600} imageHeight={900} canonicalPath={canonicalPath} structuredData={[structuredData, meetingStructuredData]}>
 	<div class="sado-archive-page">
 		<nav class="section-nav" aria-label="ページ内メニュー">
-			<div class="page-shell"><a href="#about">概要</a><a href="#flyer">チラシ</a><a href="#schedule">スケジュール</a><a class="meeting-nav-link" href="#evangelistic-meeting">TALK &amp; LIVE</a><a href="#photos">写真</a><a href="#previous">これまでの行進</a></div>
+			<div class="page-shell"><a href="#about">概要</a><a href="#flyer">チラシ</a><a href="#day1-report">1日目レポート</a><a href="#share">シェア</a><a href="#schedule">スケジュール</a><a class="meeting-nav-link" href="#evangelistic-meeting">TALK &amp; LIVE</a><a href="#photos">写真</a><a href="#previous">これまでの行進</a></div>
 		</nav>
 		<main>
 			<section class="hero" id="flyer" aria-labelledby="hero-title">
@@ -133,6 +139,187 @@ const meetingStructuredData = {
 			<section class="section about-section" id="about" aria-labelledby="about-title"><div class="page-shell"><div class="section-heading"><p class="eyebrow eyebrow-red">ABOUT THE WALK</p><h2 id="about-title">佐渡島を、祈りとともに歩く。</h2><p>2026年8月23日（日）から27日（木）まで、アーサー・ホーランドが十字架を携え、両津を起点に佐渡島約99kmを5日間で歩く予定です。</p></div><div class="point-grid"><article><span>01</span><h3>両津から、両津へ</h3><p>島の南側から東海岸をつなぎ、5日目に両津へ戻る行程です。</p></article><article><span>02</span><h3>5日間・約99km</h3><p>各日の出発予定時刻、区間、距離、Googleマップを掲載しています。</p></article><article><span>03</span><h3>祈りを携えて</h3><p>佐渡に暮らす人々と島の平安を覚えながら、一歩ずつ歩きます。</p></article></div></div></section>
 
 			<section class="journey-section" aria-labelledby="journey-title"><div class="page-shell journey-grid"><figure><img src="/walk-across-sado/assets/arthur-long-road.jpg" alt="緑に囲まれた一本道を歩くアーサー・ホーランド" loading="lazy" /></figure><div class="journey-copy"><p class="eyebrow">THE WALK CONTINUES</p><h2 id="journey-title">これまでの歩みを、佐渡へ。</h2><p>十字架を担ぎ、日本や世界の各地を歩き続けてきたアーサー・ホーランド。その歩みは、2026年夏、佐渡島へ続きます。</p></div></div></section>
+
+			<section class="section day1-report-section" id="day1-report" aria-labelledby="day1-report-title">
+				<div class="page-shell day1-report-shell">
+					<div class="section-heading day1-report-heading">
+						<p class="eyebrow eyebrow-red">DAY 01 REPORT / 2026.08.23</p>
+						<h2 id="day1-report-title">「見てください、<br />水があります」</h2>
+						<p>佐渡島十字架行進、1日目。海の上から始まった一日は、片山さんご一家の洗礼へと流れていった。</p>
+					</div>
+
+					<div class="day1-route-strip" aria-label="佐渡島十字架行進1日目の計画区間">
+						<span>DAY 01</span>
+						<strong>両津夷 → 長石海水浴場</strong>
+						<em>計画距離 16.7km</em>
+					</div>
+
+					<article class="day1-feature-story">
+						<figure class="day1-feature-photo">
+							<img src="/walk-across-sado/assets/day01-20260823/day01-father-carries-cross.jpg" alt="佐渡の道で十字架を担ぐダイスケさんと、その隣を歩くアーサー・ホーランド" width="1600" height="900" fetchpriority="high" decoding="async" />
+							<figcaption>洗礼を数時間後に控え、十字架を担いで歩くダイスケさんとアーサー先生。</figcaption>
+						</figure>
+						<div class="day1-feature-copy">
+							<p class="eyebrow">SADO, DAY ONE</p>
+							<p class="day1-lead">夜明け前の新潟を出て、海を渡り、十字架を担いで島を歩いた。</p>
+							<p>2026年8月23日。5日間で約99キロを計画する佐渡島十字架行進の初日は、海の上から始まった。</p>
+						</div>
+					</article>
+
+					<div class="day1-story-stack">
+						<article class="day1-story-row day1-story-row-opening">
+							<div class="day1-story-copy">
+								<h3>二年越しの島</h3>
+								<p>夜明け前の新潟。見送りに駆けつけたのは、アーサー先生のバイクチーム「ロードエンジェルズ」の光さん。少しでも一行を見送りたいと、前日のうちに茨城から新潟へ入り、この朝、港まで送りに来てくれた。</p>
+								<p>ところが、皆で朝のディボーションをしようというその前に、光さんのバイクの鍵が見当たらないことに気づいた。レッカーを呼ぶか、新しい鍵を作るか、バイクを置いて電車で帰るか——半ば諦めかけている光さんの事情を聞いて、皆でそのことを祈った。祈って、見送られて、一行はフェリーターミナルへ向かった。</p>
+								<p>朝6時、佐渡汽船のフェリーが新潟港を離れた。出航のアナウンスが流れるころ、「鍵、あった」という知らせが届いた。旅立ちの朝に与えられた小さな答えに、皆の顔がほころんだ。</p>
+								<p>デッキへ出ると、手すりや救命艇の上に、何羽ものウミネコがちょこんと乗っていた。飛んで船を追うのではなく、船の一員のように静かに乗っている。そして不思議なことに、どのウミネコもそろって進行方向を向いていた。「この船に乗れば島に着くと学習しているんですかね」と誰かが言って、小さな笑いになった。</p>
+								<p>後藤さんが取っておいてくれた船室で、一行は輪になって祈った。アーサー・ホーランド、後藤さん、そしてHIROさん。元レーサーのHIROさんは、五島列島十字架行進の全旅程を共にした人だ。今回も佐渡の全旅程を共にするために、合流した。また一緒に歩けることが、確かな支えになっている。</p>
+								<p>朝の祈りは、感謝から始まった。祈りが聞かれて、光さんの鍵が見つかったこと。小さな出来事かもしれない。けれど旅の初めに、祈りはちゃんと届くのだと皆で確かめるような時間だった。</p>
+								<p>祈りの中で、二年前のことが思い起こされた。新潟の海岸線を歩いた時、沖に浮かぶ島影を見ながら「来年はここ行きたいな」と言ったのはバングラさんだった。翌年の行き先は能登に変わり、バングラさんは今年1月、天に帰った。十字架の手入れをしていると今も思い出す、という声があった。二年越しに、一行はその島へ渡る。</p>
+								<p>祈りはそのまま、この日の中心へ向かっていった。今日、島で洗礼を受ける片山さんご一家がいる。恵子さんが祈り続けてきたことが、ダイスケさんに、そして娘さんに届いた。そのことへの感謝が、船室で幾重にも祈られた。祈りを終えるころ、窓の外には島影が近づいていた。</p>
+							</div>
+							<div class="day1-story-gallery day1-story-gallery-trio">
+								<figure>
+									<img src="/walk-across-sado/assets/day01-20260823/day01-dawn-arthur.jpg" alt="夜明けの新潟を出発するアーサー号" width="1600" height="1200" loading="lazy" decoding="async" />
+									<figcaption>夜明け前の新潟。アーサー号はフェリーターミナルへ。</figcaption>
+								</figure>
+								<figure>
+									<img src="/walk-across-sado/assets/day01-20260823/day01-seagulls-on-ferry-wide.jpg" alt="佐渡汽船の手すりや救命艇の上に何羽も乗っているウミネコ" width="1920" height="1080" loading="lazy" decoding="async" />
+									<figcaption>何羽ものウミネコが、そろって進行方向を向いて船に乗っていた。</figcaption>
+								</figure>
+								<figure>
+									<img src="/walk-across-sado/assets/day01-20260823/day01-sea-gull.jpg" alt="佐渡汽船の船に乗り、進行方向を向いて座る二羽のウミネコ" width="1600" height="900" loading="lazy" decoding="async" />
+									<figcaption>二羽の視線も、船の進む先へ。</figcaption>
+								</figure>
+							</div>
+						</article>
+
+						<article class="day1-story-row day1-story-row-reversed">
+							<div class="day1-story-copy">
+								<h3>両津港から</h3>
+								<p>8時半ごろ、両津港。桟橋の向こうに、片山さんご一家の姿があった。新潟からこの日のために海を渡ってきた三人である。お母さんの恵子さんは二年半前、思い立ってメールを送り、東京・成増の教会で一人で洗礼を受けた。そして今回、娘と主人も、その変わっていく姿を見て、家族全員が洗礼を受けたいとなったのだ。</p>
+								<p>港には、小田原から来た佐藤さんの姿もあった。神奈川の海老名から夜行バスに乗り、約10時間かけて新潟までたどり着いたという。佐藤さんは純一さんの友人だ。純一さんは、お母さまの代からアーサー先生をよく知る間柄で、先日も小田原にアーサー先生を招き、伝道集会「Saturday Night Arthur」を開いたばかり。小田原で生まれたつながりが、海を越えて佐渡まで続いていた。佐渡島十字架行進の告知を見つけ、参加を決めたのは一週間ほど前。それでも初日だけではなく、五日間の全日程を共にする予定で来ている。</p>
+								<p>自己紹介の輪の中で、ダイスケさんが口を開いた。洗礼を受けるきっかけは、国家試験だったという。</p>
+								<blockquote>「合格発表の前日に、受かったら僕は仕えますと、心の中で誓ったんです。そうしたら受かってしまって。今日はそのために、神様に会いに来ました」</blockquote>
+								<p>今日は距離にとらわれず、洗礼式を迎える準備として、十字架に触れ、担ぎながら楽しんで歩こう。後藤さんがそう呼びかけ、十字架は港を出発した。</p>
+							</div>
+							<div class="day1-story-gallery day1-story-gallery-duo">
+								<figure>
+									<img src="/walk-across-sado/assets/day01-20260823/day01-cross-start.jpg" alt="両津の町を十字架とともに歩くアーサー・ホーランド" width="1600" height="900" loading="lazy" decoding="async" />
+									<figcaption>両津の町を、十字架が歩き出す。</figcaption>
+								</figure>
+								<figure>
+									<img src="/walk-across-sado/assets/day01-20260823/day01-walk-together.jpg" alt="田園のそばを十字架とともに歩くダイスケさんとアーサー・ホーランド" width="1600" height="900" loading="lazy" decoding="async" />
+									<figcaption>島の道を、交代で担ぎながら進む。</figcaption>
+								</figure>
+							</div>
+						</article>
+
+						<article class="day1-story-row">
+							<div class="day1-story-copy">
+								<h3>小さな十字架</h3>
+								<p>道中、ダイスケさんが試験の日のことをもう少し話してくれた。当日の朝、恵子さんが小さな十字架を持たせてくれたのだという。「わからない問題があったら、握っておけばどうにかなるから」と。会場で本当にポケットの中の十字架を握りながら解いた。難しいと感じた問題が、あとで答え合わせをしたら「全部合ってたんですよ」。アーサーが笑った。恵子さんの祈りが、背後にあったんだね。</p>
+								<p>合格した国家試験では、東洋医学や西洋医学、解剖学、生理学などが問われた。教員として、バスケットボールの指導者として、生徒たちの体を自分の手で診られるようになりたかったのだと言う。ご夫妻が通っていたのは、新潟のミッションスクールだった。学生時代、意味も分からず出ていた礼拝。それでも「やっぱり、種は蒔かれてたんだね」とアーサーは言った。家でお母さんが賛美歌を歌うのを聞くうちに、眠っていたものが目を覚ましたのだ、と。</p>
+								<p>道の途中では、不思議な再会もあった。友人と佐渡に来ていたバイク乗りの女性が、偶然、行進の列に行き合わせたのだ。数年前にアーサーから洗礼を受けた人だった。短い祝福の祈りを受け、彼女は走り去っていった。「これが十字架行進のミステリーなんだよな」</p>
+							</div>
+							<figure class="day1-story-photo day1-story-photo-wide">
+								<img src="/walk-across-sado/assets/day01-20260823/day01-biker-reunion-blessing.jpg" alt="佐渡の道端で再会した女性を祝福して祈るアーサー・ホーランド" width="1920" height="1080" loading="lazy" decoding="async" />
+								<figcaption>歩みの途中で、思いがけない再会。道端で短い祝福の祈りがささげられた。</figcaption>
+							</figure>
+						</article>
+
+						<article class="day1-story-row day1-story-row-reversed">
+							<div class="day1-story-copy">
+								<h3>入り江の昼</h3>
+								<p>昼前、港からの道のりをひと区切りして、一行は洗礼式の浜へ移った。「いいウォームアップになったね」とアーサー。入り江になった海水浴場は、日本海とは思えないほど波がなかった。</p>
+								<p>HIROさんが自宅から持ってきたコーヒーセットで、挽きたての豆からコーヒーが淹れられた。アーサーは自家製のピーナッツバターとバナナのサンドを「試してごらん」と皆に振る舞う。ふと会話が途切れた時、アーサーが海を見ながら言った。こうしていると静かだよな。この沈黙の中に神がいるのに——。誰も続きを急がなかった。</p>
+							</div>
+							<figure class="day1-story-photo">
+								<img src="/walk-across-sado/assets/day01-20260823/day01-seaside-rest-adults.jpg" alt="静かな海辺で昼食をとるアーサー・ホーランドと参加者" width="1600" height="900" loading="lazy" decoding="async" />
+								<figcaption>海沿いでひと休み。波は驚くほど静かだった。</figcaption>
+							</figure>
+						</article>
+
+						<article class="day1-baptism-story">
+							<div class="day1-baptism-heading">
+								<p class="eyebrow">BAPTISM BY THE SEA</p>
+								<h3>水があります</h3>
+							</div>
+
+							<div class="day1-baptism-grid">
+								<div class="day1-story-copy">
+									<p>午後、浜辺に集まった一行は、賛美歌「主は今生きておられる」を歌った。それから後藤さんが、使徒行伝8章を朗読する。旅の途中で福音を聞いたエチオピアの高官が、水辺に差しかかって言う場面である。</p>
+									<blockquote class="day1-scripture">「見てください。水があります。私がバプテスマを受けるのに、何か妨げがあるでしょうか」</blockquote>
+									<p>目の前に、その水があった。水に沈むのは古い自分の死、上がってくるのはよみがえりのしるし。心で信じたことを、形で表すのが洗礼式なんだと、アーサーは語った。</p>
+								</div>
+								<figure class="day1-baptism-tears-photo">
+									<img src="/walk-across-sado/assets/day01-20260823/day01-baptism-tears.jpg" alt="海を前に祈るアーサー・ホーランド" width="1600" height="900" loading="lazy" decoding="async" />
+									<figcaption>式を前に、静かな海へ祈りを向けるアーサー先生。</figcaption>
+								</figure>
+							</div>
+
+							<div class="day1-baptism-narrative">
+								<p>最初に海に入ったのはダイスケさんだった。式が始まる前から、涙が止まらなくなっていた。「自然と涙が出るんですけど」「いいんだよ。それ、ジーザスが触れてくれてんだよ」。あなたはイエス・キリストを罪からの救い主として信じますか——信じます。短い問いと答えのあと、体が水に沈み、上がってきた。拍手が起きた。</p>
+								<p>次は恵子さん。二年半前に一人で受けた洗礼を、今日は家族とともに、気持ちを新たにして受け直す。アーサーは祈りの中で、美容師という仕事は人を美しくし、人に触れて癒やす働きなのだと語り、「彼女の心の底にある願いが今日成就したことも感謝します」と続けた。</p>
+								<p>最後に娘さん。「ここでちゃんと支えるから、大丈夫だよ」。一瞬だよ、という声とともに水をくぐり、笑顔で立ち上がった。</p>
+								<p>三人が一人ひとり、同じ海で、同じ問いに「信じます」と答えて水をくぐった。「家族全員というのは、なかなかないケースだよ。あなたたちも嬉しいけど、俺たちも嬉しい」とアーサーが言う。</p>
+							</div>
+
+							<div class="day1-baptism-triptych" role="group" aria-label="片山さんご一家三人の洗礼">
+								<figure>
+									<img src="/walk-across-sado/assets/day01-20260823/day01-baptism-father-insta360-studio-v2.jpg" alt="後藤さんとアーサー・ホーランドに支えられ、海で洗礼を受けるダイスケさん" width="1600" height="900" loading="lazy" decoding="async" />
+								</figure>
+								<figure>
+									<img src="/walk-across-sado/assets/day01-20260823/day01-baptism-keiko-selected.jpg" alt="後藤さんとアーサー・ホーランドに支えられ、海で洗礼式に臨む恵子さん" width="1920" height="1080" loading="lazy" decoding="async" />
+								</figure>
+								<figure>
+									<img src="/walk-across-sado/assets/day01-20260823/day01-baptism-daughter-selected.jpg" alt="後藤さんとアーサー・ホーランドに支えられ、海で洗礼式に臨む娘さん" width="1920" height="1080" loading="lazy" decoding="async" />
+								</figure>
+								<p>ダイスケさん、恵子さん、娘さん。一人ひとりが同じ海で、同じ問いに「信じます」と答えた。</p>
+							</div>
+						</article>
+
+						<article class="day1-story-row day1-story-row-reversed day1-closing-story">
+							<div class="day1-story-copy">
+								<h3>浜辺の聖餐式</h3>
+								<p>そのまま浜辺で、後藤さんの導きで聖餐式が持たれた。パンは裂かれたイエスの体、杯は流された血。普通に生活できること自体が奇跡だった。今、私たちがこうして生きていること、この場所に集まれたこと、その一つひとつが奇跡です——。後藤さんはそう祈った。</p>
+								<p>「波も喜んでるよ。ハレルヤって言ってる。俺にはそう聞こえるけど」とアーサーが言い、みんなが笑った。</p>
+								<p>十字架行進の写真を織り込んだ、できたばかりの3冊の新約聖書が片山さんご一家に手渡された。そして、この浜にはもうひとつの偶然があった。ダイスケさんは毎年、部活の合宿でこの海に来ているのだという。「よく考えたら俺、毎年一回、この海で泳ぐんですよ」。馴染みの浜が、洗礼の場所になった。「毎年、思い出せるってことです」</p>
+							</div>
+							<figure class="day1-story-photo">
+								<img src="/walk-across-sado/assets/day01-20260823/day01-baptism-after.jpg" alt="洗礼後、海辺で十字架を囲む片山さんご一家、アーサー・ホーランドと参加者たち" width="1600" height="1200" loading="lazy" decoding="async" />
+								<figcaption>十字架とともに、海を背にして。片山さんご一家と仲間たち。</figcaption>
+							</figure>
+						</article>
+
+						<article class="day1-prose-section day1-final-story">
+							<p class="eyebrow">THE FIRST DAY CLOSES</p>
+							<h3>一日目の終わりに</h3>
+							<p>夕方の便で島を後にする片山さんご一家を見送り、一行は明日の行程を確かめた。計画では初日16.7キロだったこの日、一行が選んだのは、距離を刻むことよりも、一つの家族の洗礼を一日の真ん中に置くことだった。</p>
+							<p>船室の祈りで始まり、海の中で頂点を迎え、浜辺の聖餐式で閉じた一日。二年前に島影を見て「行きたいな」と言った人の願いは、こういう形で、初日から実を結び始めている。佐渡島十字架行進は、まだ始まったばかりだ。</p>
+						</article>
+					</div>
+				</div>
+			</section>
+
+			<section class="section sado-share-section" id="share" aria-labelledby="sado-share-title" data-share-root>
+				<div class="page-shell sado-share-shell">
+					<div class="section-heading sado-share-heading">
+						<p class="eyebrow eyebrow-red">SHARE THIS STORY</p>
+						<h2 id="sado-share-title">佐渡島1日目の記録を、届ける。</h2>
+						<p>心に残ったこの日の歩みを、ご家族や友人へシェアできます。</p>
+					</div>
+					<div class="sado-share-grid" aria-label="佐渡島十字架行進1日目の記事を共有">
+						<button class="sado-share-card sado-share-native" type="button" data-share-native aria-label="端末の共有メニューを開く"><span>スマホで共有</span><small>共有メニューを開く</small></button>
+						<a class="sado-share-card sado-share-line" href={`https://line.me/R/msg/text/?${encodedLineText}`} data-share-line target="_blank" rel="noopener noreferrer"><span>LINE</span><small>友だちへ送る</small></a>
+						<a class="sado-share-card sado-share-x" href={`https://twitter.com/intent/tweet?text=${encodedShareText}&url=${encodedShareUrl}`} data-share-x target="_blank" rel="noopener noreferrer"><span>X</span><small>投稿で紹介する</small></a>
+						<a class="sado-share-card sado-share-facebook" href={`https://www.facebook.com/sharer/sharer.php?u=${encodedShareUrl}`} data-share-facebook target="_blank" rel="noopener noreferrer"><span>Facebook</span><small>タイムラインで共有</small></a>
+						<button class="sado-share-card sado-share-copy" type="button" data-copy-link aria-label="記事のURLをコピーする"><span>リンクコピー</span><small data-copy-status>URLをコピー</small></button>
+					</div>
+					<p class="sado-share-live-status" aria-live="polite" data-share-live-status></p>
+				</div>
+			</section>
 
 			<section class="section schedule-section" id="schedule" aria-labelledby="schedule-title"><div class="page-shell schedule-shell"><div class="schedule-intro"><p class="eyebrow">SCHEDULE</p><h2 id="schedule-title">佐渡島十字架行進<br />5日間の予定</h2><p>佐渡島全体のルートと、各日の出発予定時刻、区間、距離をまとめています。</p></div>
 				<section class="route-overview" aria-labelledby="route-overview-title"><div class="route-overview-heading"><div><p>佐渡島をめぐる全行程</p><h3 id="route-overview-title">5日間のルート</h3></div><span>約99km</span></div><div class="route-map-layout"><div class="sado-map-frame"><div id="sado-map" class="sado-map-canvas" role="region" aria-label="佐渡島十字架行進の5日間のルート地図"></div></div><ol class="route-legend" aria-label="日別ルート一覧">{routes.map((route) => <li style={`--route-color:${route.color}`}><a href={route.map} target="_blank" rel="noreferrer" aria-label={`DAY ${route.day} ${route.from}から${route.to}までのルートをGoogleマップで見る`}><span class="route-day">DAY {route.day}</span><strong>{route.from}<i aria-hidden="true">→</i>{route.to}</strong><small>{route.date}・{route.distance}</small><b>Googleマップ <span aria-hidden="true">↗</span></b></a></li>)}</ol></div><div class="route-map-note"><p>ルート線は行程の概略です。詳細は各日のGoogleマップでご確認ください。</p><p>地図データ © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap contributors</a></p></div></section>
@@ -193,8 +380,69 @@ const meetingStructuredData = {
 				resizeFrame = window.requestAnimationFrame(fitWholeIsland);
 			}, { passive: true });
 		})();
-	</script>
-</Layout>
+		</script>
+		<script is:inline define:vars={{ shareTitle, shareText, shareUrl }}>
+			(() => {
+				const root = document.querySelector('[data-share-root]');
+				if (!root) return;
+
+				const nativeButton = root.querySelector('[data-share-native]');
+				const copyButton = root.querySelector('[data-copy-link]');
+				const copyStatus = root.querySelector('[data-copy-status]');
+				const liveStatus = root.querySelector('[data-share-live-status]');
+				const payload = { title: shareTitle, text: shareText, url: shareUrl };
+
+				const announce = (message) => {
+					if (liveStatus) liveStatus.textContent = message;
+				};
+
+				const legacyCopy = () => {
+					const textarea = document.createElement('textarea');
+					textarea.value = shareUrl;
+					textarea.setAttribute('readonly', '');
+					textarea.style.position = 'fixed';
+					textarea.style.opacity = '0';
+					document.body.appendChild(textarea);
+					textarea.select();
+					const copied = document.execCommand('copy');
+					textarea.remove();
+					return copied;
+				};
+
+				const copyShareUrl = async () => {
+					try {
+						if (navigator.clipboard && window.isSecureContext) {
+							await navigator.clipboard.writeText(shareUrl);
+						} else if (!legacyCopy()) {
+							window.prompt('このURLをコピーしてください', shareUrl);
+						}
+						if (copyStatus) copyStatus.textContent = 'コピーしました';
+						announce('記事のURLをコピーしました。');
+						window.setTimeout(() => {
+							if (copyStatus) copyStatus.textContent = 'URLをコピー';
+						}, 2400);
+					} catch {
+						window.prompt('このURLをコピーしてください', shareUrl);
+						announce('URLを表示しました。');
+					}
+				};
+
+				copyButton?.addEventListener('click', copyShareUrl);
+				nativeButton?.addEventListener('click', async () => {
+					if (!navigator.share) {
+						await copyShareUrl();
+						return;
+					}
+					try {
+						await navigator.share(payload);
+						announce('共有メニューを開きました。');
+					} catch (error) {
+						if (error?.name !== 'AbortError') announce('共有メニューを開けませんでした。リンクコピーをご利用ください。');
+					}
+				});
+			})();
+		</script>
+	</Layout>
 
 <style is:global>
 	.sado-archive-page {
@@ -465,6 +713,121 @@ const meetingStructuredData = {
 		letter-spacing: 0.06em;
 	}
 
+	.sado-archive-page .day1-story-photo-wide img {
+		aspect-ratio: 16 / 9;
+		object-position: center;
+	}
+
+	.sado-archive-page .sado-share-section {
+		scroll-margin-top: 72px;
+		border-top: 1px solid rgba(7, 19, 24, 0.1);
+		border-bottom: 1px solid rgba(7, 19, 24, 0.1);
+		background:
+			linear-gradient(125deg, rgba(13, 111, 118, 0.08), transparent 52%),
+			#fff;
+	}
+
+	.sado-archive-page .sado-share-shell {
+		max-width: 1120px;
+	}
+
+	.sado-archive-page .sado-share-heading {
+		max-width: 760px;
+		margin-inline: auto;
+		text-align: center;
+	}
+
+	.sado-archive-page .sado-share-heading h2 {
+		font-size: clamp(1.85rem, 3.6vw, 3rem);
+	}
+
+	.sado-archive-page .sado-share-heading > p:last-child {
+		margin-inline: auto;
+	}
+
+	.sado-archive-page .sado-share-grid {
+		display: grid;
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+		gap: 12px;
+		margin-top: 38px;
+	}
+
+	.sado-archive-page .sado-share-card {
+		--share-accent: #0d6f76;
+		display: flex;
+		min-width: 0;
+		min-height: 108px;
+		appearance: none;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: center;
+		gap: 5px;
+		padding: 20px 18px 17px;
+		border: 1px solid #d8d8d0;
+		border-top: 4px solid var(--share-accent);
+		border-radius: 0;
+		background: #fff;
+		box-shadow: 0 10px 24px rgba(5, 30, 38, 0.08);
+		color: #072e3c;
+		font: inherit;
+		text-align: left;
+		text-decoration: none;
+		cursor: pointer;
+		transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+	}
+
+	.sado-archive-page .sado-share-card:hover,
+	.sado-archive-page .sado-share-card:focus-visible {
+		border-color: var(--share-accent);
+		box-shadow: 0 15px 30px rgba(5, 30, 38, 0.14);
+		transform: translateY(-2px);
+	}
+
+	.sado-archive-page .sado-share-card:focus-visible {
+		outline: 3px solid rgba(13, 111, 118, 0.24);
+		outline-offset: 3px;
+	}
+
+	.sado-archive-page .sado-share-card span {
+		font-size: 0.95rem;
+		font-weight: 900;
+		letter-spacing: 0.01em;
+		line-height: 1.35;
+	}
+
+	.sado-archive-page .sado-share-card small {
+		color: #657178;
+		font-size: 0.7rem;
+		font-weight: 700;
+		line-height: 1.55;
+	}
+
+	.sado-archive-page .sado-share-native {
+		--share-accent: #d6a935;
+		border-color: #052d3c;
+		border-top-color: var(--share-accent);
+		background: #052d3c;
+		color: #fff;
+	}
+
+	.sado-archive-page .sado-share-native small {
+		color: rgba(255, 255, 255, 0.7);
+	}
+
+	.sado-archive-page .sado-share-line { --share-accent: #06c755; }
+	.sado-archive-page .sado-share-x { --share-accent: #111; }
+	.sado-archive-page .sado-share-facebook { --share-accent: #1877f2; }
+	.sado-archive-page .sado-share-copy { --share-accent: #d6a935; }
+
+	.sado-archive-page .sado-share-live-status {
+		min-height: 1.5em;
+		margin: 13px 0 0;
+		color: #0d6f76;
+		font-size: 0.75rem;
+		font-weight: 800;
+		text-align: center;
+	}
+
 	@media (max-width: 760px) {
 		.sado-archive-page .section-nav .page-shell {
 			justify-content: flex-start;
@@ -472,6 +835,10 @@ const meetingStructuredData = {
 	}
 
 	@media (max-width: 900px) {
+		.sado-archive-page .sado-share-grid {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+
 		.sado-archive-page .hero-grid {
 			grid-template-columns: minmax(0, 1fr);
 			gap: 32px;
@@ -501,6 +868,21 @@ const meetingStructuredData = {
 	}
 
 	@media (max-width: 640px) {
+		.sado-archive-page .sado-share-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 10px;
+			margin-top: 30px;
+		}
+
+		.sado-archive-page .sado-share-native {
+			grid-column: 1 / -1;
+		}
+
+		.sado-archive-page .sado-share-card {
+			min-height: 92px;
+			padding: 16px 14px 14px;
+		}
+
 		.sado-archive-page .hero-media {
 			width: min(100%, 340px);
 			padding: 8px;

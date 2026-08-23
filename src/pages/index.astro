@@ -28,8 +28,29 @@ const allMessages = (await getCollection('daily-messages', ({ data }) => {
 	(a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
 
-const featuredMessages = allMessages.slice(0, 3);
-const archiveMessages = allMessages.slice(3);
+const sadoDayOneFeature = {
+	href: '/walk-across-sado/#day1-report',
+	title: '佐渡島十字架行進1日目｜「見てください、水があります」',
+	date: new Date('2026-08-23T12:00:00+09:00'),
+	thumbnail: '/walk-across-sado/assets/day01-20260823/day01-father-carries-cross.jpg',
+	alt: '佐渡の道で十字架を担ぐダイスケさんと、その隣を歩くアーサー・ホーランド',
+	kind: 'article' as const,
+};
+const messageFeatureItems = allMessages.map((post) => ({
+	href: `/messages/${post.slug}/`,
+	title: post.data.title,
+	date: post.data.date,
+	thumbnail: `https://img.youtube.com/vi/${post.data.youtubeId}/maxresdefault.jpg`,
+	alt: post.data.title,
+	kind: 'video' as const,
+	messageSlug: post.slug,
+}));
+const featuredItems = [
+	...(sadoDayOneFeature.date <= currentBuildTime ? [sadoDayOneFeature] : []),
+	...messageFeatureItems,
+].sort((a, b) => b.date.valueOf() - a.date.valueOf()).slice(0, 3);
+const featuredMessageSlugs = new Set(featuredItems.flatMap((item) => item.kind === 'video' ? [item.messageSlug] : []));
+const archiveMessages = allMessages.filter((post) => !featuredMessageSlugs.has(post.slug));
 const monthFormatter = new Intl.DateTimeFormat('ja-JP', { year: 'numeric', month: 'long', timeZone: 'Asia/Tokyo' });
 const tokyoDateParts = new Intl.DateTimeFormat('en-CA', {
 	year: 'numeric',
@@ -180,11 +201,11 @@ const homeStructuredData = [
 		"@context": "https://schema.org",
 		"@type": "ItemList",
 		name: "アーサーホーランド最新メッセージ",
-		itemListElement: featuredMessages.map((post, index) => ({
+		itemListElement: featuredItems.map((item, index) => ({
 			"@type": "ListItem",
 			position: index + 1,
-			url: `${siteURL}/messages/${post.slug}/`,
-			name: post.data.title,
+			url: new URL(item.href, siteURL).href,
+			name: item.title,
 		})),
 	},
 	{
@@ -636,19 +657,20 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 				<a class="section-link" href="#archive">一覧から探す</a>
 			</div>
 			<div class="featured-grid">
-				{featuredMessages.map((post, index) => (
-					<a href={`/messages/${post.slug}`} class:list={['featured-card', { primary: index === 0 }]}>
+				{featuredItems.map((item, index) => (
+					<a href={item.href} class:list={['featured-card', { primary: index === 0, 'featured-article-card': item.kind === 'article' }]}>
 						<div class="featured-thumb">
 							<img
-								src={`https://img.youtube.com/vi/${post.data.youtubeId}/maxresdefault.jpg`}
-								alt={post.data.title}
+								src={item.thumbnail}
+								alt={item.alt}
 								loading={index === 0 ? 'eager' : 'lazy'}
 							/>
-							<div class="play-icon">▶</div>
+							{item.kind === 'article' && <span class="article-badge">DAY 01 REPORT</span>}
+							<div class:list={['play-icon', { 'article-icon': item.kind === 'article' }]}>{item.kind === 'article' ? '→' : '▶'}</div>
 						</div>
 						<div class="featured-body">
-							<div class="card-date">{formatDate(post.data.date)}</div>
-							<h3>{post.data.title}</h3>
+							<div class="card-date">{formatDate(item.date)}</div>
+							<h3>{item.title}</h3>
 						</div>
 					</a>
 				))}
@@ -2014,6 +2036,10 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		border-left-color: #c5a059;
 	}
 
+	.featured-article-card {
+		border-left-color: #c5a059;
+	}
+
 	.featured-thumb {
 		position: relative;
 		aspect-ratio: 16 / 9;
@@ -2066,6 +2092,20 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		transform: scale(1.025);
 	}
 
+	.article-badge {
+		position: absolute;
+		top: 14px;
+		left: 14px;
+		padding: 7px 10px 6px;
+		background: #c5a059;
+		color: #111;
+		font-family: 'Oswald', sans-serif;
+		font-size: 0.72rem;
+		font-weight: 800;
+		letter-spacing: 0.12em;
+		line-height: 1;
+	}
+
 	.archive-item:hover .archive-thumb-main {
 		opacity: 1;
 		transform: scale(1.025);
@@ -2112,6 +2152,14 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		justify-content: center;
 		font-size: 1.2rem;
 		transition: 0.3s;
+	}
+
+	.play-icon.article-icon {
+		border-color: #111;
+		background: #c5a059;
+		color: #111;
+		font-size: 1.6rem;
+		font-weight: 900;
 	}
 
 	.card-date { 
