@@ -28,14 +28,26 @@ const allMessages = (await getCollection('daily-messages', ({ data }) => {
 	(a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
 
-const sadoDayOneFeature = {
-	href: '/walk-across-sado/#day1-report',
-	title: '佐渡島十字架行進1日目｜「見てください、水があります」',
-	date: new Date('2026-08-23T12:00:00+09:00'),
-	thumbnail: '/walk-across-sado/assets/day01-20260823/day01-father-carries-cross.jpg',
-	alt: '佐渡の道で十字架を担ぐダイスケさんと、その隣を歩くアーサー・ホーランド',
-	kind: 'article' as const,
-};
+const sadoFeatureItems = [
+	{
+		href: '/walk-across-sado/#day2-report',
+		title: '佐渡島十字架行進2日目｜「この佐渡島のために、歩きながら祈ってるんです」',
+		date: new Date('2026-08-24T14:00:00+09:00'),
+		thumbnail: '/walk-across-sado/assets/day02-20260824/day02-participants-departure-fields.jpg',
+		alt: '実りを迎えた佐渡の田んぼの横を十字架とともに歩くアーサー・ホーランドと参加者たち',
+		badge: 'DAY 02 REPORT',
+		kind: 'article' as const,
+	},
+	{
+		href: '/walk-across-sado/#day1-report',
+		title: '佐渡島十字架行進1日目｜「見てください、水があります」',
+		date: new Date('2026-08-23T12:00:00+09:00'),
+		thumbnail: '/walk-across-sado/assets/day01-20260823/day01-father-carries-cross.jpg',
+		alt: '佐渡の道で十字架を担ぐダイスケさんと、その隣を歩くアーサー・ホーランド',
+		badge: 'DAY 01 REPORT',
+		kind: 'article' as const,
+	},
+];
 const messageFeatureItems = allMessages.map((post) => ({
 	href: `/messages/${post.slug}/`,
 	title: post.data.title,
@@ -46,7 +58,7 @@ const messageFeatureItems = allMessages.map((post) => ({
 	messageSlug: post.slug,
 }));
 const featuredItems = [
-	...(sadoDayOneFeature.date <= currentBuildTime ? [sadoDayOneFeature] : []),
+	...sadoFeatureItems.filter((item) => item.date <= currentBuildTime),
 	...messageFeatureItems,
 ].sort((a, b) => b.date.valueOf() - a.date.valueOf()).slice(0, 3);
 const featuredMessageSlugs = new Set(featuredItems.flatMap((item) => item.kind === 'video' ? [item.messageSlug] : []));
@@ -665,7 +677,7 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 								alt={item.alt}
 								loading={index === 0 ? 'eager' : 'lazy'}
 							/>
-							{item.kind === 'article' && <span class="article-badge">DAY 01 REPORT</span>}
+							{item.kind === 'article' && <span class="article-badge">{item.badge}</span>}
 							<div class:list={['play-icon', { 'article-icon': item.kind === 'article' }]}>{item.kind === 'article' ? '→' : '▶'}</div>
 						</div>
 						<div class="featured-body">
