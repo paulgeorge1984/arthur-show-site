@@ -1,15 +1,16 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import SadoDayTwoReport from '../../components/SadoDayTwoReport.astro';
+import SadoDayThreeReport from '../../components/SadoDayThreeReport.astro';
 import '../walk-across-sado2026/archive.css';
 
 const siteUrl = 'https://arthur-show.com';
 const canonicalPath = '/walk-across-sado/';
-const pageTitle = '佐渡島十字架行進 2026｜2日目「この佐渡島のために、歩きながら祈ってるんです」';
-const pageDescription = '佐渡島十字架行進2日目。長石海水浴場から小木町へ計画22.5km。朝のディボーション、稲穂の道、海辺の道草、上り坂の賛美と、佐渡のために祈りながら歩いた一行の記録。';
-const shareUrl = `${siteUrl}${canonicalPath}#day2-report`;
-const shareTitle = '佐渡島十字架行進 2026｜2日目「この佐渡島のために、歩きながら祈ってるんです」';
-const shareText = '朝のディボーションから稲穂の道、青い海、上り坂へ。仲間たちと佐渡のために祈りながら歩いた2日目の記録。';
+const pageTitle = '佐渡島十字架行進 2026｜3日目「沈黙の中を、十字架は進んだ」';
+const pageDescription = '佐渡島十字架行進3日目。「この日は主が作られた」と歌って道へ出た一行は、10キロ以上を沈黙のうちに歩いた。帰着後に語られた道の証言と、再会、食卓の祈りを記す。';
+const shareUrl = `${siteUrl}${canonicalPath}#day3-report`;
+const shareTitle = '佐渡島十字架行進 2026｜3日目「沈黙の中を、十字架は進んだ」';
+const shareText = '【佐渡島十字架行進 DAY03】「みんな黙って、沈黙の中10キロ以上歩いたよね」。三日目、一行は道の途中で、沈黙のうちに歩くことを決めました。波の音、鳥のさえずり、風、野の花——沈黙の中で受け取ったものを、アーサー先生は詩篇19篇の言葉とともに振り返ります。道で声をかけてくれた大工の方との出会い、夕方の再会、皆で祈って囲んだ食卓。DAY03の記事を特設ページで公開しました。';
 const encodedShareUrl = encodeURIComponent(shareUrl);
 const encodedShareText = encodeURIComponent(`${shareTitle}\n${shareText}`);
 const encodedLineText = encodeURIComponent(`${shareTitle}\n${shareText}\n${shareUrl}`);
@@ -120,10 +121,10 @@ const meetingStructuredData = {
 };
 ---
 
-<Layout title={pageTitle} description={pageDescription} image="/walk-across-sado/assets/day02-20260824/day02-arthur-cross-rice-road.jpg" imageAlt="実りを迎えた佐渡の田んぼの横を十字架を担いで歩くアーサー・ホーランド" imageWidth={1474} imageHeight={1110} canonicalPath={canonicalPath} structuredData={[structuredData, meetingStructuredData]}>
+<Layout title={pageTitle} description={pageDescription} image="/walk-across-sado/assets/day03-20260825/day03-return-interview.jpg" imageAlt="帰着後、車内で三日目の歩みを振り返るアーサー先生" imageWidth={1920} imageHeight={1080} canonicalPath={canonicalPath} structuredData={[structuredData, meetingStructuredData]}>
 	<div class="sado-archive-page">
 		<nav class="section-nav" aria-label="ページ内メニュー">
-			<div class="page-shell"><a href="#about">概要</a><a href="#flyer">チラシ</a><a href="#day1-report">1日目レポート</a><a href="#day2-report">2日目レポート</a><a href="#share">シェア</a><a href="#schedule">スケジュール</a><a class="meeting-nav-link" href="#evangelistic-meeting">TALK &amp; LIVE</a><a href="#photos">写真</a><a href="#previous">これまでの行進</a></div>
+			<div class="page-shell"><a href="#about">概要</a><a href="#flyer">チラシ</a><a href="#day1-report">1日目レポート</a><a href="#day2-report">2日目レポート</a><a href="#day3-report">3日目レポート</a><a href="#share">シェア</a><a href="#schedule">スケジュール</a><a class="meeting-nav-link" href="#evangelistic-meeting">TALK &amp; LIVE</a><a href="#photos">写真</a><a href="#previous">これまでの行進</a></div>
 		</nav>
 		<main>
 			<section class="hero" id="flyer" aria-labelledby="hero-title">
@@ -305,15 +306,16 @@ const meetingStructuredData = {
 			</section>
 
 			<SadoDayTwoReport />
+			<SadoDayThreeReport />
 
 			<section class="section sado-share-section" id="share" aria-labelledby="sado-share-title" data-share-root>
 				<div class="page-shell sado-share-shell">
 					<div class="section-heading sado-share-heading">
 						<p class="eyebrow eyebrow-red">SHARE THIS STORY</p>
-						<h2 id="sado-share-title">佐渡島2日目の記録を、届ける。</h2>
+						<h2 id="sado-share-title">佐渡島3日目の記録を、届ける。</h2>
 						<p>心に残ったこの日の歩みを、ご家族や友人へシェアできます。</p>
 					</div>
-					<div class="sado-share-grid" aria-label="佐渡島十字架行進2日目の記事を共有">
+					<div class="sado-share-grid" aria-label="佐渡島十字架行進3日目の記事を共有">
 						<button class="sado-share-card sado-share-native" type="button" data-share-native aria-label="端末の共有メニューを開く"><span>スマホで共有</span><small>共有メニューを開く</small></button>
 						<a class="sado-share-card sado-share-line" href={`https://line.me/R/msg/text/?${encodedLineText}`} data-share-line target="_blank" rel="noopener noreferrer"><span>LINE</span><small>友だちへ送る</small></a>
 						<a class="sado-share-card sado-share-x" href={`https://twitter.com/intent/tweet?text=${encodedShareText}&url=${encodedShareUrl}`} data-share-x target="_blank" rel="noopener noreferrer"><span>X</span><small>投稿で紹介する</small></a>
@@ -443,6 +445,24 @@ const meetingStructuredData = {
 						if (error?.name !== 'AbortError') announce('共有メニューを開けませんでした。リンクコピーをご利用ください。');
 					}
 				});
+			})();
+		</script>
+		<script is:inline>
+			(() => {
+				const scrollToDayThree = () => {
+					if (window.location.hash !== '#day3-report') return;
+					const report = document.getElementById('day3-report');
+					if (!report) return;
+					window.requestAnimationFrame(() => report.scrollIntoView({ block: 'start', behavior: 'auto' }));
+				};
+
+				if (document.readyState === 'loading') {
+					document.addEventListener('DOMContentLoaded', scrollToDayThree, { once: true });
+				} else {
+					scrollToDayThree();
+				}
+				window.addEventListener('load', scrollToDayThree, { once: true });
+				window.addEventListener('hashchange', scrollToDayThree);
 			})();
 		</script>
 	</Layout>
