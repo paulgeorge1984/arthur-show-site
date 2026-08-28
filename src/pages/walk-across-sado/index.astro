@@ -7,11 +7,11 @@ import '../walk-across-sado2026/archive.css';
 
 const siteUrl = 'https://arthur-show.com';
 const canonicalPath = '/walk-across-sado/';
-const pageTitle = '佐渡島十字架行進 2026｜4日目「一冊の聖書が手渡された夜」';
-const pageDescription = '佐渡島十字架行進4日目。朝の御言葉から海沿いの祈り、道の途中の聖餐へ。夕方は真野シェアベースカフェでのTALK & LIVE。賛美とメッセージの夜に、一人の女性が信仰を告白し、洗礼を受けた。';
+const pageTitle = '佐渡島十字架行進 DAY04｜その日に知り、その夜、洗礼を受けた';
+const pageDescription = '佐渡島十字架行進4日目。その日に急遽連絡を受けて初めてTALK & LIVEを知った一人の女性が、その夜、会場へ来て、アーサー先生のメッセージを聞き、ジーザスを受け入れ、その場で洗礼を受けた。聖霊に導かれた一日の記録。';
 const shareUrl = `${siteUrl}${canonicalPath}#day4-report`;
-const shareTitle = '佐渡島十字架行進 2026｜4日目「一冊の聖書が手渡された夜」';
-const shareText = '【佐渡島十字架行進 DAY04】朝に受け取った「命をどう神に返すのか」という問いを携え、一行は海沿いの道へ。昼には道の途中でパンと杯を分かち、夕方は真野シェアベースカフェでTALK & LIVEが開かれました。サルーキ＝CHIYOさんと神山みささんの賛美、アーサー先生のメッセージ。そしてその夜、十字架行進を記念してつくられた聖書『DATE WITH JESUS』が一人の女性に手渡され、思いがけない洗礼へとつながりました。4日目の記録です。';
+const shareTitle = '佐渡島十字架行進 DAY04｜その日に知り、その夜、洗礼を受けた';
+const shareText = '【佐渡島十字架行進 DAY04】その日に急遽連絡を受けて初めてTALK & LIVEを知った一人の女性が、その夜、真野シェアベースカフェへ。サルーキ＝CHIYOさんと神山みささんの賛美に続き、アーサー先生のメッセージを聞いてジーザスを受け入れ、「はい、信じます」と答えて、その夜のうちに洗礼を受けました。聖霊の導きがなければありえない、一日の記録です。';
 const encodedShareUrl = encodeURIComponent(shareUrl);
 const encodedShareText = encodeURIComponent(`${shareTitle}\n${shareText}`);
 const encodedLineText = encodeURIComponent(`${shareTitle}\n${shareText}\n${shareUrl}`);
@@ -122,7 +122,7 @@ const meetingStructuredData = {
 };
 ---
 
-<Layout title={pageTitle} description={pageDescription} image="/walk-across-sado/assets/day04-20260826/day04-lead.jpg" imageAlt="青い海を背に、十字架を担ぐアーサー先生と同行者たち" imageWidth={1920} imageHeight={1080} canonicalPath={canonicalPath} structuredData={[structuredData, meetingStructuredData]}>
+<Layout title={pageTitle} description={pageDescription} image="/walk-across-sado/assets/day04-20260826/day04-baptism-prayer.jpg" imageAlt="洗礼のあと、新しい歩みのために女性へ祈るアーサー先生" imageWidth={1920} imageHeight={1080} canonicalPath={canonicalPath} structuredData={[structuredData, meetingStructuredData]}>
 	<div class="sado-archive-page">
 		<nav class="section-nav" aria-label="ページ内メニュー">
 			<div class="page-shell"><a href="#about">概要</a><a href="#flyer">チラシ</a><a href="#day1-report">1日目レポート</a><a href="#day2-report">2日目レポート</a><a href="#day3-report">3日目レポート</a><a href="#day4-report">4日目レポート</a><a href="#share">シェア</a><a href="#schedule">スケジュール</a><a class="meeting-nav-link" href="#evangelistic-meeting">TALK &amp; LIVE</a><a href="#photos">写真</a><a href="#previous">これまでの行進</a></div>
@@ -314,10 +314,10 @@ const meetingStructuredData = {
 				<div class="page-shell sado-share-shell">
 					<div class="section-heading sado-share-heading">
 						<p class="eyebrow eyebrow-red">SHARE THIS STORY</p>
-						<h2 id="sado-share-title">佐渡島4日目の記録を、届ける。</h2>
-						<p>心に残ったこの日の歩みを、ご家族や友人へシェアできます。</p>
+						<h2 id="sado-share-title">聖霊に導かれた、この夜を届ける。</h2>
+						<p>その日に集会を知り、その夜に洗礼を受けた一日の記録をご家族や友人へシェアできます。</p>
 					</div>
-					<div class="sado-share-grid" aria-label="佐渡島十字架行進4日目の記事を共有">
+					<div class="sado-share-grid" aria-label="聖霊の導きの中で洗礼を受けた佐渡島十字架行進4日目の記事を共有">
 						<button class="sado-share-card sado-share-native" type="button" data-share-native aria-label="端末の共有メニューを開く"><span>スマホで共有</span><small>共有メニューを開く</small></button>
 						<a class="sado-share-card sado-share-line" href={`https://line.me/R/msg/text/?${encodedLineText}`} data-share-line target="_blank" rel="noopener noreferrer"><span>LINE</span><small>友だちへ送る</small></a>
 						<a class="sado-share-card sado-share-x" href={`https://twitter.com/intent/tweet?text=${encodedShareText}&url=${encodedShareUrl}`} data-share-x target="_blank" rel="noopener noreferrer"><span>X</span><small>投稿で紹介する</small></a>
