@@ -75,11 +75,13 @@ const messageFeatureItems = allMessages.map((post) => ({
 	kind: 'video' as const,
 	messageSlug: post.slug,
 }));
+const publishedSadoFeatureItems = sadoFeatureItems.filter((item) => item.date <= currentBuildTime);
 const featuredItems = [
-	...sadoFeatureItems.filter((item) => item.date <= currentBuildTime),
+	...publishedSadoFeatureItems,
 	...messageFeatureItems,
-].sort((a, b) => b.date.valueOf() - a.date.valueOf()).slice(0, 3);
+].sort((a, b) => b.date.valueOf() - a.date.valueOf()).slice(0, 7);
 const featuredMessageSlugs = new Set(featuredItems.flatMap((item) => item.kind === 'video' ? [item.messageSlug] : []));
+const featuredSadoHrefs = new Set(featuredItems.flatMap((item) => item.kind === 'article' ? [item.href] : []));
 const archiveMessages = allMessages.filter((post) => !featuredMessageSlugs.has(post.slug));
 const monthFormatter = new Intl.DateTimeFormat('ja-JP', { year: 'numeric', month: 'long', timeZone: 'Asia/Tokyo' });
 const tokyoDateParts = new Intl.DateTimeFormat('en-CA', {
@@ -150,30 +152,58 @@ const bibleBooks = [
 	'ヨハネの手紙 第一', 'ヨハネの手紙 第二', 'ヨハネの手紙 第三', 'ユダの手紙', 'ヨハネの黙示録',
 ];
 const bibleBookOrder = new Map(bibleBooks.map((book, index) => [book, index]));
-const months = Array.from(new Set(allMessages.map((post) => getTokyoMonthKey(post.data.date)))).map((key) => {
-	const [year, month] = key.split('-').map(Number);
-	const date = new Date(year, month - 1, 1);
-	return {
-		key,
-		label: monthFormatter.format(date),
-		count: allMessages.filter((post) => getTokyoMonthKey(post.data.date) === key).length,
-	};
-});
-const seenArchiveMonths = new Set<string>();
-const archiveRows = archiveMessages.map((post) => {
-	const monthKey = getTokyoMonthKey(post.data.date);
-	const showMonthAnchor = !seenArchiveMonths.has(monthKey);
-	seenArchiveMonths.add(monthKey);
-	return {
-		post,
-		monthKey,
-		showMonthAnchor,
+const archiveItems = [
+	...publishedSadoFeatureItems
+		.filter((item) => !featuredSadoHrefs.has(item.href))
+		.map((item) => ({
+			kind: item.kind,
+			href: item.href,
+			title: item.title,
+			date: item.date,
+			thumbnail: item.thumbnail,
+			alt: item.alt,
+			badge: item.badge,
+			searchText: normalizeSearchText([
+				item.title,
+				item.badge,
+				item.alt,
+				'佐渡島 十字架行進 アーサー・ホーランド WALK ACROSS',
+			].join(' ')),
+		})),
+	...archiveMessages.map((post) => ({
+		kind: 'video' as const,
+		href: `/messages/${post.slug}`,
+		title: post.data.title,
+		date: post.data.date,
+		thumbnail: `https://i.ytimg.com/vi/${post.data.youtubeId}/hq720.jpg`,
+		alt: post.data.title,
+		badge: undefined,
 		searchText: normalizeSearchText([
 			post.data.title,
 			cleanArchiveDescription(post.data.description, post.data.title),
 			(post.data.tags || []).join(' '),
 			post.body,
 		].join(' ')),
+	})),
+].sort((a, b) => b.date.valueOf() - a.date.valueOf());
+const months = Array.from(new Set(archiveItems.map((item) => getTokyoMonthKey(item.date)))).map((key) => {
+	const [year, month] = key.split('-').map(Number);
+	const date = new Date(year, month - 1, 1);
+	return {
+		key,
+		label: monthFormatter.format(date),
+		count: archiveItems.filter((item) => getTokyoMonthKey(item.date) === key).length,
+	};
+});
+const seenArchiveMonths = new Set<string>();
+const archiveRows = archiveItems.map((item) => {
+	const monthKey = getTokyoMonthKey(item.date);
+	const showMonthAnchor = !seenArchiveMonths.has(monthKey);
+	seenArchiveMonths.add(monthKey);
+	return {
+		item,
+		monthKey,
+		showMonthAnchor,
 	};
 });
 
@@ -761,7 +791,7 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 					<p class="section-kicker">ARCHIVE</p>
 					<h2 id="archive-title">メッセージ一覧</h2>
 				</div>
-				<p class="archive-count">{allMessages.length}件</p>
+				<p class="archive-count">{archiveRows.length}件</p>
 			</div>
 			<div class="archive-tools">
 				<div class="archive-tools-head">
@@ -782,33 +812,34 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 			</div>
 
 			<div class="archive-list" data-archive-list>
-				{archiveRows.map(({ post, monthKey, showMonthAnchor, searchText }) => {
+				{archiveRows.map(({ item, monthKey, showMonthAnchor }) => {
 					return (
 						<a
-							href={`/messages/${post.slug}`}
-							class="archive-item"
+							href={item.href}
+							class:list={['archive-item', { 'archive-article-item': item.kind === 'article' }]}
 							id={showMonthAnchor ? `month-${monthKey}` : undefined}
 							data-month={monthKey}
-							data-search={searchText}
+							data-search={item.searchText}
 						>
 							<span class="archive-thumb">
 								<img
 									class="archive-thumb-bg"
-									src={`https://i.ytimg.com/vi/${post.data.youtubeId}/hq720.jpg`}
+									src={item.thumbnail}
 									alt=""
 									aria-hidden="true"
 									loading="lazy"
 								/>
 								<img
 									class="archive-thumb-main"
-									src={`https://i.ytimg.com/vi/${post.data.youtubeId}/hq720.jpg`}
-									alt=""
+									src={item.thumbnail}
+									alt={item.alt}
 									loading="lazy"
 								/>
+								{item.kind === 'article' && <span class="article-badge">{item.badge}</span>}
 							</span>
 							<div class="archive-item-body">
-								<div class="card-date">{formatDate(post.data.date)}</div>
-								<h3>{post.data.title}</h3>
+								<div class="card-date">{formatDate(item.date)}</div>
+								<h3>{item.title}</h3>
 							</div>
 						</a>
 					);
@@ -2136,6 +2167,10 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		line-height: 1;
 	}
 
+	.archive-thumb .article-badge {
+		z-index: 2;
+	}
+
 	.archive-item:hover .archive-thumb-main {
 		opacity: 1;
 		transform: scale(1.025);
@@ -2905,6 +2940,10 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		background: #fff;
 		border: 1px solid #e4e4e7;
 		box-shadow: 0 10px 24px rgba(0, 0, 0, 0.05);
+	}
+
+	.archive-article-item {
+		border-left: 4px solid #c5a059;
 	}
 
 	.archive-item[hidden] {
