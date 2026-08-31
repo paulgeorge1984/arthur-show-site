@@ -308,6 +308,43 @@
 	margin-bottom: 0;
 }
 
+.day1-baptism-video {
+	max-width: 960px;
+	margin: 42px auto 0;
+}
+
+.day1-baptism-video-frame {
+	position: relative;
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	overflow: hidden;
+	border: 1px solid rgba(255, 255, 255, .18);
+	background: #000;
+	box-shadow: 0 20px 42px rgba(0, 0, 0, .34);
+}
+
+.day1-baptism-video-frame iframe {
+	display: block;
+	width: 100%;
+	height: 100%;
+	border: 0;
+}
+
+.day1-baptism-video figcaption {
+	margin-top: 14px;
+	color: rgba(255, 255, 255, .72);
+	font-size: .84rem;
+	font-weight: 700;
+	line-height: 1.8;
+}
+
+.day1-baptism-video figcaption a {
+	color: #e8ff00;
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 4px;
+}
+
 .day1-baptism-triptych {
 	display: grid;
 	grid-template-columns: repeat(3, minmax(0, 1fr));
