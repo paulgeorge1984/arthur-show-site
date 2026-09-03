@@ -7,15 +7,8 @@ const siteURL = 'https://arthur-show.com';
 const blessingTimeOsakaBanner = '/assets/generated/blessing-time-osaka2026-banner.webp';
 const gospelTalkSummerBanner = '/assets/generated/gospel-talk-summer-osaka20260719-banner.webp';
 const theEssenceAkitaBanner = '/assets/the-essence-akita-20261114-og-v3.jpg';
-const blessingNightKagurazakaAugustUrl = 'https://www.blessingnight.jp/schedule/schedule373';
-const gospelArtTsukubaUrl = '/gospel-art-tsukuba-20260815/';
-const gospelArtTsukubaPoster = '/assets/gospel-art-tsukuba-20260815.jpg';
-const tsukubaChurchUrl = '/arthur-hollands-tsukuba-20260816/';
-const tsukubaChurchPoster = '/assets/arthur-hollands-tsukuba-church-20260816.png';
+const blessingNightKagurazakaSeptemberUrl = 'https://www.blessingnight.jp/schedule/schedule582';
 const blessingNightShimokitazawaPoster = '/assets/blessing-night-shimokitazawa-20261009-front.webp';
-const igniteHiscallPoster = '/assets/ignite-hiscall-20260821.jpg';
-const sadoGatheringUrl = '/walk-across-sado/#evangelistic-meeting';
-const sadoGatheringPoster = '/walk-across-sado/sado-talk-live-2026-a4.jpg';
 
 // サイトのビルドが実行された現在の時刻を取得
 const currentBuildTime = new Date(); 
@@ -470,13 +463,13 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		<details class="home-event-drawer">
 			<summary class="home-event-summary">
 				<span class="home-event-summary-media blessing-night-kagurazaka-summary-media" aria-hidden="true">
-					<strong>AUG 14</strong>
+					<strong>SEP 11</strong>
 					<small>KAGURAZAKA</small>
 				</span>
 				<span class="home-event-summary-copy">
 					<span class="home-event-summary-kicker">EVENT INFO</span>
 					<strong>イベント案内</strong>
-					<span>8/14 BLESSING NIGHT 神楽坂／8/15 Gospel Art／8/16 Special Message／8/21 IGNITE／8/26 佐渡島 伝道集会／10/9 下北沢／11/14 THE ESSENCE</span>
+					<span>9/11 BLESSING NIGHT 神楽坂／10/9 下北沢／11/14 THE ESSENCE</span>
 				</span>
 				<span class="home-event-summary-action" aria-hidden="true">
 					<span class="closed">見る</span>
@@ -486,136 +479,26 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 			<div class="home-event-panel">
 				<a
 					class="blessing-time-feature blessing-night-kagurazaka-home-feature"
-					href={blessingNightKagurazakaAugustUrl}
+					href={blessingNightKagurazakaSeptemberUrl}
 					target="_blank"
 					rel="noopener noreferrer"
-					aria-label="BLESSING NIGHT 神楽坂 2026年8月14日 公式の詳細・申込ページを見る"
+					aria-label="BLESSING NIGHT 神楽坂 2026年9月11日 公式の詳細・申込ページを見る"
 				>
 					<div class="blessing-time-feature-copy">
-						<p class="blessing-time-feature-kicker">NEXT EVENT / 8.14 FRI</p>
+						<p class="blessing-time-feature-kicker">NEXT EVENT / 9.11 FRI</p>
 						<h2>BLESSING NIGHT 神楽坂</h2>
 						<p>
 							不良牧師アーサー・ホーランドが語る、聖なる夜のトークライブ。
-							今月はゲストに須郷裕介を迎えます。
+							音楽ゲストにラニー・ラッカーを迎えます。
 						</p>
 						<div class="blessing-time-feature-meta">
-							<span>2026年8月14日（金）</span>
+							<span>2026年9月11日（金）</span>
 							<span>OPEN 18:30 / START 19:00</span>
-							<span>ゲスト：須郷裕介</span>
+							<span>音楽ゲスト：ラニー・ラッカー</span>
 							<span>u-ma kagurazaka</span>
-							<span>3,000円（税込／飲食代別途）</span>
+							<span>3,000円（税込・飲食代別途）</span>
 						</div>
 						<span class="blessing-time-feature-button">公式の詳細・申込ページへ</span>
-					</div>
-				</a>
-
-				<a
-					class="blessing-time-feature the-essence-home-feature gospel-art-home-feature"
-					href={gospelArtTsukubaUrl}
-					aria-label="Gospel Art 2026年8月15日 茨城県つくば美術館 特別ページを見る"
-				>
-					<img
-						src={gospelArtTsukubaPoster}
-						alt=""
-						width="905"
-						height="1280"
-						loading="eager"
-						aria-hidden="true"
-					/>
-					<div class="blessing-time-feature-copy">
-						<p class="blessing-time-feature-kicker">THIS SATURDAY / 8.15</p>
-						<h2>Gospel Art</h2>
-						<p>
-							アーサー・ホーランドが語る「神が人類に与えた愛のストーリー」。
-						</p>
-						<div class="blessing-time-feature-meta">
-							<span>2026年8月15日（土）</span>
-							<span>13:30開演</span>
-							<span>茨城県つくば美術館</span>
-							<span>入場無料</span>
-						</div>
-						<span class="blessing-time-feature-button">詳細・アクセス・チラシを見る</span>
-					</div>
-				</a>
-
-				<a
-					class="blessing-time-feature tsukuba-church-home-feature"
-					href={tsukubaChurchUrl}
-					aria-label="Arthur Hollands Special Message 2026年8月16日 つくばキリストの愛教会 特別ページを見る"
-				>
-					<img src={tsukubaChurchPoster} alt="" width="1054" height="1492" loading="eager" aria-hidden="true" />
-					<div class="blessing-time-feature-copy">
-						<p class="blessing-time-feature-kicker">THE NEXT DAY / 8.16</p>
-						<h2>Arthur Hollands<br />Special Message</h2>
-						<p>アーサー・ホーランド伝道メッセージ。つくばキリストの愛教会の主日礼拝（二部）です。</p>
-						<div class="blessing-time-feature-meta">
-							<span>2026年8月16日（日）</span>
-							<span>主日礼拝（二部）11:00〜</span>
-							<span>つくばキリストの愛教会</span>
-							<span>予約不要・参加無料</span>
-						</div>
-						<span class="blessing-time-feature-button">詳細・アクセス・チラシを見る</span>
-					</div>
-				</a>
-
-				<a
-					class="blessing-time-feature ignite-home-feature"
-					href="/calendar/#calendar-events"
-					aria-label="IGNITE アーサー・ホーランド講演会 2026年8月21日 名古屋レジェンドホール カレンダーで詳細を見る"
-				>
-					<img
-						src={igniteHiscallPoster}
-						alt=""
-						width="904"
-						height="1280"
-						loading="eager"
-						aria-hidden="true"
-					/>
-					<div class="blessing-time-feature-copy">
-						<p class="blessing-time-feature-kicker">NEXT EVENT / 8.21 FRI</p>
-						<h2>IGNITE</h2>
-						<p>
-							HISCALL CHURCH PRESENTS。アーサー・ホーランド講演会「ハートに火を灯せ！」。
-						</p>
-						<div class="blessing-time-feature-meta">
-							<span>2026年8月21日（金）</span>
-							<span>18:00開場 / 18:30開演</span>
-							<span>名古屋レジェンドホール</span>
-							<span>参加無料（自由献金あり）</span>
-							<span>申込み不要・初めての方も大歓迎</span>
-							<span>大須1-7-26 / THE Y'S CAFE 052-228-7677</span>
-						</div>
-						<span class="blessing-time-feature-button">カレンダーで詳細を見る</span>
-					</div>
-				</a>
-
-				<a
-					class="blessing-time-feature the-essence-home-feature sado-gathering-home-feature"
-					href={sadoGatheringUrl}
-						aria-label="アーサー・ホーランド、サルーキ＝CHIYO、神山みさ出演 佐渡島TALK & LIVEの詳細とA4チラシを見る"
-				>
-					<img
-						src={sadoGatheringPoster}
-						alt=""
-						width="1054"
-						height="1492"
-						loading="lazy"
-						aria-hidden="true"
-					/>
-					<div class="blessing-time-feature-copy">
-						<p class="blessing-time-feature-kicker">TALK &amp; LIVE IN SADO / 8.26</p>
-						<h2>佐渡島<br />TALK &amp; LIVE</h2>
-							<p>アーサー・ホーランドのトークに加え、サルーキ＝CHIYO、神山みさが音楽ゲストとして出演します。</p>
-						<div class="blessing-time-feature-meta">
-							<span>2026年8月26日（水）18:00開始</span>
-							<span>真野シェアベースカフェ</span>
-							<span>新潟県佐渡市吉岡917-6</span>
-								<span>ARTHUR HOLLANDS / アーサー・ホーランド</span>
-								<span>MUSIC GUEST：サルーキ＝CHIYO（千代延 大介 / ちよのぶ だいすけ）</span>
-								<span>MUSIC GUEST：神山みさ</span>
-							<span>予約・お問い合わせ：後藤 080-3927-1165</span>
-						</div>
-						<span class="blessing-time-feature-button">詳細・アクセス・A4チラシを見る</span>
 					</div>
 				</a>
 
