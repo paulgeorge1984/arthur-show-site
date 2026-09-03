@@ -8,6 +8,8 @@ const blessingTimeOsakaBanner = '/assets/generated/blessing-time-osaka2026-banne
 const gospelTalkSummerBanner = '/assets/generated/gospel-talk-summer-osaka20260719-banner.webp';
 const theEssenceAkitaBanner = '/assets/the-essence-akita-20261114-og-v3.jpg';
 const blessingNightKagurazakaSeptemberUrl = 'https://www.blessingnight.jp/schedule/schedule582';
+const blessingNightKagurazakaSeptemberPosterFront = '/assets/blessing-night-kagurazaka-20260911-front.jpg';
+const blessingNightKagurazakaSeptemberPosterBack = '/assets/blessing-night-kagurazaka-20260911-back.jpg';
 const blessingNightShimokitazawaPoster = '/assets/blessing-night-shimokitazawa-20261009-front.webp';
 
 // サイトのビルドが実行された現在の時刻を取得
@@ -484,6 +486,22 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 					rel="noopener noreferrer"
 					aria-label="BLESSING NIGHT 神楽坂 2026年9月11日 公式の詳細・申込ページを見る"
 				>
+					<div class="blessing-night-kagurazaka-home-media" aria-hidden="true">
+						<img
+							src={blessingNightKagurazakaSeptemberPosterFront}
+							alt=""
+							width="1025"
+							height="1280"
+							loading="eager"
+						/>
+						<img
+							src={blessingNightKagurazakaSeptemberPosterBack}
+							alt=""
+							width="1026"
+							height="1280"
+							loading="lazy"
+						/>
+					</div>
 					<div class="blessing-time-feature-copy">
 						<p class="blessing-time-feature-kicker">NEXT EVENT / 9.11 FRI</p>
 						<h2>BLESSING NIGHT 神楽坂</h2>
@@ -1423,6 +1441,8 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 	}
 
 	.blessing-night-kagurazaka-home-feature {
+		display: grid;
+		grid-template-columns: minmax(0, 1.2fr) minmax(340px, 0.8fr);
 		min-height: 0;
 		background:
 			radial-gradient(circle at 86% 18%, rgba(197, 160, 89, 0.24), transparent 30%),
@@ -1431,9 +1451,31 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 	}
 
 	.blessing-night-kagurazaka-home-feature::before {
-		background:
-			linear-gradient(90deg, rgba(5, 5, 5, 0.08), transparent 64%, rgba(197, 160, 89, 0.12)),
-			linear-gradient(0deg, rgba(197, 160, 89, 0.18), transparent 52%);
+		display: none;
+	}
+
+	.blessing-night-kagurazaka-home-media {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		align-items: center;
+		gap: 12px;
+		padding: 18px;
+		background: linear-gradient(145deg, #050505, #252525 55%, #4d4327);
+	}
+
+	.blessing-night-kagurazaka-home-media img {
+		display: block;
+		width: 100%;
+		height: auto;
+		border: 3px solid rgba(255, 248, 235, 0.9);
+		box-shadow: 0 16px 38px rgba(0, 0, 0, 0.42);
+		object-fit: contain;
+		transition: transform 0.35s;
+	}
+
+	.blessing-night-kagurazaka-home-feature:hover .blessing-night-kagurazaka-home-media img,
+	.blessing-night-kagurazaka-home-feature:focus-visible .blessing-night-kagurazaka-home-media img {
+		transform: scale(1.012);
 	}
 
 	.blessing-night-kagurazaka-home-feature .blessing-time-feature-copy {
@@ -3045,6 +3087,19 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 			min-height: 0;
 			padding: 30px 24px;
 			background: linear-gradient(135deg, #071018, #102b3e);
+		}
+
+		.blessing-night-kagurazaka-home-feature {
+			display: flex;
+		}
+
+		.blessing-night-kagurazaka-home-media {
+			gap: 8px;
+			padding: 12px;
+		}
+
+		.blessing-night-kagurazaka-home-media img {
+			border-width: 2px;
 		}
 
 		.blessing-time-feature h2 {

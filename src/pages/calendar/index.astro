@@ -8,6 +8,8 @@ const narimasuChurchUrl = 'https://www.narimasu-church.org';
 const fridayNightUrl = 'https://ochanomizu.cc/meeting/fridaynight/';
 const blessingNightUrl = 'https://www.blessingnight.jp';
 const blessingNightKagurazakaSeptemberUrl = 'https://www.blessingnight.jp/schedule/schedule582';
+const blessingNightKagurazakaSeptemberPosterFront = '/assets/blessing-night-kagurazaka-20260911-front.jpg';
+const blessingNightKagurazakaSeptemberPosterBack = '/assets/blessing-night-kagurazaka-20260911-back.jpg';
 const blessingNightShimokitazawaUrl = '/blessing-night-shimokitazawa-20261009/';
 const blessingNightShimokitazawaPoster = '/assets/blessing-night-shimokitazawa-20261009-front.webp';
 const theEssenceAkitaUrl = '/the-essence-akita-20261114/';
@@ -69,8 +71,24 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				</div>
 			</section>
 
-		<section class="calendar-special-event blessing-night-kagurazaka-august-feature" aria-label="2026年9月 BLESSING NIGHT 神楽坂 特別案内">
+		<section class="calendar-special-event blessing-night-kagurazaka-september-feature" aria-label="2026年9月 BLESSING NIGHT 神楽坂 特別案内">
 			<a class="calendar-special-link" href={blessingNightKagurazakaSeptemberUrl} target="_blank" rel="noopener noreferrer">
+				<span class="calendar-special-media blessing-night-kagurazaka-poster-gallery" aria-hidden="true">
+					<img
+						src={blessingNightKagurazakaSeptemberPosterFront}
+						alt=""
+						width="1025"
+						height="1280"
+						loading="eager"
+					/>
+					<img
+						src={blessingNightKagurazakaSeptemberPosterBack}
+						alt=""
+						width="1026"
+						height="1280"
+						loading="lazy"
+					/>
+				</span>
 				<span class="calendar-special-copy">
 					<span class="calendar-special-label">THIS MONTH / NEXT BLESSING NIGHT</span>
 					<strong>BLESSING NIGHT 神楽坂</strong>
@@ -1355,8 +1373,8 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				#050505;
 		}
 
-		.blessing-night-kagurazaka-august-feature .calendar-special-link {
-			grid-template-columns: 1fr;
+		.blessing-night-kagurazaka-september-feature .calendar-special-link {
+			grid-template-columns: minmax(0, 1.2fr) minmax(340px, 0.8fr);
 			min-height: 0;
 			background:
 				radial-gradient(circle at 86% 18%, rgba(197, 160, 89, 0.24), transparent 30%),
@@ -1364,12 +1382,14 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				#06080b;
 		}
 
-		.blessing-night-kagurazaka-august-feature .calendar-special-copy {
+		.blessing-night-kagurazaka-september-feature .calendar-special-copy {
 			padding: clamp(34px, 6vw, 58px);
 		}
 
-		.blessing-night-kagurazaka-august-feature .calendar-special-copy strong {
+		.blessing-night-kagurazaka-september-feature .calendar-special-copy strong {
 			max-width: 17ch;
+			font-size: 3.1rem;
+			word-break: keep-all;
 		}
 
 		.blessing-night-shimokitazawa-feature .calendar-special-media {
@@ -1393,10 +1413,8 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			pointer-events: none;
 		}
 
-		.blessing-night-kagurazaka-august-feature .calendar-special-link::before {
-			background:
-				linear-gradient(90deg, rgba(5, 5, 5, 0.08), transparent 64%, rgba(197, 160, 89, 0.12)),
-				linear-gradient(0deg, rgba(197, 160, 89, 0.18), transparent 52%);
+		.blessing-night-kagurazaka-september-feature .calendar-special-link::before {
+			display: none;
 		}
 
 		.saturday-night-arthur-feature .calendar-special-link::before {
@@ -1421,6 +1439,26 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 		.calendar-special-media {
 			position: relative;
 			z-index: 2;
+		}
+
+		.blessing-night-kagurazaka-september-feature .blessing-night-kagurazaka-poster-gallery {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			align-items: center;
+			gap: 12px;
+			min-height: 0;
+			padding: 18px;
+			background: linear-gradient(145deg, #050505, #252525 55%, #4d4327);
+		}
+
+		.blessing-night-kagurazaka-september-feature .blessing-night-kagurazaka-poster-gallery img {
+			width: 100%;
+			height: auto;
+			max-height: none;
+			border: 3px solid rgba(255, 248, 235, 0.9);
+			box-shadow: 0 16px 38px rgba(0, 0, 0, 0.42);
+			object-fit: contain;
+			object-position: center;
 		}
 
 			.calendar-special-copy {
@@ -2272,6 +2310,10 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			grid-template-columns: 1fr;
 		}
 
+		.blessing-night-kagurazaka-september-feature .calendar-special-link {
+			grid-template-columns: 1fr;
+		}
+
 		.calendar-special-media {
 			order: -1;
 			min-height: 300px;
@@ -2354,6 +2396,24 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 
 		.calendar-special-media img {
 			object-position: left center;
+		}
+
+		.blessing-night-kagurazaka-september-feature .blessing-night-kagurazaka-poster-gallery {
+			min-height: 0;
+			padding: 12px;
+			aspect-ratio: auto;
+		}
+
+		.blessing-night-kagurazaka-poster-gallery img {
+			width: 100%;
+			height: auto;
+			max-height: none;
+			border-width: 2px;
+			object-position: center;
+		}
+
+		.blessing-night-kagurazaka-september-feature .calendar-special-copy strong {
+			font-size: 2.15rem;
 		}
 
 		.saturday-night-arthur-feature .calendar-special-media {
