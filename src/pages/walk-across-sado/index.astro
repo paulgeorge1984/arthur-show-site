@@ -23,25 +23,25 @@ const meetingMapUrl = 'https://www.google.com/maps/search/?api=1&query=%E6%96%B0
 
 const routes = [
 	{
-		day: '01', date: '8月23日（日）', startTime: '9:00', from: '両津夷', to: '長石海水浴場', distance: '実績16.7km', color: '#d71920',
+		day: '01', date: '8月23日（日）', startTime: '9:00', from: '両津夷', to: '長石海水浴場', distance: '16.7km', color: '#d71920',
 		note: '両津から南へ。海を横目に、佐渡での最初の一歩を踏み出しました。',
 		map: 'https://www.google.com/maps/dir/?api=1&origin=38.0876397,138.434285&destination=37.9705636,138.3432168&travelmode=walking',
 		coordinates: [[38.08764,138.43429],[38.06105,138.42088],[38.03770,138.39454],[38.01176,138.37680],[37.98964,138.35047],[37.97063,138.34316]],
 	},
 	{
-		day: '02', date: '8月24日（月）', startTime: '7:00', from: '長石海水浴場', to: '小木町', distance: '実績24.2km', color: '#b76600',
+		day: '02', date: '8月24日（月）', startTime: '7:00', from: '長石海水浴場', to: '小木町', distance: '24.2km', color: '#b76600',
 		note: '海沿いの道をたどり、島の南端・小木を目指しました。',
 		map: 'https://www.google.com/maps/dir/?api=1&origin=37.9705636,138.3432168&destination=37.8156801,138.2804536&travelmode=walking&waypoints=37.9053519,138.2953834%7C37.8500000,138.2770000',
 		coordinates: [[37.97063,138.34316],[37.95200,138.34070],[37.93000,138.32000],[37.90535,138.29538],[37.88000,138.28500],[37.85000,138.27700],[37.81572,138.28038]],
 	},
 	{
-		day: '03', date: '8月25日（火）', startTime: '7:00', from: '小木町', to: '松ケ崎西側', distance: '実績24.3km', color: '#14817f',
+		day: '03', date: '8月25日（火）', startTime: '7:00', from: '小木町', to: '松ケ崎西側', distance: '24.3km', color: '#14817f',
 		note: '小木から東へ。祈りを携えて、長い海岸線を歩きました。',
 		map: 'https://www.google.com/maps/dir/?api=1&origin=37.8156801,138.2804536&destination=37.9191723,138.4890406&travelmode=walking',
 		coordinates: [[37.81572,138.28038],[37.82676,138.30424],[37.84268,138.37881],[37.86074,138.39963],[37.88090,138.43042],[37.90061,138.47143],[37.91922,138.48898]],
 	},
 	{
-		day: '04', date: '8月26日（水）', startTime: '7:00', from: '松ケ崎西側', to: '羽二生', distance: '実績25.7km', color: '#356fab',
+		day: '04', date: '8月26日（水）', startTime: '7:00', from: '松ケ崎西側', to: '羽二生', distance: '25.7km', color: '#356fab',
 		note: '佐渡一周線（県道45号）に沿い、東海岸を北へ進みました。',
 		map: 'https://www.google.com/maps/dir/?api=1&origin=37.9191723,138.4890406&destination=38.0727054,138.5250852&travelmode=walking&waypoints=37.9431604,138.5026881%7C37.9607907,138.5123278%7C37.9845876,138.5272821%7C38.0059324,138.5431652%7C38.0214936,138.5511363%7C38.0459046,138.5624995%7C38.0665244,138.5721079%7C38.0812084,138.5534798',
 		// OpenStreetMapの佐渡一周線（県道45号）の道路形状1,015点を、表示用に簡略化。
@@ -70,7 +70,7 @@ const routes = [
 		],
 	},
 	{
-		day: '05', date: '8月27日（木）', startTime: '7:00', from: '羽二生', to: '両津夷', distance: '実績13.9km', color: '#7652a8',
+		day: '05', date: '8月27日（木）', startTime: '7:00', from: '羽二生', to: '両津夷', distance: '13.9km', color: '#7652a8',
 		note: '祈りの歩みをつなぎ、出発の地・両津でゴールを迎えました。',
 		map: 'https://www.google.com/maps/dir/?api=1&origin=38.0727054,138.5250852&destination=38.0876209,138.4343011&travelmode=walking',
 		coordinates: [[38.07269,138.52508],[38.06924,138.50726],[38.06472,138.47045],[38.07157,138.44660],[38.08118,138.43558],[38.08762,138.43430]],
@@ -155,7 +155,7 @@ const meetingStructuredData = {
 					<div class="day1-route-strip" aria-label="佐渡島十字架行進1日目の歩行区間">
 						<span>DAY 01</span>
 						<strong>両津夷 → 長石海水浴場</strong>
-						<em>実績距離 16.7km</em>
+						<em>距離 16.7km</em>
 					</div>
 
 					<article class="day1-feature-story">
@@ -344,8 +344,8 @@ const meetingStructuredData = {
 			</section>
 
 			<section class="section schedule-section" id="schedule" aria-labelledby="schedule-title"><div class="page-shell schedule-shell"><div class="schedule-intro"><p class="eyebrow">SCHEDULE</p><h2 id="schedule-title">佐渡島十字架行進<br />5日間の記録</h2><p>佐渡島全体のルートと、各日の出発時刻、区間、実際に歩いた距離をまとめています。</p></div>
-				<section class="route-overview" aria-labelledby="route-overview-title"><div class="route-overview-heading"><div><p>佐渡島をめぐる全行程</p><h3 id="route-overview-title">5日間のルート</h3></div><span>実績104.8km</span></div><div class="route-map-layout"><div class="sado-map-frame"><div id="sado-map" class="sado-map-canvas" role="region" aria-label="佐渡島十字架行進の5日間のルート地図"></div></div><ol class="route-legend" aria-label="日別ルート一覧">{routes.map((route) => <li style={`--route-color:${route.color}`}><a href={route.map} target="_blank" rel="noreferrer" aria-label={`DAY ${route.day} ${route.from}から${route.to}までのルートをGoogleマップで見る`}><span class="route-day">DAY {route.day}</span><strong>{route.from}<i aria-hidden="true">→</i>{route.to}</strong><small>{route.date}・{route.distance}</small><b>Googleマップ <span aria-hidden="true">↗</span></b></a></li>)}</ol></div><div class="route-map-note"><p>ルート線は行程の概略です。詳細は各日のGoogleマップでご確認ください。</p><p>地図データ © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap contributors</a></p></div></section>
-				<div class="schedule-list">{routes.map((route) => <article class="schedule-card" style={`--route-color:${route.color}`}><div class="schedule-card-top"><p>{route.date}</p><span>DAY {route.day}</span></div><h3><span>{route.from}</span><i aria-hidden="true">→</i><span>{route.to}</span></h3><div class="schedule-meta"><p><span>出発時刻</span><strong>{route.startTime}</strong></p><p><span>距離</span><strong>{route.distance}</strong></p></div><p class="schedule-description">{route.note}</p><a href={route.map} target="_blank" rel="noreferrer">Googleマップで区間を見る</a></article>)}</div><p class="schedule-caution">※ 距離は実際に歩いた実績値です。当日の出発時刻・コースは天候、道路状況、安全上の判断により調整しました。</p></div></section>
+				<section class="route-overview" aria-labelledby="route-overview-title"><div class="route-overview-heading"><div><p>佐渡島をめぐる全行程</p><h3 id="route-overview-title">5日間のルート</h3></div><span>104.8km</span></div><div class="route-map-layout"><div class="sado-map-frame"><div id="sado-map" class="sado-map-canvas" role="region" aria-label="佐渡島十字架行進の5日間のルート地図"></div></div><ol class="route-legend" aria-label="日別ルート一覧">{routes.map((route) => <li style={`--route-color:${route.color}`}><a href={route.map} target="_blank" rel="noreferrer" aria-label={`DAY ${route.day} ${route.from}から${route.to}までのルートをGoogleマップで見る`}><span class="route-day">DAY {route.day}</span><strong>{route.from}<i aria-hidden="true">→</i>{route.to}</strong><small>{route.date}・{route.distance}</small><b>Googleマップ <span aria-hidden="true">↗</span></b></a></li>)}</ol></div><div class="route-map-note"><p>ルート線は行程の概略です。詳細は各日のGoogleマップでご確認ください。</p><p>地図データ © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap contributors</a></p></div></section>
+				<div class="schedule-list">{routes.map((route) => <article class="schedule-card" style={`--route-color:${route.color}`}><div class="schedule-card-top"><p>{route.date}</p><span>DAY {route.day}</span></div><h3><span>{route.from}</span><i aria-hidden="true">→</i><span>{route.to}</span></h3><div class="schedule-meta"><p><span>出発時刻</span><strong>{route.startTime}</strong></p><p><span>距離</span><strong>{route.distance}</strong></p></div><p class="schedule-description">{route.note}</p><a href={route.map} target="_blank" rel="noreferrer">Googleマップで区間を見る</a></article>)}</div><p class="schedule-caution">※ 掲載しているのは、実際に歩いた距離です。当日の出発時刻・コースは天候、道路状況、安全上の判断により調整しました。</p></div></section>
 
 			<section class="meeting-section" id="evangelistic-meeting" aria-labelledby="meeting-title">
 				<div class="page-shell meeting-grid">
