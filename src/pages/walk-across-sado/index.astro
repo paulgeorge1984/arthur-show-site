@@ -9,7 +9,7 @@ import '../walk-across-sado2026/archive.css';
 const siteUrl = 'https://arthur-show.com';
 const canonicalPath = '/walk-across-sado/';
 const pageTitle = '佐渡島十字架行進5日目｜十字架は両津へ帰ってきた';
-const pageDescription = '2026年8月27日、佐渡島十字架行進は最終日を迎えた。羽二生から両津夷へ、最後の9.8km。計画された99kmの道は、出発の地・両津へ戻った。車を止めた旅行中の家族、「あの人は誰ですか」と尋ねた女性、5日間で4人の洗礼。人の計画には書けなかった出会いの記録。';
+const pageDescription = '2026年8月27日、佐渡島十字架行進は最終日を迎えた。羽二生から両津夷へ、最後の13.9km。5日間で実際に歩いた104.8kmの道は、出発の地・両津へ戻った。車を止めた旅行中の家族、「あの人は誰ですか」と尋ねた女性、5日間で4人の洗礼。人の計画には書けなかった出会いの記録。';
 const shareUrl = `${siteUrl}${canonicalPath}#day5-report`;
 const shareTitle = '佐渡島十字架行進5日目｜十字架は両津へ帰ってきた';
 const shareText = `【${shareTitle}】${pageDescription}`;
@@ -23,26 +23,26 @@ const meetingMapUrl = 'https://www.google.com/maps/search/?api=1&query=%E6%96%B0
 
 const routes = [
 	{
-		day: '01', date: '8月23日（日）', startTime: '9:00', from: '両津夷', to: '長石海水浴場', distance: '計画16.7km', color: '#d71920',
-		note: '両津から南へ。海を横目に、佐渡での最初の一歩を踏み出します。',
+		day: '01', date: '8月23日（日）', startTime: '9:00', from: '両津夷', to: '長石海水浴場', distance: '実績16.7km', color: '#d71920',
+		note: '両津から南へ。海を横目に、佐渡での最初の一歩を踏み出しました。',
 		map: 'https://www.google.com/maps/dir/?api=1&origin=38.0876397,138.434285&destination=37.9705636,138.3432168&travelmode=walking',
 		coordinates: [[38.08764,138.43429],[38.06105,138.42088],[38.03770,138.39454],[38.01176,138.37680],[37.98964,138.35047],[37.97063,138.34316]],
 	},
 	{
-		day: '02', date: '8月24日（月）', startTime: '7:00', from: '長石海水浴場', to: '小木町', distance: '22.5km', color: '#b76600',
-		note: '海沿いの道をたどり、島の南端・小木を目指します。',
+		day: '02', date: '8月24日（月）', startTime: '7:00', from: '長石海水浴場', to: '小木町', distance: '実績24.2km', color: '#b76600',
+		note: '海沿いの道をたどり、島の南端・小木を目指しました。',
 		map: 'https://www.google.com/maps/dir/?api=1&origin=37.9705636,138.3432168&destination=37.8156801,138.2804536&travelmode=walking&waypoints=37.9053519,138.2953834%7C37.8500000,138.2770000',
 		coordinates: [[37.97063,138.34316],[37.95200,138.34070],[37.93000,138.32000],[37.90535,138.29538],[37.88000,138.28500],[37.85000,138.27700],[37.81572,138.28038]],
 	},
 	{
-		day: '03', date: '8月25日（火）', startTime: '7:00', from: '小木町', to: '松ケ崎西側', distance: '24.3km', color: '#14817f',
-		note: '小木から東へ。祈りを携えて、長い海岸線を歩きます。',
+		day: '03', date: '8月25日（火）', startTime: '7:00', from: '小木町', to: '松ケ崎西側', distance: '実績24.3km', color: '#14817f',
+		note: '小木から東へ。祈りを携えて、長い海岸線を歩きました。',
 		map: 'https://www.google.com/maps/dir/?api=1&origin=37.8156801,138.2804536&destination=37.9191723,138.4890406&travelmode=walking',
 		coordinates: [[37.81572,138.28038],[37.82676,138.30424],[37.84268,138.37881],[37.86074,138.39963],[37.88090,138.43042],[37.90061,138.47143],[37.91922,138.48898]],
 	},
 	{
-		day: '04', date: '8月26日（水）', startTime: '7:00', from: '松ケ崎西側', to: '羽二生', distance: '25.7km', color: '#356fab',
-		note: '佐渡一周線（県道45号）に沿い、東海岸を北へ進みます。',
+		day: '04', date: '8月26日（水）', startTime: '7:00', from: '松ケ崎西側', to: '羽二生', distance: '実績25.7km', color: '#356fab',
+		note: '佐渡一周線（県道45号）に沿い、東海岸を北へ進みました。',
 		map: 'https://www.google.com/maps/dir/?api=1&origin=37.9191723,138.4890406&destination=38.0727054,138.5250852&travelmode=walking&waypoints=37.9431604,138.5026881%7C37.9607907,138.5123278%7C37.9845876,138.5272821%7C38.0059324,138.5431652%7C38.0214936,138.5511363%7C38.0459046,138.5624995%7C38.0665244,138.5721079%7C38.0812084,138.5534798',
 		// OpenStreetMapの佐渡一周線（県道45号）の道路形状1,015点を、表示用に簡略化。
 		coordinates: [
@@ -70,8 +70,8 @@ const routes = [
 		],
 	},
 	{
-		day: '05', date: '8月27日（木）', startTime: '7:00', from: '羽二生', to: '両津夷', distance: '9.8km', color: '#7652a8',
-		note: '祈りの歩みをつなぎ、出発の地・両津でゴールを迎えます。',
+		day: '05', date: '8月27日（木）', startTime: '7:00', from: '羽二生', to: '両津夷', distance: '実績13.9km', color: '#7652a8',
+		note: '祈りの歩みをつなぎ、出発の地・両津でゴールを迎えました。',
 		map: 'https://www.google.com/maps/dir/?api=1&origin=38.0727054,138.5250852&destination=38.0876209,138.4343011&travelmode=walking',
 		coordinates: [[38.07269,138.52508],[38.06924,138.50726],[38.06472,138.47045],[38.07157,138.44660],[38.08118,138.43558],[38.08762,138.43430]],
 	},
@@ -136,13 +136,13 @@ const meetingStructuredData = {
 							<img src="/walk-across-sado/sado-island-2026-flyer.jpg" alt="SADO ISLAND 2026 佐渡島十字架行進の告知チラシ" width="904" height="1280" fetchpriority="high" />
 						</a>
 					</figure>
-					<div class="hero-copy"><p class="eyebrow">ARTHUR HOLLANDS</p><h1 id="hero-title"><span>WALK ACROSS<br />SADO ISLAND 2026</span><strong>アーサー・ホーランド<br />佐渡島十字架行進 2026</strong></h1><p class="hero-summary">2026年8月、十字架を携え、祈りとともに佐渡島約99kmを歩く5日間。両津を出発し、島の南側から東海岸をつないで、再び両津を目指します。</p><dl class="hero-facts"><div><dt>DATE</dt><dd>8.23 SUN — 8.27 THU</dd></div><div><dt>DISTANCE</dt><dd>99.0 KM / 5 DAYS</dd></div><div><dt>PLACE</dt><dd>SADO ISLAND, NIIGATA</dd></div></dl><a class="button button-primary" href="#schedule">5日間のスケジュールを見る</a></div>
+					<div class="hero-copy"><p class="eyebrow">ARTHUR HOLLANDS</p><h1 id="hero-title"><span>WALK ACROSS<br />SADO ISLAND 2026</span><strong>アーサー・ホーランド<br />佐渡島十字架行進 2026</strong></h1><p class="hero-summary">2026年8月、十字架を携え、祈りとともに佐渡島104.8kmを歩いた5日間。両津を出発し、島の南側から東海岸をつないで、再び両津へ戻りました。</p><dl class="hero-facts"><div><dt>DATE</dt><dd>8.23 SUN — 8.27 THU</dd></div><div><dt>DISTANCE</dt><dd>104.8 KM / 5 DAYS</dd></div><div><dt>PLACE</dt><dd>SADO ISLAND, NIIGATA</dd></div></dl><a class="button button-primary" href="#schedule">5日間の記録を見る</a></div>
 				</div>
 			</section>
 
-			<section class="section about-section" id="about" aria-labelledby="about-title"><div class="page-shell"><div class="section-heading"><p class="eyebrow eyebrow-red">ABOUT THE WALK</p><h2 id="about-title">佐渡島を、祈りとともに歩く。</h2><p>2026年8月23日（日）から27日（木）まで、アーサー・ホーランドが十字架を携え、両津を起点に佐渡島約99kmを5日間で歩く予定です。</p></div><div class="point-grid"><article><span>01</span><h3>両津から、両津へ</h3><p>島の南側から東海岸をつなぎ、5日目に両津へ戻る行程です。</p></article><article><span>02</span><h3>5日間・約99km</h3><p>各日の出発予定時刻、区間、距離、Googleマップを掲載しています。</p></article><article><span>03</span><h3>祈りを携えて</h3><p>佐渡に暮らす人々と島の平安を覚えながら、一歩ずつ歩きます。</p></article></div></div></section>
+			<section class="section about-section" id="about" aria-labelledby="about-title"><div class="page-shell"><div class="section-heading"><p class="eyebrow eyebrow-red">ABOUT THE WALK</p><h2 id="about-title">佐渡島を、祈りとともに歩いた。</h2><p>2026年8月23日（日）から27日（木）まで、アーサー・ホーランドが十字架を携え、両津を起点に佐渡島104.8kmを5日間で歩きました。</p></div><div class="point-grid"><article><span>01</span><h3>両津から、両津へ</h3><p>島の南側から東海岸をつなぎ、5日目に両津へ戻った行程です。</p></article><article><span>02</span><h3>5日間・104.8km</h3><p>各日の出発時刻、区間、実際に歩いた距離、Googleマップを掲載しています。</p></article><article><span>03</span><h3>祈りを携えて</h3><p>佐渡に暮らす人々と島の平安を覚えながら、一歩ずつ歩きました。</p></article></div></div></section>
 
-			<section class="journey-section" aria-labelledby="journey-title"><div class="page-shell journey-grid"><figure><img src="/walk-across-sado/assets/arthur-long-road.jpg" alt="緑に囲まれた一本道を歩くアーサー・ホーランド" loading="lazy" /></figure><div class="journey-copy"><p class="eyebrow">THE WALK CONTINUES</p><h2 id="journey-title">これまでの歩みを、佐渡へ。</h2><p>十字架を担ぎ、日本や世界の各地を歩き続けてきたアーサー・ホーランド。その歩みは、2026年夏、佐渡島へ続きます。</p></div></div></section>
+			<section class="journey-section" aria-labelledby="journey-title"><div class="page-shell journey-grid"><figure><img src="/walk-across-sado/assets/arthur-long-road.jpg" alt="緑に囲まれた一本道を歩くアーサー・ホーランド" loading="lazy" /></figure><div class="journey-copy"><p class="eyebrow">THE WALK CONTINUES</p><h2 id="journey-title">これまでの歩みを、佐渡へ。</h2><p>十字架を担ぎ、日本や世界の各地を歩き続けてきたアーサー・ホーランド。その歩みは2026年夏、佐渡島へと続き、5日間で104.8kmを歩きました。</p></div></div></section>
 
 			<section class="section day1-report-section" id="day1-report" aria-labelledby="day1-report-title">
 				<div class="page-shell day1-report-shell">
@@ -152,10 +152,10 @@ const meetingStructuredData = {
 						<p>佐渡島十字架行進、1日目。海の上から始まった一日は、片山さんご一家の洗礼へと流れていった。</p>
 					</div>
 
-					<div class="day1-route-strip" aria-label="佐渡島十字架行進1日目の計画区間">
+					<div class="day1-route-strip" aria-label="佐渡島十字架行進1日目の歩行区間">
 						<span>DAY 01</span>
 						<strong>両津夷 → 長石海水浴場</strong>
-						<em>計画距離 16.7km</em>
+						<em>実績距離 16.7km</em>
 					</div>
 
 					<article class="day1-feature-story">
@@ -166,7 +166,7 @@ const meetingStructuredData = {
 						<div class="day1-feature-copy">
 							<p class="eyebrow">SADO, DAY ONE</p>
 							<p class="day1-lead">夜明け前の新潟を出て、海を渡り、十字架を担いで島を歩いた。</p>
-							<p>2026年8月23日。5日間で約99キロを計画する佐渡島十字架行進の初日は、海の上から始まった。</p>
+							<p>2026年8月23日。5日間で104.8キロを歩いた佐渡島十字架行進の初日は、海の上から始まった。</p>
 						</div>
 					</article>
 
@@ -313,7 +313,7 @@ const meetingStructuredData = {
 						<article class="day1-prose-section day1-final-story">
 							<p class="eyebrow">THE FIRST DAY CLOSES</p>
 							<h3>一日目の終わりに</h3>
-							<p>夕方の便で島を後にする片山さんご一家を見送り、一行は明日の行程を確かめた。計画では初日16.7キロだったこの日、一行が選んだのは、距離を刻むことよりも、一つの家族の洗礼を一日の真ん中に置くことだった。</p>
+							<p>夕方の便で島を後にする片山さんご一家を見送り、一行は明日の行程を確かめた。実際に16.7キロを歩いたこの日、一行が選んだのは、距離を刻むことよりも、一つの家族の洗礼を一日の真ん中に置くことだった。</p>
 							<p>船室の祈りで始まり、海の中で頂点を迎え、浜辺の聖餐式で閉じた一日。二年前に島影を見て「行きたいな」と言った人の願いは、こういう形で、初日から実を結び始めている。佐渡島十字架行進は、まだ始まったばかりだ。</p>
 						</article>
 					</div>
@@ -343,9 +343,9 @@ const meetingStructuredData = {
 				</div>
 			</section>
 
-			<section class="section schedule-section" id="schedule" aria-labelledby="schedule-title"><div class="page-shell schedule-shell"><div class="schedule-intro"><p class="eyebrow">SCHEDULE</p><h2 id="schedule-title">佐渡島十字架行進<br />5日間の予定</h2><p>佐渡島全体のルートと、各日の出発予定時刻、区間、距離をまとめています。</p></div>
-				<section class="route-overview" aria-labelledby="route-overview-title"><div class="route-overview-heading"><div><p>佐渡島をめぐる全行程</p><h3 id="route-overview-title">5日間のルート</h3></div><span>約99km</span></div><div class="route-map-layout"><div class="sado-map-frame"><div id="sado-map" class="sado-map-canvas" role="region" aria-label="佐渡島十字架行進の5日間のルート地図"></div></div><ol class="route-legend" aria-label="日別ルート一覧">{routes.map((route) => <li style={`--route-color:${route.color}`}><a href={route.map} target="_blank" rel="noreferrer" aria-label={`DAY ${route.day} ${route.from}から${route.to}までのルートをGoogleマップで見る`}><span class="route-day">DAY {route.day}</span><strong>{route.from}<i aria-hidden="true">→</i>{route.to}</strong><small>{route.date}・{route.distance}</small><b>Googleマップ <span aria-hidden="true">↗</span></b></a></li>)}</ol></div><div class="route-map-note"><p>ルート線は行程の概略です。詳細は各日のGoogleマップでご確認ください。</p><p>地図データ © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap contributors</a></p></div></section>
-				<div class="schedule-list">{routes.map((route) => <article class="schedule-card" style={`--route-color:${route.color}`}><div class="schedule-card-top"><p>{route.date}</p><span>DAY {route.day}</span></div><h3><span>{route.from}</span><i aria-hidden="true">→</i><span>{route.to}</span></h3><div class="schedule-meta"><p><span>出発予定</span><strong>{route.startTime}</strong></p><p><span>距離</span><strong>{route.distance}</strong></p></div><p class="schedule-description">{route.note}</p><a href={route.map} target="_blank" rel="noreferrer">Googleマップで区間を見る</a></article>)}</div><p class="schedule-caution">※ 距離は計画時のGoogleマップ表示値です。出発時刻・コースは天候、道路状況、安全上の判断により変更になる場合があります。</p></div></section>
+			<section class="section schedule-section" id="schedule" aria-labelledby="schedule-title"><div class="page-shell schedule-shell"><div class="schedule-intro"><p class="eyebrow">SCHEDULE</p><h2 id="schedule-title">佐渡島十字架行進<br />5日間の記録</h2><p>佐渡島全体のルートと、各日の出発時刻、区間、実際に歩いた距離をまとめています。</p></div>
+				<section class="route-overview" aria-labelledby="route-overview-title"><div class="route-overview-heading"><div><p>佐渡島をめぐる全行程</p><h3 id="route-overview-title">5日間のルート</h3></div><span>実績104.8km</span></div><div class="route-map-layout"><div class="sado-map-frame"><div id="sado-map" class="sado-map-canvas" role="region" aria-label="佐渡島十字架行進の5日間のルート地図"></div></div><ol class="route-legend" aria-label="日別ルート一覧">{routes.map((route) => <li style={`--route-color:${route.color}`}><a href={route.map} target="_blank" rel="noreferrer" aria-label={`DAY ${route.day} ${route.from}から${route.to}までのルートをGoogleマップで見る`}><span class="route-day">DAY {route.day}</span><strong>{route.from}<i aria-hidden="true">→</i>{route.to}</strong><small>{route.date}・{route.distance}</small><b>Googleマップ <span aria-hidden="true">↗</span></b></a></li>)}</ol></div><div class="route-map-note"><p>ルート線は行程の概略です。詳細は各日のGoogleマップでご確認ください。</p><p>地図データ © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap contributors</a></p></div></section>
+				<div class="schedule-list">{routes.map((route) => <article class="schedule-card" style={`--route-color:${route.color}`}><div class="schedule-card-top"><p>{route.date}</p><span>DAY {route.day}</span></div><h3><span>{route.from}</span><i aria-hidden="true">→</i><span>{route.to}</span></h3><div class="schedule-meta"><p><span>出発時刻</span><strong>{route.startTime}</strong></p><p><span>距離</span><strong>{route.distance}</strong></p></div><p class="schedule-description">{route.note}</p><a href={route.map} target="_blank" rel="noreferrer">Googleマップで区間を見る</a></article>)}</div><p class="schedule-caution">※ 距離は実際に歩いた実績値です。当日の出発時刻・コースは天候、道路状況、安全上の判断により調整しました。</p></div></section>
 
 			<section class="meeting-section" id="evangelistic-meeting" aria-labelledby="meeting-title">
 				<div class="page-shell meeting-grid">
