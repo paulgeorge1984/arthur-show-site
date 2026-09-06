@@ -8,10 +8,10 @@ import '../walk-across-sado2026/archive.css';
 
 const siteUrl = 'https://arthur-show.com';
 const canonicalPath = '/walk-across-sado/';
-const pageTitle = '佐渡島十字架行進5日目｜十字架は両津へ帰ってきた';
-const pageDescription = '2026年8月27日、佐渡島十字架行進は最終日を迎えた。羽二生から両津夷へ、最後の13.9km。5日間で実際に歩いた104.8kmの道は、出発の地・両津へ戻った。車を止めた旅行中の家族、「あの人は誰ですか」と尋ねた女性、5日間で4人の洗礼。人の計画には書けなかった出会いの記録。';
-const shareUrl = `${siteUrl}${canonicalPath}#day5-report`;
-const shareTitle = '佐渡島十字架行進5日目｜十字架は両津へ帰ってきた';
+const pageTitle = '佐渡島十字架行進 2026｜総まとめダイジェストと5日間の記録';
+const pageDescription = '2026年8月23日〜27日、アーサー・ホーランドが十字架を携え、佐渡島104.8kmを歩いた5日間。その旅を一本にまとめたダイジェスト映像と、各日の写真・レポートをお届けします。';
+const shareUrl = `${siteUrl}${canonicalPath}#digest`;
+const shareTitle = pageTitle;
 const shareText = `【${shareTitle}】${pageDescription}`;
 const encodedShareUrl = encodeURIComponent(shareUrl);
 const encodedShareText = encodeURIComponent(`${shareTitle}\n${shareText}`);
@@ -126,9 +126,34 @@ const meetingStructuredData = {
 <Layout title={pageTitle} description={pageDescription} image="/walk-across-sado/assets/day05-20260827/day05-lead.jpg" imageAlt="曇り空と海を背に、最終日の道を進むアーサー・ホーランドと十字架" imageWidth={1920} imageHeight={1080} canonicalPath={canonicalPath} structuredData={[structuredData, meetingStructuredData]}>
 	<div class="sado-archive-page">
 		<nav class="section-nav" aria-label="ページ内メニュー">
-			<div class="page-shell"><a href="#about">概要</a><a href="#flyer">チラシ</a><a href="#day1-report">1日目レポート</a><a href="#day2-report">2日目レポート</a><a href="#day3-report">3日目レポート</a><a href="#day4-report">4日目レポート</a><a href="#day5-report">5日目レポート</a><a href="#share">シェア</a><a href="#schedule">スケジュール</a><a class="meeting-nav-link" href="#evangelistic-meeting">TALK &amp; LIVE</a><a href="#photos">写真</a><a href="#previous">これまでの行進</a></div>
+			<div class="page-shell"><a class="digest-nav-link" href="#digest">総まとめ映像</a><a href="#about">概要</a><a href="#flyer">チラシ</a><a href="#day1-report">1日目レポート</a><a href="#day2-report">2日目レポート</a><a href="#day3-report">3日目レポート</a><a href="#day4-report">4日目レポート</a><a href="#day5-report">5日目レポート</a><a href="#share">シェア</a><a href="#schedule">スケジュール</a><a class="meeting-nav-link" href="#evangelistic-meeting">TALK &amp; LIVE</a><a href="#photos">写真</a><a href="#previous">これまでの行進</a></div>
 		</nav>
 		<main>
+			<section class="digest-section" id="digest" aria-labelledby="digest-title">
+				<div class="page-shell digest-shell">
+					<div class="digest-heading">
+						<p class="digest-label">佐渡島十字架行進 2026 <span>総まとめダイジェスト</span></p>
+						<h2 id="digest-title">5日間・104.8kmの旅を、<br />この一本に。</h2>
+						<p class="digest-lead">十字架を携え、祈りとともに歩いた佐渡の旅。<br />その5日間を、ダイジェスト映像で振り返ります。</p>
+					</div>
+					<div class="digest-video-frame">
+						<iframe
+							src="https://www.youtube.com/embed/rZluSmxeSpY?rel=0"
+							title="佐渡島十字架行進 2026 総まとめダイジェスト"
+							width="1280"
+							height="720"
+							referrerpolicy="strict-origin-when-cross-origin"
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+							allowfullscreen
+						></iframe>
+					</div>
+					<div class="digest-actions">
+						<a class="digest-youtube-link" href="https://youtu.be/rZluSmxeSpY" target="_blank" rel="noopener noreferrer">YouTubeで見る <span aria-hidden="true">↗</span></a>
+						<a class="digest-report-link" href="#day1-report">写真とレポートで5日間をたどる <span aria-hidden="true">↓</span></a>
+					</div>
+				</div>
+			</section>
+
 			<section class="hero" id="flyer" aria-labelledby="hero-title">
 				<div class="page-shell hero-grid">
 					<figure class="hero-media">
@@ -136,7 +161,7 @@ const meetingStructuredData = {
 							<img src="/walk-across-sado/sado-island-2026-flyer.jpg" alt="SADO ISLAND 2026 佐渡島十字架行進の告知チラシ" width="904" height="1280" fetchpriority="high" />
 						</a>
 					</figure>
-					<div class="hero-copy"><p class="eyebrow">ARTHUR HOLLANDS</p><h1 id="hero-title"><span>WALK ACROSS<br />SADO ISLAND 2026</span><strong>アーサー・ホーランド<br />佐渡島十字架行進 2026</strong></h1><p class="hero-summary">2026年8月、十字架を携え、祈りとともに佐渡島104.8kmを歩いた5日間。両津を出発し、島の南側から東海岸をつないで、再び両津へ戻りました。</p><dl class="hero-facts"><div><dt>DATE</dt><dd>8.23 SUN — 8.27 THU</dd></div><div><dt>DISTANCE</dt><dd>104.8 KM / 5 DAYS</dd></div><div><dt>PLACE</dt><dd>SADO ISLAND, NIIGATA</dd></div></dl><a class="button button-primary" href="#schedule">5日間の記録を見る</a></div>
+					<div class="hero-copy"><p class="eyebrow">ARTHUR HOLLANDS</p><h1 id="hero-title"><span>WALK ACROSS<br />SADO ISLAND 2026</span><strong>アーサー・ホーランド<br />佐渡島十字架行進 2026</strong></h1><p class="hero-summary">2026年8月、十字架を携え、祈りとともに佐渡島104.8kmを歩いた5日間。両津を出発し、島の南側から東海岸をつないで、再び両津へ戻りました。</p><dl class="hero-facts"><div><dt>DATE</dt><dd>8.23 SUN — 8.27 THU</dd></div><div><dt>DISTANCE</dt><dd>104.8 KM / 5 DAYS</dd></div><div><dt>PLACE</dt><dd>SADO ISLAND, NIIGATA</dd></div></dl><a class="button button-primary" href="#digest">総まとめ映像を見る</a></div>
 				</div>
 			</section>
 
@@ -330,9 +355,9 @@ const meetingStructuredData = {
 					<div class="section-heading sado-share-heading">
 						<p class="eyebrow eyebrow-red">SHARE THIS STORY</p>
 						<h2 id="sado-share-title">5日間の歩みを届ける。</h2>
-						<p>佐渡島十字架行進、最終日の記録をご家族や友人へシェアできます。</p>
+						<p>総まとめダイジェストと5日間の記録をご家族や友人へシェアできます。</p>
 					</div>
-					<div class="sado-share-grid" aria-label="佐渡島十字架行進5日目の記事を共有">
+					<div class="sado-share-grid" aria-label="佐渡島十字架行進の総まとめ映像と5日間の記録を共有">
 						<button class="sado-share-card sado-share-native" type="button" data-share-native aria-label="端末の共有メニューを開く"><span>スマホで共有</span><small>共有メニューを開く</small></button>
 						<a class="sado-share-card sado-share-line" href={`https://line.me/R/msg/text/?${encodedLineText}`} data-share-line target="_blank" rel="noopener noreferrer"><span>LINE</span><small>友だちへ送る</small></a>
 						<a class="sado-share-card sado-share-x" href={`https://twitter.com/intent/tweet?text=${encodedShareText}&url=${encodedShareUrl}`} data-share-x target="_blank" rel="noopener noreferrer"><span>X</span><small>投稿で紹介する</small></a>
@@ -523,6 +548,89 @@ const meetingStructuredData = {
 </style>
 
 <style>
+	.sado-archive-page .section-nav .page-shell { justify-content: flex-start; }
+	.sado-archive-page .digest-nav-link {
+		background: #9e1821;
+		color: #fff;
+		font-weight: 900;
+	}
+
+	.sado-archive-page .digest-section {
+		scroll-margin-top: 72px;
+		padding: clamp(36px, 5vw, 68px) 0 clamp(44px, 6vw, 76px);
+		border-bottom: 4px solid var(--gold);
+		background: radial-gradient(ellipse at top, #124e5c, transparent 75%), #031d27;
+		color: #fff;
+	}
+
+	.sado-archive-page .digest-shell { max-width: 1040px; }
+	.sado-archive-page .digest-heading { text-align: center; }
+	.sado-archive-page .digest-label {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+		gap: 10px 16px;
+		color: #eed180;
+		font-size: .82rem;
+		font-weight: 800;
+		letter-spacing: .08em;
+	}
+	.sado-archive-page .digest-label span {
+		padding: 5px 14px;
+		border: 1px solid #d6a93599;
+		background: #d6a93515;
+	}
+	.sado-archive-page .digest-heading h2 {
+		margin: 22px 0 18px;
+		font-family: Yu Mincho, Hiragino Mincho ProN, serif;
+		font-size: clamp(1.6rem, 4.5vw, 3.4rem);
+		font-weight: 800;
+		letter-spacing: -.035em;
+		line-height: 1.4;
+	}
+	.sado-archive-page .digest-lead {
+		color: #dbe6e9;
+		font-size: clamp(.88rem, 1.5vw, 1rem);
+		line-height: 1.9;
+	}
+	.sado-archive-page .digest-video-frame {
+		aspect-ratio: 16 / 9;
+		margin-top: clamp(26px, 4vw, 38px);
+		border: 1px solid #d6a93588;
+		background: #000;
+		box-shadow: 0 20px 60px #0006;
+	}
+	.sado-archive-page .digest-video-frame iframe {
+		display: block;
+		width: 100%;
+		height: 100%;
+		border: 0;
+	}
+	.sado-archive-page .digest-actions {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		align-items: center;
+		gap: 14px 24px;
+		margin-top: 22px;
+		font-size: .88rem;
+		font-weight: 800;
+	}
+	.sado-archive-page .digest-youtube-link {
+		padding: 11px 20px;
+		background: #fff;
+		color: #072e3c;
+	}
+	.sado-archive-page .digest-report-link { color: #eed180; padding: 10px 0; }
+	.sado-archive-page .digest-actions a:hover { text-decoration: underline; text-underline-offset: 4px; }
+	.sado-archive-page .digest-actions a:focus-visible,
+	.sado-archive-page .digest-nav-link:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
+	@media (max-width: 640px) {
+		.sado-archive-page .digest-label { flex-direction: column; }
+		.sado-archive-page .digest-actions { justify-content: center; text-align: center; }
+	}
+
 	.sado-archive-page .hero-grid {
 		grid-template-columns: minmax(300px, 0.86fr) minmax(0, 1.14fr);
 		align-items: center;
