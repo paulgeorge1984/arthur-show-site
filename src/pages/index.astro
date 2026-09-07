@@ -11,6 +11,7 @@ const blessingNightKagurazakaSeptemberUrl = 'https://www.blessingnight.jp/schedu
 const blessingNightKagurazakaSeptemberPosterFront = '/assets/blessing-night-kagurazaka-20260911-front.jpg';
 const blessingNightKagurazakaSeptemberPosterBack = '/assets/blessing-night-kagurazaka-20260911-back.jpg';
 const blessingNightShimokitazawaPoster = '/assets/blessing-night-shimokitazawa-20261009-front.webp';
+const igniteHiscallSeptemberPoster = '/assets/ignite-hiscall-20260918.jpg';
 
 // サイトのビルドが実行された現在の時刻を取得
 const currentBuildTime = new Date(); 
@@ -471,7 +472,7 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 				<span class="home-event-summary-copy">
 					<span class="home-event-summary-kicker">EVENT INFO</span>
 					<strong>イベント案内</strong>
-					<span>9/11 BLESSING NIGHT 神楽坂／10/9 下北沢／11/14 THE ESSENCE</span>
+					<span>9/11 BLESSING NIGHT 神楽坂／9/18 IGNITE／10/9 下北沢／11/14 THE ESSENCE</span>
 				</span>
 				<span class="home-event-summary-action" aria-hidden="true">
 					<span class="closed">見る</span>
@@ -517,6 +518,35 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 							<span>3,000円（税込・飲食代別途）</span>
 						</div>
 						<span class="blessing-time-feature-button">公式の詳細・申込ページへ</span>
+					</div>
+				</a>
+
+				<a class="blessing-time-feature ignite-home-feature" href="/calendar/#ignite-20260918" aria-label="IGNITE ハートに火を灯せ！ 2026年9月18日 名古屋レジェンドホール 詳細を見る">
+					<img
+						src={igniteHiscallSeptemberPoster}
+						alt=""
+						width="1024"
+						height="1280"
+						loading="eager"
+						aria-hidden="true"
+					/>
+					<div class="blessing-time-feature-copy">
+						<p class="blessing-time-feature-kicker">NEXT EVENT / 9.18 FRI</p>
+						<h2>IGNITE ハートに火を灯せ！</h2>
+						<p>
+							IGNITE（イグナイト）ハートに火を灯せ！申込み不要・当日直接会場へ・初めての方も大歓迎。
+						</p>
+						<div class="blessing-time-feature-meta">
+							<span>2026年9月18日（金）</span>
+							<span>18:00開場 / 18:30開演</span>
+							<span>参加無料（自由献金あり）</span>
+							<span>名古屋レジェンドホール</span>
+							<span>愛知県名古屋市中区大須1丁目7-26（地下鉄大須観音駅④すぐ）</span>
+							<span>主催：ヒズコールチャーチ</span>
+							<span>問合せ：THE Y’S CAFE 052-228-7677</span>
+							<span>今後のIGNITE：10月16日（金）・11月27日（金） ※12月はIGNITEお休み・12月20日（日）はヒズコールチャーチクリスマス礼拝 ゲストメッセージ</span>
+						</div>
+						<span class="blessing-time-feature-button">詳細を見る</span>
 					</div>
 				</a>
 

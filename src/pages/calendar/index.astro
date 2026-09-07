@@ -14,6 +14,7 @@ const blessingNightShimokitazawaUrl = '/blessing-night-shimokitazawa-20261009/';
 const blessingNightShimokitazawaPoster = '/assets/blessing-night-shimokitazawa-20261009-front.webp';
 const theEssenceAkitaUrl = '/the-essence-akita-20261114/';
 const theEssenceAkitaPoster = '/assets/the-essence-akita-20261114.jpg';
+const igniteHiscallSeptemberPoster = '/assets/ignite-hiscall-20260918.jpg';
 const calendarShareUrl = 'https://arthur-show.com/calendar/';
 const calendarShareTitle = 'アーサーホーランド関連スケジュール | THE ARTHUR HOLLANDS SHOW';
 const encodedCalendarShareUrl = encodeURIComponent(calendarShareUrl);
@@ -104,6 +105,38 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 						<span>3,000円（税込・飲食代別途）</span>
 					</span>
 					<span class="calendar-special-button">公式の詳細・申込ページへ</span>
+				</span>
+			</a>
+		</section>
+
+		<section id="ignite-20260918" class="calendar-special-event ignite-hiscall-feature" aria-label="IGNITE ハートに火を灯せ！ 特別案内">
+			<a class="calendar-special-link" href={igniteHiscallSeptemberPoster} target="_blank" rel="noopener noreferrer" aria-label="IGNITE フライヤー原寸画像を開く">
+				<span class="calendar-special-media" aria-hidden="true">
+					<img
+						src={igniteHiscallSeptemberPoster}
+						alt=""
+						width="1024"
+						height="1280"
+						loading="eager"
+					/>
+				</span>
+				<span class="calendar-special-copy">
+					<span class="calendar-special-label">NEXT EVENT</span>
+					<strong>IGNITE ハートに火を灯せ！</strong>
+					<span class="calendar-special-lead">
+						IGNITE（イグナイト）ハートに火を灯せ！申込み不要・当日直接会場へ・初めての方も大歓迎。
+					</span>
+					<span class="calendar-special-meta">
+						<span>2026年9月18日（金）</span>
+						<span>18:00開場 / 18:30開演</span>
+						<span>参加無料（自由献金あり）</span>
+						<span>名古屋レジェンドホール</span>
+						<span>愛知県名古屋市中区大須1丁目7-26（地下鉄大須観音駅④すぐ）</span>
+						<span>主催：ヒズコールチャーチ</span>
+						<span>問合せ：THE Y’S CAFE 052-228-7677</span>
+						<span>今後のIGNITE：10月16日（金）・11月27日（金） ※12月はIGNITEお休み・12月20日（日）はヒズコールチャーチクリスマス礼拝 ゲストメッセージ</span>
+					</span>
+					<span class="calendar-special-button">フライヤー原寸を見る</span>
 				</span>
 			</a>
 		</section>
@@ -290,6 +323,28 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				location: 'つくばキリストの愛教会 〒305-0035 茨城県つくば市松代2-14-7',
 				start: {
 					dateTime: '2026-08-16T11:00:00+09:00',
+					timeZone: TOKYO_TIME_ZONE,
+				},
+				end: null,
+			},
+			{
+				id: 'manual-ignite-hiscall-2026-09-18',
+				summary: 'IGNITE',
+				description: [
+					'HISCALL CHURCH PRESENTS',
+					'アーサー・ホーランド講演会「IGNITE ハートに火を灯せ！」',
+					'2026年9月18日（金） 18:00開場 / 18:30開演',
+					'参加無料（自由献金あり）',
+					'申込み不要。当日直接会場へお越しください。',
+					'どなたでもお気軽にご参加いただけます（初めての方も大歓迎）。',
+					'主催：ヒズコールチャーチ',
+					"問合せ：THE Y'S CAFE 052-228-7677",
+					'今後のIGNITE：10月16日（金）・11月27日（金）',
+					'※12月はIGNITEはお休みです。12月20日（日）は別行事のヒズコールチャーチクリスマス礼拝ゲストメッセージです。',
+				].join('\n'),
+				location: '名古屋レジェンドホール 愛知県名古屋市中区大須1丁目7-26（地下鉄大須観音駅④すぐ）',
+				start: {
+					dateTime: '2026-09-18T18:30:00+09:00',
 					timeZone: TOKYO_TIME_ZONE,
 				},
 				end: null,
@@ -718,6 +773,13 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				&& /ignite|hiscall|ヒズコール/i.test(searchableText);
 		}
 
+		function isIgniteHiscallSeptemberEvent(event) {
+			const startKey = event.start?.date || getDateKeyFromDate(getEventStart(event));
+			const searchableText = [event.summary || '', event.description || '', event.location || ''].join(' ');
+			return startKey === '2026-09-18'
+				&& /ignite|hiscall|ヒズコール/i.test(searchableText);
+		}
+
 		function isSadoEvangelisticMeetingEvent(event) {
 			const startKey = event.start?.date || getDateKeyFromDate(getEventStart(event));
 			const searchableText = [event.summary || '', event.description || '', event.location || ''].join(' ');
@@ -766,12 +828,14 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			const hasBlessingNightKagurazakaSeptember = events.some((event) => isBlessingNightKagurazakaSeptemberEvent(event));
 			const hasGospelArtTsukuba = events.some((event) => isGospelArtTsukubaEvent(event));
 			const hasIgniteHiscall = events.some((event) => isIgniteHiscallEvent(event));
+			const hasIgniteHiscallSeptember = events.some((event) => isIgniteHiscallSeptemberEvent(event));
 			const hasSadoEvangelisticMeeting = events.some((event) => isSadoEvangelisticMeetingEvent(event));
 			const hasBlessingNightShimokitazawa = events.some((event) => isBlessingNightShimokitazawaEvent(event));
 			const gospelTalkManualEvent = manualEventsInRange.find((event) => event.id === 'manual-gospel-talk-summer-osaka-2026-07-19');
 			const blessingNightKagurazakaSeptemberManualEvent = manualEventsInRange.find((event) => event.id === 'manual-blessing-night-kagurazaka-2026-09-11');
 			const gospelArtTsukubaManualEvent = manualEventsInRange.find((event) => event.id === 'manual-gospel-art-tsukuba-2026-08-15');
 			const igniteHiscallManualEvent = manualEventsInRange.find((event) => event.id === 'manual-ignite-hiscall-2026-08-21');
+			const igniteHiscallSeptemberManualEvent = manualEventsInRange.find((event) => event.id === 'manual-ignite-hiscall-2026-09-18');
 			const sadoEvangelisticMeetingManualEvent = manualEventsInRange.find((event) => event.id === 'manual-sado-evangelistic-meeting-2026-08-26');
 			const blessingNightManualEvent = manualEventsInRange.find((event) => event.id === 'manual-blessing-night-shimokitazawa-2026-10-09');
 			let mergedEvents = events;
@@ -830,6 +894,19 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 					};
 				});
 			}
+			if (igniteHiscallSeptemberManualEvent && hasIgniteHiscallSeptember) {
+				mergedEvents = mergedEvents.map((event) => {
+					if (!isIgniteHiscallSeptemberEvent(event)) return event;
+					return {
+						...event,
+						summary: igniteHiscallSeptemberManualEvent.summary,
+						description: igniteHiscallSeptemberManualEvent.description,
+						location: igniteHiscallSeptemberManualEvent.location,
+						start: igniteHiscallSeptemberManualEvent.start,
+						end: igniteHiscallSeptemberManualEvent.end,
+					};
+				});
+			}
 			if (sadoEvangelisticMeetingManualEvent && hasSadoEvangelisticMeeting) {
 				let sadoMerged = false;
 				mergedEvents = mergedEvents.flatMap((event) => {
@@ -865,6 +942,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 					if (isBlessingNightKagurazakaSeptemberEvent(event)) return !hasBlessingNightKagurazakaSeptember;
 					if (isGospelArtTsukubaEvent(event)) return !hasGospelArtTsukuba;
 					if (isIgniteHiscallEvent(event)) return !hasIgniteHiscall;
+					if (isIgniteHiscallSeptemberEvent(event)) return !hasIgniteHiscallSeptember;
 					if (isSadoEvangelisticMeetingEvent(event)) return !hasSadoEvangelisticMeeting;
 					if (isBlessingNightShimokitazawaEvent(event)) return !hasBlessingNightShimokitazawa;
 					if (isSaturdayNightArthurEvent(event)) return !hasSaturdayNightArthur;
