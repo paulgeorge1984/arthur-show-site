@@ -126,7 +126,7 @@ const meetingStructuredData = {
 <Layout title={pageTitle} description={pageDescription} image="/walk-across-sado/assets/day05-20260827/day05-lead.jpg" imageAlt="曇り空と海を背に、最終日の道を進むアーサー・ホーランドと十字架" imageWidth={1920} imageHeight={1080} canonicalPath={canonicalPath} structuredData={[structuredData, meetingStructuredData]}>
 	<div class="sado-archive-page">
 		<nav class="section-nav" aria-label="ページ内メニュー">
-			<div class="page-shell"><a class="digest-nav-link" href="#digest">総まとめ映像</a><a href="#about">概要</a><a href="#flyer">チラシ</a><a href="#day1-report">1日目レポート</a><a href="#day2-report">2日目レポート</a><a href="#day3-report">3日目レポート</a><a href="#day4-report">4日目レポート</a><a href="#day5-report">5日目レポート</a><a href="#share">シェア</a><a href="#schedule">スケジュール</a><a class="meeting-nav-link" href="#evangelistic-meeting">TALK &amp; LIVE</a><a href="#photos">写真</a><a href="#previous">これまでの行進</a></div>
+			<div class="page-shell"><a class="digest-nav-link" href="#digest">総まとめ映像</a><a class="message-nav-link" href="#message-video">メッセージ動画</a><a href="#about">概要</a><a href="#flyer">チラシ</a><a href="#day1-report">1日目レポート</a><a href="#day2-report">2日目レポート</a><a href="#day3-report">3日目レポート</a><a href="#day4-report">4日目レポート</a><a href="#day5-report">5日目レポート</a><a href="#share">シェア</a><a href="#schedule">スケジュール</a><a class="meeting-nav-link" href="#evangelistic-meeting">TALK &amp; LIVE</a><a href="#photos">写真</a><a href="#previous">これまでの行進</a></div>
 		</nav>
 		<main>
 			<section class="digest-section" id="digest" aria-labelledby="digest-title">
@@ -150,6 +150,23 @@ const meetingStructuredData = {
 					<div class="digest-actions">
 						<a class="digest-youtube-link" href="https://youtu.be/rZluSmxeSpY" target="_blank" rel="noopener noreferrer">YouTubeで見る <span aria-hidden="true">↗</span></a>
 						<a class="digest-report-link" href="#day1-report">写真とレポートで5日間をたどる <span aria-hidden="true">↓</span></a>
+					</div>
+				</div>
+			</section>
+
+			<section class="digest-section message-video-section" id="message-video" aria-labelledby="message-video-title">
+				<div class="page-shell digest-shell">
+					<div class="digest-heading">
+						<p class="digest-label">SADO DAY04 <span>アーサー・ホーランド メッセージ</span></p>
+						<h2 id="message-video-title">あなたの価値は、<br />誰かの評価では決まらない</h2>
+						<p class="digest-lead">「あなたは愛されている」。十字架を担ぎ、歩き続ける理由がここに。<br />2026年8月26日 · 真野シェアベースカフェ</p>
+					</div>
+					<div class="digest-video-frame">
+						<iframe src="https://www.youtube.com/embed/XgbE1fIBxfE?rel=0" title="あなたの価値は、誰かの評価では決まらない｜佐渡島十字架行進 DAY04 メッセージ" width="1280" height="720" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+					</div>
+					<div class="digest-actions">
+						<a class="digest-youtube-link" href="https://youtu.be/XgbE1fIBxfE" target="_blank" rel="noopener noreferrer">メッセージをYouTubeで見る <span aria-hidden="true">↗</span></a>
+						<a class="digest-report-link" href="/messages/2026-09-07/">メッセージを読む <span aria-hidden="true">→</span></a>
 					</div>
 				</div>
 			</section>
@@ -562,6 +579,10 @@ const meetingStructuredData = {
 		background: radial-gradient(ellipse at top, #124e5c, transparent 75%), #031d27;
 		color: #fff;
 	}
+
+	.sado-archive-page .message-video-section { background: #181818; }
+	.sado-archive-page .message-nav-link { background: #eed180; color: #181818; font-weight: 900; }
+	.sado-archive-page .message-nav-link:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
 
 	.sado-archive-page .digest-shell { max-width: 1040px; }
 	.sado-archive-page .digest-heading { text-align: center; }
