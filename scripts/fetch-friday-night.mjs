@@ -28,6 +28,7 @@ function toIsoDuration(seconds) {
 function isPublicVideo(video) {
 	const title = String(video?.title || '').trim();
 	if (!video?.id || !title) return false;
+	if (/関根|\bSekine\b/i.test(title)) return false;
 	return !/(^\[?private video\]?$|^\[?deleted video\]?$|unavailable|非公開|削除済み|この動画は再生できません)/i.test(title);
 }
 
@@ -53,6 +54,7 @@ async function resolveThumbnail(id) {
 async function main() {
 	const { stdout } = await execFileAsync('yt-dlp', [
 		'--flat-playlist',
+		'--extractor-args', 'youtube:lang=ja',
 		'--skip-download',
 		'--dump-single-json',
 		'--ignore-errors',

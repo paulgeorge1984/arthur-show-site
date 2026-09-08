@@ -34,7 +34,17 @@ const gotoSpecial = {
 	wideImage: '/walk-across-goto2026/assets/goto-cross-walk-2026-wide.jpg',
 	description: '2026年6月、長崎県・五島列島を舞台に十字架を掲げて歩く祈りの旅。現地映像、ドキュメンタリー、行進記録を順次掲載します。',
 };
-const specialPages = [gotoSpecial, awajiSpecial];
+const sadoSpecial = {
+	year: '2026',
+	title: '佐渡島十字架行進2026',
+	englishTitle: 'WALK ACROSS SADO ISLAND 2026',
+	region: '佐渡島',
+	href: '/walk-across-sado/#digest',
+	image: '/walk-across-sado/assets/day05-20260827/day05-lead.jpg',
+	wideImage: null,
+	description: '2026年8月23日〜27日、十字架を携え、祈りとともに佐渡島104.8kmを歩いた5日間。総まとめ映像と、写真・レポートで旅を振り返ります。',
+};
+const specialPages = [sadoSpecial, gotoSpecial, awajiSpecial];
 const standaloneVideos = [
 	{
 		year: '2014',
@@ -62,8 +72,8 @@ const years = [...new Set([
 
 <Layout
 	title="WALK ACROSS"
-	description="アーサー・ホーランドの十字架行進アーカイブ。日本、台湾、淡路島、能登半島、富士山、四国、紀伊半島など、歩いて届けられた祈りと証しの記録。"
-	image="/walk-across-goto2026/assets/goto-cross-walk-2026-wide.jpg"
+	description="アーサー・ホーランドの十字架行進アーカイブ。佐渡島、五島列島、日本、台湾、淡路島、能登半島、富士山、四国、紀伊半島など、歩いて届けられた祈りと証しの記録。"
+	image="/walk-across-sado/assets/day05-20260827/day05-lead.jpg"
 	imageAlt="WALK ACROSS | THE ARTHUR HOLLANDS SHOW"
 	imageWidth={1280}
 	imageHeight={720}
