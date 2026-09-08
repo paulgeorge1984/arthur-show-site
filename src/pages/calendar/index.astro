@@ -1,4 +1,5 @@
 ---
+import NashiFes from '../../components/NashiFes.astro';
 import Layout from '../../layouts/Layout.astro';
 
 const officialScheduleUrl = 'https://www.arthurhollands.com/%E3%82%B9%E3%82%B1%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB';
@@ -71,6 +72,8 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 					</a>
 				</div>
 			</section>
+
+		<NashiFes />
 
 		<section class="calendar-special-event blessing-night-kagurazaka-september-feature" aria-label="2026年9月 BLESSING NIGHT 神楽坂 特別案内">
 			<a class="calendar-special-link" href={blessingNightKagurazakaSeptemberUrl} target="_blank" rel="noopener noreferrer">
@@ -274,6 +277,14 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			},
 		];
 		const MANUAL_EVENTS = [
+            {
+                id: 'manual-nashi-fes-2026-09-19',
+                summary: '第27回 梨フェス ～梨狩り＆BBQ～',
+                description: 'メッセージ：アーサー・ホーランド（11:20〜）／音楽：Samuell Soung。大人2,500円、中・高校生1,000円、小学生500円。梨食べ放題。お問い合わせ：090-7632-2388。https://arthur-show.com/calendar/#nashi-fes-20260919',
+                location: '小杉農園 新潟県燕市下児ノ木37',
+                start: { dateTime: '2026-09-19T10:30:00+09:00', timeZone: TOKYO_TIME_ZONE },
+                end: { dateTime: '2026-09-19T15:00:00+09:00', timeZone: TOKYO_TIME_ZONE },
+            },
 			{
 				id: 'manual-blessing-night-kagurazaka-2026-09-11',
 				summary: 'BLESSING NIGHT 神楽坂',
@@ -937,7 +948,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				});
 			}
 			return [
-				...mergedEvents,
+				...mergedEvents.filter((event) => !(getDateKeyFromDate(getEventStart(event)) === '2026-09-19' && /梨|小杉農園/.test(event.summary || ''))),
 				...manualEventsInRange.filter((event) => {
 					if (isBlessingNightKagurazakaSeptemberEvent(event)) return !hasBlessingNightKagurazakaSeptember;
 					if (isGospelArtTsukubaEvent(event)) return !hasGospelArtTsukuba;
