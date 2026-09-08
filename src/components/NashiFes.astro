@@ -1,4 +1,7 @@
-<section id="nashi-fes-20260919" aria-labelledby="nashi-fes-title">
+---
+const { calendar = false } = Astro.props;
+---
+<section class:list={{ "nashi-calendar": calendar }} id="nashi-fes-20260919" aria-labelledby="nashi-fes-title">
   <div class="nashi-card">
     <div class="nashi-grid">
       <div class="nashi-poster">
@@ -71,5 +74,7 @@
 #nashi-fes-20260919 .nashi-body{padding:20px 18px 18px}
 #nashi-fes-20260919 .nashi-meta-row{grid-template-columns:2.8em minmax(0,1fr)}
 }
+#nashi-fes-20260919.nashi-calendar{max-width:1120px;padding:0 20px 34px}
+@media (max-width:640px){#nashi-fes-20260919.nashi-calendar{max-width:100%;padding-left:14px;padding-right:14px}}
 </style>
 </section>
