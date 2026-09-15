@@ -352,6 +352,16 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 	structuredData={homeStructuredData}
 >
 	<div class="container">
+		<a class="fuji-home-feature" href="/walk-across-fuji-2026/" aria-label="富士山一周十字架行進 2026 日程・ルート・参加案内を見る">
+			<img src="/walk-across-fuji-2026/fuji-campaign-v13.png" alt="十字架を担ぐアーサー・ホーランドと富士山 — 富士山一周十字架行進2026" width="1536" height="1024" loading="eager" fetchpriority="high" />
+			<div class="fuji-home-copy">
+				<p class="awaji-kicker">WALK ACROSS MT. FUJI 2026</p>
+				<h2>富士山一周<br />十字架行進</h2>
+				<p class="fuji-home-date">9月24日（木）〜27日（日）<br />毎朝7:00スタート</p>
+				<p>アーサー・ホーランドが十字架を担ぎ、富士山を一周する4日間。</p>
+				<span class="awaji-button">日程・ルート・参加案内を見る →</span>
+			</div>
+		</a>
 		<a class="awaji-feature sado-feature" href="/walk-across-sado/" aria-label="SADO ISLAND 2026 佐渡島十字架行進の特設ページを見る">
 			<div class="awaji-visual">
 				<img src="/walk-across-sado/sado-island-2026-flyer.jpg" alt="SADO ISLAND 2026 佐渡島十字架行進の告知フライヤー" width="904" height="1280" loading="eager" />
@@ -937,6 +947,27 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 </Layout>
 
 <style>
+	.fuji-home-feature {
+		display: grid;
+		grid-template-columns: 1.15fr 1fr;
+		align-items: center;
+		margin: 24px 0;
+		background: #101719;
+		border: 1px solid #c5a059;
+		color: #fff;
+		text-decoration: none;
+	}
+	.fuji-home-feature > img { display: block; width: 100%; height: auto; }
+	.fuji-home-copy { min-width: 0; padding: 24px; }
+	.fuji-home-copy h2 { margin: 10px 0 18px; font-size: clamp(1.8rem, 3.5vw, 3rem); font-weight: 900; line-height: 1.3; color: #fff; }
+	.fuji-home-date { font-size: clamp(1.05rem, 1.8vw, 1.35rem); font-weight: 800; color: #f0c35b; }
+	.fuji-home-copy > p { margin-bottom: 18px; }
+	.fuji-home-feature:hover .awaji-button { background: #fff; }
+	.fuji-home-feature:focus-visible { outline: 3px solid #c5a059; outline-offset: 4px; }
+	@media (max-width: 700px) {
+		.fuji-home-feature { grid-template-columns: 1fr; margin: 18px 0; }
+		.fuji-home-copy { padding: 20px; }
+	}
 	.container {
 		max-width: 980px;
 		margin: 0 auto;
