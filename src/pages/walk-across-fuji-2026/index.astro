@@ -1,0 +1,178 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const title = '富士山一周十字架行進 2026｜9月24日（木）〜27日（日）毎朝7:00スタート';
+const description = 'アーサー・ホーランドによる富士山一周十字架行進 2026。2026年9月24日（木）〜27日（日）の4日間、毎朝7:00スタート。行程案・地図・問い合わせ先を掲載。';
+const calendarUrl = 'https://www.google.com/calendar/event?eid=MmRqNDU1cjRkMjJmYXVpaDB0ODJjdWJyOGQgYXJ0aHVyLmhvbGxhbmRzLmhwQG0';
+const routes = [
+  { day: 'Day 1', date: '9月24日（木）', from: 'ドンキホーテ河口湖インター店', to: 'セブン-イレブン 御殿場板妻店', url: 'https://maps.app.goo.gl/7NBz25bx4jJD97Dx8' },
+  { day: 'Day 2', date: '9月25日（金）', from: 'セブン-イレブン 御殿場板妻店', to: 'やぎの木登りガーデンカフェ', url: 'https://maps.app.goo.gl/HGDjjQ15uLeQigHw8' },
+  { day: 'Day 3', date: '9月26日（土）', from: 'やぎの木登りガーデンカフェ', to: 'ニューあかいけ', url: 'https://maps.app.goo.gl/rkcNpWpCKQUnxSqs8' },
+  { day: 'Day 4', date: '9月27日（日）', from: 'ニューあかいけ', to: 'ドンキホーテ河口湖インター店', url: 'https://maps.app.goo.gl/yYtqdR4AbdTLbf3N7' },
+];
+---
+<Layout title={title} description={description} noindex={false} canonicalPath="/walk-across-fuji-2026/" image="/walk-across-fuji-2026/fuji-campaign-v13.png" imageWidth={1536} imageHeight={1024} imageType="image/png">
+<div class="fuji-page">
+
+<header class="fuji-hero">
+<figure class="fuji-poster">
+<img src="/walk-across-fuji-2026/fuji-campaign-v13.png" width="1536" height="1024" alt="富士山一周十字架行進 2026 キャンペーンポスター：十字架を担ぐアーサー・ホーランドと富士山" loading="eager" fetchpriority="high" />
+</figure>
+<div class="fuji-hero-body">
+<div class="fuji-hero-inner">
+<p class="fuji-eyebrow">ARTHUR HOLLANDS — FUJI CROSS WALK 2026 / 4 DAYS</p>
+<h1 class="fuji-h1">富士山一周<br />十字架行進</h1>
+<p class="fuji-date"><strong>2026年9月24日（木）〜9月27日（日）</strong><span>毎朝7:00スタート</span></p>
+<div class="fuji-cta">
+<a class="fuji-btn fuji-btn-red" href="#route">4日間の行程案を見る</a>
+<a class="fuji-btn fuji-btn-line" href={calendarUrl} target="_blank" rel="noopener noreferrer">Googleカレンダーで確認</a>
+</div>
+</div>
+</div>
+</header>
+<section class="fuji-intro">
+<div class="fuji-wrap fuji-wrap-narrow">
+<p class="fuji-lead">アーサー・ホーランドが十字架を携え、富士山の周りを歩く4日間。開催日程と、行程案をご案内します。</p>
+</div>
+</section>
+<section id="route" class="fuji-sec">
+<div class="fuji-wrap">
+<div class="fuji-sec-head">
+<p class="fuji-sec-en">SCHEDULE — 4 DAYS</p>
+<h2 class="fuji-h2">4日間の行程案</h2>
+<p class="fuji-box"><strong>各日のスタート地点は変更になる場合があります。必ず、ご参加の前に、担当のサポートスタッフ後藤（<a href="tel:08039271165">080-3927-1165</a>）までご連絡のうえ、最新のスタート地点をご確認ください。</strong></p>
+
+</div>
+<ol class="fuji-rows">
+{routes.map((r, i) => (
+<li class="fuji-row">
+<div class="fuji-num" aria-hidden="true"><span class="fuji-num-day">DAY</span><span class="fuji-num-n">0{i + 1}</span></div>
+<div class="fuji-row-main">
+<p class="fuji-row-date">{r.date} <span class="fuji-start">7:00スタート</span></p>
+<dl class="fuji-path">
+<div><dt>出発</dt><dd>{r.from}</dd></div>
+<div><dt>到着</dt><dd>{r.to}</dd></div>
+</dl>
+<a class="fuji-map" href={r.url} target="_blank" rel="noopener noreferrer">Googleマップで見る</a>
+</div>
+</li>
+))}
+</ol>
+<p class="fuji-note fuji-note-box">各日7時出発となります。出発点およびゴール地点は変わる可能性があるため、必ずスタッフ後藤（<a href="tel:08039271165">080-3927-1165</a>）にご連絡ください。</p>
+</div>
+</section>
+<section class="fuji-sec" id="route-map" aria-labelledby="fuji-route-map-title">
+<div class="fuji-wrap">
+<p class="fuji-sec-en">ROUTE MAP — 4 DAYS</p>
+<h2 class="fuji-h2" id="fuji-route-map-title">4日間のルート地図</h2>
+<iframe src="/walk-across-fuji-2026/route-map.html" title="富士山一周十字架行進 4日間のルート地図" loading="lazy" style="display:block;width:100%;height:860px;border:0" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+</div>
+</section>
+
+<section class="fuji-sec fuji-film">
+<div class="fuji-wrap fuji-wrap-narrow">
+<p class="fuji-sec-en">FUJI CROSS WALK — FILM</p>
+<h2 class="fuji-h2">富士山を歩く、その姿を。</h2>
+<h3 style="margin:1.5rem 0 .75rem;font-weight:800;font-size:1.3rem">2025年 ダイジェスト</h3>
+<p class="fuji-note">昨年の富士山一周十字架行進ダイジェスト（3分41秒）</p>
+<iframe src="https://www.youtube-nocookie.com/embed/x2gbeHaoCSg" title="不良牧師アーサーホーランド 富士山一周十字架行進 2025 ダイジェスト" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<p><a href="https://www.youtube.com/watch?v=x2gbeHaoCSg" target="_blank" rel="noopener noreferrer">2025年のダイジェストをYouTubeで見る ↗</a></p>
+<h3 style="margin:3rem 0 .75rem;font-weight:800;font-size:1.3rem">2023年 ダイジェスト</h3>
+<p class="fuji-note">2023年3月31日〜4月3日の富士山一周十字架行進ダイジェスト（2分16秒）</p>
+<iframe src="https://www.youtube-nocookie.com/embed/ZpJAOdCH4NY" title="ARTHUR HOLLANDS WALK AROUND Mt.FUJI DIGEST 2023.3.31-4.3" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<p><a href="https://www.youtube.com/watch?v=ZpJAOdCH4NY" target="_blank" rel="noopener noreferrer">YouTubeで見る ↗</a></p>
+</div>
+</section>
+<section class="fuji-sec fuji-share" id="share" aria-labelledby="share-title"><div class="fuji-wrap"><p class="fuji-sec-en">SHARE</p><h2 class="fuji-h2" id="share-title">この行進をシェア</h2><div class="fuji-share-buttons"><button type="button" data-fuji-share="native">スマホで共有</button><a data-fuji-share="line" target="_blank" rel="noopener noreferrer">LINE</a><a data-fuji-share="x" target="_blank" rel="noopener noreferrer">X</a><a data-fuji-share="facebook" target="_blank" rel="noopener noreferrer">Facebook</a><button type="button" data-fuji-share="copy">リンクをコピー</button></div><p class="fuji-share-status" role="status" aria-live="polite"></p><input class="fuji-share-url" aria-label="共有するページのURL" readonly hidden /></div></section><section class="fuji-sec fuji-sec-contact">
+<div class="fuji-wrap fuji-wrap-narrow">
+<div class="fuji-sec-head">
+<p class="fuji-sec-en">CONTACT</p>
+<h2 class="fuji-h2">問い合わせ</h2>
+</div>
+<div class="fuji-contact">
+<p class="fuji-contact-name">サポートスタッフ 後藤</p>
+<a class="fuji-tel" href="tel:08039271165">080-3927-1165</a>
+<p class="fuji-contact-sub">日程は <a href={calendarUrl} target="_blank" rel="noopener noreferrer">Googleカレンダー</a> でも確認できます。</p>
+</div>
+</div>
+</section>
+<footer class="fuji-foot">
+<div class="fuji-wrap">
+<p>富士山一周十字架行進 2026｜2026年9月24日（木）〜27日（日）｜毎朝7:00スタート</p>
+</div>
+</footer>
+</div>
+<style>
+.fuji-page{background:#f6f3eb;color:#142329;font-family:"Noto Sans JP",system-ui,-apple-system,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;line-height:2;overflow-x:clip}
+.fuji-page *{box-sizing:border-box}
+.fuji-page a{color:#ca3025}
+.fuji-page a:focus-visible,.fuji-page summary:focus-visible{outline:3px solid #ca3025;outline-offset:3px}
+.fuji-page .fuji-wrap{max-width:1120px;margin:0 auto}
+.fuji-page .fuji-wrap-narrow{max-width:760px}
+.fuji-page .fuji-preview{margin:0;background:#142329;color:#f6f3eb;font-size:12px;font-weight:700;letter-spacing:.08em;text-align:center;padding:7px 16px;line-height:1.8}
+.fuji-page .fuji-hero{background:#142329;color:#fff;padding:0 0 34px}
+.fuji-page .fuji-poster{margin:0;line-height:0}
+.fuji-page .fuji-poster img{display:block;width:100%;height:auto}
+.fuji-page .fuji-hero-body{padding:26px 18px 0}
+.fuji-page .fuji-hero-inner{max-width:1120px;margin:0 auto}
+.fuji-page .fuji-eyebrow{margin:0 0 10px;color:#f0b9b4;font-family:Oswald,"Noto Sans JP",sans-serif;font-size:12px;font-weight:600;letter-spacing:.24em;line-height:2}
+.fuji-page .fuji-h1{margin:0 0 14px;font-size:clamp(38px,9vw,72px);line-height:1.18;letter-spacing:.02em;font-weight:800}
+.fuji-page .fuji-date{margin:0 0 18px;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;border-top:3px solid #ca3025;padding-top:14px}
+.fuji-page .fuji-date strong{font-size:clamp(16px,4.6vw,22px);font-weight:800;letter-spacing:.02em}
+.fuji-page .fuji-date span{display:inline-block;background:#ca3025;color:#fff;font-weight:800;font-size:14px;letter-spacing:.08em;padding:3px 12px;line-height:1.8}
+.fuji-page .fuji-cta{display:flex;flex-wrap:wrap;gap:10px}
+.fuji-page .fuji-btn{display:inline-block;text-decoration:none;font-weight:800;font-size:15px;line-height:1.6;padding:12px 20px}
+.fuji-page .fuji-btn-red{background:#ca3025;color:#fff}
+.fuji-page .fuji-btn-red:hover,.fuji-page .fuji-btn-red:focus-visible{background:#a9261e;color:#fff}
+.fuji-page .fuji-btn-line{border:2px solid #fff;color:#fff}
+.fuji-page .fuji-btn-line:hover,.fuji-page .fuji-btn-line:focus-visible{background:#fff;color:#142329}
+.fuji-page .fuji-intro{padding:26px 18px 0}
+.fuji-page .fuji-lead{margin:0;font-size:15px;font-weight:500;line-height:2.1}
+.fuji-page .fuji-sec{padding:34px 18px}
+.fuji-page .fuji-sec-head{margin-bottom:18px}
+.fuji-page .fuji-sec-en{margin:0;color:#ca3025;font-family:Oswald,"Noto Sans JP",sans-serif;font-size:13px;font-weight:600;letter-spacing:.28em}
+.fuji-page .fuji-h2{margin:2px 0 14px;font-size:clamp(22px,6vw,30px);line-height:1.4;letter-spacing:.04em;font-weight:800}
+.fuji-page .fuji-box{margin:0;background:#fff;border:2px solid #142329;border-left:8px solid #ca3025;padding:12px 14px;font-size:14px;font-weight:700;line-height:1.9}
+.fuji-page .fuji-note{font-size:13px;line-height:2;color:#3d4e55;margin:10px 0 0}
+.fuji-page .fuji-note-box{background:#fff;border:1px solid #d8d0bf;padding:10px 12px}
+.fuji-page .fuji-rows{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:14px}
+.fuji-page .fuji-row{background:#fff;border:1px solid #ddd4c0;border-top:5px solid #ca3025;padding:16px 16px 18px;display:grid;gap:12px}
+.fuji-page .fuji-num{display:flex;align-items:baseline;gap:10px;line-height:1}
+.fuji-page .fuji-num-day{font-family:Oswald,"Noto Sans JP",sans-serif;font-size:15px;font-weight:600;letter-spacing:.22em;color:#ca3025}
+.fuji-page .fuji-num-n{font-family:Oswald,"Noto Sans JP",sans-serif;font-size:44px;font-weight:700;letter-spacing:.02em;color:#142329;line-height:1}
+.fuji-page .fuji-row-date{margin:0;font-size:17px;font-weight:800}
+.fuji-page .fuji-start{display:inline-block;margin-left:8px;font-size:13px;font-weight:800;background:#142329;color:#fff;padding:2px 10px;vertical-align:middle}
+.fuji-page .fuji-path{margin:10px 0 12px;display:grid;gap:8px}
+.fuji-page .fuji-path div{display:grid;grid-template-columns:52px 1fr;gap:10px;align-items:start;background:#f6f3eb;border:1px solid #ddd4c0;padding:9px 11px;font-size:15px;line-height:1.9}
+.fuji-page .fuji-path dt{font-size:12px;font-weight:800;color:#fff;background:#ca3025;text-align:center;padding:3px 0;line-height:1.8}
+.fuji-page .fuji-path dd{margin:0;font-weight:700}
+.fuji-page .fuji-map{display:block;text-align:center;text-decoration:none;font-weight:800;font-size:15px;background:#142329;color:#fff;padding:12px;line-height:1.6}
+.fuji-page .fuji-map:hover,.fuji-page .fuji-map:focus-visible{background:#ca3025;color:#fff}
+.fuji-page .fuji-sec-ref{background:#efe9d9}
+.fuji-page .fuji-details{background:#fff;border:1px solid #ddd4c0;padding:14px}
+.fuji-page .fuji-details summary{cursor:pointer;font-weight:800;font-size:15px;padding:6px 2px}
+.fuji-page .fuji-ref-link{display:block;margin-top:10px;border:1px solid #ddd4c0;line-height:0}
+.fuji-page .fuji-ref-link img{display:block;width:100%;height:auto}
+.fuji-page .fuji-sec-contact{padding-bottom:44px}
+.fuji-page .fuji-contact{background:#142329;color:#fff;padding:22px 20px;text-align:left}
+.fuji-page .fuji-contact-name{margin:0;font-size:15px;font-weight:700}
+.fuji-page .fuji-tel{display:inline-block;margin:8px 0 6px;color:#fff;font-size:30px;font-weight:800;letter-spacing:.04em;text-decoration:none;border-bottom:3px solid #ca3025;line-height:1.5}
+.fuji-page .fuji-contact-sub{margin:8px 0 0;font-size:14px;color:#e9e2d2}
+.fuji-page .fuji-contact-sub a{color:#fff;text-decoration:underline;text-underline-offset:3px}
+.fuji-page .fuji-foot{background:#142329;color:#c9c2b2;font-size:12px;padding:16px 18px}
+.fuji-page .fuji-foot p{margin:0;line-height:1.9}
+@media(min-width:860px){
+.fuji-page .fuji-hero{padding-bottom:44px}
+.fuji-page .fuji-hero-body{padding:30px 32px 0}
+.fuji-page .fuji-intro{padding:30px 32px 0}
+.fuji-page .fuji-sec{padding:44px 32px}
+.fuji-page .fuji-row{grid-template-columns:170px 1fr;gap:20px;padding:20px 22px;align-items:start}
+.fuji-page .fuji-num{flex-direction:column;gap:2px;border-right:2px solid #f6f3eb;padding-right:16px}
+.fuji-page .fuji-num-n{font-size:56px}
+.fuji-page .fuji-path div{padding:10px 12px}
+.fuji-page .fuji-map{max-width:320px}
+}
+.fuji-page .fuji-film{background:#efe9d9}.fuji-page .fuji-film iframe{display:block;width:100%;aspect-ratio:16/9;border:0;margin-top:18px}
+</style>
+<style is:global>.fuji-share-buttons{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.fuji-share-buttons a,.fuji-share-buttons button{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 20px;border:1px solid #142329;border-radius:5px;background:#142329;color:#fff;font:700 15px/1.4 sans-serif;text-decoration:none;cursor:pointer}.fuji-share-buttons [data-fuji-share="line"]{background:#067d35;border-color:#067d35}.fuji-share-buttons [data-fuji-share="facebook"]{background:#1769b7;border-color:#1769b7}.fuji-share-buttons [data-fuji-share="copy"]{background:transparent;color:#142329}.fuji-share-buttons :focus-visible{outline:3px solid #ca3025;outline-offset:3px}.fuji-share-status{min-height:1.6em;margin:10px 0 0;font-size:14px}.fuji-share-url{box-sizing:border-box;width:100%;padding:10px;font-size:16px}@media(max-width:520px){.fuji-share-buttons{display:grid;grid-template-columns:1fr 1fr}.fuji-share-buttons [data-fuji-share="native"]{grid-column:1/-1}}</style>
+<script is:inline>(()=>{const box=document.querySelector('.fuji-share');if(!box)return;const url=location.origin+location.pathname;const title='富士山一周十字架行進2026';const text='2026年9月24日（木）〜27日（日）毎朝7:00スタート。富士山を一周する4日間。';const enc=encodeURIComponent;const status=box.querySelector('.fuji-share-status');const field=box.querySelector('.fuji-share-url');const links={line:'https://social-plugins.line.me/lineit/share?url='+enc(url)+'&text='+enc(title+'\n'+text),x:'https://twitter.com/intent/tweet?text='+enc(title+'\n'+text)+'&url='+enc(url),facebook:'https://www.facebook.com/sharer/sharer.php?u='+enc(url)};Object.entries(links).forEach(([key,value])=>{box.querySelector('[data-fuji-share="'+key+'"]').href=value;});async function copy(){try{await navigator.clipboard.writeText(url);status.textContent='リンクをコピーしました。';field.hidden=true;}catch{field.value=url;field.hidden=false;field.focus();field.select();status.textContent='表示されたURLをコピーしてください。';}}box.querySelector('[data-fuji-share="copy"]').addEventListener('click',copy);box.querySelector('[data-fuji-share="native"]').addEventListener('click',async()=>{if(navigator.share){try{await navigator.share({title,text,url});status.textContent='';}catch(error){if(error.name!=='AbortError'){await copy();}}}else{await copy();}});})();</script>
+</Layout>

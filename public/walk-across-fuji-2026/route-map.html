@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>富士山 徒歩ルート</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+body{
+  background:#f6f3eb;
+  color:#142329;
+  font-family:-apple-system,"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP","Yu Gothic UI",Meiryo,sans-serif;
+  min-height:0;
+  max-width:100%;
+  overflow-x:hidden;
+  padding:12px;
+  line-height:1.5;
+}
+.day-btns{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:8px;
+  margin-bottom:12px;
+}
+.day-btn{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:8px 4px;
+  border:2px solid #142329;
+  border-radius:6px;
+  background:#f6f3eb;
+  color:#142329;
+  font-size:.85rem;
+  font-weight:700;
+  cursor:pointer;
+  min-height:48px;
+  transition:background .15s,color .15s;
+}
+.day-btn span{font-size:.72rem;font-weight:400;margin-top:2px}
+.day-btn[aria-pressed="true"]{
+  background:#142329;
+  color:#f6f3eb;
+}
+.day-btn:focus-visible{outline:3px solid #142329;outline-offset:2px}
+.route-heading{
+  font-size:1.05rem;
+  font-weight:700;
+  text-align:center;
+  margin-bottom:10px;
+  padding:4px 0;
+  min-height:1.6em;
+}
+.map-wrap{
+  width:100%;
+  max-width:720px;
+  margin-left:auto;
+  margin-right:auto;
+  height:600px;
+  border-radius:8px;
+  overflow:hidden;
+  border:1px solid #142329;
+  margin-bottom:10px;
+}
+.map-wrap iframe{
+  width:100%;
+  height:100%;
+  border:0;
+  display:block;
+}
+.map-link{
+  display:block;
+  text-align:center;
+  margin-bottom:8px;
+  font-size:.9rem;
+}
+.map-link a{
+  color:#142329;
+  font-weight:600;
+  text-decoration:underline;
+}
+.map-link a:hover{color:#3a5a6a}
+.note{
+  text-align:center;
+  font-size:.8rem;
+  color:#142329;
+  opacity:.75;
+}
+@media(max-width:480px){
+  .day-btns{grid-template-columns:repeat(2,1fr)}
+  .overview-btn{grid-column:1/-1}
+  .map-wrap{height:480px}
+  .day-btn{font-size:.8rem;min-height:44px}
+}
+</style>
+</head>
+<body>
+<div class="day-btns" role="group" aria-label="日付選択">
+<button type="button" class="day-btn overview-btn" data-idx="0" aria-pressed="true">全体<span>4日間</span></button>
+  <button type="button" class="day-btn" data-idx="1" aria-pressed="true">DAY1<span>9/24</span></button>
+  <button type="button" class="day-btn" data-idx="2" aria-pressed="false">DAY2<span>9/25</span></button>
+  <button type="button" class="day-btn" data-idx="3" aria-pressed="false">DAY3<span>9/26</span></button>
+  <button type="button" class="day-btn" data-idx="4" aria-pressed="false">DAY4<span>9/27</span></button>
+</div>
+<p class="route-heading" id="routeHeading"></p>
+<div class="map-wrap">
+  <iframe id="mapFrame" title="Googleマップ 徒歩ルート" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src=""></iframe>
+</div>
+<p class="map-link"><a id="mapLink" href="#" target="_blank" rel="noopener noreferrer">Googleマップで開く</a></p>
+<p class="note">全体ルートと、日別の徒歩ルートを切り替えられます。</p>
+<script>
+(function(){
+"use strict";
+const routes=[{"day": 0, "date": "9/24–9/27", "from": "富士山一周", "to": "4日間の全体ルート", "label": "富士山を一周する4日間の全体ルート", "color": "#142329", "url": "https://www.google.com/maps/dir/?api=1&origin=35.4825115%2C138.7785636&destination=35.4825115%2C138.7785636&waypoints=35.2937155%2C138.8981653%7C35.2815784%2C138.6465383%7C35.4853106%2C138.6189809&travelmode=walking", "embed": "https://www.google.com/maps/embed?pb=!1m36!1m12!1m3!1d416443.0563589888!2d138.41025062361263!3d35.36901123557724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m21!3e2!4m3!3m2!1d35.4825115!2d138.77856359999998!4m3!3m2!1d35.2937155!2d138.8981653!4m3!3m2!1d35.2815784!2d138.6465383!4m3!3m2!1d35.4853106!2d138.6189809!4m3!3m2!1d35.4825115!2d138.77856359999998!5e0!3m2!1sja!2sjp!4v1789466977264!5m2!1sja!2sjp"}, {"day": 1, "date": "9/24", "from": "ドンキホーテ河口湖インター店", "to": "セブン-イレブン 御殿場板妻店", "color": "#d93632", "url": "https://maps.app.goo.gl/7NBz25bx4jJD97Dx8", "embed": "https://www.google.com/maps/embed?pb=!1m26!1m12!1m3!1d208172.27689208128!2d138.76085297402847!3d35.388098625085505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m11!3e2!4m5!1s0x601960ea63c755e1%3A0xb766618c9f2c0fa6!2z44OJ44Oz44O744Kt44Ob44O844OGIOays-WPo-a5luOCpOODs-OCv-ODvOW6l-OAgeOAkjQwMy0wMDE2IOWxseaiqOecjOWvjOWjq-WQieeUsOW4guadvuWxse-8ke-8le-8me-8kCDnlao!3m2!1d35.4825115!2d138.77856359999998!4m3!3m2!1d35.2937155!2d138.8981653!5e0!3m2!1sja!2sjp!4v1789466044826!5m2!1sja!2sjp"}, {"day": 2, "date": "9/25", "from": "セブン-イレブン 御殿場板妻店", "to": "やぎの木登りガーデンカフェ", "color": "#176db2", "url": "https://maps.app.goo.gl/HGDjjQ15uLeQigHw8", "embed": "https://www.google.com/maps/embed?pb=!1m24!1m12!1m3!1d416948.49882132804!2d138.60754222751865!3d35.270927551447166!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m9!3e2!4m3!3m2!1d35.2937155!2d138.8981653!4m3!3m2!1d35.2815784!2d138.6465383!5e0!3m2!1sja!2sjp!4v1789466048269!5m2!1sja!2sjp"}, {"day": 3, "date": "9/26", "from": "やぎの木登りガーデンカフェ", "to": "ニューあかいけ", "color": "#248348", "url": "https://maps.app.goo.gl/rkcNpWpCKQUnxSqs8", "embed": "https://www.google.com/maps/embed?pb=!1m24!1m12!1m3!1d208184.35872410532!2d138.52679843197805!3d35.383417126855136!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m9!3e2!4m3!3m2!1d35.2815784!2d138.6465383!4m3!3m2!1d35.4853106!2d138.6189809!5e0!3m2!1sja!2sjp!4v1789465988111!5m2!1sja!2sjp"}, {"day": 4, "date": "9/27", "from": "ニューあかいけ", "to": "ドンキホーテ河口湖インター店", "color": "#8a48ab", "url": "https://maps.app.goo.gl/yYtqdR4AbdTLbf3N7", "embed": "https://www.google.com/maps/embed?pb=!1m24!1m12!1m3!1d207902.62696222684!2d138.61670132924704!3d35.49244353974412!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m9!3e2!4m3!3m2!1d35.4853106!2d138.6189809!4m3!3m2!1d35.4828869!2d138.77913859999998!5e0!3m2!1sja!2sjp!4v1789466051673!5m2!1sja!2sjp"}];
+const heading=document.getElementById("routeHeading");
+const frame=document.getElementById("mapFrame");
+const link=document.getElementById("mapLink");
+const btns=document.querySelectorAll(".day-btn");
+
+function select(idx){
+  if(!routes||!routes[idx])return;
+  const r=routes[idx];
+  heading.textContent=r.label||(r.from+" \u2192 "+r.to);
+  frame.src=r.embed;
+  frame.title="Googleマップ "+r.from+" \u2192 "+r.to;
+  link.href=r.url;
+  btns.forEach(function(b,i){
+    b.setAttribute("aria-pressed",i===idx?"true":"false");
+    b.style.background=i===idx?r.color:"";
+    b.style.color=i===idx?"#f6f3eb":"";
+    b.style.borderColor=i===idx?r.color:"#142329";
+  });
+}
+
+btns.forEach(function(b){
+  b.addEventListener("click",function(){
+    select(parseInt(b.dataset.idx,10));
+  });
+});
+
+select(0);
+})();
+</script>
+</body>
+</html>
