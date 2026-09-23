@@ -1,0 +1,324 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const routePath = '/preview-fuji-day00-20260923-3e4b64fe74f5/';
+const photoRoot = '/img/daily/20260923-fuji-day00';
+const photos = {
+	takoyaki: {
+		src: `${photoRoot}/01-takoyaki-party.jpg`,
+		alt: 'たこ焼き器のそばに座るアーサー先生と、準備する人々',
+		caption: '具材や皿が並ぶ食卓。たこ焼きパーティーの準備が進む。',
+	},
+	meal: {
+		src: `${photoRoot}/02-evening-meal.jpg`,
+		alt: '友人たちと夕食を囲むアーサー先生',
+		caption: '大皿を囲む夜の食卓。会話が続くひととき。',
+	},
+	together: {
+		src: `${photoRoot}/03-together.jpg`,
+		alt: '食卓の前に並ぶアーサー先生と三人',
+		caption: '食卓の前で撮影した、笑顔の集合写真。',
+	},
+};
+---
+
+<Layout
+	title="出発前日、たこ焼きと夜の食卓"
+	description="富士山一周十字架行進の前日、イッチー御一家とのたこ焼きパーティーと、タナカツさんや友人たちとの夕食を記録したDAY 00レポート。"
+	image={photos.takoyaki.src}
+	imageAlt={photos.takoyaki.alt}
+	imageWidth={1800}
+	imageHeight={1350}
+	canonicalPath={routePath}
+	noindex={true}
+>
+	<main class="report-page">
+		<div class="report-shell">
+			<a class="event-link" href="/walk-across-fuji-2026/">富士山一周十字架行進 2026 <span aria-hidden="true">↗</span></a>
+
+			<header class="report-header">
+				<p class="eyebrow">DAY 00 REPORT <span aria-hidden="true">/</span> 2026.09.23</p>
+				<h1>出発前日、<br class="mobile-break" />たこ焼きと夜の食卓</h1>
+				<p class="lead">
+					富士山一周十字架行進が始まる9月24日を前にした、9月23日の移動日。
+					アーサー先生は、イッチー御一家の願いで開かれたたこ焼きパーティー、
+					そして夜にはタナカツさんや友人たちとの食事を通して、再会のひとときを過ごした。
+				</p>
+			</header>
+
+			<article class="report-story">
+				<section class="story-section" aria-labelledby="takoyaki-title">
+					<div class="story-copy">
+						<p class="section-label">A TABLE BEFORE THE WALK</p>
+						<h2 id="takoyaki-title">たこ焼きパーティー</h2>
+						<p>
+							イッチー御一家の強い願いで、アーサー先生はたこ焼きパーティーに加わった。
+							焼き始める前には、集まった人々が手をつないで祈り、共にいられることへの感謝と、
+							楽しい食事への願いを分かち合った。鉄板を囲み、焼き上がりを待つ時間にも笑顔が広がる。
+						</p>
+					</div>
+					<figure class="story-photo story-photo-feature">
+						<img src={photos.takoyaki.src} alt={photos.takoyaki.alt} loading="lazy" decoding="async" />
+						<figcaption>{photos.takoyaki.caption}</figcaption>
+					</figure>
+				</section>
+
+				<section class="story-section story-section-reversed" aria-labelledby="nha-trang-title">
+					<div class="story-copy">
+						<p class="section-label">A CONNECTION FROM NHA TRANG</p>
+						<h2 id="nha-trang-title">ニャチャンからの縁</h2>
+						<p>
+							アーサー先生とイッチー御一家の縁は二年前にさかのぼる。
+							タナカツさんの紹介をきっかけに、ベトナム・ニャチャンで行われた
+							イッチー御一家の結婚式をアーサー先生が執り行った。
+							遠く離れた地で結ばれた縁が、日本の食卓で再び重なった。
+						</p>
+					</div>
+					<div class="story-note" aria-hidden="true">
+						<span>REUNION</span>
+						<strong>二年前の出会いが、<br />食卓でもう一度つながる。</strong>
+					</div>
+				</section>
+
+				<section class="story-section story-section-evening" aria-labelledby="evening-title">
+					<div class="story-copy">
+						<p class="section-label">EVENING TOGETHER</p>
+						<h2 id="evening-title">夜の食卓</h2>
+						<p>
+							その夜、アーサー先生はタナカツさんや友人たちと夕食を共にした。
+							大皿を囲んで言葉を交わすひとときが、出発を前にした一日をやさしく締めくくる。
+							人と人が食卓を囲む時間を胸に、行進へ向けた歩みが整えられていった。
+						</p>
+					</div>
+					<div class="photo-pair">
+						<figure class="story-photo">
+							<img src={photos.meal.src} alt={photos.meal.alt} loading="lazy" decoding="async" />
+							<figcaption>{photos.meal.caption}</figcaption>
+						</figure>
+						<figure class="story-photo">
+							<img src={photos.together.src} alt={photos.together.alt} loading="lazy" decoding="async" />
+							<figcaption>{photos.together.caption}</figcaption>
+						</figure>
+					</div>
+				</section>
+
+				<p class="closing-line">
+					祈りと食事、そして語らいに支えられた移動日の一日。<br />
+					富士山一周十字架行進は、9月24日から始まる。
+				</p>
+			</article>
+
+			<footer class="report-footer">
+				<span>WALK ACROSS MT. FUJI 2026</span>
+				<a href="/walk-across-fuji-2026/">行進の案内へ戻る <span aria-hidden="true">→</span></a>
+			</footer>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	.report-page {
+		--report-ink: #20201d;
+		--report-muted: #6f6b62;
+		--report-gold: #a98447;
+		--report-line: #ded8cd;
+		background: #f5f2ec;
+		color: var(--report-ink);
+		padding: clamp(2.5rem, 7vw, 6.5rem) 1.1rem 3rem;
+	}
+
+	.report-shell {
+		max-width: 1080px;
+		margin: 0 auto;
+	}
+
+	.event-link,
+	.report-footer a {
+		color: var(--report-ink);
+		font-size: 0.82rem;
+		font-weight: 700;
+		text-decoration: none;
+	}
+
+	.event-link span,
+	.report-footer a span {
+		color: var(--report-gold);
+		margin-left: 0.35rem;
+	}
+
+	.report-header {
+		max-width: 850px;
+		padding: clamp(2.4rem, 6vw, 5rem) 0 clamp(2.2rem, 5vw, 4rem);
+	}
+
+	.eyebrow,
+	.section-label,
+	.report-footer > span {
+		color: var(--report-gold);
+		font-family: Oswald, sans-serif;
+		font-size: 0.77rem;
+		font-weight: 700;
+		letter-spacing: 0.15em;
+		margin: 0;
+	}
+
+	.eyebrow span {
+		color: #bcb4a7;
+		padding: 0 0.3rem;
+	}
+
+	h1,
+	h2 {
+		font-family: 'Shippori Mincho', serif;
+		letter-spacing: 0.02em;
+	}
+
+	h1 {
+		font-size: clamp(2.35rem, 6vw, 4.8rem);
+		line-height: 1.35;
+		margin: 1.25rem 0 1.6rem;
+	}
+
+	.mobile-break {
+		display: none;
+	}
+
+	.lead {
+		color: #504c44;
+		font-size: clamp(1rem, 1.7vw, 1.16rem);
+		line-height: 2.05;
+		margin: 0;
+	}
+
+	.report-story {
+		border-top: 1px solid var(--report-line);
+	}
+
+	.story-section {
+		align-items: center;
+		border-bottom: 1px solid var(--report-line);
+		display: grid;
+		gap: clamp(2rem, 6vw, 5.2rem);
+		grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+		padding: clamp(2.6rem, 6vw, 5.2rem) 0;
+	}
+
+	.story-section-reversed {
+		grid-template-columns: minmax(0, 1fr) minmax(260px, 0.72fr);
+	}
+
+	.story-copy h2 {
+		font-size: clamp(1.75rem, 3.5vw, 2.65rem);
+		line-height: 1.55;
+		margin: 0.55rem 0 1rem;
+	}
+
+	.story-copy p:not(.section-label) {
+		color: #49463f;
+		font-size: 1rem;
+		line-height: 2.05;
+		margin: 0;
+	}
+
+	.story-photo {
+		margin: 0;
+	}
+
+	.story-photo img {
+		aspect-ratio: 4 / 3;
+		background: #e8e2d8;
+		display: block;
+		object-fit: cover;
+		width: 100%;
+	}
+
+	.story-photo figcaption {
+		color: var(--report-muted);
+		font-size: 0.82rem;
+		line-height: 1.7;
+		padding-top: 0.65rem;
+	}
+
+	.story-note {
+		border-left: 2px solid var(--report-gold);
+		padding: 0.3rem 0 0.3rem 1.5rem;
+	}
+
+	.story-note span {
+		color: var(--report-gold);
+		display: block;
+		font: 700 0.72rem Oswald, sans-serif;
+		letter-spacing: 0.15em;
+		margin-bottom: 0.8rem;
+	}
+
+	.story-note strong {
+		font-family: 'Shippori Mincho', serif;
+		font-size: clamp(1.25rem, 2.5vw, 1.85rem);
+		font-weight: 700;
+		line-height: 1.8;
+	}
+
+	.story-section-evening {
+		align-items: start;
+		grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+	}
+
+	.photo-pair {
+		display: grid;
+		gap: 1.25rem;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.closing-line {
+		font-family: 'Shippori Mincho', serif;
+		font-size: clamp(1.05rem, 2vw, 1.35rem);
+		line-height: 2;
+		margin: 0;
+		padding: clamp(2.5rem, 5vw, 4rem) 0;
+		text-align: center;
+	}
+
+	.report-footer {
+		align-items: center;
+		border-top: 1px solid var(--report-line);
+		display: flex;
+		gap: 1rem;
+		justify-content: space-between;
+		padding-top: 1.1rem;
+	}
+
+	@media (max-width: 720px) {
+		.report-page {
+			padding-inline: 1.25rem;
+		}
+
+		.mobile-break {
+			display: initial;
+		}
+
+		.story-section,
+		.story-section-reversed,
+		.story-section-evening {
+			gap: 1.5rem;
+			grid-template-columns: 1fr;
+		}
+
+		.story-section-reversed .story-note {
+			margin-left: 0.15rem;
+		}
+
+		.photo-pair {
+			gap: 0.8rem;
+		}
+
+		.photo-pair figcaption {
+			font-size: 0.75rem;
+		}
+
+		.report-footer {
+			align-items: flex-start;
+			flex-direction: column;
+		}
+	}
+</style>
