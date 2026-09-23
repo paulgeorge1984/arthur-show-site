@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 const title = '富士山一周十字架行進 2026｜9月24日（木）〜27日（日）毎朝7:00スタート';
-const description = 'アーサー・ホーランドによる富士山一周十字架行進 2026。2026年9月24日（木）〜27日（日）の4日間、毎朝7:00スタート。行程案・地図・問い合わせ先を掲載。';
+const description = 'アーサー・ホーランドによる富士山一周十字架行進 2026。2026年9月24日（木）〜27日（日）の4日間、毎朝7:00スタート。行程案・地図・前日からの記録・問い合わせ先を掲載。';
 const calendarUrl = 'https://www.google.com/calendar/event?eid=MmRqNDU1cjRkMjJmYXVpaDB0ODJjdWJyOGQgYXJ0aHVyLmhvbGxhbmRzLmhwQG0';
 const routes = [
   { day: 'Day 1', date: '9月24日（木）', from: 'ドンキホーテ河口湖インター店', to: 'セブン-イレブン 御殿場板妻店', url: 'https://maps.app.goo.gl/7NBz25bx4jJD97Dx8' },
@@ -31,7 +31,7 @@ const routes = [
 </header>
 <section class="fuji-intro">
 <div class="fuji-wrap fuji-wrap-narrow">
-<p class="fuji-lead">アーサー・ホーランドが十字架を携え、富士山の周りを歩く4日間。開催日程と、行程案をご案内します。</p>
+<p class="fuji-lead">アーサー・ホーランドが十字架を携え、富士山の周りを歩く4日間。開催日程と行程案、前日からの記録をご案内します。</p>
 </div>
 </section>
 <section id="route" class="fuji-sec">
@@ -68,22 +68,56 @@ const routes = [
 </div>
 </section>
 
-<section class="fuji-sec fuji-day00" aria-labelledby="fuji-day00-title">
+<section class="fuji-sec fuji-journal" aria-labelledby="fuji-journal-title">
 <div class="fuji-wrap">
 <div class="fuji-sec-head">
-<p class="fuji-sec-en">DAY 00 — REPORT</p>
-<h2 class="fuji-h2" id="fuji-day00-title">出発前日、たこ焼きと夜の食卓</h2>
-<p class="fuji-note">イッチー御一家の願いで開かれたたこ焼きパーティーから、タナカツさんや友人たちと囲んだ夜の食卓まで。行進前日の一日を写真とともに振り返ります。</p>
+<p class="fuji-sec-en">WALK ACROSS — JOURNAL</p>
+<h2 class="fuji-h2" id="fuji-journal-title">行進の記録</h2>
+<p class="fuji-note">出発前日から各日の歩みを、順次掲載していきます。</p>
 </div>
-<a class="fuji-day00-card" href="/preview-fuji-day00-20260923-3e4b64fe74f5/">
+<article class="fuji-report" id="day00" aria-labelledby="fuji-day00-title">
+<header class="fuji-report-header">
+<p class="fuji-report-kicker">DAY 00 <span>2026.09.23</span></p>
+<h3 id="fuji-day00-title">出発前日、たこ焼きと夜の食卓</h3>
+<p class="fuji-report-lead">富士山一周十字架行進が始まる9月24日を前にした、9月23日の移動日。アーサー先生は、イッチー御一家の願いで開かれたたこ焼きパーティー、そして夜にはタナカツさんや友人たちとの食事を通して、再会のひとときを過ごした。</p>
+</header>
+<div class="fuji-report-content">
+<section class="fuji-report-part" aria-labelledby="fuji-takoyaki-title">
+<div class="fuji-report-copy">
+<p class="fuji-report-label">A TABLE BEFORE THE WALK</p>
+<h4 id="fuji-takoyaki-title">たこ焼きパーティー</h4>
+<p>イッチー御一家の強い願いで、アーサー先生はたこ焼きパーティーに加わった。焼き始める前には、集まった人々が手をつないで祈り、共にいられることへの感謝と、楽しい食事への願いを分かち合った。鉄板を囲み、焼き上がりを待つ時間にも笑顔が広がる。</p>
+</div>
+<figure class="fuji-report-photo">
 <img src="/img/daily/20260923-fuji-day00/01-takoyaki-party.jpg" width="1800" height="1350" alt="たこ焼き器のそばに座るアーサー先生と、準備する人々" loading="lazy" decoding="async" />
-<div class="fuji-day00-copy">
-<p class="fuji-day00-date">2026.09.23 <span>DAY 00</span></p>
-<h3>行進が始まる前日、食卓を囲んで</h3>
-<p>二年前にニャチャンで行われたイッチー御一家の結婚式から続く交流と、出発前日の食事のひとときをお届けします。</p>
-<span class="fuji-day00-link">前日のレポートを読む <span aria-hidden="true">↗</span></span>
+<figcaption>具材や皿が並ぶ食卓。たこ焼きパーティーの準備が進む。</figcaption>
+</figure>
+</section>
+<section class="fuji-report-meeting" aria-labelledby="fuji-nha-trang-title">
+<p class="fuji-report-label">A CONNECTION FROM NHA TRANG</p>
+<h4 id="fuji-nha-trang-title">ニャチャンでの出会い</h4>
+<p>アーサー先生とイッチー御一家の出会いは二年前にさかのぼる。タナカツさんの紹介をきっかけに、ベトナム・ニャチャンで行われたイッチー御一家の結婚式をアーサー先生が執り行った。ニャチャンで始まった交流が、日本の食卓でもう一度続いていった。</p>
+</section>
+<section class="fuji-report-part fuji-report-part-evening" aria-labelledby="fuji-evening-title">
+<div class="fuji-report-copy">
+<p class="fuji-report-label">EVENING TOGETHER</p>
+<h4 id="fuji-evening-title">夜の食卓</h4>
+<p>その夜、アーサー先生はタナカツさんや友人たちと夕食を共にした。テーブルを囲んで言葉を交わすひとときが、出発を前にした一日をやさしく締めくくる。人と人が食卓を囲む時間を胸に、行進へ向けた歩みが整えられていった。</p>
 </div>
-</a>
+<div class="fuji-report-pair">
+<figure class="fuji-report-photo">
+<img src="/img/daily/20260923-fuji-day00/02-evening-meal.jpg" width="1800" height="1350" alt="友人たちと夕食を囲むアーサー先生" loading="lazy" decoding="async" />
+<figcaption>テーブルを囲む夜の食卓。会話が続くひととき。</figcaption>
+</figure>
+<figure class="fuji-report-photo">
+<img src="/img/daily/20260923-fuji-day00/03-together.jpg" width="1800" height="1350" alt="食卓の前に並ぶアーサー先生と三人" loading="lazy" decoding="async" />
+<figcaption>食卓の前で撮影した、笑顔の集合写真。</figcaption>
+</figure>
+</div>
+</section>
+<p class="fuji-report-closing">祈りと食事、そして語らいに支えられた移動日の一日。<br />富士山一周十字架行進は、9月24日から始まる。</p>
+</div>
+</article>
 </div>
 </section>
 
@@ -171,15 +205,24 @@ const routes = [
 .fuji-page .fuji-details summary{cursor:pointer;font-weight:800;font-size:15px;padding:6px 2px}
 .fuji-page .fuji-ref-link{display:block;margin-top:10px;border:1px solid #ddd4c0;line-height:0}
 .fuji-page .fuji-ref-link img{display:block;width:100%;height:auto}
-.fuji-page .fuji-day00-card{display:grid;grid-template-columns:1fr;background:#fff;border:1px solid #ddd4c0;border-top:5px solid #ca3025;color:#142329;text-decoration:none;overflow:hidden}
-.fuji-page .fuji-day00-card img{display:block;width:100%;height:100%;aspect-ratio:4/3;object-fit:cover}
-.fuji-page .fuji-day00-copy{padding:16px 18px 20px}
-.fuji-page .fuji-day00-date{margin:0 0 8px;color:#ca3025;font-family:Oswald,"Noto Sans JP",sans-serif;font-size:13px;font-weight:700;letter-spacing:.1em}
-.fuji-page .fuji-day00-date span{display:inline-block;margin-left:6px;background:#142329;color:#fff;padding:2px 8px;letter-spacing:.12em}
-.fuji-page .fuji-day00-copy h3{margin:0 0 8px;font-size:19px;line-height:1.6}
-.fuji-page .fuji-day00-copy>p:not(.fuji-day00-date){margin:0 0 16px;font-size:14px;line-height:1.9;color:#3d4e55}
-.fuji-page .fuji-day00-link{display:inline-block;font-size:14px;font-weight:800;color:#ca3025;text-decoration:underline;text-underline-offset:4px}
-.fuji-page .fuji-day00-card:hover .fuji-day00-link,.fuji-page .fuji-day00-card:focus-visible .fuji-day00-link{color:#a9261e}
+.fuji-page .fuji-journal{background:#efe9d9}
+.fuji-page .fuji-report{background:#fff;border:1px solid #ddd4c0;border-top:5px solid #ca3025}
+.fuji-page .fuji-report-header{padding:18px 16px 0}
+.fuji-page .fuji-report-kicker{margin:0 0 8px;color:#ca3025;font-family:Oswald,"Noto Sans JP",sans-serif;font-size:13px;font-weight:700;letter-spacing:.12em}
+.fuji-page .fuji-report-kicker span{display:inline-block;margin-left:8px;color:#3d4e55;font-family:"Noto Sans JP",sans-serif;font-size:12px;letter-spacing:.08em}
+.fuji-page .fuji-report-header h3{margin:0 0 10px;font-size:clamp(20px,5vw,26px);line-height:1.55;font-weight:800}
+.fuji-page .fuji-report-lead{margin:0;font-size:14px;line-height:2;color:#3d4e55}
+.fuji-page .fuji-report-content{padding:0 16px 20px}
+.fuji-page .fuji-report-part{display:grid;gap:16px;margin-top:22px;align-items:center}
+.fuji-page .fuji-report-copy h4,.fuji-page .fuji-report-meeting h4{margin:0 0 8px;font-size:18px;line-height:1.6;font-weight:800}
+.fuji-page .fuji-report-copy p:not(.fuji-report-label),.fuji-page .fuji-report-meeting>p:last-child{margin:0;font-size:14px;line-height:2;color:#3d4e55}
+.fuji-page .fuji-report-label{margin:0 0 5px;color:#ca3025;font-family:Oswald,"Noto Sans JP",sans-serif;font-size:11px;font-weight:700;letter-spacing:.18em}
+.fuji-page .fuji-report-photo{margin:0;line-height:1.7}
+.fuji-page .fuji-report-photo img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}
+.fuji-page .fuji-report-photo figcaption{padding:6px 2px 0;font-size:12px;color:#59676c}
+.fuji-page .fuji-report-meeting{margin-top:22px;padding:16px;background:#f6f3eb;border-left:6px solid #ca3025}
+.fuji-page .fuji-report-pair{display:grid;grid-template-columns:1fr;gap:14px}
+.fuji-page .fuji-report-closing{margin:22px 0 0;padding:14px 16px;background:#142329;color:#fff;font-size:14px;line-height:2;text-align:center;font-weight:700}
 .fuji-page .fuji-sec-contact{padding-bottom:44px}
 .fuji-page .fuji-contact{background:#142329;color:#fff;padding:22px 20px;text-align:left}
 .fuji-page .fuji-contact-name{margin:0;font-size:15px;font-weight:700}
@@ -198,8 +241,12 @@ const routes = [
 .fuji-page .fuji-num-n{font-size:56px}
 .fuji-page .fuji-path div{padding:10px 12px}
 .fuji-page .fuji-map{max-width:320px}
-.fuji-page .fuji-day00-card{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);align-items:stretch}
-.fuji-page .fuji-day00-copy{padding:24px 28px;align-self:center}
+.fuji-page .fuji-report-header{padding:28px 30px 0}
+.fuji-page .fuji-report-content{padding:0 30px 28px}
+.fuji-page .fuji-report-part{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:28px}
+.fuji-page .fuji-report-part-evening{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);align-items:start}
+.fuji-page .fuji-report-pair{grid-template-columns:1fr 1fr;gap:12px}
+.fuji-page .fuji-report-meeting{padding:18px 22px}
 }
 .fuji-page .fuji-film{background:#efe9d9}.fuji-page .fuji-film iframe{display:block;width:100%;aspect-ratio:16/9;border:0;margin-top:18px}
 </style>
