@@ -1,18 +1,11 @@
 ---
-import NashiFes from '../components/NashiFes.astro';
 import Layout from '../layouts/Layout.astro';
 import YoutubeSubscribeBanner from '../components/YoutubeSubscribeBanner.astro';
 import { getCollection } from 'astro:content';
 
 const siteURL = 'https://arthur-show.com';
-const blessingTimeOsakaBanner = '/assets/generated/blessing-time-osaka2026-banner.webp';
-const gospelTalkSummerBanner = '/assets/generated/gospel-talk-summer-osaka20260719-banner.webp';
 const theEssenceAkitaBanner = '/assets/the-essence-akita-20261114-og-v3.jpg';
-const blessingNightKagurazakaSeptemberUrl = 'https://www.blessingnight.jp/schedule/schedule582';
-const blessingNightKagurazakaSeptemberPosterFront = '/assets/blessing-night-kagurazaka-20260911-front.jpg';
-const blessingNightKagurazakaSeptemberPosterBack = '/assets/blessing-night-kagurazaka-20260911-back.jpg';
 const blessingNightShimokitazawaPoster = '/assets/blessing-night-shimokitazawa-20261009-front.webp';
-const igniteHiscallSeptemberPoster = '/assets/ignite-hiscall-20260918.jpg';
 
 // サイトのビルドが実行された現在の時刻を取得
 const currentBuildTime = new Date(); 
@@ -380,110 +373,16 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 			</div>
 		</a>
 
-		<a
-			class="blessing-time-feature blessing-time-home-priority"
-			href="/blessing-time-osaka2026/"
-			aria-label="今週土曜開催 BLESSING TIME in OSAKA 2026年7月18日 詳細とアクセスを見る"
-			data-blessing-campaign-window
-			data-blessing-campaign-link
-			data-campaign-placement="home_hero"
-		>
-			<img
-				src={blessingTimeOsakaBanner}
-				alt=""
-				width="1600"
-				height="900"
-				loading="eager"
-				aria-hidden="true"
-			/>
-			<div class="blessing-time-feature-copy">
-				<p class="blessing-time-feature-kicker">THIS SATURDAY / 今週土曜開催</p>
-				<h2>BLESSING TIME in OSAKA</h2>
-				<p>
-					大阪・今週土曜。アーサー・ホーランドの Talk Live と豪華アーティスト陣による Worship。
-					ジーザスの愛と希望に満ちた祝福の時間を、ぜひご一緒ください。
-				</p>
-				<div class="blessing-time-feature-meta">
-					<span>2026年7月18日（土）</span>
-					<span>OPEN 14:30 / START 15:00</span>
-					<span>大阪クリスチャンセンター OCCホール</span>
-					<span>入場無料・予約不要・自由席（席上献金あり）</span>
-				</div>
-				<span class="blessing-time-feature-button">詳細・アクセスを見る</span>
-			</div>
-		</a>
-
-		<section
-			class="blessing-time-short-feature"
-			aria-labelledby="blessing-time-short-home-title"
-			data-blessing-campaign-window
-		>
-			<div class="blessing-time-short-copy">
-				<p class="blessing-time-short-kicker">60 SEC PREVIEW / 今週土曜・大阪</p>
-				<h2 id="blessing-time-short-home-title">魂に火を灯す賛美</h2>
-				<p>
-					アーサー・ホーランドの Talk Live と、5組のアーティストによる Worship。
-					BLESSING TIMEの熱を、このショートで。
-				</p>
-				<div class="blessing-time-short-meta" aria-label="開催情報">
-					<strong>7.18 SAT / 15:00</strong>
-					<span>大阪 OCCホール・入場無料</span>
-				</div>
-				<a
-					class="blessing-time-short-action"
-					href="/blessing-time-osaka2026/"
-					data-blessing-campaign-link
-					data-campaign-placement="home_short"
-				>
-					詳細・アクセスを見る <span aria-hidden="true">→</span>
-				</a>
-			</div>
-			<div class="blessing-time-short-player">
-				<iframe
-					src="https://www.youtube.com/embed/0ynCzIaaxpE?rel=0&playsinline=1"
-					title="BLESSING TIME in OSAKA 2026 60秒ショート映像"
-					loading="lazy"
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-					allowfullscreen
-				></iframe>
-			</div>
-		</section>
-
-		<a
-			class="gospel-talk-home-companion"
-			href="/gospel-talk-summer-osaka20260719/"
-			aria-label="翌日7月19日開催 Gospel Talk in the Summer 詳細と地図を見る"
-			data-gospel-talk-campaign-window
-			data-gospel-talk-campaign-link
-			data-campaign-placement="home_blessing_companion"
-		>
-			<span class="gospel-talk-home-companion-media" aria-hidden="true">
-				<img
-					src={gospelTalkSummerBanner}
-					alt=""
-					width="1600"
-					height="900"
-					loading="eager"
-				/>
-			</span>
-			<span class="gospel-talk-home-companion-copy">
-				<span class="gospel-talk-home-companion-kicker">大阪2DAYS / 翌日も大阪</span>
-				<strong>7/19（日）11:00｜Gospel Talk in the Summer</strong>
-				<span>「神の言葉を語る」・大阪弟子教会｜入場無料（席上献金あり）</span>
-			</span>
-			<span class="gospel-talk-home-companion-action">7/19の詳細・地図を見る <span aria-hidden="true">→</span></span>
-		</a>
-
 		<details class="home-event-drawer">
 			<summary class="home-event-summary">
-				<span class="home-event-summary-media blessing-night-kagurazaka-summary-media" aria-hidden="true">
-					<strong>SEP 11</strong>
-					<small>KAGURAZAKA</small>
+				<span class="home-event-summary-media upcoming-events-summary-media" aria-hidden="true">
+					<strong>OCT 09–16</strong>
+					<small>UPCOMING</small>
 				</span>
 				<span class="home-event-summary-copy">
 					<span class="home-event-summary-kicker">EVENT INFO</span>
 					<strong>イベント案内</strong>
-					<span>9/11 BLESSING NIGHT 神楽坂／9/18 IGNITE／9/19 梨フェス／10/9 下北沢／11/14 THE ESSENCE</span>
+					<span>10/9 下北沢／10/16 IGNITE／11/14 THE ESSENCE</span>
 				</span>
 				<span class="home-event-summary-action" aria-hidden="true">
 					<span class="closed">見る</span>
@@ -491,77 +390,7 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 				</span>
 			</summary>
 			<div class="home-event-panel">
-				<a
-					class="blessing-time-feature blessing-night-kagurazaka-home-feature"
-					href={blessingNightKagurazakaSeptemberUrl}
-					target="_blank"
-					rel="noopener noreferrer"
-					aria-label="BLESSING NIGHT 神楽坂 2026年9月11日 公式の詳細・申込ページを見る"
-				>
-					<div class="blessing-night-kagurazaka-home-media" aria-hidden="true">
-						<img
-							src={blessingNightKagurazakaSeptemberPosterFront}
-							alt=""
-							width="1025"
-							height="1280"
-							loading="eager"
-						/>
-						<img
-							src={blessingNightKagurazakaSeptemberPosterBack}
-							alt=""
-							width="1026"
-							height="1280"
-							loading="lazy"
-						/>
-					</div>
-					<div class="blessing-time-feature-copy">
-						<p class="blessing-time-feature-kicker">NEXT EVENT / 9.11 FRI</p>
-						<h2>BLESSING NIGHT 神楽坂</h2>
-						<p>
-							不良牧師アーサー・ホーランドが語る、聖なる夜のトークライブ。
-							音楽ゲストにラニー・ラッカーを迎えます。
-						</p>
-						<div class="blessing-time-feature-meta">
-							<span>2026年9月11日（金）</span>
-							<span>OPEN 18:30 / START 19:00</span>
-							<span>音楽ゲスト：ラニー・ラッカー</span>
-							<span>u-ma kagurazaka</span>
-							<span>3,000円（税込・飲食代別途）</span>
-						</div>
-						<span class="blessing-time-feature-button">公式の詳細・申込ページへ</span>
-					</div>
-				</a>
 
-				<a class="blessing-time-feature ignite-home-feature" href="/calendar/#ignite-20260918" aria-label="IGNITE ハートに火を灯せ！ 2026年9月18日 名古屋レジェンドホール 詳細を見る">
-					<img
-						src={igniteHiscallSeptemberPoster}
-						alt=""
-						width="1024"
-						height="1280"
-						loading="eager"
-						aria-hidden="true"
-					/>
-					<div class="blessing-time-feature-copy">
-						<p class="blessing-time-feature-kicker">NEXT EVENT / 9.18 FRI</p>
-						<h2>IGNITE ハートに火を灯せ！</h2>
-						<p>
-							IGNITE（イグナイト）ハートに火を灯せ！申込み不要・当日直接会場へ・初めての方も大歓迎。
-						</p>
-						<div class="blessing-time-feature-meta">
-							<span>2026年9月18日（金）</span>
-							<span>18:00開場 / 18:30開演</span>
-							<span>参加無料（自由献金あり）</span>
-							<span>名古屋レジェンドホール</span>
-							<span>愛知県名古屋市中区大須1丁目7-26（地下鉄大須観音駅④すぐ）</span>
-							<span>主催：ヒズコールチャーチ</span>
-							<span>問合せ：THE Y’S CAFE 052-228-7677</span>
-							<span>今後のIGNITE：10月16日（金）・11月27日（金） ※12月はIGNITEお休み・12月20日（日）はヒズコールチャーチクリスマス礼拝 ゲストメッセージ</span>
-						</div>
-						<span class="blessing-time-feature-button">詳細を見る</span>
-					</div>
-				</a>
-
-				<NashiFes />
 
 				<a class="blessing-time-feature the-essence-home-feature blessing-night-home-feature" href="/blessing-night-shimokitazawa-20261009/" aria-label="BLESSING NIGHT 下北沢 2026年10月9日 Com.Cafe 音倉 特別ページを見る">
 					<img
@@ -586,6 +415,31 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 							<span>3,000円（飲食代別途）</span>
 						</div>
 						<span class="blessing-time-feature-button">詳細・ご予約案内を見る</span>
+					</div>
+				</a>
+
+				<a class="blessing-time-feature ignite-home-feature" href="/calendar/#ignite-20261016" aria-label="IGNITE ハートに火を灯せ！ 2026年10月16日 名古屋レジェンドホール 詳細を見る">
+					<img
+						src="/assets/ignite-hiscall-20261016.jpg"
+						alt=""
+						width="904"
+						height="1280"
+						loading="eager"
+						aria-hidden="true"
+					/>
+					<div class="blessing-time-feature-copy">
+						<p class="blessing-time-feature-kicker">NEXT EVENT / 10.16 FRI</p>
+						<h2>IGNITE ハートに火を灯せ！</h2>
+						<p>アーサー・ホーランドのゲストメッセージ。申込み不要、初めての方も大歓迎です。</p>
+						<div class="blessing-time-feature-meta">
+							<span>2026年10月16日（金）</span>
+							<span>18:00開場 / 18:30開演</span>
+							<span>参加無料（自由献金あり）</span>
+							<span>名古屋レジェンドホール</span>
+							<span>愛知県名古屋市中区大須1丁目7-26（地下鉄大須観音駅④番出口すぐ）</span>
+							<span>主催：ヒズコールチャーチ</span>
+						</div>
+						<span class="blessing-time-feature-button">開催案内を見る</span>
 					</div>
 				</a>
 
@@ -1100,7 +954,7 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		background: #050505;
 	}
 
-	.blessing-night-kagurazaka-summary-media {
+	.upcoming-events-summary-media {
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -1113,7 +967,7 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		color: #fff;
 	}
 
-	.blessing-night-kagurazaka-summary-media strong {
+	.upcoming-events-summary-media strong {
 		font-family: 'Oswald', sans-serif;
 		font-size: clamp(2rem, 5vw, 3.25rem);
 		font-weight: 900;
@@ -1121,7 +975,7 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		line-height: 0.9;
 	}
 
-	.blessing-night-kagurazaka-summary-media small {
+	.upcoming-events-summary-media small {
 		color: #f4d36f;
 		font-family: 'Oswald', sans-serif;
 		font-size: 0.72rem;
