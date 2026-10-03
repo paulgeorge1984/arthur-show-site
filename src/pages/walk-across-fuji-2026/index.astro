@@ -13,6 +13,18 @@ const routes = [
 <Layout title={title} description={description} noindex={false} canonicalPath="/walk-across-fuji-2026/" image="/walk-across-fuji-2026/fuji-campaign-v13.png" imageWidth={1536} imageHeight={1024} imageType="image/png">
 <div class="fuji-page">
 
+<section class="fuji-featured-film" id="digest-2026" aria-labelledby="fuji-digest-title">
+<div class="fuji-wrap">
+<p class="fuji-sec-en">FUJI CROSS WALK 2026 — DIGEST FILM</p>
+<h2 id="fuji-digest-title">Tell Jesus You Love Him<span>ただひとつの旋律</span></h2>
+<p class="fuji-digest-description">アーサー・ホーランドと共に歩いた、富士山十字架行進2026。その日々をダイジェスト映像で。</p>
+<div class="fuji-digest-player">
+<iframe src="https://www.youtube-nocookie.com/embed/gCMeNkznH_U?rel=0" title="Tell Jesus You Love Him ただひとつの旋律 Arthur Hollands 富士山十字架行進2026ダイジェスト" loading="eager" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+<a class="fuji-btn fuji-btn-red" href="https://youtu.be/gCMeNkznH_U" target="_blank" rel="noopener noreferrer">YouTubeでダイジェストを見る ↗</a>
+</div>
+</section>
+
 <header class="fuji-hero">
 <figure class="fuji-poster">
 <img src="/walk-across-fuji-2026/fuji-campaign-v13.png" width="1536" height="1024" alt="富士山一周十字架行進 2026 キャンペーンポスター：十字架を担ぐアーサー・ホーランドと富士山" loading="eager" fetchpriority="high" />
@@ -23,6 +35,7 @@ const routes = [
 <h1 class="fuji-h1">富士山一周<br />十字架行進</h1>
 <p class="fuji-date"><strong>2026年9月24日（木）〜9月27日（日）</strong><span>毎朝7:00スタート</span></p>
 <div class="fuji-cta">
+<a class="fuji-btn fuji-btn-red" href="#digest-2026">2026年 ダイジェストを見る</a>
 <a class="fuji-btn fuji-btn-red" href="#day04">DAY 04 の記録を読む</a>
 <a class="fuji-btn fuji-btn-line" href="#day03">DAY 03 の記録を読む</a>
 <a class="fuji-btn fuji-btn-line" href="#day02">DAY 02 の記録を読む</a>
@@ -290,6 +303,14 @@ const routes = [
 </footer>
 </div>
 <style>
+.fuji-page .fuji-featured-film{padding:clamp(28px,5vw,64px) 18px;background:#101c21;color:#fff;border-bottom:4px solid #c5a059;scroll-margin-top:90px}
+.fuji-page .fuji-featured-film .fuji-sec-en{color:#e6c582;letter-spacing:.18em}
+.fuji-page .fuji-featured-film h2{margin:10px 0 16px;font-family:Oswald,"Noto Sans JP",sans-serif;font-size:clamp(30px,5vw,56px);line-height:1.2;font-weight:700;overflow-wrap:anywhere}
+.fuji-page .fuji-featured-film h2 span{display:block;margin-top:10px;color:#e6c582;font-family:"Noto Sans JP",sans-serif;font-size:clamp(22px,4vw,36px);letter-spacing:.12em}
+.fuji-page .fuji-digest-description{margin:0 0 24px;color:#e2e8e9;font-size:clamp(14px,2vw,17px);line-height:1.9}
+.fuji-page .fuji-digest-player{aspect-ratio:16/9;width:100%;background:#000;box-shadow:0 12px 40px #0006;border:1px solid #c5a059;margin-bottom:24px}
+.fuji-page .fuji-digest-player iframe{display:block;width:100%;height:100%;border:0}
+
 .fuji-page{background:#f6f3eb;color:#142329;font-family:"Noto Sans JP",system-ui,-apple-system,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;line-height:2;overflow-x:clip}
 .fuji-page *{box-sizing:border-box}
 .fuji-page a{color:#ca3025}
