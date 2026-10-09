@@ -5,7 +5,8 @@ import { getCollection } from 'astro:content';
 
 const siteURL = 'https://arthur-show.com';
 const theEssenceAkitaBanner = '/assets/the-essence-akita-20261114-og-v3.jpg';
-const blessingNightShimokitazawaPoster = '/assets/blessing-night-shimokitazawa-20261009-front.webp';
+const blessingNightShimokitazawaPoster = '/assets/blessing-night-shimokitazawa-20261009-front.jpg';
+const blessingNightShimokitazawaPosterBack = '/assets/blessing-night-shimokitazawa-20261009-back.jpg';
 
 // サイトのビルドが実行された現在の時刻を取得
 const currentBuildTime = new Date(); 
@@ -392,15 +393,15 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 			<div class="home-event-panel">
 
 
-				<a class="blessing-time-feature the-essence-home-feature blessing-night-home-feature" href="/blessing-night-shimokitazawa-20261009/" aria-label="BLESSING NIGHT 下北沢 2026年10月9日 Com.Cafe 音倉 特別ページを見る">
-					<img
-						src={blessingNightShimokitazawaPoster}
-						alt=""
-						width="1025"
-						height="1280"
-						loading="eager"
-						aria-hidden="true"
-					/>
+				<article class="blessing-time-feature blessing-night-kagurazaka-home-feature blessing-night-home-feature" aria-label="BLESSING NIGHT 下北沢 2026年10月9日 Com.Cafe 音倉">
+					<div class="blessing-night-kagurazaka-home-media">
+						<a href={blessingNightShimokitazawaPoster} target="_blank" rel="noopener noreferrer" aria-label="BLESSING NIGHT 下北沢 フライヤー表面を原寸で開く">
+							<img src={blessingNightShimokitazawaPoster} alt="BLESSING NIGHT 下北沢 フライヤー表面" width="1025" height="1280" loading="lazy" />
+						</a>
+						<a href={blessingNightShimokitazawaPosterBack} target="_blank" rel="noopener noreferrer" aria-label="BLESSING NIGHT 下北沢 フライヤー裏面を原寸で開く">
+							<img src={blessingNightShimokitazawaPosterBack} alt="アーサー・ホーランドとSEISHI TOYAのプロフィール掲載フライヤー裏面" width="988" height="1280" loading="lazy" />
+						</a>
+					</div>
 					<div class="blessing-time-feature-copy">
 						<p class="blessing-time-feature-kicker">NEXT EVENT / 10.9 FRI</p>
 						<h2>BLESSING NIGHT 下北沢</h2>
@@ -414,9 +415,9 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 							<span>Com.Cafe 音倉</span>
 							<span>3,000円（飲食代別途）</span>
 						</div>
-						<span class="blessing-time-feature-button">詳細・ご予約案内を見る</span>
+						<a class="blessing-time-feature-button" href="/blessing-night-shimokitazawa-20261009/">詳細・ご予約案内を見る</a>
 					</div>
-				</a>
+				</article>
 
 				<a class="blessing-time-feature ignite-home-feature" href="/calendar/#ignite-20261016" aria-label="IGNITE ハートに火を灯せ！ 2026年10月16日 名古屋レジェンドホール 詳細を見る">
 					<img

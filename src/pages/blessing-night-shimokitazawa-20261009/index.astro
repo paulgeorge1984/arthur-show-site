@@ -5,8 +5,8 @@ const pageUrl = '/blessing-night-shimokitazawa-20261009/';
 const shareUrl = `https://arthur-show.com${pageUrl}`;
 const eventTitle = 'BLESSING NIGHT 下北沢';
 const eventDescription = '2026年10月9日（金）、下北沢 Com.Cafe 音倉で開催。不良牧師アーサー・ホーランドが語る聖なる夜のトークライブ。音楽ゲストはSEISHI TOYA（遠谷政史）。Background VocalsはThe Sistafrees、Keyboardは松崎陽平。開場18:30、開演19:00。';
-const posterFront = '/assets/blessing-night-shimokitazawa-20261009-front.webp';
-const posterBack = '/assets/blessing-night-shimokitazawa-20261009-back.webp';
+const posterFront = '/assets/blessing-night-shimokitazawa-20261009-front.jpg';
+const posterBack = '/assets/blessing-night-shimokitazawa-20261009-back.jpg';
 const socialImage = '/assets/blessing-night-shimokitazawa-20261009-og.webp';
 const officialUrl = 'https://www.blessingnight.jp/';
 const mapUrl = 'https://www.google.com/maps/search/?api=1&query=Com.Cafe%20%E9%9F%B3%E5%80%89%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%B8%96%E7%94%B0%E8%B0%B7%E5%8C%BA%E5%8C%97%E6%B2%A22-26-23';
@@ -116,15 +116,20 @@ const structuredData = {
 						<a href={officialUrl} target="_blank" rel="noopener noreferrer">公式サイト</a>
 					</div>
 				</div>
-				<figure class="bn-poster-frame">
-					<img
-						src={posterFront}
-						alt="BLESSING NIGHT 下北沢。2026年10月9日金曜日、18時30分開場、19時開演。アーサー・ホーランド、音楽ゲストSEISHI TOYA。会場はCom.Cafe 音倉。"
-						width="1025"
-						height="1280"
-						loading="eager"
-					/>
-				</figure>
+				<div class="bn-poster-pair">
+					<figure class="bn-poster-frame">
+						<a href={posterFront} target="_blank" rel="noopener noreferrer" aria-label="イベントフライヤー表面を原寸で開く">
+							<img src={posterFront} alt="BLESSING NIGHT 下北沢 イベントフライヤー表面" width="1025" height="1280" loading="eager" />
+						</a>
+						<figcaption>表面・イベント案内</figcaption>
+					</figure>
+					<figure class="bn-poster-frame">
+						<a href={posterBack} target="_blank" rel="noopener noreferrer" aria-label="イベントフライヤー裏面を原寸で開く">
+							<img src={posterBack} alt="アーサー・ホーランドとSEISHI TOYAのプロフィール掲載フライヤー裏面" width="988" height="1280" loading="eager" />
+						</a>
+						<figcaption>裏面・出演者プロフィール</figcaption>
+					</figure>
+				</div>
 			</div>
 		</section>
 
@@ -151,7 +156,7 @@ const structuredData = {
 				<img
 					src={posterBack}
 					alt="アーサー・ホーランドと音楽ゲストSEISHI TOYA（遠谷政史）のプロフィール"
-					width="998"
+					width="988"
 					height="1280"
 					loading="lazy"
 				/>
@@ -236,7 +241,7 @@ const structuredData = {
 					<figcaption>イベント案内</figcaption>
 				</figure>
 				<figure>
-					<img src={posterBack} alt="アーサー・ホーランド、SEISHI TOYAプロフィール掲載フライヤー" width="998" height="1280" loading="lazy" />
+					<img src={posterBack} alt="アーサー・ホーランド、SEISHI TOYAプロフィール掲載フライヤー" width="988" height="1280" loading="lazy" />
 					<figcaption>出演者プロフィール</figcaption>
 				</figure>
 			</div>
@@ -382,7 +387,7 @@ const structuredData = {
 		position: relative;
 		z-index: 2;
 		display: grid;
-		grid-template-columns: minmax(0, 1fr) minmax(300px, 430px);
+		grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.35fr);
 		gap: clamp(34px, 6vw, 70px);
 		align-items: center;
 		width: min(1120px, 100%);
@@ -479,6 +484,17 @@ const structuredData = {
 	.bn-flyer-grid figure {
 		margin: 0;
 	}
+
+	.bn-poster-pair {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 18px;
+		align-items: start;
+	}
+
+	.bn-poster-pair a { display: block; }
+	.bn-poster-pair figcaption { margin-top: 12px; color: #f8f3e9; text-align: center; }
+	.bn-poster-pair .bn-poster-frame img { box-sizing: border-box; object-fit: contain; transform: none; }
 
 	.bn-poster-frame img {
 		display: block;
@@ -693,6 +709,7 @@ const structuredData = {
 
 	@media (max-width: 640px) {
 		.bn-hero-inner { padding: 38px 16px 50px; }
+		.bn-poster-pair { grid-template-columns: 1fr; width: 100%; }
 		.bn-hero h1 { font-size: clamp(3.7rem, 19vw, 5.2rem); }
 		.bn-hero-meta span,
 		.bn-actions a,
