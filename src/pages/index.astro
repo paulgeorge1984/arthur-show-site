@@ -383,7 +383,7 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 				<span class="home-event-summary-copy">
 					<span class="home-event-summary-kicker">EVENT INFO</span>
 					<strong>イベント案内</strong>
-					<span>10/9 下北沢／10/16 IGNITE／11/13 神楽坂／11/14 THE ESSENCE</span>
+					<span>10/9 下北沢／10/16 IGNITE／11/7 サタデー・ナイト・アーサー／11/13 神楽坂／11/14 THE ESSENCE</span>
 				</span>
 				<span class="home-event-summary-action" aria-hidden="true">
 					<span class="closed">見る</span>
@@ -443,6 +443,31 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 						<span class="blessing-time-feature-button">開催案内を見る</span>
 					</div>
 				</a>
+
+				<article class="blessing-time-feature blessing-night-kagurazaka-home-feature saturday-night-arthur-home-feature" aria-label="サタデー・ナイト・アーサー 2026年11月7日 BLEND PARK">
+					<div class="blessing-night-kagurazaka-home-media">
+						<a href="/assets/saturday-night-arthur-20261107.png?v=20261009-final" target="_blank" rel="noopener noreferrer" aria-label="サタデー・ナイト・アーサー フライヤー表面を原寸で開く">
+							<img src="/assets/saturday-night-arthur-20261107.png?v=20261009-final" alt="サタデー・ナイト・アーサー －賛美と御言葉の夕べ－ 2026年11月7日 告知フライヤー表面" width="1054" height="1492" loading="lazy" />
+						</a>
+						<a href="/assets/saturday-night-arthur-20261107-back.png?v=20261009-final" target="_blank" rel="noopener noreferrer" aria-label="サタデー・ナイト・アーサー フライヤー裏面を原寸で開く">
+							<img src="/assets/saturday-night-arthur-20261107-back.png?v=20261009-final" alt="サタデー・ナイト・アーサー －賛美と御言葉の夕べ－ 2026年11月7日 告知フライヤー裏面" width="1054" height="1492" loading="lazy" />
+						</a>
+					</div>
+					<div class="blessing-time-feature-copy">
+						<p class="blessing-time-feature-kicker">NEXT EVENT / 11.7 SAT</p>
+						<h2>サタデー・ナイト・アーサー</h2>
+						<p>賛美と御言葉の夕べ。Messenger アーサーホーランド、Music Guest 堀井ローレン。</p>
+						<div class="blessing-time-feature-meta">
+							<span>2026年11月7日（土）</span>
+							<span>17:00〜</span>
+							<span>BLEND PARK</span>
+							<span>神奈川県小田原市国府津2-6-17</span>
+							<span>JR国府津駅から徒歩約8分</span>
+							<span>お問い合わせ：<a href="tel:09067478068">090-6747-8068（松脇）</a></span>
+						</div>
+						<a class="blessing-time-feature-button" href="/saturday-night-arthur-20261107/">詳細を見る</a>
+					</div>
+				</article>
 
 				<article class="blessing-time-feature blessing-night-kagurazaka-home-feature" aria-label="BLESSING NIGHT 神楽坂 2026年11月13日 u-ma kagurazaka">
 					<div class="blessing-night-kagurazaka-home-media">
@@ -1395,6 +1420,11 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 
 	.blessing-night-kagurazaka-home-feature::before {
 		display: none;
+	}
+	.saturday-night-arthur-home-feature .blessing-night-kagurazaka-home-media img {
+		width: 100%;
+		height: auto;
+		object-fit: contain;
 	}
 
 	.blessing-night-kagurazaka-home-media {
@@ -3312,4 +3342,7 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 			min-height: 32px;
 		}
 	}
+
+ .saturday-night-arthur-home-feature .blessing-night-kagurazaka-home-media img { transform: none !important; }
+ @media (max-width: 640px) { .saturday-night-arthur-home-feature .blessing-night-kagurazaka-home-media { grid-template-columns: 1fr; } }
 </style>

@@ -125,6 +125,33 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			</a>
 		</section>
 
+		<section id="saturday-night-arthur-20261107" class="calendar-special-event saturday-night-arthur-feature" aria-label="サタデー・ナイト・アーサー 2026年11月7日 特別案内">
+			<div class="calendar-special-link">
+				<span class="calendar-special-media">
+					<a href="/assets/saturday-night-arthur-20261107.png?v=20261009-final" target="_blank" rel="noopener noreferrer" aria-label="サタデー・ナイト・アーサー フライヤー表面原寸画像を開く">
+						<img src="/assets/saturday-night-arthur-20261107.png?v=20261009-final" alt="サタデー・ナイト・アーサー 告知フライヤー表面" width="1054" height="1492" loading="lazy" />
+					</a>
+					<a href="/assets/saturday-night-arthur-20261107-back.png?v=20261009-final" target="_blank" rel="noopener noreferrer" aria-label="サタデー・ナイト・アーサー フライヤー裏面原寸画像を開く">
+						<img src="/assets/saturday-night-arthur-20261107-back.png?v=20261009-final" alt="サタデー・ナイト・アーサー 告知フライヤー裏面" width="1054" height="1492" loading="lazy" />
+					</a>
+				</span>
+				<div class="calendar-special-copy">
+					<span class="calendar-special-label">NEXT EVENT / 11.7 SAT</span>
+					<strong>サタデー・ナイト・アーサー</strong>
+					<span class="calendar-special-lead">賛美と御言葉の夕べ。Messenger アーサーホーランド、Music Guest 堀井ローレン。</span>
+					<span class="calendar-special-meta">
+						<span>2026年11月7日（土）</span>
+						<span>17:00〜</span>
+						<span>BLEND PARK</span>
+						<span>神奈川県小田原市国府津2-6-17</span>
+						<span>JR国府津駅から徒歩約8分</span>
+						<span>お問い合わせ：<a href="tel:09067478068">090-6747-8068（松脇）</a></span>
+					</span>
+					<a class="calendar-special-button" href="/saturday-night-arthur-20261107/">詳細ページを見る</a>
+				</div>
+			</div>
+		</section>
+
 		<section id="blessing-night-kagurazaka-20261113" class="calendar-special-event blessing-night-kagurazaka-feature" aria-label="BLESSING NIGHT 神楽坂 2026年11月13日 特別案内">
 			<div class="calendar-special-link">
 				<span class="calendar-special-media">
@@ -461,6 +488,24 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 					dateTime: '2026-07-04T17:00:00+09:00',
 					timeZone: TOKYO_TIME_ZONE,
 				},
+			},
+			{
+				id: 'manual-saturday-night-arthur-2026-11-07',
+				summary: 'サタデー・ナイト・アーサー（Saturday Night Arthur）－賛美と御言葉の夕べ－',
+				description: [
+					'2026年11月7日（土）17:00〜',
+					'Messenger アーサーホーランド / Music Guest 堀井ローレン',
+					'BLEND PARK 神奈川県小田原市国府津2-6-17',
+					'JR国府津駅から徒歩約8分',
+					'お問い合わせ090-6747-8068（松脇）',
+					'https://arthur-show.com/saturday-night-arthur-20261107/',
+				].join('\n'),
+				location: 'BLEND PARK 神奈川県小田原市国府津2-6-17',
+				start: {
+					dateTime: '2026-11-07T17:00:00+09:00',
+					timeZone: TOKYO_TIME_ZONE,
+				},
+				end: null,
 			},
 			{
 				id: 'manual-blessing-time-osaka-2026-07-18',
@@ -861,6 +906,13 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			return startKey === '2026-07-04'
 				&& /saturday\s*night\s*arthur|賛美と御言葉の夕べ/i.test(searchableText);
 		}
+		function isSaturdayNightArthurNovemberEvent(event) {
+			const startKey = event.start?.date || getDateKeyFromDate(getEventStart(event));
+			const searchableText = `${event.summary || ''} ${event.description || ''} ${event.location || ''}`;
+			return startKey === '2026-11-07'
+				&& /saturday\s*night\s*arthur|サタデー・ナイト・アーサー|賛美と御言葉の夕べ|BLEND\s*PARK/i.test(searchableText);
+		}
+
 
 		function isTheEssenceAkitaEvent(event) {
 			const startKey = event.start?.date || getDateKeyFromDate(getEventStart(event));
@@ -901,6 +953,27 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			const sadoEvangelisticMeetingManualEvent = manualEventsInRange.find((event) => event.id === 'manual-sado-evangelistic-meeting-2026-08-26');
 			const blessingNightManualEvent = manualEventsInRange.find((event) => event.id === 'manual-blessing-night-shimokitazawa-2026-10-09');
 			let mergedEvents = events;
+			const saturdayNightArthurNovemberManualEvent = manualEventsInRange.find((event) => event.id === 'manual-saturday-night-arthur-2026-11-07');
+			const hasSaturdayNightArthurNovember = mergedEvents.some((event) => isSaturdayNightArthurNovemberEvent(event));
+			let saturdayNightArthurNovemberHandled = false;
+			if (saturdayNightArthurNovemberManualEvent && hasSaturdayNightArthurNovember) {
+				let novemberMerged = false;
+				mergedEvents = mergedEvents.flatMap((event) => {
+					if (!isSaturdayNightArthurNovemberEvent(event)) return [event];
+					if (novemberMerged) return [];
+					novemberMerged = true;
+					return [{...saturdayNightArthurNovemberManualEvent}];
+				});
+				saturdayNightArthurNovemberHandled = true;
+			}
+			if (saturdayNightArthurNovemberManualEvent && !saturdayNightArthurNovemberHandled && !hasSaturdayNightArthurNovember) {
+				mergedEvents = [...mergedEvents, {...saturdayNightArthurNovemberManualEvent}];
+				saturdayNightArthurNovemberHandled = true;
+			}
+			if (saturdayNightArthurNovemberHandled) {
+				const manualIndex = manualEventsInRange.indexOf(saturdayNightArthurNovemberManualEvent);
+				if (manualIndex !== -1) manualEventsInRange.splice(manualIndex, 1);
+			}
 			if (blessingNightManualEvent && hasBlessingNightShimokitazawa) {
 				mergedEvents = mergedEvents.map((event) => {
 					if (!isBlessingNightShimokitazawaEvent(event)) return event;
@@ -1038,6 +1111,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 					if (isIgniteHiscallOctoberEvent(event)) return !hasIgniteHiscallOctober;
 					if (isSadoEvangelisticMeetingEvent(event)) return !hasSadoEvangelisticMeeting;
 					if (isBlessingNightShimokitazawaEvent(event)) return !hasBlessingNightShimokitazawa;
+					if (isSaturdayNightArthurNovemberEvent(event)) return !hasSaturdayNightArthurNovember;
 					if (isSaturdayNightArthurEvent(event)) return !hasSaturdayNightArthur;
 					if (isBlessingTimeOsakaEvent(event)) return !hasBlessingTimeOsaka;
 					if (isTheEssenceAkitaEvent(event)) return !hasTheEssenceAkita;
@@ -1523,6 +1597,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				linear-gradient(135deg, rgba(5, 8, 18, 0.98), rgba(6, 37, 76, 0.86)),
 				#050814;
 		}
+		.saturday-night-arthur-feature .calendar-special-media {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:18px;}
 
 		.blessing-night-kagurazaka-feature .calendar-special-link {
 			grid-template-columns: 1fr;
@@ -2749,4 +2824,9 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			height: 6px;
 		}
 	}
+
+	#saturday-night-arthur-20261107 .calendar-special-media { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+	#saturday-night-arthur-20261107 .calendar-special-media a { display: block; min-width: 0; }
+	#saturday-night-arthur-20261107 .calendar-special-media img { width: 100% !important; height: auto; max-height: none; object-fit: contain; transform: none !important; }
+	@media (max-width: 860px) { #saturday-night-arthur-20261107 .calendar-special-media { grid-template-columns: 1fr; } }
 </style>
