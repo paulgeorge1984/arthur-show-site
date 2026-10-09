@@ -125,7 +125,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			</a>
 		</section>
 
-		<section id="saturday-night-arthur-20261107" class="calendar-special-event saturday-night-arthur-feature" aria-label="サタデー・ナイト・アーサー 2026年11月7日 特別案内">
+		<section id="saturday-night-arthur-20261107" class="calendar-special-event blessing-night-kagurazaka-feature saturday-night-arthur-feature" aria-label="サタデー・ナイト・アーサー 2026年11月7日 特別案内">
 			<div class="calendar-special-link">
 				<span class="calendar-special-media">
 					<a href="/assets/saturday-night-arthur-20261107.png?v=20261009-approved" target="_blank" rel="noopener noreferrer" aria-label="サタデー・ナイト・アーサー フライヤー表面原寸画像を開く">
@@ -1591,13 +1591,6 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			box-shadow: 0 18px 58px rgba(0, 0, 0, 0.3);
 		}
 
-		.saturday-night-arthur-feature .calendar-special-link {
-			grid-template-columns: minmax(280px, 0.68fr) minmax(340px, 1.32fr);
-			background:
-				linear-gradient(135deg, rgba(5, 8, 18, 0.98), rgba(6, 37, 76, 0.86)),
-				#050814;
-		}
-		.saturday-night-arthur-feature .calendar-special-media {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:18px;}
 
 		.blessing-night-kagurazaka-feature .calendar-special-link {
 			grid-template-columns: 1fr;
@@ -1651,6 +1644,10 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 		.blessing-night-kagurazaka-feature .calendar-special-button {
 			border-radius: 0;
 			text-decoration: none;
+		}
+
+		.saturday-night-arthur-feature .calendar-special-copy .calendar-special-button {
+			color: #050505;
 		}
 
 		.gospel-talk-osaka-feature .calendar-special-link {
@@ -1717,11 +1714,6 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			display: none;
 		}
 
-		.saturday-night-arthur-feature .calendar-special-link::before {
-			background:
-				linear-gradient(90deg, rgba(5, 7, 16, 0.05), rgba(5, 7, 16, 0.08) 48%, rgba(5, 7, 16, 0.3)),
-				linear-gradient(0deg, rgba(197, 160, 89, 0.18), transparent 48%);
-		}
 
 		.gospel-talk-osaka-feature .calendar-special-link::before {
 			background:
@@ -1843,16 +1835,6 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			background: #8bbbd6;
 		}
 
-		.saturday-night-arthur-feature .calendar-special-media {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			padding: 18px;
-			background:
-				radial-gradient(circle at 20% 18%, rgba(25, 111, 181, 0.36), transparent 34%),
-				radial-gradient(circle at 72% 70%, rgba(215, 170, 75, 0.28), transparent 38%),
-				linear-gradient(160deg, #020713, #071b38 58%, #2d230f);
-		}
 
 		.gospel-talk-osaka-feature .calendar-special-media {
 			display: flex;
@@ -1872,16 +1854,6 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				linear-gradient(150deg, #020714, #072655 56%, #37112a);
 		}
 
-		.saturday-night-arthur-feature .calendar-special-media img {
-			width: auto;
-			height: 100%;
-			max-width: 88%;
-			max-height: 405px;
-			border: 5px solid rgba(255, 248, 235, 0.92);
-			box-shadow: 0 18px 46px rgba(0, 0, 0, 0.44);
-			object-fit: contain;
-			object-position: center;
-		}
 
 		.gospel-talk-osaka-feature .calendar-special-media img {
 			width: auto;
@@ -2598,9 +2570,6 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			grid-template-columns: 1fr;
 		}
 
-		.saturday-night-arthur-feature .calendar-special-link {
-			grid-template-columns: 1fr;
-		}
 
 		.gospel-talk-osaka-feature .calendar-special-link {
 			grid-template-columns: 1fr;
@@ -2724,17 +2693,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			font-size: 2.15rem;
 		}
 
-		.saturday-night-arthur-feature .calendar-special-media {
-			aspect-ratio: auto;
-			min-height: 360px;
-			padding: 20px;
-		}
 
-		.saturday-night-arthur-feature .calendar-special-media img {
-			width: min(74%, 300px);
-			height: auto;
-			max-height: none;
-		}
 
 		.gospel-talk-osaka-feature .calendar-special-media {
 			aspect-ratio: auto;
@@ -2825,8 +2784,4 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 		}
 	}
 
-	#saturday-night-arthur-20261107 .calendar-special-media { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-	#saturday-night-arthur-20261107 .calendar-special-media a { display: block; min-width: 0; }
-	#saturday-night-arthur-20261107 .calendar-special-media img { width: 100% !important; height: auto; max-height: none; object-fit: contain; transform: none !important; }
-	@media (max-width: 860px) { #saturday-night-arthur-20261107 .calendar-special-media { grid-template-columns: 1fr; } }
 </style>
