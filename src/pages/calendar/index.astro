@@ -125,6 +125,37 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			</a>
 		</section>
 
+		<section id="blessing-night-kagurazaka-20261113" class="calendar-special-event blessing-night-kagurazaka-feature" aria-label="BLESSING NIGHT 神楽坂 2026年11月13日 特別案内">
+			<div class="calendar-special-link">
+				<span class="calendar-special-media">
+					<a class="blessing-night-kagurazaka-flyer" href="/assets/blessing-night-kagurazaka-20261113-front.jpg" target="_blank" rel="noopener noreferrer" aria-label="BLESSING NIGHT 神楽坂 2026年11月13日 フライヤー表面を原寸で開く">
+						<img src="/assets/blessing-night-kagurazaka-20261113-front.jpg" alt="" width="1024" height="1280" loading="lazy" />
+					</a>
+					<a class="blessing-night-kagurazaka-flyer" href="/assets/blessing-night-kagurazaka-20261113-back.jpg" target="_blank" rel="noopener noreferrer" aria-label="BLESSING NIGHT 神楽坂 2026年11月13日 フライヤー裏面を原寸で開く">
+						<img src="/assets/blessing-night-kagurazaka-20261113-back.jpg" alt="" width="1026" height="1280" loading="lazy" />
+					</a>
+				</span>
+				<div class="calendar-special-copy">
+					<span class="calendar-special-label">NEXT EVENT / 11.13 FRI</span>
+					<strong>BLESSING NIGHT 神楽坂</strong>
+					<span class="calendar-special-lead">不良牧師が語る聖なる夜のトークライブ。音楽ゲストに塩谷美和、ピアノに大山小夜子を迎えます。</span>
+					<span class="calendar-special-meta">
+						<span>2026年11月13日（金）</span>
+						<span>OPEN 18:30 / START 19:00</span>
+						<span>u-ma kagurazaka 〒162-0805 東京都新宿区矢来町132-5</span>
+						<span>音楽ゲスト：塩谷美和／ピアノ：大山小夜子</span>
+						<span>3,000円（飲食代別途）</span>
+						<span>会場TEL：<a href="tel:0366734922">03-6673-4922</a></span>
+						<span>ご予約：<a href="tel:08041207171">080-4120-7171</a></span>
+						<span>会場メール：<a href="mailto:u.ma.kagurazaka@gmail.com">u.ma.kagurazaka@gmail.com</a></span>
+						<span>お問い合わせ：<a href="mailto:mag.manak@gmail.com">mag.manak@gmail.com</a>（MAG金子）</span>
+						<span>公式サイト：<a href="https://www.blessingnight.jp/" target="_blank" rel="noopener noreferrer">https://www.blessingnight.jp/</a></span>
+					</span>
+					<a class="calendar-special-button" href="/calendar/#blessing-night-kagurazaka-20261113">この案内の位置へ</a>
+				</div>
+			</div>
+		</section>
+
 		<section class="calendar-special-event the-essence-akita-feature" aria-label="THE ESSENCE 秋田 特別案内">
 			<a class="calendar-special-link" href={theEssenceAkitaUrl}>
 				<span class="calendar-special-media" aria-hidden="true">
@@ -250,6 +281,28 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				location: 'u-ma kagurazaka 〒162-0805 東京都新宿区矢来町132-5',
 				start: {
 					dateTime: '2026-09-11T19:00:00+09:00',
+					timeZone: TOKYO_TIME_ZONE,
+				},
+				end: null,
+			},
+			{
+				id: 'manual-blessing-night-kagurazaka-2026-11-13',
+				summary: 'BLESSING NIGHT 神楽坂',
+				description: [
+					'不良牧師が語る聖なる夜のトークライブ',
+					'OPEN 18:30 / START 19:00',
+					'音楽ゲスト：塩谷美和',
+					'ピアノ：大山小夜子',
+					'3,000円（飲食代別途）',
+					'会場TEL：03-6673-4922',
+					'ご予約：080-4120-7171',
+					'u.ma.kagurazaka@gmail.com',
+					'mag.manak@gmail.com（MAG金子）',
+					'https://arthur-show.com/calendar/#blessing-night-kagurazaka-20261113',
+				].join('\n'),
+				location: 'u-ma kagurazaka 〒162-0805 東京都新宿区矢来町132-5',
+				start: {
+					dateTime: '2026-11-13T19:00:00+09:00',
 					timeZone: TOKYO_TIME_ZONE,
 				},
 				end: null,
@@ -688,6 +741,13 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				}];
 			}
 
+			if (isBlessingNightKagurazakaNovemberEvent(event)) {
+				return [{
+					label: '11/13 BLESSING NIGHT 神楽坂 詳細',
+					url: '/calendar/#blessing-night-kagurazaka-20261113',
+				}];
+			}
+
 			if (isBlessingNightShimokitazawaEvent(event)) {
 				return [{
 					label: 'BLESSING NIGHT 下北沢 詳細',
@@ -740,6 +800,14 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			const searchableText = `${event.summary || ''} ${event.description || ''} ${event.location || ''}`;
 			return startKey === '2026-09-11'
 				&& /(?:blessing\s*night|ブレッシングナイト|ブレッシングナイ)/i.test(searchableText);
+		}
+
+		function isBlessingNightKagurazakaNovemberEvent(event) {
+			const startKey = event.start?.date || getDateKeyFromDate(getEventStart(event));
+			const searchableText = `${event.summary || ''} ${event.description || ''} ${event.location || ''}`;
+			return startKey === '2026-11-13'
+				&& /(?:blessing\s*night|ブレッシングナイト|ブレッシングナイ)/i.test(searchableText)
+				&& /(?:kagurazaka|神楽坂|矢来町)/i.test(searchableText);
 		}
 
 		function isGospelArtTsukubaEvent(event) {
@@ -816,6 +884,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			const hasTheEssenceAkita = events.some((event) => isTheEssenceAkitaEvent(event));
 			const hasGospelTalkSummer = events.some((event) => isGospelTalkSummerEvent(event));
 			const hasBlessingNightKagurazakaSeptember = events.some((event) => isBlessingNightKagurazakaSeptemberEvent(event));
+			const hasBlessingNightKagurazakaNovember = events.some((event) => isBlessingNightKagurazakaNovemberEvent(event));
 			const hasGospelArtTsukuba = events.some((event) => isGospelArtTsukubaEvent(event));
 			const hasIgniteHiscall = events.some((event) => isIgniteHiscallEvent(event));
 			const hasIgniteHiscallSeptember = events.some((event) => isIgniteHiscallSeptemberEvent(event));
@@ -824,6 +893,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			const hasBlessingNightShimokitazawa = events.some((event) => isBlessingNightShimokitazawaEvent(event));
 			const gospelTalkManualEvent = manualEventsInRange.find((event) => event.id === 'manual-gospel-talk-summer-osaka-2026-07-19');
 			const blessingNightKagurazakaSeptemberManualEvent = manualEventsInRange.find((event) => event.id === 'manual-blessing-night-kagurazaka-2026-09-11');
+			const blessingNightKagurazakaNovemberManualEvent = manualEventsInRange.find((event) => event.id === 'manual-blessing-night-kagurazaka-2026-11-13');
 			const gospelArtTsukubaManualEvent = manualEventsInRange.find((event) => event.id === 'manual-gospel-art-tsukuba-2026-08-15');
 			const igniteHiscallManualEvent = manualEventsInRange.find((event) => event.id === 'manual-ignite-hiscall-2026-08-21');
 			const igniteHiscallSeptemberManualEvent = manualEventsInRange.find((event) => event.id === 'manual-ignite-hiscall-2026-09-18');
@@ -855,6 +925,22 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 						start: blessingNightKagurazakaSeptemberManualEvent.start,
 						end: blessingNightKagurazakaSeptemberManualEvent.end,
 					};
+				});
+			}
+			if (blessingNightKagurazakaNovemberManualEvent && hasBlessingNightKagurazakaNovember) {
+				let blessingNightKagurazakaNovemberMerged = false;
+				mergedEvents = mergedEvents.flatMap((event) => {
+					if (!isBlessingNightKagurazakaNovemberEvent(event)) return [event];
+					if (blessingNightKagurazakaNovemberMerged) return [];
+					blessingNightKagurazakaNovemberMerged = true;
+					return [{
+						...event,
+						summary: blessingNightKagurazakaNovemberManualEvent.summary,
+						description: blessingNightKagurazakaNovemberManualEvent.description,
+						location: blessingNightKagurazakaNovemberManualEvent.location,
+						start: blessingNightKagurazakaNovemberManualEvent.start,
+						end: blessingNightKagurazakaNovemberManualEvent.end,
+					}];
 				});
 			}
 			if (gospelArtTsukubaManualEvent && hasGospelArtTsukuba) {
@@ -945,6 +1031,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				...mergedEvents.filter((event) => !(getDateKeyFromDate(getEventStart(event)) === '2026-09-19' && /梨|小杉農園/.test(event.summary || ''))),
 				...manualEventsInRange.filter((event) => {
 					if (isBlessingNightKagurazakaSeptemberEvent(event)) return !hasBlessingNightKagurazakaSeptember;
+					if (isBlessingNightKagurazakaNovemberEvent(event)) return !hasBlessingNightKagurazakaNovember;
 					if (isGospelArtTsukubaEvent(event)) return !hasGospelArtTsukuba;
 					if (isIgniteHiscallEvent(event)) return !hasIgniteHiscall;
 					if (isIgniteHiscallSeptemberEvent(event)) return !hasIgniteHiscallSeptember;
@@ -1435,6 +1522,60 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			background:
 				linear-gradient(135deg, rgba(5, 8, 18, 0.98), rgba(6, 37, 76, 0.86)),
 				#050814;
+		}
+
+		.blessing-night-kagurazaka-feature .calendar-special-link {
+			grid-template-columns: 1fr;
+			background:
+				radial-gradient(circle at 86% 18%, rgba(197, 160, 89, 0.22), transparent 32%),
+				linear-gradient(135deg, rgba(6, 8, 11, 0.99), rgba(30, 47, 43, 0.94) 58%, rgba(75, 55, 24, 0.88)),
+				#06080b;
+		}
+
+		.blessing-night-kagurazaka-feature .calendar-special-media {
+			order: 0;
+			aspect-ratio: auto;
+			height: auto;
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			align-items: start;
+			gap: 12px;
+			min-height: 0;
+			padding: 18px;
+			background: linear-gradient(145deg, #050505, #252525 55%, #4d4327);
+		}
+
+		.blessing-night-kagurazaka-feature .calendar-special-media a {
+			display: block;
+			line-height: 0;
+		}
+
+		.blessing-night-kagurazaka-feature .calendar-special-media img {
+			display: block;
+			box-sizing: border-box;
+			width: 100%;
+			height: auto;
+			object-fit: contain;
+			border: 3px solid rgba(255, 248, 235, 0.9);
+			box-shadow: 0 16px 38px rgba(0, 0, 0, 0.42);
+		}
+
+		.blessing-night-kagurazaka-feature .calendar-special-copy a {
+			color: var(--calendar-gold);
+			overflow-wrap: anywhere;
+		}
+
+		.blessing-night-kagurazaka-feature .calendar-special-link::before {
+			display: none;
+		}
+
+		.blessing-night-kagurazaka-feature .calendar-special-link:hover .calendar-special-media img {
+			transform: none;
+		}
+
+		.blessing-night-kagurazaka-feature .calendar-special-button {
+			border-radius: 0;
+			text-decoration: none;
 		}
 
 		.gospel-talk-osaka-feature .calendar-special-link {
@@ -2395,6 +2536,14 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 		}
 
 		.blessing-night-kagurazaka-september-feature .calendar-special-link {
+			grid-template-columns: 1fr;
+		}
+
+		.blessing-night-kagurazaka-feature .calendar-special-link {
+			grid-template-columns: 1fr;
+		}
+
+		.blessing-night-kagurazaka-feature .calendar-special-media {
 			grid-template-columns: 1fr;
 		}
 

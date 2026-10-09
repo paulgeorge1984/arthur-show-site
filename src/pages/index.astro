@@ -382,7 +382,7 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 				<span class="home-event-summary-copy">
 					<span class="home-event-summary-kicker">EVENT INFO</span>
 					<strong>イベント案内</strong>
-					<span>10/9 下北沢／10/16 IGNITE／11/14 THE ESSENCE</span>
+					<span>10/9 下北沢／10/16 IGNITE／11/13 神楽坂／11/14 THE ESSENCE</span>
 				</span>
 				<span class="home-event-summary-action" aria-hidden="true">
 					<span class="closed">見る</span>
@@ -442,6 +442,30 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 						<span class="blessing-time-feature-button">開催案内を見る</span>
 					</div>
 				</a>
+
+				<article class="blessing-time-feature blessing-night-kagurazaka-home-feature" aria-label="BLESSING NIGHT 神楽坂 2026年11月13日 u-ma kagurazaka">
+					<div class="blessing-night-kagurazaka-home-media">
+						<a href="/assets/blessing-night-kagurazaka-20261113-front.jpg" target="_blank" rel="noopener noreferrer" aria-label="BLESSING NIGHT 神楽坂 2026年11月13日 フライヤー表面を原寸で開く">
+							<img src="/assets/blessing-night-kagurazaka-20261113-front.jpg" alt="" width="1024" height="1280" loading="lazy" />
+						</a>
+						<a href="/assets/blessing-night-kagurazaka-20261113-back.jpg" target="_blank" rel="noopener noreferrer" aria-label="BLESSING NIGHT 神楽坂 2026年11月13日 フライヤー裏面を原寸で開く">
+							<img src="/assets/blessing-night-kagurazaka-20261113-back.jpg" alt="" width="1026" height="1280" loading="lazy" />
+						</a>
+					</div>
+					<div class="blessing-time-feature-copy">
+						<p class="blessing-time-feature-kicker">NEXT EVENT / 11.13 FRI</p>
+						<h2>BLESSING NIGHT 神楽坂</h2>
+						<p>不良牧師が語る聖なる夜のトークライブ。音楽ゲストに塩谷美和、ピアノに大山小夜子を迎えます。</p>
+						<div class="blessing-time-feature-meta">
+							<span>2026年11月13日（金）</span>
+							<span>OPEN 18:30 / START 19:00</span>
+							<span>u-ma kagurazaka（東京都新宿区矢来町132-5）</span>
+							<span>音楽ゲスト：塩谷美和／ピアノ：大山小夜子</span>
+							<span>3,000円（飲食代別途）</span>
+						</div>
+						<a class="blessing-time-feature-button" href="/calendar/#blessing-night-kagurazaka-20261113">詳細・ご予約案内を見る</a>
+					</div>
+				</article>
 
 				<a class="blessing-time-feature the-essence-home-feature" href="/the-essence-akita-20261114/" aria-label="THE ESSENCE 2026年11月14日 秋田キャッスルホテル 特別ページを見る">
 					<img
@@ -1400,6 +1424,26 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		width: 100%;
 		min-height: 0;
 		padding: clamp(34px, 6vw, 58px);
+	}
+
+	.blessing-night-kagurazaka-home-feature .blessing-night-kagurazaka-home-media a {
+		display: block;
+		line-height: 0;
+		text-decoration: none;
+	}
+
+	.blessing-night-kagurazaka-home-feature .blessing-time-feature-button {
+		display: inline-block;
+		border-radius: 0;
+		background: #c5a059;
+		color: #06080b;
+		text-decoration: none;
+	}
+
+	.blessing-night-kagurazaka-home-feature .blessing-time-feature-button:hover,
+	.blessing-night-kagurazaka-home-feature .blessing-time-feature-button:focus-visible {
+		background: #e0c07a;
+		color: #06080b;
 	}
 
 	.blessing-night-kagurazaka-home-feature h2 {
@@ -3009,6 +3053,7 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 
 		.blessing-night-kagurazaka-home-feature {
 			display: flex;
+			flex-direction: column;
 		}
 
 		.blessing-night-kagurazaka-home-media {
