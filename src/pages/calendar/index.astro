@@ -8,7 +8,8 @@ const narimasuChurchUrl = 'https://www.narimasu-church.org';
 const fridayNightUrl = 'https://ochanomizu.cc/meeting/fridaynight/';
 const blessingNightUrl = 'https://www.blessingnight.jp';
 const blessingNightShimokitazawaUrl = '/blessing-night-shimokitazawa-20261009/';
-const blessingNightShimokitazawaPoster = '/assets/blessing-night-shimokitazawa-20261009-front.webp';
+const blessingNightShimokitazawaPoster = '/assets/blessing-night-shimokitazawa-20261009-front.jpg';
+const blessingNightShimokitazawaPosterBack = '/assets/blessing-night-shimokitazawa-20261009-back.jpg';
 const theEssenceAkitaUrl = '/the-essence-akita-20261114/';
 const theEssenceAkitaPoster = '/assets/the-essence-akita-20261114.jpg';
 const calendarShareUrl = 'https://arthur-show.com/calendar/';
@@ -68,17 +69,16 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				</div>
 			</section>
 
-		<section class="calendar-special-event the-essence-akita-feature blessing-night-shimokitazawa-feature" aria-label="BLESSING NIGHT 下北沢 特別案内">
-			<a class="calendar-special-link" href={blessingNightShimokitazawaUrl}>
-				<span class="calendar-special-media" aria-hidden="true">
-					<img
-						src={blessingNightShimokitazawaPoster}
-						alt=""
-						width="1025"
-						height="1280"
-						loading="eager"
-					/>
-				</span>
+		<section id="blessing-night-shimokitazawa-20261009" class="calendar-special-event blessing-night-kagurazaka-feature blessing-night-shimokitazawa-feature" aria-label="BLESSING NIGHT 下北沢 特別案内">
+			<div class="calendar-special-link">
+				<div class="calendar-special-media">
+					<a href={blessingNightShimokitazawaPoster} target="_blank" rel="noopener noreferrer" aria-label="BLESSING NIGHT 下北沢 フライヤー表面を原寸で開く">
+						<img src={blessingNightShimokitazawaPoster} alt="BLESSING NIGHT 下北沢 イベントフライヤー表面" width="1025" height="1280" loading="eager" />
+					</a>
+					<a href={blessingNightShimokitazawaPosterBack} target="_blank" rel="noopener noreferrer" aria-label="BLESSING NIGHT 下北沢 フライヤー裏面を原寸で開く">
+						<img src={blessingNightShimokitazawaPosterBack} alt="アーサー・ホーランドとSEISHI TOYAのプロフィール掲載フライヤー裏面" width="988" height="1280" loading="eager" />
+					</a>
+				</div>
 				<span class="calendar-special-copy">
 					<span class="calendar-special-label">NEXT EVENT</span>
 					<strong>BLESSING NIGHT 下北沢</strong>
@@ -92,9 +92,9 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 						<span>Com.Cafe 音倉</span>
 						<span>3,000円（飲食代別途）</span>
 					</span>
-					<span class="calendar-special-button">詳細・ご予約案内を見る</span>
+					<a class="calendar-special-button" href={blessingNightShimokitazawaUrl}>詳細・ご予約案内を見る</a>
 				</span>
-			</a>
+			</div>
 		</section>
 
 		<section id="ignite-20261016" class="calendar-special-event ignite-hiscall-feature" aria-label="IGNITE ハートに火を灯せ！ 2026年10月16日 特別案内">
