@@ -1,4 +1,5 @@
 ---
+import HiscallChristmasEvent from '../../components/HiscallChristmasEvent.astro';
 import Layout from '../../layouts/Layout.astro';
 
 const officialScheduleUrl = 'https://www.arthurhollands.com/%E3%82%B9%E3%82%B1%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB';
@@ -211,6 +212,10 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			</a>
 		</section>
 
+		<div class="calendar-special-event hiscall-christmas-feature">
+			<HiscallChristmasEvent />
+		</div>
+
 		<section class="calendar-section" id="calendar-events" aria-labelledby="calendar-title">
 			<div class="calendar-heading">
 				<div>
@@ -287,6 +292,17 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			},
 		];
 		const MANUAL_EVENTS = [
+			{
+			  "id": "manual-hiscall-christmas-2026-12-20",
+			  "summary": "クリスマス礼拝｜ヒズコールチャーチ",
+			  "description": "10:30開始／礼拝参加無料\nゲストメッセンジャー：アーサー・ホーランド牧師\nゲストシンガー：堀井ローレンさん（Lauren Horii）\nクリスマスパーティー：13:30開場／14:00開始／16:00終了\nパーティー参加費：大学生以上2,000円／高校生以下無料。食事を用意しますので、チラシ内QRコードからお申し込みください。\nhttps://arthur-show.com/assets/hiscall-christmas-20261220.jpg",
+			  "location": "ヒズコールチャーチ 名古屋市中区大須1-7-26（地下鉄大須観音駅④番出口 徒歩1分）",
+			  "start": {
+			    "dateTime": "2026-12-20T10:30:00+09:00",
+			    "timeZone": "Asia/Tokyo"
+			  },
+			  "end": null
+			},
             {
                 id: 'manual-nashi-fes-2026-09-19',
                 summary: '第27回 梨フェス ～梨狩り＆BBQ～',
@@ -928,7 +944,23 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				&& /gospel\s*talk|神の言葉を語る|大阪弟子教会|j\.\s*disciple/i.test(searchableText);
 		}
 
+		function isHiscallChristmasEvent(event) {
+            const startKey = event.start?.date || getDateKeyFromDate(getEventStart(event));
+            const text = `${event.summary || ''} ${event.description || ''} ${event.location || ''}`;
+            return startKey === '2026-12-20'
+                && /ヒズコール|ヒズ・コール|his\s*call/i.test(text)
+                && /クリスマス|christmas|礼拝|service/i.test(text);
+        }
+
 		function mergeManualEvents(events, range) {
+            // The flyer supplies the confirmed details for this one service.
+            // Keep unrelated events, including any separately listed afternoon party.
+            const christmas = MANUAL_EVENTS.find((event) => event.id === 'manual-hiscall-christmas-2026-12-20');
+            if (christmas && isEventInRange(christmas, range)) {
+                events = events.filter((event) => !isHiscallChristmasEvent(event)
+                    || Number(new Intl.DateTimeFormat('en-GB', { timeZone: TOKYO_TIME_ZONE, hour: '2-digit', hourCycle: 'h23' }).format(getEventStart(event))) >= 13);
+            }
+
 			const manualEventsInRange = MANUAL_EVENTS.filter((event) => isEventInRange(event, range));
 			if (!manualEventsInRange.length) return events;
 			const hasSaturdayNightArthur = events.some((event) => isSaturdayNightArthurEvent(event));

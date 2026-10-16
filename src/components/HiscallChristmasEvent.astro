@@ -1,0 +1,39 @@
+---
+const poster = '/assets/hiscall-christmas-20261220.jpg';
+---
+<section id="hiscall-christmas-20261220" class="hiscall-christmas" aria-label="2026年12月20日 ヒズコールチャーチ クリスマス礼拝">
+  <a class="poster" href={poster} target="_blank" rel="noopener noreferrer" aria-label="クリスマス礼拝のチラシを原寸で開く">
+    <img src={poster} alt="His Call Church Christmas Service 2026年12月20日 クリスマス礼拝とパーティーのチラシ" width="904" height="1280" loading="lazy" />
+  </a>
+  <div class="copy">
+    <p class="kicker">CHRISTMAS SERVICE / 12.20 SUN</p>
+    <h2>クリスマス礼拝</h2>
+    <p class="date">2026年12月20日（日）10:30 START</p>
+    <p>ゲストメッセンジャー：アーサー・ホーランド牧師<br />ゲストシンガー：堀井ローレンさん（Lauren Horii）</p>
+    <p class="fee">礼拝：参加無料</p>
+    <h3>ヒズコールチャーチ</h3>
+    <p>名古屋市中区大須1-7-26<br />地下鉄大須観音駅④番出口 徒歩1分</p>
+    <div class="party">
+      <h3>クリスマスパーティー</h3>
+      <p>13:30 開場／14:00 開始／16:00 終了</p>
+      <p>参加費：大学生以上 2,000円／高校生以下 無料</p>
+      <p>食事を用意しますので、チラシ内のQRコードからお申し込みください。</p>
+    </div>
+    <p>主催：ヒズコールチャーチ</p>
+    <a class="flyer-link" href={poster} target="_blank" rel="noopener noreferrer">チラシを拡大する（お申し込みQRコード）</a>
+  </div>
+</section>
+<style>
+  .hiscall-christmas { display:grid; grid-template-columns:minmax(0, .9fr) minmax(0, 1.1fr); width:100%; box-sizing:border-box; border:1px solid #75613c; background:#171717; color:#f5f1e8; }
+  .poster { display:block; align-self:start; }
+  .poster img { display:block; width:100%; height:auto; object-fit:contain; }
+  .copy { min-width:0; padding:28px; line-height:1.85; overflow-wrap:anywhere; }
+  .copy p { margin:0 0 16px; }
+  .kicker, .fee, .flyer-link { color:#d8b76e; font-weight:700; }
+  h2 { font-size:clamp(1.6rem, 3vw, 2.4rem); margin:0 0 16px; line-height:1.4; }
+  h3 { font-size:1.15rem; margin:0 0 8px; }
+  .date { font-weight:700; }
+  .party { border-top:1px solid #75613c; padding-top:20px; margin-top:20px; }
+  .flyer-link { text-decoration:underline; }
+  @media(max-width:640px) { .hiscall-christmas { grid-template-columns:minmax(0,1fr); } .copy { padding:20px 16px; } }
+</style>

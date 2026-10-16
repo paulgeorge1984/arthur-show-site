@@ -1,4 +1,5 @@
 ---
+import HiscallChristmasEvent from '../components/HiscallChristmasEvent.astro';
 import Layout from '../layouts/Layout.astro';
 import YoutubeSubscribeBanner from '../components/YoutubeSubscribeBanner.astro';
 import { getCollection } from 'astro:content';
@@ -383,7 +384,7 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 				<span class="home-event-summary-copy">
 					<span class="home-event-summary-kicker">EVENT INFO</span>
 					<strong>イベント案内</strong>
-					<span>10/9 下北沢／10/16 IGNITE／11/7 サタデー・ナイト・アーサー／11/13 神楽坂／11/14 THE ESSENCE</span>
+					<span>10/9 下北沢／10/16 IGNITE／11/7 サタデー・ナイト・アーサー／11/13 神楽坂／11/14 THE ESSENCE／12/20 クリスマス礼拝</span>
 				</span>
 				<span class="home-event-summary-action" aria-hidden="true">
 					<span class="closed">見る</span>
@@ -517,6 +518,7 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 						<span class="blessing-time-feature-button">特別ページを見る</span>
 					</div>
 				</a>
+				<HiscallChristmasEvent />
 			</div>
 		</details>
 
