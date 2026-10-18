@@ -1,6 +1,7 @@
 ---
 import HiscallChristmasEvent from '../../components/HiscallChristmasEvent.astro';
 import Layout from '../../layouts/Layout.astro';
+import KuwanaEvent from '../../components/KuwanaEvent.astro';
 
 const officialScheduleUrl = 'https://www.arthurhollands.com/%E3%82%B9%E3%82%B1%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB';
 const officialNotice = '本ページは参考表記のため、カレンダーの最新データ、および3ヶ月より先のスケジュールは、必ず上記のアーサーホーランド公式サイトからご確認ください。';
@@ -125,6 +126,8 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				</span>
 			</a>
 		</section>
+
+		<section class="calendar-special-event" aria-label="桑名 ゴスペルトークライブ 特別案内"><KuwanaEvent /></section>
 
 		<section id="saturday-night-arthur-20261107" class="calendar-special-event blessing-night-kagurazaka-feature saturday-night-arthur-feature" aria-label="サタデー・ナイト・アーサー 2026年11月7日 特別案内">
 			<div class="calendar-special-link">
@@ -292,6 +295,14 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			},
 		];
 		const MANUAL_EVENTS = [
+            {
+                id: 'manual-kuwana-2026-10-24',
+                summary: 'アーサー・ホーランド ゴスペルトークライブ In Kuwana',
+                description: '〜 You Are Loved 〜\n開場13:00／入場無料／定員48名（当日先着順）。満員の場合、入場できない場合もございます。\nホール横の立体駐車場利用可。主催者へ駐車券をお渡しください（無料処理）。\nお問い合わせ：Jesus and Bible Ministry 070-9508-1722 / jesusandbibleministry@gmail.com',
+                location: '柿安シティホール 3階 第3・第4会議室（桑名市中央町3-20）',
+                start: { dateTime: '2026-10-24T13:30:00+09:00', timeZone: 'Asia/Tokyo' },
+                end: { dateTime: '2026-10-24T15:30:00+09:00', timeZone: 'Asia/Tokyo' },
+            },
 			{
 			  "id": "manual-hiscall-christmas-2026-12-20",
 			  "summary": "クリスマス礼拝｜ヒズコールチャーチ",
@@ -952,7 +963,13 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
                 && /クリスマス|christmas|礼拝|service/i.test(text);
         }
 
-		function mergeManualEvents(events, range) {
+		function isKuwanaGospelTalkEvent(event) {
+            const date = event.start?.date || getDateKeyFromDate(getEventStart(event));
+            const text = `${event.summary || ''} ${event.location || ''}`;
+            return date === '2026-10-24' && /桑名|Kuwana|柿安/i.test(text) && /アーサー|ホーランド|Arthur|ゴスペル|トーク/i.test(text);
+        }
+
+        function mergeManualEvents(events, range) {
             // The flyer supplies the confirmed details for this one service.
             // Keep unrelated events, including any separately listed afternoon party.
             const christmas = MANUAL_EVENTS.find((event) => event.id === 'manual-hiscall-christmas-2026-12-20');
@@ -984,7 +1001,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			const igniteHiscallOctoberManualEvent = manualEventsInRange.find((event) => event.id === 'manual-ignite-hiscall-2026-10-16');
 			const sadoEvangelisticMeetingManualEvent = manualEventsInRange.find((event) => event.id === 'manual-sado-evangelistic-meeting-2026-08-26');
 			const blessingNightManualEvent = manualEventsInRange.find((event) => event.id === 'manual-blessing-night-shimokitazawa-2026-10-09');
-			let mergedEvents = events;
+			let mergedEvents = manualEventsInRange.some((event) => event.id === 'manual-kuwana-2026-10-24') ? events.filter((event) => !isKuwanaGospelTalkEvent(event)) : events;
 			const saturdayNightArthurNovemberManualEvent = manualEventsInRange.find((event) => event.id === 'manual-saturday-night-arthur-2026-11-07');
 			const hasSaturdayNightArthurNovember = mergedEvents.some((event) => isSaturdayNightArthurNovemberEvent(event));
 			let saturdayNightArthurNovemberHandled = false;
