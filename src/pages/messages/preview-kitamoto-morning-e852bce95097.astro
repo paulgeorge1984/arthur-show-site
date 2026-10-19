@@ -1,13 +1,13 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Article, { frontmatter } from '../../drafts/kitamoto-morning-undated.mdx';
+import Article, { frontmatter } from '../../content/daily-messages/2026-10-20-kitamoto-morning.mdx';
 const previewPath = '/messages/preview-kitamoto-morning-e852bce95097/';
 ---
 <Layout title={frontmatter.title} description={frontmatter.description} image={frontmatter.heroImage} imageWidth={1600} imageHeight={750} noindex={true} canonicalPath={previewPath}>
   <div class="message-preview">
     <aside class="preview-note" aria-label="公開前プレビュー">
-      <strong>公開前プレビュー · 公開日未定</strong>
-      <p>正式公開の日程は未定です。限定公開の動画と記事をご確認いただけます。</p>
+      <strong>公開前プレビュー · 2026年10月20日 6:30（日本時間）公開</strong>
+      <p>2026年10月20日 6:30（日本時間）のプレミア公開に合わせて記事を公開します。</p>
     </aside>
     {frontmatter.youtubeId && <div class="preview-video"><iframe src={`https://www.youtube.com/embed/${frontmatter.youtubeId}`} title={frontmatter.title} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>}
     <Article />
