@@ -4,5 +4,11 @@ Options -Indexes
 # Legacy PHP files may remain on the server after an incremental deployment.
 # Deny them before a PHP handler can run.
 <FilesMatch "(?i)\.(php[0-9]*|phtml|phar)$">
-  Require all denied
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
 </FilesMatch>
