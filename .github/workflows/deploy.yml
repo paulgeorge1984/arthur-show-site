@@ -17,7 +17,12 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22.23.4
+          package-manager-cache: false
 
       - name: Check scheduled publish state
         id: publish_window
@@ -94,10 +99,6 @@ jobs:
           });
           NODE
 
-      - uses: actions/setup-node@v3
-        if: steps.publish_window.outputs.should_deploy == 'true'
-        with:
-          node-version: 18
       - name: Install dependencies
         if: steps.publish_window.outputs.should_deploy == 'true'
         run: npm ci
