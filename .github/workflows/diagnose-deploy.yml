@@ -7,7 +7,11 @@ permissions:
   contents: read
 jobs:
   diagnose:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [ubuntu-24.04-arm, macos-latest]
+    runs-on: ${{ matrix.runner }}
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
