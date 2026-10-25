@@ -37,6 +37,12 @@ def main():
         print(json.dumps({"https_status": status, "has_canonical": canon, "has_video": video}))
     probe("https", https)
 
+    def connect_only(target, port):
+        with socket.create_connection((target, port), timeout=8):
+            print(json.dumps({"stage": "connect_only", "target": target, "port": port, "ok": True}))
+    for target, port in [("github.com",443),("arthur-show.com",80),("arthur-show.com",443),("ftp3.gmoserver.jp",21),("file3.rentalserver.jp",443)]:
+        probe("connect_" + target + "_" + str(port), lambda t=target,p=port: connect_only(t,p))
+
     def ftps():
         ctx = ssl.create_default_context()
         ftp = ftplib.FTP_TLS(context=ctx)
