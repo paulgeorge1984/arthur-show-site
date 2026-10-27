@@ -1,4 +1,4 @@
-name: Onamae public reachability test
+name: XServer FTP scope check
 
 on:
   workflow_dispatch:
@@ -7,23 +7,43 @@ permissions:
   contents: read
 
 jobs:
-  public_reachability:
+  ftp_scope:
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
-      - name: Check existing site from GitHub runner
+      - name: Check that FTP cannot leave the website directory
+        env:
+          XSERVER_FTP_USERNAME: ${{ secrets.XSERVER_FTP_USERNAME }}
+          XSERVER_FTP_PASSWORD: ${{ secrets.XSERVER_FTP_PASSWORD }}
         run: |
-          set -uo pipefail
-          failed=0
-          for url in \
-            "http://arthur-show.com/.well-known/acme-challenge/YE2jkv5yxJjdvXy8Oqfl_MDfITP4EiokyrLDdfFQJ7E" \
-            "http://www.arthur-show.com/.well-known/acme-challenge/Y0zAsVtJgnBPGl9mVdXjmZKJPKf-MLQ3M61JjAuAdFE"; do
-            if status=$(curl -4 --noproxy '*' --connect-timeout 8 --max-time 12 -sS -o /dev/null -w '%{http_code}' "$url"); then
-              echo "Public challenge response: $status"
-              [[ "$status" == 200 ]] || failed=1
-            else
-              echo "Public challenge connection failed"
-              failed=1
-            fi
-          done
-          exit "$failed"
+          python3 <<'PY'
+          import ftplib, os, ssl, sys
+          username=os.environ.get('XSERVER_FTP_USERNAME','')
+          password=os.environ.get('XSERVER_FTP_PASSWORD','')
+          if not username or not password:
+              sys.exit('Missing FTP account configuration')
+          try:
+              with ftplib.FTP_TLS(context=ssl.create_default_context(),timeout=15) as ftp:
+                  ftp.connect('sv17295.xserver.jp',21)
+                  ftp.login(username,password)
+                  ftp.prot_p()
+                  start=ftp.pwd()
+                  try:
+                      ftp.cwd('..')
+                  except ftplib.error_perm:
+                      pass
+                  else:
+                      if ftp.pwd()!=start:
+                          sys.exit('Scope check failed: parent directory was accessible')
+                  try:
+                      ftp.cwd('/home/xs534416/vr360.life')
+                  except ftplib.error_perm:
+                      pass
+                  else:
+                      sys.exit('Scope check failed: another site directory was accessible')
+                  print('PASS: FTP could not leave the configured website directory')
+          except SystemExit:
+              raise
+          except Exception as error:
+              sys.exit('Scope check could not complete: '+type(error).__name__)
+          PY
