@@ -1,126 +1,45 @@
-name: Deploy Astro Site
+name: XServer FTPS connection test
 
 on:
-  push:
-    branches: [ main ]
-  schedule:
-    # Check scheduled messages every 15 minutes, but deploy only when content just became publishable.
-    - cron: '*/15 * * * *'
   workflow_dispatch:
 
-concurrency:
-  group: deploy-${{ github.ref }}
-  cancel-in-progress: ${{ github.event_name != 'schedule' }}
+permissions:
+  contents: read
 
 jobs:
-  build_and_deploy:
+  test_ftps:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 8
     steps:
-      - uses: actions/checkout@v6
-
-      - uses: actions/setup-node@v6
-        with:
-          node-version: 22.23.4
-          package-manager-cache: false
-
-      - name: Check scheduled publish state
-        id: publish_window
+      - name: Verify scoped FTPS upload and download
+        env:
+          XSERVER_FTP_USERNAME: ${{ secrets.XSERVER_FTP_USERNAME }}
+          LFTP_PASSWORD: ${{ secrets.XSERVER_FTP_PASSWORD }}
         run: |
-          if [ "${{ github.event_name }}" != "schedule" ]; then
-            echo "should_deploy=true" >> "$GITHUB_OUTPUT"
-            exit 0
+          set -euo pipefail
+          : "${XSERVER_FTP_USERNAME:?XServer FTP username is missing}"
+          : "${LFTP_PASSWORD:?XServer FTP password is missing}"
+          if [[ ! "$XSERVER_FTP_USERNAME" =~ ^[a-z0-9._-]+@arthur-show[.]com$ ]]; then
+            echo 'Unexpected FTP account; refusing to test.' >&2
+            exit 1
           fi
-
-          node <<'NODE' >> "$GITHUB_OUTPUT"
-          const fs = require('fs');
-          const path = require('path');
-          const contentDir = path.join(process.cwd(), 'src/content/daily-messages');
-          const now = new Date();
-          let shouldDeploy = false;
-          const publishable = [];
-
-          for (const file of fs.readdirSync(contentDir)) {
-            if (!file.endsWith('.mdx')) continue;
-            const body = fs.readFileSync(path.join(contentDir, file), 'utf8');
-            const match = body.match(/^date:\s*(.+)$/m);
-            const youtubeMatch = body.match(/^youtubeId:\s*["']?([A-Za-z0-9_-]{11})["']?\s*$/m);
-            if (!match || !youtubeMatch) continue;
-            const publishDate = new Date(match[1].trim().replace(/^["']|["']$/g, ''));
-            if (!Number.isNaN(publishDate.getTime()) && publishDate <= now) {
-              publishable.push({
-                slug: file.replace(/\.mdx$/, ''),
-                publishedAt: publishDate.getTime(),
-                youtubeId: youtubeMatch[1],
-              });
-            }
-          }
-
-          // A build containing the newest due article also contains every older
-          // due article. Checking the newest timestamp lets any later cron recover
-          // after an arbitrarily long Actions delay without repeatedly deploying.
-          const newestTimestamp = publishable.reduce(
-            (latest, item) => Math.max(latest, item.publishedAt),
-            -Infinity,
-          );
-          const candidates = publishable
-            .filter((item) => item.publishedAt === newestTimestamp)
-
-          async function isAlreadyLive(candidate) {
-            const url = `https://arthur-show.com/messages/${encodeURIComponent(candidate.slug)}/`;
-            try {
-              const response = await fetch(url, {
-                redirect: 'follow',
-                signal: AbortSignal.timeout(10000),
-                headers: { 'user-agent': 'arthur-show-scheduled-publish-check' },
-              });
-              const html = await response.text();
-              const canonical = `<link rel="canonical" href="${url}">`;
-              const videoMarker = `/embed/${candidate.youtubeId}?rel=0`;
-              return response.ok && html.includes(canonical) && html.includes(videoMarker);
-            } catch (error) {
-              console.error(`Could not verify ${url}: ${error.message}`);
-              return false;
-            }
-          }
-
-          (async () => {
-            for (const candidate of candidates) {
-              if (!(await isAlreadyLive(candidate))) {
-                console.error(`Scheduled article is ready but not live: ${candidate.slug}`);
-                shouldDeploy = true;
-                break;
-              }
-            }
-            console.log(`should_deploy=${shouldDeploy ? 'true' : 'false'}`);
-          })().catch((error) => {
-            console.error(error);
-            console.log('should_deploy=true');
-          });
-          NODE
-
-      - name: Install dependencies
-        if: steps.publish_window.outputs.should_deploy == 'true'
-        run: npm ci
-      - name: Build site
-        if: steps.publish_window.outputs.should_deploy == 'true'
-        env:
-          PUBLIC_GA_MEASUREMENT_ID: ${{ secrets.PUBLIC_GA_MEASUREMENT_ID }}
-        run: npm run build
-      - name: FTP Deploy
-        if: steps.publish_window.outputs.should_deploy == 'true'
-        env:
-          FTP_HOST: ${{ secrets.FTP_HOST }}
-          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-          FTP_REMOTE_DIR: ${{ secrets.FTP_REMOTE_DIR }}
-        run: |
           sudo apt-get update
           sudo apt-get install -y lftp
-          lftp -u "$FTP_USERNAME","$FTP_PASSWORD" "$FTP_HOST" <<EOF
-          set ftp:ssl-allow no
-          set net:max-retries 3
+          printf 'Arthur Show XServer FTPS test 2026-10-27\n' > "$RUNNER_TEMP/xserver-ftps-probe-20261027.txt"
+          lftp --norc <<LFTP
+          set cmd:fail-exit yes
+          set ftp:ssl-allow yes
+          set ftp:ssl-force yes
+          set ftp:ssl-protect-data yes
+          set ftp:ssl-protect-list yes
+          set ssl:verify-certificate yes
+          set xfer:use-temp-file yes
+          set net:max-retries 2
           set net:timeout 20
-          mirror --reverse --verbose --parallel=4 ./dist/ "$FTP_REMOTE_DIR"/
+          open --env-password --user "$XSERVER_FTP_USERNAME" ftp://sv17295.xserver.jp
+          put "$RUNNER_TEMP/xserver-ftps-probe-20261027.txt" -o ".xserver-ftps-probe-20261027.txt"
+          get ".xserver-ftps-probe-20261027.txt" -o "$RUNNER_TEMP/xserver-ftps-probe-return.txt"
           bye
-          EOF
+          LFTP
+          cmp "$RUNNER_TEMP/xserver-ftps-probe-20261027.txt" "$RUNNER_TEMP/xserver-ftps-probe-return.txt"
+          echo 'FTPS upload and download comparison passed.'
