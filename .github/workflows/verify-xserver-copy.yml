@@ -12,7 +12,7 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 60
     steps:
       - name: Read every file through verified FTPS and compare the complete tree
         env:
@@ -35,7 +35,12 @@ jobs:
               ftp.cwd('/')
               return ftp
           files = []
+          directories_checked = 0
           def walk(ftp, directory=''):
+              global directories_checked
+              directories_checked += 1
+              if directories_checked % 50 == 0:
+                  print(json.dumps({'directories_checked': directories_checked, 'files_discovered': len(files)}), flush=True)
               for name, facts in ftp.mlsd('/' + directory):
                   kind = facts.get('type', '')
                   if kind in ('cdir', 'pdir'):
@@ -79,8 +84,16 @@ jobs:
                   digest.update(content)
               return path, size, digest.hexdigest()
           try:
-              with concurrent.futures.ThreadPoolExecutor(max_workers=2, initializer=initialize) as pool:
-                  results = list(pool.map(verify, files))
+              with concurrent.futures.ThreadPoolExecutor(max_workers=4, initializer=initialize) as pool:
+                  results = []
+                  checked_bytes = 0
+                  futures = [pool.submit(verify, entry) for entry in files]
+                  for future in concurrent.futures.as_completed(futures):
+                      item = future.result()
+                      results.append(item)
+                      checked_bytes += item[1]
+                      if len(results) % 100 == 0 or len(results) == len(files):
+                          print(json.dumps({'files_read': len(results), 'files_total': len(files), 'bytes_read': checked_bytes}), flush=True)
           finally:
               for ftp in connections:
                   ftp.close()
