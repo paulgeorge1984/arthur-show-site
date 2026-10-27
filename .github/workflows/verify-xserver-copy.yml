@@ -1,0 +1,94 @@
+name: Verify XServer migration copy
+
+on:
+  push:
+    branches: [codex/verify-xserver-migration-20261028]
+    paths: [.github/workflows/verify-xserver-copy.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Read every file through verified FTPS and compare the complete tree
+        env:
+          FTP_USER: ${{ secrets.XSERVER_FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.XSERVER_FTP_PASSWORD }}
+        run: |
+          python3 <<'PY'
+          import concurrent.futures, ftplib, hashlib, json, os, re, ssl, sys, threading
+          sys.excepthook = lambda kind, value, tb: print("Verification could not finish: " + kind.__name__, file=sys.stderr)
+          EXPECTED = 'dac12620b46a53a4503c73a8561616b268126c618313db5009b143be91cec345'
+          USER = os.environ['FTP_USER']
+          PASSWORD = os.environ['FTP_PASSWORD']
+          if not re.fullmatch(r'[a-z0-9._-]+@arthur-show[.]com', USER) or not PASSWORD:
+              raise SystemExit('Missing or unexpected scoped FTP credential')
+          def connect():
+              ftp = ftplib.FTP_TLS(context=ssl.create_default_context(), timeout=60)
+              ftp.connect('sv17295.xserver.jp', 21)
+              ftp.login(USER, PASSWORD)
+              ftp.prot_p()
+              ftp.cwd('/')
+              return ftp
+          files = []
+          def walk(ftp, directory=''):
+              for name, facts in ftp.mlsd('/' + directory):
+                  kind = facts.get('type', '')
+                  if kind in ('cdir', 'pdir'):
+                      continue
+                  if '/' in name or '\x00' in name or name in ('.', '..'):
+                      raise RuntimeError('Unexpected directory entry')
+                  path = directory + name
+                  if kind == 'dir':
+                      walk(ftp, path + '/')
+                  elif kind == 'file':
+                      files.append((path, int(facts['size'])))
+                  else:
+                      raise RuntimeError('Unsupported file type')
+          with connect() as listing:
+              walk(listing)
+          print(json.dumps({'discovered_files': len(files), 'remote_bytes': sum(s for _, s in files)}), flush=True)
+          if len(files) != 1991 or sum(s for _, s in files) > 500_000_000:
+              raise SystemExit('Unexpected file inventory; no files were changed')
+          local = threading.local()
+          connections = []
+          def initialize():
+              local.ftp = connect()
+              connections.append(local.ftp)
+          def verify(entry):
+              path, remote_size = entry
+              digest, raw_size, normalized = hashlib.sha256(), 0, []
+              def receive(chunk):
+                  nonlocal raw_size
+                  raw_size += len(chunk)
+                  if path == '.user.ini':
+                      normalized.append(chunk)
+                  else:
+                      digest.update(chunk)
+              local.ftp.retrbinary('RETR /' + path, receive, blocksize=131072)
+              if raw_size != remote_size:
+                  raise RuntimeError('Incomplete file read')
+              size = raw_size
+              if path == '.user.ini':
+                  content = b''.join(normalized).replace(b'\r\n', b'\n')
+                  size = len(content)
+                  digest.update(content)
+              return path, size, digest.hexdigest()
+          try:
+              with concurrent.futures.ThreadPoolExecutor(max_workers=2, initializer=initialize) as pool:
+                  results = list(pool.map(verify, files))
+          finally:
+              for ftp in connections:
+                  ftp.close()
+          tree = hashlib.sha256()
+          for path, size, digest in sorted(results):
+              tree.update((path + '\0' + str(size) + '\0' + digest + '\n').encode())
+          result = {'files': len(results), 'bytes': sum(size for _, size, _ in results), 'tree_sha256': tree.hexdigest(), 'matches_expected': tree.hexdigest() == EXPECTED, 'remote_mutations': 0, 'user_ini_comparison': 'CRLF normalized to LF'}
+          print(json.dumps(result), flush=True)
+          if not result['matches_expected']:
+              raise SystemExit('Tree hash mismatch; no files were changed')
+          PY
