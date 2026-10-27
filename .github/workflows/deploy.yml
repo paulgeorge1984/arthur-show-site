@@ -1,4 +1,4 @@
-name: XServer FTPS connection test
+name: Onamae public reachability test
 
 on:
   workflow_dispatch:
@@ -7,39 +7,23 @@ permissions:
   contents: read
 
 jobs:
-  test_ftps:
+  public_reachability:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 3
     steps:
-      - name: Verify scoped FTPS upload and download
-        env:
-          XSERVER_FTP_USERNAME: ${{ secrets.XSERVER_FTP_USERNAME }}
-          LFTP_PASSWORD: ${{ secrets.XSERVER_FTP_PASSWORD }}
+      - name: Check existing site from GitHub runner
         run: |
-          set -euo pipefail
-          : "${XSERVER_FTP_USERNAME:?XServer FTP username is missing}"
-          : "${LFTP_PASSWORD:?XServer FTP password is missing}"
-          if [[ ! "$XSERVER_FTP_USERNAME" =~ ^[a-z0-9._-]+@arthur-show[.]com$ ]]; then
-            echo 'Unexpected FTP account; refusing to test.' >&2
-            exit 1
-          fi
-          sudo apt-get update
-          sudo apt-get install -y lftp
-          printf 'Arthur Show XServer FTPS test 2026-10-27\n' > "$RUNNER_TEMP/xserver-ftps-probe-20261027.txt"
-          lftp --norc <<LFTP
-          set cmd:fail-exit yes
-          set ftp:ssl-allow yes
-          set ftp:ssl-force yes
-          set ftp:ssl-protect-data yes
-          set ftp:ssl-protect-list yes
-          set ssl:verify-certificate yes
-          set xfer:use-temp-file yes
-          set net:max-retries 2
-          set net:timeout 20
-          open --env-password --user "$XSERVER_FTP_USERNAME" ftp://sv17295.xserver.jp
-          put "$RUNNER_TEMP/xserver-ftps-probe-20261027.txt" -o ".xserver-ftps-probe-20261027.txt"
-          get ".xserver-ftps-probe-20261027.txt" -o "$RUNNER_TEMP/xserver-ftps-probe-return.txt"
-          bye
-          LFTP
-          cmp "$RUNNER_TEMP/xserver-ftps-probe-20261027.txt" "$RUNNER_TEMP/xserver-ftps-probe-return.txt"
-          echo 'FTPS upload and download comparison passed.'
+          set -uo pipefail
+          failed=0
+          for url in \
+            "http://arthur-show.com/.well-known/acme-challenge/YE2jkv5yxJjdvXy8Oqfl_MDfITP4EiokyrLDdfFQJ7E" \
+            "http://www.arthur-show.com/.well-known/acme-challenge/Y0zAsVtJgnBPGl9mVdXjmZKJPKf-MLQ3M61JjAuAdFE"; do
+            if status=$(curl -4 --noproxy '*' --connect-timeout 8 --max-time 12 -sS -o /dev/null -w '%{http_code}' "$url"); then
+              echo "Public challenge response: $status"
+              [[ "$status" == 200 ]] || failed=1
+            else
+              echo "Public challenge connection failed"
+              failed=1
+            fi
+          done
+          exit "$failed"
