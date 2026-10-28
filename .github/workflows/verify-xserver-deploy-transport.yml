@@ -1,0 +1,37 @@
+name: Verify XServer FTPS transport (read only)
+
+on:
+  push:
+    branches: [codex/arthur-xserver-deploy-20261028]
+    paths: [.github/workflows/verify-xserver-deploy-transport.yml]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Read and verify the staged homepage over FTPS
+        env:
+          FTP_USERNAME: ${{ secrets.XSERVER_FTP_USERNAME }}
+          LFTP_PASSWORD: ${{ secrets.XSERVER_FTP_PASSWORD }}
+        run: |
+          [[ "$FTP_USERNAME" =~ ^[a-z0-9._-]+@arthur-show[.]com$ ]] || exit 1
+          [[ -n "$LFTP_PASSWORD" ]] || exit 1
+          sudo apt-get update
+          sudo apt-get install -y lftp
+          lftp --norc --user "$FTP_USERNAME" --env-password ftp://sv17295.xserver.jp <<'LFTP'
+          set cmd:fail-exit yes
+          set ftp:ssl-allow yes
+          set ftp:ssl-force yes
+          set ftp:ssl-protect-data yes
+          set ftp:ssl-protect-list yes
+          set ssl:verify-certificate yes
+          set net:max-retries 3
+          set net:timeout 20
+          get -o staged-index.html /index.html
+          bye
+          LFTP
+          echo 'fb5a24ea17099624b34e14f8a4ca9324b69f6fe19ff782949760aa68ce5007a5  staged-index.html' | sha256sum --check
