@@ -107,20 +107,28 @@ jobs:
         env:
           PUBLIC_GA_MEASUREMENT_ID: ${{ secrets.PUBLIC_GA_MEASUREMENT_ID }}
         run: npm run build
-      - name: FTP Deploy
+      - name: Deploy to XServer over FTPS
         if: steps.publish_window.outputs.should_deploy == 'true'
         env:
-          FTP_HOST: ${{ secrets.FTP_HOST }}
-          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-          FTP_REMOTE_DIR: ${{ secrets.FTP_REMOTE_DIR }}
+          FTP_USERNAME: ${{ secrets.XSERVER_FTP_USERNAME }}
+          LFTP_PASSWORD: ${{ secrets.XSERVER_FTP_PASSWORD }}
         run: |
+          # The dedicated account is restricted to Arthur Show's public root.
+          [[ "$FTP_USERNAME" =~ ^[a-z0-9._-]+@arthur-show[.]com$ ]] || exit 1
+          [[ -n "$LFTP_PASSWORD" ]] || exit 1
           sudo apt-get update
           sudo apt-get install -y lftp
-          lftp -u "$FTP_USERNAME","$FTP_PASSWORD" "$FTP_HOST" <<EOF
-          set ftp:ssl-allow no
+          lftp --norc --user "$FTP_USERNAME" --env-password ftp://sv17295.xserver.jp <<'EOF'
+          set cmd:fail-exit yes
+          set ftp:ssl-allow yes
+          set ftp:ssl-force yes
+          set ftp:ssl-protect-data yes
+          set ftp:ssl-protect-list yes
+          set ssl:verify-certificate yes
+          set xfer:use-temp-file yes
           set net:max-retries 3
           set net:timeout 20
-          mirror --reverse --verbose --parallel=4 ./dist/ "$FTP_REMOTE_DIR"/
+          # Preserve server-specific configuration and never delete remote files.
+          mirror --reverse --verbose --parallel=4 --exclude-glob .htaccess --exclude-glob .user.ini ./dist/ ./
           bye
           EOF
