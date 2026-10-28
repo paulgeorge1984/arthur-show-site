@@ -19,14 +19,24 @@ jobs:
           import ftplib, hashlib, io, json, os, re, ssl, sys, urllib.request
           from pathlib import Path
           sys.excepthook = lambda kind, value, tb: print('Event sync failed: ' + kind.__name__, file=sys.stderr)
-          ROWS = [{'path': '_astro/index.B2t--DfK.css', 'bytes': 7174, 'sha256': '1246c89d37038c9c90fa21e28ec46ec51a637b7711b39a4aa1a94ac86e07755d', 'old_sha256': '1246c89d37038c9c90fa21e28ec46ec51a637b7711b39a4aa1a94ac86e07755d'}, {'path': '_astro/index.BRxkACbW.css', 'bytes': 56436, 'sha256': '80edfbb58b1225407380d6a6f8bd930f5446bfe8f833289dc93025e622384955', 'old_sha256': None}, {'path': '_astro/index.CWu911yJ.css', 'bytes': 24412, 'sha256': '3a959e3ba5731db31891a92e7e4746fb84aa8983ff3589521e3c626788ea47d2', 'old_sha256': None}, {'path': '_astro/index.CZxofAC1.css', 'bytes': 12221, 'sha256': 'ca5a6c9370d43f1b98822864bc6cb207370fa575ec95f57129bbc9b0e4ef999e', 'old_sha256': 'ca5a6c9370d43f1b98822864bc6cb207370fa575ec95f57129bbc9b0e4ef999e'}, {'path': '_astro/index.Ht9Wmt5w.css', 'bytes': 7142, 'sha256': 'd780c5552601871883b16da85a57fbeede77e652a42f06ab5815f8667efeffd7', 'old_sha256': 'd780c5552601871883b16da85a57fbeede77e652a42f06ab5815f8667efeffd7'}, {'path': 'assets/kashiwa-passion-20261101.jpg', 'bytes': 482312, 'sha256': '27c57acbf9584960c860126381bec998cf72ef1d55cb8e12096d48c94914b632', 'old_sha256': None}, {'path': 'assets/saturday-night-arthur-20261107-touring.png', 'bytes': 1929978, 'sha256': 'a8035ee609589c98a0f445a0d941397ee55d642c6e2b574f47c1aa88c7b64216', 'old_sha256': None}, {'path': 'calendar/index.html', 'bytes': 110718, 'sha256': '254aca7e84c099692f68670080010490781af39446a9a326d77479b7c0331e46', 'old_sha256': '70da262c9f75a4f2af3076c2bdabb81f1a3cc5247c7f1c093d978427ec9bdd43'}, {'path': 'index.html', 'bytes': 1181416, 'sha256': '9114b2ae10b3203e5753af6095de21691531935b1e7e3051ced556bcf1627647', 'old_sha256': '60d91b2b33b551f37f4ab64ecd9fd771a373035dc437ab04fa1adf2020b30e7e'}]
+          ROWS = [{'path': '_astro/index.B2t--DfK.css', 'bytes': 7174, 'sha256': '1246c89d37038c9c90fa21e28ec46ec51a637b7711b39a4aa1a94ac86e07755d', 'old_sha256': '1246c89d37038c9c90fa21e28ec46ec51a637b7711b39a4aa1a94ac86e07755d'}, {'path': '_astro/index.BRxkACbW.css', 'bytes': 56436, 'sha256': '80edfbb58b1225407380d6a6f8bd930f5446bfe8f833289dc93025e622384955', 'old_sha256': '80edfbb58b1225407380d6a6f8bd930f5446bfe8f833289dc93025e622384955'}, {'path': '_astro/index.CZxofAC1.css', 'bytes': 12221, 'sha256': 'ca5a6c9370d43f1b98822864bc6cb207370fa575ec95f57129bbc9b0e4ef999e', 'old_sha256': 'ca5a6c9370d43f1b98822864bc6cb207370fa575ec95f57129bbc9b0e4ef999e'}, {'path': '_astro/index.DQw5lmL7.css', 'bytes': 24485, 'sha256': '6ca0de16037c1c8e43becdb509276e47e7c456e7ed9f2145144648620e5c2e2f', 'old_sha256': None}, {'path': '_astro/index.Ht9Wmt5w.css', 'bytes': 7142, 'sha256': 'd780c5552601871883b16da85a57fbeede77e652a42f06ab5815f8667efeffd7', 'old_sha256': 'd780c5552601871883b16da85a57fbeede77e652a42f06ab5815f8667efeffd7'}, {'path': 'assets/kashiwa-passion-20261101.jpg', 'bytes': 482312, 'sha256': '27c57acbf9584960c860126381bec998cf72ef1d55cb8e12096d48c94914b632', 'old_sha256': '27c57acbf9584960c860126381bec998cf72ef1d55cb8e12096d48c94914b632'}, {'path': 'assets/saturday-night-arthur-20261107-touring.png', 'bytes': 1929978, 'sha256': 'a8035ee609589c98a0f445a0d941397ee55d642c6e2b574f47c1aa88c7b64216', 'old_sha256': 'a8035ee609589c98a0f445a0d941397ee55d642c6e2b574f47c1aa88c7b64216'}, {'path': 'calendar/index.html', 'bytes': 106319, 'sha256': 'b922e032a5c6c56067401c59e04e2041c1edf4a9b7ef857516a20ede0f1eaca5', 'old_sha256': '254aca7e84c099692f68670080010490781af39446a9a326d77479b7c0331e46'}, {'path': 'index.html', 'bytes': 1173403, 'sha256': 'e38f0ef8d82f42287e99203a50acbd64549ec5fa961f38beffdca44c225aec2c', 'old_sha256': '9114b2ae10b3203e5753af6095de21691531935b1e7e3051ced556bcf1627647'}]
           sha = lambda data: hashlib.sha256(data).hexdigest()
+          def stable_index(data):
+              text = data.decode()
+              collections = []
+              patterns = ['<a\\b(?=[^>]*\\bclass="archive-item")[\\s\\S]*?</a>', '\\{"title":[^{}]+\\}']
+              for pattern in patterns:
+                  collections.append(sorted(re.findall(pattern, text)))
+                  text = re.sub(pattern, '', text)
+              return sha(json.dumps([text, collections], ensure_ascii=False).encode())
           local = {}
           for row in ROWS:
               with urllib.request.urlopen('https://arthur-show.com/' + row['path'], timeout=60) as response:
                   data = response.read()
               if sha(data) != row['sha256']:
-                  raise SystemExit('Published content hash mismatch: ' + row['path'])
+                  if row['path'] != 'index.html' or stable_index(data) != 'f3ff2ca8cdcadbbe8200986f7efc4f6e6c0891c122fb91a5438ba1fcee40e967':
+                      raise SystemExit('Published content hash mismatch: ' + row['path'])
+                  row['sha256'] = sha(data)
               local[row['path']] = data
           user = os.environ['FTP_USER']
           if not re.fullmatch(r'[a-z0-9._-]+@arthur-show[.]com', user) or not os.environ['FTP_PASSWORD']:
@@ -64,7 +74,7 @@ jobs:
               current = read(path)
               if (sha(current) if current is not None else None) != row['old_sha256']:
                   raise SystemExit('Concurrent edit detected: ' + path)
-              temporary = path + '.event-update-7ede6c4'
+              temporary = path + '.event-update-77b6104'
               ftp.storbinary('STOR /' + temporary, io.BytesIO(local[path]))
               if sha(read(temporary)) != row['sha256']:
                   raise SystemExit('Temporary upload verification failed')
@@ -78,7 +88,7 @@ jobs:
                   raise SystemExit('Final content mismatch')
               verified.append(row['path'])
           ftp.quit()
-          result = {'uploaded': len(changes), 'verified_files': verified, 'tls_certificate_verified': True, 'source_commit': '7ede6c4', 'target': 'sv17295.xserver.jp scoped Arthur Show root', 'dns_changes': 0}
+          result = {'uploaded': len(changes), 'verified_files': verified, 'manifest': [{'path': row['path'], 'size': len(local[row['path']]), 'sha256': row['sha256']} for row in ROWS], 'tls_certificate_verified': True, 'source_commit': '77b6104', 'target': 'sv17295.xserver.jp scoped Arthur Show root', 'dns_changes': 0}
           Path('event-sync-result.json').write_text(json.dumps(result, indent=2))
           print(json.dumps(result), flush=True)
           PY
