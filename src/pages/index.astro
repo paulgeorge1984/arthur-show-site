@@ -5,7 +5,8 @@ import YoutubeSubscribeBanner from '../components/YoutubeSubscribeBanner.astro';
 import { getCollection } from 'astro:content';
 
 const siteURL = 'https://arthur-show.com';
-const theEssenceAkitaBanner = '/assets/the-essence-akita-20261114-og-v3.jpg';
+const theEssenceAkitaPoster = '/assets/the-essence-akita-20261114.jpg';
+const theEssenceAkitaPosterBack = '/assets/the-essence-akita-20261114-back.jpg';
 
 // サイトのビルドが実行された現在の時刻を取得
 const currentBuildTime = new Date(); 
@@ -441,30 +442,34 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 					</div>
 				</article>
 
-				<a class="blessing-time-feature the-essence-home-feature" href="/the-essence-akita-20261114/" aria-label="THE ESSENCE 2026年11月14日 秋田キャッスルホテル 特別ページを見る">
-					<img
-						src={theEssenceAkitaBanner}
-						alt=""
-						width="1200"
-						height="630"
-						loading="lazy"
-						aria-hidden="true"
-					/>
+				<article id="the-essence-akita-20261114" class="blessing-time-feature blessing-night-kagurazaka-home-feature the-essence-announcement-home-feature" aria-label="THE ESSENCE 2026年11月14日 秋田キャッスルホテル">
+					<div class="blessing-night-kagurazaka-home-media">
+						<a href={theEssenceAkitaPoster} target="_blank" rel="noopener noreferrer" aria-label="THE ESSENCE チラシ表面を原寸で開く">
+							<img src={theEssenceAkitaPoster} alt="THE ESSENCE 2026年11月14日（土）19時から21時、秋田キャッスルホテル弥生の間。入場無料の告知チラシ表面" width="905" height="1280" loading="lazy" />
+						</a>
+						<a href={theEssenceAkitaPosterBack} target="_blank" rel="noopener noreferrer" aria-label="THE ESSENCE チラシ裏面を原寸で開く">
+							<img src={theEssenceAkitaPosterBack} alt="THE ESSENCE チラシ裏面。アーサー・ホーランドのプロフィール、ご来場案内、会場アクセスと問い合わせ先" width="905" height="1280" loading="lazy" />
+						</a>
+					</div>
 					<div class="blessing-time-feature-copy">
-						<p class="blessing-time-feature-kicker">SPECIAL MESSAGE</p>
-						<h2>THE ESSENCE</h2>
+						<p class="blessing-time-feature-kicker">NEXT EVENT / 11.14 SAT</p>
+						<h2>THE<br />ESSENCE</h2>
 						<p>
 							きれいごとでは終われない、人生の本質を問う夜。
 							不良牧師アーサーホーランドを秋田キャッスルホテルに迎えます。
 						</p>
 						<div class="blessing-time-feature-meta">
 							<span>2026年11月14日（土）</span>
-							<span>19:00〜21:00</span>
+							<span>19:00〜21:00（開場18:30）</span>
 							<span>秋田キャッスルホテル 弥生の間</span>
+							<span>秋田県秋田市中通1丁目3番5号</span>
+							<span>入場無料（任意の席上献金があります）</span>
+							<span>事前申込不要・どなたでもご参加いただけます。</span>
+							<span>お問い合わせ：<a href="tel:08039271165">080-3927-1165（後藤）</a></span>
 						</div>
-						<span class="blessing-time-feature-button">特別ページを見る</span>
+						<a class="blessing-time-feature-button" href="/the-essence-akita-20261114/">特別ページを見る</a>
 					</div>
-				</a>
+				</article>
 				<HiscallChristmasEvent />
 			</div>
 		</details>
@@ -1452,15 +1457,20 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 	.kashiwa-passion-home-feature:hover .blessing-night-kagurazaka-home-media img {
 		transform: none;
 	}
-	.saturday-night-arthur-touring-home-feature {
+	.saturday-night-arthur-touring-home-feature,
+	.the-essence-announcement-home-feature {
 		grid-template-columns: minmax(0, 1fr);
+	}
+	.the-essence-announcement-home-feature .blessing-night-kagurazaka-home-media {
+		align-items: start;
 	}
 	.saturday-night-arthur-touring-home-feature .blessing-night-kagurazaka-home-media {
 		grid-template-columns: repeat(3, minmax(0, 1fr));
 		align-items: start;
 	}
 	@media (max-width: 640px) {
-		.saturday-night-arthur-touring-home-feature .blessing-night-kagurazaka-home-media {
+		.saturday-night-arthur-touring-home-feature .blessing-night-kagurazaka-home-media,
+		.the-essence-announcement-home-feature .blessing-night-kagurazaka-home-media {
 			grid-template-columns: minmax(0, 1fr);
 		}
 	}
