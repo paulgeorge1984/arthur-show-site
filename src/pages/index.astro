@@ -1,5 +1,6 @@
 ---
 import HiscallChristmasEvent from '../components/HiscallChristmasEvent.astro';
+import ShinkaichiChristmasEvent from '../components/ShinkaichiChristmasEvent.astro';
 import Layout from '../layouts/Layout.astro';
 import YoutubeSubscribeBanner from '../components/YoutubeSubscribeBanner.astro';
 import { getCollection } from 'astro:content';
@@ -355,7 +356,7 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 				<span class="home-event-summary-copy">
 					<span class="home-event-summary-kicker">EVENT INFO</span>
 					<strong>イベント案内</strong>
-					<span>11/1 柏熱の日・柏教会／11/7 サタデー・ナイト・アーサー／11/13 神楽坂／11/14 THE ESSENCE／12/20 クリスマス礼拝</span>
+					<span>11/1 柏熱の日・柏教会／11/7 サタデー・ナイト・アーサー／11/13 神楽坂／11/14 THE ESSENCE／12/10 新開地クリスマス／12/20 クリスマス礼拝</span>
 				</span>
 				<span class="home-event-summary-action" aria-hidden="true">
 					<span class="closed">見る</span>
@@ -470,6 +471,7 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 						<a class="blessing-time-feature-button" href="/the-essence-akita-20261114/">特別ページを見る</a>
 					</div>
 				</article>
+				<ShinkaichiChristmasEvent />
 				<HiscallChristmasEvent />
 			</div>
 		</details>
@@ -1025,13 +1027,11 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 	}
 
 	.home-event-summary-copy span:last-child {
-		overflow: hidden;
 		color: rgba(255, 255, 255, 0.82);
 		font-size: 0.92rem;
 		font-weight: 900;
 		line-height: 1.35;
-		text-overflow: ellipsis;
-		white-space: nowrap;
+		overflow-wrap: anywhere;
 	}
 
 	.home-event-summary-action {
@@ -3024,12 +3024,8 @@ const newTestamentBooks = scriptureBooks.filter((book) => (bibleBookOrder.get(bo
 		}
 
 		.home-event-summary-copy span:last-child {
-			display: -webkit-box;
-			overflow: hidden;
 			font-size: 0.78rem;
 			line-height: 1.35;
-			-webkit-line-clamp: 2;
-			-webkit-box-orient: vertical;
 			white-space: normal;
 		}
 

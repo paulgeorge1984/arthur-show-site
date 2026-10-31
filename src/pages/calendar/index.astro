@@ -1,5 +1,6 @@
 ---
 import HiscallChristmasEvent from '../../components/HiscallChristmasEvent.astro';
+import ShinkaichiChristmasEvent from '../../components/ShinkaichiChristmasEvent.astro';
 import Layout from '../../layouts/Layout.astro';
 
 const officialScheduleUrl = 'https://www.arthurhollands.com/%E3%82%B9%E3%82%B1%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB';
@@ -183,6 +184,10 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			</a>
 		</section>
 
+		<div class="calendar-special-event shinkaichi-christmas-feature">
+			<ShinkaichiChristmasEvent />
+		</div>
+
 		<div class="calendar-special-event hiscall-christmas-feature">
 			<HiscallChristmasEvent />
 		</div>
@@ -263,6 +268,14 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			},
 		];
 		const MANUAL_EVENTS = [
+			{
+				id: 'manual-shinkaichi-christmas-2026-12-10',
+				summary: '新開地クリスマス',
+				description: '講師：アーサー・ホーランド牧師\n会場電話：078-576-3324（チラシの表記と異なります）\nhttps://arthur-show.com/calendar/#shinkaichi-christmas-20261210',
+				location: '湊川伝道館（神戸市兵庫区新開地2-6-7）',
+				start: { dateTime: '2026-12-10T19:00:00+09:00', timeZone: TOKYO_TIME_ZONE },
+				end: null,
+			},
             {
                 id: 'manual-kashiwa-passion-2026-11-01',
                 summary: 'A day of passion（柏熱の日）｜日本バプテスト柏教会 礼拝',
@@ -941,6 +954,12 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				&& /gospel\s*talk|神の言葉を語る|大阪弟子教会|j\.\s*disciple/i.test(searchableText);
 		}
 
+		function isShinkaichiChristmasEvent(event) {
+			const startKey = event.start?.date || getDateKeyFromDate(getEventStart(event));
+			return startKey === '2026-12-10'
+				&& /新開地\s*クリスマス/.test(event.summary || '');
+		}
+
 		function isHiscallChristmasEvent(event) {
             const startKey = event.start?.date || getDateKeyFromDate(getEventStart(event));
             const text = `${event.summary || ''} ${event.description || ''} ${event.location || ''}`;
@@ -956,6 +975,11 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
         }
 
         function mergeManualEvents(events, range) {
+			// Replace only an official entry with this event's exact title and date.
+			const shinkaichi = MANUAL_EVENTS.find((event) => event.id === 'manual-shinkaichi-christmas-2026-12-10');
+			if (shinkaichi && isEventInRange(shinkaichi, range)) {
+				events = events.filter((event) => !isShinkaichiChristmasEvent(event));
+			}
             // Replace only the verified official all-day entry with the flyer times.
             const kashiwa = MANUAL_EVENTS.find((event) => event.id === 'manual-kashiwa-passion-2026-11-01');
             if (kashiwa && isEventInRange(kashiwa, range)) {

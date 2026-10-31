@@ -1,0 +1,35 @@
+---
+const poster = '/assets/shinkaichi-christmas-20261210.jpg';
+---
+
+<section id="shinkaichi-christmas-20261210" class="shinkaichi-christmas" aria-label="2026年12月10日 新開地クリスマス">
+  <a class="poster" href={poster} target="_blank" rel="noopener noreferrer" aria-label="新開地クリスマスのチラシを原寸で開く">
+    <img src={poster} alt="新開地クリスマス。12月10日木曜日19時から、湊川伝道館にてアーサー・ホーランド牧師を迎える集会のチラシ" width="863" height="1280" loading="lazy" />
+  </a>
+  <div class="copy">
+    <p class="kicker">CHRISTMAS EVENT / 12.10 THU</p>
+    <h2>新開地クリスマス</h2>
+    <p>アーサー・ホーランド牧師をお迎えします。</p>
+    <p class="date">2026年12月10日（木）19:00から</p>
+    <h3>湊川伝道館</h3>
+    <p>神戸市兵庫区新開地2-6-7</p>
+    <p>会場電話：<a href="tel:0785763324">078-576-3324</a></p>
+    <p class="note">※チラシの電話番号とは表記が異なります。上記は<a href="https://kbh-bible.jp/archives/tag/%E6%B9%8A%E5%B7%9D%E4%BC%9D%E9%81%93%E9%A4%A8" target="_blank" rel="noopener noreferrer">神戸バイブルハウスの会場案内</a>に掲載されている番号です。</p>
+    <a class="flyer-link" href={poster} target="_blank" rel="noopener noreferrer">チラシを拡大する</a>
+  </div>
+</section>
+
+<style>
+  .shinkaichi-christmas { display:grid; grid-template-columns:minmax(0, .9fr) minmax(0, 1.1fr); width:100%; box-sizing:border-box; border:1px solid #75613c; background:#171717; color:#f5f1e8; }
+  .poster { display:block; align-self:start; }
+  .poster img { display:block; width:100%; height:auto; object-fit:contain; }
+  .copy { min-width:0; padding:28px; line-height:1.85; overflow-wrap:anywhere; }
+  .copy p { margin:0 0 16px; }
+  .kicker, .flyer-link, .copy a { color:#d8b76e; }
+  .kicker, .flyer-link, .date { font-weight:700; }
+  h2 { font-size:clamp(1.6rem, 3vw, 2.4rem); margin:0 0 16px; line-height:1.4; }
+  h3 { font-size:1.15rem; margin:0 0 8px; }
+  .note { font-size:.9rem; }
+  .flyer-link { text-decoration:underline; }
+  @media(max-width:640px) { .shinkaichi-christmas { grid-template-columns:minmax(0,1fr); } .copy { padding:20px 16px; } }
+</style>
