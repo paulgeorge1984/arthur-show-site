@@ -269,6 +269,46 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 		];
 		const MANUAL_EVENTS = [
 			{
+				id: 'manual-friday-night-2026-11-06',
+				summary: 'フライデーナイト',
+				description: '19:00開始／8階チャペル',
+				location: 'お茶の水クリスチャン・センター（東京都千代田区神田駿河台2-1-1）',
+				start: { dateTime: '2026-11-06T19:00:00+09:00', timeZone: TOKYO_TIME_ZONE },
+				end: null,
+			},
+			{
+				id: 'manual-friday-night-2026-12-04',
+				summary: 'フライデーナイト',
+				description: '12月18日から12月4日に変更。開始時刻は主催者へご確認ください（通常19:00開始）。',
+				location: 'お茶の水クリスチャン・センター（東京都千代田区神田駿河台2-1-1）',
+				start: { date: '2026-12-04' },
+				end: { date: '2026-12-05' },
+			},
+			{
+				id: 'manual-saitama-christmas-2026-12-11',
+				summary: '第34回さいたま市民クリスマス',
+				description: '18:00開場／18:45開演\n詳細・入場料は主催者の案内をご確認ください。\nhttps://ameblo.jp/saitamachristmas/entry-12982221699.html',
+				location: 'RaiBoC Hall（市民会館おおみや）7階',
+				start: { dateTime: '2026-12-11T18:45:00+09:00', timeZone: TOKYO_TIME_ZONE },
+				end: null,
+			},
+			{
+				id: 'manual-masterseed-christmas-2026-12-12',
+				summary: 'OCC MASTERSEED クリスマス集会',
+				description: '',
+				location: 'お茶の水クリスチャン・センター（東京都千代田区神田駿河台2-1-1）',
+				start: { dateTime: '2026-12-12T17:30:00+09:00', timeZone: TOKYO_TIME_ZONE },
+				end: { dateTime: '2026-12-12T19:00:00+09:00', timeZone: TOKYO_TIME_ZONE },
+			},
+			{
+				id: 'manual-narimasu-2026-12-13',
+				summary: '成増教会 特別礼拝',
+				description: 'メッセンジャー：アーサー・ホーランド師\nhttps://www.narimasu-church.org/info/2026/arthur.html',
+				location: 'キリスト兄弟団 成増教会（東京都練馬区旭町3-32-18）',
+				start: { dateTime: '2026-12-13T10:30:00+09:00', timeZone: TOKYO_TIME_ZONE },
+				end: null,
+			},
+			{
 				id: 'manual-shinkaichi-christmas-2026-12-10',
 				summary: '新開地クリスマス',
 				description: '講師：アーサー・ホーランド牧師\n会場電話：078-576-3324\nhttps://arthur-show.com/calendar/#shinkaichi-christmas-20261210',
@@ -791,6 +831,9 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 		}
 
 		function resolveRelatedEventLinks(event) {
+			if (event.id === 'manual-masterseed-christmas-2026-12-12') {
+				return [{ label: 'お茶の水クリスチャン・センター 公式サイト', url: 'https://ochanomizu.cc/' }];
+			}
 			if (isSadoEvangelisticMeetingEvent(event)) {
 				return [{
 				label: '佐渡島 TALK & LIVE 詳細・会場案内',
@@ -974,7 +1017,21 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
             return date === '2026-10-24' && /桑名|Kuwana|柿安/i.test(text) && /アーサー|ホーランド|Arthur|ゴスペル|トーク/i.test(text);
         }
 
-        function mergeManualEvents(events, range) {
+		function isReplacedScheduleEvent(event) {
+			const date = event.start?.date || getDateKeyFromDate(getEventStart(event));
+			const title = (event.summary || '').trim();
+			if (['2026-11-06', '2026-12-04', '2026-12-18'].includes(date)) {
+				return /^(?:フライデ[ーイ]ナイト|friday\s*night)$/i.test(title);
+			}
+			if (date === '2026-12-11') return /^(?:第34回)?\s*さいたま市民クリスマス$/.test(title);
+			if (date === '2026-12-12') return /^(?:OCC\s*)?MASTER\s*SEED\s*クリスマス集会$/i.test(title);
+			if (date === '2026-12-13') return title === '成増教会' || title === '成増教会 特別礼拝';
+			return false;
+		}
+
+		function mergeManualEvents(events, range) {
+			// Only the identified official entries are superseded by the confirmed schedule.
+			events = events.filter((event) => !isReplacedScheduleEvent(event));
 			// Replace only an official entry with this event's exact title and date.
 			const shinkaichi = MANUAL_EVENTS.find((event) => event.id === 'manual-shinkaichi-christmas-2026-12-10');
 			if (shinkaichi && isEventInRange(shinkaichi, range)) {
