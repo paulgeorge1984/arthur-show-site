@@ -1,0 +1,36 @@
+---
+const poster = '/assets/narimasu-christmas-festival-2026.jpg';
+---
+
+<section id="narimasu-christmas-eve-20261224" class="narimasu-christmas-eve" aria-label="2026年12月24日 成増教会 クリスマスイブ コンサート礼拝">
+  <a class="poster" href={poster} target="_blank" rel="noopener noreferrer" aria-label="成増クリスマスフェスティバルのチラシを原寸で開く">
+    <img src={poster} alt="成増クリスマスフェスティバル2026のチラシ。アーサー・ホーランドのメッセージは12月24日19時からのクリスマスイブ コンサート礼拝" width="750" height="1062" loading="lazy" />
+  </a>
+  <div class="copy">
+    <p class="kicker">CHRISTMAS EVE / 12.24 THU</p>
+    <h2>クリスマスイブ<br />コンサート礼拝</h2>
+    <p class="date">2026年12月24日（木）19:00から</p>
+    <p>メッセージ：アーサー・ホーランド</p>
+    <p>入場無料（自由献金あり）<br />YouTubeでリアルタイム配信します。<br />集会後の軽食はありません。</p>
+    <h3>キリスト兄弟団 成増教会</h3>
+    <p>〒179-0071 東京都練馬区旭町3-32-18<br />東京メトロ地下鉄成増駅1番出口から徒歩5分<br />東武東上線成増駅南口から徒歩10分</p>
+    <p>会場電話：<a href="tel:0339390333">03-3939-0333</a></p>
+    <p class="note">チラシには他の日程も掲載されています。アーサー・ホーランドのメッセージは12月24日の礼拝です。</p>
+    <a class="flyer-link" href={poster} target="_blank" rel="noopener noreferrer">チラシを拡大する</a>
+  </div>
+</section>
+
+<style>
+  .narimasu-christmas-eve { display:grid; grid-template-columns:minmax(0, .9fr) minmax(0, 1.1fr); width:100%; box-sizing:border-box; border:1px solid #75613c; background:#171717; color:#f5f1e8; }
+  .poster { display:block; align-self:start; }
+  .poster img { display:block; width:100%; height:auto; object-fit:contain; }
+  .copy { min-width:0; padding:28px; line-height:1.85; overflow-wrap:anywhere; }
+  .copy p { margin:0 0 16px; }
+  .kicker, .flyer-link, .copy a { color:#d8b76e; }
+  .kicker, .flyer-link, .date { font-weight:700; }
+  h2 { font-size:clamp(1.6rem, 3vw, 2.4rem); margin:0 0 16px; line-height:1.4; }
+  h3 { font-size:1.15rem; margin:0 0 8px; }
+  .note { font-size:.9rem; color:#d3cdc0; }
+  .flyer-link { text-decoration:underline; }
+  @media(max-width:640px) { .narimasu-christmas-eve { grid-template-columns:minmax(0,1fr); } .copy { padding:20px 16px; } }
+</style>

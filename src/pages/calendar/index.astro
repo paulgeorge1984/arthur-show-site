@@ -1,5 +1,7 @@
 ---
 import HiscallChristmasEvent from '../../components/HiscallChristmasEvent.astro';
+import BlessingNightNarimasu2026 from '../../components/BlessingNightNarimasu2026.astro';
+import NarimasuChristmasEve2026 from '../../components/NarimasuChristmasEve2026.astro';
 import ShinkaichiChristmasEvent from '../../components/ShinkaichiChristmasEvent.astro';
 import Layout from '../../layouts/Layout.astro';
 
@@ -159,12 +161,20 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			</a>
 		</section>
 
+		<div class="calendar-special-event blessing-night-narimasu-feature">
+			<BlessingNightNarimasu2026 />
+		</div>
+
 		<div class="calendar-special-event shinkaichi-christmas-feature">
 			<ShinkaichiChristmasEvent />
 		</div>
 
 		<div class="calendar-special-event hiscall-christmas-feature">
 			<HiscallChristmasEvent />
+		</div>
+
+		<div class="calendar-special-event narimasu-christmas-eve-feature">
+			<NarimasuChristmasEve2026 />
 		</div>
 
 		<section class="calendar-section" id="calendar-events" aria-labelledby="calendar-title">
@@ -243,6 +253,34 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			},
 		];
 		const MANUAL_EVENTS = [
+			{
+				id: 'manual-blessing-night-narimasu-2026-12-08',
+				summary: 'BLESSING NIGHT SPECIAL WORSHIP NIGHT 成増',
+				description: [
+					'18:30開場／19:00開演',
+					'Arthur Hollands Talk Live／Music Guest：三上勝久バンド with 古川初穂',
+					'入場無料（自由献金）／会場に駐車場はありません。',
+					'お問い合わせ：mag.manak@gmail.com（MAG金子）',
+					'https://arthur-show.com/calendar/#blessing-night-narimasu-20261208',
+				].join('\n'),
+				location: 'キリスト兄弟団 成増教会（東京都練馬区旭町3-32-18）',
+				start: { dateTime: '2026-12-08T19:00:00+09:00', timeZone: TOKYO_TIME_ZONE },
+				end: null,
+			},
+			{
+				id: 'manual-narimasu-christmas-eve-2026-12-24',
+				summary: 'クリスマスイブ コンサート礼拝｜成増教会',
+				description: [
+					'19:00開始／メッセージ：アーサー・ホーランド',
+					'入場無料（自由献金あり）／YouTubeでリアルタイム配信',
+					'集会後の軽食はありません。',
+					'会場電話：03-3939-0333',
+					'https://arthur-show.com/calendar/#narimasu-christmas-eve-20261224',
+				].join('\n'),
+				location: 'キリスト兄弟団 成増教会（東京都練馬区旭町3-32-18）',
+				start: { dateTime: '2026-12-24T19:00:00+09:00', timeZone: TOKYO_TIME_ZONE },
+				end: null,
+			},
 			{
 				id: 'manual-friday-night-2026-11-06',
 				summary: 'フライデーナイト',
@@ -999,8 +1037,10 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				return /^(?:フライデ[ーイ]ナイト|friday\s*night)$/i.test(title);
 			}
 			if (date === '2026-12-11') return /^(?:第34回)?\s*さいたま市民クリスマス$/.test(title);
+			if (date === '2026-12-08') return title === 'ブレッシングナイト＠成増';
 			if (date === '2026-12-12') return /^(?:OCC\s*)?MASTER\s*SEED\s*クリスマス集会$/i.test(title);
 			if (date === '2026-12-13') return title === '成増教会' || title === '成増教会 特別礼拝';
+			if (date === '2026-12-24') return title === '成増教会クリスマスイブ';
 			return false;
 		}
 

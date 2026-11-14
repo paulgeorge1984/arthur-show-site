@@ -1,0 +1,42 @@
+---
+const front = '/assets/blessing-night-narimasu-20261208-front.jpg';
+const back = '/assets/blessing-night-narimasu-20261208-back.jpg';
+---
+
+<section id="blessing-night-narimasu-20261208" class="blessing-narimasu" aria-label="2026年12月8日 BLESSING NIGHT 成増">
+  <div class="posters">
+    <a href={front} target="_blank" rel="noopener noreferrer" aria-label="BLESSING NIGHT 成増のチラシ表面を原寸で開く">
+      <img src={front} alt="BLESSING NIGHT SPECIAL WORSHIP NIGHT 成増。12月8日19時からのチラシ表面" width="900" height="1280" loading="lazy" />
+    </a>
+    <a href={back} target="_blank" rel="noopener noreferrer" aria-label="BLESSING NIGHT 成増のチラシ裏面を原寸で開く">
+      <img src={back} alt="BLESSING NIGHT 成増のチラシ裏面。出演者のプロフィールと会場案内" width="900" height="1280" loading="lazy" />
+    </a>
+  </div>
+  <div class="copy">
+    <p class="kicker">BLESSING NIGHT SPECIAL / 12.8 TUE</p>
+    <h2>WORSHIP NIGHT 成増</h2>
+    <p>Arthur Hollands Talk Live<br />「今夜は賛美のチカラ！」</p>
+    <p class="date">2026年12月8日（火）<br />18:30 開場／19:00 開演</p>
+    <p>Music Guest：三上勝久バンド with 古川初穂</p>
+    <p>入場無料（自由献金）</p>
+    <h3>キリスト兄弟団 成増教会</h3>
+    <p>〒179-0071 東京都練馬区旭町3-32-18<br />会場電話：<a href="tel:0339390333">03-3939-0333</a><br />会場に駐車場はありません。</p>
+    <p>お問い合わせ：<a href="mailto:mag.manak@gmail.com">mag.manak@gmail.com</a>（MAG金子）</p>
+    <a class="flyer-link" href="https://www.blessingnight.jp/schedule/schedule599" target="_blank" rel="noopener noreferrer">公式イベント案内を見る</a>
+  </div>
+</section>
+
+<style>
+  .blessing-narimasu { display:grid; grid-template-columns:minmax(0, .9fr) minmax(0, 1.1fr); width:100%; box-sizing:border-box; border:1px solid #75613c; background:#171717; color:#f5f1e8; }
+  .posters { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:2px; align-content:start; }
+  .posters a { display:block; min-width:0; }
+  .posters img { display:block; width:100%; height:auto; object-fit:contain; }
+  .copy { min-width:0; padding:28px; line-height:1.85; overflow-wrap:anywhere; }
+  .copy p { margin:0 0 16px; }
+  .kicker, .flyer-link, .copy a { color:#d8b76e; }
+  .kicker, .flyer-link, .date { font-weight:700; }
+  h2 { font-size:clamp(1.6rem, 3vw, 2.4rem); margin:0 0 16px; line-height:1.4; }
+  h3 { font-size:1.15rem; margin:0 0 8px; }
+  .flyer-link { text-decoration:underline; }
+  @media(max-width:640px) { .blessing-narimasu { grid-template-columns:minmax(0,1fr); } .copy { padding:20px 16px; } }
+</style>
