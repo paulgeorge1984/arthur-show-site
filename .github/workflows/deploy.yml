@@ -77,7 +77,22 @@ jobs:
               const html = await response.text();
               const canonical = `<link rel="canonical" href="${url}">`;
               const videoMarker = `/embed/${candidate.youtubeId}?rel=0`;
-              return response.ok && html.includes(canonical) && html.includes(videoMarker);
+              const articleIsLive = response.ok && html.includes(canonical) && html.includes(videoMarker);
+              if (!articleIsLive) return false;
+
+              // This article may be published by the dedicated timed job
+              // before the full site build. Keep the regular cron active until
+              // the homepage also includes the new article.
+              if (candidate.slug === '2026-11-18-nihonbashi-kanon') {
+                const homeResponse = await fetch('https://arthur-show.com/', {
+                  redirect: 'follow',
+                  signal: AbortSignal.timeout(10000),
+                  headers: { 'user-agent': 'arthur-show-scheduled-publish-check' },
+                });
+                const homeHtml = await homeResponse.text();
+                return homeResponse.ok && homeHtml.includes(`/messages/${candidate.slug}/`);
+              }
+              return true;
             } catch (error) {
               console.error(`Could not verify ${url}: ${error.message}`);
               return false;
