@@ -1,0 +1,145 @@
+name: Publish November Friday Night at 06:30 JST
+
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/publish-fridaynight-20261120.yml]
+
+permissions:
+  contents: read
+
+jobs:
+  prepare-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22.23.4
+          package-manager-cache: false
+
+      - name: Restrict the scheduled run to this release
+        id: release_window
+        shell: bash
+        run: |
+          target=$(date -u -d '2026-11-19 21:30:00 UTC' +%s)
+          now=$(date -u +%s)
+          if (( now < target - 3600 || now > target + 14400 )); then
+            echo 'eligible=false' >> "$GITHUB_OUTPUT"
+            echo 'Outside the one-time publication window; no changes will be made.'
+          else
+            echo 'eligible=true' >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Prepare the article route in this temporary checkout
+        if: steps.release_window.outputs.eligible == 'true'
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+
+          article = Path('src/content/daily-messages/2026-11-20-fridaynight.mdx').read_text(encoding='utf-8')
+          assert 'date: 2026-11-20T06:30:00+09:00' in article
+          assert 'youtubeId: "LMZv100_4yU"' in article
+          route = Path('src/pages/messages/[...slug].astro')
+          source = route.read_text(encoding='utf-8')
+          original = '  const currentBuildTime = new Date();'
+          assert source.count(original) == 1
+          # This modifies only the runner checkout. Nothing is published yet.
+          route.write_text(source.replace(original, "  const currentBuildTime = new Date('2026-11-19T21:30:00.000Z');"), encoding='utf-8')
+          PY
+
+      - name: Install dependencies and build
+        if: steps.release_window.outputs.eligible == 'true'
+        env:
+          SKIP_SLIDE_NOTES_SYNC: '1'
+          PUBLIC_GA_MEASUREMENT_ID: ${{ secrets.PUBLIC_GA_MEASUREMENT_ID }}
+        run: |
+          npm ci
+          npm run build
+
+      - name: Validate the public page and its already-deployed assets
+        if: steps.release_window.outputs.eligible == 'true'
+        run: |
+          python3 <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          from urllib.request import Request, urlopen
+
+          slug = '2026-11-20-fridaynight'
+          html = Path(f'dist/messages/{slug}/index.html').read_text(encoding='utf-8')
+          class Page(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.canonicals, self.robots, self.assets = [], [], set()
+              def handle_starttag(self, tag, attrs):
+                  a = dict(attrs)
+                  if tag == 'link' and a.get('rel') == 'canonical':
+                      self.canonicals.append(a.get('href'))
+                  if tag == 'meta' and a.get('name') == 'robots':
+                      self.robots.append(a.get('content', ''))
+                  if tag == 'link' and a.get('rel') == 'stylesheet':
+                      self.assets.add(a.get('href', ''))
+                  if tag == 'img':
+                      self.assets.add(a.get('src', ''))
+          page = Page()
+          page.feed(html)
+          assert page.canonicals == [f'https://arthur-show.com/messages/{slug}/']
+          assert not any('noindex' in value for value in page.robots)
+          assert '/embed/LMZv100_4yU?rel=0' in html
+          paths = sorted(x for x in page.assets if x.startswith('/_astro/') or x.startswith('/img/daily/20261120-fridaynight/'))
+          images = [x for x in paths if x.startswith('/img/daily/20261120-fridaynight/')]
+          assert len(images) >= 7 and any(x.startswith('/_astro/') for x in paths)
+          for path in paths:
+              request = Request('https://arthur-show.com' + path, method='HEAD', headers={'User-Agent': 'arthur-show-scheduled-publish-check'})
+              with urlopen(request, timeout=20) as response:
+                  assert response.status == 200, (path, response.status)
+          print(f'Validated canonical URL, video ID, and {len(paths)} live assets.')
+          PY
+
+      - name: Install the transfer client before the release time
+        if: steps.release_window.outputs.eligible == 'true'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lftp
+
+      - name: Publish only the article after 06:30 JST
+        if: steps.release_window.outputs.eligible == 'true'
+        shell: bash
+        env:
+          FTP_USERNAME: ${{ secrets.XSERVER_FTP_USERNAME }}
+          LFTP_PASSWORD: ${{ secrets.XSERVER_FTP_PASSWORD }}
+        run: |
+          target=$(date -u -d '2026-11-19 21:30:00 UTC' +%s)
+          now=$(date -u +%s)
+          while (( now < target )); do
+            remaining=$((target - now))
+            if (( remaining > 30 )); then sleep 30; else sleep "$remaining"; fi
+            now=$(date -u +%s)
+          done
+          # A newer main branch may contain revised copy. The normal cron will
+          # publish it, so never overwrite it with this older snapshot.
+          current=$(git ls-remote origin refs/heads/main | awk '{print $1}')
+          if [[ "$current" != "${GITHUB_SHA}" ]]; then
+            echo '::warning::Main changed after this build; leaving publication to the normal cron.'
+            exit 0
+          fi
+          [[ "$FTP_USERNAME" =~ ^[a-z0-9._-]+@arthur-show[.]com$ ]]
+          [[ -n "$LFTP_PASSWORD" ]]
+          lftp --norc --user "$FTP_USERNAME" --env-password ftp://sv17295.xserver.jp <<'EOF'
+          set cmd:fail-exit yes
+          set ftp:ssl-allow yes
+          set ftp:ssl-force yes
+          set ftp:ssl-protect-data yes
+          set ftp:ssl-protect-list yes
+          set ssl:verify-certificate yes
+          set xfer:use-temp-file yes
+          set net:max-retries 1
+          set net:timeout 20
+          mkdir -p messages/2026-11-20-fridaynight
+          put -O messages/2026-11-20-fridaynight dist/messages/2026-11-20-fridaynight/index.html
+          bye
+          EOF
+          page=$(curl --fail --silent --show-error --max-time 30 'https://arthur-show.com/messages/2026-11-20-fridaynight/?publish-check=20261120')
+          [[ "$page" == *'/embed/LMZv100_4yU?rel=0'* ]]
+          echo 'The article is live with the scheduled video.'
