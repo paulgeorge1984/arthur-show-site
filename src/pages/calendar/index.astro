@@ -1,4 +1,5 @@
 ---
+import IgniteNagoya2026 from '../../components/IgniteNagoya2026.astro';
 import HiscallChristmasEvent from '../../components/HiscallChristmasEvent.astro';
 import BlessingNightNarimasu2026 from '../../components/BlessingNightNarimasu2026.astro';
 import NarimasuChristmasEve2026 from '../../components/NarimasuChristmasEve2026.astro';
@@ -161,6 +162,10 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			</a>
 		</section>
 
+		<div class="calendar-special-event">
+			<IgniteNagoya2026 />
+		</div>
+
 		<div class="calendar-special-event blessing-night-narimasu-feature">
 			<BlessingNightNarimasu2026 />
 		</div>
@@ -287,6 +292,14 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				description: '19:00開始／8階チャペル',
 				location: 'お茶の水クリスチャン・センター（東京都千代田区神田駿河台2-1-1）',
 				start: { dateTime: '2026-11-06T19:00:00+09:00', timeZone: TOKYO_TIME_ZONE },
+				end: null,
+			},
+			{
+				id: 'manual-ignite-nagoya-2026-11-27',
+				summary: 'IGNITE ハートに火を灯せ。',
+				description: 'メッセージ：アーサー・ホーランド\n18:00開場／18:30開演。参加無料（自由献金あり）。申込み不要。\n地下鉄大須観音駅4番出口すぐ。\nhttps://arthur-show.com/calendar/#ignite-nagoya-20261127',
+				location: '名古屋レジェンドホール（愛知県名古屋市中区大須1丁目7-26）',
+				start: { dateTime: '2026-11-27T18:30:00+09:00', timeZone: TOKYO_TIME_ZONE },
 				end: null,
 			},
 			{
@@ -1036,6 +1049,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			if (['2026-11-06', '2026-12-04', '2026-12-18'].includes(date)) {
 				return /^(?:フライデ[ーイ]ナイト|friday\s*night)$/i.test(title);
 			}
+			if (date === '2026-11-27') return /^IGNITE$/i.test(title);
 			if (date === '2026-12-11') return /^(?:第34回)?\s*さいたま市民クリスマス$/.test(title);
 			if (date === '2026-12-08') return title === 'ブレッシングナイト＠成増';
 			if (date === '2026-12-12') return /^(?:OCC\s*)?MASTER\s*SEED\s*クリスマス集会$/i.test(title);

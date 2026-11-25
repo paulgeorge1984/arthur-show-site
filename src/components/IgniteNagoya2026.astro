@@ -1,0 +1,33 @@
+---
+const poster = '/assets/ignite-nagoya-20261127.jpg';
+---
+
+<section id="ignite-nagoya-20261127" class="ignite-nagoya" aria-labelledby="ignite-nagoya-title">
+  <a class="poster" href={poster} target="_blank" rel="noopener noreferrer" aria-label="IGNITE 名古屋のチラシを原寸で開く">
+    <img src={poster} alt="祈るアーサー・ホーランドを写した、11月27日「IGNITE ハートに火を灯せ。」の告知チラシ" width="1024" height="1280" loading="lazy" />
+  </a>
+  <div class="copy">
+    <p class="kicker">IGNITE / 11.27 FRI</p>
+    <h2 id="ignite-nagoya-title">IGNITE ハートに火を灯せ。</h2>
+    <p>本当の出会いが、あなたの人生を動かす。<br />メッセージ：アーサー・ホーランド</p>
+    <p class="date">2026年11月27日（金）<br />18:00 開場／18:30 開演</p>
+    <h3>名古屋レジェンドホール</h3>
+    <p>愛知県名古屋市中区大須1丁目7-26<br />地下鉄大須観音駅4番出口すぐ</p>
+    <p>参加無料（自由献金あり）。申込み不要です。当日直接会場へお越しください。初めての方も大歓迎です。</p>
+    <a class="flyer-link" href={poster} target="_blank" rel="noopener noreferrer">チラシを拡大する</a>
+  </div>
+</section>
+
+<style>
+  .ignite-nagoya { display:grid; grid-template-columns:minmax(0, .9fr) minmax(0, 1.1fr); width:100%; box-sizing:border-box; border:1px solid #75613c; background:#171717; color:#f5f1e8; }
+  .poster { display:block; align-self:start; }
+  .poster img { display:block; width:100%; height:auto; object-fit:contain; }
+  .copy { min-width:0; padding:28px; line-height:1.85; overflow-wrap:anywhere; }
+  .copy p { margin:0 0 16px; }
+  .kicker, .flyer-link, .copy a { color:#d8b76e; }
+  .kicker, .flyer-link, .date { font-weight:700; }
+  h2 { font-size:clamp(1.6rem, 3vw, 2.4rem); margin:0 0 16px; line-height:1.4; }
+  h3 { font-size:1.15rem; margin:0 0 8px; }
+  .flyer-link { text-decoration:underline; }
+  @media(max-width:640px) { .ignite-nagoya { grid-template-columns:minmax(0,1fr); } .copy { padding:20px 16px; } }
+</style>
