@@ -1,0 +1,39 @@
+---
+const poster = '/assets/saitama-christmas-20261211.jpg';
+---
+
+<section id="saitama-christmas-20261211" class="saitama-christmas" aria-labelledby="saitama-christmas-title">
+  <a class="poster" href={poster} target="_blank" rel="noopener noreferrer" aria-label="第34回さいたま市民クリスマス2026のチラシを原寸で開く">
+    <img src={poster} alt="第34回さいたま市民クリスマス2026「最高のプレゼント」のチラシ" width="2481" height="3508" loading="lazy" />
+  </a>
+  <div class="copy">
+    <p class="kicker">CHRISTMAS EVENT / 12.11 FRI</p>
+    <h2 id="saitama-christmas-title">第34回さいたま市民クリスマス2026</h2>
+    <p>「最高のプレゼント」をテーマに、メッセンジャーのアーサー・ホーランドと音楽ゲストの堀井ローレンが親子で共演します。</p>
+    <p class="date">2026年12月11日（金）18:00開場／18:45開演</p>
+    <h3>RaiBoC Hall（さいたま市民会館おおみや）大ホール</h3>
+    <p>大宮門街7階。大宮駅東口から徒歩3分。手話通訳があります。</p>
+    <h3>チケット（全席自由）</h3>
+    <p>大人（高校生以上）は前売900円、当日1,500円。<br />小・中学生は前売・当日ともに500円。未就学児は無料です。</p>
+    <h3>チケットのお問い合わせ</h3>
+    <p>さいたま市民クリスマス実行委員会<br />
+      <a href="tel:0486891115">048-689-1115</a><br />
+      <a href="mailto:1225saitama.christmas@gmail.com">1225saitama.christmas@gmail.com</a>
+    </p>
+    <a class="flyer-link" href={poster} target="_blank" rel="noopener noreferrer">チラシを拡大する</a>
+  </div>
+</section>
+
+<style>
+  .saitama-christmas { display:grid; grid-template-columns:minmax(0, .9fr) minmax(0, 1.1fr); width:100%; box-sizing:border-box; border:1px solid #75613c; background:#171717; color:#f5f1e8; }
+  .poster { display:block; align-self:start; }
+  .poster img { display:block; width:100%; height:auto; object-fit:contain; }
+  .copy { min-width:0; padding:28px; line-height:1.85; overflow-wrap:anywhere; }
+  .copy p { margin:0 0 16px; }
+  .kicker, .flyer-link, .copy a { color:#d8b76e; }
+  .kicker, .flyer-link, .date { font-weight:700; }
+  h2 { font-size:clamp(1.6rem, 3vw, 2.4rem); margin:0 0 16px; line-height:1.4; }
+  h3 { font-size:1.15rem; margin:0 0 8px; }
+  .flyer-link { text-decoration:underline; }
+  @media(max-width:640px) { .saitama-christmas { grid-template-columns:minmax(0,1fr); } .copy { padding:20px 16px; } }
+</style>

@@ -3,6 +3,7 @@ import IgniteNagoya2026 from '../../components/IgniteNagoya2026.astro';
 import HiscallChristmasEvent from '../../components/HiscallChristmasEvent.astro';
 import BlessingNightNarimasu2026 from '../../components/BlessingNightNarimasu2026.astro';
 import NarimasuChristmasEve2026 from '../../components/NarimasuChristmasEve2026.astro';
+import SaitamaChristmasEvent from '../../components/SaitamaChristmasEvent.astro';
 import ShinkaichiChristmasEvent from '../../components/ShinkaichiChristmasEvent.astro';
 import Layout from '../../layouts/Layout.astro';
 
@@ -79,6 +80,10 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 
 		<div class="calendar-special-event shinkaichi-christmas-feature">
 			<ShinkaichiChristmasEvent />
+		</div>
+
+		<div class="calendar-special-event">
+			<SaitamaChristmasEvent />
 		</div>
 
 		<div class="calendar-special-event hiscall-christmas-feature">
@@ -219,9 +224,9 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 			},
 			{
 				id: 'manual-saitama-christmas-2026-12-11',
-				summary: '第34回さいたま市民クリスマス',
-				description: '18:00開場／18:45開演\n詳細・入場料は主催者の案内をご確認ください。\nhttps://ameblo.jp/saitamachristmas/entry-12982221699.html',
-				location: 'RaiBoC Hall（市民会館おおみや）7階',
+				summary: '第34回さいたま市民クリスマス2026',
+				description: '18:00開場／18:45開演\n「最高のプレゼント」 アーサー・ホーランド、堀井ローレン出演。\n大人（高校生以上）前売900円／当日1,500円、小・中学生500円、未就学児無料。全席自由・手話通訳あり。\nお問い合わせ：さいたま市民クリスマス実行委員会 048-689-1115\nhttps://arthur-show.com/calendar/#saitama-christmas-20261211\nhttps://ameblo.jp/saitamachristmas/entry-12982221699.html',
+				location: 'RaiBoC Hall（さいたま市民会館おおみや）大ホール・大宮門街7階',
 				start: { dateTime: '2026-12-11T18:45:00+09:00', timeZone: TOKYO_TIME_ZONE },
 				end: null,
 			},
@@ -957,7 +962,7 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				return /^(?:フライデ[ーイ]ナイト|friday\s*night)$/i.test(title);
 			}
 			if (date === '2026-11-27') return /^IGNITE$/i.test(title);
-			if (date === '2026-12-11') return /^(?:第34回)?\s*さいたま市民クリスマス$/.test(title);
+			if (date === '2026-12-11') return /^(?:第34回)?\s*さいたま市民クリスマス(?:\s*2026)?$/.test(title);
 			if (date === '2026-12-08') return title === 'ブレッシングナイト＠成増';
 			if (date === '2026-12-12') return /^(?:OCC\s*)?MASTER\s*SEED\s*クリスマス集会$/i.test(title);
 			if (date === '2026-12-13') return title === '成増教会' || title === '成増教会 特別礼拝';
