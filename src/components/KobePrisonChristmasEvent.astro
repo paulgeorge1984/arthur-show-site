@@ -1,0 +1,33 @@
+---
+const poster = '/assets/kobe-prison-christmas-20261211.jpg';
+---
+
+<section id="kobe-prison-christmas-20261211" class="prayer-event" aria-labelledby="kobe-prison-christmas-title">
+  <a class="poster" href={poster} target="_blank" rel="noopener noreferrer" aria-label="神戸刑務所クリスマス特別伝道集会のチラシを原寸で開く">
+    <img src={poster} width="343" height="512" loading="lazy" alt="受刑者のためのクリスマス特別伝道集会のチラシ。講師はアーサー・ホーランド先生。" />
+  </a>
+  <div class="copy">
+    <p class="prayer-label">お祈りのお願い</p>
+    <h2 id="kobe-prison-christmas-title">受刑者のためのクリスマス特別伝道集会</h2>
+    <p><time datetime="2026-12-11T09:30:00+09:00">2026年12月11日（金）午前9時30分</time><br />神戸刑務所</p>
+    <p><strong>受刑者の方を対象とした所内集会のため、一般の方は参加できません。</strong></p>
+    <p>アーサー・ホーランド先生のメッセージを通して、ジーザスの愛が受刑者の方一人ひとりの心に届きますように。どうぞお祈りください。</p>
+    <a class="flyer-link" href={poster} target="_blank" rel="noopener noreferrer">チラシを拡大する</a>
+  </div>
+</section>
+
+<style>
+  .prayer-event { display: grid; grid-template-columns: minmax(0, 343px) minmax(0, 1fr); width: 100%; box-sizing: border-box; border: 1px solid #75613c; background: #171717; color: #f5f1e8; }
+  .poster { display: block; align-self: start; }
+  .poster img { display: block; width: 100%; height: auto; }
+  .copy { align-self: center; min-width: 0; padding: 28px; line-height: 1.85; }
+  .copy p { margin: 0 0 16px; }
+  .prayer-label, .flyer-link { color: #d8b76e; font-weight: 700; }
+  h2 { margin: 0 0 16px; font-size: clamp(1.6rem, 3vw, 2.4rem); line-height: 1.4; }
+  .flyer-link { text-decoration: underline; }
+  @media (max-width: 640px) {
+    .prayer-event { grid-template-columns: minmax(0, 1fr); }
+    .poster { width: 100%; max-width: 343px; justify-self: center; }
+    .copy { padding: 20px 16px; }
+  }
+</style>

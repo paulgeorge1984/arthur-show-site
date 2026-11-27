@@ -3,6 +3,7 @@ import IgniteNagoya2026 from '../../components/IgniteNagoya2026.astro';
 import HiscallChristmasEvent from '../../components/HiscallChristmasEvent.astro';
 import BlessingNightNarimasu2026 from '../../components/BlessingNightNarimasu2026.astro';
 import NarimasuChristmasEve2026 from '../../components/NarimasuChristmasEve2026.astro';
+import KobePrisonChristmasEvent from '../../components/KobePrisonChristmasEvent.astro';
 import SaitamaChristmasEvent from '../../components/SaitamaChristmasEvent.astro';
 import ShinkaichiChristmasEvent from '../../components/ShinkaichiChristmasEvent.astro';
 import Layout from '../../layouts/Layout.astro';
@@ -80,6 +81,10 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 
 		<div class="calendar-special-event shinkaichi-christmas-feature">
 			<ShinkaichiChristmasEvent />
+		</div>
+
+		<div class="calendar-special-event">
+			<KobePrisonChristmasEvent />
 		</div>
 
 		<div class="calendar-special-event">
@@ -221,6 +226,18 @@ const encodedCalendarLineText = encodeURIComponent(`${calendarShareTitle}\n${cal
 				location: 'お茶の水クリスチャン・センター（東京都千代田区神田駿河台2-1-1）',
 				start: { date: '2026-12-04' },
 				end: { date: '2026-12-05' },
+			},
+			{
+				id: 'manual-kobe-prison-christmas-2026-12-11',
+				summary: '受刑者のためのクリスマス特別伝道集会（お祈りのお願い）',
+				description: [
+					'受刑者の方を対象とした所内集会のため、一般の方は参加できません。',
+					'アーサー・ホーランド先生のメッセージを通して、ジーザスの愛が受刑者の方一人ひとりの心に届きますように。どうぞお祈りください。',
+					'https://arthur-show.com/calendar/#kobe-prison-christmas-20261211',
+				].join('\n'),
+				location: '神戸刑務所',
+				start: { dateTime: '2026-12-11T09:30:00+09:00', timeZone: TOKYO_TIME_ZONE },
+				end: null,
 			},
 			{
 				id: 'manual-saitama-christmas-2026-12-11',
